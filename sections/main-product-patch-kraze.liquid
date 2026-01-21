@@ -17,10 +17,10 @@
 {% endschema %}
 
 <style>
-  .product-page-main { background-color: #fff; padding: 2rem 1rem 4rem; color: #111827; font-family: 'Inter', sans-serif; }
-  .product-container { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 4rem; }
+  .product-page-main { background-color: #fff; padding: 2rem 1rem 4rem; color: #111827; font-family: 'Inter', sans-serif !important; }
+  .product-container { max-width: 1216px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 3rem; padding: 0 1rem; }
   @media (min-width: 1024px) {
-    .product-container { grid-template-columns: 1.1fr 0.9fr; align-items: start; }
+    .product-container { grid-template-columns: 1.1fr 0.9fr; align-items: start; gap: 3rem; }
     .product-gallery { position: sticky; top: 2rem; }
   }
 
@@ -41,7 +41,7 @@
 
   /* Info Column */
   .product-info { display: flex; flex-direction: column; gap: 1.25rem; }
-  .product-title { font-size: 2.75rem; font-weight: 800; color: #111827; margin: 0; line-height: 1.1; letter-spacing: -0.02em; }
+  .product-title { font-size: 2.25rem; font-weight: 700; color: #111827; margin: 0; line-height: 1.1; letter-spacing: -0.025em; }
   
   .reviews-row { display: flex; align-items: center; gap: 0.5rem; font-weight: 500; font-size: 0.95rem; color: #374151; }
   .stars { color: #fbbf24; letter-spacing: 1px; }
@@ -167,7 +167,7 @@
       </div>
       
       <div class="description-text">
-        {{ product.description | strip_html | truncate: 150 }}
+        {{ product.description | strip_html | truncate: 500 }}
       </div>
       <div class="feature-bar">
         <span class="feature-green">10 Minimum Quantity</span> | <span>Ships Fast</span> | <span>No Setup Fees</span>
