@@ -30,8 +30,9 @@
   .pk-block { display: block; }
   @media (min-width: 1024px) {
     .lg\:pk-flex { display: flex; }
-    .lg\:pk-hidden { display: none; }
+    .lg\:pk-hidden { display: none !important; }
     .lg\:pk-block { display: block; }
+    .desktop\:hidden { display: none !important; }
   }
 
   /* TOP BAR */
@@ -173,20 +174,13 @@
           <span class="pk-action-sub">Account & Reorder</span>
         </a>
         
-        <a href="{{ routes.cart_url }}" class="pk-action-item" id="cart-icon-bubble" style="color:inherit; text-decoration:none; flex-direction:row; gap:0.5rem; align-items:center;">
-           <div style="position:relative;">
-              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-              {%- if cart != empty -%}
-                <span style="position:absolute; top:-8px; right:-8px; background:#b62b2a; color:white; font-size:10px; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center;">{{ cart.item_count }}</span>
-              {%- endif -%}
-           </div>
-        </a>
+        {% render 'cart-drawer' %}
       </div>
     </div>
   </div>
 
   <!-- Cart Drawer Component -->
-  {% render 'cart-drawer' %}
+
 
   <!-- MOBILE HEADER -->
   <div class="pk-mobile-header lg:pk-hidden desktop:hidden">
@@ -251,24 +245,24 @@
   // ------------------------------------
   const MEGA_MENUS = {
     embroidery: [
-      { title: "Standard Embroidery", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Embroidered_NP_01_2024_2.jpg?v=1731449138", href: "/collections/standard-embroidery" },
-      { title: "3D Embroidery", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_3D_Embroidery_NP_01_2024_1.jpg?v=1731449173", href: "/collections/3d-embroidery" },
-      { title: "Custom Name Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NamePatchMOCK_1_4dc33b0d-b190-47c0-a29b-ebfd6aa53a44_1.png?v=1764952518", href: "/collections/custom-name-patches" },
-      { title: "Chenille", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_ChenilleNP01_2024.png?v=1755711760", href: "/collections/chenille" },
+      { title: "Standard Embroidery", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Embroidered_NP_01_2024_2.jpg?v=1731449138", href: "/collections/embroidered-patches" },
+      { title: "3D Embroidery", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_3D_Embroidery_NP_01_2024_1.jpg?v=1731449173", href: "/collections/3d-embroidered-patches" },
+      { title: "Custom Name Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NamePatchMOCK_1_4dc33b0d-b190-47c0-a29b-ebfd6aa53a44_1.png?v=1764952518", href: "/collections/name-patches" },
+      { title: "Chenille", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_ChenilleNP01_2024.png?v=1755711760", href: "/collections/chenille-patches" },
       { title: "Custom Tackle Twill Letters", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png?v=1764629501", href: "/collections/custom-tackle-twill" }
     ],
     pvcRubber: [
-      { title: "Standard PVC Rubber", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_PVC_Rubber_NP_01_2024_2.jpg?v=1731448911", href: "/collections/standard-pvc-rubber" },
+      { title: "Standard PVC Rubber", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_PVC_Rubber_NP_01_2024_2.jpg?v=1731448911", href: "/collections/pvc-patches" },
       { title: "Glow in The Dark PVC Rubber Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/4_glow-in-the-dark.jpg?v=1761235940", href: "/collections/glow-in-the-dark-pvc" },
       { title: "Custom Keychains", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/2_keychains.jpg?v=1761235775", href: "/collections/custom-keychains" }
     ],
     leather: [
-      { title: "Genuine Leather", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Genuine_Leather_NP_01_2024_2.jpg?v=1731448976", href: "/collections/genuine-leather" },
-      { title: "Faux Leather", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Faux_Leather_NP_01_2024_2.jpg?v=1731449032", href: "/collections/faux-leather" }
+      { title: "Genuine Leather", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Genuine_Leather_NP_01_2024_2.jpg?v=1731448976", href: "/collections/genuine-leather-patches" },
+      { title: "Faux Leather", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Faux_Leather_NP_01_2024_2.jpg?v=1731449032", href: "/collections/faux-leather-patches" }
     ],
     ninjaFlex: [
-      { title: "Metallic Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/metallicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png?v=1765396220", href: "/collections/metallic-flex" },
-      { title: "Full Color Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/two_c14c6fc7-cb38-4ab1-88ca-4317dbe888ee.png?v=1757960975", href: "/collections/full-color-flex" },
+      { title: "Metallic Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/metallicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png?v=1765396220", href: "/collections/metallic-flex-patches" },
+      { title: "Full Color Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/two_c14c6fc7-cb38-4ab1-88ca-4317dbe888ee.png?v=1757960975", href: "/collections/full-color-printed-patches" },
       { title: "Matte Black Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Matte_Black_Flex.png?v=1761169152", href: "/collections/matte-black-flex" },
       { title: "Matte White Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches_Matte_white_double_8c1a8bc3-ceae-4a3b-a7ab-20e50c408ff9.png?v=1762360471", href: "/collections/matte-white-flex" }
     ],
@@ -283,16 +277,16 @@
 
   const NAV_ITEMS = [
     { label: "Embroidery", key: "embroidery", hasDropdown: true },
-    { label: "Full Color", key: "fullColor", hasDropdown: false },
+    { label: "Full Color", key: "fullColor", hasDropdown: false, href: "/collections/full-color-printed-patches" },
     { label: "PVC Rubber", key: "pvcRubber", hasDropdown: true },
     { label: "Leather", key: "leather", hasDropdown: true },
-    { label: "Silicone", key: "silicone", hasDropdown: false },
+    { label: "Silicone", key: "silicone", hasDropdown: false, href: "/collections/pvc-patches" },
     { label: "Ninja Flex", key: "ninjaFlex", hasDropdown: true },
-    { label: "Woven", key: "woven", hasDropdown: false },
-    { label: "Rhinestones", key: "rhinestones", hasDropdown: false },
+    { label: "Woven", key: "woven", hasDropdown: false, href: "/collections/woven-patches" },
+    { label: "Rhinestones", key: "rhinestones", hasDropdown: false, href: "/collections/rhinestone-transfers" },
     { label: "Stickers", key: "stickers", hasDropdown: true },
     { label: "Supplies", key: "supplies", hasDropdown: true },
-    { label: "Support", key: "support", hasDropdown: true }
+    { label: "Support", key: "support", hasDropdown: true, href: "/pages/contact" }
   ];
 
   // ------------------------------------
@@ -315,7 +309,7 @@
          btn.innerHTML += `<svg class="pk-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>`;
        } else {
          // Direct link for items without dropdowns
-         btn.onclick = () => { window.location.href = `/collections/${item.label.toLowerCase().replace(/\s+/g, '-')}`; };
+         btn.onclick = () => { window.location.href = item.href ? item.href : `/collections/all`; };
        }
        
        // Hover Events
@@ -403,7 +397,7 @@
         container.appendChild(content);
       } else {
         // No dropdown, just a link
-        btn.onclick = () => { window.location.href = `/collections/${item.label.toLowerCase().replace(/\s+/g, '-')}`; };
+        btn.onclick = () => { window.location.href = item.href ? item.href : `/collections/all`; };
         container.appendChild(btn);
       }
       mobileList.appendChild(container);
