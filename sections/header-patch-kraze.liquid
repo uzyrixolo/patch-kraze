@@ -17,9 +17,10 @@
 {% endschema %}
 
 <style>
-  /* Base Reset & Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  
   .pk-header * { box-sizing: border-box; }
-  .pk-header { font-family: 'Inter', sans-serif; background: #fff; line-height: 1.5; color: #111827; }
+  .pk-header { font-family: 'Inter', sans-serif !important; background: #fff; line-height: 1.5; color: #111827; }
 
   /* Utilities */
   .pk-container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
@@ -125,22 +126,22 @@
   <div class="pk-top-bar">
     <div class="pk-container lg:pk-flex pk-items-center pk-justify-between pk-hidden" style="height: 100%;">
       <div class="pk-flex" style="height: 100%;">
-        <a href="{{ section.settings.url_transfers | default: '/collections/transfers' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>TRANSFERS</span></a>
+        <a href="{{ section.settings.url_transfers | default: '/products/dtf-transfers' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>TRANSFERS</span></a>
         <a href="{{ section.settings.url_blanks | default: '/collections/blanks' }}" class="pk-brand-link pk-bg-white-link"><span>PATCH KRAZE</span><span>BLANKS</span><span class="pk-link-underline"></span></a>
-        <a href="{{ section.settings.url_patches | default: '/collections/patches' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>PATCHES</span></a>
-        <a href="{{ section.settings.url_printhouse | default: '/collections/printhouse' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>PRINTHOUSE</span></a>
-        <a href="{{ section.settings.url_pod | default: '/collections/pod' }}" class="pk-brand-link pk-text-pink"><span>PATCH KRAZE</span><span>POD</span></a>
+        <a href="{{ section.settings.url_patches | default: '/products/embroidered-patches' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>PATCHES</span></a>
+        <a href="{{ section.settings.url_printhouse | default: '/pages/printhouse' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>PRINTHOUSE</span></a>
+        <a href="{{ section.settings.url_pod | default: '/pages/pod' }}" class="pk-brand-link pk-text-pink"><span>PATCH KRAZE</span><span>POD</span></a>
       </div>
       <div style="font-size: 0.75rem; font-weight: 500;">
         Select Patches Ship as Fast as 5 Business Days with PatchFast. 10pc Mins with Free Shipping!
       </div>
     </div>
     <!-- Mobile Top Bar Content -->
-    <div class="lg:pk-hidden pk-flex pk-items-center" style="overflow-x: auto; height: 100%;">
-       <a href="{{ section.settings.url_transfers | default: '/collections/transfers' }}" class="pk-brand-link pk-text-cyan" style="min-width: 80px; text-align: center;"><span>PATCH KRAZE</span><span>TRANSFERS</span></a>
-       <a href="{{ section.settings.url_blanks | default: '/collections/blanks' }}" class="pk-brand-link pk-bg-white-link" style="min-width: 80px; text-align: center;"><span>PATCH KRAZE</span><span>BLANKS</span></a>
-       <a href="{{ section.settings.url_patches | default: '/collections/patches' }}" class="pk-brand-link pk-text-cyan" style="min-width: 80px; text-align: center;"><span>PATCH KRAZE</span><span>PATCHES</span></a>
-    </div>
+     <div class="lg:pk-hidden pk-flex pk-items-center" style="overflow-x: auto; height: 100%;">
+        <a href="{{ section.settings.url_transfers | default: '/products/dtf-transfers' }}" class="pk-brand-link pk-text-cyan" style="min-width: 80px; text-align: center;"><span>PATCH KRAZE</span><span>TRANSFERS</span></a>
+        <a href="{{ section.settings.url_blanks | default: '/collections/blanks' }}" class="pk-brand-link pk-bg-white-link" style="min-width: 80px; text-align: center;"><span>PATCH KRAZE</span><span>BLANKS</span></a>
+        <a href="{{ section.settings.url_patches | default: '/products/embroidered-patches' }}" class="pk-brand-link pk-text-cyan" style="min-width: 80px; text-align: center;"><span>PATCH KRAZE</span><span>PATCHES</span></a>
+     </div>
   </div>
 
   <!-- MAIN HEADER (DESKTOP) -->
@@ -225,10 +226,10 @@
       <div class="pk-drawer-brands">
          <div class="pk-drawer-brands-title">Our Brands</div>
          <div class="pk-brand-grid">
-            <a href="{{ section.settings.url_transfers | default: '/collections/transfers' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">TRANSFERS</a>
+            <a href="{{ section.settings.url_transfers | default: '/products/dtf-transfers' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">TRANSFERS</a>
             <a href="{{ section.settings.url_blanks | default: '/collections/blanks' }}" class="pk-mobile-brand-btn" style="background:#fff; color:#111827;">BLANKS</a>
-            <a href="{{ section.settings.url_patches | default: '/collections/patches' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">PATCHES</a>
-            <a href="{{ section.settings.url_printhouse | default: '/collections/printhouse' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">PRINTHOUSE</a>
+            <a href="{{ section.settings.url_patches | default: '/products/embroidered-patches' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">PATCHES</a>
+            <a href="{{ section.settings.url_printhouse | default: '/pages/printhouse' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">PRINTHOUSE</a>
          </div>
       </div>
       <div id="mobile-nav-list">
@@ -245,45 +246,45 @@
   // ------------------------------------
   const MEGA_MENUS = {
     embroidery: [
-      { title: "Standard Embroidery", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Embroidered_NP_01_2024_2.jpg?v=1731449138", href: "/collections/embroidered-patches" },
-      { title: "3D Embroidery", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_3D_Embroidery_NP_01_2024_1.jpg?v=1731449173", href: "/collections/3d-embroidered-patches" },
-      { title: "Custom Name Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NamePatchMOCK_1_4dc33b0d-b190-47c0-a29b-ebfd6aa53a44_1.png?v=1764952518", href: "/collections/name-patches" },
-      { title: "Chenille", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_ChenilleNP01_2024.png?v=1755711760", href: "/collections/chenille-patches" },
-      { title: "Custom Tackle Twill Letters", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png?v=1764629501", href: "/collections/custom-tackle-twill" }
+      { title: "Standard Embroidery", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Embroidered_NP_01_2024_2.jpg?v=1731449138", href: "/products/embroidered-patches" },
+      { title: "3D Embroidery", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_3D_Embroidery_NP_01_2024_1.jpg?v=1731449173", href: "/products/3d-embroidered-patches" },
+      { title: "Custom Name Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NamePatchMOCK_1_4dc33b0d-b190-47c0-a29b-ebfd6aa53a44_1.png?v=1764952518", href: "/products/name-patches" },
+      { title: "Chenille", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_ChenilleNP01_2024.png?v=1755711760", href: "/products/chenille-patches" },
+      { title: "Custom Tackle Twill Letters", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png?v=1764629501", href: "/products/tackle-twill-letters" }
     ],
     pvcRubber: [
-      { title: "Standard PVC Rubber", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_PVC_Rubber_NP_01_2024_2.jpg?v=1731448911", href: "/collections/pvc-patches" },
-      { title: "Glow in The Dark PVC Rubber Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/4_glow-in-the-dark.jpg?v=1761235940", href: "/collections/glow-in-the-dark-pvc" },
-      { title: "Custom Keychains", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/2_keychains.jpg?v=1761235775", href: "/collections/custom-keychains" }
+      { title: "Standard PVC Rubber", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_PVC_Rubber_NP_01_2024_2.jpg?v=1731448911", href: "/products/pvc-patches" },
+      { title: "Glow in The Dark PVC Rubber Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/4_glow-in-the-dark.jpg?v=1761235940", href: "/products/glow-in-the-dark-pvc-patches" },
+      { title: "Custom Keychains", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/2_keychains.jpg?v=1761235775", href: "/products/custom-keychains" }
     ],
     leather: [
-      { title: "Genuine Leather", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Genuine_Leather_NP_01_2024_2.jpg?v=1731448976", href: "/collections/genuine-leather-patches" },
-      { title: "Faux Leather", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Faux_Leather_NP_01_2024_2.jpg?v=1731449032", href: "/collections/faux-leather-patches" }
+      { title: "Genuine Leather", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Genuine_Leather_NP_01_2024_2.jpg?v=1731448976", href: "/products/leather-patches" },
+      { title: "Faux Leather", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Faux_Leather_NP_01_2024_2.jpg?v=1731449032", href: "/products/leather-patches" }
     ],
     ninjaFlex: [
-      { title: "Metallic Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/metallicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png?v=1765396220", href: "/collections/metallic-flex-patches" },
-      { title: "Full Color Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/two_c14c6fc7-cb38-4ab1-88ca-4317dbe888ee.png?v=1757960975", href: "/collections/full-color-printed-patches" },
-      { title: "Matte Black Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Matte_Black_Flex.png?v=1761169152", href: "/collections/matte-black-flex" },
-      { title: "Matte White Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches_Matte_white_double_8c1a8bc3-ceae-4a3b-a7ab-20e50c408ff9.png?v=1762360471", href: "/collections/matte-white-flex" }
+      { title: "Metallic Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/metallicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png?v=1765396220", href: "/products/metallic-flex-patches" },
+      { title: "Full Color Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/two_c14c6fc7-cb38-4ab1-88ca-4317dbe888ee.png?v=1757960975", href: "/products/full-color-printed-patches" },
+      { title: "Matte Black Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Matte_Black_Flex.png?v=1761169152", href: "/products/matte-black-patches" },
+      { title: "Matte White Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches_Matte_white_double_8c1a8bc3-ceae-4a3b-a7ab-20e50c408ff9.png?v=1762360471", href: "/products/matte-white-patches" }
     ],
     stickers: [
-      { title: "Custom Vinyl Stickers", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/BOOK_1.png?v=1740599405", href: "/collections/custom-vinyl-stickers" },
-      { title: "Custom Bumper Stickers", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/bumpercar_1.png?v=1740599420", href: "/collections/custom-bumper-stickers" }
+      { title: "Custom Vinyl Stickers", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/BOOK_1.png?v=1740599405", href: "/products/custom-vinyl-stickers" },
+      { title: "Custom Bumper Stickers", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/bumpercar_1.png?v=1740599420", href: "/products/custom-bumper-stickers" }
     ],
     supplies: [
-      { title: "Heat Presses", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/hpn-15x15-signature-series-heat-press_f68c0253-f1a1-48fa-9c7d-fe310916b2bd.png?v=1763589654", href: "/collections/heat-presses" }
+      { title: "Heat Presses", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/hpn-15x15-signature-series-heat-press_f68c0253-f1a1-48fa-9c7d-fe310916b2bd.png?v=1763589654", href: "/products/heat-presses" }
     ]
   };
 
   const NAV_ITEMS = [
     { label: "Embroidery", key: "embroidery", hasDropdown: true },
-    { label: "Full Color", key: "fullColor", hasDropdown: false, href: "/collections/full-color-printed-patches" },
+    { label: "Full Color", key: "fullColor", hasDropdown: false, href: "/products/full-color-printed-patches" },
     { label: "PVC Rubber", key: "pvcRubber", hasDropdown: true },
     { label: "Leather", key: "leather", hasDropdown: true },
-    { label: "Silicone", key: "silicone", hasDropdown: false, href: "/collections/pvc-patches" },
+    { label: "Silicone", key: "silicone", hasDropdown: false, href: "/products/silicone-patches" },
     { label: "Ninja Flex", key: "ninjaFlex", hasDropdown: true },
-    { label: "Woven", key: "woven", hasDropdown: false, href: "/collections/woven-patches" },
-    { label: "Rhinestones", key: "rhinestones", hasDropdown: false, href: "/collections/rhinestone-transfers" },
+    { label: "Woven", key: "woven", hasDropdown: false, href: "/products/woven-patches" },
+    { label: "Rhinestones", key: "rhinestones", hasDropdown: false, href: "/products/rhinestone-transfers" },
     { label: "Stickers", key: "stickers", hasDropdown: true },
     { label: "Supplies", key: "supplies", hasDropdown: true },
     { label: "Support", key: "support", hasDropdown: true, href: "/pages/contact" }
