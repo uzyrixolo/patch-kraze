@@ -1,0 +1,143 @@
+{% schema %}
+{
+  "name": "Credibility (Patch Kraze)",
+  "class": "section-credibility-patch-kraze",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Credibility (Patch Kraze)"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .credibility-section {
+    width: 100%;
+    background-color: #fff;
+    padding: 2.5rem 0 5rem;
+  }
+  .credibility-container {
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  /* Brand Logos */
+  .credibility-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+  }
+  .credibility-logo-text {
+    font-size: 0.875rem; /* sm */
+    font-weight: 600;
+    color: #9ca3af; /* gray-400 */
+  }
+
+  /* Headline */
+  .credibility-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .credibility-title {
+    font-size: 2.25rem; /* 4xl ~ 36px */
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .credibility-subtitle {
+    font-size: 1.125rem; /* lg */
+    color: #4b5563; /* gray-600 */
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  /* Features */
+  .credibility-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .credibility-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .credibility-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .feature-icon {
+    font-size: 3rem; /* 5xl */
+    margin-bottom: 1.5rem;
+  }
+  .feature-title {
+    font-size: 1.25rem; /* xl */
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 0.75rem;
+  }
+  .feature-desc {
+    color: #4b5563; /* gray-600 */
+    font-size: 0.875rem; /* sm */
+    line-height: 1.625;
+  }
+</style>
+
+<div class="credibility-section">
+  <div class="credibility-container">
+    
+    <!-- Brand Logos Row -->
+    <div class="credibility-logos">
+      <div class="credibility-logo-text">Universal</div>
+      <div class="credibility-logo-text">Montho</div>
+      <div class="credibility-logo-text">Activision</div>
+      <div class="credibility-logo-text">Amazon</div>
+      <div class="credibility-logo-text">Walmart</div>
+      <div class="credibility-logo-text">Lowes</div>
+      <div class="credibility-logo-text">GM</div>
+    </div>
+
+    <!-- Headline and Subtitle -->
+    <div class="credibility-header">
+      <h2 class="credibility-title">
+        #1 Site In The USA To Order Personalized Embroidery Patches
+      </h2>
+      <p class="credibility-subtitle">
+        Out of so many reasons, let's focus on the top three ones why we are the best team to customize embroidered patches for you.
+      </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="credibility-grid">
+      
+      <!-- Feature 1 -->
+      <div class="credibility-feature">
+        <div class="feature-icon">⭐</div>
+        <h3 class="feature-title">High-Quality Materials</h3>
+        <p class="feature-desc">We use premium threads and durable fabrics to ensure long-lasting emblems that withstand wear and tear.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="credibility-feature">
+        <div class="feature-icon">💡</div>
+        <h3 class="feature-title">All Shapes & Sizes</h3>
+        <p class="feature-desc">From classic circles and squares to unique shapes, we can create crests in virtually any size to match your vision.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="credibility-feature">
+        <div class="feature-icon">%</div>
+        <h3 class="feature-title">Cost-Effective Prices</h3>
+        <p class="feature-desc">You can order our cool Velcro patches at your desired rates. Yes, our prices will never fall out of your budget.</p>
+      </div>
+
+    </div>
+  </div>
+</div>

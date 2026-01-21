@@ -1,0 +1,13 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer-patch-kraze",
+      "settings": {}
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

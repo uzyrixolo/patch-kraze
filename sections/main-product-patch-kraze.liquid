@@ -1,0 +1,351 @@
+{% schema %}
+{
+  "name": "Main Product PK",
+  "class": "section-main-product",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Product PK"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .product-page-main { background-color: #fff; padding: 2rem 1rem 4rem; color: #111827; font-family: 'Inter', sans-serif; }
+  .product-container { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 4rem; }
+  @media (min-width: 1024px) {
+    .product-container { grid-template-columns: 1.1fr 0.9fr; align-items: start; }
+    .product-gallery { position: sticky; top: 2rem; }
+  }
+
+  /* Gallery */
+  .product-gallery { display: flex; flex-direction: column; gap: 1rem; }
+  .main-image-wrapper { position: relative; width: 100%; aspect-ratio: 1 / 1; background-color: #f3f4f6; border-radius: 1rem; overflow: hidden; }
+  .main-product-img { width: 100%; height: 100%; object-fit: contain; }
+  
+  .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 3rem; height: 3rem; background-color: white; border: 1px solid #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: all 0.2s; }
+  .nav-arrow:hover { background-color: #f9fafb; scale: 1.05; }
+  .nav-arrow.prev { left: 1rem; }
+  .nav-arrow.next { right: 1rem; }
+
+  .thumbnails-row { display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 0.5rem; }
+  .thumbnail-btn { flex-shrink: 0; width: 5.5rem; height: 5.5rem; border-radius: 0.75rem; overflow: hidden; border: 2px solid transparent; cursor: pointer; opacity: 0.8; transition: all 0.2s; background: #f3f4f6; }
+  .thumbnail-btn.active { border-color: #10b981; opacity: 1; box-shadow: 0 0 0 2px #d1fae5; }
+  .thumbnail-btn img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Info Column */
+  .product-info { display: flex; flex-direction: column; gap: 1.25rem; }
+  .product-title { font-size: 2.75rem; font-weight: 800; color: #111827; margin: 0; line-height: 1.1; letter-spacing: -0.02em; }
+  
+  .reviews-row { display: flex; align-items: center; gap: 0.5rem; font-weight: 500; font-size: 0.95rem; color: #374151; }
+  .stars { color: #fbbf24; letter-spacing: 1px; }
+
+  .price-block { font-size: 1.25rem; font-weight: 500; color: #374151; }
+  .price-value { font-weight: 800; color: #111827; }
+
+  /* Description & Details */
+  .description-text { font-size: 1rem; line-height: 1.6; color: #4b5563; }
+  .thermal-tape { font-weight: 600; font-size: 0.95rem; color: #111827; display: flex; align-items: center; gap: 0.5rem; }
+
+  .feature-bar { display: flex; height: 2rem; align-items: center; gap: 1rem; font-size: 0.85rem; color: #374151; margin-top: 0.5rem; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; padding: 1.5rem 0; width: 100%; }
+  .feature-green { color: #059669; font-weight: 600; }
+
+  /* UPLOAD SECTION (Green Box) */
+  .upload-box-wrapper {
+    margin-top: 2rem;
+    border: 2px dashed #4ade80; /* Perfect Ninja Green */
+    border-radius: 1.5rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    background-color: #ecfdf5; /* Light mint bg */
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+  }
+  .upload-box-wrapper:hover { background-color: #d1fae5; border-color: #10b981; }
+  .native-file-input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 50; }
+  
+  .upload-cloud-icon {
+    width: 4rem; height: 4rem; 
+    background: #34d399; /* Green cloud */
+    color: white; border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; 
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+  }
+  
+  .upload-title { font-size: 1.5rem; font-weight: 700; color: #064e3b; margin-bottom: 0.5rem; }
+  .upload-subtitle { color: #4b5563; margin-bottom: 1.5rem; }
+  
+  .btn-green-browse {
+    background-color: #10b981; color: white; border: none; padding: 0.875rem 3rem; border-radius: 0.5rem; font-weight: 600; font-size: 1rem; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3); transition: background 0.2s;
+  }
+
+  /* CUSTOMIZE SECTION */
+  .customize-ui { display: none; margin-top: 2rem; }
+  .customize-ui.active { display: block; animation: slideUp 0.4s ease-out; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .file-success-bar {
+    background: #ecfdf5; border: 1px solid #10b981; padding: 1rem; border-radius: 0.75rem; 
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+  }
+  .file-thumb { width: 3.5rem; height: 3.5rem; background: #fff; border-radius: 0.5rem; border: 1px solid #d1fae5; object-fit: cover; }
+  
+  /* Pricing Table */
+  .pricing-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .pricing-header { background: #f9fafb; padding: 0.75rem 1rem; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #111827; display: flex; justify-content: space-between; font-size: 0.9rem; }
+  .pricing-row { display: flex; justify-content: space-between; padding: 0.75rem 1rem; border-bottom: 1px solid #f3f4f6; font-size: 0.9rem; color: #4b5563; }
+  .pricing-row:last-child { border-bottom: none; }
+  .pricing-row.active { background-color: #ecfdf5; color: #065f46; font-weight: 600; }
+  .buy-more-label { color: #10b981; font-weight: 700; margin-bottom: 0.5rem; display: block; font-size: 0.9rem; text-transform: uppercase; }
+
+  /* Controls */
+  .control-group { margin-bottom: 1.5rem; }
+  .control-label { display: block; font-weight: 700; margin-bottom: 0.75rem; color: #111827; font-size: 0.95rem; }
+  .text-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem; background: #fff; }
+  .text-input:focus { border-color: #10b981; outline: none; ring: 2px solid #d1fae5; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  
+  /* Shape Grid */
+  .shape-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; margin-bottom: 2rem; } 
+  .shape-card { aspect-ratio: 1; border: 1px solid #e5e7eb; border-radius: 0.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; cursor: pointer; transition: all 0.2s; background: #fff; }
+  .shape-card:hover { border-color: #10b981; }
+  .shape-card.selected { border-color: #10b981; background-color: #ecfdf5; box-shadow: 0 0 0 1px #10b981; }
+  .shape-svg { width: 28px; height: 28px; stroke: #374151; stroke-width: 2; fill: none; }
+  .shape-card.selected .shape-svg { stroke: #059669; }
+
+  /* Backing Grid */
+  .backing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .backing-card { border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; cursor: pointer; transition: all 0.2s; text-align: center; padding-bottom: 0.75rem; background:#fff;}
+  .backing-card.selected { border-color: #10b981; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2); }
+  .backing-preview { height: 4rem; width: 100%; background: #f3f4f6; margin-bottom: 0.5rem; }
+  .bg-heat { background: repeating-linear-gradient(45deg, #e5e7eb, #e5e7eb 2px, #f3f4f6 2px, #f3f4f6 8px); opacity:0.8; }
+  .bg-peel { background: #d4b996; }
+  .bg-velcro { background: #1f2937; background-image: radial-gradient(#374151 15%, transparent 16%); background-size: 4px 4px; }
+
+  .checkout-btn { width: 100%; background: #000; color: #fff; padding: 1.25rem; font-size: 1.125rem; font-weight: 700; text-transform: uppercase; border: none; border-radius: 0.75rem; cursor: pointer; transition: background 0.2s; }
+  .checkout-btn:hover { background: #1f2937; }
+  .total-price-large { font-size: 2.5rem; font-weight: 800; color: #111827; margin: 1rem 0; display: block; }
+
+</style>
+
+<div class="product-page-main">
+  <div class="product-container">
+    
+    <!-- Gallery -->
+    <div class="product-gallery">
+      <div class="main-image-wrapper">
+        <button class="nav-arrow prev" id="btnPrev"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg></button>
+        <img id="mainProductImage" src="{{ product.featured_image | image_url: width: 1000 }}" class="main-product-img">
+        <button class="nav-arrow next" id="btnNext"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      {% if product.media.size > 1 %}
+      <div class="thumbnails-row">
+        {% for media in product.media %}
+          <button class="thumbnail-btn {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
+            <img src="{{ media | image_url: width: 200 }}">
+          </button>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Info -->
+    <div class="product-info">
+      <h1 class="product-title">{{ product.title }}</h1>
+      <div class="reviews-row"><span class="stars">★★★★★</span><span>16 Reviews</span></div>
+      
+      <div class="price-block">
+        <span class="price-value" id="header-price">{{ product.price | money }}</span> each at 100 pieces.
+      </div>
+      
+      <div class="description-text">
+        {{ product.description | strip_html | truncate: 150 }}
+      </div>
+      <div class="feature-bar">
+        <span class="feature-green">10 Minimum Quantity</span> | <span>Ships Fast</span> | <span>No Setup Fees</span>
+      </div>
+      <div class="product-app-blocks">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when '@app' %}
+              {% render block %}
+          {% endcase %}
+        {% endfor %}
+      </div>
+
+      <form action="/cart/add" method="post" enctype="multipart/form-data">
+        <!-- HIDDEN VARIANT ID INPUT -->
+        <input type="hidden" name="id" id="real-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+        
+        <!-- STAGE 1: UPLOAD -->
+        <div id="upload-stage" class="upload-box-wrapper">
+          <input type="file" name="properties[Design File]" id="file-input" class="native-file-input" required accept="image/*,.pdf">
+          <div class="upload-cloud-icon">
+             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+          </div>
+          <div class="upload-title">Upload your file(s)</div>
+          <button type="button" class="btn-green-browse">Browse</button>
+        </div>
+
+        <!-- STAGE 2: CUSTOMIZE -->
+        <div id="customize-stage" class="customize-ui">
+          
+          <div class="file-success-bar">
+            <img id="file-preview-img" class="file-thumb" src="">
+            <div>
+              <div style="font-weight:700; color:#064e3b;">File Uploaded!</div>
+              <div id="filename-display" style="font-size:0.85rem; color:#059669;">filename.png</div>
+              <div style="text-decoration:underline; font-size:0.75rem; cursor:pointer;" onclick="resetUpload()">Change</div>
+            </div>
+          </div>
+
+          <div class="buy-more-label">Buy More. Save More.</div>
+          <div class="pricing-card">
+            <div class="pricing-header"><span>Qty</span><span>Price</span><span>Discount</span></div>
+            <div class="pricing-row" data-min="10" data-max="24"><span>10-24 pcs</span><span>$6.79 ea</span><span>-</span></div>
+            <div class="pricing-row" data-min="25" data-max="49"><span>25-49 pcs</span><span>$5.77 ea</span><span>15% off</span></div>
+            <div class="pricing-row" data-min="50" data-max="99"><span>50-99 pcs</span><span>$4.35 ea</span><span>36% off</span></div>
+            <div class="pricing-row" data-min="100" data-max="199"><span>100-199 pcs</span><span>$3.80 ea</span><span>44% off</span></div>
+            <div class="pricing-row" data-min="200" data-max="9999"><span>200+ pcs</span><span>$2.65 ea</span><span>61% off</span></div>
+          </div>
+
+          <div class="row-2">
+             <div class="control-group">
+               <label class="control-label">Size (inches)</label>
+               <input type="number" name="properties[Width]" class="text-input" value="3.0">
+             </div>
+             <div class="control-group">
+               <label class="control-label">Quantity</label>
+               <input type="number" name="quantity" id="qty-input" class="text-input" value="100" min="10" style="font-weight:700;">
+             </div>
+          </div>
+
+          <span class="total-price-large" id="total-price-display">$380.00</span>
+          
+          <label class="control-label">Select Shape:</label>
+          <div class="shape-grid">
+             <!-- Shapes ... -->
+             <div class="shape-card selected" onclick="selectShape(this, 'Circle')"><svg class="shape-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg><span>CIRCLE</span></div>
+             <div class="shape-card" onclick="selectShape(this, 'Square')"><svg class="shape-svg" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/></svg><span>SQUARE</span></div>
+             <!-- Add other shapes as needed -->
+          </div>
+          <input type="hidden" name="properties[Shape]" id="shape-input" value="Circle">
+
+          <label class="control-label">Select Your Backing:</label>
+          <div class="backing-grid">
+            <div class="backing-card selected" onclick="selectBacking(this, 'Heat Applied')"><div class="backing-preview bg-heat"></div><div>Heat Applied</div></div>
+            <div class="backing-card" onclick="selectBacking(this, 'Velcro')"><div class="backing-preview bg-velcro"></div><div>Velcro</div></div>
+            <div class="backing-card" onclick="selectBacking(this, 'Peel & Stick')"><div class="backing-preview bg-peel"></div><div>Peel & Stick</div></div>
+          </div>
+          <input type="hidden" name="properties[Backing]" id="backing-input" value="Heat Applied">
+          
+          <button type="submit" name="add" class="checkout-btn">Proceed to Checkout</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 1. INJECT SHOPIFY VARIANTS
+  const shopifyVariants = {{ product.variants | json }};
+  const PRICING = [
+    { min: 10, max: 24, price: 6.79 },
+    { min: 25, max: 49, price: 5.77 },
+    { min: 50, max: 99, price: 4.35 },
+    { min: 100, max: 199, price: 3.80 },
+    { min: 200, max: 9999, price: 2.65 }
+  ];
+
+  const fileInput = document.getElementById('file-input');
+  const uploadStage = document.getElementById('upload-stage');
+  const customizeStage = document.getElementById('customize-stage');
+  const qtyInput = document.getElementById('qty-input');
+  const totalDisplay = document.getElementById('total-price-display');
+  const headerPrice = document.getElementById('header-price');
+  const pricingRows = document.querySelectorAll('.pricing-row');
+  const variantInput = document.getElementById('real-variant-id');
+
+  // File Preview
+  fileInput.addEventListener('change', function() {
+    if(this.files && this.files.length > 0) {
+       const file = this.files[0]; 
+       document.getElementById('filename-display').innerText = file.name;
+       const reader = new FileReader();
+       reader.onload = function(e){ document.getElementById('file-preview-img').src = e.target.result; }
+       reader.readAsDataURL(file);
+       uploadStage.style.display = 'none';
+       customizeStage.classList.add('active');
+    }
+  });
+  window.resetUpload = function() {
+    fileInput.value = '';
+    customizeStage.classList.remove('active');
+    uploadStage.style.display = 'block';
+  }
+
+  // Smart Pricing + Variant Swapper
+  function updatePriceAndVariant() {
+    let qty = parseInt(qtyInput.value) || 10;
+    if(qty < 10) qty = 10;
+
+    // Find Price Tier
+    let unitPrice = 6.79;
+    let currentTier = PRICING[0];
+    for(let tier of PRICING) {
+       if(qty >= tier.min) { unitPrice = tier.price; currentTier = tier; }
+    }
+
+    // UPDATE UI
+    headerPrice.innerText = '$' + unitPrice.toFixed(2);
+    totalDisplay.innerText = '$' + (qty * unitPrice).toFixed(2);
+    
+    pricingRows.forEach(row => {
+       const min = parseInt(row.dataset.min);
+       const max = parseInt(row.dataset.max);
+       if(qty >= min && qty <= max) row.classList.add('active');
+       else row.classList.remove('active');
+    });
+
+    // VARIANT SWAP LOGIC (The Magic)
+    // We look for a variant that matches the tier quantity (e.g. "10", "100")
+    // If found, we use it. If not, we keep default.
+    const foundVariant = shopifyVariants.find(v => {
+       // Check if variant title contains the min quantity of tier
+       // e.g. Tier 100 -> Variant "100 pieces" or "100+"
+       return v.title.includes(currentTier.min.toString());
+    });
+    
+    if(foundVariant) {
+       variantInput.value = foundVariant.id;
+       console.log("Swapped to Variant:", foundVariant.title, foundVariant.id);
+    } else {
+       console.warn("No specific variant found for qty " + qty + ". Using default.");
+       // Optional: Reset to first variant if needed, or keep previous.
+    }
+  }
+
+  qtyInput.addEventListener('input', updatePriceAndVariant);
+  updatePriceAndVariant(); // Init
+
+  // Selectors
+  window.selectShape = function(el, val) {
+     document.querySelectorAll('.shape-card').forEach(c => c.classList.remove('selected'));
+     el.classList.add('selected');
+     document.getElementById('shape-input').value = val;
+  }
+  window.selectBacking = function(el, val) {
+     document.querySelectorAll('.backing-card').forEach(c => c.classList.remove('selected'));
+     el.classList.add('selected');
+     document.getElementById('backing-input').value = val;
+  }
+</script>

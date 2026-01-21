@@ -1,0 +1,415 @@
+{% schema %}
+{
+  "name": "Header Patch Kraze",
+  "class": "section-header",
+  "settings": [
+    {
+       "type": "header",
+       "content": "Top Bar Links"
+    },
+    { "type": "url", "id": "url_transfers", "label": "Transfers URL" },
+    { "type": "url", "id": "url_blanks", "label": "Blanks URL" },
+    { "type": "url", "id": "url_patches", "label": "Patches URL" },
+    { "type": "url", "id": "url_printhouse", "label": "Printhouse URL" },
+    { "type": "url", "id": "url_pod", "label": "POD URL" }
+  ]
+}
+{% endschema %}
+
+<style>
+  /* Base Reset & Fonts */
+  .pk-header * { box-sizing: border-box; }
+  .pk-header { font-family: 'Inter', sans-serif; background: #fff; line-height: 1.5; color: #111827; }
+
+  /* Utilities */
+  .pk-container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+  .pk-flex { display: flex; }
+  .pk-items-center { align-items: center; }
+  .pk-justify-between { justify-content: space-between; }
+  .pk-hidden { display: none; }
+  .pk-block { display: block; }
+  @media (min-width: 1024px) {
+    .lg\:pk-flex { display: flex; }
+    .lg\:pk-hidden { display: none; }
+    .lg\:pk-block { display: block; }
+  }
+
+  /* TOP BAR */
+  .pk-top-bar { background-color: #000; color: #fff; border-bottom: 2px solid #b62b2a; height: 48px; position: sticky; top: 0; z-index: 50; }
+  .pk-brand-link { 
+    display: flex; flex-direction: column; justify-content: center; height: 100%; padding: 0 0.75rem; 
+    font-size: 0.75rem; font-weight: 700; line-height: 1.1; font-style: italic; letter-spacing: 0.025em; text-decoration: none; transition: background 0.2s;
+  }
+  .pk-brand-link:hover { background-color: #111827; }
+  .pk-text-cyan { color: #22d3ee; }
+  .pk-text-pink { color: #f472b6; }
+  .pk-bg-white-link { background-color: #fff; color: #111827; position: relative; }
+  .pk-bg-white-link:hover { background-color: #f9fafb; }
+  .pk-link-underline { position: absolute; bottom: -2px; left: 0; right: 0; height: 4px; background-color: #fff; z-index: 10; }
+
+  /* MAIN HEADER */
+  .pk-main-header { border-bottom: 1px solid #e5e7eb; padding: 1rem 0; }
+  .pk-logo { height: 4rem; width: auto; object-fit: contain; }
+  
+  .pk-search-wrapper { position: relative; max-width: 42rem; flex: 1; margin: 0 2rem; }
+  .pk-search-input { width: 100%; height: 2.75rem; padding: 0 2.5rem 0 1rem; border: 1px solid #e5e7eb; border-radius: 0.375rem; font-size: 0.875rem; }
+  .pk-search-btn { position: absolute; right: 0; top: 0; height: 100%; width: 2.75rem; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #6b7280; }
+
+  .pk-actions { display: flex; gap: 1.5rem; align-items: center; }
+  .pk-action-item { display: flex; flex-direction: column; align-items: flex-end; font-size: 0.875rem; line-height: 1.25; }
+  .pk-action-title { font-weight: 600; color: #111827; white-space: nowrap; }
+  .pk-action-sub { font-size: 0.75rem; color: #4b5563; }
+  .pk-live-chat { display: flex; align-items: center; gap: 0.5rem; }
+  .pk-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background-color: #22c55e; } /* Green dot */
+
+  /* NAV DESKTOP */
+  .pk-nav { background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 48px; z-index: 40; }
+  .pk-nav-list { display: flex; height: 3rem; align-items: center; gap: 0.25rem; font-size: 0.875rem; font-weight: 500; list-style: none; margin: 0; padding: 0; }
+  .pk-nav-item { height: 100%; display: flex; align-items: center; }
+  .pk-nav-btn { background: transparent; border: none; padding: 0 1rem; height: 100%; display: flex; align-items: center; cursor: pointer; color: #111827; transition: color 0.15s; font-size: 0.875rem; font-weight: 500;font-family: inherit;}
+  .pk-nav-btn:hover { color: #06b6d4; }
+  .pk-chevron { width: 0.75rem; height: 0.75rem; margin-left: 0.25rem; }
+
+  /* MEGA MENU */
+  .pk-mega-menu {
+    position: absolute; top: 100%; left: 0; right: 0; background: #fff; border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); z-index: 50; padding: 2rem 0; display: none;
+  }
+  .pk-mega-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; }
+  .pk-mega-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; group: hover; }
+  .pk-mega-img-box { width: 100%; aspect-ratio: 1; background: #f3f4f6; border-radius: 0.5rem; overflow: hidden; margin-bottom: 0.75rem; }
+  .pk-mega-img { width: 100%; height: 100%; object-fit: cover; transition: scale 0.2s; }
+  .pk-mega-item:hover .pk-mega-img { transform: scale(1.05); }
+  .pk-mega-title { font-size: 0.75rem; font-weight: 600; color: #1f2937; text-align: center; }
+  .pk-mega-item:hover .pk-mega-title { color: #06b6d4; }
+
+  /* MOBILE NAV */
+  .pk-mobile-header { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0.75rem; border-bottom: 1px solid #e5e7eb; }
+  .pk-mobile-logo { height: 2.5rem; width: auto; }
+  .pk-mobile-icons { display: flex; gap: 0; }
+  .pk-icon-btn { padding: 0.5rem; background: transparent; border: none; color: #374151; }
+  
+  .pk-mobile-drawer {
+    position: fixed; top: 0; left: 0; height: 100%; width: 85%; max-width: 320px; background: #fff; z-index: 60;
+    transform: translateX(-100%); transition: transform 0.3s ease-in-out;
+    display: flex; flex-direction: column;
+  }
+  .pk-mobile-drawer.open { transform: translateX(0); }
+  .pk-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 55; display: none; }
+  .pk-overlay.open { display: block; }
+  
+  .pk-drawer-header { padding: 1rem; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f9fafb; }
+  .pk-drawer-content { overflow-y: auto; flex: 1; }
+  
+  .pk-drawer-brands { padding: 1rem; background: #111827; border-bottom: 1px solid #1f2937; }
+  .pk-drawer-brands-title { font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+  .pk-brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .pk-mobile-brand-btn { 
+    display: block; text-align: center; padding: 0.5rem; font-size: 0.75rem; font-weight: 700; border-radius: 0.25rem; text-decoration: none;
+  }
+
+  .pk-accordion-btn { 
+    width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; 
+    text-align: left; background: #fff; border: none; border-bottom: 1px solid #f3f4f6; font-weight: 500; color: #111827;
+  }
+  .pk-accordion-content { background: #f9fafb; display: none; }
+  .pk-accordion-content.open { display: block; }
+  .pk-sub-link { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem; text-decoration: none; color: #374151; font-size: 0.875rem; }
+  .pk-sub-thumb { width: 2.5rem; height: 2.5rem; background: #e5e7eb; border-radius: 0.25rem; object-fit: cover; }
+</style>
+
+<div class="pk-header">
+  
+  <!-- TOP BAR -->
+  <div class="pk-top-bar">
+    <div class="pk-container lg:pk-flex pk-items-center pk-justify-between pk-hidden" style="height: 100%;">
+      <div class="pk-flex" style="height: 100%;">
+        <a href="{{ section.settings.url_transfers | default: '/collections/transfers' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>TRANSFERS</span></a>
+        <a href="{{ section.settings.url_blanks | default: '/collections/blanks' }}" class="pk-brand-link pk-bg-white-link"><span>PATCH KRAZE</span><span>BLANKS</span><span class="pk-link-underline"></span></a>
+        <a href="{{ section.settings.url_patches | default: '/collections/patches' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>PATCHES</span></a>
+        <a href="{{ section.settings.url_printhouse | default: '/collections/printhouse' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>PRINTHOUSE</span></a>
+        <a href="{{ section.settings.url_pod | default: '/collections/pod' }}" class="pk-brand-link pk-text-pink"><span>PATCH KRAZE</span><span>POD</span></a>
+      </div>
+      <div style="font-size: 0.75rem; font-weight: 500;">
+        Select Patches Ship as Fast as 5 Business Days with PatchFast. 10pc Mins with Free Shipping!
+      </div>
+    </div>
+    <!-- Mobile Top Bar Content -->
+    <div class="lg:pk-hidden pk-flex pk-items-center" style="overflow-x: auto; height: 100%;">
+       <a href="{{ section.settings.url_transfers | default: '/collections/transfers' }}" class="pk-brand-link pk-text-cyan" style="min-width: 80px; text-align: center;"><span>PATCH KRAZE</span><span>TRANSFERS</span></a>
+       <a href="{{ section.settings.url_blanks | default: '/collections/blanks' }}" class="pk-brand-link pk-bg-white-link" style="min-width: 80px; text-align: center;"><span>PATCH KRAZE</span><span>BLANKS</span></a>
+       <a href="{{ section.settings.url_patches | default: '/collections/patches' }}" class="pk-brand-link pk-text-cyan" style="min-width: 80px; text-align: center;"><span>PATCH KRAZE</span><span>PATCHES</span></a>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER (DESKTOP) -->
+  <div class="pk-main-header pk-hidden lg:pk-block">
+    <div class="pk-container pk-flex pk-items-center pk-justify-between">
+      <a href="/">
+        <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/patchkraze-logo.webp?v=1768381402" alt="Patch Kraze" class="pk-logo">
+      </a>
+      
+      <predictive-search class="pk-search-wrapper" style="display:block;">
+        <form action="{{ routes.search_url }}" method="get" role="search">
+          <input type="search" name="q" placeholder="Search Patch Styles" class="pk-search-input" role="combobox" aria-expanded="false" aria-owns="predictive-search-results" aria-controls="predictive-search-results" aria-haspopup="listbox" aria-autocomplete="list">
+          <input name="options[prefix]" type="hidden" value="last">
+          <button type="submit" class="pk-search-btn">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </button>
+          <div id="predictive-search" tabindex="-1"></div>
+        </form>
+      </predictive-search>
+
+      <div class="pk-actions">
+        <div class="pk-action-item">
+          <div class="pk-live-chat">
+             <span class="pk-dot"></span>
+             <span class="pk-action-title" style="color:#059669;">Live Chat 24/7</span>
+          </div>
+          <span class="pk-action-sub">Chat with Us</span>
+        </div>
+        <a href="{{ routes.account_url }}" class="pk-action-item" style="text-decoration:none;">
+          <span class="pk-action-title">Hello, sign in</span>
+          <span class="pk-action-sub">Account & Reorder</span>
+        </a>
+        
+        <a href="{{ routes.cart_url }}" class="pk-action-item" id="cart-icon-bubble" style="color:inherit; text-decoration:none; flex-direction:row; gap:0.5rem; align-items:center;">
+           <div style="position:relative;">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+              {%- if cart != empty -%}
+                <span style="position:absolute; top:-8px; right:-8px; background:#b62b2a; color:white; font-size:10px; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center;">{{ cart.item_count }}</span>
+              {%- endif -%}
+           </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer Component -->
+  {% render 'cart-drawer' %}
+
+  <!-- MOBILE HEADER -->
+  <div class="pk-mobile-header lg:pk-hidden desktop:hidden">
+    <button class="pk-icon-btn" onclick="toggleMobileMenu(true)">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+    <a href="/">
+      <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/patchkraze-logo.webp?v=1768381402" class="pk-mobile-logo">
+    </a>
+    <div class="pk-mobile-icons lg:pk-hidden desktop:hidden">
+       <button class="pk-icon-btn"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+       <button class="pk-icon-btn"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></button>
+    </div>
+  </div>
+
+  <!-- NAVIGATION (DESKTOP) -->
+  <nav class="pk-nav pk-hidden lg:pk-block">
+    <div class="pk-container">
+      <ul class="pk-nav-list" id="desktop-nav-list">
+         <!-- Populated via JS -->
+      </ul>
+      <div id="mega-menu-container" class="pk-mega-menu">
+         <div class="pk-container">
+            <div class="pk-mega-grid" id="mega-menu-content">
+               <!-- Content -->
+            </div>
+         </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE DRAWER -->
+  <div class="pk-overlay" id="mobile-overlay" onclick="toggleMobileMenu(false)"></div>
+  <div class="pk-mobile-drawer" id="mobile-drawer">
+    <div class="pk-drawer-header">
+      <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/patchkraze-logo.webp?v=1768381402" style="height:2rem;">
+      <button class="pk-icon-btn" onclick="toggleMobileMenu(false)">
+         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="pk-drawer-content">
+      <div class="pk-drawer-brands">
+         <div class="pk-drawer-brands-title">Our Brands</div>
+         <div class="pk-brand-grid">
+            <a href="{{ section.settings.url_transfers | default: '/collections/transfers' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">TRANSFERS</a>
+            <a href="{{ section.settings.url_blanks | default: '/collections/blanks' }}" class="pk-mobile-brand-btn" style="background:#fff; color:#111827;">BLANKS</a>
+            <a href="{{ section.settings.url_patches | default: '/collections/patches' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">PATCHES</a>
+            <a href="{{ section.settings.url_printhouse | default: '/collections/printhouse' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">PRINTHOUSE</a>
+         </div>
+      </div>
+      <div id="mobile-nav-list">
+         <!-- Populated via JS -->
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ------------------------------------
+  // DATA CONFIGURATION
+  // ------------------------------------
+  const MEGA_MENUS = {
+    embroidery: [
+      { title: "Standard Embroidery", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Embroidered_NP_01_2024_2.jpg?v=1731449138", href: "/collections/standard-embroidery" },
+      { title: "3D Embroidery", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_3D_Embroidery_NP_01_2024_1.jpg?v=1731449173", href: "/collections/3d-embroidery" },
+      { title: "Custom Name Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NamePatchMOCK_1_4dc33b0d-b190-47c0-a29b-ebfd6aa53a44_1.png?v=1764952518", href: "/collections/custom-name-patches" },
+      { title: "Chenille", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_ChenilleNP01_2024.png?v=1755711760", href: "/collections/chenille" },
+      { title: "Custom Tackle Twill Letters", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png?v=1764629501", href: "/collections/custom-tackle-twill" }
+    ],
+    pvcRubber: [
+      { title: "Standard PVC Rubber", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_PVC_Rubber_NP_01_2024_2.jpg?v=1731448911", href: "/collections/standard-pvc-rubber" },
+      { title: "Glow in The Dark PVC Rubber Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/4_glow-in-the-dark.jpg?v=1761235940", href: "/collections/glow-in-the-dark-pvc" },
+      { title: "Custom Keychains", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/2_keychains.jpg?v=1761235775", href: "/collections/custom-keychains" }
+    ],
+    leather: [
+      { title: "Genuine Leather", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Genuine_Leather_NP_01_2024_2.jpg?v=1731448976", href: "/collections/genuine-leather" },
+      { title: "Faux Leather", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Faux_Leather_NP_01_2024_2.jpg?v=1731449032", href: "/collections/faux-leather" }
+    ],
+    ninjaFlex: [
+      { title: "Metallic Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/metallicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png?v=1765396220", href: "/collections/metallic-flex" },
+      { title: "Full Color Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/two_c14c6fc7-cb38-4ab1-88ca-4317dbe888ee.png?v=1757960975", href: "/collections/full-color-flex" },
+      { title: "Matte Black Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Matte_Black_Flex.png?v=1761169152", href: "/collections/matte-black-flex" },
+      { title: "Matte White Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches_Matte_white_double_8c1a8bc3-ceae-4a3b-a7ab-20e50c408ff9.png?v=1762360471", href: "/collections/matte-white-flex" }
+    ],
+    stickers: [
+      { title: "Custom Vinyl Stickers", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/BOOK_1.png?v=1740599405", href: "/collections/custom-vinyl-stickers" },
+      { title: "Custom Bumper Stickers", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/bumpercar_1.png?v=1740599420", href: "/collections/custom-bumper-stickers" }
+    ],
+    supplies: [
+      { title: "Heat Presses", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/hpn-15x15-signature-series-heat-press_f68c0253-f1a1-48fa-9c7d-fe310916b2bd.png?v=1763589654", href: "/collections/heat-presses" }
+    ]
+  };
+
+  const NAV_ITEMS = [
+    { label: "Embroidery", key: "embroidery", hasDropdown: true },
+    { label: "Full Color", key: "fullColor", hasDropdown: false },
+    { label: "PVC Rubber", key: "pvcRubber", hasDropdown: true },
+    { label: "Leather", key: "leather", hasDropdown: true },
+    { label: "Silicone", key: "silicone", hasDropdown: false },
+    { label: "Ninja Flex", key: "ninjaFlex", hasDropdown: true },
+    { label: "Woven", key: "woven", hasDropdown: false },
+    { label: "Rhinestones", key: "rhinestones", hasDropdown: false },
+    { label: "Stickers", key: "stickers", hasDropdown: true },
+    { label: "Supplies", key: "supplies", hasDropdown: true },
+    { label: "Support", key: "support", hasDropdown: true }
+  ];
+
+  // ------------------------------------
+  // DESKTOP LOGIC
+  // ------------------------------------
+  const desktopList = document.getElementById('desktop-nav-list');
+  const megaMenuContainer = document.getElementById('mega-menu-container');
+  const megaMenuContent = document.getElementById('mega-menu-content');
+  let currentOpenMenu = null;
+
+  function renderDesktopNav() {
+    NAV_ITEMS.forEach(item => {
+       const li = document.createElement('li');
+       li.className = 'pk-nav-item';
+       
+       const btn = document.createElement('button');
+       btn.className = 'pk-nav-btn';
+       btn.innerHTML = `<span>${item.label}</span>`;
+       if (item.hasDropdown) {
+         btn.innerHTML += `<svg class="pk-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>`;
+       } else {
+         // Direct link for items without dropdowns
+         btn.onclick = () => { window.location.href = `/collections/${item.label.toLowerCase().replace(/\s+/g, '-')}`; };
+       }
+       
+       // Hover Events
+       li.addEventListener('mouseenter', () => {
+         if (item.hasDropdown && MEGA_MENUS[item.key]) {
+           showMegaMenu(item.key);
+         } else {
+           hideMegaMenu();
+         }
+       });
+
+       li.appendChild(btn);
+       desktopList.appendChild(li);
+    });
+  }
+
+  function showMegaMenu(key) {
+    currentOpenMenu = key;
+    const items = MEGA_MENUS[key] || [];
+    megaMenuContent.innerHTML = items.map(subItem => `
+      <a href="${subItem.href}" class="pk-mega-item">
+        <div class="pk-mega-img-box"><img src="${subItem.image}" class="pk-mega-img"></div>
+        <div class="pk-mega-title">${subItem.title}</div>
+      </a>
+    `).join('');
+    megaMenuContainer.style.display = 'block';
+  }
+
+  function hideMegaMenu() {
+    currentOpenMenu = null;
+    megaMenuContainer.style.display = 'none';
+  }
+  
+  // Close menu when mouse leaves the nav bar entirely
+  document.querySelector('.pk-nav').addEventListener('mouseleave', hideMegaMenu);
+
+  renderDesktopNav();
+
+  // ------------------------------------
+  // MOBILE LOGIC
+  // ------------------------------------
+  const mobileList = document.getElementById('mobile-nav-list');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const mobileOverlay = document.getElementById('mobile-overlay');
+
+  window.toggleMobileMenu = function(open) {
+    if (open) {
+      mobileDrawer.classList.add('open');
+      mobileOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileDrawer.classList.remove('open');
+      mobileOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function renderMobileNav() {
+    NAV_ITEMS.forEach(item => {
+      const container = document.createElement('div');
+      
+      const btn = document.createElement('button');
+      btn.className = 'pk-accordion-btn';
+      btn.innerHTML = `<span>${item.label}</span>`;
+      
+      if (item.hasDropdown) {
+        btn.innerHTML += `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>`;
+        
+        const content = document.createElement('div');
+        content.className = 'pk-accordion-content';
+        const subItems = MEGA_MENUS[item.key] || [];
+        content.innerHTML = subItems.map(sub => `
+           <a href="${sub.href}" class="pk-sub-link">
+             <img src="${sub.image}" class="pk-sub-thumb">
+             <span>${sub.title}</span>
+           </a>
+        `).join('');
+
+        btn.onclick = () => {
+          content.classList.toggle('open');
+          btn.querySelector('svg').style.transform = content.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0)';
+        };
+        
+        container.appendChild(btn);
+        container.appendChild(content);
+      } else {
+        // No dropdown, just a link
+        btn.onclick = () => { window.location.href = `/collections/${item.label.toLowerCase().replace(/\s+/g, '-')}`; };
+        container.appendChild(btn);
+      }
+      mobileList.appendChild(container);
+    });
+  }
+
+  renderMobileNav();
+
+</script>

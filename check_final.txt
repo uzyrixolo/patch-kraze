@@ -1,0 +1,2092 @@
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  blocks/_card.liquid                                                         │
+│                                                                              │
+│                                                                              │
+│  [warning]: UnrecognizedRenderSnippetArguments                               │
+│  Unknown argument 'background_video_loop' in render tag for snippet          │
+│  'background-media'.                                                         │
+│                                                                              │
+│  77  background_video_loop: true,                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  blocks/_collection-card-image.liquid                                        │
+│                                                                              │
+│                                                                              │
+│  [warning]: ValidRenderSnippetArgumentTypes                                  │
+│  Type mismatch for argument 'image_source': expected object, got boolean     │
+│                                                                              │
+│  17  image_source: blank,                                                    │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  blocks/_hotspot-product.liquid                                              │
+│                                                                              │
+│                                                                              │
+│  [warning]: UnrecognizedRenderSnippetArguments                               │
+│  Unknown argument 'block' in render tag for snippet 'price'.                 │
+│                                                                              │
+│  59  {% render 'price', product_resource: hotspot_product, block: block %}   │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  layout/password.liquid                                                      │
+│                                                                              │
+│                                                                              │
+│  [warning]: RemoteAsset                                                      │
+│  Use one of the asset_url filters to serve assets for better performance.    │
+│                                                                              │
+│  20  href="#MainContent"                                                     │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  layout/theme.liquid                                                         │
+│                                                                              │
+│                                                                              │
+│  [warning]: RemoteAsset                                                      │
+│  Use one of the asset_url filters to serve assets for better performance.    │
+│                                                                              │
+│  18  href="#MainContent"                                                     │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/bg.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "Добавяне към количката",                         │
+│  294        "adding_to_cart": "Добавяне...",                                 │
+│  295        "added_to_cart": "Добавено в количката",                         │
+│  296        "add_to_cart_error": "Грешка при добавянето в количката",        │
+│  297        "sold_out": "Изчерпано",                                         │
+│  298        "unavailable": "Неналично",                                      │
+│  299        "quantity_error_max": "За този артикул има максимум от {{        │
+│  maximum }}",                                                                │
+│  300        "quantity": "Количество",                                        │
+│  301        "quantity_increments": "Стъпки от {{ increment }}",              │
+│  302        "quantity_minimum": "Минимум: {{ minimum }}",                    │
+│  303        "quantity_maximum": "Максимум: {{ maximum }}",                   │
+│  304        "in_cart": "в количката"                                         │
+│  305      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "Добавяне към количката",                         │
+│  294        "adding_to_cart": "Добавяне...",                                 │
+│  295        "added_to_cart": "Добавено в количката",                         │
+│  296        "add_to_cart_error": "Грешка при добавянето в количката",        │
+│  297        "sold_out": "Изчерпано",                                         │
+│  298        "unavailable": "Неналично",                                      │
+│  299        "quantity_error_max": "За този артикул има максимум от {{        │
+│  maximum }}",                                                                │
+│  300        "quantity": "Количество",                                        │
+│  301        "quantity_increments": "Стъпки от {{ increment }}",              │
+│  302        "quantity_minimum": "Минимум: {{ minimum }}",                    │
+│  303        "quantity_maximum": "Максимум: {{ maximum }}",                   │
+│  304        "in_cart": "в количката"                                         │
+│  305      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/cs.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  304      "product": {                                                       │
+│  305        "add_to_cart": "Přidat do košíku",                               │
+│  306        "adding_to_cart": "Přidávání do košíku...",                      │
+│  307        "added_to_cart": "Přidáno do košíku",                            │
+│  308        "add_to_cart_error": "Chyba při přidávání do košíku",            │
+│  309        "sold_out": "Vyprodáno",                                         │
+│  310        "unavailable": "Není k dispozici",                               │
+│  311        "quantity_error_max": "Maximum této položky je: {{ maximum }}",  │
+│  312        "quantity": "Množství",                                          │
+│  313        "quantity_increments": "Přírůstky: {{ increment }}",             │
+│  314        "quantity_minimum": "Minimum: {{ minimum }}",                    │
+│  315        "quantity_maximum": "Maximum: {{ maximum }}",                    │
+│  316        "in_cart": "v košíku"                                            │
+│  317      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  304      "product": {                                                       │
+│  305        "add_to_cart": "Přidat do košíku",                               │
+│  306        "adding_to_cart": "Přidávání do košíku...",                      │
+│  307        "added_to_cart": "Přidáno do košíku",                            │
+│  308        "add_to_cart_error": "Chyba při přidávání do košíku",            │
+│  309        "sold_out": "Vyprodáno",                                         │
+│  310        "unavailable": "Není k dispozici",                               │
+│  311        "quantity_error_max": "Maximum této položky je: {{ maximum }}",  │
+│  312        "quantity": "Množství",                                          │
+│  313        "quantity_increments": "Přírůstky: {{ increment }}",             │
+│  314        "quantity_minimum": "Minimum: {{ minimum }}",                    │
+│  315        "quantity_maximum": "Maximum: {{ maximum }}",                    │
+│  316        "in_cart": "v košíku"                                            │
+│  317      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/da.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "Læg i indkøbskurven",                            │
+│  294        "added_to_cart": "Lagt i indkøbskurv",                           │
+│  295        "adding_to_cart": "Tilføjer...",                                 │
+│  296        "add_to_cart_error": "Der opstod en fejl, da du lagde varen i    │
+│  indkøbskurven",                                                             │
+│  297        "sold_out": "Udsolgt",                                           │
+│  298        "unavailable": "Ikke tilgængelig",                               │
+│  299        "quantity_error_max": "Denne vare har en maksimumgrænse på {{    │
+│  maximum }}",                                                                │
+│  300        "quantity": "Antal",                                             │
+│  301        "quantity_increments": "Intervaller på {{ increment }}",         │
+│  302        "quantity_minimum": "Minimum på {{ minimum }}",                  │
+│  303        "quantity_maximum": "Maksimum på {{ maximum }}",                 │
+│  304        "in_cart": "i indkøbskurv"                                       │
+│  305      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "Læg i indkøbskurven",                            │
+│  294        "added_to_cart": "Lagt i indkøbskurv",                           │
+│  295        "adding_to_cart": "Tilføjer...",                                 │
+│  296        "add_to_cart_error": "Der opstod en fejl, da du lagde varen i    │
+│  indkøbskurven",                                                             │
+│  297        "sold_out": "Udsolgt",                                           │
+│  298        "unavailable": "Ikke tilgængelig",                               │
+│  299        "quantity_error_max": "Denne vare har en maksimumgrænse på {{    │
+│  maximum }}",                                                                │
+│  300        "quantity": "Antal",                                             │
+│  301        "quantity_increments": "Intervaller på {{ increment }}",         │
+│  302        "quantity_minimum": "Minimum på {{ minimum }}",                  │
+│  303        "quantity_maximum": "Maksimum på {{ maximum }}",                 │
+│  304        "in_cart": "i indkøbskurv"                                       │
+│  305      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/de.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "In den Warenkorb legen",                         │
+│  294        "added_to_cart": "Zum Warenkorb hinzugefügt",                    │
+│  295        "adding_to_cart": "Wird hinzugefügt...",                         │
+│  296        "add_to_cart_error": "Fehler beim Hinzufügen zum Warenkorb",     │
+│  297        "sold_out": "Ausverkauft",                                       │
+│  298        "unavailable": "Nicht verfügbar",                                │
+│  299        "quantity_error_max": "Dieser Artikel hat ein Maximum von {{     │
+│  maximum }}",                                                                │
+│  300        "quantity": "Menge",                                             │
+│  301        "quantity_increments": "In {{ increment }}er Schritten",         │
+│  302        "quantity_minimum": "Mindestens {{ minimum }}",                  │
+│  303        "quantity_maximum": "Maximal {{ maximum }}",                     │
+│  304        "in_cart": "im Warenkorb"                                        │
+│  305      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "In den Warenkorb legen",                         │
+│  294        "added_to_cart": "Zum Warenkorb hinzugefügt",                    │
+│  295        "adding_to_cart": "Wird hinzugefügt...",                         │
+│  296        "add_to_cart_error": "Fehler beim Hinzufügen zum Warenkorb",     │
+│  297        "sold_out": "Ausverkauft",                                       │
+│  298        "unavailable": "Nicht verfügbar",                                │
+│  299        "quantity_error_max": "Dieser Artikel hat ein Maximum von {{     │
+│  maximum }}",                                                                │
+│  300        "quantity": "Menge",                                             │
+│  301        "quantity_increments": "In {{ increment }}er Schritten",         │
+│  302        "quantity_minimum": "Mindestens {{ minimum }}",                  │
+│  303        "quantity_maximum": "Maximal {{ maximum }}",                     │
+│  304        "in_cart": "im Warenkorb"                                        │
+│  305      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/el.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "Προσθήκη στο καλάθι",                            │
+│  294        "added_to_cart": "Προστέθηκε στο καλάθι",                        │
+│  295        "adding_to_cart": "Προσθήκη...",                                 │
+│  296        "add_to_cart_error": "Παρουσιάστηκε σφάλμα κατά την προσθήκη     │
+│  στο καλάθι",                                                                │
+│  297        "sold_out": "Εξαντλήθηκε",                                       │
+│  298        "unavailable": "Μη διαθέσιμο",                                   │
+│  299        "quantity_error_max": "Αυτό το προϊόν έχει μέγιστο όριο {{       │
+│  maximum }}",                                                                │
+│  300        "quantity": "Ποσότητα",                                          │
+│  301        "quantity_increments": "Ποσότητες των {{ increment }}",          │
+│  302        "quantity_minimum": "Ελάχιστο όριο {{ minimum }}",               │
+│  303        "quantity_maximum": "Μέγιστο όριο {{ maximum }}",                │
+│  304        "in_cart": "στο καλάθι"                                          │
+│  305      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "Προσθήκη στο καλάθι",                            │
+│  294        "added_to_cart": "Προστέθηκε στο καλάθι",                        │
+│  295        "adding_to_cart": "Προσθήκη...",                                 │
+│  296        "add_to_cart_error": "Παρουσιάστηκε σφάλμα κατά την προσθήκη     │
+│  στο καλάθι",                                                                │
+│  297        "sold_out": "Εξαντλήθηκε",                                       │
+│  298        "unavailable": "Μη διαθέσιμο",                                   │
+│  299        "quantity_error_max": "Αυτό το προϊόν έχει μέγιστο όριο {{       │
+│  maximum }}",                                                                │
+│  300        "quantity": "Ποσότητα",                                          │
+│  301        "quantity_increments": "Ποσότητες των {{ increment }}",          │
+│  302        "quantity_minimum": "Ελάχιστο όριο {{ minimum }}",               │
+│  303        "quantity_maximum": "Μέγιστο όριο {{ maximum }}",                │
+│  304        "in_cart": "στο καλάθι"                                          │
+│  305      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/es.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  298      "product": {                                                       │
+│  299        "add_to_cart": "Agregar al carrito",                             │
+│  300        "added_to_cart": "Agregado al carrito",                          │
+│  301        "adding_to_cart": "Agregando...",                                │
+│  302        "add_to_cart_error": "Error al agregar al carrito",              │
+│  303        "sold_out": "Agotado",                                           │
+│  304        "unavailable": "No disponible",                                  │
+│  305        "quantity_error_max": "Este artículo tiene un máximo de {{       │
+│  maximum }}.",                                                               │
+│  306        "quantity": "Cantidad",                                          │
+│  307        "quantity_increments": "Incrementos de {{ increment }}",         │
+│  308        "quantity_minimum": "Mínimo de {{ minimum }}",                   │
+│  309        "quantity_maximum": "Máximo de {{ maximum }}",                   │
+│  310        "in_cart": "en el carrito"                                       │
+│  311      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  298      "product": {                                                       │
+│  299        "add_to_cart": "Agregar al carrito",                             │
+│  300        "added_to_cart": "Agregado al carrito",                          │
+│  301        "adding_to_cart": "Agregando...",                                │
+│  302        "add_to_cart_error": "Error al agregar al carrito",              │
+│  303        "sold_out": "Agotado",                                           │
+│  304        "unavailable": "No disponible",                                  │
+│  305        "quantity_error_max": "Este artículo tiene un máximo de {{       │
+│  maximum }}.",                                                               │
+│  306        "quantity": "Cantidad",                                          │
+│  307        "quantity_increments": "Incrementos de {{ increment }}",         │
+│  308        "quantity_minimum": "Mínimo de {{ minimum }}",                   │
+│  309        "quantity_maximum": "Máximo de {{ maximum }}",                   │
+│  310        "in_cart": "en el carrito"                                       │
+│  311      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/fi.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "Lisää ostoskoriin",                              │
+│  294        "added_to_cart": "Lisätty ostoskoriin",                          │
+│  295        "adding_to_cart": "Lisätään...",                                 │
+│  296        "add_to_cart_error": "Ostoskoriin lisättäessä tapahtui virhe",   │
+│  297        "sold_out": "Loppuunmyyty",                                      │
+│  298        "unavailable": "Ei käytettävissä",                               │
+│  299        "quantity_error_max": "Tämän tuotteen enimmäismäärä on {{        │
+│  maximum }}",                                                                │
+│  300        "quantity": "Määrä",                                             │
+│  301        "quantity_increments": "Lisäysten koko: {{ increment }}",        │
+│  302        "quantity_minimum": "Vähimmäismäärä {{ minimum }}",              │
+│  303        "quantity_maximum": "Enimmäismäärä {{ maximum }}",               │
+│  304        "in_cart": "ostoskorissa"                                        │
+│  305      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "Lisää ostoskoriin",                              │
+│  294        "added_to_cart": "Lisätty ostoskoriin",                          │
+│  295        "adding_to_cart": "Lisätään...",                                 │
+│  296        "add_to_cart_error": "Ostoskoriin lisättäessä tapahtui virhe",   │
+│  297        "sold_out": "Loppuunmyyty",                                      │
+│  298        "unavailable": "Ei käytettävissä",                               │
+│  299        "quantity_error_max": "Tämän tuotteen enimmäismäärä on {{        │
+│  maximum }}",                                                                │
+│  300        "quantity": "Määrä",                                             │
+│  301        "quantity_increments": "Lisäysten koko: {{ increment }}",        │
+│  302        "quantity_minimum": "Vähimmäismäärä {{ minimum }}",              │
+│  303        "quantity_maximum": "Enimmäismäärä {{ maximum }}",               │
+│  304        "in_cart": "ostoskorissa"                                        │
+│  305      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/fr.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  298      "product": {                                                       │
+│  299        "add_to_cart": "Ajouter au panier",                              │
+│  300        "added_to_cart": "Ajouté au panier",                             │
+│  301        "adding_to_cart": "Ajout...",                                    │
+│  302        "add_to_cart_error": "Erreur lors de l’ajout au panier",         │
+│  303        "sold_out": "Épuisé",                                            │
+│  304        "unavailable": "Non disponible(s)",                              │
+│  305        "quantity_error_max": "Cet article a un maximum de {{ maximum    │
+│  }}",                                                                        │
+│  306        "quantity": "Quantité",                                          │
+│  307        "quantity_increments": "Incréments de {{ increment }}",          │
+│  308        "quantity_minimum": "Minimum de {{ minimum }}",                  │
+│  309        "quantity_maximum": "Maximum de {{ maximum }}",                  │
+│  310        "in_cart": "dans le panier"                                      │
+│  311      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  298      "product": {                                                       │
+│  299        "add_to_cart": "Ajouter au panier",                              │
+│  300        "added_to_cart": "Ajouté au panier",                             │
+│  301        "adding_to_cart": "Ajout...",                                    │
+│  302        "add_to_cart_error": "Erreur lors de l’ajout au panier",         │
+│  303        "sold_out": "Épuisé",                                            │
+│  304        "unavailable": "Non disponible(s)",                              │
+│  305        "quantity_error_max": "Cet article a un maximum de {{ maximum    │
+│  }}",                                                                        │
+│  306        "quantity": "Quantité",                                          │
+│  307        "quantity_increments": "Incréments de {{ increment }}",          │
+│  308        "quantity_minimum": "Minimum de {{ minimum }}",                  │
+│  309        "quantity_maximum": "Maximum de {{ maximum }}",                  │
+│  310        "in_cart": "dans le panier"                                      │
+│  311      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/hr.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  298      "product": {                                                       │
+│  299        "add_to_cart": "Dodaj u košaricu",                               │
+│  300        "added_to_cart": "Dodano u košaricu",                            │
+│  301        "adding_to_cart": "Dodavanje...",                                │
+│  302        "add_to_cart_error": "Pogreška prilikom dodavanja u košaricu",   │
+│  303        "sold_out": "Rasprodano",                                        │
+│  304        "unavailable": "Nedostupno",                                     │
+│  305        "quantity_error_max": "Maksimum za ovaj artikl iznosi {{         │
+│  maximum }}",                                                                │
+│  306        "quantity": "Količina",                                          │
+│  307        "quantity_increments": "Povećanje od {{ increment }}",           │
+│  308        "quantity_minimum": "Minimalno {{ minimum }}",                   │
+│  309        "quantity_maximum": "Maksimalno {{ maximum }}",                  │
+│  310        "in_cart": "u košarici"                                          │
+│  311      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  298      "product": {                                                       │
+│  299        "add_to_cart": "Dodaj u košaricu",                               │
+│  300        "added_to_cart": "Dodano u košaricu",                            │
+│  301        "adding_to_cart": "Dodavanje...",                                │
+│  302        "add_to_cart_error": "Pogreška prilikom dodavanja u košaricu",   │
+│  303        "sold_out": "Rasprodano",                                        │
+│  304        "unavailable": "Nedostupno",                                     │
+│  305        "quantity_error_max": "Maksimum za ovaj artikl iznosi {{         │
+│  maximum }}",                                                                │
+│  306        "quantity": "Količina",                                          │
+│  307        "quantity_increments": "Povećanje od {{ increment }}",           │
+│  308        "quantity_minimum": "Minimalno {{ minimum }}",                   │
+│  309        "quantity_maximum": "Maksimalno {{ maximum }}",                  │
+│  310        "in_cart": "u košarici"                                          │
+│  311      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/hu.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "Hozzáadás a kosárhoz",                           │
+│  317        "adding_to_cart": "Hozzáadás…",                                  │
+│  318        "added_to_cart": "Hozzáadva a kosárhoz",                         │
+│  319        "add_to_cart_error": "Nem tudtuk hozzáadni a terméket a          │
+│  kosárhoz",                                                                  │
+│  320        "quantity_error_max": "A tétel maximális mennyisége {{ maximum   │
+│  }}",                                                                        │
+│  321        "sold_out": "Elfogyott",                                         │
+│  322        "unavailable": "Nincs készleten",                                │
+│  323        "quantity": "Mennyiség",                                         │
+│  324        "quantity_increments": "Növekmény: {{ increment }}",             │
+│  325        "quantity_minimum": "Minimum: {{ minimum }}",                    │
+│  326        "quantity_maximum": "Maximum: {{ maximum }}",                    │
+│  327        "in_cart": "a kosárban"                                          │
+│  328      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "Hozzáadás a kosárhoz",                           │
+│  317        "adding_to_cart": "Hozzáadás…",                                  │
+│  318        "added_to_cart": "Hozzáadva a kosárhoz",                         │
+│  319        "add_to_cart_error": "Nem tudtuk hozzáadni a terméket a          │
+│  kosárhoz",                                                                  │
+│  320        "quantity_error_max": "A tétel maximális mennyisége {{ maximum   │
+│  }}",                                                                        │
+│  321        "sold_out": "Elfogyott",                                         │
+│  322        "unavailable": "Nincs készleten",                                │
+│  323        "quantity": "Mennyiség",                                         │
+│  324        "quantity_increments": "Növekmény: {{ increment }}",             │
+│  325        "quantity_minimum": "Minimum: {{ minimum }}",                    │
+│  326        "quantity_maximum": "Maximum: {{ maximum }}",                    │
+│  327        "in_cart": "a kosárban"                                          │
+│  328      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/id.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "Tambahkan ke keranjang",                         │
+│  294        "added_to_cart": "Ditambahkan ke keranjang",                     │
+│  295        "adding_to_cart": "Menambahkan...",                              │
+│  296        "add_to_cart_error": "Kesalahan saat menambahkan ke keranjang",  │
+│  297        "sold_out": "Habis",                                             │
+│  298        "unavailable": "Tidak Tersedia",                                 │
+│  299        "quantity_error_max": "Item ini memiliki batas maksimum {{       │
+│  maximum }}",                                                                │
+│  300        "quantity": "Jumlah",                                            │
+│  301        "quantity_increments": "Nilai peningkatan {{ increment }}",      │
+│  302        "quantity_minimum": "Minimum {{ minimum }}",                     │
+│  303        "quantity_maximum": "Maksimum {{ maximum }}",                    │
+│  304        "in_cart": "di keranjang"                                        │
+│  305      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "Tambahkan ke keranjang",                         │
+│  294        "added_to_cart": "Ditambahkan ke keranjang",                     │
+│  295        "adding_to_cart": "Menambahkan...",                              │
+│  296        "add_to_cart_error": "Kesalahan saat menambahkan ke keranjang",  │
+│  297        "sold_out": "Habis",                                             │
+│  298        "unavailable": "Tidak Tersedia",                                 │
+│  299        "quantity_error_max": "Item ini memiliki batas maksimum {{       │
+│  maximum }}",                                                                │
+│  300        "quantity": "Jumlah",                                            │
+│  301        "quantity_increments": "Nilai peningkatan {{ increment }}",      │
+│  302        "quantity_minimum": "Minimum {{ minimum }}",                     │
+│  303        "quantity_maximum": "Maksimum {{ maximum }}",                    │
+│  304        "in_cart": "di keranjang"                                        │
+│  305      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/it.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  322      "product": {                                                       │
+│  323        "add_to_cart": "Aggiungi al carrello",                           │
+│  324        "adding_to_cart": "Aggiunta in corso...",                        │
+│  325        "added_to_cart": "Aggiunto al carrello",                         │
+│  326        "add_to_cart_error": "Errore durante l'aggiunta al carrello",    │
+│  327        "quantity_error_max": "Questo articolo ha un massimo di {{       │
+│  maximum }}",                                                                │
+│  328        "sold_out": "Esaurito",                                          │
+│  329        "unavailable": "Non disponibile",                                │
+│  330        "quantity": "Quantità",                                          │
+│  331        "quantity_increments": "Incrementi di {{ increment }}",          │
+│  332        "quantity_minimum": "Minimo di {{ minimum }}",                   │
+│  333        "quantity_maximum": "Massimo di {{ maximum }}",                  │
+│  334        "in_cart": "nel carrello"                                        │
+│  335      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  322      "product": {                                                       │
+│  323        "add_to_cart": "Aggiungi al carrello",                           │
+│  324        "adding_to_cart": "Aggiunta in corso...",                        │
+│  325        "added_to_cart": "Aggiunto al carrello",                         │
+│  326        "add_to_cart_error": "Errore durante l'aggiunta al carrello",    │
+│  327        "quantity_error_max": "Questo articolo ha un massimo di {{       │
+│  maximum }}",                                                                │
+│  328        "sold_out": "Esaurito",                                          │
+│  329        "unavailable": "Non disponibile",                                │
+│  330        "quantity": "Quantità",                                          │
+│  331        "quantity_increments": "Incrementi di {{ increment }}",          │
+│  332        "quantity_minimum": "Minimo di {{ minimum }}",                   │
+│  333        "quantity_maximum": "Massimo di {{ maximum }}",                  │
+│  334        "in_cart": "nel carrello"                                        │
+│  335      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/ja.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "カートに追加する",                               │
+│  294        "added_to_cart": "カートに追加済み",                             │
+│  295        "adding_to_cart": "追加中...",                                   │
+│  296        "add_to_cart_error":                                             │
+│  "カートに追加する際にエラーが発生しました",                                 │
+│  297        "sold_out": "売り切れ",                                          │
+│  298        "unavailable": "利用できません",                                 │
+│  299        "quantity_error_max": "このアイテムの最大値は{{ maximum          │
+│  }}です",                                                                    │
+│  300        "quantity": "個数",                                              │
+│  301        "quantity_increments": "{{ increment }}の増分",                  │
+│  302        "quantity_minimum": "最小{{ minimum }}",                         │
+│  303        "quantity_maximum": "最大{{ maximum }}",                         │
+│  304        "in_cart": "カート内"                                            │
+│  305      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "カートに追加する",                               │
+│  294        "added_to_cart": "カートに追加済み",                             │
+│  295        "adding_to_cart": "追加中...",                                   │
+│  296        "add_to_cart_error":                                             │
+│  "カートに追加する際にエラーが発生しました",                                 │
+│  297        "sold_out": "売り切れ",                                          │
+│  298        "unavailable": "利用できません",                                 │
+│  299        "quantity_error_max": "このアイテムの最大値は{{ maximum          │
+│  }}です",                                                                    │
+│  300        "quantity": "個数",                                              │
+│  301        "quantity_increments": "{{ increment }}の増分",                  │
+│  302        "quantity_minimum": "最小{{ minimum }}",                         │
+│  303        "quantity_maximum": "最大{{ maximum }}",                         │
+│  304        "in_cart": "カート内"                                            │
+│  305      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/ko.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "카트에 추가",                                    │
+│  294        "added_to_cart": "카트에 추가됨",                                │
+│  295        "adding_to_cart": "추가 중...",                                  │
+│  296        "add_to_cart_error": "카트에 추가하는 중 오류 발생",             │
+│  297        "sold_out": "품절",                                              │
+│  298        "unavailable": "사용할 수 없음",                                 │
+│  299        "quantity_error_max": "이 품목의 최대 개수는 {{ maximum          │
+│  }}개입니다.",                                                               │
+│  300        "quantity": "수량",                                              │
+│  301        "quantity_increments": "{{ increment }}개씩 증가",               │
+│  302        "quantity_minimum": "최소 {{ minimum }}개",                      │
+│  303        "quantity_maximum": "최대 {{ maximum }}개",                      │
+│  304        "in_cart": "카트에 있음"                                         │
+│  305      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "카트에 추가",                                    │
+│  294        "added_to_cart": "카트에 추가됨",                                │
+│  295        "adding_to_cart": "추가 중...",                                  │
+│  296        "add_to_cart_error": "카트에 추가하는 중 오류 발생",             │
+│  297        "sold_out": "품절",                                              │
+│  298        "unavailable": "사용할 수 없음",                                 │
+│  299        "quantity_error_max": "이 품목의 최대 개수는 {{ maximum          │
+│  }}개입니다.",                                                               │
+│  300        "quantity": "수량",                                              │
+│  301        "quantity_increments": "{{ increment }}개씩 증가",               │
+│  302        "quantity_minimum": "최소 {{ minimum }}개",                      │
+│  303        "quantity_maximum": "최대 {{ maximum }}개",                      │
+│  304        "in_cart": "카트에 있음"                                         │
+│  305      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/lt.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  329      "product": {                                                       │
+│  330        "add_to_cart": "Įdėti į krepšelį",                               │
+│  331        "adding_to_cart": "Pridedama…",                                  │
+│  332        "added_to_cart": "Įdėta į krepšelį",                             │
+│  333        "add_to_cart_error": "Dedant į krepšelį įvyko klaida",           │
+│  334        "quantity_error_max": "Nustatytas didžiausias šios prekės        │
+│  kiekis: {{ maximum }}",                                                     │
+│  335        "sold_out": "Išparduota",                                        │
+│  336        "unavailable": "Nėra",                                           │
+│  337        "quantity": "Kiekis",                                            │
+│  338        "quantity_increments": "Kiekis didėja kas {{ increment }}",      │
+│  339        "quantity_minimum": "Mažiausiai {{ minimum }}",                  │
+│  340        "quantity_maximum": "Daugiausiai {{ maximum }}",                 │
+│  341        "in_cart": "krepšelyje"                                          │
+│  342      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  329      "product": {                                                       │
+│  330        "add_to_cart": "Įdėti į krepšelį",                               │
+│  331        "adding_to_cart": "Pridedama…",                                  │
+│  332        "added_to_cart": "Įdėta į krepšelį",                             │
+│  333        "add_to_cart_error": "Dedant į krepšelį įvyko klaida",           │
+│  334        "quantity_error_max": "Nustatytas didžiausias šios prekės        │
+│  kiekis: {{ maximum }}",                                                     │
+│  335        "sold_out": "Išparduota",                                        │
+│  336        "unavailable": "Nėra",                                           │
+│  337        "quantity": "Kiekis",                                            │
+│  338        "quantity_increments": "Kiekis didėja kas {{ increment }}",      │
+│  339        "quantity_minimum": "Mažiausiai {{ minimum }}",                  │
+│  340        "quantity_maximum": "Daugiausiai {{ maximum }}",                 │
+│  341        "in_cart": "krepšelyje"                                          │
+│  342      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/nb.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "Legg i handlekurv",                              │
+│  317        "adding_to_cart": "Legger til ...",                              │
+│  318        "added_to_cart": "Lagt til i handlekurv",                        │
+│  319        "add_to_cart_error": "Problem med å legge til i handlekurven",   │
+│  320        "quantity_error_max": "Denne varen har et maksimumsantall på {{  │
+│   maximum }}",                                                               │
+│  321        "sold_out": "Utsolgt",                                           │
+│  322        "unavailable": "Utilgjengelig",                                  │
+│  323        "quantity": "Antall",                                            │
+│  324        "quantity_increments": "Økninger på {{ increment }}",            │
+│  325        "quantity_minimum": "Minimum {{ minimum }}",                     │
+│  326        "quantity_maximum": "Maksimum {{ maximum }}",                    │
+│  327        "in_cart": "i handlekurv"                                        │
+│  328      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "Legg i handlekurv",                              │
+│  317        "adding_to_cart": "Legger til ...",                              │
+│  318        "added_to_cart": "Lagt til i handlekurv",                        │
+│  319        "add_to_cart_error": "Problem med å legge til i handlekurven",   │
+│  320        "quantity_error_max": "Denne varen har et maksimumsantall på {{  │
+│   maximum }}",                                                               │
+│  321        "sold_out": "Utsolgt",                                           │
+│  322        "unavailable": "Utilgjengelig",                                  │
+│  323        "quantity": "Antall",                                            │
+│  324        "quantity_increments": "Økninger på {{ increment }}",            │
+│  325        "quantity_minimum": "Minimum {{ minimum }}",                     │
+│  326        "quantity_maximum": "Maksimum {{ maximum }}",                    │
+│  327        "in_cart": "i handlekurv"                                        │
+│  328      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/nl.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "Aan winkelwagen toevoegen",                      │
+│  317        "adding_to_cart": "Toevoegen...",                                │
+│  318        "added_to_cart": "Toegevoegd aan winkelwagen",                   │
+│  319        "add_to_cart_error": "Fout bij het toevoegen aan de              │
+│  winkelwagen",                                                               │
+│  320        "quantity_error_max": "Voor dit artikel geldt een maximum van    │
+│  {{ maximum }}.",                                                            │
+│  321        "sold_out": "Uitverkocht",                                       │
+│  322        "unavailable": "Niet beschikbaar",                               │
+│  323        "quantity": "Aantal",                                            │
+│  324        "quantity_increments": "Stappen van {{ increment }}",            │
+│  325        "quantity_minimum": "Minimum van {{ minimum }}",                 │
+│  326        "quantity_maximum": "Maximum van {{ maximum }}",                 │
+│  327        "in_cart": "in winkelwagen"                                      │
+│  328      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "Aan winkelwagen toevoegen",                      │
+│  317        "adding_to_cart": "Toevoegen...",                                │
+│  318        "added_to_cart": "Toegevoegd aan winkelwagen",                   │
+│  319        "add_to_cart_error": "Fout bij het toevoegen aan de              │
+│  winkelwagen",                                                               │
+│  320        "quantity_error_max": "Voor dit artikel geldt een maximum van    │
+│  {{ maximum }}.",                                                            │
+│  321        "sold_out": "Uitverkocht",                                       │
+│  322        "unavailable": "Niet beschikbaar",                               │
+│  323        "quantity": "Aantal",                                            │
+│  324        "quantity_increments": "Stappen van {{ increment }}",            │
+│  325        "quantity_minimum": "Minimum van {{ minimum }}",                 │
+│  326        "quantity_maximum": "Maximum van {{ maximum }}",                 │
+│  327        "in_cart": "in winkelwagen"                                      │
+│  328      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/pl.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  329      "product": {                                                       │
+│  330        "add_to_cart": "Dodaj do koszyka",                               │
+│  331        "adding_to_cart": "Trwa dodawanie...",                           │
+│  332        "added_to_cart": "Dodano do koszyka",                            │
+│  333        "add_to_cart_error": "Błąd podczas dodawania do koszyka",        │
+│  334        "quantity_error_max": "Pozycja ma maksymalny limit {{ maximum    │
+│  }}",                                                                        │
+│  335        "sold_out": "Wyprzedane",                                        │
+│  336        "unavailable": "Niedostępny",                                    │
+│  337        "quantity": "Ilość",                                             │
+│  338        "quantity_increments": "Przyrost o {{ increment }}",             │
+│  339        "quantity_minimum": "Minimum {{ minimum }}",                     │
+│  340        "quantity_maximum": "Maksimum {{ maximum }}",                    │
+│  341        "in_cart": "w koszyku"                                           │
+│  342      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  329      "product": {                                                       │
+│  330        "add_to_cart": "Dodaj do koszyka",                               │
+│  331        "adding_to_cart": "Trwa dodawanie...",                           │
+│  332        "added_to_cart": "Dodano do koszyka",                            │
+│  333        "add_to_cart_error": "Błąd podczas dodawania do koszyka",        │
+│  334        "quantity_error_max": "Pozycja ma maksymalny limit {{ maximum    │
+│  }}",                                                                        │
+│  335        "sold_out": "Wyprzedane",                                        │
+│  336        "unavailable": "Niedostępny",                                    │
+│  337        "quantity": "Ilość",                                             │
+│  338        "quantity_increments": "Przyrost o {{ increment }}",             │
+│  339        "quantity_minimum": "Minimum {{ minimum }}",                     │
+│  340        "quantity_maximum": "Maksimum {{ maximum }}",                    │
+│  341        "in_cart": "w koszyku"                                           │
+│  342      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/pt-BR.json                                                          │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  298      "product": {                                                       │
+│  299        "add_to_cart": "Adicionar ao carrinho",                          │
+│  300        "added_to_cart": "Adicionado ao carrinho",                       │
+│  301        "adding_to_cart": "Adicionando...",                              │
+│  302        "add_to_cart_error": "Erro ao adicionar ao carrinho",            │
+│  303        "sold_out": "Esgotado",                                          │
+│  304        "unavailable": "Indisponível",                                   │
+│  305        "quantity_error_max": "Este item apresenta um máximo de {{       │
+│  maximum }}",                                                                │
+│  306        "quantity": "Quantidade",                                        │
+│  307        "quantity_increments": "Incrementos de {{ increment }}",         │
+│  308        "quantity_minimum": "Mínimo de {{ minimum }}",                   │
+│  309        "quantity_maximum": "Máximo de {{ maximum }}",                   │
+│  310        "in_cart": "no carrinho"                                         │
+│  311      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  298      "product": {                                                       │
+│  299        "add_to_cart": "Adicionar ao carrinho",                          │
+│  300        "added_to_cart": "Adicionado ao carrinho",                       │
+│  301        "adding_to_cart": "Adicionando...",                              │
+│  302        "add_to_cart_error": "Erro ao adicionar ao carrinho",            │
+│  303        "sold_out": "Esgotado",                                          │
+│  304        "unavailable": "Indisponível",                                   │
+│  305        "quantity_error_max": "Este item apresenta um máximo de {{       │
+│  maximum }}",                                                                │
+│  306        "quantity": "Quantidade",                                        │
+│  307        "quantity_increments": "Incrementos de {{ increment }}",         │
+│  308        "quantity_minimum": "Mínimo de {{ minimum }}",                   │
+│  309        "quantity_maximum": "Máximo de {{ maximum }}",                   │
+│  310        "in_cart": "no carrinho"                                         │
+│  311      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/pt-PT.json                                                          │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  298      "product": {                                                       │
+│  299        "add_to_cart": "Adicionar ao carrinho",                          │
+│  300        "added_to_cart": "Adicionado ao carrinho",                       │
+│  301        "adding_to_cart": "A adicionar...",                              │
+│  302        "add_to_cart_error": "Erro ao adicionar ao carrinho",            │
+│  303        "sold_out": "Esgotado",                                          │
+│  304        "unavailable": "Indisponível",                                   │
+│  305        "quantity_error_max": "Este item tem um máximo de {{ maximum     │
+│  }}",                                                                        │
+│  306        "quantity": "Quantidade",                                        │
+│  307        "quantity_increments": "Incrementos de {{ increment }}",         │
+│  308        "quantity_minimum": "Mínimo de {{ minimum }}",                   │
+│  309        "quantity_maximum": "Máximo de {{ maximum }}",                   │
+│  310        "in_cart": "no carrinho"                                         │
+│  311      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  298      "product": {                                                       │
+│  299        "add_to_cart": "Adicionar ao carrinho",                          │
+│  300        "added_to_cart": "Adicionado ao carrinho",                       │
+│  301        "adding_to_cart": "A adicionar...",                              │
+│  302        "add_to_cart_error": "Erro ao adicionar ao carrinho",            │
+│  303        "sold_out": "Esgotado",                                          │
+│  304        "unavailable": "Indisponível",                                   │
+│  305        "quantity_error_max": "Este item tem um máximo de {{ maximum     │
+│  }}",                                                                        │
+│  306        "quantity": "Quantidade",                                        │
+│  307        "quantity_increments": "Incrementos de {{ increment }}",         │
+│  308        "quantity_minimum": "Mínimo de {{ minimum }}",                   │
+│  309        "quantity_maximum": "Máximo de {{ maximum }}",                   │
+│  310        "in_cart": "no carrinho"                                         │
+│  311      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/ro.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  322      "product": {                                                       │
+│  323        "add_to_cart": "Adaugă în coș",                                  │
+│  324        "adding_to_cart": "Se adaugă...",                                │
+│  325        "added_to_cart": "Adăugat în coș",                               │
+│  326        "add_to_cart_error": "Eroare la adăugarea în coș",               │
+│  327        "quantity_error_max": "Acest articol are maxim {{ maximum }}",   │
+│  328        "sold_out": "Stoc epuizat",                                      │
+│  329        "unavailable": "Indisponibil",                                   │
+│  330        "quantity": "Cantitate",                                         │
+│  331        "quantity_increments": "Creșteri de {{ increment }}",            │
+│  332        "quantity_minimum": "Minim {{ minimum }}",                       │
+│  333        "quantity_maximum": "Maxim {{ maximum }}",                       │
+│  334        "in_cart": "în coș"                                              │
+│  335      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  322      "product": {                                                       │
+│  323        "add_to_cart": "Adaugă în coș",                                  │
+│  324        "adding_to_cart": "Se adaugă...",                                │
+│  325        "added_to_cart": "Adăugat în coș",                               │
+│  326        "add_to_cart_error": "Eroare la adăugarea în coș",               │
+│  327        "quantity_error_max": "Acest articol are maxim {{ maximum }}",   │
+│  328        "sold_out": "Stoc epuizat",                                      │
+│  329        "unavailable": "Indisponibil",                                   │
+│  330        "quantity": "Cantitate",                                         │
+│  331        "quantity_increments": "Creșteri de {{ increment }}",            │
+│  332        "quantity_minimum": "Minim {{ minimum }}",                       │
+│  333        "quantity_maximum": "Maxim {{ maximum }}",                       │
+│  334        "in_cart": "în coș"                                              │
+│  335      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/ru.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  329      "product": {                                                       │
+│  330        "add_to_cart": "Добавить в корзину",                             │
+│  331        "adding_to_cart": "Добавление...",                               │
+│  332        "added_to_cart": "Товар добавлен в корзину",                     │
+│  333        "add_to_cart_error": "Возникла ошибка при добавлении в           │
+│  корзину",                                                                   │
+│  334        "quantity_error_max": "Максимальное количество этого товара —    │
+│  {{ maximum }}",                                                             │
+│  335        "sold_out": "Продано",                                           │
+│  336        "unavailable": "Недоступно",                                     │
+│  337        "quantity": "Количество",                                        │
+│  338        "quantity_increments": "Прирост: {{ increment }}",               │
+│  339        "quantity_minimum": "Минимум: {{ minimum }}",                    │
+│  340        "quantity_maximum": "Максимум: {{ maximum }}",                   │
+│  341        "in_cart": "в корзине"                                           │
+│  342      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  329      "product": {                                                       │
+│  330        "add_to_cart": "Добавить в корзину",                             │
+│  331        "adding_to_cart": "Добавление...",                               │
+│  332        "added_to_cart": "Товар добавлен в корзину",                     │
+│  333        "add_to_cart_error": "Возникла ошибка при добавлении в           │
+│  корзину",                                                                   │
+│  334        "quantity_error_max": "Максимальное количество этого товара —    │
+│  {{ maximum }}",                                                             │
+│  335        "sold_out": "Продано",                                           │
+│  336        "unavailable": "Недоступно",                                     │
+│  337        "quantity": "Количество",                                        │
+│  338        "quantity_increments": "Прирост: {{ increment }}",               │
+│  339        "quantity_minimum": "Минимум: {{ minimum }}",                    │
+│  340        "quantity_maximum": "Максимум: {{ maximum }}",                   │
+│  341        "in_cart": "в корзине"                                           │
+│  342      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/sk.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  329      "product": {                                                       │
+│  330        "add_to_cart": "Pridať do košíka",                               │
+│  331        "adding_to_cart": "Pridávanie...",                               │
+│  332        "added_to_cart": "Pridané do košíka",                            │
+│  333        "add_to_cart_error": "Chyba pri pridávaní do košíka",            │
+│  334        "quantity_error_max": "Maximálne množstvo tejto položky je {{    │
+│  maximum }}",                                                                │
+│  335        "sold_out": "Vypredané",                                         │
+│  336        "unavailable": "Nedostupné",                                     │
+│  337        "quantity": "Množstvo",                                          │
+│  338        "quantity_increments": "Prírastky po {{ increment }}",           │
+│  339        "quantity_minimum": "Minimálne {{ minimum }} ks",                │
+│  340        "quantity_maximum": "Maximálne {{ maximum }} ks",                │
+│  341        "in_cart": "v košíku"                                            │
+│  342      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  329      "product": {                                                       │
+│  330        "add_to_cart": "Pridať do košíka",                               │
+│  331        "adding_to_cart": "Pridávanie...",                               │
+│  332        "added_to_cart": "Pridané do košíka",                            │
+│  333        "add_to_cart_error": "Chyba pri pridávaní do košíka",            │
+│  334        "quantity_error_max": "Maximálne množstvo tejto položky je {{    │
+│  maximum }}",                                                                │
+│  335        "sold_out": "Vypredané",                                         │
+│  336        "unavailable": "Nedostupné",                                     │
+│  337        "quantity": "Množstvo",                                          │
+│  338        "quantity_increments": "Prírastky po {{ increment }}",           │
+│  339        "quantity_minimum": "Minimálne {{ minimum }} ks",                │
+│  340        "quantity_maximum": "Maximálne {{ maximum }} ks",                │
+│  341        "in_cart": "v košíku"                                            │
+│  342      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/sl.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  304      "product": {                                                       │
+│  305        "add_to_cart": "Dodaj v košarico",                               │
+│  306        "added_to_cart": "Dodano v košarico",                            │
+│  307        "adding_to_cart": "Dodajanje ...",                               │
+│  308        "add_to_cart_error": "Pri dodajanju v košarico je prišlo do      │
+│  napake",                                                                    │
+│  309        "sold_out": "Razprodano",                                        │
+│  310        "unavailable": "Ni na voljo",                                    │
+│  311        "quantity_error_max": "Ta artikel ima največ {{ maximum }}",     │
+│  312        "quantity": "Količina",                                          │
+│  313        "quantity_increments": "V korakih po {{ increment }}",           │
+│  314        "quantity_minimum": "Najmanj od {{ minimum }}",                  │
+│  315        "quantity_maximum": "Največ od {{ maximum }}",                   │
+│  316        "in_cart": "v košarici"                                          │
+│  317      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  304      "product": {                                                       │
+│  305        "add_to_cart": "Dodaj v košarico",                               │
+│  306        "added_to_cart": "Dodano v košarico",                            │
+│  307        "adding_to_cart": "Dodajanje ...",                               │
+│  308        "add_to_cart_error": "Pri dodajanju v košarico je prišlo do      │
+│  napake",                                                                    │
+│  309        "sold_out": "Razprodano",                                        │
+│  310        "unavailable": "Ni na voljo",                                    │
+│  311        "quantity_error_max": "Ta artikel ima največ {{ maximum }}",     │
+│  312        "quantity": "Količina",                                          │
+│  313        "quantity_increments": "V korakih po {{ increment }}",           │
+│  314        "quantity_minimum": "Najmanj od {{ minimum }}",                  │
+│  315        "quantity_maximum": "Največ od {{ maximum }}",                   │
+│  316        "in_cart": "v košarici"                                          │
+│  317      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/sv.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "Lägg till i varukorgen",                         │
+│  317        "adding_to_cart": "Lägger till ...",                             │
+│  318        "added_to_cart": "Tillagd i varukorgen",                         │
+│  319        "add_to_cart_error": "Det uppstod ett fel när artikeln skulle    │
+│  läggas till i varukorgen",                                                  │
+│  320        "quantity_error_max": "Den här artikeln har max {{ maximum }}",  │
+│  321        "sold_out": "Slutsåld",                                          │
+│  322        "unavailable": "Inte tillgängliga",                              │
+│  323        "quantity": "Kvantitet",                                         │
+│  324        "quantity_increments": "Ökningar i steg om {{ increment }}",     │
+│  325        "quantity_minimum": "Minimum {{ minimum }}",                     │
+│  326        "quantity_maximum": "Maximum {{ maximum }}",                     │
+│  327        "in_cart": "i varukorg"                                          │
+│  328      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "Lägg till i varukorgen",                         │
+│  317        "adding_to_cart": "Lägger till ...",                             │
+│  318        "added_to_cart": "Tillagd i varukorgen",                         │
+│  319        "add_to_cart_error": "Det uppstod ett fel när artikeln skulle    │
+│  läggas till i varukorgen",                                                  │
+│  320        "quantity_error_max": "Den här artikeln har max {{ maximum }}",  │
+│  321        "sold_out": "Slutsåld",                                          │
+│  322        "unavailable": "Inte tillgängliga",                              │
+│  323        "quantity": "Kvantitet",                                         │
+│  324        "quantity_increments": "Ökningar i steg om {{ increment }}",     │
+│  325        "quantity_minimum": "Minimum {{ minimum }}",                     │
+│  326        "quantity_maximum": "Maximum {{ maximum }}",                     │
+│  327        "in_cart": "i varukorg"                                          │
+│  328      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/th.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "เพิ่มลงในตะกร้าสินค้า",                          │
+│  294        "added_to_cart": "เพิ่มลงในตะกร้าสินค้าแล้ว",                    │
+│  295        "adding_to_cart": "กำลังเพิ่ม...",                               │
+│  296        "add_to_cart_error": "เกิดข้อผิดพลาดขณะเพิ่มสินค้าในตะกร้า",     │
+│  297        "sold_out": "ขายหมดแล้ว",                                        │
+│  298        "unavailable": "ไม่พร้อมจำหน่าย",                                │
+│  299        "quantity_error_max": "สินค้านี้มีจำนวนสูงสุดที่ {{ maximum }}   │
+│  รายการ",                                                                    │
+│  300        "quantity": "จำนวน",                                             │
+│  301        "quantity_increments": "เพิ่มขึ้นได้ทีละ {{ increment }}",       │
+│  302        "quantity_minimum": "จำนวนต่ำสุดคือ {{ minimum }}",              │
+│  303        "quantity_maximum": "จำนวนสูงสุดคือ {{ maximum }}",              │
+│  304        "in_cart": "ในตะกร้าสินค้า"                                      │
+│  305      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "เพิ่มลงในตะกร้าสินค้า",                          │
+│  294        "added_to_cart": "เพิ่มลงในตะกร้าสินค้าแล้ว",                    │
+│  295        "adding_to_cart": "กำลังเพิ่ม...",                               │
+│  296        "add_to_cart_error": "เกิดข้อผิดพลาดขณะเพิ่มสินค้าในตะกร้า",     │
+│  297        "sold_out": "ขายหมดแล้ว",                                        │
+│  298        "unavailable": "ไม่พร้อมจำหน่าย",                                │
+│  299        "quantity_error_max": "สินค้านี้มีจำนวนสูงสุดที่ {{ maximum }}   │
+│  รายการ",                                                                    │
+│  300        "quantity": "จำนวน",                                             │
+│  301        "quantity_increments": "เพิ่มขึ้นได้ทีละ {{ increment }}",       │
+│  302        "quantity_minimum": "จำนวนต่ำสุดคือ {{ minimum }}",              │
+│  303        "quantity_maximum": "จำนวนสูงสุดคือ {{ maximum }}",              │
+│  304        "in_cart": "ในตะกร้าสินค้า"                                      │
+│  305      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/tr.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "Sepete ekle",                                    │
+│  317        "adding_to_cart": "Ekleniyor...",                                │
+│  318        "added_to_cart": "Sepete eklendi",                               │
+│  319        "add_to_cart_error": "Sepete eklenirken hata oluştu",            │
+│  320        "quantity_error_max": "Bu ürün için maksimum değer: {{ maximum   │
+│  }}",                                                                        │
+│  321        "sold_out": "Tükendi",                                           │
+│  322        "unavailable": "Kullanılamıyor",                                 │
+│  323        "quantity": "Adet",                                              │
+│  324        "quantity_increments": "Artış değeri: {{ increment }}",          │
+│  325        "quantity_minimum": "Minimum: {{ minimum }}",                    │
+│  326        "quantity_maximum": "Maksimum: {{ maximum }}",                   │
+│  327        "in_cart": "sepette"                                             │
+│  328      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "Sepete ekle",                                    │
+│  317        "adding_to_cart": "Ekleniyor...",                                │
+│  318        "added_to_cart": "Sepete eklendi",                               │
+│  319        "add_to_cart_error": "Sepete eklenirken hata oluştu",            │
+│  320        "quantity_error_max": "Bu ürün için maksimum değer: {{ maximum   │
+│  }}",                                                                        │
+│  321        "sold_out": "Tükendi",                                           │
+│  322        "unavailable": "Kullanılamıyor",                                 │
+│  323        "quantity": "Adet",                                              │
+│  324        "quantity_increments": "Artış değeri: {{ increment }}",          │
+│  325        "quantity_minimum": "Minimum: {{ minimum }}",                    │
+│  326        "quantity_maximum": "Maksimum: {{ maximum }}",                   │
+│  327        "in_cart": "sepette"                                             │
+│  328      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/vi.json                                                             │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "Thêm vào giỏ hàng",                              │
+│  317        "adding_to_cart": "Đang thêm...",                                │
+│  318        "added_to_cart": "Đã thêm vào giỏ hàng",                         │
+│  319        "add_to_cart_error": "Lỗi khi thêm vào giỏ hàng",                │
+│  320        "quantity_error_max": "Mặt hàng này có tối đa {{ maximum }}",    │
+│  321        "sold_out": "Hết hàng",                                          │
+│  322        "unavailable": "Không khả dụng",                                 │
+│  323        "quantity": "Số lượng",                                          │
+│  324        "quantity_increments": "Mức gia tăng {{ increment }}",           │
+│  325        "quantity_minimum": "Tối thiểu {{ minimum }}",                   │
+│  326        "quantity_maximum": "Tối đa {{ maximum }}",                      │
+│  327        "in_cart": "trong giỏ hàng"                                      │
+│  328      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "Thêm vào giỏ hàng",                              │
+│  317        "adding_to_cart": "Đang thêm...",                                │
+│  318        "added_to_cart": "Đã thêm vào giỏ hàng",                         │
+│  319        "add_to_cart_error": "Lỗi khi thêm vào giỏ hàng",                │
+│  320        "quantity_error_max": "Mặt hàng này có tối đa {{ maximum }}",    │
+│  321        "sold_out": "Hết hàng",                                          │
+│  322        "unavailable": "Không khả dụng",                                 │
+│  323        "quantity": "Số lượng",                                          │
+│  324        "quantity_increments": "Mức gia tăng {{ increment }}",           │
+│  325        "quantity_minimum": "Tối thiểu {{ minimum }}",                   │
+│  326        "quantity_maximum": "Tối đa {{ maximum }}",                      │
+│  327        "in_cart": "trong giỏ hàng"                                      │
+│  328      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/zh-CN.json                                                          │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "添加到购物车",                                   │
+│  294        "added_to_cart": "添加到购物车",                                 │
+│  295        "adding_to_cart": "正在添加...",                                 │
+│  296        "add_to_cart_error": "添加到购物车时出错",                       │
+│  297        "sold_out": "售罄",                                              │
+│  298        "unavailable": "不可售",                                         │
+│  299        "quantity_error_max": "此商品上限为 {{ maximum }}",              │
+│  300        "quantity": "数量",                                              │
+│  301        "quantity_increments": "增量为 {{ increment }}",                 │
+│  302        "quantity_minimum": "最少 {{ minimum }} 个",                     │
+│  303        "quantity_maximum": "最多 {{ maximum }} 个",                     │
+│  304        "in_cart": "在购物车中"                                          │
+│  305      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  292      "product": {                                                       │
+│  293        "add_to_cart": "添加到购物车",                                   │
+│  294        "added_to_cart": "添加到购物车",                                 │
+│  295        "adding_to_cart": "正在添加...",                                 │
+│  296        "add_to_cart_error": "添加到购物车时出错",                       │
+│  297        "sold_out": "售罄",                                              │
+│  298        "unavailable": "不可售",                                         │
+│  299        "quantity_error_max": "此商品上限为 {{ maximum }}",              │
+│  300        "quantity": "数量",                                              │
+│  301        "quantity_increments": "增量为 {{ increment }}",                 │
+│  302        "quantity_minimum": "最少 {{ minimum }} 个",                     │
+│  303        "quantity_maximum": "最多 {{ maximum }} 个",                     │
+│  304        "in_cart": "在购物车中"                                          │
+│  305      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  locales/zh-TW.json                                                          │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.default_title' is missing             │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "加入購物車",                                     │
+│  317        "adding_to_cart": "正在新增…",                                   │
+│  318        "added_to_cart": "已放入購物車",                                 │
+│  319        "add_to_cart_error": "加入購物車時發生錯誤",                     │
+│  320        "quantity_error_max": "此品項上限為 {{ maximum }}",              │
+│  321        "sold_out": "售罄",                                              │
+│  322        "unavailable": "無可用資料",                                     │
+│  323        "quantity": "數量",                                              │
+│  324        "quantity_increments": "{{ increment }} 的倍數",                 │
+│  325        "quantity_minimum": "最少 {{ minimum }} 個",                     │
+│  326        "quantity_maximum": "最多 {{ maximum }} 個",                     │
+│  327        "in_cart": "在購物車中"                                          │
+│  328      }                                                                  │
+│                                                                              │
+│                                                                              │
+│  [error]: MatchingTranslations                                               │
+│  The translation for 'products.product.sticky_add_to_cart' is missing        │
+│                                                                              │
+│  315      "product": {                                                       │
+│  316        "add_to_cart": "加入購物車",                                     │
+│  317        "adding_to_cart": "正在新增…",                                   │
+│  318        "added_to_cart": "已放入購物車",                                 │
+│  319        "add_to_cart_error": "加入購物車時發生錯誤",                     │
+│  320        "quantity_error_max": "此品項上限為 {{ maximum }}",              │
+│  321        "sold_out": "售罄",                                              │
+│  322        "unavailable": "無可用資料",                                     │
+│  323        "quantity": "數量",                                              │
+│  324        "quantity_increments": "{{ increment }} 的倍數",                 │
+│  325        "quantity_minimum": "最少 {{ minimum }} 個",                     │
+│  326        "quantity_maximum": "最多 {{ maximum }} 個",                     │
+│  327        "in_cart": "在購物車中"                                          │
+│  328      }                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  sections/explore-products-patch-kraze.liquid                                │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  165  <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/ninj  │
+│  a-transfers-patches-design.jpg?v=1768381402" alt="Patch Kraze Transfers"    │
+│  class="explore-bg-img">                                                     │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  176  <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/ninj  │
+│  a-printhouse-warehouse-production.jpg?v=1768381402" alt="Patch Kraze        │
+│  Printhouse" class="explore-bg-img">                                         │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  187  <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/ninj  │
+│  a-blanks-apparel-clothing-bulk.jpg?v=1768381402" alt="Patch Kraze Blanks"   │
+│  class="explore-bg-img">                                                     │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  sections/header-patch-kraze.liquid                                          │
+│                                                                              │
+│                                                                              │
+│  [warning]: HardcodedRoutes                                                  │
+│  Use routes object {{ routes.root_url }} instead of hardcoding /             │
+│                                                                              │
+│  353  <a href="/" class="patch-logo">                                        │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  sections/header.liquid                                                      │
+│                                                                              │
+│                                                                              │
+│  [error]: UniqueStaticBlockId                                                │
+│  The id 'header-menu' is already being used by another static block          │
+│                                                                              │
+│  55  content_for 'block', type: '_header-menu', id: 'header-menu', variant:  │
+│   'mobile'                                                                   │
+│                                                                              │
+│                                                                              │
+│  [error]: UniqueStaticBlockId                                                │
+│  The id 'header-menu' is already being used by another static block          │
+│                                                                              │
+│  59  content_for 'block', type: '_header-menu', id: 'header-menu', variant:  │
+│   'navigation_bar', transparent: transparent                                 │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  sections/hero-banner-patch-kraze.liquid                                     │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  196            <img                                                         │
+│  197              src="https://ninjapatches.com/cdn/shop/files/patches-hero  │
+│  -v3-2.png?v=1762368190&width=1200"                                          │
+│  198              alt="Custom patches on black baseball cap with sample      │
+│  designs"                                                                    │
+│  199              class="hero-img"                                           │
+│  200              loading="eager"                                            │
+│  201            >                                                            │
+│                                                                              │
+│                                                                              │
+│  [warning]: RemoteAsset                                                      │
+│  Asset should be served by the Shopify CDN for better performance.           │
+│                                                                              │
+│  197  src="https://ninjapatches.com/cdn/shop/files/patches-hero-v3-2.png?v=  │
+│  1762368190&width=1200"                                                      │
+│                                                                              │
+│                                                                              │
+│  [warning]: HardcodedRoutes                                                  │
+│  Use routes object {{ routes.collections_url }} instead of hardcoding        │
+│  /collections                                                                │
+│                                                                              │
+│  184  <a href="/collections/custom-patches" class="btn-primary-patch">       │
+│                                                                              │
+│                                                                              │
+│  [warning]: HardcodedRoutes                                                  │
+│  Use routes object {{ routes.collections_url }} instead of hardcoding        │
+│  /collections                                                                │
+│                                                                              │
+│  187  <a href="/collections/rush-patches" class="btn-secondary-patch">       │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  sections/ordering-process-patch-kraze.liquid                                │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  107  <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/4-st  │
+│  ep.jpg?v=1768381402" alt="Upload Your Designs & Place Order Online"         │
+│  class="order-img">                                                          │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  118  <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/1-st  │
+│  ep.jpg?v=1768381402" alt="Approve Your Patch Artwork Proofs"                │
+│  class="order-img">                                                          │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  129  <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/3-st  │
+│  ep.jpg?v=1768381402" alt="We Create & Ship Your Custom Patch Order"         │
+│  class="order-img">                                                          │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  140  <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/2-st  │
+│  ep.jpg?v=1768381402" alt="Heatpress when Ready" class="order-img">          │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  sections/shop-all-patches.liquid                                            │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  150  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Phot  │
+│  o_Embroidered_NP_01_2024_2.jpg" alt="Embroidered Patches"                   │
+│  class="patch-static-img">                                                   │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  165  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Phot  │
+│  o_3D_Embroidery_NP_01_2024_1.jpg" alt="3D Embroidered Patches"              │
+│  class="patch-static-img">                                                   │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  180  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Phot  │
+│  o_Full_Color_Printed_NP_01_2024_2.jpg" alt="Full Color Printed Patches"     │
+│  class="patch-static-img">                                                   │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  195  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Phot  │
+│  o_PVC_Rubber_NP_01_2024_2.jpg" alt="PVC Rubber Patches"                     │
+│  class="patch-static-img">                                                   │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  210  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Phot  │
+│  o_Genuine_Leather_NP_01_2024_2.jpg" alt="Genuine Leather Patches"           │
+│  class="patch-static-img">                                                   │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  225  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Phot  │
+│  o_Faux_Leather_NP_01_2024_2.jpg" alt="Faux Leather Patches"                 │
+│  class="patch-static-img">                                                   │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  240  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Phot  │
+│  o_Woven_NP_01_2024_2.jpg" alt="Woven Patches" class="patch-static-img">     │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  255  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/meta  │
+│  llicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png" alt="Metallic Flex       │
+│  Patches" class="patch-static-img">                                          │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  270  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/two_  │
+│  c14c6fc7-cb38-4ab1-88ca-4317dbe888ee.png" alt="Full Color Flex Patches"     │
+│  class="patch-static-img">                                                   │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  285  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Matt  │
+│  e_Black_Flex.png" alt="Matte Black Flex Patches" class="patch-static-img">  │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  300  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Phot  │
+│  o_ChenilleNP01_2024.png" alt="Chenille Patches" class="patch-static-img">   │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  315  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Phot  │
+│  o_Silicone_NP_01_2024_2.jpg" alt="Silicone Patches"                         │
+│  class="patch-static-img">                                                   │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  330  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Name  │
+│  PatchMOCK_1_4dc33b0d-b190-47c0-a29b-ebfd6aa53a44_1.png" alt="Custom         │
+│  Embroidered Name Patches" class="patch-static-img">                         │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  345  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.P  │
+│  atches_Matte_white_double_8c1a8bc3-ceae-4a3b-a7ab-20e50c408ff9.png"         │
+│  alt="Matte White Flex Patches" class="patch-static-img">                    │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  360  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.P  │
+│  atches-chrome-double_e150e78d-4203-4ece-8968-ad1910bf8a53.png" alt="Chrome  │
+│   Flex Patches" class="patch-static-img">                                    │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  375  <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d  │
+│  8d2043c-7a4d-4a69-a794-454178d674a9.png" alt="Custom Tackle Twill Letters"  │
+│   class="patch-static-img">                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  sections/shop-popular-products.liquid                                       │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  106  <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/pvc-  │
+│  keychains-with-colorful-designs.jpg?v=1768381402" alt="PVC Keychains"       │
+│  class="popular-img">                                                        │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  116  <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/viny  │
+│  l-stickers-rolls.jpg?v=1768381402" alt="Vinyl Stickers"                     │
+│  class="popular-img">                                                        │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  126  <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/bump  │
+│  er-sticker-on-vehicle.jpg?v=1768381402" alt="Bumper Stickers"               │
+│  class="popular-img">                                                        │
+│                                                                              │
+│                                                                              │
+│  [error]: ImgWidthAndHeight                                                  │
+│  Missing width and height attributes on img tag                              │
+│                                                                              │
+│  136  <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/red-  │
+│  truck-with-stickers.jpg?v=1768381402" alt="Truck Stickers"                  │
+│  class="popular-img">                                                        │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/account-drawer.liquid                                              │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  12  {{ block.shopify_attributes }}                                          │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/blog-comment-form.liquid                                           │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'comment' used.                                              │
+│                                                                              │
+│  52  if blog.moderated? and comment.status == 'unapproved'                   │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/cart-drawer.liquid                                                 │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'section' used.                                              │
+│                                                                              │
+│  44  data-section-id="{{ section.id }}"                                      │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  19  {{ block.shopify_attributes }}                                          │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/cart-icon-component.liquid                                         │
+│                                                                              │
+│                                                                              │
+│  [warning]: UnrecognizedRenderSnippetArguments                               │
+│  Unknown argument 'test_id' in render tag for snippet 'cart-bubble'.         │
+│                                                                              │
+│  18  {% render 'cart-bubble', limit: 100, live_region: true, test_id:        │
+│  test_id %}                                                                  │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'test_id' used.                                              │
+│                                                                              │
+│  18  {% render 'cart-bubble', limit: 100, live_region: true, test_id:        │
+│  test_id %}                                                                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/cart-summary.liquid                                                │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'section' used.                                              │
+│                                                                              │
+│  48  {% render 'cart-discount', section_id: section.id %}                    │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/contact-form.liquid                                                │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'section' used.                                              │
+│                                                                              │
+│  23  {% assign form_id = block.id | default: section.id | prepend:           │
+│  'ContactForm-' %}                                                           │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  23  {% assign form_id = block.id | default: section.id | prepend:           │
+│  'ContactForm-' %}                                                           │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  21  {{ block.shopify_attributes }}                                          │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/divider.liquid                                                     │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  24  {{- block.shopify_attributes -}}                                        │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/drawer-localization.liquid                                         │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  14  assign background_brightness =                                          │
+│  block.settings.color_scheme.settings.background | color_brightness          │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'section' used.                                              │
+│                                                                              │
+│  21  assign localization_font = '--menu-localization-font:                   │
+│  var(--font-[localization_font]--family); ' | replace:                       │
+│  '[localization_font]', section.settings.localization_font                   │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  31  block_id: block.id,                                                     │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  120  block_id: block.id                                                     │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/dropdown-localization.liquid                                       │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'section' used.                                              │
+│                                                                              │
+│  11  assign background_brightness =                                          │
+│  section.settings.color_scheme.settings.background | color_brightness        │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'section' used.                                              │
+│                                                                              │
+│  18  assign localization_font = '--menu-localization-font:                   │
+│  var(--font-[localization_font]--family); ' | replace:                       │
+│  '[localization_font]', section.settings.localization_font                   │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'section' used.                                              │
+│                                                                              │
+│  19  assign localization_font_size = '--menu-localization-font-size:         │
+│  [localization_font_size]; ' | replace: '[localization_font_size]',          │
+│  section.settings.localization_font_size                                     │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  31  block_id: block.id                                                      │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  96  block_id: block.id                                                      │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/jumbo-text.liquid                                                  │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  12  assign block_settings = block_settings | default: block.settings        │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  49  {{ block.shopify_attributes }}                                          │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/localization-form.liquid                                           │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'back' used.                                                 │
+│                                                                              │
+│  51  return_to: back,                                                        │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/product-media-gallery-content.liquid                               │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  137  render 'util-product-media-sizes-attr', block: block, section:         │
+│  section, settings: settings, is_first_image: true, is_single_column: true,  │
+│   needs_both_sizes: true                                                     │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'section' used.                                              │
+│                                                                              │
+│  137  render 'util-product-media-sizes-attr', block: block, section:         │
+│  section, settings: settings, is_first_image: true, is_single_column: true,  │
+│   needs_both_sizes: true                                                     │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  144  render 'util-product-media-sizes-attr', block: block, section:         │
+│  section, settings: settings, is_first_image: false, is_single_column:       │
+│  is_single_column, needs_both_sizes: needs_both_sizes                        │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'section' used.                                              │
+│                                                                              │
+│  144  render 'util-product-media-sizes-attr', block: block, section:         │
+│  section, settings: settings, is_first_image: false, is_single_column:       │
+│  is_single_column, needs_both_sizes: needs_both_sizes                        │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/quantity-selector.liquid                                           │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'block' used.                                                │
+│                                                                              │
+│  40  {{- block.shopify_attributes -}}                                        │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/slideshow.liquid                                                   │
+│                                                                              │
+│                                                                              │
+│  [warning]: UnusedDocParam                                                   │
+│  The parameter 'content_position' is defined but not used in this file.      │
+│                                                                              │
+│  26  @param {string} [content_position] - The position of the content,       │
+│  defaults to 'on-media'                                                      │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'disabled' used.                                             │
+│                                                                              │
+│  93  {% if show_arrows and disabled != true %}                               │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'disabled' used.                                             │
+│                                                                              │
+│  96  {% if slideshow_arrows and disabled != true %}                          │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/variant-main-picker.liquid                                         │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'section' used.                                              │
+│                                                                              │
+│  12  assign button_background_brightness =                                   │
+│  section.settings.color_scheme.settings.foreground | color_brightness        │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'section' used.                                              │
+│                                                                              │
+│  50  assign fieldset_id = section.id | append: '-' | append:                 │
+│  product_resource.id | append: '-' | append: product_option.name |           │
+│  handleize                                                                   │
+│                                                                              │
+│                                                                              │
+│  [warning]: UndefinedObject                                                  │
+│  Unknown object 'section' used.                                              │
+│                                                                              │
+│  22  data-section-id="{{ section.id }}"                                      │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  snippets/video.liquid                                                       │
+│                                                                              │
+│                                                                              │
+│  [warning]: UnusedDocParam                                                   │
+│  The parameter 'section_id' is defined but not used in this file.            │
+│                                                                              │
+│  18  @param {string} section_id - The section ID                             │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─ info ───────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  Theme Check Summary.                                                        │
+│                                                                              │
+│  343 files inspected with 134 total offenses found across 58 files.          │
+│  90 errors.                                                                  │
+│  44 warnings.                                                                │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+

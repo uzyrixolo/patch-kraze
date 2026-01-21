@@ -1,0 +1,122 @@
+{% schema %}
+{
+  "name": "Prod. Details (Kraze)",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Prod. Details (Kraze)"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="page-width" style="padding: 4rem 1rem; max-width: 1280px; margin: 0 auto; border-top: 1px solid #e5e7eb;">
+  <div class="details-grid">
+    
+    <!-- Left: Description -->
+    <div class="details-left">
+      <h2 style="font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 1.5rem;">Product Details</h2>
+      
+      <p style="color: #4b5563; line-height: 1.625; margin-bottom: 1.5rem;">
+        Embroidered patches from Patch Kraze offer a vibrant and professional way to feature designs on apparel such as <a href="#" style="color:#111827; text-decoration:underline;">clothing</a>, <a href="#" style="color:#111827; text-decoration:underline;">hats</a>, <a href="#" style="color:#111827; text-decoration:underline;">jackets</a>, or <a href="#" style="color:#111827; text-decoration:underline;">backpacks</a>. Crafted from durable materials with precise embroidery, these custom patches ensure strong and long-lasting adherence to your chosen items.
+      </p>
+      
+      <p style="color: #4b5563; line-height: 1.625; margin-bottom: 1.5rem;">
+        You can personalize your patches extensively, giving you full control over their appearance. Choose from our three backing options: heat-applied (our most popular), peel-and-stick, and Velcro.
+      </p>
+      
+      <p style="color: #4b5563; line-height: 1.625; font-style: italic;">
+        <span style="font-weight: 600;">Want Embroidery, but your design may be too detailed? No worries, we will simply upgrade you to our Print + Stich method which will include embroidery and our sublimated print for the finer details.</span>
+      </p>
+    </div>
+
+    <!-- Right: Accordion -->
+    <div class="details-right">
+      
+      <details class="faq-item">
+        <summary class="faq-summary">
+          <span class="faq-title">Features</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-content">High quality threads, durable backing, custom shapes enabled...</div>
+      </details>
+      
+      <details class="faq-item">
+        <summary class="faq-summary">
+          <span class="faq-title">Satisfaction Guarantee</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-content">We stand by our quality 100%. If there is a defect, we reprint.</div>
+      </details>
+      
+      <details class="faq-item">
+        <summary class="faq-summary">
+          <span class="faq-title">Pressing Instructions</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-content">Heat Press at 300F for 15 seconds...</div>
+      </details>
+      
+      <details class="faq-item">
+        <summary class="faq-summary">
+          <span class="faq-title">Art Upload Recommendations</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-content">Vector files (AI, EPS, PDF) preferred. High res PNG/JPG accepted.</div>
+      </details>
+      
+      <details class="faq-item">
+        <summary class="faq-summary">
+          <span class="faq-title">Care Instructions</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-content">Machine wash cold, tumble dry low. Do not bleach.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">
+          <span class="faq-title">Order Issues & Reprints</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-content">Contact support within 7 days of receiving your order.</div>
+      </details>
+
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .details-grid { grid-template-columns: 1fr 1fr; }
+  }
+  
+  .faq-item {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .faq-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    list-style: none; /* Hide default triangle */
+  }
+  .faq-summary::-webkit-details-marker { display: none; }
+  
+  .faq-title { font-weight: 600; color: #111827; }
+  .faq-icon { color: #6b7280; font-size: 1.25rem; }
+  
+  .faq-content {
+    padding-bottom: 1.25rem;
+    color: #4b5563;
+    line-height: 1.625;
+  }
+  
+  details[open] .faq-icon { transform: rotate(45deg); } /* Simple rotation logic usually needs JS for text '+' but fine */
+</style>

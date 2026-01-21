@@ -1,0 +1,201 @@
+{% schema %}
+{
+  "name": "CTA Section (Patch Kraze)",
+  "class": "section-cta-patch-kraze",
+  "settings": [],
+  "presets": [
+    {
+      "name": "CTA Section (Patch Kraze)"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .cta-section-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-bg {
+    background-color: #0f172a; /* slate-900 */
+    padding: 4rem 1rem;
+    position: relative;
+  }
+  
+  /* Golden curved shape simulator via CSS clip-path or absolute div */
+  .cta-shape {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 33%;
+    background-color: #facc15; /* yellow-400 */
+    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .cta-shape { display: block; }
+  }
+
+  .cta-container {
+    max-width: 1152px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .cta-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  
+  .cta-left {
+    flex: 1;
+  }
+  
+  .cta-heading {
+    font-size: 2.25rem; /* 4xl */
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2rem;
+    line-height: 1.25;
+  }
+  @media (min-width: 768px) {
+    .cta-heading { font-size: 3rem; /* 5xl */ }
+  }
+  .text-yellow-400 { color: #facc15; }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .btn-cta {
+    background-color: #facc15;
+    color: #0f172a;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px; /* full */
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s;
+     text-decoration: none;
+  }
+  .btn-cta:hover { background-color: #fde047; /* yellow-300 */ }
+
+  /* Badge Circle */
+  .cta-badge-wrapper {
+    display: none;
+    flex: 1;
+    justify-content: flex-end;
+  }
+  @media (min-width: 1024px) {
+    .cta-badge-wrapper { display: flex; }
+  }
+  
+  .cta-circle {
+    position: relative;
+    width: 12rem; /* 48 */
+    height: 12rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cta-circle-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cta-badge-content {
+    text-align: center;
+  }
+  .badge-low-prices {
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .badge-guaranteed {
+    background-color: #facc15;
+    color: #0f172a;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
+    display: inline-block;
+  }
+  .badge-stars {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    margin-bottom: 0.5rem;
+  }
+  .badge-star { color: #fff; font-size: 1.25rem; }
+  .badge-every-day {
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+</style>
+
+<div class="cta-section-wrapper">
+  <div class="cta-bg">
+    <div class="cta-shape"></div>
+    
+    <div class="cta-container">
+      <div class="cta-content">
+        
+        <!-- Left content -->
+        <div class="cta-left">
+          <h2 class="cta-heading">
+            From Concept To Creation, Expect Perfection At Every Step From <span class="text-yellow-400">Our Embroidery Patch Makers</span>
+          </h2>
+
+          <div class="cta-buttons">
+            <a href="/pages/contact" class="btn-cta">
+              <span>👥</span> Connect With Us
+            </a>
+            <a href="/pages/quote" class="btn-cta">
+              Share Your Artwork
+            </a>
+          </div>
+        </div>
+
+        <!-- Right badge -->
+        <div class="cta-badge-wrapper">
+          <div class="cta-circle">
+            <div class="cta-circle-border">
+              <div class="cta-badge-content">
+                <div class="badge-low-prices">LOW PRICES</div>
+                <div class="badge-guaranteed">Guaranteed</div>
+                <div class="badge-stars">
+                  <span class="badge-star">★</span>
+                  <span class="badge-star">★</span>
+                  <span class="badge-star">★</span>
+                  <span class="badge-star">★</span>
+                  <span class="badge-star">★</span>
+                </div>
+                <div class="badge-every-day">EVERY DAY</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

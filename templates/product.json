@@ -1,0 +1,34 @@
+{
+    "sections": {
+        "main": {
+            "type": "main-product-patch-kraze"
+        },
+        "recommended_hats": {
+            "type": "product-recommended-hats"
+        },
+        "patch_examples": {
+            "type": "product-patch-examples"
+        },
+        "product_details": {
+            "type": "product-details-accordion"
+        },
+        "comparison_slider": {
+            "type": "comparison-slider"
+        },
+        "product_faq": {
+            "type": "product-faq-patch-kraze"
+        },
+        "testimonials": {
+            "type": "testimonials-patch-kraze"
+        }
+    },
+    "order": [
+        "main",
+        "recommended_hats",
+        "patch_examples",
+        "product_details",
+        "comparison_slider",
+        "product_faq",
+        "testimonials"
+    ]
+}

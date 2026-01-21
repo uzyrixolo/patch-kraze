@@ -1,0 +1,247 @@
+{% schema %}
+{
+  "name": "Footer (Patch Kraze)",
+  "class": "section-footer-patch-kraze",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Footer (Patch Kraze)"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .site-footer {
+    background-color: #000;
+    color: #fff;
+    font-size: 0.875rem; /* text-sm */
+  }
+  .footer-container {
+    max-width: 1280px; /* container */
+    margin: 0 auto;
+    padding: 4rem 1rem; /* py-16 px-4 */
+  }
+  
+  .footer-row-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #1f2937; /* gray-800 */
+  }
+  @media (min-width: 768px) {
+    .footer-row-1 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .footer-row-1 { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .footer-col-title {
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .footer-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-nav-item {
+    margin-bottom: 0.5rem;
+  }
+  .footer-nav-link {
+    color: #9ca3af; /* gray-400 */
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-nav-link:hover {
+    color: #22c55e; /* primary/green */
+  }
+
+  .footer-contact-block {
+    margin-bottom: 1rem;
+    color: #9ca3af;
+  }
+  .contact-title {
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.25rem;
+    display: block;
+  }
+
+  .footer-row-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 768px) {
+    .footer-row-2 { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #1f2937;
+    background-color: #000;
+    color: #9ca3af;
+  }
+  .footer-bottom-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  @media (min-width: 768px) {
+    .footer-bottom-container { flex-direction: row; }
+  }
+
+</style>
+
+<footer class="site-footer">
+  <div class="footer-container">
+    
+    <!-- Row 1 -->
+    <div class="footer-row-1">
+      
+      <!-- Col 1: Our Products -->
+      <div>
+        <h3 class="footer-col-title">Our Products</h3>
+        <ul class="footer-nav-list">
+          <li class="footer-nav-item"><a href="/collections/embroidered-patches" class="footer-nav-link">Embroidered Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/metallic-flex-patches" class="footer-nav-link">Metallic Flex Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/full-color-printed-patches" class="footer-nav-link">Full Color Printed Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/pvc-patches" class="footer-nav-link">PVC Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/genuine-leather-patches" class="footer-nav-link">Genuine Leather Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/faux-leather-patches" class="footer-nav-link">Faux Leather Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/woven-patches" class="footer-nav-link">Woven Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/3d-embroidered-patches" class="footer-nav-link">3D Embroidered Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/chenille-patches" class="footer-nav-link">Chenille Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/custom-stickers" class="footer-nav-link">Custom Stickers</a></li>
+          <li class="footer-nav-item"><a href="/collections/rhinestone-transfers" class="footer-nav-link">Rhinestone Transfers</a></li>
+          <li class="footer-nav-item"><a href="/collections/blank-hats" class="footer-nav-link">Blank Hats</a></li>
+          <li class="footer-nav-item"><a href="/collections/patch-samples" class="footer-nav-link">Patch Samples</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 2: Custom Patches -->
+      <div>
+        <h3 class="footer-col-title">Custom Patches</h3>
+        <ul class="footer-nav-list">
+          <li class="footer-nav-item"><a href="/collections/backpack-patches" class="footer-nav-link">Backpack Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/patches-for-beanies" class="footer-nav-link">Patches for Beanies</a></li>
+          <li class="footer-nav-item"><a href="/collections/patches-for-jackets" class="footer-nav-link">Patches for Jackets</a></li>
+          <li class="footer-nav-item"><a href="/collections/patches-for-jeans" class="footer-nav-link">Patches for Jeans</a></li>
+          <li class="footer-nav-item"><a href="/collections/patches-for-hats" class="footer-nav-link">Patches for Hats</a></li>
+          <li class="footer-nav-item"><a href="/collections/patches-for-clothes" class="footer-nav-link">Patches for Clothes</a></li>
+          <li class="footer-nav-item"><a href="/collections/patches-for-shirts" class="footer-nav-link">Patches for Shirts</a></li>
+          <li class="footer-nav-item"><a href="/collections/patches-for-hoodies" class="footer-nav-link">Patches for Hoodies</a></li>
+          <li class="footer-nav-item"><a href="/collections/patches-for-vests" class="footer-nav-link">Patches for Vests</a></li>
+          <li class="footer-nav-item"><a href="/collections/patches-for-pants" class="footer-nav-link">Patches for Pants</a></li>
+          <li class="footer-nav-item"><a href="/collections/letterman-jacket-patches" class="footer-nav-link">Letterman Jacket Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/all" class="footer-nav-link">View All</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Custom Patch Styles -->
+      <div>
+        <h3 class="footer-col-title">Custom Patch Styles</h3>
+        <ul class="footer-nav-list">
+          <li class="footer-nav-item"><a href="/collections/iron-on-patches" class="footer-nav-link">Iron On Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/morale-patches" class="footer-nav-link">Morale Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/army-patches" class="footer-nav-link">Army Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/motorcycle-patches" class="footer-nav-link">Motorcycle Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/military-patches" class="footer-nav-link">Military Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/tactical-patches" class="footer-nav-link">Tactical Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/police-patches" class="footer-nav-link">Police Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/girl-scout-patches" class="footer-nav-link">Girl Scout Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/funny-patches" class="footer-nav-link">Funny Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/name-patches" class="footer-nav-link">Name Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/custom-velcro-patches" class="footer-nav-link">Custom Velcro Patches</a></li>
+          <li class="footer-nav-item"><a href="/collections/all" class="footer-nav-link">View All</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Contact -->
+      <div>
+        <h3 class="footer-col-title">Patch Kraze</h3>
+        
+        <div class="footer-contact-block">
+          <span class="contact-title">Chat</span>
+          Available 24 hours a Day. 7 days a Week. 365 Days a Year.
+        </div>
+
+        <div class="footer-contact-block">
+          <span class="contact-title">Phone</span>
+          Mon-Fri: 8:00am - 12:00am EST<br>
+          Sat-Sun: 9:00am - 5:00pm EST<br>
+          <a href="tel:1-888-356-3665" class="footer-nav-link">1-888-356-3665</a>
+        </div>
+
+        <div class="footer-contact-block">
+          <a href="mailto:service@patchkraze.com" class="footer-nav-link">service@patchkraze.com</a>
+        </div>
+
+        <div class="footer-contact-block">
+          2727 Commerce Way<br>
+          Philadelphia, PA 19154
+        </div>
+      </div>
+    
+    </div>
+
+    <!-- Row 2 -->
+    <div class="footer-row-2">
+      
+      <!-- Instructions -->
+      <div>
+        <h3 class="footer-col-title">Pressing Instructions By Method</h3>
+        <ul class="footer-nav-list">
+          <li class="footer-nav-item"><a href="/pages/heatpress-for-garments" class="footer-nav-link">Heatpress For Garments</a></li>
+          <li class="footer-nav-item"><a href="/pages/heatpress-for-hats" class="footer-nav-link">Heatpress For Hats</a></li>
+          <li class="footer-nav-item"><a href="/pages/iron-for-garments" class="footer-nav-link">Iron For Garments</a></li>
+          <li class="footer-nav-item"><a href="/pages/peel-and-stick" class="footer-nav-link">Peel and Stick</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Care -->
+      <div>
+        <h3 class="footer-col-title">Customer Care</h3>
+        <ul class="footer-nav-list">
+          <li class="footer-nav-item"><a href="{{ routes.account_url }}" class="footer-nav-link">My Account</a></li>
+          <li class="footer-nav-item"><a href="/pages/contact" class="footer-nav-link">Contact Us</a></li>
+          <li class="footer-nav-item"><a href="/pages/order-issues" class="footer-nav-link">Order Issue Form</a></li>
+          <li class="footer-nav-item"><a href="/pages/satisfaction-guarantee" class="footer-nav-link">Satisfaction Guarantee</a></li>
+          <li class="footer-nav-item"><a href="/pages/faq" class="footer-nav-link">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Store Info -->
+      <div>
+        <h3 class="footer-col-title">Store Info</h3>
+        <ul class="footer-nav-list">
+          <li class="footer-nav-item"><a href="/policies/shipping-policy" class="footer-nav-link">Shipping Policy</a></li>
+          <li class="footer-nav-item"><a href="/policies/refund-policy" class="footer-nav-link">Refund Policy</a></li>
+          <li class="footer-nav-item"><a href="/policies/privacy-policy" class="footer-nav-link">Privacy Policy</a></li>
+          <li class="footer-nav-item"><a href="/policies/terms-of-service" class="footer-nav-link">Terms of Service</a></li>
+          <li class="footer-nav-item"><a href="/policies/contact-information" class="footer-nav-link">Contact Information</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+  
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-container">
+      <p>Copyright © {{ 'now' | date: "%Y" }} Patch Kraze.</p>
+      <a href="/policies/privacy-policy" class="footer-nav-link">Privacy Policy</a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,130 @@
+{
+  "name": "Comp Slider PK",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Comp Slider PK"
+    }
+  ]
+}
+
+<div style="background-color: #f3f4f6; padding: 4rem 1rem;">
+  <div class="page-width" style="max-width: 1280px; margin: 0 auto;">
+    <h2 style="font-size: 1.875rem; font-weight: 700; text-align: center; color: #111827; margin-bottom: 2.5rem;">
+      You Upload Your Design, We Turn it into an Embroidered Patch
+    </h2>
+    
+    <div style="max-width: 56rem; margin: 0 auto;">
+      <div class="comparison-container" id="comparisonContainer">
+        
+        <!-- Left Image (Digital Proof) -->
+        <div class="img-wrapper detail-proof">
+             <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:white; color:#9ca3af;">Digital Proof Image</div>
+        </div>
+        
+        <!-- Right Image (Embroidered Patch) - Clipped -->
+        <div class="img-wrapper embroidered-patch" id="overlayImage">
+             <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#e5e7eb; color:#1f2937;">Real Patch Image</div>
+        </div>
+
+        <!-- Slider Handle -->
+        <div class="slider-handle" id="sliderHandle">
+          <div class="handle-circle">
+            <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+          </div>
+        </div>
+
+        <!-- Labels -->
+        <div class="label-badge label-left">Your Design as a Digital Proof</div>
+        <div class="label-badge label-right">Your Design as a Embroidered Patch</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .comparison-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #e5e7eb;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: col-resize;
+  }
+  .img-wrapper {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    overflow: hidden;
+  }
+  
+  .slider-handle {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 2px;
+    background-color: #1f2937;
+    left: 50%; /* Initial */
+    z-index: 10;
+  }
+  .handle-circle {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2.5rem; height: 2.5rem;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: #4b5563;
+  }
+
+  .label-badge {
+    position: absolute;
+    top: 1.5rem;
+    background-color: #10b981; /* emerald-500 */
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    z-index: 20;
+    pointer-events: none;
+  }
+  .label-left { left: 5%; }
+  .label-right { right: 5%; }
+</style>
+
+<script>
+  (function() {
+    const container = document.getElementById('comparisonContainer');
+    const overlay = document.getElementById('overlayImage');
+    const handle = document.getElementById('sliderHandle');
+    let isDragging = false;
+
+    function updateSlider(x) {
+      const rect = container.getBoundingClientRect();
+      let pos = ((x - rect.left) / rect.width) * 100;
+      pos = Math.max(0, Math.min(100, pos));
+      
+      overlay.style.clipPath = `inset(0 0 0 ${pos}%)`;
+      handle.style.left = `${pos}%`;
+    }
+
+    container.addEventListener('mousedown', () => isDragging = true);
+    window.addEventListener('mouseup', () => isDragging = false);
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      updateSlider(e.clientX);
+    });
+    
+    // Touch support
+    container.addEventListener('touchstart', () => isDragging = true);
+    window.addEventListener('touchend', () => isDragging = false);
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      updateSlider(e.touches[0].clientX);
+    });
+  })();
+</script>

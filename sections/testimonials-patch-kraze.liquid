@@ -1,0 +1,197 @@
+{
+  "name": "Testimonials PK",
+  "class": "section-testimonials-patch-kraze",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Testimonials PK"
+    }
+  ]
+}
+
+<style>
+  .testimonials-section {
+    width: 100%;
+    background-color: #000;
+    overflow: hidden;
+    padding: 4rem 0;
+  }
+  
+  .testimonials-header {
+    text-align: center;
+    margin-bottom: 5rem;
+    padding: 0 1rem;
+  }
+  .testimonials-title {
+    font-size: 3rem; /* 5xl */
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+  .testimonials-subtitle {
+    font-size: 1.125rem; /* lg */
+    color: #9ca3af; /* gray-400 */
+  }
+
+  /* Marquee Containers */
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 1.5rem 0;
+    display: flex;
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .marquee-content {
+    display: flex;
+    gap: 1.5rem; /* 6 (24px) */
+    animation: marquee 120s linear infinite; /* Increased duration for smoother scroll */
+    flex-shrink: 0;
+  }
+  
+  .marquee-content.reverse {
+     animation-direction: reverse;
+  }
+
+  .marquee-content:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+  }
+  
+  /* Testimonial Card Styles (Scoped from Snippet) */
+  .testimonial-card {
+    flex-shrink: 0;
+    width: 20rem; /* 80 (320px) */
+    background-color: #111827; /* gray-900 */
+    border: 1px solid #1f2937; /* gray-800 */
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .testimonial-card:hover {
+    border-color: #374151; /* gray-700 */
+  }
+
+  .stars-row {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+  }
+  .star-icon {
+    color: #facc15; /* yellow-400 */
+    fill: #facc15;
+    width: 20px;
+    height: 20px;
+  }
+
+  .client-name {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+  }
+
+  .verified-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem; /* sm */
+  }
+  .check-icon {
+    color: #22c55e;
+    width: 16px;
+    height: 16px;
+  }
+  .verified-text {
+    color: #9ca3af; /* gray-400 */
+  }
+
+  .review-text {
+    color: #d1d5db; /* gray-300 */
+    font-size: 0.875rem; /* sm */
+    line-height: 1.625;
+  }
+</style>
+
+<div class="testimonials-section">
+  <div class="testimonials-header">
+    <h2 class="testimonials-title">Custom Patches Backed by Incredible Reviews</h2>
+    <p class="testimonials-subtitle">Verified Feedback from Authentic Customers</p>
+  </div>
+
+  <!-- Top Marquee (Left) -->
+  <div class="marquee-container">
+    <div class="marquee-content">
+      <!-- Loop twice to ensure continuity -->
+      {% for i in (1..2) %}
+          {% render 'card-review', name: 'Lee Ingram', rating: 5, text: 'Great quality and service!' %}
+          {% render 'card-review', name: 'Colin Schless', rating: 5, text: "Awesome quality patches! We got a set for my son's soccer team. Couldn't be happier with the quality and delivery speed. Thank you!" %}
+          {% render 'card-review', name: 'James Cundiff', rating: 5, text: 'Awesome! Patches were just what I wanted! Turnover time was prompt. Highly recommend them.' %}
+          {% render 'card-review', name: 'Robert Neumann', rating: 5, text: "Patch Kraze worked with me to ensure complete satisfaction with my volunteer organization's unit emblem. Everyone is thrilled with it, and I could not be more pleased with the experience. Highly recommend!" %}
+          {% render 'card-review', name: 'Ralph Arguelles', rating: 5, text: 'This is now the second order from Patch Kraze. They are so clean and easy to apply. Customer service is top notch. I may get a little crazy with my next design, but I know they can handle it!' %}
+          {% render 'card-review', name: 'Darrell DeVor', rating: 5, text: 'The PVC Velcro back patches came in even better than expected. Quality is amazing and the colors pop like crazy.' %}
+          {% render 'card-review', name: 'Kris Johnson', rating: 5, text: "Love my patches from Patch Kraze. They came out exactly how I wanted them to and they don't look cheap and flimsy." %}
+          {% render 'card-review', name: 'Lownice Hobson', rating: 5, text: 'My design was pretty intricate and the patches look amazing!' %}
+          {% render 'card-review', name: 'Lena Lindsay', rating: 5, text: 'Absolutely LOVE how my patches came out. Colors and Detail definitely a 10+. Working on my next order right now.' %}
+          {% render 'card-review', name: 'Michael Torres', rating: 5, text: "Best patches I've ever ordered. The embroidery detail is incredible and they arrived faster than expected!" %}
+          {% render 'card-review', name: 'Sarah Mitchell', rating: 5, text: 'Perfect for our team uniforms. Patch Kraze delivered exactly what we needed. Highly professional!' %}
+          {% render 'card-review', name: 'David Chen', rating: 5, text: 'Outstanding quality and customer service. Will definitely order again for our club patches.' %}
+          {% render 'card-review', name: 'Jessica Brown', rating: 5, text: 'The custom design process was smooth and the final patches exceeded my expectations!' %}
+          {% render 'card-review', name: 'Marcus Williams', rating: 5, text: 'Great communication throughout the process. Patches look professional and durable.' %}
+          {% render 'card-review', name: 'Emily Rodriguez', rating: 5, text: 'Love the rush shipping option! Got my patches in time for the event. Top-notch quality!' %}
+          {% render 'card-review', name: 'Andrew Thompson', rating: 5, text: 'The attention to detail is phenomenal. Our company logo patches look exactly like the digital proof!' %}
+          {% render 'card-review', name: 'Patricia Garcia', rating: 5, text: 'Third time ordering and always impressed. The velcro backing is super strong and holds up great.' %}
+          {% render 'card-review', name: 'Kevin O_Brien', rating: 5, text: 'Fast turnaround and excellent customer support. They helped me perfect my design before production.' %}
+          {% render 'card-review', name: 'Michelle Lee', rating: 5, text: 'These patches are perfect for our scout troop. Durable, colorful, and reasonably priced!' %}
+          {% render 'card-review', name: 'Brandon Davis', rating: 5, text: 'Ordered custom patches for my motorcycle club. Everyone loves them! Will be back for more.' %}
+          {% render 'card-review', name: 'Amanda Wilson', rating: 5, text: 'The heat-press application was so easy. Patches look professionally sewn on!' %}
+          {% render 'card-review', name: 'Christopher Martinez', rating: 5, text: 'Bulk order discount saved us a ton. Quality remained excellent across all 500 patches.' %}
+          {% render 'card-review', name: 'Nicole Taylor', rating: 5, text: 'My small business logo patches turned out beautifully. Customers always ask where I got them!' %}
+          {% render 'card-review', name: 'Ryan Anderson', rating: 5, text: 'The 3D puff embroidery option makes our patches stand out. Absolutely love the texture!' %}
+          {% render 'card-review', name: 'Stephanie White', rating: 5, text: 'Ordered for a family reunion. Everyone was impressed with the quality and quick delivery!' %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Bottom Marquee (Right/Reverse) -->
+  <div class="marquee-container">
+    <div class="marquee-content reverse">
+      <!-- Loop twice to ensure continuity -->
+      {% for i in (1..2) %}
+          {% render 'card-review', name: 'Lee Ingram', rating: 5, text: 'Great quality and service!' %}
+          {% render 'card-review', name: 'Colin Schless', rating: 5, text: "Awesome quality patches! We got a set for my son's soccer team. Couldn't be happier with the quality and delivery speed. Thank you!" %}
+          {% render 'card-review', name: 'James Cundiff', rating: 5, text: 'Awesome! Patches were just what I wanted! Turnover time was prompt. Highly recommend them.' %}
+          {% render 'card-review', name: 'Robert Neumann', rating: 5, text: "Patch Kraze worked with me to ensure complete satisfaction with my volunteer organization's unit emblem. Everyone is thrilled with it, and I could not be more pleased with the experience. Highly recommend!" %}
+          {% render 'card-review', name: 'Ralph Arguelles', rating: 5, text: 'This is now the second order from Patch Kraze. They are so clean and easy to apply. Customer service is top notch. I may get a little crazy with my next design, but I know they can handle it!' %}
+          {% render 'card-review', name: 'Darrell DeVor', rating: 5, text: 'The PVC Velcro back patches came in even better than expected. Quality is amazing and the colors pop like crazy.' %}
+          {% render 'card-review', name: 'Kris Johnson', rating: 5, text: "Love my patches from Patch Kraze. They came out exactly how I wanted them to and they don't look cheap and flimsy." %}
+          {% render 'card-review', name: 'Lownice Hobson', rating: 5, text: 'My design was pretty intricate and the patches look amazing!' %}
+          {% render 'card-review', name: 'Lena Lindsay', rating: 5, text: 'Absolutely LOVE how my patches came out. Colors and Detail definitely a 10+. Working on my next order right now.' %}
+          {% render 'card-review', name: 'Michael Torres', rating: 5, text: "Best patches I've ever ordered. The embroidery detail is incredible and they arrived faster than expected!" %}
+          {% render 'card-review', name: 'Sarah Mitchell', rating: 5, text: 'Perfect for our team uniforms. Patch Kraze delivered exactly what we needed. Highly professional!' %}
+          {% render 'card-review', name: 'David Chen', rating: 5, text: 'Outstanding quality and customer service. Will definitely order again for our club patches.' %}
+          {% render 'card-review', name: 'Jessica Brown', rating: 5, text: 'The custom design process was smooth and the final patches exceeded my expectations!' %}
+          {% render 'card-review', name: 'Marcus Williams', rating: 5, text: 'Great communication throughout the process. Patches look professional and durable.' %}
+          {% render 'card-review', name: 'Emily Rodriguez', rating: 5, text: 'Love the rush shipping option! Got my patches in time for the event. Top-notch quality!' %}
+          {% render 'card-review', name: 'Andrew Thompson', rating: 5, text: 'The attention to detail is phenomenal. Our company logo patches look exactly like the digital proof!' %}
+          {% render 'card-review', name: 'Patricia Garcia', rating: 5, text: 'Third time ordering and always impressed. The velcro backing is super strong and holds up great.' %}
+          {% render 'card-review', name: 'Kevin O_Brien', rating: 5, text: 'Fast turnaround and excellent customer support. They helped me perfect my design before production.' %}
+          {% render 'card-review', name: 'Michelle Lee', rating: 5, text: 'These patches are perfect for our scout troop. Durable, colorful, and reasonably priced!' %}
+          {% render 'card-review', name: 'Brandon Davis', rating: 5, text: 'Ordered custom patches for my motorcycle club. Everyone loves them! Will be back for more.' %}
+          {% render 'card-review', name: 'Amanda Wilson', rating: 5, text: 'The heat-press application was so easy. Patches look professionally sewn on!' %}
+          {% render 'card-review', name: 'Christopher Martinez', rating: 5, text: 'Bulk order discount saved us a ton. Quality remained excellent across all 500 patches.' %}
+          {% render 'card-review', name: 'Nicole Taylor', rating: 5, text: 'My small business logo patches turned out beautifully. Customers always ask where I got them!' %}
+          {% render 'card-review', name: 'Ryan Anderson', rating: 5, text: 'The 3D puff embroidery option makes our patches stand out. Absolutely love the texture!' %}
+          {% render 'card-review', name: 'Stephanie White', rating: 5, text: 'Ordered for a family reunion. Everyone was impressed with the quality and quick delivery!' %}
+      {% endfor %}
+    </div>
+  </div>
+
+</div>

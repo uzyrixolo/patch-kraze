@@ -1,0 +1,147 @@
+{% schema %}
+{
+  "name": "Rec. Hats (Patch Kraze)",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Hats Collection",
+      "info": "Select the hats collection to display."
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 6,
+      "label": "Number of products"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rec. Hats (Patch Kraze)"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="page-width" style="padding: 4rem 1rem; max-width: 1280px; margin: 0 auto;">
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <p style="text-transform: uppercase; letter-spacing: 0.1em; color: #6b7280; font-size: 0.875rem; margin-bottom: 0.5rem;">Recommended For You</p>
+    <h2 style="font-size: 1.875rem; font-weight: 700; color: #111827;">Complete Your Order with Hats</h2>
+  </div>
+  
+  {% assign selected_collection = section.settings.collection %}
+  
+  <div class="hats-grid">
+    {% if selected_collection != blank %}
+      {% for product in selected_collection.products limit: section.settings.limit %}
+        <div class="hat-item">
+          <a href="{{ product.url }}" style="text-decoration:none; color:inherit;">
+            <div class="hat-img-box">
+              {% if product.tags contains 'Best Seller' %}
+                <span class="hat-badge">Best Seller</span>
+              {% endif %}
+              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}" width="400" height="auto" style="width:100%; height:100%; object-fit:contain;">
+            </div>
+          </a>
+          <h3 class="hat-name">{{ product.title }}</h3>
+          <p class="hat-price">Starting at: {{ product.price | money }}</p>
+          <form method="post" action="/cart/add">
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" />
+            <button type="submit" class="hat-btn">Shop Now</button>
+          </form>
+        </div>
+      {% endfor %}
+    {% else %}
+      <!-- Fallback / Placeholder if no collection selected -->
+      {% for i in (1..6) %}
+       <div class="hat-item">
+          <div class="hat-img-box">
+             <div style="width:100%; height:100%; background:#f3f4f6; display:flex; align-items:center; justify-content:center; color:#9ca3af;">No Collection Selected</div>
+          </div>
+          <h3 class="hat-name">Sample Hat {{ i }}</h3>
+          <p class="hat-price">Starting at: $10.00</p>
+          <button class="hat-btn" disabled>Shop Now</button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <div style="text-align: center; margin-top: 2.5rem;">
+    {% if selected_collection != blank %}
+      <a href="{{ selected_collection.url }}" style="color: #111827; font-weight: 500; text-decoration: underline;">Shop All Hats</a>
+    {% else %}
+       <a href="/collections/all" style="color: #111827; font-weight: 500; text-decoration: underline;">Shop All Hats</a>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .hats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .hats-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .hats-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+
+  .hat-img-box {
+    position: relative;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background: #fff;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+  }
+  .hat-img-box:hover { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+  
+  .hat-badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background: #111827;
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    z-index: 2;
+  }
+  
+  .hat-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #111827;
+    margin-bottom: 0.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .hat-price {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 0.75rem;
+  }
+  .hat-btn {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .hat-btn:hover { background: #1f2937; }
+  .hat-btn:disabled { background: #9ca3af; cursor: not-allowed; }
+</style>

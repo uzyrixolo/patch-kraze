@@ -1,0 +1,48 @@
+<script src="{{ 's3-upload.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  s3-uploader {
+    display: block;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+  }
+  .upload-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .upload-progress-container {
+    height: 6px;
+    background: #e0e0e0;
+    margin-top: 10px;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .upload-progress {
+    height: 100%;
+    background: #0F2A3A; /* Midnight Navy */
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  .upload-status {
+    font-size: 0.85em;
+    margin-top: 5px;
+    color: #666;
+  }
+</style>
+
+<s3-uploader>
+  <label class="upload-label" for="patch-upload">Upload Your Patch Image</label>
+  <input type="file" id="patch-upload" accept="image/png, image/jpeg, image/jpg" required>
+  
+  <!-- This hidden input sends the URL to Shopify line item properties -->
+  <input type="hidden" name="properties[Uploaded Image]">
+
+  <div class="upload-progress-container">
+    <div class="upload-progress"></div>
+  </div>
+  <div class="upload-status">Select an image to start</div>
+</s3-uploader>

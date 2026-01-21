@@ -1,0 +1,147 @@
+{% schema %}
+{
+  "name": "Product FAQ (Kraze)",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product FAQ (Kraze)"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="page-width" style="padding: 4rem 1rem; max-width: 1280px; margin: 0 auto; background-color: #fff;">
+  <h2 style="font-size: 1.875rem; font-weight: 700; color: #111827; margin-bottom: 2rem;">FAQ</h2>
+  
+  <div class="product-faq-container">
+    <details class="p-faq-item">
+      <summary class="p-faq-summary">
+        <span class="p-faq-icon">+</span>
+        <span class="p-faq-question">What Are Embroidered Patches?</span>
+      </summary>
+      <div class="p-faq-answer">
+        Embroidered patches are decorative pieces of fabric featuring designs created by stitching colored threads onto a base material.
+      </div>
+    </details>
+
+    <details class="p-faq-item">
+      <summary class="p-faq-summary">
+        <span class="p-faq-icon">+</span>
+        <span class="p-faq-question">How Are Embroidered Patches Made?</span>
+      </summary>
+      <div class="p-faq-answer">
+        Embroidered patches are made using computerized embroidery machines that stitch intricate designs onto a fabric backing.
+      </div>
+    </details>
+
+    <details class="p-faq-item">
+      <summary class="p-faq-summary">
+        <span class="p-faq-icon">+</span>
+        <span class="p-faq-question">What Are The Applications Of Embroidered Patches?</span>
+      </summary>
+      <div class="p-faq-answer">
+        Used across many industries including military, law enforcement, corporate branding, sports teams, etc.
+      </div>
+    </details>
+
+    <details class="p-faq-item">
+      <summary class="p-faq-summary">
+        <span class="p-faq-icon">+</span>
+        <span class="p-faq-question">Why Choose Embroidered Patches?</span>
+      </summary>
+      <div class="p-faq-answer">
+        Durability, professional appearance, and versatility. Withstand repeated washing and provide a classic textured look.
+      </div>
+    </details>
+
+    <details class="p-faq-item">
+      <summary class="p-faq-summary">
+        <span class="p-faq-icon">+</span>
+        <span class="p-faq-question">How To Attach Embroidered Patches</span>
+      </summary>
+      <div class="p-faq-answer">
+        Iron-on, sew-on, velcro backing, or adhesive backing. Heat-press application is our most popular method.
+      </div>
+    </details>
+
+    <details class="p-faq-item">
+      <summary class="p-faq-summary">
+        <span class="p-faq-icon">+</span>
+        <span class="p-faq-question">What Types Of Embroidered Patches Do You Offer?</span>
+      </summary>
+      <div class="p-faq-answer">
+        Standard embroidered, 3D puff, metallic thread, glow-in-the-dark, and more.
+      </div>
+    </details>
+
+     <details class="p-faq-item">
+      <summary class="p-faq-summary">
+        <span class="p-faq-icon">+</span>
+        <span class="p-faq-question">What Makes Embroidered Patches Different?</span>
+      </summary>
+      <div class="p-faq-answer">
+        Textured, dimensional appearance created by actual thread stitching. Premium look and feel compared to printed.
+      </div>
+    </details>
+  </div>
+  
+  <!-- Carbon Neutral Bar -->
+  <div class="carbon-bar">
+    <div class="carbon-content">
+      <div class="carbon-left">
+        <div class="icon-leaf-circle">🌱</div>
+        <span><span style="font-weight:600;">Patch Kraze Mission:</span> Carbon-neutral shipping on all orders</span>
+      </div>
+      <div class="carbon-right">
+        <div style="text-align:center;">
+          <div style="font-size:1.5rem; font-weight:700; color:#111827;">25591kg</div>
+          <div style="font-size:0.75rem; color:#6b7280;">shipping emissions removed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .p-faq-item { border-bottom: 1px solid #e5e7eb; }
+  .p-faq-summary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    list-style: none; 
+  }
+  .p-faq-summary::-webkit-details-marker { display: none; }
+  
+  .p-faq-icon { color: #9ca3af; font-size: 1.5rem; line-height: 1; transition: transform 0.2s; }
+  details[open] .p-faq-icon { transform: rotate(45deg); }
+  
+  .p-faq-question { font-weight: 500; color: #111827; }
+  .p-faq-answer { padding: 0 0 1.25rem 2rem; color: #4b5563; line-height: 1.625; }
+
+  .carbon-bar {
+    margin-top: 3rem;
+    background-color: #f9fafb; /* gray-50 */
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+  .carbon-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  @media (min-width: 768px) {
+    .carbon-content { flex-direction: row; justify-content: space-between; align-items: center; }
+  }
+  .carbon-left { display: flex; align-items: center; gap: 0.75rem; color: #374151; }
+  .icon-leaf-circle {
+    width: 2.5rem; height: 2.5rem;
+    background-color: #dcfce7; /* green-100 */
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem;
+  }
+</style>

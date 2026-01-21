@@ -1,0 +1,149 @@
+{% schema %}
+{
+  "name": "Ordering Process",
+  "class": "section-ordering-process",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Ordering Process (Patch Kraze)"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .ordering-section {
+    width: 100%;
+    background-color: #fff;
+    padding: 2.5rem 1rem;
+  }
+  .ordering-container {
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .ordering-header {
+    margin-bottom: 4rem;
+  }
+  .ordering-title {
+    font-size: 1.875rem; /* 3xl */
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 0.5rem;
+  }
+  .ordering-subtitle {
+    color: #4b5563; /* gray-600 */
+  }
+
+  .ordering-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .ordering-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .ordering-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .order-step {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .order-img-wrapper {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+  .order-img-box {
+    width: 15rem; /* 60 */
+    height: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .order-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s;
+  }
+  .order-img-box:hover .order-img {
+    transform: scale(1.1);
+  }
+
+  .order-step-title {
+    font-size: 1.125rem; /* lg */
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+  .order-step-desc {
+    color: #4b5563; /* gray-600 */
+    font-size: 0.875rem; /* sm */
+    text-align: center;
+    line-height: 1.5;
+  }
+</style>
+
+<div class="ordering-section">
+  <div class="ordering-container">
+    
+    <div class="ordering-header">
+      <h2 class="ordering-title">The Patch Kraze Ordering Process</h2>
+      <p class="ordering-subtitle">Simplifying the Process with Satisfaction Guaranteed</p>
+    </div>
+
+    <div class="ordering-grid">
+      
+      <!-- Step 1 -->
+      <div class="order-step">
+        <div class="order-img-wrapper">
+          <div class="order-img-box">
+            <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/4-step.jpg?v=1768381402" alt="Upload Your Designs & Place Order Online" class="order-img">
+          </div>
+        </div>
+        <h3 class="order-step-title">Upload Your Designs & Place Order Online</h3>
+        <p class="order-step-desc">Use designs with unlimited colors, simple or high detail artwork. Upload any design you want and we'll turn it into high quality custom patches.</p>
+      </div>
+
+       <!-- Step 2 -->
+      <div class="order-step">
+        <div class="order-img-wrapper">
+          <div class="order-img-box">
+            <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/1-step.jpg?v=1768381402" alt="Approve Your Patch Artwork Proofs" class="order-img">
+          </div>
+        </div>
+        <h3 class="order-step-title">Approve Your Patch Artwork Proofs</h3>
+        <p class="order-step-desc">If selected during checkout, we will send you a virtual proof for approval before we can begin production.</p>
+      </div>
+
+       <!-- Step 3 -->
+      <div class="order-step">
+        <div class="order-img-wrapper">
+          <div class="order-img-box">
+             <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/3-step.jpg?v=1768381402" alt="We Create & Ship Your Custom Patch Order" class="order-img">
+          </div>
+        </div>
+        <h3 class="order-step-title">We Create & Ship Your Custom Patch Order</h3>
+        <p class="order-step-desc">We make ordering custom patches easy. We can create the most detailed, highest quality, full color custom patches you can find.</p>
+      </div>
+
+       <!-- Step 4 -->
+      <div class="order-step">
+        <div class="order-img-wrapper">
+          <div class="order-img-box">
+             <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/2-step.jpg?v=1768381402" alt="Heatpress when Ready" class="order-img">
+          </div>
+        </div>
+        <h3 class="order-step-title">Heatpress when Ready. Keep Extras in Storage Forever</h3>
+        <p class="order-step-desc">Press your custom made patches with a heat press, while using our required pressing instructions for ultimate durability.</p>
+      </div>
+
+    </div>
+  </div>
+</div>

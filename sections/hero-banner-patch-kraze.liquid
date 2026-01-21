@@ -1,0 +1,207 @@
+{% schema %}
+{
+  "name": "Hero Banner (Patch Kraze)",
+  "class": "section-hero-patch-kraze",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Hero Banner (Patch Kraze)"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .hero-patch-kraze {
+    width: 100%;
+    background-color: #111827; /* gray-900 */
+    padding: 5rem 1rem;
+  }
+  .hero-container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .hero-content {
+    display: flex;
+    flex-direction: column-reverse; /* Mobile first: text below or matching nextjs */
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .hero-content {
+      flex-direction: row;
+    }
+  }
+
+  .hero-text-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .hero-heading {
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.25;
+    font-size: 2.25rem; /* 4xl ~ 36px/2.25rem */
+    margin: 0;
+  }
+  @media (min-width: 768px) {
+    .hero-heading { font-size: 2.25rem; }
+  }
+
+  .hero-description {
+    font-size: 1.125rem; /* lg */
+    color: #d1d5db; /* gray-300 */
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Benefits */
+  .hero-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .hero-benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .check-icon {
+    width: 24px;
+    height: 24px;
+    color: #d7263d;
+    flex-shrink: 0;
+  }
+  .hero-benefit-item span {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* Buttons */
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 1rem;
+  }
+  @media (min-width: 640px) {
+    .hero-actions {
+      flex-direction: row;
+    }
+  }
+  
+  .btn-primary-patch {
+    padding: 0.75rem 2rem;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    transition: opacity 0.2s;
+    background-color: #d7263d;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+  }
+  .btn-primary-patch:hover { opacity: 0.9; }
+
+  .btn-secondary-patch {
+    padding: 0.75rem 2rem;
+    background-color: #fff;
+    color: #0f172a; /* slate-900 */
+    font-weight: 700;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+  }
+  .btn-secondary-patch:hover { background-color: #f3f4f6; }
+
+  /* Image Side */
+  .hero-image-side {
+    flex: 1;
+    position: relative;
+    height: 20rem; /* 80 */
+    width: 100%;
+  }
+  @media (min-width: 1024px) {
+    .hero-image-side { height: 24rem; /* 96 */ }
+  }
+  .hero-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+</style>
+
+<div class="hero-patch-kraze">
+  <div class="hero-container">
+    <div class="hero-content">
+      
+      <!-- Left Content -->
+      <div class="hero-text-side">
+        <!-- Heading -->
+        <h1 class="hero-heading">
+          Premium Custom Patches with Low 10-Piece Minimums
+        </h1>
+
+        <!-- Description -->
+        <p class="hero-description">
+          15+ premium heat-pressable patch styles that apply in just 20 seconds. 5-day rush shipping available for select patch types.
+        </p>
+
+        <!-- Benefits -->
+        <div class="hero-benefits">
+          <div class="hero-benefit-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Free Shipping</span>
+          </div>
+          <div class="hero-benefit-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Low Minimums</span>
+          </div>
+          <div class="hero-benefit-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>No Setup Fees</span>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="hero-actions">
+          <a href="/collections/custom-patches" class="btn-primary-patch">
+            Shop Custom Patches
+          </a>
+          <a href="/collections/rush-patches" class="btn-secondary-patch">
+            Shop 5 Day Rush Patches
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Content -->
+      <div class="hero-image-side">
+        <div class="hero-img-wrapper">
+          <img
+            src="https://ninjapatches.com/cdn/shop/files/patches-hero-v3-2.png?v=1762368190&width=1200"
+            alt="Custom patches on black baseball cap with sample designs"
+            class="hero-img"
+            loading="eager"
+          >
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

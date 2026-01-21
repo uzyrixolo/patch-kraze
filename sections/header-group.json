@@ -1,0 +1,13 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "header": {
+      "type": "header-patch-kraze",
+      "settings": {}
+    }
+  },
+  "order": [
+    "header"
+  ]
+}

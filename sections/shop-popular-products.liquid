@@ -1,0 +1,145 @@
+{% schema %}
+{
+  "name": "Shop Popular Products",
+  "class": "section-shop-popular-products",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Shop Popular Products (Patch Kraze)"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .shop-popular-section {
+    width: 100%;
+    background-color: #fff;
+    padding: 2.5rem 1rem 5rem;
+  }
+  .shop-popular-container {
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  .shop-popular-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: left;
+    margin-bottom: 2rem;
+    color: #000;
+  }
+  
+  .popular-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .popular-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .popular-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .popular-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .popular-img-wrapper {
+    position: relative;
+    margin-bottom: 1rem;
+    background-color: #f3f4f6;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+  }
+  .popular-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .popular-img-wrapper:hover .popular-img {
+    transform: scale(1.05);
+  }
+
+  .popular-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 0.5rem;
+  }
+  .popular-price {
+    color: #0d9488; /* teal-600 */
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  
+  .btn-customize-popular {
+    background-color: #000;
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    width: 100%;
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+  .btn-customize-popular:hover { background-color: #1f2937; }
+</style>
+
+<div class="shop-popular-section">
+  <div class="shop-popular-container">
+    <h2 class="shop-popular-heading">Shop Other Popular Products</h2>
+
+    <div class="popular-grid">
+      
+      <!-- PVC Keychains -->
+      <div class="popular-item">
+        <div class="popular-img-wrapper">
+          <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/pvc-keychains-with-colorful-designs.jpg?v=1768381402" alt="PVC Keychains" class="popular-img">
+        </div>
+        <h3 class="popular-title">PVC Keychains</h3>
+        <p class="popular-price">As low as $1.84 ea.</p>
+        <button class="btn-customize-popular">Customize</button>
+      </div>
+
+       <!-- Vinyl Stickers -->
+      <div class="popular-item">
+        <div class="popular-img-wrapper">
+          <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/vinyl-stickers-rolls.jpg?v=1768381402" alt="Vinyl Stickers" class="popular-img">
+        </div>
+        <h3 class="popular-title">Vinyl Stickers</h3>
+        <p class="popular-price">As low as $0.22 ea.</p>
+        <button class="btn-customize-popular">Customize</button>
+      </div>
+
+       <!-- Bumper Stickers -->
+      <div class="popular-item">
+        <div class="popular-img-wrapper">
+          <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/bumper-sticker-on-vehicle.jpg?v=1768381402" alt="Bumper Stickers" class="popular-img">
+        </div>
+        <h3 class="popular-title">Bumper Stickers</h3>
+        <p class="popular-price">As low as $0.42 ea.</p>
+        <button class="btn-customize-popular">Customize</button>
+      </div>
+
+       <!-- Truck Stickers -->
+      <div class="popular-item">
+        <div class="popular-img-wrapper">
+          <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/red-truck-with-stickers.jpg?v=1768381402" alt="Truck Stickers" class="popular-img">
+        </div>
+        <h3 class="popular-title">Truck Stickers</h3>
+        <p class="popular-price">As low as $12.60 ea.</p>
+        <button class="btn-customize-popular">Customize</button>
+      </div>
+
+    </div>
+  </div>
+</div>

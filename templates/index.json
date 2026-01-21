@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "hero_banner": {
+      "type": "hero-banner-patch-kraze"
+    },
+    "shop_all_patches": {
+      "type": "shop-all-patches"
+    },
+    "shop_popular_products": {
+      "type": "shop-popular-products"
+    },
+    "credibility": {
+      "type": "credibility-patch-kraze"
+    },
+    "cta": {
+      "type": "cta-patch-kraze"
+    },
+    "ordering_process": {
+      "type": "ordering-process-patch-kraze"
+    },
+    "why_buy": {
+      "type": "why-buy-patch-kraze"
+    },
+    "faq": {
+      "type": "faq-patch-kraze"
+    },
+    "explore_products": {
+      "type": "explore-products-patch-kraze"
+    }
+  },
+  "order": [
+    "hero_banner",
+    "shop_all_patches",
+    "shop_popular_products",
+    "credibility",
+    "cta",
+    "ordering_process",
+    "why_buy",
+    "faq",
+    "explore_products"
+  ]
+}

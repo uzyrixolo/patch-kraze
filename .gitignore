@@ -1,0 +1,6 @@
+# Shopify
+config/settings_data.json
+*.log
+.DS_Store
+.shopify
+node_modules/

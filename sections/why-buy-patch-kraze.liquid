@@ -1,0 +1,179 @@
+{% schema %}
+{
+  "name": "Why Buy (Patch Kraze)",
+  "class": "section-why-buy-patch-kraze",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Why Buy (Patch Kraze)"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .why-buy-section {
+    width: 100%;
+    background-color: #fff;
+    padding: 4rem 1rem 5rem;
+  }
+  .why-buy-container {
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .why-buy-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .why-buy-title {
+    font-size: 1.875rem; /* 3xl */
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 1rem;
+  }
+  @media (min-width: 768px) {
+    .why-buy-title { font-size: 2.25rem; /* 4xl */ }
+  }
+  .why-buy-desc {
+    font-size: 1rem;
+    color: #4b5563; /* gray-600 */
+    max-width: 48rem;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .why-buy-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .why-buy-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .why-buy-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .why-buy-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    border: 1px solid #f3f4f6;
+    transition: box-shadow 0.2s;
+  }
+  .why-buy-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .why-buy-icon-box {
+    padding: 0.75rem;
+    border-radius: 9999px; /* full */
+    background-color: #ccfbf1; /* teal-100 */
+    color: #0d9488; /* teal-600 */
+    flex-shrink: 0;
+  }
+  .why-buy-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .why-buy-content h3 {
+    font-size: 1.125rem; /* lg */
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 0.5rem;
+  }
+  .why-buy-content p {
+    color: #6b7280; /* gray-500 */
+    font-size: 0.875rem; /* sm */
+    line-height: 1.5;
+  }
+</style>
+
+<div class="why-buy-section">
+  <div class="why-buy-container">
+    
+    <div class="why-buy-header">
+      <h2 class="why-buy-title">Why Buy From Patch Kraze?</h2>
+      <p class="why-buy-desc">
+        At Patch Kraze, we are proud of the service we provide and the quality of our embroidered patches and
+        other products. There are many reasons why you should choose us for your custom patches.
+      </p>
+    </div>
+
+    <div class="why-buy-grid">
+      
+      <!-- Card 1 -->
+      <div class="why-buy-card">
+        <div class="why-buy-icon-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="why-buy-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div class="why-buy-content">
+          <h3>5 Day Production, Low Minimums</h3>
+          <p>Our Patch Kraze Fast option produces patches in five days — available for select patch types, including options with low minimums starting at just 10 patches.</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="why-buy-card">
+        <div class="why-buy-icon-box">
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="why-buy-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <div class="why-buy-content">
+          <h3>Top Quality Materials</h3>
+          <p>We only use top quality materials and the latest technology for all of our patches. Our patches are durable, machine washable, and will not fade.</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="why-buy-card">
+        <div class="why-buy-icon-box">
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="why-buy-icon"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+        </div>
+        <div class="why-buy-content">
+          <h3>Free Shipping</h3>
+          <p>All of our orders come with free shipping to the continental United States. We also offer rush shipping options for tight deadlines.</p>
+        </div>
+      </div>
+
+       <!-- Card 4 -->
+      <div class="why-buy-card">
+        <div class="why-buy-icon-box">
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="why-buy-icon"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </div>
+        <div class="why-buy-content">
+          <h3>Free Design & Setup</h3>
+          <p>We offer free design and setup for all orders. Our expert designers will work with you to create the perfect patch for your needs.</p>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="why-buy-card">
+        <div class="why-buy-icon-box">
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="why-buy-icon"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+        </div>
+        <div class="why-buy-content">
+          <h3>100% Satisfaction Guarantee</h3>
+          <p>We stand behind our products 100%. If you are not satisfied with your order for any reason, we will make it right.</p>
+        </div>
+      </div>
+
+       <!-- Card 6 -->
+      <div class="why-buy-card">
+        <div class="why-buy-icon-box">
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="why-buy-icon"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <div class="why-buy-content">
+          <h3>Fast Turnaround</h3>
+          <p>Our standard turnaround time is 10-12 business days. We also offer rush options for those who need their patches sooner.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
