@@ -348,4 +348,52 @@
      el.classList.add('selected');
      document.getElementById('backing-input').value = val;
   }
+
+  // --- GALLERY LOGIC ---
+  const mainImage = document.getElementById('mainProductImage');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const thumbnails = document.querySelectorAll('.thumbnail-btn');
+  const mediaJson = [
+    { src: "{{ product.featured_image | image_url: width: 1000 }}" },
+    {% for media in product.media %}
+      { src: "{{ media | image_url: width: 1000 }}" },
+    {% endfor %}
+  ];
+  // Remove duplicate first item if media includes featured image
+  if(mediaJson.length > {{ product.media.size }} + 1) mediaJson.shift();
+
+  let currentImageIndex = 0;
+
+  function updateGallery(index) {
+     if(index < 0) index = mediaJson.length - 1;
+     if(index >= mediaJson.length) index = 0;
+     
+     currentImageIndex = index;
+     
+     // Update Main Image
+     // We use a small fade effect for better UX
+     mainImage.style.opacity = 0.5;
+     setTimeout(() => {
+        mainImage.src = mediaJson[currentImageIndex].src;
+        mainImage.style.opacity = 1;
+     }, 150);
+
+     // Update Thumbnails
+     thumbnails.forEach((thumb, i) => {
+        if(i === currentImageIndex) thumb.classList.add('active');
+        else thumb.classList.remove('active');
+     });
+  }
+
+  if(btnPrev) {
+    btnPrev.addEventListener('click', () => updateGallery(currentImageIndex - 1));
+  }
+  if(btnNext) {
+    btnNext.addEventListener('click', () => updateGallery(currentImageIndex + 1));
+  }
+  thumbnails.forEach((thumb, index) => {
+     thumb.addEventListener('click', () => updateGallery(index));
+  });
+
 </script>
