@@ -21,7 +21,7 @@
     font-family: 'Inter', sans-serif !important;
   }
   .shop-patches-container {
-    max-width: 1152px; /* max-w-6xl */
+    max-width: 1300px; /* max-w-6xl */
     margin: 0 auto;
     padding: 0 1rem; 
   }
@@ -58,33 +58,28 @@
     overflow: hidden;
     aspect-ratio: 1/1;
     cursor: pointer;
+    display: block;
   }
   
   .patch-img-container {
     position: absolute;
     inset: 0;
+    overflow: hidden;
   }
   
-  .patch-static-img, .patch-video {
+  .patch-static-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     position: absolute;
     inset: 0;
-  }
-  
-  .patch-static-img {
     z-index: 10;
-    transition: opacity 0.3s;
+    transition: transform 0.5s ease;
   }
   
-  /* Hover effect: Hide image to show video underneath */
+  /* Hover effect: Scale image */
   .patch-image-wrapper:hover .patch-static-img {
-    opacity: 0;
-  }
-  
-  .patch-video {
-    z-index: 0; 
+    transform: scale(1.1);
   }
 
   .patch-badge {
@@ -147,9 +142,7 @@
       <div class="patch-card">
         <a href="/products/embroidered-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <!-- Video Background -->
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/01eb6fb0fc9c4f74b4b0e50f3801f530/01eb6fb0fc9c4f74b4b0e50f3801f530.HD-1080p-2.5Mbps-29352723.mp4" autoplay muted loop playsinline class="patch-video"></video>
-               <!-- Static Image Overlay -->
+               <!-- Static Image Only -->
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Embroidered_NP_01_2024_2.jpg" alt="Embroidered Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -159,12 +152,11 @@
         <p class="patch-desc">Embroidered with premium thread on durable fabric, these patches deliver rich texture and visual detail for a quality finish on any apparel.</p>
         <a href="/products/embroidered-patches" class="btn-customize">Customize</a>
       </div>
-
+      
        <!-- ITEM 2 -->
       <div class="patch-card">
         <a href="/products/3d-embroidered-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/3b0a2c0f2a9c4024baeb50f83801f530/3b0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352773.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_3D_Embroidery_NP_01_2024_1.jpg" alt="3D Embroidered Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -179,7 +171,6 @@
       <div class="patch-card">
         <a href="/products/full-color-printed-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/8b0a2c0f2a9c4024baeb50f83801f530/8b0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352793.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Full_Color_Printed_NP_01_2024_2.jpg" alt="Full Color Printed Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -194,7 +185,6 @@
       <div class="patch-card">
         <a href="/products/pvc-rubber-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/1c0a2c0f2a9c4024baeb50f83801f530/1c0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352753.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_PVC_Rubber_NP_01_2024_2.jpg" alt="PVC Rubber Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -209,7 +199,6 @@
       <div class="patch-card">
         <a href="/products/leather-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/5d0a2c0f2a9c4024baeb50f83801f530/5d0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352763.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Genuine_Leather_NP_01_2024_2.jpg" alt="Genuine Leather Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -224,7 +213,6 @@
       <div class="patch-card">
         <a href="/products/leather-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/7e0a2c0f2a9c4024baeb50f83801f530/7e0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352783.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Faux_Leather_NP_01_2024_2.jpg" alt="Faux Leather Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -239,7 +227,6 @@
       <div class="patch-card">
         <a href="/products/woven-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/9f0a2c0f2a9c4024baeb50f83801f530/9f0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352803.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Woven_NP_01_2024_2.jpg" alt="Woven Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -254,7 +241,6 @@
       <div class="patch-card">
         <a href="/products/metallic-flex-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/2d0a2c0f2a9c4024baeb50f83801f530/2d0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352743.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/metallicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png" alt="Metallic Flex Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">25 pc min</div>
@@ -269,7 +255,6 @@
       <div class="patch-card">
         <a href="/products/full-color-flex-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/4a0a2c0f2a9c4024baeb50f83801f530/4a0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352733.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/two_c14c6fc7-cb38-4ab1-88ca-4317dbe888ee.png" alt="Full Color Flex Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -284,7 +269,6 @@
       <div class="patch-card">
         <a href="/products/matte-black-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/6f0a2c0f2a9c4024baeb50f83801f530/6f0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352713.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Matte_Black_Flex.png" alt="Matte Black Flex Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -299,7 +283,6 @@
       <div class="patch-card">
         <a href="/products/chenille-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/0c0a2c0f2a9c4024baeb50f83801f530/0c0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352813.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_ChenilleNP01_2024.png" alt="Chenille Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -314,7 +297,6 @@
       <div class="patch-card">
         <a href="/products/silicone-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/5a0a2c0f2a9c4024baeb50f83801f530/5a0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352823.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Silicone_NP_01_2024_2.jpg" alt="Silicone Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -329,7 +311,6 @@
       <div class="patch-card">
         <a href="/products/name-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/3e0a2c0f2a9c4024baeb50f83801f530/3e0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352833.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NamePatchMOCK_1_4dc33b0d-b190-47c0-a29b-ebfd6aa53a44_1.png" alt="Custom Embroidered Name Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">1pc min</div>
@@ -344,7 +325,6 @@
       <div class="patch-card">
         <a href="/products/matte-white-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/7a0a2c0f2a9c4024baeb50f83801f530/7a0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352843.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches_Matte_white_double_8c1a8bc3-ceae-4a3b-a7ab-20e50c408ff9.png" alt="Matte White Flex Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -359,7 +339,6 @@
       <div class="patch-card">
         <a href="/products/chrome-flex-patches" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/9a0a2c0f2a9c4024baeb50f83801f530/9a0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352853.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches-chrome-double_e150e78d-4203-4ece-8968-ad1910bf8a53.png" alt="Chrome Flex Patches" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
@@ -374,7 +353,6 @@
       <div class="patch-card">
         <a href="/products/tackle-twill-letters" class="patch-image-wrapper group">
            <div class="patch-img-container">
-               <video src="https://ninjapatches.com/cdn/shop/videos/c/vp/1d0a2c0f2a9c4024baeb50f83801f530/1d0a2c0f2a9c4024baeb50f83801f530.HD-1080p-2.5Mbps-29352863.mp4" autoplay muted loop playsinline class="patch-video"></video>
                <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png" alt="Custom Tackle Twill Letters" class="patch-static-img">
            </div>
            <div class="patch-badge">10pc min</div>
