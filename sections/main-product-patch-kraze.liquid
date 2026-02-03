@@ -118,8 +118,8 @@
   .shape-card { aspect-ratio: 1; border: 1px solid #e5e7eb; border-radius: 0.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; cursor: pointer; transition: all 0.2s; background: #fff; }
   .shape-card:hover { border-color: #10b981; }
   .shape-card.selected { border-color: #10b981; background-color: #ecfdf5; box-shadow: 0 0 0 1px #10b981; }
-  .shape-svg { width: 28px; height: 28px; stroke: #374151; stroke-width: 2; fill: none; }
-  .shape-card.selected .shape-svg { stroke: #059669; }
+  .shape-image { width: 50px; height: 50px; background-size: contain; background-repeat: no-repeat; background-position: center; }
+  .shape-card.selected .shape-image { /* Optional: add filter if needed, but images are colored */ }
 
   /* Backing Grid */
   .backing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
@@ -230,22 +230,75 @@
 
           <span class="total-price-large" id="total-price-display">$380.00</span>
           
+          <div class="control-group">
+            <h3 class="control-label" style="font-size:1.5rem; margin-top:2rem;">Select Your Options Below</h3>
+            <p style="color:#6b7280; margin-bottom:1.5rem;">These do not affect your final price.</p>
+          </div>
+
           <label class="control-label">Select Shape:</label>
           <div class="shape-grid">
-             <!-- Shapes ... -->
-             <div class="shape-card selected" onclick="selectShape(this, 'Circle')"><svg class="shape-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg><span>CIRCLE</span></div>
-             <div class="shape-card" onclick="selectShape(this, 'Square')"><svg class="shape-svg" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/></svg><span>SQUARE</span></div>
-             <!-- Add other shapes as needed -->
+             <div class="shape-card selected" onclick="selectShape(this, 'Circle')">
+               <div class="shape-image" style="background-image:url('https://d17fzo7x83uajt.cloudfront.net/eyJidWNrZXQiOiJiY3BvIiwia2V5IjoibmluamFwb2RkZC5teXNob3BpZnkuY29tLzg3MzM4ODgzODEyNDctY2lyY2xlMi5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjIwMCwiZml0IjoiY29udGFpbiJ9fX0=');"></div>
+               <span>Circle</span>
+             </div>
+             <div class="shape-card" onclick="selectShape(this, 'Square')">
+               <div class="shape-image" style="background-image:url('https://d17fzo7x83uajt.cloudfront.net/eyJidWNrZXQiOiJiY3BvIiwia2V5IjoibmluamFwb2RkZC5teXNob3BpZnkuY29tLzg3MzM4ODgzODEyNDctc3F1YXJlMi5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjIwMCwiZml0IjoiY29udGFpbiJ9fX0=');"></div>
+               <span>Square</span>
+             </div>
+             <div class="shape-card" onclick="selectShape(this, 'Rectangle')">
+               <div class="shape-image" style="background-image:url('https://d17fzo7x83uajt.cloudfront.net/eyJidWNrZXQiOiJiY3BvIiwia2V5IjoibmluamFwb2RkZC5teXNob3BpZnkuY29tLzg3MzM4ODgzODEyNDctcmVjdGFuZ2xlMi5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjIwMCwiZml0IjoiY29udGFpbiJ9fX0=');"></div>
+               <span>Rectangle</span>
+             </div>
+             <div class="shape-card" onclick="selectShape(this, 'Oval')">
+               <div class="shape-image" style="background-image:url('https://d17fzo7x83uajt.cloudfront.net/eyJidWNrZXQiOiJiY3BvIiwia2V5IjoibmluamFwb2RkZC5teXNob3BpZnkuY29tLzg3MzM4ODgzODEyNDctb3ZhbDIucG5nIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyMDAsImZpdCI6ImNvbnRhaW4ifX19');"></div>
+               <span>Oval</span>
+             </div>
+             <div class="shape-card" onclick="selectShape(this, 'Custom')">
+               <div class="shape-image" style="background-image:url('https://d17fzo7x83uajt.cloudfront.net/eyJidWNrZXQiOiJiY3BvIiwia2V5IjoibmluamFwb2RkZC5teXNob3BpZnkuY29tLzg3MzM4ODgzODEyNDctZGllY3V0Mi5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjIwMCwiZml0IjoiY29udGFpbiJ9fX0=');"></div>
+               <span>Custom</span>
+             </div>
           </div>
           <input type="hidden" name="properties[Shape]" id="shape-input" value="Circle">
 
-          <label class="control-label">Select Your Backing:</label>
-          <div class="backing-grid">
-            <div class="backing-card selected" onclick="selectBacking(this, 'Heat Applied')"><div class="backing-preview bg-heat"></div><div>Heat Applied</div></div>
-            <div class="backing-card" onclick="selectBacking(this, 'Velcro')"><div class="backing-preview bg-velcro"></div><div>Velcro</div></div>
-            <div class="backing-card" onclick="selectBacking(this, 'Peel & Stick')"><div class="backing-preview bg-peel"></div><div>Peel & Stick</div></div>
+          <div class="control-group">
+            <label class="control-label">Patch Background Color:</label>
+            <input type="text" name="properties[Patch Background Color]" class="text-input" placeholder="">
           </div>
-          <input type="hidden" name="properties[Backing]" id="backing-input" value="Heat Applied">
+
+          <div class="control-group">
+            <label class="control-label">Border Thread Color :</label>
+            <input type="text" name="properties[Border Thread Color]" class="text-input" placeholder="">
+          </div>
+
+          <label class="control-label">Select Your Backing: <span id="backing-label-extra" style="font-weight:400; color:#6b7280;">Heat Applied (Most Popular)</span></label>
+          <div class="backing-grid">
+            <div class="backing-card selected" onclick="selectBacking(this, 'Heat Applied (Most Popular)')">
+              <div class="backing-preview" style="background-image:url('https://ninjapatches.com/cdn/shop/files/Heat_Applied.png?v=1710967397'); background-size:cover; background-position:center;"></div>
+              <div>Heat Applied</div>
+            </div>
+            <div class="backing-card" onclick="selectBacking(this, 'Velcro (Both Sides of Velcro Included)')">
+              <div class="backing-preview" style="background-image:url('https://ninjapatches.com/cdn/shop/files/Velcro.png?v=1710967397'); background-size:cover; background-position:center;"></div>
+              <div>Velcro</div>
+            </div>
+            <div class="backing-card" onclick="selectBacking(this, 'Peel & Stick')">
+              <div class="backing-preview" style="background-image:url('https://ninjapatches.com/cdn/shop/files/Peel_Stick.png?v=1710967397'); background-size:cover; background-position:center;"></div>
+              <div>Peel & Stick</div>
+            </div>
+          </div>
+          <div id="backing-description" style="margin-bottom:2rem; font-size:0.9rem; color:#4b5563; line-height:1.5;">
+            Our most popular method allows you to quickly and conveniently use a heat press or even a home iron if the right pressure and heat are applied.
+          </div>
+          <input type="hidden" name="properties[Backing]" id="backing-input" value="Heat Applied (Most Popular)">
+
+          <div class="control-group" style="margin-top:2rem;">
+            <label style="display:flex; align-items:center; gap:0.5rem; font-weight:700; cursor:pointer;">
+              <input type="checkbox" id="design-notes-toggle" style="width:1.2rem; height:1.2rem;">
+              Add Free Design Notes (Optional)
+            </label>
+            <div id="design-notes-container" style="display:none; margin-top:1rem;">
+               <textarea name="properties[Design Notes]" class="text-input" rows="4" placeholder="i.e. Keep the white inside of the text. Change the border of the logo to blue."></textarea>
+            </div>
+          </div>
           
           <button type="submit" name="add" class="checkout-btn">Proceed to Checkout</button>
 
@@ -347,6 +400,22 @@
      document.querySelectorAll('.backing-card').forEach(c => c.classList.remove('selected'));
      el.classList.add('selected');
      document.getElementById('backing-input').value = val;
+     
+     // Update label
+     const labelMap = {
+       'Heat Applied': 'Heat Applied (Most Popular)',
+       'Velcro': 'Velcro',
+       'Peel & Stick': 'Peel & Stick'
+     };
+     document.getElementById('backing-label-extra').innerText = labelMap[val] || val;
+
+     // Update description
+     const descMap = {
+       'Heat Applied': 'Our most popular method allows you to quickly and conveniently use a heat press or even a home iron if the right pressure and heat are applied.',
+       'Velcro': 'Ideal for uniforms and tactical gear. Allows for easy removal and reattachment.',
+       'Peel & Stick': 'Perfect for temporary use or hard-to-iron surfaces. Just peel off the back and stick it on!'
+     };
+     document.getElementById('backing-description').innerText = descMap[val] || '';
   }
 
   // --- GALLERY LOGIC ---
