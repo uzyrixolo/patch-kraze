@@ -1,34 +1,53 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "sections": {
-        "main": {
-            "type": "main-product-patch-kraze"
-        },
-        "recommended_hats": {
-            "type": "product-recommended-hats"
-        },
-        "patch_examples": {
-            "type": "product-patch-examples"
-        },
-        "product_details": {
-            "type": "product-details-accordion"
-        },
-        "comparison_slider": {
-            "type": "comparison-slider"
-        },
-        "product_faq": {
-            "type": "product-faq-patch-kraze"
-        },
-        "testimonials": {
-            "type": "testimonials-patch-kraze"
-        }
+  "sections": {
+    "main": {
+      "type": "main-product-patch-kraze",
+      "settings": {}
     },
-    "order": [
-        "main",
-        "recommended_hats",
-        "patch_examples",
-        "product_details",
-        "comparison_slider",
-        "product_faq",
-        "testimonials"
-    ]
+    "recommended_hats": {
+      "type": "product-recommended-hats",
+      "settings": {
+        "collection": "hats",
+        "limit": 6
+      }
+    },
+    "patch_examples": {
+      "type": "product-patch-examples",
+      "settings": {}
+    },
+    "product_details": {
+      "type": "product-details-accordion",
+      "settings": {}
+    },
+    "comparison_slider": {
+      "type": "comparison-slider",
+      "settings": {}
+    },
+    "product_faq": {
+      "type": "product-faq-patch-kraze",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials-patch-kraze",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "recommended_hats",
+    "patch_examples",
+    "product_details",
+    "comparison_slider",
+    "product_faq",
+    "testimonials"
+  ]
 }
