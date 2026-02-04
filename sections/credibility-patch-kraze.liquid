@@ -28,14 +28,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
     margin-bottom: 4rem;
     flex-wrap: wrap;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .credibility-logo-text {
-    font-size: 0.875rem; /* sm */
-    font-weight: 600;
-    color: #9ca3af; /* gray-400 */
+  .brand-logo {
+    height: 2.5rem; /* h-10 */
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+  .brand-logo:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  @media (max-width: 640px) {
+    .credibility-logos { gap: 2rem; }
+    .brand-logo { height: 2rem; }
   }
 
   /* Headline */
@@ -95,13 +110,25 @@
     
     <!-- Brand Logos Row -->
     <div class="credibility-logos">
-      <div class="credibility-logo-text">Universal</div>
-      <div class="credibility-logo-text">Montho</div>
-      <div class="credibility-logo-text">Activision</div>
-      <div class="credibility-logo-text">Amazon</div>
-      <div class="credibility-logo-text">Walmart</div>
-      <div class="credibility-logo-text">Lowes</div>
-      <div class="credibility-logo-text">GM</div>
+      <!-- Row 1 -->
+      <img src="https://masterscustompatches.com/images/brands/apple.png" alt="Apple" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/google.png" alt="Google" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/amazon.png" alt="Amazon" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/nike.png" alt="Nike" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/pepsi.png" alt="Pepsi" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/spotify.png" alt="Spotify" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/tesla.png" alt="Tesla" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/north-face.png" alt="The North Face" class="brand-logo">
+      
+      <!-- Row 2 -->
+      <img src="https://masterscustompatches.com/images/brands/linkedin.png" alt="LinkedIn" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/mcdonalds.png" alt="McDonald's" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/honda.png" alt="Honda" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/kfc.png" alt="KFC" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/shopify.png" alt="Shopify" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/adidas.png" alt="Adidas" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/tiktok.png" alt="TikTok" class="brand-logo">
+      <img src="https://masterscustompatches.com/images/brands/youtube.png" alt="YouTube" class="brand-logo">
     </div>
 
     <!-- Headline and Subtitle -->

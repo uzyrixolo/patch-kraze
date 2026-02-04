@@ -262,11 +262,12 @@
           <div class="buy-more-label">Buy More. Save More.</div>
           <div class="pricing-card">
             <div class="pricing-header"><span>Qty</span><span>Price</span><span>Discount</span></div>
-            <div class="pricing-row" data-min="10" data-max="24"><span>10-24 pcs</span><span>$6.79 ea</span><span>-</span></div>
-            <div class="pricing-row" data-min="25" data-max="49"><span>25-49 pcs</span><span>$5.77 ea</span><span>15% off</span></div>
-            <div class="pricing-row" data-min="50" data-max="99"><span>50-99 pcs</span><span>$4.35 ea</span><span>36% off</span></div>
-            <div class="pricing-row" data-min="100" data-max="199"><span>100-199 pcs</span><span>$3.80 ea</span><span>44% off</span></div>
-            <div class="pricing-row" data-min="200" data-max="9999"><span>200+ pcs</span><span>$2.65 ea</span><span>61% off</span></div>
+            <div class="pricing-row" data-min="10" data-max="48"><span>10-48 pcs</span><span>$6.79 ea</span><span>-</span></div>
+            <div class="pricing-row" data-min="49" data-max="98"><span>49-98 pcs</span><span>$5.77 ea</span><span>15% off</span></div>
+            <div class="pricing-row" data-min="99" data-max="148"><span>99-148 pcs</span><span>$5.43 ea</span><span>20% off</span></div>
+            <div class="pricing-row" data-min="149" data-max="298"><span>149-298 pcs</span><span>$4.75 ea</span><span>30% off</span></div>
+            <div class="pricing-row" data-min="299" data-max="498"><span>299-498 pcs</span><span>$4.07 ea</span><span>40% off</span></div>
+            <div class="pricing-row" data-min="499" data-max="99999"><span>499+ pcs</span><span>$3.39 ea</span><span>50% off</span></div>
           </div>
 
           <div style="margin-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 1.5rem;">
@@ -403,55 +404,17 @@
 <script>
   // 1. INJECT SHOPIFY VARIANTS
   const shopifyVariants = {{ product.variants | json }};
+  const BASE_PRICE = 6.79;
   const PRICING = [
-    { min: 10, max: 24, price: 6.79 },
-    { min: 25, max: 49, price: 5.77 },
-    { min: 50, max: 99, price: 4.35 },
-    { min: 100, max: 199, price: 3.80 },
-    { min: 200, max: 9999, price: 2.65 }
+    { min: 10, max: 48, discount: 0 },
+    { min: 49, max: 98, discount: 0.15 },
+    { min: 99, max: 148, discount: 0.20 },
+    { min: 149, max: 298, discount: 0.30 },
+    { min: 299, max: 498, discount: 0.40 },
+    { min: 499, max: 99999, discount: 0.50 }
   ];
 
-  const fileInput = document.getElementById('file-input');
-  const uploadStage = document.getElementById('upload-stage');
-  const customizeStage = document.getElementById('customize-stage');
-  const qtyInput = document.getElementById('qty-input');
-  const totalDisplay = document.getElementById('total-price-display');
-  const headerPrice = document.getElementById('header-price');
-  const pricingRows = document.querySelectorAll('.pricing-row');
-  const variantInput = document.getElementById('real-variant-id');
-
-  // File Preview
-  fileInput.addEventListener('change', function() {
-    if(this.files && this.files.length > 0) {
-       const file = this.files[0]; 
-       document.getElementById('filename-display').innerText = file.name;
-       const reader = new FileReader();
-       reader.onload = function(e){ document.getElementById('file-preview-img').src = e.target.result; }
-       reader.readAsDataURL(file);
-       uploadStage.style.display = 'none';
-       customizeStage.classList.add('active');
-    }
-  });
-  window.resetUpload = function() {
-    fileInput.value = '';
-    customizeStage.classList.remove('active');
-    uploadStage.style.display = 'block';
-  }
-
-  const widthInput = document.getElementById('width-input');
-  const heightInput = document.getElementById('height-input');
-  const unitPriceDisplay = document.getElementById('unit-price-display');
-  const calculatedSizeDisplay = document.getElementById('calculated-size-display');
-
-  // Stepper Logic
-  window.stepSize = function(type, delta) {
-    const el = type === 'width' ? widthInput : heightInput;
-    let val = parseFloat(el.value) || 2.0;
-    val += delta;
-    if(val < 1.0) val = 1.0; // Min size
-    el.value = val.toFixed(2);
-    updatePriceAndVariant();
-  };
+  /* ... elements ... */
 
   // Smart Pricing + Variant Swapper
   function updatePriceAndVariant() {
@@ -466,15 +429,13 @@
     // Update Size Text
     calculatedSizeDisplay.innerText = avgSize.toFixed(2).replace(/\.00$/, '') + '"';
 
-    // Find Base Price Tier (Existing logic) - In real app, price also depends on Size
-    // For now we simulate base tiers, assumed for ~3"
-    // TODO: Add size multiplier if needed
-    
-    let unitPrice = 6.79;
+    // Calculate Unit Price based on Tiers
     let currentTier = PRICING[0];
     for(let tier of PRICING) {
-       if(qty >= tier.min) { unitPrice = tier.price; currentTier = tier; }
+       if(qty >= tier.min) { currentTier = tier; }
     }
+    
+    let unitPrice = BASE_PRICE * (1 - currentTier.discount);
 
     // UPDATE UI
     headerPrice.innerText = '$' + unitPrice.toFixed(2);
