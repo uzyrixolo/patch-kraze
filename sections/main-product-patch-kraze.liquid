@@ -339,15 +339,15 @@
           <label class="control-label">Select Your Backing: <span id="backing-label-extra" style="font-weight:400; color:#6b7280;">Heat Applied (Most Popular)</span></label>
           <div class="backing-grid">
             <div class="backing-card selected" onclick="selectBacking(this, 'Heat Applied (Most Popular)')">
-              <div class="backing-preview" style="background-image:url('https://ninjapatches.com/cdn/shop/files/Heat_Applied.png?v=1710967397'); background-size:cover; background-position:center;"></div>
+              <div class="backing-preview" style="background-image:url('{{ 'Heat_Applied.png' | asset_url }}'); background-size:cover; background-position:center;"></div>
               <div>Heat Applied</div>
             </div>
             <div class="backing-card" onclick="selectBacking(this, 'Velcro (Both Sides of Velcro Included)')">
-              <div class="backing-preview" style="background-image:url('https://ninjapatches.com/cdn/shop/files/Velcro.png?v=1710967397'); background-size:cover; background-position:center;"></div>
+              <div class="backing-preview" style="background-image:url('{{ 'Velcro.png' | asset_url }}'); background-size:cover; background-position:center;"></div>
               <div>Velcro</div>
             </div>
             <div class="backing-card" onclick="selectBacking(this, 'Peel & Stick')">
-              <div class="backing-preview" style="background-image:url('https://ninjapatches.com/cdn/shop/files/Peel_Stick.png?v=1710967397'); background-size:cover; background-position:center;"></div>
+              <div class="backing-preview" style="background-image:url('{{ 'Peel_Stick.png' | asset_url }}'); background-size:cover; background-position:center;"></div>
               <div>Peel & Stick</div>
             </div>
           </div>
