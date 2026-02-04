@@ -187,7 +187,34 @@
   .total-price-large { font-size: 2rem; font-weight: 800; color: #111827; line-height: 1; margin:0; }
 
   /* Hide App Block */
+  /* Hide App Block */
   div#orichi-discount-block { display: none !important; }
+
+  /* Checkout Button */
+  .checkout-btn {
+    width: 100%;
+    background-color: #10b981; /* Ninja Green */
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 1rem;
+  }
+  .checkout-btn:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.5);
+  }
+  .checkout-btn:active {
+    transform: translateY(0);
+  }
 </style>
 
 <div class="product-page-main">
@@ -333,23 +360,23 @@
           <label class="control-label">Select Shape:</label>
           <div class="shape-grid">
              <div class="shape-card selected" onclick="selectShape(this, 'Circle')">
-               <div class="shape-image" style="background-image:url('https://d17fzo7x83uajt.cloudfront.net/eyJidWNrZXQiOiJiY3BvIiwia2V5IjoibmluamFwb2RkZC5teXNob3BpZnkuY29tLzg3MzM4ODgzODEyNDctY2lyY2xlMi5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjIwMCwiZml0IjoiY29udGFpbiJ9fX0=');"></div>
+               <div class="shape-image" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgc3Ryb2tlPSIjMTEyMzI3IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9IiNmZmYiIC8+PC9zdmc+');"></div>
                <span>Circle</span>
              </div>
              <div class="shape-card" onclick="selectShape(this, 'Square')">
-               <div class="shape-image" style="background-image:url('https://d17fzo7x83uajt.cloudfront.net/eyJidWNrZXQiOiJiY3BvIiwia2V5IjoibmluamFwb2RkZC5teXNob3BpZnkuY29tLzg3MzM4ODgzODEyNDctc3F1YXJlMi5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjIwMCwiZml0IjoiY29udGFpbiJ9fX0=');"></div>
+               <div class="shape-image" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIxNSIgeT0iMTUiIHdpZHRoPSI3MCIgaGVpZ2h0PSI3MCIgcng9IjgiIHN0cm9rZT0iIzExMjMyNyIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSIjZmZmIiAvPjwvc3ZnPg==');"></div>
                <span>Square</span>
              </div>
              <div class="shape-card" onclick="selectShape(this, 'Rectangle')">
-               <div class="shape-image" style="background-image:url('https://d17fzo7x83uajt.cloudfront.net/eyJidWNrZXQiOiJiY3BvIiwia2V5IjoibmluamFwb2RkZC5teXNob3BpZnkuY29tLzg3MzM4ODgzODEyNDctcmVjdGFuZ2xlMi5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjIwMCwiZml0IjoiY29udGFpbiJ9fX0=');"></div>
+               <div class="shape-image" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIxMCIgeT0iMzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgcng9IjYiIHN0cm9rZT0iIzExMjMyNyIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSIjZmZmIiAvPjwvc3ZnPg==');"></div>
                <span>Rectangle</span>
              </div>
              <div class="shape-card" onclick="selectShape(this, 'Oval')">
-               <div class="shape-image" style="background-image:url('https://d17fzo7x83uajt.cloudfront.net/eyJidWNrZXQiOiJiY3BvIiwia2V5IjoibmluamFwb2RkZC5teXNob3BpZnkuY29tLzg3MzM4ODgzODEyNDctb3ZhbDIucG5nIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyMDAsImZpdCI6ImNvbnRhaW4ifX19');"></div>
+               <div class="shape-image" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZWxsaXBzZSBjeD0iNTAiIGN5PSI1MCIgcng9IjQwIiByeT0iMjUiIHN0cm9rZT0iIzExMjMyNyIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSIjZmZmIiAvPjwvc3ZnPg==');"></div>
                <span>Oval</span>
              </div>
              <div class="shape-card" onclick="selectShape(this, 'Custom')">
-               <div class="shape-image" style="background-image:url('https://d17fzo7x83uajt.cloudfront.net/eyJidWNrZXQiOiJiY3BvIiwia2V5IjoibmluamFwb2RkZC5teXNob3BpZnkuY29tLzg3MzM4ODgzODEyNDctZGllY3V0Mi5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjIwMCwiZml0IjoiY29udGFpbiJ9fX0=');"></div>
+               <div class="shape-image" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNDAgMTUgTjYwIDE1IEw4MCA0MCBMNTAgODUgTDIwIDQwIFoiIHN0cm9rZT0iIzExMjMyNyIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSIjZmZmIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvc3ZnPg==');"></div>
                <span>Custom</span>
              </div>
           </div>
