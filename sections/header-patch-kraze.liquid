@@ -66,6 +66,17 @@
 
   /* NAV DESKTOP */
   .pk-nav { background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 48px; z-index: 40; }
+  
+  /* Mobile Responsive Header */
+  @media (max-width: 1023px) {
+    .pk-main-header { display: none !important; }
+    .pk-nav { display: none !important; }
+    .pk-mobile-header { display: flex !important; }
+  }
+  
+  @media (max-width: 768px) {
+    .pk-search-wrapper { max-width: 100%; margin: 0 0.5rem; }
+  }
   .pk-nav-list { display: flex; height: 3rem; align-items: center; gap: 0.25rem; font-size: 0.875rem; font-weight: 500; list-style: none; margin: 0; padding: 0; }
   .pk-nav-item { height: 100%; display: flex; align-items: center; }
   .pk-nav-btn { background: transparent; border: none; padding: 0 1rem; height: 100%; display: flex; align-items: center; cursor: pointer; color: #111827; transition: color 0.15s; font-size: 0.875rem; font-weight: 500;font-family: inherit;}
