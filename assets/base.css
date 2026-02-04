@@ -28,6 +28,7 @@ html {
   scrollbar-width: thin;
   scrollbar-color: rgb(var(--color-foreground-rgb) / var(--opacity-40)) var(--color-background);
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 html[scroll-lock] {
