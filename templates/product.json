@@ -22,6 +22,7 @@
     },
     "patch_examples": {
       "type": "product-patch-examples",
+      "disabled": true,
       "settings": {}
     },
     "product_details": {
@@ -30,6 +31,7 @@
     },
     "comparison_slider": {
       "type": "comparison-slider",
+      "disabled": true,
       "settings": {}
     },
     "product_faq": {
