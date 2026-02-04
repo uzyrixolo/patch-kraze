@@ -24,6 +24,7 @@
     },
     "recommended_hats": {
       "type": "product-recommended-hats",
+      "disabled": true,
       "settings": {
         "collection": "hats",
         "limit": 6
