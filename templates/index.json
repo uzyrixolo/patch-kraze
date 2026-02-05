@@ -1,31 +1,92 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_banner": {
-      "type": "hero-banner-patch-kraze"
+      "type": "hero-banner-patch-kraze",
+      "settings": {}
     },
     "shop_all_patches": {
-      "type": "shop-all-patches"
+      "type": "shop-all-patches",
+      "settings": {}
     },
     "shop_popular_products": {
-      "type": "shop-popular-products"
+      "type": "shop-popular-products",
+      "settings": {}
     },
     "credibility": {
-      "type": "credibility-patch-kraze"
+      "type": "credibility-patch-kraze",
+      "settings": {}
     },
     "cta": {
-      "type": "cta-patch-kraze"
+      "type": "cta-patch-kraze",
+      "settings": {}
     },
     "ordering_process": {
-      "type": "ordering-process-patch-kraze"
+      "type": "ordering-process-patch-kraze",
+      "blocks": {
+        "process_step_k9tmYt": {
+          "type": "process_step",
+          "settings": {
+            "image": "shopify://shop_images/4-step.jpg",
+            "title": "Upload Your Designs & Place Order Online",
+            "description": "Use designs with unlimited colors, simple or high detail artwork. Upload any design you want and we’ll turn it into high quality custom patches."
+          }
+        },
+        "process_step_w7Qh9j": {
+          "type": "process_step",
+          "settings": {
+            "image": "shopify://shop_images/1-step.jpg",
+            "title": "Approve Your Patch Artwork Proofs",
+            "description": "If selected during checkout, we will send you a virtual proof for approval before we can begin production. We offer free proof approvals on patch orders of $300 or more."
+          }
+        },
+        "process_step_9mALJD": {
+          "type": "process_step",
+          "settings": {
+            "image": "shopify://shop_images/3-step.jpg",
+            "title": "We Create & Ship Your Custom Patch Order",
+            "description": "We make ordering custom patches easy. We can create the most detailed, highest quality, full color custom patches you can find."
+          }
+        },
+        "process_step_Lte4kd": {
+          "type": "process_step",
+          "settings": {
+            "image": "shopify://shop_images/2-step.jpg",
+            "title": "Heatpress when Ready. Keep Extras in Storage Forever",
+            "description": "Press your custom made patches with a heat press, while using our required pressing instructions for ultimate durability."
+          }
+        }
+      },
+      "block_order": [
+        "process_step_k9tmYt",
+        "process_step_w7Qh9j",
+        "process_step_9mALJD",
+        "process_step_Lte4kd"
+      ],
+      "settings": {
+        "heading": "The Patch Kraze Ordering Process",
+        "subheading": "Simplifying the Process with Satisfaction Guaranteed"
+      }
     },
     "why_buy": {
-      "type": "why-buy-patch-kraze"
+      "type": "why-buy-patch-kraze",
+      "settings": {}
     },
     "faq": {
-      "type": "faq-patch-kraze"
+      "type": "faq-patch-kraze",
+      "settings": {}
     },
     "explore_products": {
-      "type": "explore-products-patch-kraze"
+      "type": "explore-products-patch-kraze",
+      "settings": {}
     }
   },
   "order": [
