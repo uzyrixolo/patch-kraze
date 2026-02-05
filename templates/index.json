@@ -86,6 +86,7 @@
     },
     "explore_products": {
       "type": "explore-products-patch-kraze",
+      "disabled": true,
       "settings": {}
     }
   },
