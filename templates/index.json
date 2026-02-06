@@ -27,6 +27,26 @@
             "badge": "10pc min"
           }
         },
+        "patch_3d_embroidered": {
+          "type": "patch_item",
+          "settings": {
+            "title": "3D Embroidered Patches",
+            "price": "As low as $2.04 ea.",
+            "description": "Our 3D embroidered patches provide a raised effect that enhances the detail and tactile appeal of your custom designs.",
+            "product_url": "/products/3d-embroidered-patches",
+            "badge": "10pc min"
+          }
+        },
+        "patch_full_color_printed": {
+          "type": "patch_item",
+          "settings": {
+            "title": "Full Color Printed Patches",
+            "price": "As low as $0.96 ea.",
+            "description": "Full Color Printed Patches use advanced sublimation to create sharp, vivid, and long-lasting graphics.",
+            "product_url": "/products/full-color-printed-patches",
+            "badge": "10pc min"
+          }
+        },
         "patch_pvc": {
           "type": "patch_item",
           "settings": {
@@ -38,13 +58,23 @@
             "badge": "10pc min"
           }
         },
-        "patch_leather": {
+        "patch_leather_genuine": {
           "type": "patch_item",
           "settings": {
             "image": "shopify://shop_images/leather-main.jpg",
-            "title": "Leather Patches",
+            "title": "Genuine Leather Patches",
             "price": "As low as $1.40 ea.",
             "description": "Premium leather patches with embossed or engraved designs for a sophisticated, durable look.",
+            "product_url": "/products/leather-patches",
+            "badge": "10pc min"
+          }
+        },
+        "patch_leather_faux": {
+          "type": "patch_item",
+          "settings": {
+            "title": "Faux Leather Patches",
+            "price": "As low as $1.18 ea.",
+            "description": "Affordable leather-like patches offering the aesthetic of genuine leather with enhanced durability.",
             "product_url": "/products/leather-patches",
             "badge": "10pc min"
           }
@@ -59,13 +89,117 @@
             "product_url": "/products/woven-patches",
             "badge": "10pc min"
           }
+        },
+        "patch_metallic_flex": {
+          "type": "patch_item",
+          "settings": {
+            "title": "Metallic Flex Patches",
+            "price": "As low as $2.96 ea.",
+            "description": "Shimmering metallic flex patches with vibrant finishes for eye-catching designs on apparel.",
+            "product_url": "/products/metallic-flex-patches",
+            "badge": "25 pc min"
+          }
+        },
+        "patch_full_color_flex": {
+          "type": "patch_item",
+          "settings": {
+            "title": "Full Color Flex Patches",
+            "price": "As low as $1.50 ea.",
+            "description": "Vibrant, flexible patches that bring your full-color designs to life with a modern feel.",
+            "product_url": "/products/full-color-flex-patches",
+            "badge": "10pc min"
+          }
+        },
+        "patch_matte_black": {
+          "type": "patch_item",
+          "settings": {
+            "title": "Matte Black Flex Patches",
+            "price": "As low as $1.60 ea.",
+            "description": "Sleek and stealthy matte black finish for a premium, understated tactical look.",
+            "product_url": "/products/matte-black-patches",
+            "badge": "10pc min"
+          }
+        },
+        "patch_chenille": {
+          "type": "patch_item",
+          "settings": {
+            "image": "shopify://shop_images/chenille-main.jpg",
+            "title": "Chenille Patches",
+            "price": "As low as $1.75 ea.",
+            "description": "Fuzzy chenille patches with dimensional embroidery for a vintage, textured look perfect for athletic wear.",
+            "product_url": "/products/chenille-patches",
+            "badge": "10pc min"
+          }
+        },
+        "patch_silicone": {
+          "type": "patch_item",
+          "settings": {
+            "image": "shopify://shop_images/silicone-main.jpg",
+            "title": "Silicone Patches",
+            "price": "As low as $2.10 ea.",
+            "description": "Durable, weather-resistant silicone patches perfect for heavy-duty gear and outdoor wear.",
+            "product_url": "/products/silicone-patches",
+            "badge": "10pc min"
+          }
+        },
+        "patch_name": {
+          "type": "patch_item",
+          "settings": {
+            "title": "Custom Embroidered Name Patches",
+            "price": "As low as $3.50 ea.",
+            "description": "Personalized name patches with high-quality embroidery, perfect for uniforms and workwear.",
+            "product_url": "/products/name-patches",
+            "badge": "1pc min"
+          }
+        },
+        "patch_matte_white": {
+          "type": "patch_item",
+          "settings": {
+            "title": "Matte White Flex Patches",
+            "price": "As low as $1.60 ea.",
+            "description": "Clean, crisp matte white finish for a modern and minimalist aesthetic.",
+            "product_url": "/products/matte-white-patches",
+            "badge": "10pc min"
+          }
+        },
+        "patch_chrome_flex": {
+          "type": "patch_item",
+          "settings": {
+            "title": "Chrome Flex Patches",
+            "price": "As low as $2.75 ea.",
+            "description": "High-shine chrome finish that catches the light for a premium, metallic look.",
+            "product_url": "/products/chrome-flex-patches",
+            "badge": "10pc min"
+          }
+        },
+        "patch_tackle_twill": {
+          "type": "patch_item",
+          "settings": {
+            "title": "Custom Tackle Twill Letters",
+            "price": "As low as $1.90 ea.",
+            "description": "Classic collegiate style lettering made from durable tackle twill fabric.",
+            "product_url": "/products/tackle-twill-letters",
+            "badge": "10pc min"
+          }
         }
       },
       "block_order": [
         "patch_embroidered",
+        "patch_3d_embroidered",
+        "patch_full_color_printed",
         "patch_pvc",
-        "patch_leather",
-        "patch_woven"
+        "patch_leather_genuine",
+        "patch_leather_faux",
+        "patch_woven",
+        "patch_metallic_flex",
+        "patch_full_color_flex",
+        "patch_matte_black",
+        "patch_chenille",
+        "patch_silicone",
+        "patch_name",
+        "patch_matte_white",
+        "patch_chrome_flex",
+        "patch_tackle_twill"
       ],
       "settings": {
         "heading": "Shop All Patch Types"
