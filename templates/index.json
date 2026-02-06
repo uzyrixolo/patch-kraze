@@ -34,7 +34,8 @@
             "price": "As low as $2.04 ea.",
             "description": "Our 3D embroidered patches provide a raised effect that enhances the detail and tactile appeal of your custom designs.",
             "product_url": "/products/3d-embroidered-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_3D_Embroidery_NP_01_2024_1.jpg"
           }
         },
         "patch_full_color_printed": {
@@ -44,7 +45,8 @@
             "price": "As low as $0.96 ea.",
             "description": "Full Color Printed Patches use advanced sublimation to create sharp, vivid, and long-lasting graphics.",
             "product_url": "/products/full-color-printed-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Full_Color_Printed_NP_01_2024_2.jpg"
           }
         },
         "patch_pvc": {
@@ -76,7 +78,8 @@
             "price": "As low as $1.18 ea.",
             "description": "Affordable leather-like patches offering the aesthetic of genuine leather with enhanced durability.",
             "product_url": "/products/leather-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/5-1.png"
           }
         },
         "patch_woven": {
@@ -97,7 +100,8 @@
             "price": "As low as $2.96 ea.",
             "description": "Shimmering metallic flex patches with vibrant finishes for eye-catching designs on apparel.",
             "product_url": "/products/metallic-flex-patches",
-            "badge": "25 pc min"
+            "badge": "25 pc min",
+            "image_url": "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/metallicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png"
           }
         },
         "patch_full_color_flex": {
@@ -107,7 +111,8 @@
             "price": "As low as $1.50 ea.",
             "description": "Vibrant, flexible patches that bring your full-color designs to life with a modern feel.",
             "product_url": "/products/full-color-flex-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/two_c14c6fc7-cb38-4ab1-88ca-4317dbe888ee.png"
           }
         },
         "patch_matte_black": {
@@ -117,7 +122,8 @@
             "price": "As low as $1.60 ea.",
             "description": "Sleek and stealthy matte black finish for a premium, understated tactical look.",
             "product_url": "/products/matte-black-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Matte_Black_Flex.png"
           }
         },
         "patch_chenille": {
@@ -149,7 +155,8 @@
             "price": "As low as $3.50 ea.",
             "description": "Personalized name patches with high-quality embroidery, perfect for uniforms and workwear.",
             "product_url": "/products/name-patches",
-            "badge": "1pc min"
+            "badge": "1pc min",
+            "image_url": "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NamePatchMOCK_1_4dc33b0d-b190-47c0-a29b-ebfd6aa53a44_1.png"
           }
         },
         "patch_matte_white": {
@@ -159,7 +166,8 @@
             "price": "As low as $1.60 ea.",
             "description": "Clean, crisp matte white finish for a modern and minimalist aesthetic.",
             "product_url": "/products/matte-white-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches_Matte_white_double_8c1a8bc3-ceae-4a3b-a7ab-20e50c408ff9.png"
           }
         },
         "patch_chrome_flex": {
@@ -169,7 +177,8 @@
             "price": "As low as $2.75 ea.",
             "description": "High-shine chrome finish that catches the light for a premium, metallic look.",
             "product_url": "/products/chrome-flex-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches-chrome-double_e150e78d-4203-4ece-8968-ad1910bf8a53.png"
           }
         },
         "patch_tackle_twill": {
@@ -179,7 +188,8 @@
             "price": "As low as $1.90 ea.",
             "description": "Classic collegiate style lettering made from durable tackle twill fabric.",
             "product_url": "/products/tackle-twill-letters",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png"
           }
         }
       },
