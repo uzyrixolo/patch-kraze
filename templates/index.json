@@ -19,6 +19,7 @@
     },
     "shop_popular_products": {
       "type": "shop-popular-products",
+      "disabled": true,
       "settings": {}
     },
     "credibility": {
