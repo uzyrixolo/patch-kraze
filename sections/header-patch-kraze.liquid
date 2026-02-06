@@ -37,7 +37,7 @@
   }
 
   /* TOP BAR */
-  .pk-top-bar { background-color: #000; color: #fff; border-bottom: 2px solid #b62b2a; height: 48px; position: sticky; top: 0; z-index: 50; }
+  .pk-top-bar { background-color: #000; color: #fff; border-bottom: 2px solid #b62b2a; height: 48px; position: relative; z-index: 50; }
   .pk-brand-link { 
     display: flex; flex-direction: column; justify-content: center; height: 100%; padding: 0 0.75rem; 
     font-size: 0.75rem; font-weight: 700; line-height: 1.1; font-style: italic; letter-spacing: 0.025em; text-decoration: none; transition: background 0.2s;
@@ -79,8 +79,8 @@
   }
 
   /* NAV DESKTOP */
-  .pk-nav { background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 48px; z-index: 40; }
-  .pk-header { position: relative; }
+  .pk-nav { background: #fff; border-bottom: 1px solid #e5e7eb; position: relative; z-index: 40; }
+  .pk-header { position: sticky; top: 0; z-index: 1000; background: #fff; }
   
   /* Mobile Responsive Header */
   @media (max-width: 1023px) {
