@@ -27,6 +27,7 @@
     },
     "cta": {
       "type": "cta-patch-kraze",
+      "disabled": true,
       "settings": {}
     },
     "ordering_process": {
