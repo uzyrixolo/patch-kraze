@@ -533,6 +533,16 @@
                <textarea name="properties[Design Notes]" class="text-input" rows="4" placeholder="i.e. Keep the white inside of the text. Change the border of the logo to blue."></textarea>
             </div>
           </div>
+
+          <div class="control-group" style="margin-top:1.5rem; padding:1.5rem; background-color:#fef3c7; border:2px solid #fbbf24; border-radius:0.75rem;">
+            <label style="display:flex; align-items:center; gap:0.75rem; font-weight:700; cursor:pointer; font-size:1.05rem;">
+              <input type="checkbox" id="digital-proof-checkbox" style="width:1.3rem; height:1.3rem; cursor:pointer;">
+              <span style="color:#92400e;">Get Digital Proof Before Production</span>
+            </label>
+            <p style="margin:0.75rem 0 0 2rem; font-size:0.9rem; color:#78350f; line-height:1.5;">
+              We'll send you a digital mockup for approval before we start production. Review and approve your design to ensure it's perfect!
+            </p>
+          </div>
           
           <button type="submit" name="add" class="checkout-btn">Add to Cart</button>
 
@@ -565,6 +575,20 @@
           });
           
           if(response.ok) {
+            // Check if digital proof checkbox is checked
+            const digitalProofCheckbox = document.getElementById('digital-proof-checkbox');
+            if(digitalProofCheckbox && digitalProofCheckbox.checked) {
+              // Add digital proof product (variant ID: 42891809292372)
+              const proofData = new FormData();
+              proofData.append('id', '42891809292372');
+              proofData.append('quantity', '1');
+              
+              await fetch('/cart/add.js', {
+                method: 'POST',
+                body: proofData
+              });
+            }
+            
             // Trigger cart update event
             document.dispatchEvent(new CustomEvent('cart:add'));
             
@@ -577,6 +601,7 @@
                 } else if(typeof cartDrawer.showDialog === 'function') {
                   cartDrawer.showDialog();
                 }
+              }
               }
             }, 200);
             
