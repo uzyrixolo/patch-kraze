@@ -58,11 +58,22 @@
   .pk-search-btn { position: absolute; right: 0; top: 0; height: 100%; width: 2.75rem; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #6b7280; }
 
   .pk-actions { display: flex; gap: 1.5rem; align-items: center; }
-  .pk-action-item { display: flex; flex-direction: column; align-items: flex-end; font-size: 0.875rem; line-height: 1.25; }
+  .pk-action-item { display: flex; flex-direction: column; align-items: flex-end; font-size: 0.875rem; line-height: 1.25; position: relative; }
   .pk-action-title { font-weight: 600; color: #111827; white-space: nowrap; }
   .pk-action-sub { font-size: 0.75rem; color: #4b5563; }
   .pk-live-chat { display: flex; align-items: center; gap: 0.5rem; }
   .pk-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background-color: #22c55e; } /* Green dot */
+
+  /* Cart Icon Alignment */
+  .pk-action-item cart-icon {
+    display: block;
+    position: relative;
+  }
+  .pk-action-item .cart-bubble {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+  }
 
   /* NAV DESKTOP */
   .pk-nav { background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 48px; z-index: 40; }
@@ -99,8 +110,19 @@
   /* MOBILE NAV */
   .pk-mobile-header { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0.75rem; border-bottom: 1px solid #e5e7eb; }
   .pk-mobile-logo { height: 2.5rem; width: auto; }
-  .pk-mobile-icons { display: flex; gap: 0; }
-  .pk-icon-btn { padding: 0.5rem; background: transparent; border: none; color: #374151; }
+  .pk-mobile-icons { display: flex; gap: 0.75rem; align-items: center; }
+  .pk-icon-btn { padding: 0.5rem; background: transparent; border: none; color: #374151; position: relative; }
+  
+  /* Mobile Cart Icon */
+  .pk-icon-btn cart-icon {
+    display: block;
+    position: relative;
+  }
+  .pk-icon-btn .cart-bubble {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+  }
   
   .pk-mobile-drawer {
     position: fixed; top: 0; left: 0; height: 100%; width: 85%; max-width: 320px; background: #fff; z-index: 60;
@@ -159,7 +181,7 @@
   <div class="pk-main-header pk-hidden lg:pk-block">
     <div class="pk-container pk-flex pk-items-center pk-justify-between">
       <a href="/">
-        <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo.webp?v=1770364953" alt="Patch Kraze" class="pk-logo">
+        <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo.webp?v=1770364953" alt="Patch Kraze" width="160" height="64" class="pk-logo">
       </a>
       
       <predictive-search class="pk-search-wrapper" style="display:block;">
@@ -202,7 +224,7 @@
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
     </button>
     <a href="/">
-      <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo.webp?v=1770364953" class="pk-mobile-logo">
+      <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo.webp?v=1770364953" width="100" height="40" class="pk-mobile-logo">
     </a>
     <div class="pk-mobile-icons lg:pk-hidden desktop:hidden">
        <button class="pk-icon-btn"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
@@ -232,7 +254,7 @@
   <div class="pk-overlay" id="mobile-overlay" onclick="toggleMobileMenu(false)"></div>
   <div class="pk-mobile-drawer" id="mobile-drawer">
     <div class="pk-drawer-header">
-      <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo.webp?v=1770364953" style="height:2rem;">
+      <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo.webp?v=1770364953" width="80" height="32" style="height:2rem;">
       <button class="pk-icon-btn" onclick="toggleMobileMenu(false)">
          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
