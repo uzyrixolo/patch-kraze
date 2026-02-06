@@ -576,12 +576,25 @@
       const formData = new FormData(form);
       const originalText = btn.innerText;
       
+      // Add sections parameter for cart drawer rendering
+      const cartItemsComponents = document.querySelectorAll('cart-items-component');
+      const sectionIds = [];
+      cartItemsComponents.forEach((item) => {
+        if (item instanceof HTMLElement && item.dataset.sectionId) {
+          sectionIds.push(item.dataset.sectionId);
+        }
+      });
+      if(sectionIds.length > 0) {
+        formData.append('sections', sectionIds.join(','));
+      }
+      
       btn.disabled = true;
       btn.innerText = 'Adding...';
       
       // Debug: Log what we're sending
       console.log('Variant ID:', formData.get('id'));
       console.log('Quantity:', formData.get('quantity'));
+      console.log('Sections:', formData.get('sections'));
       
       try {
         const response = await fetch('/cart/add.js', {
@@ -600,41 +613,60 @@
             const proofData = new FormData();
             proofData.append('id', '42891809292372');
             proofData.append('quantity', '1');
+            if(sectionIds.length > 0) {
+              proofData.append('sections', sectionIds.join(','));
+            }
             
-            await fetch('/cart/add.js', {
+            const proofResponse = await fetch('/cart/add.js', {
               method: 'POST',
               body: proofData
             });
-          }
-          
-          // Refresh cart data FIRST
-          const cartResponse = await fetch('/cart.js');
-          const cartData = await cartResponse.json();
-          console.log('Cart data:', cartData);
-          
-          // Trigger cart update events with data
-          document.dispatchEvent(new CustomEvent('cart:add', { detail: { resource: cartData } }));
-          document.dispatchEvent(new CustomEvent('cart:update', { detail: { resource: cartData } }));
-          
-          // Force cart drawer refresh
-          const cartDrawer = document.querySelector('cart-drawer-component');
-          if(cartDrawer) {
-            // Trigger refresh if method exists
-            if(typeof cartDrawer.refresh === 'function') {
-              await cartDrawer.refresh();
+            const proofData2 = await proofResponse.json();
+            console.log('Digital proof added:', proofData2);
+            
+            // Use the proof response data which has the updated cart
+            if(proofResponse.ok) {
+              Object.assign(responseData, proofData2);
             }
           }
           
-          // Open cart drawer
-          setTimeout(() => {
-            if(cartDrawer) {
-              if(typeof cartDrawer.open === 'function') {
-                cartDrawer.open();
-              } else if(typeof cartDrawer.showDialog === 'function') {
-                cartDrawer.showDialog();
+          // Dispatch proper cart events with section HTML data
+          const cartAddEvent = new CustomEvent('cart:add', {
+            bubbles: true,
+            detail: {
+              resource: responseData,
+              data: {
+                source: 'product-form',
+                sections: responseData.sections
               }
             }
-          }, 300);
+          });
+          document.dispatchEvent(cartAddEvent);
+          
+          const cartUpdateEvent = new CustomEvent('cart:update', {
+            bubbles: true,
+            detail: {
+              resource: responseData,
+              data: {
+                source: 'product-form',
+                sections: responseData.sections
+              }
+            }
+          });
+          document.dispatchEvent(cartUpdateEvent);
+          
+          // Small delay before opening drawer to let it update
+          await new Promise(resolve => setTimeout(resolve, 300));
+          
+          // Open cart drawer
+          const cartDrawer = document.querySelector('cart-drawer-component');
+          if(cartDrawer) {
+            if(typeof cartDrawer.open === 'function') {
+              cartDrawer.open();
+            } else if(typeof cartDrawer.showDialog === 'function') {
+              cartDrawer.showDialog();
+            }
+          }
           
           btn.innerText = 'Added!';
           setTimeout(() => {
