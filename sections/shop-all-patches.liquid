@@ -2,10 +2,100 @@
 {
   "name": "Shop All Patch Types",
   "class": "section-shop-all-patches",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Shop All Patch Types"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "patch_item",
+      "name": "Patch Type",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Patch Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Patch Type"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price Text",
+          "default": "As low as $1.25 ea."
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "product_url",
+          "label": "Product URL"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge Text",
+          "default": "10pc min"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Shop All Patch Types"
+      "name": "Shop All Patch Types",
+      "blocks": [
+        {
+          "type": "patch_item",
+          "settings": {
+            "title": "Embroidered Patches",
+            "price": "As low as $1.25 ea.",
+            "description": "Embroidered with premium thread on durable fabric, these patches deliver rich texture and visual detail for a quality finish on any apparel.",
+            "product_url": "/products/embroidered-patches",
+            "badge": "10pc min"
+          }
+        },
+        {
+          "type": "patch_item",
+          "settings": {
+            "title": "PVC Rubber Patches",
+            "price": "As low as $1.96 ea.",
+            "description": "PVC patches use advanced molding techniques to create durable, visually striking designs with crisp detailing in vibrant colors.",
+            "product_url": "/products/pvc-rubber-patches",
+            "badge": "10pc min"
+          }
+        },
+        {
+          "type": "patch_item",
+          "settings": {
+            "title": "Leather Patches",
+            "price": "As low as $1.40 ea.",
+            "description": "Premium leather patches with embossed or engraved designs for a sophisticated, durable look.",
+            "product_url": "/products/leather-patches",
+            "badge": "10pc min"
+          }
+        },
+        {
+          "type": "patch_item",
+          "settings": {
+            "title": "Woven Patches",
+            "price": "As low as $1.50 ea.",
+            "description": "Intricately woven patches with vibrant colors and detailed designs for a classic, professional appearance.",
+            "product_url": "/products/woven-patches",
+            "badge": "10pc min"
+          }
+        }
+      ]
     }
   ]
 }
@@ -143,235 +233,45 @@
 
 <div class="shop-all-patches-section">
   <div class="shop-patches-container">
-    <h2 class="shop-patches-heading">Shop All Patch Types</h2>
+    {% if section.settings.heading != blank %}
+      <h2 class="shop-patches-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
     
     <div class="patch-grid">
-      <!-- We will perform a manual loop here matching the Next.js data -->
-      
-      <!-- ITEM 1 -->
-      <div class="patch-card">
-        <a href="/products/embroidered-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <!-- Static Image Only -->
-               <img src="{{ 'patch-images/embroidered/embroidered-main.jpg' | asset_url }}" alt="Embroidered Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">Embroidered Patches</h3>
-        <p class="patch-price">As low as $1.25 ea.</p>
-        <p class="patch-desc">Embroidered with premium thread on durable fabric, these patches deliver rich texture and visual detail for a quality finish on any apparel.</p>
-        <a href="/products/embroidered-patches" class="btn-customize">Customize</a>
-      </div>
-      
-       <!-- ITEM 2 -->
-      <div class="patch-card">
-        <a href="/products/3d-embroidered-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_3D_Embroidery_NP_01_2024_1.jpg" alt="3D Embroidered Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">3D Embroidered Patches</h3>
-        <p class="patch-price">As low as $2.04 ea.</p>
-        <p class="patch-desc">Our 3D embroidered patches provide a raised effect that enhances the detail and tactile appeal of your custom designs.</p>
-        <a href="/products/3d-embroidered-patches" class="btn-customize">Customize</a>
-      </div>
-
-       <!-- ITEM 3 -->
-      <div class="patch-card">
-        <a href="/products/full-color-printed-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Full_Color_Printed_NP_01_2024_2.jpg" alt="Full Color Printed Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">Full Color Printed Patches</h3>
-        <p class="patch-price">As low as $0.96 ea.</p>
-        <p class="patch-desc">Full Color Printed Patches use advanced sublimation to create sharp, vivid, and long-lasting graphics.</p>
-        <a href="/products/full-color-printed-patches" class="btn-customize">Customize</a>
-      </div>
-
-      <!-- ITEM 4 -->
-      <div class="patch-card">
-        <a href="/products/pvc-rubber-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="{{ 'patch-images/pvc/pvc-main.jpg' | asset_url }}" alt="PVC Rubber Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">PVC Rubber Patches</h3>
-        <p class="patch-price">As low as $1.96 ea.</p>
-        <p class="patch-desc">PVC patches use advanced molding techniques to create durable, visually striking designs with crisp detailing in vibrant colors.</p>
-        <a href="/products/pvc-rubber-patches" class="btn-customize">Customize</a>
-      </div>
-
-      <!-- ITEM 5 -->
-      <div class="patch-card">
-        <a href="/products/leather-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="{{ 'patch-images/leather/leather-main.jpg' | asset_url }}" alt="Genuine Leather Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">Genuine Leather Patches</h3>
-        <p class="patch-price">As low as $1.40 ea.</p>
-        <p class="patch-desc">Premium leather patches with embossed or engraved designs for a sophisticated, durable look.</p>
-        <a href="/products/leather-patches" class="btn-customize">Customize</a>
-      </div>
-      
-      <!-- ITEM 6 -->
-      <div class="patch-card">
-        <a href="/products/leather-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="https://patchesandprintsfactory.com/wp-content/uploads/2024/02/5-1.png" alt="Faux Leather Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">Faux Leather Patches</h3>
-        <p class="patch-price">As low as $1.18 ea.</p>
-        <p class="patch-desc">Affordable leather-like patches offering the aesthetic of genuine leather with enhanced durability.</p>
-        <a href="/products/leather-patches" class="btn-customize">Customize</a>
-      </div>
-      
-       <!-- ITEM 7 -->
-      <div class="patch-card">
-        <a href="/products/woven-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="{{ 'patch-images/woven/woven-main.jpg' | asset_url }}" alt="Woven Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">Woven Patches</h3>
-        <p class="patch-price">As low as $1.50 ea.</p>
-        <p class="patch-desc">Intricately woven patches with vibrant colors and detailed designs for a classic, professional appearance.</p>
-        <a href="/products/woven-patches" class="btn-customize">Customize</a>
-      </div>
-      
-       <!-- ITEM 8 -->
-      <div class="patch-card">
-        <a href="/products/metallic-flex-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/metallicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png" alt="Metallic Flex Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">25 pc min</div>
-        </a>
-        <h3 class="patch-title">Metallic Flex Patches</h3>
-        <p class="patch-price">As low as $2.96 ea.</p>
-        <p class="patch-desc">Shimmering metallic flex patches with vibrant finishes for eye-catching designs on apparel.</p>
-        <a href="/products/metallic-flex-patches" class="btn-customize">Customize</a>
-      </div>
-      
-       <!-- ITEM 9: Full Color Flex -->
-      <div class="patch-card">
-        <a href="/products/full-color-flex-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/two_c14c6fc7-cb38-4ab1-88ca-4317dbe888ee.png" alt="Full Color Flex Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">Full Color Flex Patches</h3>
-        <p class="patch-price">As low as $1.50 ea.</p>
-        <p class="patch-desc">Vibrant, flexible patches that bring your full-color designs to life with a modern feel.</p>
-        <a href="/products/full-color-flex-patches" class="btn-customize">Customize</a>
-      </div>
-      
-      <!-- ITEM 10: Matte Black Flex -->
-      <div class="patch-card">
-        <a href="/products/matte-black-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Matte_Black_Flex.png" alt="Matte Black Flex Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">Matte Black Flex Patches</h3>
-        <p class="patch-price">As low as $1.60 ea.</p>
-        <p class="patch-desc">Sleek and stealthy matte black finish for a premium, understated tactical look.</p>
-        <a href="/products/matte-black-patches" class="btn-customize">Customize</a>
-      </div>
-      
-       <!-- ITEM 11: Chenille -->
-      <div class="patch-card">
-        <a href="/products/chenille-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="https://patchesandprintsfactory.com/wp-content/uploads/2024/02/2-3.png" alt="Chenille Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">Chenille Patches</h3>
-        <p class="patch-price">As low as $1.75 ea.</p>
-        <p class="patch-desc">Fuzzy chenille patches with dimensional embroidery for a vintage, textured look perfect for athletic wear.</p>
-        <a href="/products/chenille-patches" class="btn-customize">Customize</a>
-      </div>
-      
-       <!-- ITEM 12: Silicone -->
-      <div class="patch-card">
-        <a href="/products/silicone-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_Silicone_NP_01_2024_2.jpg" alt="Silicone Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">Silicone Patches</h3>
-        <p class="patch-price">As low as $2.10 ea.</p>
-        <p class="patch-desc">Durable, weather-resistant silicone patches perfect for heavy-duty gear and outdoor wear.</p>
-        <a href="/products/silicone-patches" class="btn-customize">Customize</a>
-      </div>
-
-       <!-- ITEM 13: Custom Name Patches -->
-      <div class="patch-card">
-        <a href="/products/name-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NamePatchMOCK_1_4dc33b0d-b190-47c0-a29b-ebfd6aa53a44_1.png" alt="Custom Embroidered Name Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">1pc min</div>
-        </a>
-        <h3 class="patch-title">Custom Embroidered Name Patches</h3>
-        <p class="patch-price">As low as $3.50 ea.</p>
-        <p class="patch-desc">Personalized name patches with high-quality embroidery, perfect for uniforms and workwear.</p>
-        <a href="/products/name-patches" class="btn-customize">Customize</a>
-      </div>
-      
-       <!-- ITEM 14: Matte White Flex -->
-      <div class="patch-card">
-        <a href="/products/matte-white-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches_Matte_white_double_8c1a8bc3-ceae-4a3b-a7ab-20e50c408ff9.png" alt="Matte White Flex Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">Matte White Flex Patches</h3>
-        <p class="patch-price">As low as $1.60 ea.</p>
-        <p class="patch-desc">Clean, crisp matte white finish for a modern and minimalist aesthetic.</p>
-        <a href="/products/matte-white-patches" class="btn-customize">Customize</a>
-      </div>
-      
-       <!-- ITEM 15: Chrome Flex -->
-      <div class="patch-card">
-        <a href="/products/chrome-flex-patches" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches-chrome-double_e150e78d-4203-4ece-8968-ad1910bf8a53.png" alt="Chrome Flex Patches" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">Chrome Flex Patches</h3>
-        <p class="patch-price">As low as $2.75 ea.</p>
-        <p class="patch-desc">High-shine chrome finish that catches the light for a premium, metallic look.</p>
-        <a href="/products/chrome-flex-patches" class="btn-customize">Customize</a>
-      </div>
-      
-       <!-- ITEM 16: Tackle Twill -->
-      <div class="patch-card">
-        <a href="/products/tackle-twill-letters" class="patch-image-wrapper group">
-           <div class="patch-img-container">
-               <img src="https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png" alt="Custom Tackle Twill Letters" width="800" height="800" class="patch-static-img">
-           </div>
-           <div class="patch-badge">10pc min</div>
-        </a>
-        <h3 class="patch-title">Custom Tackle Twill Letters</h3>
-        <p class="patch-price">As low as $1.90 ea.</p>
-        <p class="patch-desc">Classic collegiate style lettering made from durable tackle twill fabric.</p>
-        <a href="/products/tackle-twill-letters" class="btn-customize">Customize</a>
-      </div>
+      {% for block in section.blocks %}
+        <div class="patch-card" {{ block.shopify_attributes }}>
+          {% if block.settings.product_url != blank %}
+            <a href="{{ block.settings.product_url }}" class="patch-image-wrapper group">
+              <div class="patch-img-container">
+                {% if block.settings.image != blank %}
+                  {{ block.settings.image | image_url: width: 800 | image_tag: alt: block.settings.title, width: 800, height: 800, class: 'patch-static-img' }}
+                {% else %}
+                  <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">{{ block.settings.title }}</div>
+                {% endif %}
+              </div>
+              {% if block.settings.badge != blank %}
+                <div class="patch-badge">{{ block.settings.badge }}</div>
+              {% endif %}
+            </a>
+          {% endif %}
+          
+          {% if block.settings.title != blank %}
+            <h3 class="patch-title">{{ block.settings.title }}</h3>
+          {% endif %}
+          
+          {% if block.settings.price != blank %}
+            <p class="patch-price">{{ block.settings.price }}</p>
+          {% endif %}
+          
+          {% if block.settings.description != blank %}
+            <p class="patch-desc">{{ block.settings.description }}</p>
+          {% endif %}
+          
+          {% if block.settings.product_url != blank %}
+            <a href="{{ block.settings.product_url }}" class="btn-customize">Customize</a>
+          {% endif %}
+        </div>
+      {% endfor %}
 
     </div>
   </div>
