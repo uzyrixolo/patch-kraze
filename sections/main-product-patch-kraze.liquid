@@ -579,11 +579,18 @@
       btn.disabled = true;
       btn.innerText = 'Adding...';
       
+      // Debug: Log what we're sending
+      console.log('Variant ID:', formData.get('id'));
+      console.log('Quantity:', formData.get('quantity'));
+      
       try {
         const response = await fetch('/cart/add.js', {
           method: 'POST',
           body: formData
         });
+        
+        const responseData = await response.json();
+        console.log('Add to cart response:', responseData);
         
         if(response.ok) {
           // Check if digital proof checkbox is checked
@@ -603,6 +610,11 @@
           // Trigger cart update event
           document.dispatchEvent(new CustomEvent('cart:add'));
           
+          // Refresh cart data
+          const cartResponse = await fetch('/cart.js');
+          const cartData = await cartResponse.json();
+          console.log('Cart data:', cartData);
+          
           // Open cart drawer
           setTimeout(() => {
             const cartDrawer = document.querySelector('cart-drawer-component');
@@ -613,7 +625,7 @@
                 cartDrawer.showDialog();
               }
             }
-          }, 200);
+          }, 300);
           
           btn.innerText = 'Added!';
           setTimeout(() => {
@@ -621,12 +633,14 @@
             btn.innerText = originalText;
           }, 2000);
         } else {
-          throw new Error('Failed to add to cart');
+          console.error('Add to cart failed:', responseData);
+          throw new Error(responseData.description || 'Failed to add to cart');
         }
       } catch(error) {
         console.error('Cart error:', error);
         btn.innerText = 'Error - Try Again';
         btn.disabled = false;
+        alert('Error: ' + error.message);
       }
       
       return false;
