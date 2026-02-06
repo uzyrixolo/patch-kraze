@@ -374,7 +374,7 @@
         {% endfor %}
       </div>
 
-      <form method="post" enctype="multipart/form-data" id="product-form-pk">
+      <form method="post" enctype="multipart/form-data" id="product-form-pk" data-custom-handler="true">
         <!-- HIDDEN VARIANT ID INPUT -->
         <input type="hidden" name="id" id="real-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
         
@@ -553,75 +553,92 @@
 </div>
 
 <script>
+  // AJAX Add to Cart - HIGH PRIORITY HANDLER
   (function() {
-    // AJAX Add to Cart + Open Drawer
     const form = document.getElementById('product-form-pk');
-    if(form) {
-      form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        const formData = new FormData(form);
-        const btn = form.querySelector('.checkout-btn');
-        const originalText = btn.innerText;
-        
-        btn.disabled = true;
-        btn.innerText = 'Adding...';
-        
-        try {
-          const response = await fetch('/cart/add.js', {
-            method: 'POST',
-            body: formData
-          });
-          
-          if(response.ok) {
-            // Check if digital proof checkbox is checked
-            const digitalProofCheckbox = document.getElementById('digital-proof-checkbox');
-            if(digitalProofCheckbox && digitalProofCheckbox.checked) {
-              // Add digital proof product (variant ID: 42891809292372)
-              const proofData = new FormData();
-              proofData.append('id', '42891809292372');
-              proofData.append('quantity', '1');
-              
-              await fetch('/cart/add.js', {
-                method: 'POST',
-                body: proofData
-              });
-            }
-            
-            // Trigger cart update event
-            document.dispatchEvent(new CustomEvent('cart:add'));
-            
-            // Open cart drawer with delay
-            setTimeout(() => {
-              const cartDrawer = document.querySelector('cart-drawer-component');
-              if(cartDrawer) {
-                if(typeof cartDrawer.open === 'function') {
-                  cartDrawer.open();
-                } else if(typeof cartDrawer.showDialog === 'function') {
-                  cartDrawer.showDialog();
-                }
-              }
-              }
-            }, 200);
-            
-            btn.innerText = 'Added!';
-            setTimeout(() => {
-              btn.disabled = false;
-              btn.innerText = originalText;
-            }, 2000);
-          } else {
-            throw new Error('Failed to add to cart');
-          }
-        } catch(error) {
-          console.error('Cart error:', error);
-          btn.innerText = 'Error - Try Again';
-          btn.disabled = false;
-        }
-        
+    if(!form) return;
+    
+    // Override submit with button click handler instead
+    const btn = form.querySelector('.checkout-btn');
+    if(!btn) return;
+    
+    btn.addEventListener('click', async function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      
+      // Validate form
+      if(!form.checkValidity()) {
+        form.reportValidity();
         return false;
-      }, true);
-    }
+      }
+      
+      const formData = new FormData(form);
+      const originalText = btn.innerText;
+      
+      btn.disabled = true;
+      btn.innerText = 'Adding...';
+      
+      try {
+        const response = await fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData
+        });
+        
+        if(response.ok) {
+          // Check if digital proof checkbox is checked
+          const digitalProofCheckbox = document.getElementById('digital-proof-checkbox');
+          if(digitalProofCheckbox && digitalProofCheckbox.checked) {
+            // Add digital proof product (variant ID: 42891809292372)
+            const proofData = new FormData();
+            proofData.append('id', '42891809292372');
+            proofData.append('quantity', '1');
+            
+            await fetch('/cart/add.js', {
+              method: 'POST',
+              body: proofData
+            });
+          }
+          
+          // Trigger cart update event
+          document.dispatchEvent(new CustomEvent('cart:add'));
+          
+          // Open cart drawer
+          setTimeout(() => {
+            const cartDrawer = document.querySelector('cart-drawer-component');
+            if(cartDrawer) {
+              if(typeof cartDrawer.open === 'function') {
+                cartDrawer.open();
+              } else if(typeof cartDrawer.showDialog === 'function') {
+                cartDrawer.showDialog();
+              }
+            }
+          }, 200);
+          
+          btn.innerText = 'Added!';
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.innerText = originalText;
+          }, 2000);
+        } else {
+          throw new Error('Failed to add to cart');
+        }
+      } catch(error) {
+        console.error('Cart error:', error);
+        btn.innerText = 'Error - Try Again';
+        btn.disabled = false;
+      }
+      
+      return false;
+    }, true);
+    
+    // Also prevent form submission
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      return false;
+    }, true);
   })();
 </script>
 
