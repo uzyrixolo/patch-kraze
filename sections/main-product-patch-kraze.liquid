@@ -607,17 +607,26 @@
             });
           }
           
-          // Trigger cart update event
-          document.dispatchEvent(new CustomEvent('cart:add'));
-          
-          // Refresh cart data
+          // Refresh cart data FIRST
           const cartResponse = await fetch('/cart.js');
           const cartData = await cartResponse.json();
           console.log('Cart data:', cartData);
           
+          // Trigger cart update events with data
+          document.dispatchEvent(new CustomEvent('cart:add', { detail: { resource: cartData } }));
+          document.dispatchEvent(new CustomEvent('cart:update', { detail: { resource: cartData } }));
+          
+          // Force cart drawer refresh
+          const cartDrawer = document.querySelector('cart-drawer-component');
+          if(cartDrawer) {
+            // Trigger refresh if method exists
+            if(typeof cartDrawer.refresh === 'function') {
+              await cartDrawer.refresh();
+            }
+          }
+          
           // Open cart drawer
           setTimeout(() => {
-            const cartDrawer = document.querySelector('cart-drawer-component');
             if(cartDrawer) {
               if(typeof cartDrawer.open === 'function') {
                 cartDrawer.open();
