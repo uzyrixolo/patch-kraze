@@ -1,0 +1,106 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product-patch-kraze",
+      "blocks": {
+        "oc_quantity_breaks_limit_orichi_discount_block_QxV8gw": {
+          "type": "shopify://apps/oc-quantity-breaks-limit/blocks/orichi-discount_block/3f38eaa3-2a3f-4e55-bcc9-df5d3f75e351",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "oc_quantity_breaks_limit_orichi_discount_block_QxV8gw"
+      ],
+      "settings": {}
+    },
+    "recommended_hats": {
+      "type": "product-recommended-hats",
+      "disabled": true,
+      "settings": {
+        "collection": "hats",
+        "limit": 6
+      }
+    },
+    "patch_examples": {
+      "type": "product-patch-examples",
+      "disabled": true,
+      "settings": {}
+    },
+    "product_details": {
+      "type": "product-details-accordion",
+      "settings": {}
+    },
+    "comparison_slider": {
+      "type": "comparison-slider",
+      "disabled": true,
+      "settings": {}
+    },
+    "product_faq": {
+      "type": "product-faq-patch-kraze",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials-patch-kraze",
+      "settings": {}
+    },
+    "17702139471f5cd28e": {
+      "type": "_blocks",
+      "blocks": {
+        "oc_quantity_breaks_limit_orichi_discount_block_QPzdt3": {
+          "type": "shopify://apps/oc-quantity-breaks-limit/blocks/orichi-discount_block/3f38eaa3-2a3f-4e55-bcc9-df5d3f75e351",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "oc_quantity_breaks_limit_orichi_discount_block_QPzdt3"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "recommended_hats",
+    "patch_examples",
+    "product_details",
+    "comparison_slider",
+    "product_faq",
+    "testimonials",
+    "17702139471f5cd28e"
+  ]
+}
