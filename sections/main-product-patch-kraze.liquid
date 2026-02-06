@@ -606,27 +606,36 @@
         console.log('Add to cart response:', responseData);
         
         if(response.ok) {
+          let finalResponseData = responseData;
+          
           // Check if digital proof checkbox is checked
           const digitalProofCheckbox = document.getElementById('digital-proof-checkbox');
           if(digitalProofCheckbox && digitalProofCheckbox.checked) {
-            // Add digital proof product (variant ID: 42891809292372)
-            const proofData = new FormData();
-            proofData.append('id', '42891809292372');
-            proofData.append('quantity', '1');
-            if(sectionIds.length > 0) {
-              proofData.append('sections', sectionIds.join(','));
-            }
-            
-            const proofResponse = await fetch('/cart/add.js', {
-              method: 'POST',
-              body: proofData
-            });
-            const proofData2 = await proofResponse.json();
-            console.log('Digital proof added:', proofData2);
-            
-            // Use the proof response data which has the updated cart
-            if(proofResponse.ok) {
-              Object.assign(responseData, proofData2);
+            try {
+              // Add digital proof product (variant ID: 42891809292372)
+              const proofData = new FormData();
+              proofData.append('id', '42891809292372');
+              proofData.append('quantity', '1');
+              if(sectionIds.length > 0) {
+                proofData.append('sections', sectionIds.join(','));
+              }
+              
+              const proofResponse = await fetch('/cart/add.js', {
+                method: 'POST',
+                body: proofData
+              });
+              
+              if(proofResponse.ok) {
+                const proofResponseData = await proofResponse.json();
+                console.log('Digital proof added:', proofResponseData);
+                // Use the latest response which has both items
+                finalResponseData = proofResponseData;
+              } else {
+                console.error('Digital proof add failed, continuing without it');
+              }
+            } catch(proofError) {
+              console.error('Digital proof error:', proofError);
+              // Continue without digital proof if it fails
             }
           }
           
@@ -634,10 +643,10 @@
           const cartAddEvent = new CustomEvent('cart:add', {
             bubbles: true,
             detail: {
-              resource: responseData,
+              resource: finalResponseData,
               data: {
                 source: 'product-form',
-                sections: responseData.sections
+                sections: finalResponseData.sections || {}
               }
             }
           });
@@ -646,17 +655,17 @@
           const cartUpdateEvent = new CustomEvent('cart:update', {
             bubbles: true,
             detail: {
-              resource: responseData,
+              resource: finalResponseData,
               data: {
                 source: 'product-form',
-                sections: responseData.sections
+                sections: finalResponseData.sections || {}
               }
             }
           });
           document.dispatchEvent(cartUpdateEvent);
           
           // Small delay before opening drawer to let it update
-          await new Promise(resolve => setTimeout(resolve, 300));
+          await new Promise(resolve => setTimeout(resolve, 100));
           
           // Open cart drawer
           const cartDrawer = document.querySelector('cart-drawer-component');
