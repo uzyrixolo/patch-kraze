@@ -374,7 +374,7 @@
         {% endfor %}
       </div>
 
-      <form action="/cart/add" method="post" enctype="multipart/form-data" id="product-form-pk">
+      <form method="post" enctype="multipart/form-data" id="product-form-pk">
         <!-- HIDDEN VARIANT ID INPUT -->
         <input type="hidden" name="id" id="real-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
         
