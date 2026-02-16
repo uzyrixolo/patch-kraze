@@ -66,8 +66,10 @@
         {%- if block_settings.gift_card_form and product.gift_card? -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section, block: block -%}
         {%- endif -%}
-        {% comment %} Start Custom S3 Upload {% endcomment %}
-        {% render 's3-upload-widget' %}
+        {% comment %} Start Custom S3 Upload - Only for patch template {% endcomment %}
+        {% if template.suffix == 'patch' %}
+          {% render 's3-upload-widget' %}
+        {% endif %}
         {% comment %} End Custom S3 Upload {% endcomment %}
 
         <div
