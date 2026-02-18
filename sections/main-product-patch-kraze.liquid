@@ -403,12 +403,12 @@
           <div class="buy-more-label">Buy More. Save More.</div>
           <div class="pricing-card">
             <div class="pricing-header"><span>Qty</span><span>Price</span><span>Discount</span></div>
-            <div class="pricing-row" data-min="10" data-max="48"><span>10-48 pcs</span><span>$6.79 ea</span><span>-</span></div>
-            <div class="pricing-row" data-min="49" data-max="98"><span>49-98 pcs</span><span>$5.77 ea</span><span>15% off</span></div>
-            <div class="pricing-row" data-min="99" data-max="148"><span>99-148 pcs</span><span>$5.43 ea</span><span>20% off</span></div>
-            <div class="pricing-row" data-min="149" data-max="298"><span>149-298 pcs</span><span>$4.75 ea</span><span>30% off</span></div>
-            <div class="pricing-row" data-min="299" data-max="498"><span>299-498 pcs</span><span>$4.07 ea</span><span>40% off</span></div>
-            <div class="pricing-row" data-min="499" data-max="99999"><span>499+ pcs</span><span>$3.39 ea</span><span>50% off</span></div>
+            <div class="pricing-row" data-min="10" data-max="49"><span>10-49 pcs</span><span id="price-tier-1">Calculating...</span><span>-</span></div>
+            <div class="pricing-row" data-min="50" data-max="99"><span>50-99 pcs</span><span id="price-tier-2">Calculating...</span><span>13% off</span></div>
+            <div class="pricing-row" data-min="100" data-max="199"><span>100-199 pcs</span><span id="price-tier-3">Calculating...</span><span>35% off</span></div>
+            <div class="pricing-row" data-min="200" data-max="499"><span>200-499 pcs</span><span id="price-tier-4">Calculating...</span><span>54% off</span></div>
+            <div class="pricing-row" data-min="500" data-max="999"><span>500-999 pcs</span><span id="price-tier-5">Calculating...</span><span>67% off</span></div>
+            <div class="pricing-row" data-min="1000" data-max="999999"><span>1000+ pcs</span><span id="price-tier-6">Calculating...</span><span>69% off</span></div>
           </div>
 
           <div style="margin-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 1.5rem;">
@@ -775,14 +775,15 @@
   (function() {
     // 1. INJECT SHOPIFY VARIANTS
     const shopifyVariants = {{ product.variants | json }};
-    const BASE_PRICE = 6.79;
-    const PRICING = [
-      { min: 10, max: 48, discount: 0 },
-      { min: 49, max: 98, discount: 0.15 },
-      { min: 99, max: 148, discount: 0.20 },
-      { min: 149, max: 298, discount: 0.30 },
-      { min: 299, max: 498, discount: 0.40 },
-      { min: 499, max: 99999, discount: 0.50 }
+    
+    // Quantity Break Tiers - MUST MATCH OC App Settings Exactly
+    const QUANTITY_TIERS = [
+      { min: 10, max: 49, discount: 0 },      // 10-49: No discount
+      { min: 50, max: 99, discount: 0.13 },   // 50+: 13% off
+      { min: 100, max: 199, discount: 0.35 }, // 100+: 35% off
+      { min: 200, max: 499, discount: 0.54 }, // 200+: 54% off
+      { min: 500, max: 999, discount: 0.67 }, // 500+: 67% off
+      { min: 1000, max: 999999, discount: 0.69 } // 1000+: 69% off
     ];
 
     const fileInput = document.getElementById('file-input');
@@ -854,19 +855,50 @@
          calculatedSizeDisplay.innerText = avgSize.toFixed(2).replace(/\.00$/, '') + '"';
       }
 
-      // Calculate Unit Price based on Tiers
-      let currentTier = PRICING[0];
-      for(let tier of PRICING) {
-         if(qty >= tier.min) { currentTier = tier; }
+      // Find the variant that matches the calculated size
+      // Variants are named like "Embroidered Patches - 2\" or "Embroidered Patches - 2.5\""
+      let selectedVariant = null;
+      let closestDiff = 999;
+      
+      shopifyVariants.forEach(v => {
+        // Extract size from variant title (e.g., "2" from "Embroidered Patches - 2\"")
+        const match = v.title.match(/([\d.]+)"/);  
+        if(match) {
+          const variantSize = parseFloat(match[1]);
+          const diff = Math.abs(variantSize - avgSize);
+          if(diff < closestDiff) {
+            closestDiff = diff;
+            selectedVariant = v;
+          }
+        }
+      });
+      
+      // Fallback to first variant if no match
+      if(!selectedVariant && shopifyVariants.length > 0) {
+        selectedVariant = shopifyVariants[0];
       }
       
-      let unitPrice = BASE_PRICE * (1 - currentTier.discount);
+      // Get base price from selected variant (price in cents)
+      let basePrice = selectedVariant ? selectedVariant.price / 100 : 6.79;
+      
+      // Find quantity tier discount
+      let currentTier = QUANTITY_TIERS[0];
+      for(let tier of QUANTITY_TIERS) {
+         if(qty >= tier.min && qty <= tier.max) { 
+           currentTier = tier;
+           break;
+         }
+      }
+      
+      // Calculate final unit price with discount
+      let unitPrice = basePrice * (1 - currentTier.discount);
 
       // UPDATE UI
       if(headerPrice) headerPrice.innerText = '$' + unitPrice.toFixed(2);
       if(unitPriceDisplay) unitPriceDisplay.innerHTML = '$' + unitPrice.toFixed(2) + ' <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span>';
       if(totalDisplay) totalDisplay.innerText = '$' + (qty * unitPrice).toFixed(2);
       
+      // Update pricing rows highlighting
       pricingRows.forEach(row => {
          const min = parseInt(row.dataset.min);
          const max = parseInt(row.dataset.max);
@@ -874,14 +906,31 @@
          else row.classList.remove('active');
       });
 
-      // VARIANT SWAP LOGIC (The Magic)
-      const foundVariant = shopifyVariants.find(v => {
-         return v.title.includes(currentTier.min.toString());
+      // Update hidden variant input for cart
+      if(selectedVariant && variantInput) {
+         variantInput.value = selectedVariant.id;
+      }
+      
+      // Update pricing table preview
+      QUANTITY_TIERS.forEach((tier, idx) => {
+        const tierPrice = basePrice * (1 - tier.discount);
+        const tierEl = document.getElementById(`price-tier-${idx + 1}`);
+        if(tierEl) {
+          tierEl.textContent = '$' + tierPrice.toFixed(2) + ' ea';
+        }
       });
       
-      if(foundVariant && variantInput) {
-         variantInput.value = foundVariant.id;
-      }
+      console.log('Pricing Update:', {
+        width: w,
+        height: h,
+        avgSize: avgSize.toFixed(2),
+        qty: qty,
+        variant: selectedVariant ? selectedVariant.title : 'none',
+        basePrice: basePrice.toFixed(2),
+        discount: (currentTier.discount * 100) + '%',
+        unitPrice: unitPrice.toFixed(2),
+        total: (qty * unitPrice).toFixed(2)
+      });
     }
 
     if(qtyInput) qtyInput.addEventListener('input', updatePriceAndVariant);
