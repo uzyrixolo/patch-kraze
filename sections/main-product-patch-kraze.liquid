@@ -603,7 +603,10 @@
           });
           document.dispatchEvent(cartAddEvent);
           
-          // Open cart drawer immediately
+          // Wait for cart to update before opening drawer
+          await new Promise(resolve => setTimeout(resolve, 100));
+          
+          // Open cart drawer
           const cartDrawer = document.querySelector('cart-drawer-component');
           if(cartDrawer) {
             if(typeof cartDrawer.open === 'function') {
