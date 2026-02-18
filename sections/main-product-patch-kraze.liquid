@@ -860,7 +860,9 @@
       // Try to find exact match with quantity range in title
       const qtyRangeStr = qty >= 1000 ? '1000+' : `${qtyTier.min}-${qtyTier.max}`;
       const searchPattern1 = `${sizeBracket} inch - ${qtyRangeStr}`;
-      const searchPattern2 = `${sizeBracket.toFixed(1)} inch`; // Fallback: just size
+      
+      console.log('Searching for variant:', searchPattern1);
+      console.log('Available variants:', shopifyVariants.map(v => v.title));
       
       selectedVariant = shopifyVariants.find(v => 
         v.title.includes(searchPattern1)
