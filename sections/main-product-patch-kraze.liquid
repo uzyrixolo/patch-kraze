@@ -839,9 +839,20 @@
       const qtyRangeStr = qty >= 1000 ? '1000+' : `${qtyTier.min}-${qtyTier.max}`;
       const searchPattern1 = `${sizeBracket} inch - ${qtyRangeStr}`;
       
+      console.log('[Variant Search]', {
+        avgSize,
+        sizeBracket,
+        qty,
+        qtyRangeStr,
+        searchPattern: searchPattern1,
+        availableVariants: shopifyVariants.map(v => v.title)
+      });
+      
       selectedVariant = shopifyVariants.find(v => 
         v.title.includes(searchPattern1)
       );
+      
+      console.log('[Variant Match]', selectedVariant ? selectedVariant.title : 'NO MATCH - using fallback');
       
       if(!selectedVariant) {
         // Fallback: find variant with matching size only
@@ -876,6 +887,13 @@
       // Update hidden variant input for cart
       if(selectedVariant && variantInput) {
          variantInput.value = selectedVariant.id;
+         console.log('[Variant Updated]', {
+           variantId: selectedVariant.id,
+           variantTitle: selectedVariant.title,
+           inputValue: variantInput.value
+         });
+      } else {
+         console.warn('[Variant Update FAILED]', { selectedVariant, variantInput });
       }
       
       // Update pricing table preview with current size prices
