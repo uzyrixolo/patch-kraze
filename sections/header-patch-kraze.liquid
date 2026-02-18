@@ -351,6 +351,7 @@
   let currentOpenMenu = null;
 
   function renderDesktopNav() {
+    desktopList.innerHTML = ''; // Clear existing
     NAV_ITEMS.forEach(item => {
        const li = document.createElement('li');
        li.className = 'pk-nav-item';
@@ -421,6 +422,7 @@
   }
 
   function renderMobileNav() {
+    mobileList.innerHTML = ''; // Clear existing
     NAV_ITEMS.forEach(item => {
       const container = document.createElement('div');
       
