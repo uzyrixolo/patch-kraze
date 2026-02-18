@@ -581,11 +581,6 @@
       btn.disabled = true;
       btn.innerText = 'Adding...';
       
-      // Debug: Log what we're sending
-      console.log('Variant ID:', formData.get('id'));
-      console.log('Quantity:', formData.get('quantity'));
-      console.log('Sections:', formData.get('sections'));
-      
       try {
         const response = await fetch('/cart/add.js', {
           method: 'POST',
@@ -593,10 +588,9 @@
         });
         
         const responseData = await response.json();
-        console.log('Add to cart response:', responseData);
         
         if(response.ok) {
-          // Dispatch proper cart events with section HTML data
+          // Dispatch single cart:add event
           const cartAddEvent = new CustomEvent('cart:add', {
             bubbles: true,
             detail: {
@@ -609,22 +603,7 @@
           });
           document.dispatchEvent(cartAddEvent);
           
-          const cartUpdateEvent = new CustomEvent('cart:update', {
-            bubbles: true,
-            detail: {
-              resource: responseData,
-              data: {
-                source: 'product-form',
-                sections: responseData.sections || {}
-              }
-            }
-          });
-          document.dispatchEvent(cartUpdateEvent);
-          
-          // Small delay before opening drawer to let it update
-          await new Promise(resolve => setTimeout(resolve, 100));
-          
-          // Open cart drawer
+          // Open cart drawer immediately
           const cartDrawer = document.querySelector('cart-drawer-component');
           if(cartDrawer) {
             if(typeof cartDrawer.open === 'function') {
@@ -638,9 +617,8 @@
           setTimeout(() => {
             btn.disabled = false;
             btn.innerText = originalText;
-          }, 2000);
+          }, 1000);
         } else {
-          console.error('Add to cart failed:', responseData);
           throw new Error(responseData.description || 'Failed to add to cart');
         }
       } catch(error) {
@@ -861,9 +839,6 @@
       const qtyRangeStr = qty >= 1000 ? '1000+' : `${qtyTier.min}-${qtyTier.max}`;
       const searchPattern1 = `${sizeBracket} inch - ${qtyRangeStr}`;
       
-      console.log('Searching for variant:', searchPattern1);
-      console.log('Available variants:', shopifyVariants.map(v => v.title));
-      
       selectedVariant = shopifyVariants.find(v => 
         v.title.includes(searchPattern1)
       );
@@ -910,18 +885,6 @@
         if(tierEl) {
           tierEl.textContent = '$' + tierPrice.toFixed(2) + ' ea';
         }
-      });
-      
-      console.log('Pricing Update:', {
-        width: w,
-        height: h,
-        avgSize: avgSize.toFixed(2),
-        sizeBracket: sizeBracket,
-        qty: qty,
-        qtyTier: `${qtyTier.min}-${qtyTier.max}`,
-        variant: selectedVariant ? selectedVariant.title : 'none',
-        unitPrice: unitPrice.toFixed(2),
-        total: (qty * unitPrice).toFixed(2)
       });
     }
 
