@@ -11,6 +11,13 @@
   "current": {
     "logo": "shopify://shop_images/Patch_Kraze_Logo.webp",
     "favicon": "shopify://shop_images/Patch_Kraze_Logo.webp",
-    "content_for_index": []
+    "content_for_index": [],
+    "blocks": {
+      "8171265131012698934": {
+        "type": "shopify://apps/oc-quantity-breaks-limit/blocks/orichi-discount/3f38eaa3-2a3f-4e55-bcc9-df5d3f75e351",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   }
 }
