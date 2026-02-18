@@ -837,11 +837,14 @@
       
       // Try to find exact match with quantity range in title
       const qtyRangeStr = qty >= 1000 ? '1000+' : `${qtyTier.min}-${qtyTier.max}`;
-      const searchPattern1 = `${sizeBracket} inch - ${qtyRangeStr}`;
+      // Format size bracket to always show decimal (2.0 not 2)
+      const sizeBracketStr = sizeBracket.toFixed(1);
+      const searchPattern1 = `${sizeBracketStr} inch - ${qtyRangeStr}`;
       
       console.log('[Variant Search]', {
         avgSize,
         sizeBracket,
+        sizeBracketStr,
         qty,
         qtyRangeStr,
         searchPattern: searchPattern1,
