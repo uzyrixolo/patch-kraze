@@ -63,7 +63,6 @@
       "block_order": [
         "oc_quantity_breaks_limit_orichi_discount_block_QPzdt3"
       ],
-      "disabled": true,
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
