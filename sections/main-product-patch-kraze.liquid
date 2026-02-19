@@ -590,8 +590,8 @@
         const responseData = await response.json();
         
         if(response.ok) {
-          // Dispatch single cart:add event
-          const cartAddEvent = new CustomEvent('cart:add', {
+          // Dispatch cart:update event (theme listens for this, not cart:add)
+          const cartUpdateEvent = new CustomEvent('cart:update', {
             bubbles: true,
             detail: {
               resource: responseData,
@@ -601,7 +601,7 @@
               }
             }
           });
-          document.dispatchEvent(cartAddEvent);
+          document.dispatchEvent(cartUpdateEvent);
           
           // Wait for cart to update before opening drawer
           await new Promise(resolve => setTimeout(resolve, 100));
