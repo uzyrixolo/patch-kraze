@@ -462,4 +462,12 @@
   renderDesktopNav();
   renderMobileNav();
 
+  // Re-render nav after cart updates (morphSection may wipe JS-rendered content)
+  document.addEventListener('cart:update', function() {
+    setTimeout(() => {
+      renderDesktopNav();
+      renderMobileNav();
+    }, 50);
+  });
+
 </script>
