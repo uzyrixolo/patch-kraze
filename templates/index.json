@@ -24,7 +24,8 @@
             "price": "As low as $1.25 ea.",
             "description": "Embroidered with premium thread on durable fabric, these patches deliver rich texture and visual detail for a quality finish on any apparel.",
             "product_url": "/products/embroidered-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": ""
           }
         },
         "patch_3d_embroidered": {
@@ -52,23 +53,23 @@
         "patch_pvc": {
           "type": "patch_item",
           "settings": {
-            "image": "shopify://shop_images/pvc-main.jpg",
             "title": "PVC Rubber Patches",
             "price": "As low as $1.96 ea.",
             "description": "PVC patches use advanced molding techniques to create durable, visually striking designs with crisp detailing in vibrant colors.",
             "product_url": "/products/pvc-rubber-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": ""
           }
         },
         "patch_leather_genuine": {
           "type": "patch_item",
           "settings": {
-            "image": "shopify://shop_images/leather-main.jpg",
             "title": "Genuine Leather Patches",
             "price": "As low as $1.40 ea.",
             "description": "Premium leather patches with embossed or engraved designs for a sophisticated, durable look.",
             "product_url": "/products/leather-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": ""
           }
         },
         "patch_leather_faux": {
@@ -85,12 +86,12 @@
         "patch_woven": {
           "type": "patch_item",
           "settings": {
-            "image": "shopify://shop_images/woven-main.jpg",
             "title": "Woven Patches",
             "price": "As low as $1.50 ea.",
             "description": "Intricately woven patches with vibrant colors and detailed designs for a classic, professional appearance.",
             "product_url": "/products/woven-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": ""
           }
         },
         "patch_metallic_flex": {
@@ -117,6 +118,7 @@
         },
         "patch_matte_black": {
           "type": "patch_item",
+          "disabled": true,
           "settings": {
             "title": "Matte Black Flex Patches",
             "price": "As low as $1.60 ea.",
@@ -129,23 +131,23 @@
         "patch_chenille": {
           "type": "patch_item",
           "settings": {
-            "image": "shopify://shop_images/chenille-main.jpg",
             "title": "Chenille Patches",
             "price": "As low as $1.75 ea.",
             "description": "Fuzzy chenille patches with dimensional embroidery for a vintage, textured look perfect for athletic wear.",
             "product_url": "/products/chenille-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": ""
           }
         },
         "patch_silicone": {
           "type": "patch_item",
           "settings": {
-            "image": "shopify://shop_images/silicone-main.jpg",
-            "title": "Silicone Patches",
+            "title": "Silicone Transfers Patches",
             "price": "As low as $2.10 ea.",
             "description": "Durable, weather-resistant silicone patches perfect for heavy-duty gear and outdoor wear.",
             "product_url": "/products/silicone-patches",
-            "badge": "10pc min"
+            "badge": "10pc min",
+            "image_url": ""
           }
         },
         "patch_name": {
@@ -161,6 +163,7 @@
         },
         "patch_matte_white": {
           "type": "patch_item",
+          "disabled": true,
           "settings": {
             "title": "Matte White Flex Patches",
             "price": "As low as $1.60 ea.",
