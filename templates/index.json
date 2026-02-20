@@ -31,6 +31,7 @@
         "patch_3d_embroidered": {
           "type": "patch_item",
           "settings": {
+            "image": "shopify://shop_images/3d-puff-04.avif",
             "title": "3D Embroidered Patches",
             "price": "As low as $2.04 ea.",
             "description": "Our 3D embroidered patches provide a raised effect that enhances the detail and tactile appeal of your custom designs.",
