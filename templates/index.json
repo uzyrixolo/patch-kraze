@@ -102,6 +102,7 @@
         },
         "patch_metallic_flex": {
           "type": "patch_item",
+          "disabled": true,
           "settings": {
             "title": "Metallic Flex Patches",
             "price": "As low as $2.96 ea.",
