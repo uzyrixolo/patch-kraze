@@ -79,6 +79,7 @@
         "patch_leather_faux": {
           "type": "patch_item",
           "settings": {
+            "image": "shopify://shop_images/leather-hero.jpg",
             "title": "Faux Leather Patches",
             "price": "As low as $1.18 ea.",
             "description": "Affordable leather-like patches offering the aesthetic of genuine leather with enhanced durability.",
@@ -90,6 +91,7 @@
         "patch_woven": {
           "type": "patch_item",
           "settings": {
+            "image": "shopify://shop_images/Woven-Patch-06.jpg",
             "title": "Woven Patches",
             "price": "As low as $1.50 ea.",
             "description": "Intricately woven patches with vibrant colors and detailed designs for a classic, professional appearance.",
