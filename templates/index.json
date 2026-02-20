@@ -91,7 +91,7 @@
         "patch_woven": {
           "type": "patch_item",
           "settings": {
-            "image": "shopify://shop_images/Woven-Patch-06.jpg",
+            "image": "shopify://shop_images/Woven-Patch-05.jpg",
             "title": "Woven Patches",
             "price": "As low as $1.50 ea.",
             "description": "Intricately woven patches with vibrant colors and detailed designs for a classic, professional appearance.",
@@ -138,6 +138,7 @@
         "patch_chenille": {
           "type": "patch_item",
           "settings": {
+            "image": "shopify://shop_images/Chenille_12.jpg",
             "title": "Chenille Patches",
             "price": "As low as $1.75 ea.",
             "description": "Fuzzy chenille patches with dimensional embroidery for a vintage, textured look perfect for athletic wear.",
@@ -149,6 +150,7 @@
         "patch_silicone": {
           "type": "patch_item",
           "settings": {
+            "image": "shopify://shop_images/Silicone_02.avif",
             "title": "Silicone Transfers Patches",
             "price": "As low as $2.10 ea.",
             "description": "Durable, weather-resistant silicone patches perfect for heavy-duty gear and outdoor wear.",
@@ -160,6 +162,7 @@
         "patch_name": {
           "type": "patch_item",
           "settings": {
+            "image": "shopify://shop_images/embriodary_2.jpg",
             "title": "Custom Embroidered Name Patches",
             "price": "As low as $3.50 ea.",
             "description": "Personalized name patches with high-quality embroidery, perfect for uniforms and workwear.",
@@ -183,6 +186,7 @@
         "patch_chrome_flex": {
           "type": "patch_item",
           "settings": {
+            "image": "shopify://shop_images/Metflex_02.jpg",
             "title": "Chrome Flex Patches",
             "price": "As low as $2.75 ea.",
             "description": "High-shine chrome finish that catches the light for a premium, metallic look.",
@@ -194,6 +198,7 @@
         "patch_tackle_twill": {
           "type": "patch_item",
           "settings": {
+            "image": "shopify://shop_images/Print-Embroidery-14.jpg",
             "title": "Custom Tackle Twill Letters",
             "price": "As low as $1.90 ea.",
             "description": "Classic collegiate style lettering made from durable tackle twill fabric.",
