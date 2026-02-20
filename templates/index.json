@@ -67,6 +67,7 @@
         "patch_leather_genuine": {
           "type": "patch_item",
           "settings": {
+            "image": "shopify://shop_images/leather-engraving-6.jpg",
             "title": "Genuine Leather Patches",
             "price": "As low as $1.40 ea.",
             "description": "Premium leather patches with embossed or engraved designs for a sophisticated, durable look.",
