@@ -43,6 +43,7 @@
         "patch_full_color_printed": {
           "type": "patch_item",
           "settings": {
+            "image": "shopify://shop_images/embriodary_10.jpg",
             "title": "Full Color Printed Patches",
             "price": "As low as $0.96 ea.",
             "description": "Full Color Printed Patches use advanced sublimation to create sharp, vivid, and long-lasting graphics.",
