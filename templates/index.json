@@ -55,6 +55,7 @@
         "patch_pvc": {
           "type": "patch_item",
           "settings": {
+            "image": "shopify://shop_images/PVC_5.jpg",
             "title": "PVC Rubber Patches",
             "price": "As low as $1.96 ea.",
             "description": "PVC patches use advanced molding techniques to create durable, visually striking designs with crisp detailing in vibrant colors.",
