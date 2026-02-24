@@ -356,7 +356,7 @@
       <div class="reviews-row"><span class="stars">★★★★★</span><span>16 Reviews</span></div>
       
       <div class="price-block">
-        <span class="price-value" id="header-price">{{ product.price | money }}</span> each at 100 pieces.
+        <span class="price-value" id="header-price">{{ product.price | money }}</span> each at <span id="header-qty">100</span> pieces.
       </div>
       
       <div class="description-text">
@@ -1003,6 +1003,8 @@
 
       // UPDATE UI
       if(headerPrice) headerPrice.innerText = '$' + unitPrice.toFixed(2);
+      const headerQty = document.getElementById('header-qty');
+      if(headerQty) headerQty.innerText = qty;
       if(unitPriceDisplay) unitPriceDisplay.innerHTML = '$' + unitPrice.toFixed(2) + ' <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span>';
       if(totalDisplay) totalDisplay.innerText = '$' + (qty * unitPrice).toFixed(2);
       
