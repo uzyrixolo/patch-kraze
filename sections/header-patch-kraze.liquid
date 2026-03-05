@@ -234,7 +234,7 @@
       <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo.webp?v=1770364953" width="100" height="40" class="pk-mobile-logo">
     </a>
     <div class="pk-mobile-icons lg:pk-hidden desktop:hidden">
-       <button class="pk-icon-btn"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+       <button class="pk-icon-btn" onclick="document.getElementById('search-modal')?.showDialog()"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
        <button class="pk-icon-btn" onclick="document.querySelector('cart-drawer-component').open()">
           {% render 'cart-icon-component' %}
        </button>
@@ -261,13 +261,13 @@
   <div class="pk-overlay" id="mobile-overlay" onclick="toggleMobileMenu(false)"></div>
   <div class="pk-mobile-drawer" id="mobile-drawer">
     <div class="pk-drawer-header">
-      <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo.webp?v=1770364953" width="80" height="32" style="height:2rem;">
+      <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo.webp?v=1770364953" width="80" height="32" style="height:2rem; width:auto; object-fit:contain;">
       <button class="pk-icon-btn" onclick="toggleMobileMenu(false)">
          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
     </div>
     <div class="pk-drawer-content">
-      <div class="pk-drawer-brands">
+      <div class="pk-drawer-brands" style="display:none;">
          <div class="pk-drawer-brands-title">Our Brands</div>
          <div class="pk-brand-grid">
             <a href="{{ section.settings.url_transfers | default: '/products/dtf-transfers' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">TRANSFERS</a>
@@ -305,8 +305,8 @@
       { title: "Custom Tackle Twill Letters", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png?v=1764629501", href: "/products/tackle-twill-letters" }
     ],
     pvcRubber: [
-      { title: "Standard PVC Rubber", image: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/3-2.png", href: "/products/pvc-patches" },
-      { title: "Glow in The Dark PVC Rubber Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/4_glow-in-the-dark.jpg?v=1761235940", href: "/products/glow-in-the-dark-pvc-patches" },
+      { title: "Standard PVC Rubber", image: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/3-2.png", href: "/products/pvc-rubber-patches" },
+      // { title: "Glow in The Dark PVC Rubber Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/4_glow-in-the-dark.jpg?v=1761235940", href: "/products/glow-in-the-dark-pvc-patches" },
       { title: "Custom Keychains", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/2_keychains.jpg?v=1761235775", href: "/products/custom-keychains" }
     ],
     leather: [
@@ -330,7 +330,7 @@
 
   const NAV_ITEMS = [
     { label: "Embroidery", key: "embroidery", hasDropdown: true },
-    { label: "Full Color", key: "fullColor", hasDropdown: false, href: "/products/full-color-printed-patches" },
+    // { label: "Full Color", key: "fullColor", hasDropdown: false, href: "/products/full-color-printed-patches" },
     { label: "PVC Rubber", key: "pvcRubber", hasDropdown: true },
     { label: "Leather", key: "leather", hasDropdown: true },
     { label: "Silicone", key: "silicone", hasDropdown: false, href: "/products/silicone-patches" },
