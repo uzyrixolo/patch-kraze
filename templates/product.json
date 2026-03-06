@@ -16,7 +16,7 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "media_presentation": "grid",
+            "media_presentation": "carousel",
             "media_columns": "two",
             "image_gap": 4,
             "large_first_image": false,
@@ -113,7 +113,7 @@
                   "name": "Product title",
                   "settings": {
                     "text": "<h1>{{ closest.product.title }}</h1>",
-                    "width": "100%",
+                    "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
                     "type_preset": "h3",
@@ -178,7 +178,7 @@
               "type": "variant-picker",
               "settings": {
                 "variant_style": "buttons",
-                "show_swatches": false,
+                "show_swatches": true,
                 "alignment": "left",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -209,7 +209,7 @@
                   "type": "add-to-cart",
                   "static": true,
                   "settings": {
-                    "style_class": "button"
+                    "style_class": "button-secondary"
                   },
                   "blocks": {}
                 },
@@ -321,7 +321,7 @@
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
-                "image_ratio": "adapt",
+                "image_ratio": "square",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -413,15 +413,6 @@
     },
     "177143702084cd9219": {
       "type": "_blocks",
-      "blocks": {
-        "oc_quantity_breaks_limit_orichi_discount_block_xAwjVw": {
-          "type": "shopify://apps/oc-quantity-breaks-limit/blocks/orichi-discount_block/3f38eaa3-2a3f-4e55-bcc9-df5d3f75e351",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "oc_quantity_breaks_limit_orichi_discount_block_xAwjVw"
-      ],
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
