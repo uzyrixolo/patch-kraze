@@ -747,9 +747,6 @@
       'patches-for-jackets': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-shirts': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-hats': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
-      'patches-for-jackets': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
-      'patches-for-shirts': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
-      'patches-for-hats': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'custom-tackle-twill': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 }
     };
     const PRODUCT_CONFIG = PRODUCT_CONFIGS[PRODUCT_HANDLE] || PRODUCT_CONFIGS['embroidered-patches'];
@@ -1166,18 +1163,6 @@
         updateGallery(currentImageIndex + 1);
       });
     }
-    thumbnails.forEach((thumb, index) => {
-       thumb.addEventListener('click', (e) => {
-         e.preventDefault();
-         updateGallery(index);
-       });
-    });
-
-  })();
-
-</script>
-
-{% render 'size-guide-modal' %}
     thumbnails.forEach((thumb, index) => {
        thumb.addEventListener('click', (e) => {
          e.preventDefault();
