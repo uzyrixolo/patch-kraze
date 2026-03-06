@@ -448,7 +448,7 @@
              <div class="control-group" style="margin-bottom:0;">
                 <label class="control-label">Qty</label>
                 <input type="number" name="quantity" id="qty-input" class="qty-box-large" value="100" min="25">
-                <div style="text-align: center; font-size: 0.75rem; font-weight: 700; margin-top: 0.25rem;">25 Piece Min</div>
+                <div style="text-align: center; font-size: 0.75rem; font-weight: 700; margin-top: 0.25rem;">10 Piece Min</div>
              </div>
              <div class="control-group" style="margin-bottom:0;">
                 <label class="control-label">Total</label>
@@ -747,7 +747,33 @@
       'patches-for-jackets': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-shirts': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-hats': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
-      'custom-tackle-twill': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 }
+      'custom-tackle-twill': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'designer-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'tactical-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'motorcycle-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'girl-scout-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'football-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'custom-uniform-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'sports-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'name-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'police-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'navy-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'morale-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'funny-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'firefighter-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'military-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'custom-army-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'embroidered-patches-for-clothes': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'patches-for-pants': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'patches-for-jeans': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'patches-for-hoodies': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'american-flag-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'custom-keychains': { minSize: 1.5, maxSize: 4.0, defaultSize: 2.0, step: 0.5 },
+      'rubber-patches-for-hats': { minSize: 1.5, maxSize: 4.0, defaultSize: 2.0, step: 0.5 },
+      'glow-in-the-dark-pvc-rubber-patches': { minSize: 1.5, maxSize: 4.0, defaultSize: 2.0, step: 0.5 },
+      'varsity-jacket-patches': { minSize: 4.0, maxSize: 13.0, defaultSize: 4.0, step: 1.0 },
+      'chenille-letter-patches': { minSize: 4.0, maxSize: 13.0, defaultSize: 4.0, step: 1.0 },
+      'custom-soccer-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 }
     };
     const PRODUCT_CONFIG = PRODUCT_CONFIGS[PRODUCT_HANDLE] || PRODUCT_CONFIGS['embroidered-patches'];
 
@@ -861,6 +887,61 @@
           { min: 200, max: 499, prices: [0.57, 0.84, 1.07, 1.41, 1.67, 1.95, 2.24, 2.52, 2.79, 3.36, 3.90, 4.47, 5.01, 5.58, 6.14, 6.71] },
           { min: 500, max: 999, prices: [0.41, 0.62, 0.81, 1.02, 1.22, 1.41, 1.64, 1.83, 2.04, 2.46, 2.85, 3.26, 3.68, 4.08, 4.49, 4.89] },
           { min: 1000, max: 999999, prices: [0.38, 0.56, 0.74, 0.92, 1.10, 1.26, 1.47, 1.67, 1.82, 2.19, 2.55, 2.94, 3.29, 3.65, 4.01, 4.38] }
+        ]
+      },
+      'custom-keychains': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [4.50, 4.55, 5.55, 5.57, 6.51, 7.49] },
+          { min: 50, max: 99, prices: [3.47, 3.50, 4.26, 4.28, 5.01, 5.78] },
+          { min: 100, max: 199, prices: [2.39, 2.40, 2.85, 2.85, 3.27, 3.77] },
+          { min: 200, max: 499, prices: [1.67, 1.67, 1.89, 1.92, 2.16, 2.49] },
+          { min: 500, max: 999, prices: [1.35, 1.38, 1.64, 1.65, 1.83, 2.09] },
+          { min: 1000, max: 999999, prices: [1.23, 1.25, 1.49, 1.49, 1.65, 1.91] }
+        ]
+      },
+      'rubber-patches-for-hats': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [4.50, 4.55, 5.55, 5.57, 6.51, 7.49] },
+          { min: 50, max: 99, prices: [3.47, 3.50, 4.26, 4.28, 5.01, 5.78] },
+          { min: 100, max: 199, prices: [2.39, 2.40, 2.85, 2.85, 3.27, 3.77] },
+          { min: 200, max: 499, prices: [1.67, 1.67, 1.89, 1.92, 2.16, 2.49] },
+          { min: 500, max: 999, prices: [1.35, 1.38, 1.64, 1.65, 1.83, 2.09] },
+          { min: 1000, max: 999999, prices: [1.23, 1.25, 1.49, 1.49, 1.65, 1.91] }
+        ]
+      },
+      'glow-in-the-dark-pvc-rubber-patches': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [4.65, 4.70, 5.70, 5.72, 6.66, 7.64] },
+          { min: 50, max: 99, prices: [3.62, 3.65, 4.41, 4.43, 5.16, 5.93] },
+          { min: 100, max: 199, prices: [2.54, 2.55, 3.00, 3.00, 3.42, 3.92] },
+          { min: 200, max: 499, prices: [1.82, 1.82, 2.04, 2.07, 2.31, 2.64] },
+          { min: 500, max: 999, prices: [1.50, 1.53, 1.79, 1.80, 1.98, 2.24] },
+          { min: 1000, max: 999999, prices: [1.38, 1.40, 1.64, 1.64, 1.80, 2.06] }
+        ]
+      },
+      'varsity-jacket-patches': {
+        sizeBrackets: [4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 13.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [6.63, 9.57, 11.28, 12.12, 12.75, 13.40, 14.67, 15.56, 17.85] },
+          { min: 50, max: 99, prices: [5.61, 6.63, 7.53, 8.67, 9.57, 10.85, 11.48, 12.44, 14.03] },
+          { min: 100, max: 199, prices: [4.79, 6.06, 6.63, 7.65, 8.30, 9.57, 10.20, 10.71, 11.87] },
+          { min: 200, max: 499, prices: [3.20, 4.98, 5.75, 6.26, 6.77, 7.91, 8.30, 8.87, 10.20] },
+          { min: 500, max: 999, prices: [2.55, 3.20, 4.08, 4.47, 4.98, 5.36, 5.75, 6.63, 7.91] },
+          { min: 1000, max: 999999, prices: [2.24, 2.81, 3.71, 4.08, 4.47, 4.98, 5.24, 5.87, 6.63] }
+        ]
+      },
+      'chenille-letter-patches': {
+        sizeBrackets: [4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 13.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [6.63, 9.57, 11.28, 12.12, 12.75, 13.40, 14.67, 15.56, 17.85] },
+          { min: 50, max: 99, prices: [5.61, 6.63, 7.53, 8.67, 9.57, 10.85, 11.48, 12.44, 14.03] },
+          { min: 100, max: 199, prices: [4.79, 6.06, 6.63, 7.65, 8.30, 9.57, 10.20, 10.71, 11.87] },
+          { min: 200, max: 499, prices: [3.20, 4.98, 5.75, 6.26, 6.77, 7.91, 8.30, 8.87, 10.20] },
+          { min: 500, max: 999, prices: [2.55, 3.20, 4.08, 4.47, 4.98, 5.36, 5.75, 6.63, 7.91] },
+          { min: 1000, max: 999999, prices: [2.24, 2.81, 3.71, 4.08, 4.47, 4.98, 5.24, 5.87, 6.63] }
         ]
       }
     };
