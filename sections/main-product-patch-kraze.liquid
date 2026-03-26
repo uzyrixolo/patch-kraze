@@ -1107,14 +1107,19 @@
       let qty = parseInt(qtyInput.value) || 25;
       if(qty < 25) qty = 25; // Min quantity
       
-      // Calculate Size: (W + H) / 2
+      // Calculate Size: (W + H) / 2 for patches, max(W, H) for DTF
       let w = parseFloat(widthInput ? widthInput.value : 2) || 2;
       let h = parseFloat(heightInput ? heightInput.value : 2) || 2;
-      let avgSize = (w + h) / 2;
+      let avgSize = PRODUCT_HANDLE === 'dtf-transfers' ? Math.max(w, h) : (w + h) / 2;
       
       // Update Size Text
       if(calculatedSizeDisplay) {
-         calculatedSizeDisplay.innerText = avgSize.toFixed(2).replace(/\.00$/, '') + '"';
+         if (PRODUCT_HANDLE === 'dtf-transfers') {
+           // DTF: show W x H dimensions
+           calculatedSizeDisplay.innerText = `${w}" x ${h}"`;
+         } else {
+           calculatedSizeDisplay.innerText = avgSize.toFixed(2).replace(/\.00$/, '') + '"';
+         }
       }
 
       // Lookup exact price from matrix
@@ -1125,18 +1130,27 @@
       
       // Find variant that matches: "Size inch - QtyRange"
       // E.g., "3.5 inch - 100-199" or fallback to just size
+      // For DTF: uses '2" x 2" - 25-49' format
       let selectedVariant = null;
       
       // Try to find exact match with quantity range in title
       const qtyRangeStr = qty >= 1000 ? '1000+' : `${qtyTier.min}-${qtyTier.max}`;
-      // Format size bracket to always show decimal (2.0 not 2)
-      const sizeBracketStr = sizeBracket.toFixed(1);
-      const searchPattern1 = `${sizeBracketStr} inch - ${qtyRangeStr}`;
+      
+      let searchPattern1;
+      if (PRODUCT_HANDLE === 'dtf-transfers') {
+        // DTF uses dimensions like '4" x 4" - 100-199'
+        const wInt = Math.round(w);
+        const hInt = Math.round(h);
+        searchPattern1 = `${wInt}" x ${hInt}" - ${qtyRangeStr}`;
+      } else {
+        // Format size bracket to always show decimal (2.0 not 2)
+        const sizeBracketStr = sizeBracket.toFixed(1);
+        searchPattern1 = `${sizeBracketStr} inch - ${qtyRangeStr}`;
+      }
       
       console.log('[Variant Search]', {
         avgSize,
         sizeBracket,
-        sizeBracketStr,
         qty,
         qtyRangeStr,
         searchPattern: searchPattern1,
@@ -1152,12 +1166,19 @@
       if(!selectedVariant) {
         // Fallback: find variant with matching size only
         selectedVariant = shopifyVariants.find(v => {
-          const match = v.title.match(/([\d.]+) inch/);  
-          if(match) {
-            const variantSize = parseFloat(match[1]);
-            return Math.abs(variantSize - sizeBracket) < 0.01;
+          if (PRODUCT_HANDLE === 'dtf-transfers') {
+            // DTF fallback: match dimension like '4" x 4"'
+            const wInt = Math.round(w);
+            const hInt = Math.round(h);
+            return v.title.includes(`${wInt}" x ${hInt}"`);
+          } else {
+            const match = v.title.match(/([\d.]+) inch/);  
+            if(match) {
+              const variantSize = parseFloat(match[1]);
+              return Math.abs(variantSize - sizeBracket) < 0.01;
+            }
+            return false;
           }
-          return false;
         });
       }
       
