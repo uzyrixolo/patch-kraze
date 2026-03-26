@@ -478,6 +478,7 @@
             <p style="color:#6b7280; margin-bottom:1.5rem;">These do not affect your final price.</p>
           </div>
 
+          {% unless product.handle == 'dtf-transfers' %}
           <label class="control-label">Select Shape:</label>
           <div class="shape-grid">
              <div class="shape-card selected" onclick="selectShape(this, 'Circle')">
@@ -532,6 +533,7 @@
             Our most popular method allows you to quickly and conveniently use a heat press or even a home iron if the right pressure and heat are applied.
           </div>
           <input type="hidden" name="properties[Backing]" id="backing-input" value="Heat Applied (Most Popular)">
+          {% endunless %}
 
           <div class="control-group" style="margin-top:2rem;">
             <label style="display:flex; align-items:center; gap:0.5rem; font-weight:700; cursor:pointer;">
