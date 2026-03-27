@@ -173,12 +173,12 @@
         },
         "patch_matte_white": {
           "type": "patch_item",
-          "disabled": true,
           "settings": {
-            "title": "Matte White Flex Patches",
+            "image": "shopify://shop_images/dtf_transfers_main_1774633979638.jpg",
+            "title": "DTF Transfers",
             "price": "As low as $1.60 ea.",
             "description": "Clean, crisp matte white finish for a modern and minimalist aesthetic.",
-            "product_url": "/products/matte-white-patches",
+            "product_url": "shopify://products/dtf-transfers",
             "badge": "10pc min",
             "image_url": "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches_Matte_white_double_8c1a8bc3-ceae-4a3b-a7ab-20e50c408ff9.png"
           }
