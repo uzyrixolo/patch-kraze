@@ -478,7 +478,7 @@
             <p style="color:#6b7280; margin-bottom:1.5rem;">These do not affect your final price.</p>
           </div>
 
-          {% unless product.handle == 'dtf-transfers' %}
+          {% unless product.handle == 'dtf-transfers' or product.handle contains 'sticker' %}
           <label class="control-label">Select Shape:</label>
           <div class="shape-grid">
              <div class="shape-card selected" onclick="selectShape(this, 'Circle')">
