@@ -150,7 +150,8 @@
   .pk-drawer-header { padding: 1rem; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f9fafb; }
   .pk-drawer-content { overflow-y: auto; flex: 1; }
   
-  .pk-drawer-brands { padding: 1rem; background: #111827; border-bottom: 1px solid #1f2937; }
+  .pk-drawer-brands { padding: 1rem; background: #111827; border-bottom: 1px solid #1f2937; display: none; }
+  @media screen and (min-width: 750px) { .pk-drawer-brands { display: block; } }
   .pk-drawer-brands-title { font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
   .pk-brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
   .pk-mobile-brand-btn { 
