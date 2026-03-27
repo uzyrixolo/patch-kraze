@@ -1229,17 +1229,30 @@
         }
         
         console.log('[Sticker Variant Match]', selectedVariant ? selectedVariant.title : 'NO MATCH', 'Pattern:', searchPattern);
+        console.log('[Selected Variant Price]', selectedVariant ? selectedVariant.price : 'N/A');
         
         if (selectedVariant) {
           const unitPrice = parseFloat(selectedVariant.price);
           const total = unitPrice * qty;
           
-          if(unitPriceDisplay) unitPriceDisplay.innerHTML = '$' + unitPrice.toFixed(2) + ' <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span>';
-          if(totalDisplay) totalDisplay.innerText = '$' + total.toFixed(2).replace(/\.00$/, '');
+          console.log('[Updating Price]', { unitPrice, total, unitPriceDisplayExists: !!unitPriceDisplay, totalDisplayExists: !!totalDisplay });
+          
+          if(unitPriceDisplay) {
+            unitPriceDisplay.innerHTML = '$' + unitPrice.toFixed(2) + ' <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span>';
+            console.log('[Unit Price Updated to]', unitPriceDisplay.innerHTML);
+          } else {
+            console.log('[ERROR] unitPriceDisplay not found');
+          }
+          
+          if(totalDisplay) {
+            totalDisplay.innerText = '$' + total.toFixed(2).replace(/\.00$/, '');
+            console.log('[Total Updated to]', totalDisplay.innerText);
+          } else {
+            console.log('[ERROR] totalDisplay not found');
+          }
           
           // Update hidden variant input
           const variantInput = document.getElementById('variant-id-input');
-          if(variantInput) variantInput.value = selectedVariant.id;
           if(variantInput) variantInput.value = selectedVariant.id;
           
           // Update quantity input max
