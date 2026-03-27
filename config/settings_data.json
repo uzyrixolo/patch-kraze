@@ -16,6 +16,13 @@
     "drawer_drop_shadow": true,
     "empty_state_collection": "custom-patches",
     "card_title_case": "default",
-    "content_for_index": []
+    "content_for_index": [],
+    "blocks": {
+      "14395122966275055373": {
+        "type": "shopify://apps/build-a-gang-sheet/blocks/gang-edit/ee9ed31c-1d66-4e11-bf77-f31e69c2ec2b",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   }
 }
