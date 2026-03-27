@@ -15,6 +15,7 @@
     "auto_open_cart_drawer": true,
     "drawer_drop_shadow": true,
     "empty_state_collection": "custom-patches",
+    "card_title_case": "default",
     "content_for_index": []
   }
 }
