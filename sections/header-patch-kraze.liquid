@@ -158,6 +158,29 @@
   .pk-accordion-content.open { display: block; }
   .pk-sub-link { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem; text-decoration: none; color: #374151; font-size: 0.875rem; }
   .pk-sub-thumb { width: 2.5rem; height: 2.5rem; background: #e5e7eb; border-radius: 0.25rem; object-fit: cover; }
+
+  /* MOBILE SEARCH MODAL */
+  .pk-search-modal {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+    background: #fff; padding: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    transform: translateY(-100%); transition: transform 0.3s ease-in-out;
+  }
+  .pk-search-modal.open { transform: translateY(0); }
+  .pk-search-modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9998;
+    display: none;
+  }
+  .pk-search-modal-overlay.open { display: block; }
+  .pk-search-modal-form { display: flex; gap: 0.5rem; align-items: center; }
+  .pk-search-modal-input {
+    flex: 1; height: 2.75rem; padding: 0 1rem; border: 1px solid #e5e7eb;
+    border-radius: 0.375rem; font-size: 1rem;
+  }
+  .pk-search-modal-close {
+    width: 2.75rem; height: 2.75rem; border: none; background: #f3f4f6;
+    border-radius: 0.375rem; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: #374151;
+  }
 </style>
 
 <div class="pk-header">
@@ -234,11 +257,22 @@
       <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo.webp?v=1770364953" width="100" height="40" class="pk-mobile-logo">
     </a>
     <div class="pk-mobile-icons lg:pk-hidden desktop:hidden">
-       <button class="pk-icon-btn" onclick="document.getElementById('search-modal')?.showDialog()"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+       <button class="pk-icon-btn" onclick="toggleSearchModal(true)"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
        <button class="pk-icon-btn" onclick="document.querySelector('cart-drawer-component').open()">
           {% render 'cart-icon-component' %}
        </button>
     </div>
+  </div>
+
+  <!-- MOBILE SEARCH MODAL -->
+  <div class="pk-search-modal-overlay" id="search-modal-overlay" onclick="toggleSearchModal(false)"></div>
+  <div class="pk-search-modal" id="search-modal">
+    <form action="{{ routes.search_url }}" method="get" class="pk-search-modal-form">
+      <input type="search" name="q" placeholder="Search patches..." class="pk-search-modal-input" id="mobile-search-input">
+      <button type="button" class="pk-search-modal-close" onclick="toggleSearchModal(false)">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </form>
   </div>
 
   <!-- NAVIGATION (DESKTOP) -->
@@ -417,6 +451,24 @@
     } else {
       mobileDrawer.classList.remove('open');
       mobileOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Mobile Search Modal
+  const searchModal = document.getElementById('search-modal');
+  const searchModalOverlay = document.getElementById('search-modal-overlay');
+  const mobileSearchInput = document.getElementById('mobile-search-input');
+
+  window.toggleSearchModal = function(open) {
+    if (open) {
+      searchModal.classList.add('open');
+      searchModalOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => mobileSearchInput?.focus(), 100);
+    } else {
+      searchModal.classList.remove('open');
+      searchModalOverlay.classList.remove('open');
       document.body.style.overflow = '';
     }
   }
