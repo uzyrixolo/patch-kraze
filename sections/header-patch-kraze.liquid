@@ -180,7 +180,7 @@
         <a href="{{ section.settings.url_printhouse | default: '/pages/printhouse' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>PRINTHOUSE</span></a>
         <a href="{{ section.settings.url_pod | default: '/pages/pod' }}" class="pk-brand-link pk-text-pink"><span>PATCH KRAZE</span><span>POD</span></a>
       </div>
-      <div style="font-size: 0.75rem; font-weight: 500; text-align: center; width: 100%;">
+      <div style="font-size: 0.75rem; font-weight: 500; text-align: center; width: 100%;padding-top:6px;">
         Select Patches Ship as Fast as 5 Business Days with PatchFast. 10pc Mins with Free Shipping!
       </div>
     </div>
@@ -298,44 +298,85 @@
 
 </div>
 
+{% comment %} Build product image lookup from metafields {% endcomment %}
+{% assign product_images = '' %}
+{% for item in section.blocks %}
+  {% if item.type == 'mega_menu_item' and item.settings.product != blank %}
+    {% assign prod = all_products[item.settings.product] %}
+    {% assign featured_image = prod.metafields.custom.featured_image | default: prod.featured_image %}
+    {% if featured_image != blank %}
+      {% assign product_images = product_images | append: item.settings.product | append: ':' | append: featured_image | append: ',' %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
 <script>
+  // ------------------------------------
+  // PRODUCT IMAGE LOOKUP (from metafields)
+  // ------------------------------------
+  const PRODUCT_IMAGES = {
+    {% assign image_pairs = product_images | split: ',' %}
+    {% for pair in image_pairs %}
+      {% if pair != blank %}
+        {% assign parts = pair | split: ':' %}
+        "{{ parts[0] }}": "{{ parts[1] }}"{% unless forloop.last %},{% endunless %}
+      {% endif %}
+    {% endfor %}
+  };
+
+  // Helper to get image with fallback
+  function getProductImage(handle, fallbackUrl) {
+    if (PRODUCT_IMAGES[handle]) {
+      return PRODUCT_IMAGES[handle];
+    }
+    // Try to fetch from product data if available
+    return fallbackUrl;
+  }
+
   // ------------------------------------
   // DATA CONFIGURATION
   // ------------------------------------
   const MEGA_MENUS = {
     embroidery: [
-      { title: "Standard Embroidery", image: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/1-3.png", href: "/products/embroidered-patches" },
-      { title: "3D Embroidery", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_3D_Embroidery_NP_01_2024_1.jpg?v=1731449173", href: "/products/3d-embroidered-patches" },
-      { title: "Custom Name Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NamePatchMOCK_1_4dc33b0d-b190-47c0-a29b-ebfd6aa53a44_1.png?v=1764952518", href: "/products/name-patches" },
-      { title: "Chenille", image: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/2-3.png", href: "/products/chenille-patches" },
-      { title: "Custom Tackle Twill Letters", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png?v=1764629501", href: "/products/custom-tackle-twill" }
+      { title: "Standard Embroidery", handle: "embroidered-patches", fallbackImage: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/1-3.png", href: "/products/embroidered-patches" },
+      { title: "3D Embroidery", handle: "3d-embroidered-patches", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_3D_Embroidery_NP_01_2024_1.jpg?v=1731449173", href: "/products/3d-embroidered-patches" },
+      { title: "Custom Name Patches", handle: "name-patches", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NamePatchMOCK_1_4dc33b0d-b190-47c0-a29b-ebfd6aa53a44_1.png?v=1764952518", href: "/products/name-patches" },
+      { title: "Chenille", handle: "chenille-patches", fallbackImage: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/2-3.png", href: "/products/chenille-patches" },
+      { title: "Custom Tackle Twill Letters", handle: "custom-tackle-twill", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png?v=1764629501", href: "/products/custom-tackle-twill" }
     ],
     pvcRubber: [
-      { title: "Standard PVC Rubber", image: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/3-2.png", href: "/products/pvc-rubber-patches" },
-      // { title: "Glow in The Dark PVC Rubber Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/4_glow-in-the-dark.jpg?v=1761235940", href: "/products/glow-in-the-dark-pvc-patches" },
-      { title: "Custom Keychains", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/2_keychains.jpg?v=1761235775", href: "/products/custom-keychains" }
+      { title: "Standard PVC Rubber", handle: "pvc-rubber-patches", fallbackImage: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/3-2.png", href: "/products/pvc-rubber-patches" },
+      { title: "Custom Keychains", handle: "custom-keychains", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/2_keychains.jpg?v=1761235775", href: "/products/custom-keychains" }
     ],
     leather: [
-      { title: "Genuine Leather", image: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/5-1.png", href: "/products/leather-patches" },
-      { title: "Faux Leather", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_FauxLeatherNP05_2024.jpg?v=1720019059", href: "/products/faux-leather-patches" }
+      { title: "Genuine Leather", handle: "leather-patches", fallbackImage: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/5-1.png", href: "/products/leather-patches" },
+      { title: "Faux Leather", handle: "faux-leather-patches", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_FauxLeatherNP05_2024.jpg?v=1720019059", href: "/products/faux-leather-patches" }
     ],
     pkFlex: [
-      { title: "Metallic Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/metallicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png?v=1765396220", href: "/products/metallic-flex-patches" },
-      { title: "Full Color Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/two_c14c6fc7-cb38-4ab1-88ca-4317dbe888ee.png?v=1757960975", href: "/products/full-color-printed-patches" },
-      { title: "Matte Black Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Matte_Black_Flex.png?v=1761169152", href: "/products/matte-black-patches" },
-      { title: "Matte White Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches_Matte_white_double_8c1a8bc3-ceae-4a3b-a7ab-20e50c408ff9.png?v=1762360471", href: "/products/matte-white-patches" }
+      { title: "Metallic Flex", handle: "metallic-flex-patches", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/metallicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png?v=1765396220", href: "/products/metallic-flex-patches" },
+      { title: "Full Color Flex", handle: "full-color-flex-patches", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/two_c14c6fc7-cb38-4ab1-88ca-4317dbe888ee.png?v=1757960975", href: "/products/full-color-flex-patches" },
+      { title: "Matte Black Flex", handle: "matte-black-patches", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Matte_Black_Flex.png?v=1761169152", href: "/products/matte-black-patches" },
+      { title: "Matte White Flex", handle: "matte-white-patches", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches_Matte_white_double_8c1a8bc3-ceae-4a3b-a7ab-20e50c408ff9.png?v=1762360471", href: "/products/matte-white-patches" }
     ],
     stickers: [
-      { title: "Custom Vinyl Stickers", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/BOOK_1.png?v=1740599405", href: "/products/custom-vinyl-stickers" },
-      { title: "Custom Bumper Stickers", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/bumpercar_1.png?v=1740599420", href: "/products/custom-bumper-stickers" }
+      { title: "Custom Vinyl Stickers", handle: "custom-vinyl-stickers", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/BOOK_1.png?v=1740599405", href: "/products/custom-vinyl-stickers" },
+      { title: "Custom Bumper Stickers", handle: "custom-bumper-stickers", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/bumpercar_1.png?v=1740599420", href: "/products/custom-bumper-stickers" }
     ],
     dtf: [
-      { title: "DTF Transfers", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/DTF-Transfer-Main.png", href: "/products/dtf-transfers" }
+      { title: "DTF Transfers", handle: "dtf-transfers", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/DTF-Transfer-Main.png?v=1740500238", href: "/products/dtf-transfers" }
     ],
     supplies: [
-      { title: "Heat Presses", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/hpn-15x15-signature-series-heat-press_f68c0253-f1a1-48fa-9c7d-fe310916b2bd.png?v=1763589654", href: "/collections/heat-presses" }
+      { title: "Heat Presses", handle: "heat-presses", fallbackImage: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/hpn-15x15-signature-series-heat-press_f68c0253-f1a1-48fa-9c7d-fe310916b2bd.png?v=1763589654", href: "/collections/heat-presses" }
     ]
   };
+
+  // Process images with metafield fallback
+  Object.keys(MEGA_MENUS).forEach(key => {
+    MEGA_MENUS[key] = MEGA_MENUS[key].map(item => ({
+      ...item,
+      image: getProductImage(item.handle, item.fallbackImage)
+    }));
+  });
 
   const NAV_ITEMS = [
     { label: "Embroidery", key: "embroidery", hasDropdown: true },

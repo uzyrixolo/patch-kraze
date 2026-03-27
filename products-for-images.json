@@ -54,12 +54,14 @@
     { "handle": "sublimation-patches", "title": "Sublimation Patches", "url": "https://patchkraze.com/products/sublimation-patches" },
     { "handle": "tactical-patches", "title": "Custom Tactical Patches", "url": "https://patchkraze.com/products/tactical-patches" },
     { "handle": "varsity-jacket-patches", "title": "Varsity Jacket Patches", "url": "https://patchkraze.com/products/varsity-jacket-patches" },
-    { "handle": "woven-patches", "title": "Woven Patches", "url": "https://patchkraze.com/products/woven-patches" }
+    { "handle": "woven-patches", "title": "Woven Patches", "url": "https://patchkraze.com/products/woven-patches" },
+    { "handle": "matte-white-patches", "title": "Matte White Patches", "url": "https://patchkraze.com/products/matte-white-patches" },
+    { "handle": "matte-black-patches", "title": "Matte Black Patches", "url": "https://patchkraze.com/products/matte-black-patches" }
   ],
   "image_prompts": {
     "patch_style": "Professional product photography of custom {title}, high quality embroidered/printed patch on clean white background, detailed texture, commercial product shot",
     "sticker_style": "Professional product photography of {title}, vinyl stickers with vibrant colors on clean white background, commercial product shot",
     "transfer_style": "Professional product photography of {title}, DTF heat transfer design on clean white background, commercial product shot"
   },
-  "total_products": 55
+  "total_products": 57
 }
