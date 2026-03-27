@@ -1137,6 +1137,46 @@
       heightInput.step = PRODUCT_CONFIG.step;
     }
 
+    // Check if this is a sticker product
+    const IS_STICKER = PRODUCT_HANDLE.includes('sticker');
+    
+    // Sticker style brackets (based on square inches: width * height)
+    function getStickerStyleBracket(w, h) {
+      const sqInches = w * h;
+      // Style #1-5: 1-5 sq inches (1x1 to ~2.2x2.2)
+      // Style #6-10: 6-10 sq inches
+      // etc.
+      if (sqInches <= 5) return '1-5';
+      if (sqInches <= 10) return '6-10';
+      if (sqInches <= 15) return '11-15';
+      if (sqInches <= 20) return '16-20';
+      if (sqInches <= 25) return '21-25';
+      if (sqInches <= 30) return '26-30';
+      if (sqInches <= 35) return '31-35';
+      if (sqInches <= 40) return '36-40';
+      if (sqInches <= 45) return '41-45';
+      if (sqInches <= 50) return '46-50';
+      if (sqInches <= 55) return '51-55';
+      if (sqInches <= 60) return '56-60';
+      if (sqInches <= 65) return '61-65';
+      if (sqInches <= 70) return '66-70';
+      if (sqInches <= 75) return '71-75';
+      if (sqInches <= 80) return '76-80';
+      if (sqInches <= 85) return '81-85';
+      if (sqInches <= 90) return '86-90';
+      if (sqInches <= 95) return '91-95';
+      return '96-100';
+    }
+    
+    // Sticker quantity tier
+    function getStickerQtyTier(qty) {
+      if (qty >= 25 && qty <= 49) return '25-49';
+      if (qty >= 50 && qty <= 99) return '50-99';
+      if (qty >= 100 && qty <= 249) return '100-249';
+      if (qty >= 250 && qty <= 499) return '250-499';
+      return '500+';
+    }
+
     // Smart Pricing + Variant Selector using Matrix
     function updatePriceAndVariant() {
       if(!qtyInput) return;
@@ -1148,7 +1188,47 @@
       let h = parseFloat(heightInput ? heightInput.value : 2) || 2;
       let avgSize = PRODUCT_HANDLE === 'dtf-transfers' ? Math.max(w, h) : (w + h) / 2;
       
-      // Update Size Text
+      // Handle STICKER products differently
+      if (IS_STICKER) {
+        // Update Size Text for stickers
+        if(calculatedSizeDisplay) {
+          calculatedSizeDisplay.innerText = `${w.toFixed(2).replace(/\.00$/, '')}" x ${h.toFixed(2).replace(/\.00$/, '')}"`;
+        }
+        
+        const styleBracket = getStickerStyleBracket(w, h);
+        const qtyTier = getStickerQtyTier(qty);
+        const searchPattern = `Style #${styleBracket} - ${qtyTier}`;
+        
+        console.log('[Sticker Variant Search]', { w, h, styleBracket, qty, qtyTier, searchPattern });
+        
+        const selectedVariant = shopifyVariants.find(v => 
+          v.title.includes(searchPattern)
+        );
+        
+        console.log('[Sticker Variant Match]', selectedVariant ? selectedVariant.title : 'NO MATCH');
+        
+        if (selectedVariant) {
+          const unitPrice = parseFloat(selectedVariant.price);
+          const total = unitPrice * qty;
+          
+          if(priceValue) priceValue.innerText = '$' + unitPrice.toFixed(2);
+          if(totalPriceValue) totalPriceValue.innerText = '$' + total.toFixed(2).replace(/\.00$/, '');
+          
+          // Update hidden variant input
+          const variantInput = document.getElementById('variant-id-input');
+          if(variantInput) variantInput.value = selectedVariant.id;
+          
+          // Update quantity input max
+          const qtyInput = document.getElementById('quantity-input');
+          if(qtyInput) {
+            qtyInput.max = selectedVariant.inventory_quantity || 9999;
+            if(qtyInput.value > qtyInput.max) qtyInput.value = qtyInput.max;
+          }
+        }
+        return; // Exit early for stickers
+      }
+      
+      // Update Size Text for non-stickers
       if(calculatedSizeDisplay) {
          if (PRODUCT_HANDLE === 'dtf-transfers') {
            // DTF: show W x H dimensions
