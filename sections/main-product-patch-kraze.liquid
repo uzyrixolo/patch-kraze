@@ -1214,11 +1214,21 @@
         
         console.log('[Sticker Variant Search]', { w, h, styleBracket, qty, qtyTier, searchPattern });
         
-        const selectedVariant = shopifyVariants.find(v => 
-          v.title.includes(searchPattern)
+        console.log('[Available Variants]', shopifyVariants.map(v => ({ title: v.title, option1: v.option1, price: v.price })));
+        
+        // Try matching by option1 first (for CSV-imported products), then by title
+        let selectedVariant = shopifyVariants.find(v => 
+          v.option1 && v.option1.includes(searchPattern)
         );
         
-        console.log('[Sticker Variant Match]', selectedVariant ? selectedVariant.title : 'NO MATCH');
+        // Fallback to title matching
+        if (!selectedVariant) {
+          selectedVariant = shopifyVariants.find(v => 
+            v.title && v.title.includes(searchPattern)
+          );
+        }
+        
+        console.log('[Sticker Variant Match]', selectedVariant ? selectedVariant.title : 'NO MATCH', 'Pattern:', searchPattern);
         
         if (selectedVariant) {
           const unitPrice = parseFloat(selectedVariant.price);

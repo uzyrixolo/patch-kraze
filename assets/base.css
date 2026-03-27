@@ -4036,3 +4036,7 @@ text-component {
     font-size: max(1rem, 100%);
   }
 }
+
+.cart__ctas .cart__checkout-button{
+  border: 1px solid;
+}
