@@ -426,10 +426,9 @@
           "block_order": []
         }
       },
-      "disabled": true,
       "name": "t:names.blog_posts_grid",
       "settings": {
-        "blog": "",
+        "blog": "patches",
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "post_limit": 3,
