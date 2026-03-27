@@ -50,11 +50,16 @@
 
     padding: 0;
     border: var(--style-border-popover);
+    background-color: var(--color-background, #fff);
 
     @media screen and (min-width: 750px) {
       width: var(--modal-width);
       margin-block-start: var(--modal-top-margin);
       overflow: hidden;
+    }
+
+    @media screen and (max-width: 749px) {
+      background-color: var(--color-background, #fff);
     }
   }
 
