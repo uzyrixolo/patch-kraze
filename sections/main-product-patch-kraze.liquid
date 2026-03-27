@@ -1214,7 +1214,8 @@
         
         console.log('[Sticker Variant Search]', { w, h, styleBracket, qty, qtyTier, searchPattern });
         
-        console.log('[Available Variants]', shopifyVariants.map(v => ({ title: v.title, option1: v.option1, price: v.price })));
+        console.log('[Available Variants]', shopifyVariants.map(v => ({ title: v.title, option1: v.option1, price: v.price, id: v.id })));
+                console.log('[First Variant Sample]', shopifyVariants[0]);
         
         // Try matching by option1 first (for CSV-imported products), then by title
         let selectedVariant = shopifyVariants.find(v => 

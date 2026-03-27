@@ -4040,3 +4040,27 @@ text-component {
 .cart__ctas .cart__checkout-button{
   border: 1px solid;
 }
+
+@media(max-width:767px){
+
+
+    .hero-patch-kraze {
+padding:20px;
+
+}
+.hero-text-side{
+    gap:1rem;
+}
+.hero-content{
+
+    gap:10px;
+}
+
+.hero-heading{
+
+    font-size:1.5rem;
+}
+.hero-description{
+    font-size: 0.75rem;
+}
+}
