@@ -68,7 +68,7 @@
   }
 
   .thumbnails-row { display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 0.5rem; max-width: 100%; }
-  .thumbnail-btn { flex-shrink: 0; width: 5.5rem; height: 5.5rem; border-radius: 0.75rem; overflow: hidden; border: 2px solid transparent; cursor: pointer; opacity: 0.8; transition: all 0.2s; background: #f3f4f6; }
+  .thumbnail-btn { flex-shrink: 0; width: 5.5rem; height: 5.5rem; border-radius: 0.75rem; overflow: hidden; border: 2px solid transparent; cursor: pointer; opacity: 0.8; transition: all 0.2s; background: #f3f4f6; padding:0; }
   .thumbnail-btn.active { border-color: #10b981; opacity: 1; box-shadow: 0 0 0 2px #d1fae5; }
   .thumbnail-btn img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -147,7 +147,7 @@
   /* Responsive Adjustments */
   @media (max-width: 768px) {
     .product-page-main { padding: 0 0 4rem 0; }
-    .product-container { gap: 1.5rem; padding: 0; grid-template-columns: 1fr; }
+    .product-container { gap: 1rem; padding: 0; grid-template-columns: 1fr; }
     .product-gallery { padding: 0; margin: 0 auto; max-width: 100vw; width: 100vw; overflow: hidden; }
     .main-image-wrapper { max-height: 100vw; height: 100vw; width: 100vw; border-radius: 0; margin: 0; padding: 0; aspect-ratio: unset; }
     .main-product-img { padding: 0.5rem; }
@@ -807,7 +807,7 @@
       'silicone-patches': { minSize: 1.5, maxSize: 4.0, defaultSize: 2.0, step: 0.5 },
       'leather-patches-for-jackets': { minSize: 1.5, maxSize: 6.0, defaultSize: 2.0, step: 0.5 },
       'leather-patches-for-hats': { minSize: 1.5, maxSize: 6.0, defaultSize: 2.0, step: 0.5 },
-      'dtf-transfers': { minSize: 2, maxSize: 12, defaultSize: 4, step: 1 },
+      'dtf-transfers': { minSize: 2, maxSize: 22, defaultSize: 4, step: 1 },
       // New products (404 fixes)
       'backpack-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-beanies': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
