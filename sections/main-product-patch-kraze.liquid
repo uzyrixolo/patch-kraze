@@ -422,10 +422,10 @@
 
           <div style="margin-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 1.5rem;">
              <div class="flex justify-between items-center mb-2">
-                <span style="font-weight: 700; font-size: 1rem;">Select Your Patch Size:</span>
+                <span id="size-selector-label" style="font-weight: 700; font-size: 1rem;">Select Your Patch Size:</span>
                 <button type="button" onclick="openSizeGuide()" style="background:none; border:none; cursor:pointer; color: #10b981; font-size: 0.9rem; text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
                   <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
-                  Patch Size Guide
+                  <span id="size-guide-label">Patch Size Guide</span>
                 </button>
              </div>
 
@@ -466,8 +466,8 @@
           </div>
 
           <div class="size-display-row">
-            <span>Patch Size</span> <span style="margin: 0 0.5rem;">-</span> <span id="calculated-size-display" class="size-value-green">2"</span>
-            <div class="tooltip-container">
+            <span id="size-display-label">Patch Size</span> <span style="margin: 0 0.5rem;">-</span> <span id="calculated-size-display" class="size-value-green">2"</span>
+            <div class="tooltip-container" id="size-tooltip">
                <div class="info-icon">i</div>
                <span class="tooltip-text">Patch size is calculated by adding Length + Width and dividing by 2.</span>
             </div>
@@ -1140,6 +1140,19 @@
     // Check if this is a sticker product
     const IS_STICKER = PRODUCT_HANDLE.includes('sticker');
     
+    // Update labels for stickers on page load
+    if (IS_STICKER) {
+      const sizeSelectorLabel = document.getElementById('size-selector-label');
+      const sizeGuideLabel = document.getElementById('size-guide-label');
+      const sizeDisplayLabel = document.getElementById('size-display-label');
+      const sizeTooltip = document.getElementById('size-tooltip');
+      
+      if (sizeSelectorLabel) sizeSelectorLabel.innerText = 'Select Your Sticker Size:';
+      if (sizeGuideLabel) sizeGuideLabel.innerText = 'Sticker Size Guide';
+      if (sizeDisplayLabel) sizeDisplayLabel.innerText = 'Sticker Size';
+      if (sizeTooltip) sizeTooltip.style.display = 'none'; // Hide tooltip for stickers
+    }
+    
     // Sticker style brackets (based on square inches: width * height)
     function getStickerStyleBracket(w, h) {
       const sqInches = w * h;
@@ -1211,15 +1224,15 @@
           const unitPrice = parseFloat(selectedVariant.price);
           const total = unitPrice * qty;
           
-          if(priceValue) priceValue.innerText = '$' + unitPrice.toFixed(2);
-          if(totalPriceValue) totalPriceValue.innerText = '$' + total.toFixed(2).replace(/\.00$/, '');
+          if(unitPriceDisplay) unitPriceDisplay.innerHTML = '$' + unitPrice.toFixed(2) + ' <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span>';
+          if(totalDisplay) totalDisplay.innerText = '$' + total.toFixed(2).replace(/\.00$/, '');
           
           // Update hidden variant input
           const variantInput = document.getElementById('variant-id-input');
           if(variantInput) variantInput.value = selectedVariant.id;
+          if(variantInput) variantInput.value = selectedVariant.id;
           
           // Update quantity input max
-          const qtyInput = document.getElementById('quantity-input');
           if(qtyInput) {
             qtyInput.max = selectedVariant.inventory_quantity || 9999;
             if(qtyInput.value > qtyInput.max) qtyInput.value = qtyInput.max;
