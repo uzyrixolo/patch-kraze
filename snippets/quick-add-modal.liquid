@@ -34,6 +34,7 @@
     overflow: hidden;
     min-height: 500px;
     box-shadow: 0 5px 30px rgb(0 0 0 / var(--opacity-15));
+    background-color: var(--color-background, #fff);
 
     @media screen and (max-width: 750px) {
       position: fixed;
@@ -42,6 +43,7 @@
       min-height: unset;
       max-width: 100%;
       border-radius: 0;
+      background-color: var(--color-background, #fff);
     }
   }
 
@@ -85,6 +87,7 @@
     overflow-y: auto;
     max-height: 100vh;
     flex-grow: 1;
+    background-color: var(--color-background, #fff);
 
     @media screen and (max-width: 750px) {
       grid-template-columns: repeat(4, 1fr);
@@ -97,6 +100,7 @@
       overflow-y: auto;
       height: auto; /* Prevent a bug in Safari where height:fit-content is not respected */
       max-height: 100vh;
+      background-color: var(--color-background, #fff);
     }
   }
 
