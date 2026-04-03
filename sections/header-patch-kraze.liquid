@@ -300,40 +300,135 @@
 
 <script>
   // ------------------------------------
-  // DATA CONFIGURATION
+  // DATA CONFIGURATION - Dynamic from Shopify Products
   // ------------------------------------
+  
+  {% comment %}
+    Fetch product and collection images dynamically from Shopify
+  {% endcomment %}
+  {% assign embroidered_patches = all_products['embroidered-patches'] %}
+  {% assign patches_3d = all_products['3d-embroidered-patches'] %}
+  {% assign name_patches = all_products['name-patches'] %}
+  {% assign chenille_patches = all_products['chenille-patches'] %}
+  {% assign tackle_twill = all_products['custom-tackle-twill'] %}
+  {% assign pvc_rubber = all_products['pvc-rubber-patches'] %}
+  {% assign keychains = all_products['custom-keychains'] %}
+  {% assign leather_patches = all_products['leather-patches'] %}
+  {% assign faux_leather = all_products['faux-leather-patches'] %}
+  {% assign metallic_flex = all_products['metallic-flex-patches'] %}
+  {% assign gold_flex = all_products['gold-flex-patches'] %}
+  {% assign full_color_flex = all_products['full-color-flex-patches'] %}
+  {% assign matte_black = all_products['matte-black-patches'] %}
+  {% assign matte_white = all_products['matte-white-patches'] %}
+  {% assign vinyl_stickers = all_products['custom-vinyl-stickers'] %}
+  {% assign bumper_stickers = all_products['custom-bumper-stickers'] %}
+  {% assign dtf_transfers = all_products['dtf-transfers'] %}
+  {% assign ready_made_collection = collections['ready-made-patches'] %}
+  
   const MEGA_MENUS = {
     embroidery: [
-      { title: "Standard Embroidery", image: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/1-3.png", href: "/products/embroidered-patches" },
-      { title: "3D Embroidery", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_3D_Embroidery_NP_01_2024_1.jpg?v=1731449173", href: "/products/3d-embroidered-patches" },
-      { title: "Custom Name Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NamePatchMOCK_1_4dc33b0d-b190-47c0-a29b-ebfd6aa53a44_1.png?v=1764952518", href: "/products/name-patches" },
-      { title: "Chenille", image: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/2-3.png", href: "/products/chenille-patches" },
-      { title: "Custom Tackle Twill Letters", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png?v=1764629501", href: "/products/custom-tackle-twill" }
+      { 
+        title: "Standard Embroidery", 
+        image: "{{ embroidered_patches.featured_image | img_url: '800x' }}", 
+        href: "/products/embroidered-patches" 
+      },
+      { 
+        title: "3D Embroidery", 
+        image: "{{ patches_3d.featured_image | img_url: '800x' }}", 
+        href: "/products/3d-embroidered-patches" 
+      },
+      { 
+        title: "Custom Name Patches", 
+        image: "{{ name_patches.featured_image | img_url: '800x' }}", 
+        href: "/products/name-patches" 
+      },
+      { 
+        title: "Chenille", 
+        image: "{{ chenille_patches.featured_image | img_url: '800x' }}", 
+        href: "/products/chenille-patches" 
+      },
+      { 
+        title: "Custom Tackle Twill Letters", 
+        image: "{{ tackle_twill.featured_image | img_url: '800x' }}", 
+        href: "/products/custom-tackle-twill" 
+      }
     ],
     pvcRubber: [
-      { title: "Standard PVC Rubber", image: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/3-2.png", href: "/products/pvc-rubber-patches" },
-      { title: "Custom Keychains", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/2_keychains.jpg?v=1761235775", href: "/products/custom-keychains" }
+      { 
+        title: "Standard PVC Rubber", 
+        image: "{{ pvc_rubber.featured_image | img_url: '800x' }}", 
+        href: "/products/pvc-rubber-patches" 
+      },
+      { 
+        title: "Custom Keychains", 
+        image: "{{ keychains.featured_image | img_url: '800x' }}", 
+        href: "/products/custom-keychains" 
+      }
     ],
     leather: [
-      { title: "Genuine Leather", image: "https://patchesandprintsfactory.com/wp-content/uploads/2024/02/5-1.png", href: "/products/leather-patches" },
-      { title: "Faux Leather", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Photo_FauxLeatherNP05_2024.jpg?v=1720019059", href: "/products/faux-leather-patches" }
+      { 
+        title: "Genuine Leather", 
+        image: "{{ leather_patches.featured_image | img_url: '800x' }}", 
+        href: "/products/leather-patches" 
+      },
+      { 
+        title: "Faux Leather", 
+        image: "{{ faux_leather.featured_image | img_url: '800x' }}", 
+        href: "/products/faux-leather-patches" 
+      }
     ],
     pkFlex: [
-      { title: "Silver Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/metallicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png?v=1765396220", href: "/products/metallic-flex-patches" },
-      { title: "Gold Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/metallicflex_946e0bdb-717c-40b2-a49c-e1dffa68bb54.png?v=1765396220", href: "/products/gold-flex-patches" },
-      { title: "Full Color Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/two_c14c6fc7-cb38-4ab1-88ca-4317dbe888ee.png?v=1757960975", href: "/products/full-color-flex-patches" },
-      { title: "Matte Black Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/Matte_Black_Flex.png?v=1761169152", href: "/products/matte-black-patches" },
-      { title: "Matte White Flex", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/NT.Patches_Matte_white_double_8c1a8bc3-ceae-4a3b-a7ab-20e50c408ff9.png?v=1762360471", href: "/products/matte-white-patches" }
+      { 
+        title: "Silver Flex", 
+        image: "{{ metallic_flex.featured_image | img_url: '800x' }}", 
+        href: "/products/metallic-flex-patches" 
+      },
+      { 
+        title: "Gold Flex", 
+        image: "{{ gold_flex.featured_image | img_url: '800x' }}", 
+        href: "/products/gold-flex-patches" 
+      },
+      { 
+        title: "Full Color Flex", 
+        image: "{{ full_color_flex.featured_image | img_url: '800x' }}", 
+        href: "/products/full-color-flex-patches" 
+      },
+      { 
+        title: "Matte Black Flex", 
+        image: "{{ matte_black.featured_image | img_url: '800x' }}", 
+        href: "/products/matte-black-patches" 
+      },
+      { 
+        title: "Matte White Flex", 
+        image: "{{ matte_white.featured_image | img_url: '800x' }}", 
+        href: "/products/matte-white-patches" 
+      }
     ],
     stickers: [
-      { title: "Custom Vinyl Stickers", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/BOOK_1.png?v=1740599405", href: "/products/custom-vinyl-stickers" },
-      { title: "Custom Bumper Stickers", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/bumpercar_1.png?v=1740599420", href: "/products/custom-bumper-stickers" }
+      { 
+        title: "Custom Vinyl Stickers", 
+        image: "{{ vinyl_stickers.featured_image | img_url: '800x' }}", 
+        href: "/products/custom-vinyl-stickers" 
+      },
+      { 
+        title: "Custom Bumper Stickers", 
+        image: "{{ bumper_stickers.featured_image | img_url: '800x' }}", 
+        href: "/products/custom-bumper-stickers" 
+      }
     ],
     dtf: [
-      { title: "DTF Transfers", image: "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/dtf_transfers_main_1774633979638.jpg?v=1774634121", href: "/products/dtf-transfers" }
+      { 
+        title: "DTF Transfers", 
+        image: "{{ dtf_transfers.featured_image | img_url: '800x' }}", 
+        href: "/products/dtf-transfers" 
+      }
     ],
     readymade: [
-      { title: "Ready Made Patches", image: "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/ready-made-patches.jpg", href: "/collections/ready-made-patches" }
+      { 
+        title: "Ready Made Patches", 
+        image: "{% if ready_made_collection.products.first %}{{ ready_made_collection.products.first.featured_image | img_url: '800x' }}{% endif %}", 
+        href: "/collections/ready-made-patches" 
+      }
     ]
   };
 
