@@ -50,7 +50,7 @@ with open('dtf-transfers-matrix.csv', 'w') as f:
                 f.write(f'dtf-transfers,DTF Transfers,Custom DTF Transfers printed in USA. Fast shipping.,Patch Kraze,Uncategorized,custom transfers,"DTF Transfers, custom transfers, upload",true,Transfer Size x Quantity,{option_value},{sku},0,shopify,100,deny,manual,{price},,true,true,,https://cdn.shopify.com/s/files/1/0558/0265/8899/files/DTF-by-size.png?v=1772055886,1,,false,,,,lb,active\n')
                 first = False
             else:
-                f.write(f',,,,,,,,,{option_value},{sku},0,shopify,100,deny,manual,{price},,true,true,,,,,,,,,lb,\n')
+                f.write(f'dtf-transfers,,,,,,,,{option_value},{sku},0,shopify,100,deny,manual,{price},,true,true,,,,,,,,,lb,\n')
 
 print(f"Generated CSV with {len(all_sizes)} sizes × {len(qty_tiers)} tiers = {len(all_sizes) * len(qty_tiers)} variants")
 print(f"Max size: 22x22, Price at 100-199 qty: ${round(22*22*price_per_sqin, 2)}")
