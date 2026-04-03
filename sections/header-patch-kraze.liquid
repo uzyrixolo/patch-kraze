@@ -317,6 +317,7 @@
   {% assign faux_leather = all_products['faux-leather-patches'] %}
   {% assign metallic_flex = all_products['metallic-flex-patches'] %}
   {% assign gold_flex = all_products['gold-flex-patches'] %}
+  {% assign silver_flex = all_products['silver-flex-patches'] %}
   {% assign full_color_flex = all_products['full-color-flex-patches'] %}
   {% assign matte_black = all_products['matte-black-patches'] %}
   {% assign matte_white = all_products['matte-white-patches'] %}
@@ -379,7 +380,7 @@
     ],
     pkFlex: [
       { 
-        title: "Silver Flex", 
+        title: "Metallic Flex", 
         image: "{{ metallic_flex.featured_image | img_url: '800x' }}", 
         href: "/products/metallic-flex-patches" 
       },
@@ -388,21 +389,18 @@
         image: "{{ gold_flex.featured_image | img_url: '800x' }}", 
         href: "/products/gold-flex-patches" 
       },
+      
+      { 
+        title: "Silver Flex", 
+        image: "{{ silver_flex.featured_image | img_url: '800x' }}", 
+        href: "/products/silver-flex-patches" 
+      },
       { 
         title: "Full Color Flex", 
         image: "{{ full_color_flex.featured_image | img_url: '800x' }}", 
-        href: "/products/full-color-flex-patches" 
+        href: "/products/silver-flex-patches" 
       },
-      { 
-        title: "Matte Black Flex", 
-        image: "{{ matte_black.featured_image | img_url: '800x' }}", 
-        href: "/products/matte-black-patches" 
-      },
-      { 
-        title: "Matte White Flex", 
-        image: "{{ matte_white.featured_image | img_url: '800x' }}", 
-        href: "/products/matte-white-patches" 
-      }
+      
     ],
     stickers: [
       { 
@@ -413,7 +411,7 @@
       { 
         title: "Custom Bumper Stickers", 
         image: "{{ bumper_stickers.featured_image | img_url: '800x' }}", 
-        href: "/products/custom-bumper-stickers" 
+        href: "/products/UV-DTF-Stickers" 
       }
     ],
     dtf: [
