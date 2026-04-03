@@ -33,24 +33,81 @@ for w in range(2, 23):
 
 all_sizes = current_sizes + sizes
 
-# Write CSV manually to control quoting
-with open('dtf-transfers-matrix.csv', 'w') as f:
+# Write CSV using csv module for proper quoting
+with open('dtf-transfers-matrix.csv', 'w', newline='') as f:
+    writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
+    
     # Header
-    f.write('Handle,Title,Body (HTML),Vendor,Product Category,Type,Tags,Published,Option1 Name,Option1 Value,Variant SKU,Variant Grams,Variant Inventory Tracker,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Compare At Price,Variant Requires Shipping,Variant Taxable,Variant Barcode,Image Src,Image Position,Image Alt Text,Gift Card,SEO Title,SEO Description,Variant Weight Unit,Status\n')
+    writer.writerow([
+        'Handle', 'Title', 'Body (HTML)', 'Vendor', 'Product Category', 'Type',
+        'Tags', 'Published', 'Option1 Name', 'Option1 Value', 'Variant SKU',
+        'Variant Grams', 'Variant Inventory Tracker', 'Variant Inventory Qty',
+        'Variant Inventory Policy', 'Variant Fulfillment Service', 'Variant Price',
+        'Variant Compare At Price', 'Variant Requires Shipping', 'Variant Taxable',
+        'Variant Barcode', 'Image Src', 'Image Position', 'Image Alt Text',
+        'Gift Card', 'SEO Title', 'SEO Description', 'Variant Weight Unit', 'Status'
+    ])
     
     first = True
     for w, h, base_price in sorted(all_sizes, key=lambda x: (x[0], x[1])):
         for qty_tier, multiplier in qty_tiers:
             price = round(base_price * multiplier, 2)
-            # Properly quoted for Shopify: "2"" x 2"" - 25-49"
-            option_value = f'"{w}"" x {h}"" - {qty_tier}"'
+            option_value = f'{w}" x {h}" - {qty_tier}'
             sku = f"DTF-{w}x{h}-{qty_tier.replace('-', '').replace('+', 'plus')}"
             
             if first:
-                f.write(f'dtf-transfers,DTF Transfers,Custom DTF Transfers printed in USA. Fast shipping.,Patch Kraze,Uncategorized,custom transfers,"DTF Transfers, custom transfers, upload",TRUE,Transfer Size x Quantity,{option_value},{sku},0,shopify,100,deny,manual,{price},,TRUE,TRUE,,https://cdn.shopify.com/s/files/1/0558/0265/8899/files/DTF-by-size.png?v=1772055886,1,,FALSE,,,,lb,active\n')
+                writer.writerow([
+                    'dtf-transfers',
+                    'DTF Transfers',
+                    'Custom DTF Transfers printed in USA. Fast shipping.',
+                    'Patch Kraze',
+                    'Uncategorized',
+                    'custom transfers',
+                    'DTF Transfers, custom transfers, upload',
+                    'TRUE',
+                    'Transfer Size x Quantity',
+                    option_value,
+                    sku,
+                    '0',
+                    'shopify',
+                    '100',
+                    'deny',
+                    'manual',
+                    str(price),
+                    '',
+                    'TRUE',
+                    'TRUE',
+                    '',
+                    'https://cdn.shopify.com/s/files/1/0558/0265/8899/files/DTF-by-size.png?v=1772055886',
+                    '1',
+                    '',
+                    'FALSE',
+                    '',
+                    '',
+                    'lb',
+                    'active'
+                ])
                 first = False
             else:
-                f.write(f'dtf-transfers,,,,,,,,{option_value},{sku},0,shopify,100,deny,manual,{price},,TRUE,TRUE,,,,,,,,,lb,\n')
+                writer.writerow([
+                    'dtf-transfers',
+                    '', '', '', '', '', '', '',
+                    option_value,
+                    sku,
+                    '0',
+                    'shopify',
+                    '100',
+                    'deny',
+                    'manual',
+                    str(price),
+                    '',
+                    'TRUE',
+                    'TRUE',
+                    '',
+                    '', '', '', '', '', '', '',
+                    'lb',
+                    ''
+                ])
 
 print(f"Generated CSV with {len(all_sizes)} sizes × {len(qty_tiers)} tiers = {len(all_sizes) * len(qty_tiers)} variants")
 print(f"Max size: 22x22, Price at 100-199 qty: ${round(22*22*price_per_sqin, 2)}")
