@@ -118,13 +118,15 @@
     {%- elsif resource_type == 'collection' -%}
       {%- if resource.products.size > 0 -%}
         <div class="resource-card__image-wrapper">
-          {% assign resource_products = resource.products | where: 'featured_image' %}
+          {% assign resource_products = resource.products %}
           {% for product in resource_products limit: 4 %}
-            {{
-              product.featured_image
-              | image_url: width: image_width
-              | image_tag: loading: 'lazy', class: 'resource-card__collection-image', sizes: image_sizes, widths: widths
-            }}
+            {% if product.featured_image != blank %}
+              {{
+                product.featured_image
+                | image_url: width: image_width
+                | image_tag: loading: 'lazy', class: 'resource-card__collection-image', sizes: image_sizes, widths: widths
+              }}
+            {% endif %}
           {% endfor %}
         </div>
       {%- endif -%}
