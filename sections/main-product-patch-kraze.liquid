@@ -456,7 +456,7 @@
              </div>
              <div class="control-group" style="margin-bottom:0;">
                 <label class="control-label">Qty</label>
-                <input type="number" name="quantity" id="qty-input" class="qty-box-large" value="100" min="25">
+                <input type="number" name="quantity" id="qty-input" class="qty-box-large" value="100" min="25" oninput="if(this.value < 25) this.value = 25;">
                 <div style="text-align: center; font-size: 0.75rem; font-weight: 700; margin-top: 0.25rem;">25 Piece Min</div>
              </div>
              <div class="control-group" style="margin-bottom:0;">
