@@ -1363,6 +1363,26 @@
             if(qtyInput.value > qtyInput.max) qtyInput.value = qtyInput.max;
           }
         }
+        
+        // Update pricing table for stickers
+        const basePrice = lookupPrice(1, 25); // Base price for style 1, 25 qty
+        PRICING_MATRIX.quantityTiers.forEach((tier, idx) => {
+          const tierPrice = basePrice * tier.multiplier;
+          const tierEl = document.getElementById(`price-tier-${idx + 1}`);
+          if(tierEl) {
+            tierEl.textContent = '$' + tierPrice.toFixed(2) + ' ea';
+          }
+          const discountEl = document.getElementById(`discount-tier-${idx + 1}`);
+          if(discountEl) {
+            if(idx === 0) {
+              discountEl.textContent = 'Base';
+            } else {
+              const pctOff = Math.round((1 - tier.multiplier) * 100);
+              discountEl.textContent = pctOff > 0 ? `Save ${pctOff}%` : 'Base';
+            }
+          }
+        });
+        
         return; // Exit early for stickers
       }
       
