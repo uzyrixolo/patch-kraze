@@ -456,7 +456,8 @@
              </div>
              <div class="control-group" style="margin-bottom:0;">
                 <label class="control-label">Qty</label>
-                <input type="number" name="quantity" id="qty-input" class="qty-box-large" value="100" min="25" oninput="if(this.value < 25) this.value = 25;">
+                <input type="number" name="quantity" id="qty-input" class="qty-box-large" value="100" min="1">
+                <div id="qty-error" style="text-align: center; font-size: 0.75rem; font-weight: 700; margin-top: 0.25rem; color: #ef4444; display: none;">25 Piece Minimum Required</div>
                 <div style="text-align: center; font-size: 0.75rem; font-weight: 700; margin-top: 0.25rem;">25 Piece Min</div>
              </div>
              <div class="control-group" style="margin-bottom:0;">
@@ -1286,7 +1287,15 @@
     function updatePriceAndVariant() {
       if(!qtyInput) return;
       let qty = parseInt(qtyInput.value) || 25;
-      if(qty < 25) qty = 25; // Min quantity
+      
+      // Show error if qty < 25
+      const qtyError = document.getElementById('qty-error');
+      if(qty < 25) {
+        if(qtyError) qtyError.style.display = 'block';
+        return; // Don't update prices
+      } else {
+        if(qtyError) qtyError.style.display = 'none';
+      }
       
       // Calculate Size: (W + H) / 2 for patches, max(W, H) for DTF
       let w = parseFloat(widthInput ? widthInput.value : 2) || 2;
