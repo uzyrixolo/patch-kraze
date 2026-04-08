@@ -777,6 +777,10 @@
       'silver-flex-patches': { minSize: 1.5, maxSize: 4.0, defaultSize: 2.0, step: 0.5 },
       'gold-flex-patches': { minSize: 1.5, maxSize: 4.0, defaultSize: 2.0, step: 0.5 },
       'print-stitch-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      // Sticker products (use styles instead of sizes)
+      'custom-vinyl-stickers': { styleRange: true, defaultStyle: 1 },
+      'holographic-stickers': { styleRange: true, defaultStyle: 1 },
+      'custom-stickers': { styleRange: true, defaultStyle: 1 },
       'patches-for-jackets': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-shirts': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-hats': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
@@ -948,6 +952,42 @@
           { min: 1000, max: 999999, prices: [1.41, 1.44, 1.71, 1.83, 1.98, 2.24] }
         ]
       },
+      'custom-vinyl-stickers': {
+        type: 'stickers',
+        basePrice: 0.19,
+        pricePerStyle: 0.06,
+        quantityTiers: [
+          { min: 25, max: 49, multiplier: 1.0 },
+          { min: 50, max: 99, multiplier: 0.63 },
+          { min: 100, max: 249, multiplier: 0.42 },
+          { min: 250, max: 499, multiplier: 0.32 },
+          { min: 500, max: 999999, multiplier: 0.21 }
+        ]
+      },
+      'holographic-stickers': {
+        type: 'stickers',
+        basePrice: 0.47,
+        pricePerStyle: 0.14,
+        quantityTiers: [
+          { min: 25, max: 49, multiplier: 1.0 },
+          { min: 50, max: 99, multiplier: 0.60 },
+          { min: 100, max: 249, multiplier: 0.38 },
+          { min: 250, max: 499, multiplier: 0.30 },
+          { min: 500, max: 999999, multiplier: 0.19 }
+        ]
+      },
+      'custom-stickers': {
+        type: 'stickers',
+        basePrice: 0.47,
+        pricePerStyle: 0.14,
+        quantityTiers: [
+          { min: 25, max: 49, multiplier: 1.0 },
+          { min: 50, max: 99, multiplier: 0.60 },
+          { min: 100, max: 249, multiplier: 0.38 },
+          { min: 250, max: 499, multiplier: 0.30 },
+          { min: 500, max: 999999, multiplier: 0.19 }
+        ]
+      },
       'custom-tackle-twill': {
         sizeBrackets: [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0],
         quantityTiers: [
@@ -1100,6 +1140,19 @@
     
     // Helper: Lookup exact price from matrix
     function lookupPrice(avgSize, qty) {
+      // Handle sticker products differently
+      if (PRICING_MATRIX.type === 'stickers') {
+        const qtyTier = PRICING_MATRIX.quantityTiers.find(t => qty >= t.min && qty <= t.max);
+        if (!qtyTier) return PRICING_MATRIX.basePrice;
+        
+        // Calculate style number (1-20)
+        const styleNum = Math.ceil(avgSize / 5); // Styles are groups of 5 (1-5, 6-10, etc.)
+        const styleMultiplier = 1 + (styleNum - 1) * (PRICING_MATRIX.pricePerStyle / PRICING_MATRIX.basePrice);
+        
+        return PRICING_MATRIX.basePrice * styleMultiplier * qtyTier.multiplier;
+      }
+      
+      // Regular patch pricing
       const sizeIdx = getSizeBracketIndex(avgSize);
       const qtyTier = getQuantityTier(qty);
       return qtyTier.prices[sizeIdx];
@@ -1412,24 +1465,47 @@
       }
       
       // Update pricing table preview with current size prices + dynamic discounts
-      const baseTierPrice = PRICING_MATRIX.quantityTiers[0].prices[sizeIdx]; // 25-49 tier = base
-      PRICING_MATRIX.quantityTiers.forEach((tier, idx) => {
-        const tierPrice = tier.prices[sizeIdx];
-        const tierEl = document.getElementById(`price-tier-${idx + 1}`);
-        if(tierEl) {
-          tierEl.textContent = '$' + tierPrice.toFixed(2) + ' ea';
-        }
-        // Update discount label
-        const discountEl = document.getElementById(`discount-tier-${idx + 1}`);
-        if(discountEl) {
-          if(idx === 0) {
-            discountEl.textContent = 'Base';
-          } else {
-            const pctOff = Math.round((1 - tierPrice / baseTierPrice) * 100);
-            discountEl.textContent = pctOff > 0 ? `Save ${pctOff}%` : 'Base';
+      if (PRICING_MATRIX.type === 'stickers') {
+        // Sticker pricing table
+        const styleNum = 1; // Default to style #1-5
+        const basePrice = lookupPrice(1, 25); // Base price for style 1, 25 qty
+        PRICING_MATRIX.quantityTiers.forEach((tier, idx) => {
+          const tierPrice = basePrice * tier.multiplier;
+          const tierEl = document.getElementById(`price-tier-${idx + 1}`);
+          if(tierEl) {
+            tierEl.textContent = '$' + tierPrice.toFixed(2) + ' ea';
           }
-        }
-      });
+          const discountEl = document.getElementById(`discount-tier-${idx + 1}`);
+          if(discountEl) {
+            if(idx === 0) {
+              discountEl.textContent = 'Base';
+            } else {
+              const pctOff = Math.round((1 - tier.multiplier) * 100);
+              discountEl.textContent = pctOff > 0 ? `Save ${pctOff}%` : 'Base';
+            }
+          }
+        });
+      } else {
+        // Regular patch pricing table
+        const baseTierPrice = PRICING_MATRIX.quantityTiers[0].prices[sizeIdx]; // 25-49 tier = base
+        PRICING_MATRIX.quantityTiers.forEach((tier, idx) => {
+          const tierPrice = tier.prices[sizeIdx];
+          const tierEl = document.getElementById(`price-tier-${idx + 1}`);
+          if(tierEl) {
+            tierEl.textContent = '$' + tierPrice.toFixed(2) + ' ea';
+          }
+          // Update discount label
+          const discountEl = document.getElementById(`discount-tier-${idx + 1}`);
+          if(discountEl) {
+            if(idx === 0) {
+              discountEl.textContent = 'Base';
+            } else {
+              const pctOff = Math.round((1 - tierPrice / baseTierPrice) * 100);
+              discountEl.textContent = pctOff > 0 ? `Save ${pctOff}%` : 'Base';
+            }
+          }
+        });
+      }
     }
 
     if(qtyInput) qtyInput.addEventListener('input', updatePriceAndVariant);
