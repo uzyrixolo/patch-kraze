@@ -815,10 +815,17 @@
       'silicone-patches': { minSize: 1.5, maxSize: 4.0, defaultSize: 2.0, step: 0.5 },
       'leather-patches-for-jackets': { minSize: 1.5, maxSize: 6.0, defaultSize: 2.0, step: 0.5 },
       'leather-patches-for-hats': { minSize: 1.5, maxSize: 6.0, defaultSize: 2.0, step: 0.5 },
-      'dtf-transfers': { minSize: 2, maxSize: 22, defaultSize: 4, step: 1 },
-      // New products (404 fixes)
-      'backpack-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
-      'patches-for-beanies': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      'dtf-transfers': {
+        sizeBrackets: [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [1.6, 3.6, 6.4, 10.0, 14.4, 19.6, 25.6, 32.4, 40.0, 48.4, 57.6] },
+          { min: 50, max: 99, prices: [1.12, 2.52, 4.48, 7.0, 10.08, 13.72, 17.92, 22.68, 28.0, 33.88, 40.32] },
+          { min: 100, max: 199, prices: [0.88, 1.98, 3.52, 5.5, 7.92, 10.78, 14.08, 17.82, 22.0, 26.62, 31.68] },
+          { min: 200, max: 499, prices: [0.67, 1.51, 2.69, 4.2, 6.05, 8.23, 10.75, 13.61, 16.8, 20.33, 24.19] },
+          { min: 500, max: 999, prices: [0.56, 1.26, 2.24, 3.5, 5.04, 6.86, 8.96, 11.34, 14.0, 16.94, 20.16] },
+          { min: 1000, max: 999999, prices: [0.48, 1.08, 1.92, 3.0, 4.32, 5.88, 7.68, 9.72, 12.0, 14.52, 17.28] }
+        ]
+      },
       'patches-for-clothes': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-vests': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'iron-on-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
@@ -1303,7 +1310,7 @@
       // Calculate Size: (W + H) / 2 for patches, max(W, H) for DTF
       let w = parseFloat(widthInput ? widthInput.value : 2) || 2;
       let h = parseFloat(heightInput ? heightInput.value : 2) || 2;
-      let avgSize = PRODUCT_HANDLE === 'dtf-transfers' ? Math.max(w, h) : (w + h) / 2;
+      let avgSize = PRODUCT_HANDLE === 'dtf-transfers' ? (w * h) : (w + h) / 2;
       
       // Handle STICKER products differently
       if (IS_STICKER) {
