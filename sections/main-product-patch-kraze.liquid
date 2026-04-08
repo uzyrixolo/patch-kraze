@@ -779,9 +779,9 @@
       'gold-flex-patches': { minSize: 1.5, maxSize: 4.0, defaultSize: 2.0, step: 0.5 },
       'print-stitch-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       // Sticker products (use styles instead of sizes)
-      'custom-vinyl-stickers': { styleRange: true, defaultStyle: 1 },
-      'holographic-stickers': { styleRange: true, defaultStyle: 1 },
-      'custom-stickers': { styleRange: true, defaultStyle: 1 },
+      'custom-vinyl-stickers': { styleRange: true, defaultStyle: 1, minSize: 1.0, maxSize: 10.0, defaultSize: 2.0, step: 0.5 },
+      'holographic-stickers': { styleRange: true, defaultStyle: 1, minSize: 1.0, maxSize: 10.0, defaultSize: 2.0, step: 0.5 },
+      'custom-stickers': { styleRange: true, defaultStyle: 1, minSize: 1.0, maxSize: 10.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-jackets': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-shirts': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-hats': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
@@ -1215,16 +1215,18 @@
 
     // Apply product-specific defaults to inputs on load
     if(widthInput) {
-      widthInput.value = PRODUCT_CONFIG.defaultSize.toFixed(2);
-      widthInput.min = PRODUCT_CONFIG.minSize;
-      widthInput.max = PRODUCT_CONFIG.maxSize;
-      widthInput.step = PRODUCT_CONFIG.step;
+      const defSize = PRODUCT_CONFIG.defaultSize || 2.0;
+      widthInput.value = defSize.toFixed(2);
+      widthInput.min = PRODUCT_CONFIG.minSize || 1.0;
+      widthInput.max = PRODUCT_CONFIG.maxSize || 12.0;
+      widthInput.step = PRODUCT_CONFIG.step || 0.5;
     }
     if(heightInput) {
-      heightInput.value = PRODUCT_CONFIG.defaultSize.toFixed(2);
-      heightInput.min = PRODUCT_CONFIG.minSize;
-      heightInput.max = PRODUCT_CONFIG.maxSize;
-      heightInput.step = PRODUCT_CONFIG.step;
+      const defSize = PRODUCT_CONFIG.defaultSize || 2.0;
+      heightInput.value = defSize.toFixed(2);
+      heightInput.min = PRODUCT_CONFIG.minSize || 1.0;
+      heightInput.max = PRODUCT_CONFIG.maxSize || 12.0;
+      heightInput.step = PRODUCT_CONFIG.step || 0.5;
     }
 
     // Check if this is a sticker product

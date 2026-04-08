@@ -4064,3 +4064,11 @@ padding:20px;
     font-size: 0.75rem;
 }
 }
+
+
+.variant-option__button-label:has(:checked) {border: 1px solid;}
+
+.variant-option__button-label {
+    border: 1px solid #ccc;
+}
+
