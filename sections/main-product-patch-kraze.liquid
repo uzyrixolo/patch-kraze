@@ -1345,23 +1345,32 @@
         console.log('[Selected Variant Price]', selectedVariant ? selectedVariant.price : 'N/A');
         
         if (selectedVariant) {
-          const unitPrice = parseFloat(selectedVariant.price);
+          const unitPrice = parseFloat(selectedVariant.price) / 100;
           const total = unitPrice * qty;
           
           console.log('[Updating Price]', { unitPrice, total, unitPriceDisplayExists: !!unitPriceDisplay, totalDisplayExists: !!totalDisplay });
           
+          // UPDATE MAIN UI
           if(unitPriceDisplay) {
             unitPriceDisplay.innerHTML = '$' + unitPrice.toFixed(2) + ' <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span>';
-            console.log('[Unit Price Updated to]', unitPriceDisplay.innerHTML);
-          } else {
-            console.log('[ERROR] unitPriceDisplay not found');
           }
-          
           if(totalDisplay) {
             totalDisplay.innerText = '$' + total.toFixed(2).replace(/\.00$/, '');
-            console.log('[Total Updated to]', totalDisplay.innerText);
-          } else {
-            console.log('[ERROR] totalDisplay not found');
+          }
+
+          // UPDATE HEADER UI
+          if(headerPrice) headerPrice.innerText = '$' + unitPrice.toFixed(2);
+          const headerQty = document.getElementById('header-qty');
+          if(headerQty) headerQty.innerText = qty;
+
+          // UPDATE TABLE HIGHLIGHTING
+          if (pricingRows) {
+            pricingRows.forEach(row => {
+               const min = parseInt(row.dataset.min);
+               const max = parseInt(row.dataset.max);
+               if(qty >= min && qty <= max) row.classList.add('active');
+               else row.classList.remove('active');
+            });
           }
           
           // Update hidden variant input
