@@ -1331,8 +1331,12 @@
         const wInt = Math.round(w);
         const hInt = Math.round(h);
         searchPattern1 = `${wInt}" x ${hInt}" - ${qtyRangeStr}`;
+      } else if (PRODUCT_HANDLE.includes('flex-patches')) {
+        // Flex patches use format like '3" - 100-199'
+        const sizeInt = sizeBracket % 1 === 0 ? sizeBracket.toFixed(0) : sizeBracket.toFixed(1);
+        searchPattern1 = `${sizeInt}" - ${qtyRangeStr}`;
       } else {
-        // Format size bracket to always show decimal (2.0 not 2)
+        // Other patches use format like '3.0 inch - 100-199'
         const sizeBracketStr = sizeBracket.toFixed(1);
         searchPattern1 = `${sizeBracketStr} inch - ${qtyRangeStr}`;
       }
@@ -1360,6 +1364,10 @@
             const wInt = Math.round(w);
             const hInt = Math.round(h);
             return v.title.includes(`${wInt}" x ${hInt}"`);
+          } else if (PRODUCT_HANDLE.includes('flex-patches')) {
+            // Flex patches fallback: match size like '3"'
+            const sizeInt = sizeBracket % 1 === 0 ? sizeBracket.toFixed(0) : sizeBracket.toFixed(1);
+            return v.title.includes(`${sizeInt}"`);
           } else {
             const match = v.title.match(/([\d.]+) inch/);  
             if(match) {
