@@ -1304,9 +1304,19 @@
       
       // Handle STICKER products differently
       if (IS_STICKER) {
+        console.log('[STICKER MODE] Product:', PRODUCT_HANDLE, 'Variants count:', shopifyVariants.length);
+        
         // Update Size Text for stickers
         if(calculatedSizeDisplay) {
           calculatedSizeDisplay.innerText = `${w.toFixed(2).replace(/\.00$/, '')}" x ${h.toFixed(2).replace(/\.00$/, '')}"`;
+        }
+        
+        // If no variants, show error
+        if (!shopifyVariants || shopifyVariants.length === 0) {
+          console.error('[STICKER ERROR] No variants found! CSV must be uploaded to Shopify.');
+          if(unitPriceDisplay) unitPriceDisplay.innerHTML = '<span style="color: #ef4444;">Product not configured</span>';
+          if(totalDisplay) totalDisplay.innerText = '$0.00';
+          return;
         }
         
         const styleBracket = getStickerStyleBracket(w, h);
@@ -1314,9 +1324,7 @@
         const searchPattern = `Style #${styleBracket} - ${qtyTier}`;
         
         console.log('[Sticker Variant Search]', { w, h, styleBracket, qty, qtyTier, searchPattern });
-        
         console.log('[Available Variants]', shopifyVariants.map(v => ({ title: v.title, option1: v.option1, price: v.price, id: v.id })));
-                console.log('[First Variant Sample]', shopifyVariants[0]);
         
         // Try matching by option1 first (for CSV-imported products), then by title
         let selectedVariant = shopifyVariants.find(v => 
@@ -1362,6 +1370,10 @@
             qtyInput.max = selectedVariant.inventory_quantity || 9999;
             if(qtyInput.value > qtyInput.max) qtyInput.value = qtyInput.max;
           }
+        } else {
+          console.error('[STICKER ERROR] No variant matched pattern:', searchPattern);
+          if(unitPriceDisplay) unitPriceDisplay.innerHTML = '<span style="color: #ef4444;">Select valid options</span>';
+          if(totalDisplay) totalDisplay.innerText = '$0.00';
         }
         
         // Update pricing table for stickers
