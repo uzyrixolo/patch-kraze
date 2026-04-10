@@ -323,6 +323,7 @@
   {% assign matte_white = all_products['gold-flex-patches'] %}
   {% assign vinyl_stickers = all_products['custom-vinyl-stickers'] %}
   {% assign bumper_stickers = all_products['holographic-stickers'] %}
+  {% assign uv_stickers = all_products['uv-transparent-stickers'] %}
   {% assign dtf_transfers = all_products['dtf-transfers'] %}
   {% assign full_color_printed = all_products['full-color-printed-patches'] %}
   {% assign ready_made_collection = collections['ready-made-patches'] %}
@@ -408,6 +409,11 @@
         title: "Holographic Stickers", 
         image: "{{ bumper_stickers.featured_image | img_url: '800x' }}", 
         href: "/products/holographic-stickers" 
+      },
+      { 
+        title: "UV Transparent Stickers", 
+        image: "{{ uv_stickers.featured_image | img_url: '800x' }}", 
+        href: "/products/uv-transparent-stickers" 
       }
     ],
     dtf: [
