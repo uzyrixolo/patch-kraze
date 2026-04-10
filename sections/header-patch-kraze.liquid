@@ -324,6 +324,7 @@
   {% assign vinyl_stickers = all_products['custom-vinyl-stickers'] %}
   {% assign bumper_stickers = all_products['holographic-stickers'] %}
   {% assign dtf_transfers = all_products['dtf-transfers'] %}
+  {% assign full_color_printed = all_products['full-color-printed-patches'] %}
   {% assign ready_made_collection = collections['ready-made-patches'] %}
   
   const MEGA_MENUS = {
@@ -416,6 +417,13 @@
         href: "/products/dtf-transfers" 
       }
     ],
+    fullColor: [
+      { 
+        title: "Full Color Printed Patches", 
+        image: "{{ full_color_printed.featured_image | img_url: '800x' }}", 
+        href: "/products/full-color-printed-patches" 
+      }
+    ],
     readymade: [
       { 
         title: "Ready Made Patches", 
@@ -429,7 +437,7 @@
 
   const NAV_ITEMS = [
     { label: "Embroidery", key: "embroidery", hasDropdown: true },
-    // { label: "Full Color", key: "fullColor", hasDropdown: false, href: "/products/full-color-printed-patches" },
+    { label: "Full Color", key: "fullColor", hasDropdown: true },
     { label: "PVC Rubber", key: "pvcRubber", hasDropdown: true },
     { label: "Leather", key: "leather", hasDropdown: true },
     { label: "Silicone", key: "silicone", hasDropdown: false, href: "/products/silicone-patches" },
