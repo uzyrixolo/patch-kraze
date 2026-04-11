@@ -1366,7 +1366,7 @@
         console.log('[Selected Variant Price Type]', selectedVariant ? typeof selectedVariant.price : 'N/A');
         
         if (selectedVariant) {
-          const unitPrice = parseFloat(selectedVariant.price);
+          const unitPrice = parseFloat(selectedVariant.price) / 100;
           const total = unitPrice * qty;
           
           console.log('[Updating Price]', { unitPrice, total, unitPriceDisplayExists: !!unitPriceDisplay, totalDisplayExists: !!totalDisplay });
