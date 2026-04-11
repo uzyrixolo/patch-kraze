@@ -781,6 +781,7 @@
       // Sticker products (use styles instead of sizes)
       'custom-vinyl-stickers': { styleRange: true, defaultStyle: 1, minSize: 1.0, maxSize: 10.0, defaultSize: 2.0, step: 0.5 },
       'holographic-stickers': { styleRange: true, defaultStyle: 1, minSize: 1.0, maxSize: 10.0, defaultSize: 2.0, step: 0.5 },
+      'uv-transparent-stickers': { styleRange: true, defaultStyle: 1, minSize: 1.0, maxSize: 10.0, defaultSize: 2.0, step: 0.5 },
       'custom-stickers': { styleRange: true, defaultStyle: 1, minSize: 1.0, maxSize: 10.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-jackets': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-shirts': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
@@ -982,6 +983,18 @@
           { min: 100, max: 249, multiplier: 0.38 },
           { min: 250, max: 499, multiplier: 0.30 },
           { min: 500, max: 999999, multiplier: 0.19 }
+        ]
+      },
+      'uv-transparent-stickers': {
+        type: 'stickers',
+        basePrice: 1.28,
+        pricePerStyle: 0.40,
+        quantityTiers: [
+          { min: 25, max: 49, multiplier: 1.0 },
+          { min: 50, max: 99, multiplier: 0.63 },
+          { min: 100, max: 249, multiplier: 0.42 },
+          { min: 250, max: 499, multiplier: 0.31 },
+          { min: 500, max: 999999, multiplier: 0.21 }
         ]
       },
       'custom-stickers': {
