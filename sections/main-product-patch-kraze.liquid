@@ -1362,7 +1362,8 @@
         }
         
         console.log('[Sticker Variant Match]', selectedVariant ? selectedVariant.title : 'NO MATCH', 'Pattern:', searchPattern);
-        console.log('[Selected Variant Price]', selectedVariant ? selectedVariant.price : 'N/A');
+        console.log('[Selected Variant Price RAW]', selectedVariant ? selectedVariant.price : 'N/A');
+        console.log('[Selected Variant Price Type]', selectedVariant ? typeof selectedVariant.price : 'N/A');
         
         if (selectedVariant) {
           const unitPrice = parseFloat(selectedVariant.price);
