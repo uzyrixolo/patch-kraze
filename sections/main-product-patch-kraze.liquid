@@ -827,6 +827,16 @@
           { min: 1000, max: 999999, prices: [0.07, 0.15, 0.26, 0.41, 0.59, 0.8, 1.05, 1.32, 1.64, 1.98, 2.36] }
         ]
       },
+          { min: 200, max: 499, prices: [0.05, 0.11, 0.2, 0.32, 0.45, 0.62, 0.81, 1.02, 1.26, 1.52, 1.81] },
+          { min: 500, max: 999, prices: [0.04, 0.09, 0.17, 0.26, 0.38, 0.51, 0.67, 0.85, 1.05, 1.27, 1.51] },
+          { min: 1000, max: 999999, prices: [0.04, 0.08, 0.14, 0.22, 0.32, 0.44, 0.58, 0.73, 0.9, 1.09, 1.3] }
+        ]
+      },
+          { min: 200, max: 499, prices: [0.67, 1.51, 2.69, 4.2, 6.05, 8.23, 10.75, 13.61, 16.8, 20.33, 24.19] },
+          { min: 500, max: 999, prices: [0.56, 1.26, 2.24, 3.5, 5.04, 6.86, 8.96, 11.34, 14.0, 16.94, 20.16] },
+          { min: 1000, max: 999999, prices: [0.48, 1.08, 1.92, 3.0, 4.32, 5.88, 7.68, 9.72, 12.0, 14.52, 17.28] }
+        ]
+      },
       'patches-for-clothes': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'patches-for-vests': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'iron-on-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
@@ -1465,10 +1475,9 @@
       
       let searchPattern1;
       if (PRODUCT_HANDLE === 'dtf-transfers') {
-        // DTF uses dimensions like '4" x 4" - 100-199'
-        const wInt = Math.round(w);
-        const hInt = Math.round(h);
-        searchPattern1 = `${wInt}" x ${hInt}" - ${qtyRangeStr}`;
+        // DTF uses square inches format like '4 sq in - 100-199'
+        const sqInches = Math.round(w * h);
+        searchPattern1 = `${sqInches} sq in - ${qtyRangeStr}`;
       } else if (PRODUCT_HANDLE.includes('flex-patches')) {
         // Flex patches use format like '3" - 100-199'
         const sizeInt = sizeBracket % 1 === 0 ? sizeBracket.toFixed(0) : sizeBracket.toFixed(1);
@@ -1498,10 +1507,9 @@
         // Fallback: find variant with matching size only
         selectedVariant = shopifyVariants.find(v => {
           if (PRODUCT_HANDLE === 'dtf-transfers') {
-            // DTF fallback: match dimension like '4" x 4"'
-            const wInt = Math.round(w);
-            const hInt = Math.round(h);
-            return v.title.includes(`${wInt}" x ${hInt}"`);
+            // DTF fallback: match square inches like '4 sq in'
+            const sqInches = Math.round(w * h);
+            return v.title.includes(`${sqInches} sq in`);
           } else if (PRODUCT_HANDLE.includes('flex-patches')) {
             // Flex patches fallback: match size like '3"'
             const sizeInt = sizeBracket % 1 === 0 ? sizeBracket.toFixed(0) : sizeBracket.toFixed(1);
