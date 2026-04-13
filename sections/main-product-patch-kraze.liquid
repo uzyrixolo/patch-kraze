@@ -1203,7 +1203,9 @@
 
     // File Preview
     fileInput.addEventListener('change', function() {
+      console.log('[File Upload] Change event fired', { files: this.files, length: this.files ? this.files.length : 0 });
       if(this.files && this.files.length > 0) {
+         console.log('[File Upload] File selected:', this.files[0].name);
          const file = this.files[0]; 
          const nameDisplay = document.getElementById('filename-display');
          if(nameDisplay) nameDisplay.innerText = file.name;
@@ -1215,8 +1217,14 @@
          }
          reader.readAsDataURL(file);
          
-         if(uploadStage) uploadStage.style.display = 'none';
-         if(customizeStage) customizeStage.classList.add('active');
+         if(uploadStage) {
+           console.log('[File Upload] Hiding upload stage');
+           uploadStage.style.display = 'none';
+         }
+         if(customizeStage) {
+           console.log('[File Upload] Showing customize stage');
+           customizeStage.classList.add('active');
+         }
       }
     });
 
