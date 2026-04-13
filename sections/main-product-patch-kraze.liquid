@@ -757,7 +757,7 @@
 </script>
 
 <script>
-  (function() {
+  document.addEventListener('DOMContentLoaded', function() {
     // 1. INJECT SHOPIFY VARIANTS
     const shopifyVariants = {{ product.variants | json }};
     
@@ -1700,7 +1700,7 @@
        });
     });
 
-  })();
+  }); // End of DOMContentLoaded
 
 </script>
 
