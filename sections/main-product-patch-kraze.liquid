@@ -1199,8 +1199,8 @@
     const variantInput = document.getElementById('real-variant-id');
 
     // Make functions safe if elements missing
-    if (!fileInput || !qtyInput) return;
-
+    if (!fileInput) return;
+    
     // File Preview
     fileInput.addEventListener('change', function() {
       console.log('[File Upload] Change event fired', { files: this.files, length: this.files ? this.files.length : 0 });
