@@ -593,6 +593,14 @@
       btn.disabled = true;
       btn.innerText = 'Adding...';
       
+      // Check if we need to add velcro backing
+      const backingInput = document.getElementById('backing-input');
+      const qtyInput = document.getElementById('qty-input');
+      const productHandle = '{{ product.handle }}';
+      const needsVelcroBacking = productHandle === 'embroidered-patches' && 
+                                  backingInput && backingInput.value.includes('Velcro');
+      const patchQty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+      
       try {
         const response = await fetch('/cart/add.js', {
           method: 'POST',
@@ -602,6 +610,31 @@
         const responseData = await response.json();
         
         if(response.ok) {
+          // Add velcro backing if needed
+          if(needsVelcroBacking) {
+            try {
+              // Fetch velcro backing variant ID dynamically
+              const velcroRes = await fetch('/products/velcro-backing.js');
+              const velcroProduct = await velcroRes.json();
+              const velcroVariant = velcroProduct.variants && velcroProduct.variants[0];
+              
+              if(velcroVariant) {
+                const velcroFormData = new FormData();
+                velcroFormData.append('id', velcroVariant.id);
+                velcroFormData.append('quantity', patchQty);
+                velcroFormData.append('properties[_added_with]', 'embroidered-patches');
+                
+                await fetch('/cart/add.js', {
+                  method: 'POST',
+                  body: velcroFormData
+                });
+              }
+            } catch(velcroError) {
+              console.error('Velcro backing add error:', velcroError);
+              // Don't fail the whole cart if velcro fails
+            }
+          }
+          
           // Re-render cart drawer sections if returned
           if (responseData.sections) {
             Object.entries(responseData.sections).forEach(([sectionId, html]) => {
