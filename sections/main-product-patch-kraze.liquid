@@ -621,26 +621,34 @@
         if(response.ok) {
           // Add velcro backing if needed
           if(needsVelcroBacking) {
+            console.log('[Velcro Debug] Adding velcro backing...');
             try {
               // Fetch velcro backing variant ID dynamically
+              console.log('[Velcro Debug] Fetching /products/velcro-backing.js');
               const velcroRes = await fetch('/products/velcro-backing.js');
+              console.log('[Velcro Debug] Response status:', velcroRes.status);
               const velcroProduct = await velcroRes.json();
+              console.log('[Velcro Debug] Product data:', velcroProduct);
               const velcroVariant = velcroProduct.variants && velcroProduct.variants[0];
+              console.log('[Velcro Debug] Variant:', velcroVariant);
               
               if(velcroVariant) {
+                console.log('[Velcro Debug] Adding variant to cart:', velcroVariant.id);
                 const velcroFormData = new FormData();
                 velcroFormData.append('id', velcroVariant.id);
                 velcroFormData.append('quantity', patchQty);
                 velcroFormData.append('properties[_added_with]', 'embroidered-patches');
                 
-                await fetch('/cart/add.js', {
+                const velcroAddRes = await fetch('/cart/add.js', {
                   method: 'POST',
                   body: velcroFormData
                 });
+                console.log('[Velcro Debug] Add to cart response:', velcroAddRes.status);
+              } else {
+                console.error('[Velcro Debug] No variant found!');
               }
             } catch(velcroError) {
-              console.error('Velcro backing add error:', velcroError);
-              // Don't fail the whole cart if velcro fails
+              console.error('[Velcro Debug] Error:', velcroError);
             }
           }
           
