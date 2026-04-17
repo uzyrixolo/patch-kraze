@@ -556,13 +556,15 @@
 
 <script>
   // AJAX Add to Cart - HIGH PRIORITY HANDLER
-  (function() {
+  document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('product-form-pk');
     if(!form) return;
     
     // Override submit with button click handler instead
     const btn = form.querySelector('.checkout-btn');
     if(!btn) return;
+    
+    console.log('[Cart Handler] Initialized');
     
     btn.addEventListener('click', async function(e) {
       e.preventDefault();
@@ -709,7 +711,7 @@
       e.stopImmediatePropagation();
       return false;
     }, true);
-  })();
+  }); // End of DOMContentLoaded
 </script>
 
 <script>
