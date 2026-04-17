@@ -601,6 +601,13 @@
                                   backingInput && backingInput.value.includes('Velcro');
       const patchQty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
       
+      console.log('[Velcro Debug]', {
+        productHandle,
+        backingValue: backingInput ? backingInput.value : 'no input',
+        needsVelcroBacking,
+        patchQty
+      });
+      
       try {
         const response = await fetch('/cart/add.js', {
           method: 'POST',
