@@ -952,7 +952,7 @@
       'pvc-rubber-patches': {
         sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
         quantityTiers: [
-          { min: 25, max: 49, prices: [4.50, 4.55, 5.55, 5.57, 6.51, 7.49] },
+          { min: 10, max: 49, prices: [4.50, 4.55, 5.55, 5.57, 6.51, 7.49] },
           { min: 50, max: 99, prices: [3.47, 3.50, 4.26, 4.28, 5.01, 5.78] },
           { min: 100, max: 199, prices: [2.39, 2.40, 2.85, 2.85, 3.27, 3.77] },
           { min: 200, max: 499, prices: [1.67, 1.67, 1.89, 1.92, 2.16, 2.49] },
@@ -1256,9 +1256,46 @@
     // Make functions safe if elements missing
     if (!fileInput) return;
     
+    // Update minimum quantity labels for products with different minimums
+    const minQtyLabels = {
+      'pvc-rubber-patches': 10,
+      'pvc-patches': 10,
+      'glow-in-the-dark-pvc-rubber-patches': 10
+    };
+    const productMinQty = minQtyLabels[PRODUCT_HANDLE] || 25;
+    
+    // Update feature bar
+    const featureBar = document.querySelector('.feature-bar .feature-green');
+    if(featureBar && productMinQty !== 25) {
+      featureBar.innerText = `${productMinQty} Minimum Quantity`;
+    }
+    
+    // Update qty error message
+    const qtyError = document.getElementById('qty-error');
+    if(qtyError && productMinQty !== 25) {
+      qtyError.innerText = `${productMinQty} Piece Minimum Required`;
+    }
+    
+    // Update qty min label
+    const qtyMinLabel = qtyInput ? qtyInput.parentElement.querySelector('div:last-child') : null;
+    if(qtyMinLabel && productMinQty !== 25) {
+      qtyMinLabel.innerText = `${productMinQty} Piece Min`;
+    }
+    
+    // Update pricing row labels
+    if(productMinQty !== 25) {
+      const firstPricingRow = document.querySelector('.pricing-row[data-min="25"]');
+      if(firstPricingRow) {
+        firstPricingRow.dataset.min = productMinQty;
+        const qtyLabel = firstPricingRow.querySelector('span:first-child');
+        if(qtyLabel) {
+          qtyLabel.innerText = `${productMinQty}-49 pcs`;
+        }
+      }
+    }
+    
     // File Preview
     fileInput.addEventListener('change', function() {
-      console.log('[File Upload] Change event fired', { files: this.files, length: this.files ? this.files.length : 0 });
       if(this.files && this.files.length > 0) {
          console.log('[File Upload] File selected:', this.files[0].name);
          const file = this.files[0]; 
@@ -1382,11 +1419,11 @@
     // Smart Pricing + Variant Selector using Matrix
     function updatePriceAndVariant() {
       if(!qtyInput) return;
-      let qty = parseInt(qtyInput.value) || 25;
+      let qty = parseInt(qtyInput.value) || productMinQty;
       
-      // Show error if qty < 25
+      // Show error if qty < minimum
       const qtyError = document.getElementById('qty-error');
-      if(qty < 25) {
+      if(qty < productMinQty) {
         if(qtyError) qtyError.style.display = 'block';
         return; // Don't update prices
       } else {
