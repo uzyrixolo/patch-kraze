@@ -628,78 +628,14 @@
         const responseData = await response.json();
         
         if(response.ok) {
-          // Add velcro backing if needed
-          if(needsVelcroBacking) {
-            console.log('[Velcro] Adding velcro backing line item...');
-            try {
-              // Add velcro backing as a line item with $0.25 per piece
-              const velcroFormData = new FormData();
-              // Use a special variant ID or create a dummy product for velcro backing
-              // For now, we'll add it as a property to the main item or use cart/update
-              
-              // Alternative: Add as a separate line item using cart/add.js
-              // We need the actual variant ID from the velcro-backing product
-              const velcroRes = await fetch('/products/velcro-backing.js');
-              const velcroProduct = await velcroRes.json();
-              const velcroVariant = velcroProduct.variants && velcroProduct.variants[0];
-              
-              if(velcroVariant) {
-                const velcroFormData = new FormData();
-                velcroFormData.append('id', velcroVariant.id);
-                velcroFormData.append('quantity', patchQty);
-                velcroFormData.append('properties[_added_with]', 'embroidered-patches');
-                velcroFormData.append('properties[_backing_type]', 'Velcro');
-                velcroFormData.append('properties[_price_per_piece]', '$0.25');
-                
-                const velcroAddRes = await fetch('/cart/add.js', {
-                  method: 'POST',
-                  body: velcroFormData
-                });
-                
-                if(velcroAddRes.ok) {
-                  console.log('[Velcro] Successfully added', patchQty, 'velcro backings at $0.25 each');
-                } else {
-                  console.error('[Velcro] Failed to add:', await velcroAddRes.text());
-                }
-              }
-            } catch(velcroError) {
-              console.error('[Velcro] Error:', velcroError);
-            }
-          }
+          // Show success immediately - don't wait for background tasks
+          btn.innerText = 'Added!';
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.innerText = originalText;
+          }, 1500);
           
-          // Re-render cart drawer sections if returned
-          if (responseData.sections) {
-            Object.entries(responseData.sections).forEach(([sectionId, html]) => {
-              const el = document.querySelector(`[data-section-id="${sectionId}"]`);
-              if (el) {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const newEl = doc.querySelector(`[data-section-id="${sectionId}"]`);
-                if (newEl) el.innerHTML = newEl.innerHTML;
-              }
-            });
-          }
-
-          // Fetch real cart count then dispatch event with correct shape
-          const cartRes = await fetch('/cart.js');
-          const cartData = await cartRes.json();
-          const cartUpdateEvent = new CustomEvent('cart:update', {
-            bubbles: true,
-            detail: {
-              resource: cartData,
-              data: {
-                source: 'product-form-component',
-                itemCount: cartData.item_count,
-                sections: responseData.sections || {}
-              }
-            }
-          });
-          document.dispatchEvent(cartUpdateEvent);
-
-          // Wait briefly before opening drawer so sections have time to render
-          await new Promise(resolve => setTimeout(resolve, 100));
-          
-          // Open cart drawer
+          // Open cart drawer immediately
           const cartDrawer = document.querySelector('cart-drawer-component');
           if(cartDrawer) {
             if(typeof cartDrawer.open === 'function') {
@@ -709,11 +645,73 @@
             }
           }
           
-          btn.innerText = 'Added!';
-          setTimeout(() => {
-            btn.disabled = false;
-            btn.innerText = originalText;
-          }, 1000);
+          // Background: Add velcro backing if needed (don't block UI)
+          if(needsVelcroBacking) {
+            console.log('[Velcro] Adding velcro backing in background...');
+            (async () => {
+              try {
+                const velcroRes = await fetch('/products/velcro-backing.js');
+                const velcroProduct = await velcroRes.json();
+                const velcroVariant = velcroProduct.variants && velcroProduct.variants[0];
+                
+                if(velcroVariant) {
+                  const velcroFormData = new FormData();
+                  velcroFormData.append('id', velcroVariant.id);
+                  velcroFormData.append('quantity', patchQty);
+                  velcroFormData.append('properties[_added_with]', 'embroidered-patches');
+                  velcroFormData.append('properties[_backing_type]', 'Velcro');
+                  velcroFormData.append('properties[_price_per_piece]', '$0.25');
+                  
+                  const velcroAddRes = await fetch('/cart/add.js', {
+                    method: 'POST',
+                    body: velcroFormData
+                  });
+                  
+                  if(velcroAddRes.ok) {
+                    console.log('[Velcro] Successfully added', patchQty, 'velcro backings');
+                  } else {
+                    console.error('[Velcro] Failed to add:', await velcroAddRes.text());
+                  }
+                }
+              } catch(velcroError) {
+                console.error('[Velcro] Error:', velcroError);
+              }
+            })();
+          }
+          
+          // Background: Re-render cart drawer sections and dispatch event
+          setTimeout(async () => {
+            if (responseData.sections) {
+              Object.entries(responseData.sections).forEach(([sectionId, html]) => {
+                const el = document.querySelector(`[data-section-id="${sectionId}"]`);
+                if (el) {
+                  const parser = new DOMParser();
+                  const doc = parser.parseFromString(html, 'text/html');
+                  const newEl = doc.querySelector(`[data-section-id="${sectionId}"]`);
+                  if (newEl) el.innerHTML = newEl.innerHTML;
+                }
+              });
+            }
+            
+            try {
+              const cartRes = await fetch('/cart.js');
+              const cartData = await cartRes.json();
+              const cartUpdateEvent = new CustomEvent('cart:update', {
+                bubbles: true,
+                detail: {
+                  resource: cartData,
+                  data: {
+                    source: 'product-form-component',
+                    itemCount: cartData.item_count,
+                    sections: responseData.sections || {}
+                  }
+                }
+              });
+              document.dispatchEvent(cartUpdateEvent);
+            } catch(e) {
+              console.error('Cart refresh error:', e);
+            }
+          }, 100);
         } else {
           throw new Error(responseData.description || 'Failed to add to cart');
         }
