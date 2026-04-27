@@ -542,8 +542,20 @@
               Add Free Design Notes (Optional)
             </label>
             <div id="design-notes-container" style="display:none; margin-top:1rem;">
-               <textarea name="properties[Design Notes]" class="text-input" rows="4" placeholder="i.e. Keep the white inside of the text. Change the border of the logo to blue."></textarea>
+               <textarea name="properties[Design Notes]" id="design-notes-input" class="text-input" rows="4" placeholder="i.e. Keep the white inside of the text. Change the border of the logo to blue."></textarea>
             </div>
+            <script>
+              document.getElementById('design-notes-toggle').addEventListener('change', function() {
+                const container = document.getElementById('design-notes-container');
+                const notesInput = document.getElementById('design-notes-input');
+                if(this.checked) {
+                  container.style.display = 'block';
+                } else {
+                  container.style.display = 'none';
+                  notesInput.value = '';
+                }
+              });
+            </script>
           </div>
           
           <button type="submit" name="add" class="checkout-btn">Add to Cart</button>
