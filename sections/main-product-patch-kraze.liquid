@@ -247,6 +247,20 @@
     background-size: cover;
     background-position: center;
     margin-bottom: 0.75rem;
+    position: relative;
+  }
+  .backing-price-badge {
+    position: absolute;
+    top: 0.35rem;
+    right: 0.35rem;
+    background-color: #dc2626;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.15rem 0.4rem;
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
 
   /* Pricing Table Mobile Tweak */
@@ -463,6 +477,7 @@
              <div class="control-group" style="margin-bottom:0;">
                 <label class="control-label">Total</label>
                 <div class="total-price-large" id="total-price-display">$159.00</div>
+                <div id="velcro-surcharge-notice" style="display:none; text-align:center; font-size:0.75rem; color:#dc2626; margin-top:0.25rem; font-weight:600;">+$0.25/pc Velcro surcharge</div>
              </div>
           </div>
 
@@ -522,7 +537,9 @@
               <div>Heat Applied</div>
             </div>
             <div class="backing-card" onclick="selectBacking(this, 'Velcro (Both Sides of Velcro Included)')">
-              <div class="backing-preview" style="background-image:url('https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Velcro.jpg?v=1770207494'); background-size:cover; background-position:center;"></div>
+              <div class="backing-preview" style="background-image:url('https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Velcro.jpg?v=1770207494'); background-size:cover; background-position:center;">
+                <span class="backing-price-badge">+$0.25/pc</span>
+              </div>
               <div>Velcro</div>
             </div>
             <div class="backing-card" onclick="selectBacking(this, 'Peel & Stick')">
@@ -1733,6 +1750,12 @@
        const input = document.getElementById('backing-input');
        if(input) input.value = val;
        
+       // Show/hide velcro surcharge notice
+       const surchargeNotice = document.getElementById('velcro-surcharge-notice');
+       if(surchargeNotice) {
+         surchargeNotice.style.display = val.includes('Velcro') ? 'block' : 'none';
+       }
+       
        // Update label
        const labelMap = {
          'Heat Applied': 'Heat Applied (Most Popular)',
@@ -1745,7 +1768,7 @@
        // Update description
        const descMap = {
          'Heat Applied': 'Our most popular method allows you to quickly and conveniently use a heat press or even a home iron if the right pressure and heat are applied.',
-         'Velcro': 'Ideal for uniforms and tactical gear. Allows for easy removal and reattachment.',
+         'Velcro': 'Ideal for uniforms and tactical gear. Allows for easy removal and reattachment. Additional $0.25 per patch will be added for Velcro backing.',
          'Peel & Stick': 'Perfect for temporary use or hard-to-iron surfaces. Just peel off the back and stick it on!'
        };
        const desc = document.getElementById('backing-description');
