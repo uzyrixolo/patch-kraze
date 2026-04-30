@@ -1621,9 +1621,10 @@
       let selectedVariant = null;
       
       // Try to find exact match with quantity range in title
-      const qtyRangeStr = qty >= 1000 ? '1000-999999' : `${qtyTier.min}-${qtyTier.max}`;
+      const qtyRangeStr = qty >= 1000 ? '1000+' : `${qtyTier.min}-${qtyTier.max}`;
       
       let searchPattern1;
+      let searchPatternAlt; // Alternate format for products using '.0' inch
       if (PRODUCT_HANDLE === 'dtf-transfers') {
         // DTF uses square inches format like '4 sq in - 100-199'
         // Snap to nearest valid DTF bracket: [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144]
@@ -1636,9 +1637,11 @@
         const sizeInt = sizeBracket % 1 === 0 ? sizeBracket.toFixed(0) : sizeBracket.toFixed(1);
         searchPattern1 = `${sizeInt}" - ${qtyRangeStr}`;
       } else {
-        // Other patches use format like '3.0 inch - 100-199'
-        const sizeBracketStr = sizeBracket.toFixed(1);
+        // Other patches use format like '3 inch - 100-199' or '3.0 inch - 100-199'
+        const sizeBracketStr = sizeBracket % 1 === 0 ? sizeBracket.toFixed(0) : sizeBracket.toFixed(1);
+        const sizeBracketStrAlt = sizeBracket.toFixed(1); // Alternate: '3.0 inch' for products that use .0
         searchPattern1 = `${sizeBracketStr} inch - ${qtyRangeStr}`;
+        searchPatternAlt = `${sizeBracketStrAlt} inch - ${qtyRangeStr}`;
       }
       
       console.log('[Variant Search]', {
@@ -1653,6 +1656,13 @@
       selectedVariant = shopifyVariants.find(v => 
         v.title.includes(searchPattern1)
       );
+      
+      // Try alternate format (e.g., '4.0 inch' vs '4 inch') if first match fails
+      if(!selectedVariant && searchPatternAlt) {
+        selectedVariant = shopifyVariants.find(v =>
+          v.title.includes(searchPatternAlt)
+        );
+      }
       
       console.log('[Variant Match]', selectedVariant ? selectedVariant.title : 'NO MATCH - using fallback');
       
