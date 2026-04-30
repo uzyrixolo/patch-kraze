@@ -863,6 +863,7 @@
       'chenille-patches':    { minSize: 4.0, maxSize: 13.0, defaultSize: 4.0, step: 0.5 },
       '3d-embroidered-patches':       { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'sublimation-patches-for-hats':  { minSize: 2.0, maxSize: 10.0, defaultSize: 2.0, step: 0.5 },
+            'full-color-printed-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'pvc-rubber-patches':  { minSize: 1.5, maxSize: 4.0,  defaultSize: 2.0, step: 0.5 },
       'woven-patches':       { minSize: 2.0, maxSize: 7.0,  defaultSize: 2.0, step: 0.5 },
       'leather-patches':     { minSize: 1.5, maxSize: 6.0,  defaultSize: 2.0, step: 0.5 },
@@ -965,6 +966,17 @@
           { min: 200, max: 499, prices: [0.83, 0.92, 0.98, 1.07, 1.14, 1.29, 1.44, 1.76, 2.21, 2.34, 3.09, 3.23] },
           { min: 500, max: 999, prices: [0.68, 0.74, 0.80, 0.86, 0.92, 1.04, 1.17, 1.41, 1.79, 1.89, 2.51, 2.61] },
           { min: 1000, max: 999999, prices: [0.62, 0.68, 0.72, 0.77, 0.83, 0.93, 1.07, 1.29, 1.62, 1.71, 2.25, 2.36] }
+        ]
+      },
+      'full-color-printed-patches': {
+        sizeBrackets: [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [1.23, 1.31, 1.44, 1.59, 1.74, 1.82, 1.95, 2.25, 2.51, 3.11, 3.84, 4.05, 5.36, 5.61, 6.23, 6.85] },
+          { min: 50, max: 99, prices: [1.00, 1.06, 1.17, 1.29, 1.35, 1.46, 1.58, 1.77, 2.01, 2.48, 3.06, 3.24, 4.29, 4.50, 4.99, 5.48] },
+          { min: 100, max: 199, prices: [0.79, 0.84, 0.93, 1.02, 1.08, 1.17, 1.25, 1.43, 1.59, 1.95, 2.46, 2.60, 3.44, 3.59, 3.98, 4.38] },
+          { min: 200, max: 499, prices: [0.71, 0.75, 0.83, 0.92, 0.98, 1.07, 1.14, 1.29, 1.44, 1.76, 2.21, 2.34, 3.09, 3.23, 3.58, 3.93] },
+          { min: 500, max: 999, prices: [0.58, 0.62, 0.68, 0.74, 0.80, 0.86, 0.92, 1.04, 1.17, 1.41, 1.79, 1.89, 2.51, 2.61, 2.89, 3.18] },
+          { min: 1000, max: 999999, prices: [0.53, 0.56, 0.62, 0.68, 0.72, 0.77, 0.83, 0.93, 1.07, 1.29, 1.62, 1.71, 2.25, 2.36, 2.61, 2.87] }
         ]
       },
       '3d-embroidered-patches': {
