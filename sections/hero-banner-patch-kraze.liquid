@@ -14,12 +14,42 @@
 <style>
   .hero-patch-kraze {
     width: 100%;
-    background-color: #111827; /* gray-900 */
+    background-color: #111827; /* gray-900 - fallback */
     padding: 5rem 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-bg-video.desktop-only { display: block; }
+  .hero-bg-video.mobile-only { display: none; }
+  @media (max-width: 767px) {
+    .hero-bg-video.desktop-only { display: none; }
+    .hero-bg-video.mobile-only { display: block; }
+  }
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(17, 24, 39, 0.55); /* dark tint for text readability */
+    z-index: 1;
+    pointer-events: none;
   }
   .hero-container {
     max-width: 1280px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
   }
   .hero-content {
     display: flex;
@@ -148,6 +178,17 @@
 </style>
 
 <div class="hero-patch-kraze">
+  <!-- Background Video: Desktop -->
+  <video class="hero-bg-video desktop-only" autoplay muted loop playsinline preload="auto">
+    <source src="https://cdn.shopify.com/videos/c/o/v/e5e7c87c243a4ed3b633e3c850b1d23d.mp4" type="video/mp4">
+  </video>
+  <!-- Background Video: Mobile -->
+  <video class="hero-bg-video mobile-only" autoplay muted loop playsinline preload="auto">
+    <source src="https://cdn.shopify.com/videos/c/o/v/ed01baa43cef4b548cf87e21b7d3347f.mp4" type="video/mp4">
+  </video>
+  <!-- Dark overlay for text readability -->
+  <div class="hero-overlay"></div>
+
   <div class="hero-container">
     <div class="hero-content">
       
