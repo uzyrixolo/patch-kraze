@@ -593,6 +593,52 @@
             Our most popular method allows you to quickly and conveniently use a heat press or even a home iron if the right pressure and heat are applied.
           </div>
           <input type="hidden" name="properties[Backing]" id="backing-input" value="Heat Applied (Most Popular)">
+
+          {% if product.handle == 'faux-leather-patches' %}
+          <label class="control-label" style="margin-top:1.5rem;">Select Leather Color: <span id="leather-color-label-extra" style="font-weight:400; color:#6b7280;">Faux Black</span></label>
+          <div class="backing-grid">
+            <div class="backing-card selected" onclick="selectLeatherColor(this, 'Faux Black')">
+              <div class="backing-preview" style="background:#1a1a1a;"></div>
+              <div>Faux Black</div>
+            </div>
+            <div class="backing-card" onclick="selectLeatherColor(this, 'Faux Chestnut/Brown')">
+              <div class="backing-preview" style="background:#8b4513;"></div>
+              <div>Faux Chestnut/Brown</div>
+            </div>
+            <div class="backing-card" onclick="selectLeatherColor(this, 'Faux Light Brown')">
+              <div class="backing-preview" style="background:#b8864f;"></div>
+              <div>Faux Light Brown</div>
+            </div>
+            <div class="backing-card" onclick="selectLeatherColor(this, 'Faux Chocolate')">
+              <div class="backing-preview" style="background:#3d2817;"></div>
+              <div>Faux Chocolate</div>
+            </div>
+          </div>
+          <input type="hidden" name="properties[Leather Color]" id="leather-color-input" value="Faux Black">
+          {% endif %}
+
+          {% if product.handle == 'leather-patches' or product.handle == 'genuine-leather-patches' %}
+          <label class="control-label" style="margin-top:1.5rem;">Select Leather Color: <span id="leather-color-label-extra" style="font-weight:400; color:#6b7280;">Genuine Caramel/Brown</span></label>
+          <div class="backing-grid">
+            <div class="backing-card selected" onclick="selectLeatherColor(this, 'Genuine Caramel/Brown')">
+              <div class="backing-preview" style="background:#a0522d;"></div>
+              <div>Genuine Caramel/Brown</div>
+            </div>
+            <div class="backing-card" onclick="selectLeatherColor(this, 'Genuine Natural/Sand/Tan')">
+              <div class="backing-preview" style="background:#d2b48c;"></div>
+              <div>Genuine Natural/Sand/Tan</div>
+            </div>
+            <div class="backing-card" onclick="selectLeatherColor(this, 'Genuine Taupe')">
+              <div class="backing-preview" style="background:#8b7d6b;"></div>
+              <div>Genuine Taupe</div>
+            </div>
+            <div class="backing-card" onclick="selectLeatherColor(this, 'Dark Brown Genuine')">
+              <div class="backing-preview" style="background:#3b2417;"></div>
+              <div>Dark Brown Genuine</div>
+            </div>
+          </div>
+          <input type="hidden" name="properties[Leather Color]" id="leather-color-input" value="Genuine Caramel/Brown">
+          {% endif %}
           {% endunless %}
 
           <div class="control-group" style="margin-top:2rem;">
@@ -1822,7 +1868,12 @@
        if(input) input.value = val;
     }
     window.selectBacking = function(el, val) {
-       document.querySelectorAll('.backing-card').forEach(c => c.classList.remove('selected'));
+       const grid = el.closest('.backing-grid');
+       if(grid) {
+         grid.querySelectorAll('.backing-card').forEach(c => c.classList.remove('selected'));
+       } else {
+         document.querySelectorAll('.backing-card').forEach(c => c.classList.remove('selected'));
+       }
        el.classList.add('selected');
        const input = document.getElementById('backing-input');
        if(input) input.value = val;
@@ -1850,6 +1901,19 @@
        };
        const desc = document.getElementById('backing-description');
        if(desc) desc.innerText = descMap[val] || '';
+    }
+
+    window.selectLeatherColor = function(el, val) {
+       // Only de-select cards in the SAME grid (the leather color grid)
+       const grid = el.closest('.backing-grid');
+       if(grid) {
+         grid.querySelectorAll('.backing-card').forEach(c => c.classList.remove('selected'));
+       }
+       el.classList.add('selected');
+       const input = document.getElementById('leather-color-input');
+       if(input) input.value = val;
+       const labelExtra = document.getElementById('leather-color-label-extra');
+       if(labelExtra) labelExtra.innerText = val;
     }
 
     // --- GALLERY LOGIC (Scroll Snap - Fast) ---
