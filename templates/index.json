@@ -300,19 +300,6 @@
       "type": "faq-patch-kraze",
       "settings": {}
     },
-    "video_section": {
-      "type": "video-section-patch-kraze",
-      "settings": {
-        "desktop_video_url": "https://cdn.shopify.com/videos/c/o/v/c3949c44fb574170a6ebd42db57554f3.mp4",
-        "mobile_video_url": "https://cdn.shopify.com/videos/c/o/v/8facce6f0bb94e71a9910f5d58a64f3a.mp4",
-        "autoplay": true,
-        "loop": true,
-        "muted": true,
-        "show_controls": false,
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "explore_products": {
       "type": "explore-products-patch-kraze",
       "disabled": true,
@@ -459,6 +446,20 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "video_section_patch_kraze_DwW7mE": {
+      "type": "video-section-patch-kraze",
+      "name": "PK Video Section",
+      "settings": {
+        "desktop_video_url": "https://cdn.shopify.com/videos/c/o/v/c3949c44fb574170a6ebd42db57554f3.mp4",
+        "mobile_video_url": "https://cdn.shopify.com/videos/c/o/v/8facce6f0bb94e71a9910f5d58a64f3a.mp4",
+        "autoplay": true,
+        "loop": true,
+        "muted": true,
+        "show_controls": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
@@ -469,8 +470,8 @@
     "cta",
     "ordering_process",
     "why_buy",
+    "video_section_patch_kraze_DwW7mE",
     "faq",
-    "video_section",
     "explore_products",
     "featured_blog_posts_xihL69"
   ]
