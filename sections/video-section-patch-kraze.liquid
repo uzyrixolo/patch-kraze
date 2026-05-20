@@ -1,0 +1,140 @@
+{% schema %}
+{
+  "name": "PK Video Section",
+  "class": "section-video-patch-kraze",
+  "settings": [
+    {
+      "type": "url",
+      "id": "desktop_video_url",
+      "label": "Desktop Video URL",
+      "default": "https://cdn.shopify.com/videos/c/o/v/c3949c44fb574170a6ebd42db57554f3.mp4"
+    },
+    {
+      "type": "url",
+      "id": "mobile_video_url",
+      "label": "Mobile Video URL",
+      "default": "https://cdn.shopify.com/videos/c/o/v/8facce6f0bb94e71a9910f5d58a64f3a.mp4"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "muted",
+      "label": "Muted",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_controls",
+      "label": "Show Controls",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "PK Video Section"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .pk-video-section-{{ section.id }} {
+    width: 100%;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    line-height: 0;
+    background: #000;
+  }
+  .pk-video-section-{{ section.id }} .pk-video-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .pk-video-section-{{ section.id }} .pk-video-element {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+  .pk-video-section-{{ section.id }} .pk-video-desktop {
+    display: block;
+  }
+  .pk-video-section-{{ section.id }} .pk-video-mobile {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .pk-video-section-{{ section.id }} .pk-video-desktop {
+      display: none;
+    }
+    .pk-video-section-{{ section.id }} .pk-video-mobile {
+      display: block;
+    }
+  }
+</style>
+
+<section class="pk-video-section-{{ section.id }}">
+  <div class="pk-video-wrapper">
+    {%- if section.settings.desktop_video_url != blank -%}
+      <video
+        class="pk-video-element pk-video-desktop"
+        {% if section.settings.autoplay %}autoplay{% endif %}
+        {% if section.settings.loop %}loop{% endif %}
+        {% if section.settings.muted %}muted{% endif %}
+        {% if section.settings.show_controls %}controls{% endif %}
+        playsinline
+        preload="metadata"
+        aria-label="Patch Kraze video"
+      >
+        <source src="{{ section.settings.desktop_video_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    {%- endif -%}
+
+    {%- if section.settings.mobile_video_url != blank -%}
+      <video
+        class="pk-video-element pk-video-mobile"
+        {% if section.settings.autoplay %}autoplay{% endif %}
+        {% if section.settings.loop %}loop{% endif %}
+        {% if section.settings.muted %}muted{% endif %}
+        {% if section.settings.show_controls %}controls{% endif %}
+        playsinline
+        preload="metadata"
+        aria-label="Patch Kraze video"
+      >
+        <source src="{{ section.settings.mobile_video_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    {%- endif -%}
+  </div>
+</section>
