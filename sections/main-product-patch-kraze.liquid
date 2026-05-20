@@ -1405,7 +1405,11 @@
     
     // Product-specific minimum quantity overrides (default is 10 for all)
     const minQtyLabels = {
-      // Add any products with different minimums here
+      // Sticker products require a minimum of 25
+      'custom-vinyl-stickers': 25,
+      'holographic-stickers': 25,
+      'uv-transparent-stickers': 25,
+      'custom-stickers': 25
     };
     const productMinQty = minQtyLabels[PRODUCT_HANDLE] || 10;
     
@@ -1425,6 +1429,13 @@
     const qtyMinLabel = qtyInput ? qtyInput.parentElement.querySelector('div:last-child') : null;
     if(qtyMinLabel && productMinQty !== 10) {
       qtyMinLabel.innerText = `${productMinQty} Piece Min`;
+    }
+
+    // Sync qty input min attribute and bump value if below minimum
+    if(qtyInput && productMinQty !== 10) {
+      qtyInput.min = productMinQty;
+      const currentVal = parseInt(qtyInput.value) || 0;
+      if(currentVal < productMinQty) qtyInput.value = productMinQty;
     }
     
     // Update pricing row labels if different from default HTML
