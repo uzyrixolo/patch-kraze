@@ -411,7 +411,7 @@
               "static": true,
               "settings": {
                 "show_date": true,
-                "show_author": true,
+                "show_author": false,
                 "type_preset": "",
                 "alignment": "left",
                 "show_alignment": false,
@@ -444,7 +444,7 @@
       },
       "name": "t:names.blog_posts_grid",
       "settings": {
-        "blog": "patches",
+        "blog": "news",
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "post_limit": 3,
@@ -467,33 +467,23 @@
       "blocks": {
         "video_MhVCBt": {
           "type": "video",
-          "settings": {
-            "video_url": ""
-          }
+          "settings": {}
         },
         "video_VmJTtU": {
           "type": "video",
-          "settings": {
-            "video_url": ""
-          }
+          "settings": {}
         },
         "video_TzKC3T": {
           "type": "video",
-          "settings": {
-            "video_url": ""
-          }
+          "settings": {}
         },
         "video_fbPTFN": {
           "type": "video",
-          "settings": {
-            "video_url": ""
-          }
+          "settings": {}
         },
         "video_e7Bia7": {
           "type": "video",
-          "settings": {
-            "video_url": ""
-          }
+          "settings": {}
         }
       },
       "block_order": [
