@@ -226,7 +226,16 @@
     },
     "comparison_slider": {
       "type": "comparison-slider",
-      "settings": {}
+      "settings": {
+        "heading": "You Upload Your Design, We Turn it into an Embroidered Patch",
+        "before_image": "shopify://shop_images/monkey-before.jpg",
+        "before_label": "Your Design as a Digital Proof",
+        "after_image": "shopify://shop_images/monkey-after.jpg",
+        "after_label": "Your Design as a Embroidered Patch",
+        "initial_position": 50,
+        "background_color": "#f3f4f6",
+        "label_color": "#10b981"
+      }
     },
     "product_faq": {
       "type": "product-faq-patch-kraze",
