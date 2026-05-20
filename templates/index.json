@@ -461,6 +461,60 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "video_carousel_patch_kraze_HQHGpj": {
+      "type": "video-carousel-patch-kraze",
+      "blocks": {
+        "video_MhVCBt": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_VmJTtU": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_TzKC3T": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_fbPTFN": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_e7Bia7": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_MhVCBt",
+        "video_VmJTtU",
+        "video_TzKC3T",
+        "video_fbPTFN",
+        "video_e7Bia7"
+      ],
+      "name": "Video Carousel PK",
+      "settings": {
+        "heading_prefix": "Trusted By",
+        "heading_highlight": "Thousands of People",
+        "highlight_color": "#eb1d25",
+        "background_color": "#ffffff",
+        "visible_videos_desktop": 4,
+        "visible_videos_mobile": 2,
+        "autoplay_visible": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     }
   },
   "order": [
@@ -474,6 +528,7 @@
     "why_buy",
     "faq",
     "explore_products",
-    "featured_blog_posts_xihL69"
+    "featured_blog_posts_xihL69",
+    "video_carousel_patch_kraze_HQHGpj"
   ]
 }
