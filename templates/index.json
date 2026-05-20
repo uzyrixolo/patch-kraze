@@ -465,28 +465,45 @@
     "video_carousel_patch_kraze_HQHGpj": {
       "type": "video-carousel-patch-kraze",
       "blocks": {
+        "video_PhjFB3": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-05-15 at 02.36.40.mp4"
+          }
+        },
         "video_MhVCBt": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-05-15 at 02.10.03.mp4"
+          }
         },
         "video_VmJTtU": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-05-15 at 02.37.50.mp4"
+          }
         },
         "video_TzKC3T": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-05-15 at 02.10.31.mp4"
+          }
         },
         "video_fbPTFN": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-05-15 at 02.10.03.mp4"
+          }
         },
         "video_e7Bia7": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-05-15 at 02.37.43.mp4"
+          }
         }
       },
       "block_order": [
+        "video_PhjFB3",
         "video_MhVCBt",
         "video_VmJTtU",
         "video_TzKC3T",
