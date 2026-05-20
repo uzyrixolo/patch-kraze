@@ -1560,10 +1560,11 @@
     
     // Sticker quantity tier
     function getStickerQtyTier(qty) {
-      if (qty >= 25 && qty <= 49) return '25-49';
-      if (qty >= 50 && qty <= 99) return '50-99';
-      if (qty >= 100 && qty <= 249) return '100-249';
-      if (qty >= 250 && qty <= 499) return '250-499';
+      // qty below 25 falls into first tier (25-49) since CSV has no smaller bucket
+      if (qty <= 49) return '25-49';
+      if (qty <= 99) return '50-99';
+      if (qty <= 249) return '100-249';
+      if (qty <= 499) return '250-499';
       return '500+';
     }
 
@@ -1606,6 +1607,46 @@
         const styleBracket = getStickerStyleBracket(w, h);
         const qtyTier = getStickerQtyTier(qty);
         const searchPattern = `Style #${styleBracket} - ${qtyTier}`;
+
+        // ----- Sync pricing table with CSV-uploaded variant prices (single source of truth) -----
+        // CSV tiers: 25-49, 50-99, 100-249, 250-499, 500+
+        const stickerTierDefs = [
+          { min: productMinQty, max: 49,     label: '25-49 pcs',   suffix: '25-49' },
+          { min: 50,            max: 99,     label: '50-99 pcs',   suffix: '50-99' },
+          { min: 100,           max: 249,    label: '100-249 pcs', suffix: '100-249' },
+          { min: 250,           max: 499,    label: '250-499 pcs', suffix: '250-499' },
+          { min: 500,           max: 999999, label: '500+ pcs',    suffix: '500+' }
+        ];
+        const baseVariantForStyle = shopifyVariants.find(v => v.option1 && v.option1.includes(`Style #${styleBracket} - 25-49`));
+        const stickerBasePrice = baseVariantForStyle ? parseFloat(baseVariantForStyle.price) / 100 : 0;
+        const allStickerRows = document.querySelectorAll('.pricing-card .pricing-row');
+        allStickerRows.forEach((row, idx) => {
+          const def = stickerTierDefs[idx];
+          if (!def) {
+            row.style.display = 'none';
+            return;
+          }
+          row.style.display = '';
+          row.dataset.min = def.min;
+          row.dataset.max = def.max;
+          const labelEl = row.querySelector('span:first-child');
+          if (labelEl) labelEl.textContent = def.label;
+          const tierVariant = shopifyVariants.find(v => v.option1 && v.option1.includes(`Style #${styleBracket} - ${def.suffix}`));
+          const tierPriceEl = document.getElementById(`price-tier-${idx + 1}`);
+          const tierDiscountEl = document.getElementById(`discount-tier-${idx + 1}`);
+          if (tierVariant && tierPriceEl) {
+            const tierPrice = parseFloat(tierVariant.price) / 100;
+            tierPriceEl.textContent = '$' + tierPrice.toFixed(2) + ' ea';
+            if (tierDiscountEl) {
+              if (idx === 0) {
+                tierDiscountEl.textContent = 'Base';
+              } else if (stickerBasePrice > 0) {
+                const pctOff = Math.round((1 - tierPrice / stickerBasePrice) * 100);
+                tierDiscountEl.textContent = pctOff > 0 ? `Save ${pctOff}%` : 'Base';
+              }
+            }
+          }
+        });
         
         console.log('[Sticker Variant Search]', { w, h, styleBracket, qty, qtyTier, searchPattern });
         console.log('[Available Variants]', shopifyVariants.map(v => ({ title: v.title, option1: v.option1, price: v.price, id: v.id })));
@@ -1670,24 +1711,7 @@
           if(totalDisplay) totalDisplay.innerText = '$0.00';
         }
         
-        // Update pricing table for stickers
-        const basePrice = lookupPrice(1, 25); // Base price for style 1, 25 qty
-        PRICING_MATRIX.quantityTiers.forEach((tier, idx) => {
-          const tierPrice = basePrice * tier.multiplier;
-          const tierEl = document.getElementById(`price-tier-${idx + 1}`);
-          if(tierEl) {
-            tierEl.textContent = '$' + tierPrice.toFixed(2) + ' ea';
-          }
-          const discountEl = document.getElementById(`discount-tier-${idx + 1}`);
-          if(discountEl) {
-            if(idx === 0) {
-              discountEl.textContent = 'Base';
-            } else {
-              const pctOff = Math.round((1 - tier.multiplier) * 100);
-              discountEl.textContent = pctOff > 0 ? `Save ${pctOff}%` : 'Base';
-            }
-          }
-        });
+        // Update pricing table for stickers - already handled above via shopifyVariants direct lookup
         
         return; // Exit early for stickers
       }
