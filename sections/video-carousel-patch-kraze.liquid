@@ -78,10 +78,10 @@
       "name": "Video",
       "settings": [
         {
-          "type": "text",
-          "id": "video_url",
-          "label": "Video URL (mp4)",
-          "info": "Paste a Shopify CDN .mp4 URL"
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Pick a video from your Content / Files library"
         },
         {
           "type": "image_picker",
@@ -125,7 +125,8 @@
 
     <div class="vc-pk-track" id="vc-pk-track-{{ uid }}">
       {%- for block in section.blocks -%}
-        {%- if block.settings.video_url != blank -%}
+        {%- assign block_video = block.settings.video -%}
+        {%- if block_video != blank -%}
           <div class="vc-pk-slide" {{ block.shopify_attributes }}>
             <div class="vc-pk-card">
               <video
@@ -134,9 +135,11 @@
                 loop
                 playsinline
                 preload="metadata"
-                {% if block.settings.poster_image != blank %}poster="{{ block.settings.poster_image | image_url: width: 600 }}"{% endif %}
+                {% if block.settings.poster_image != blank %}poster="{{ block.settings.poster_image | image_url: width: 600 }}"{% elsif block_video.preview_image != blank %}poster="{{ block_video.preview_image | image_url: width: 600 }}"{% endif %}
               >
-                <source src="{{ block.settings.video_url }}" type="video/mp4">
+                {%- for source in block_video.sources -%}
+                  <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                {%- endfor -%}
               </video>
               <button class="vc-pk-mute" type="button" aria-label="Toggle sound">
                 <svg class="vc-pk-icon-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
