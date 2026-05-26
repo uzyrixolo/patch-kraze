@@ -1786,32 +1786,45 @@
         availableVariants: shopifyVariants.map(v => v.title)
       });
       
-      selectedVariant = shopifyVariants.find(v => 
-        v.title.includes(searchPattern1)
+      selectedVariant = shopifyVariants.find(v =>
+        v.title === searchPattern1 || (v.option1 && v.option1 === searchPattern1)
       );
-      
+
       // Try alternate format (e.g., '4.0 inch' vs '4 inch') if first match fails
       if(!selectedVariant && searchPatternAlt) {
         selectedVariant = shopifyVariants.find(v =>
-          v.title.includes(searchPatternAlt)
+          v.title === searchPatternAlt || (v.option1 && v.option1 === searchPatternAlt)
+        );
+      }
+
+      // Safety fallback: substring match anchored at start to avoid '5 inch' matching '1.5 inch'
+      if(!selectedVariant) {
+        selectedVariant = shopifyVariants.find(v =>
+          v.title && v.title.indexOf(searchPattern1) === 0
+        );
+      }
+      if(!selectedVariant && searchPatternAlt) {
+        selectedVariant = shopifyVariants.find(v =>
+          v.title && v.title.indexOf(searchPatternAlt) === 0
         );
       }
       
       console.log('[Variant Match]', selectedVariant ? selectedVariant.title : 'NO MATCH - using fallback');
       
       if(!selectedVariant) {
-        // Fallback: find variant with matching size only
+        // Fallback: find variant with matching size only (anchored to avoid substring bleed)
         selectedVariant = shopifyVariants.find(v => {
           if (PRODUCT_HANDLE === 'dtf-transfers') {
             // DTF fallback: match square inches like '4 sq in'
             const sqInches = Math.round(w * h);
-            return v.title.includes(`${sqInches} sq in`);
+            return v.title && v.title.indexOf(`${sqInches} sq in`) === 0;
           } else if (PRODUCT_HANDLE.includes('flex-patches')) {
-            // Flex patches fallback: match size like '3"'
+            // Flex patches fallback: match size like '3"' anchored at start
             const sizeInt = sizeBracket % 1 === 0 ? sizeBracket.toFixed(0) : sizeBracket.toFixed(1);
-            return v.title.includes(`${sizeInt}"`);
+            return v.title && v.title.indexOf(`${sizeInt}"`) === 0;
           } else {
-            const match = v.title.match(/([\d.]+) inch/);  
+            // Anchor regex to start so '5 inch' doesn't match '1.5 inch'
+            const match = v.title && v.title.match(/^([\d.]+) inch/);
             if(match) {
               const variantSize = parseFloat(match[1]);
               return Math.abs(variantSize - sizeBracket) < 0.01;
