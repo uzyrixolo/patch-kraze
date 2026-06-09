@@ -1,0 +1,755 @@
+{% schema %}
+{
+  "name": "Quote Form",
+  "tag": "section",
+  "class": "section-quote-form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get Your Free Quote"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Fill out the form below and we'll get back to you within 24 hours with a detailed quote.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_file_upload",
+      "label": "Show File Upload",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote Form"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .quote-form-section {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background: var(--color-background);
+  }
+  .quote-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .quote-form-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--color-foreground);
+  }
+  .quote-form-description {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--color-foreground-secondary);
+    font-size: 1.1rem;
+  }
+  .quote-form {
+    background: #fff;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  @media (max-width: 768px) {
+    .quote-form { padding: 2rem 1.5rem; }
+    .quote-form-heading { font-size: 2rem; }
+  }
+  
+  .form-section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-foreground);
+    margin: 2rem 0 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #10b981;
+  }
+  .form-section-title:first-child {
+    margin-top: 0;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .form-row.single {
+    grid-template-columns: 1fr;
+  }
+  @media (max-width: 640px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  .form-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-foreground);
+    margin-bottom: 0.5rem;
+  }
+  .form-label .required {
+    color: #ef4444;
+  }
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #fff;
+  }
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  /* Patch Type Grid */
+  .patch-type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  @media (max-width: 640px) {
+    .patch-type-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .patch-type-option {
+    position: relative;
+  }
+  .patch-type-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .patch-type-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border: 2px solid #d1d5db;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    background: #fff;
+  }
+  .patch-type-label:hover {
+    border-color: #10b981;
+    background: #f0fdf4;
+  }
+  .patch-type-option input[type="radio"]:checked + .patch-type-label {
+    border-color: #10b981;
+    background: #ecfdf5;
+    box-shadow: 0 0 0 2px #10b981;
+  }
+  .patch-type-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .patch-type-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-foreground);
+  }
+  
+  /* File Upload */
+  .file-upload-area {
+    border: 2px dashed #d1d5db;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #f9fafb;
+    position: relative;
+  }
+  .file-upload-area:hover {
+    border-color: #10b981;
+    background: #f0fdf4;
+  }
+  .file-upload-area.dragover {
+    border-color: #10b981;
+    background: #ecfdf5;
+  }
+  .file-upload-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .file-upload-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .file-upload-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-foreground);
+    margin-bottom: 0.5rem;
+  }
+  .file-upload-hint {
+    font-size: 0.85rem;
+    color: var(--color-foreground-secondary);
+  }
+  .file-preview {
+    display: none;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #ecfdf5;
+    border: 1px solid #10b981;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+  }
+  .file-preview.active {
+    display: flex;
+  }
+  .file-preview img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+  .file-preview-info {
+    flex: 1;
+  }
+  .file-preview-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-foreground);
+  }
+  .file-preview-size {
+    font-size: 0.8rem;
+    color: var(--color-foreground-secondary);
+  }
+  .file-remove {
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Submit Button */
+  .quote-submit-btn {
+    width: 100%;
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .quote-submit-btn:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+  }
+  .quote-submit-btn:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .form-error {
+    color: #ef4444;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    display: none;
+  }
+  .form-group.error .form-input,
+  .form-group.error .form-select,
+  .form-group.error .form-textarea {
+    border-color: #ef4444;
+  }
+  .form-group.error .form-error {
+    display: block;
+  }
+  
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 3rem;
+  }
+  .form-success.active {
+    display: block;
+  }
+  .form-success-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+  .form-success-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-foreground);
+    margin-bottom: 1rem;
+  }
+  .form-success-message {
+    font-size: 1.1rem;
+    color: var(--color-foreground-secondary);
+  }
+</style>
+
+<div class="quote-form-section color-{{ section.settings.color_scheme }}">
+  <div class="quote-form-container">
+    <h2 class="quote-form-heading">{{ section.settings.heading }}</h2>
+    <div class="quote-form-description">{{ section.settings.description }}</div>
+    
+    <form class="quote-form" id="quoteForm" method="post" enctype="multipart/form-data" action="/contact#quote-form">
+      <input type="hidden" name="contact[form_type]" value="quote">
+      <input type="hidden" name="contact[form_id]" value="quote-request">
+      
+      <!-- Contact Information -->
+      <h3 class="form-section-title">Contact Information</h3>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name <span class="required">*</span></label>
+          <input type="text" name="contact[first_name]" class="form-input" required placeholder="John">
+          <span class="form-error">First name is required</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name <span class="required">*</span></label>
+          <input type="text" name="contact[last_name]" class="form-input" required placeholder="Doe">
+          <span class="form-error">Last name is required</span>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Email Address <span class="required">*</span></label>
+          <input type="email" name="contact[email]" class="form-input" required placeholder="john@example.com">
+          <span class="form-error">Valid email is required</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" name="contact[phone]" class="form-input" placeholder="(555) 123-4567">
+        </div>
+      </div>
+      
+      <!-- Project Details -->
+      <h3 class="form-section-title">Project Details</h3>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Need by Date <span class="required">*</span></label>
+          <input type="date" name="contact[need_by_date]" class="form-input" required min="{{ 'now' | date: '%Y-%m-%d' }}">
+          <span class="form-error">Please select a date</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Quantity <span class="required">*</span></label>
+          <input type="number" name="contact[quantity]" class="form-input" required min="1" placeholder="100">
+          <span class="form-error">Minimum order quantity is 1 piece</span>
+        </div>
+      </div>
+      
+      <!-- Patch Type -->
+      <div class="form-group">
+        <label class="form-label">Patch Type <span class="required">*</span></label>
+        <div class="patch-type-grid">
+          <div class="patch-type-option">
+            <input type="radio" name="contact[patch_type]" id="patch_embroidered" value="Embroidered Patches" required>
+            <label for="patch_embroidered" class="patch-type-label">
+              <span class="patch-type-icon">🧵</span>
+              <span class="patch-type-name">Embroidered Patches</span>
+            </label>
+          </div>
+          <div class="patch-type-option">
+            <input type="radio" name="contact[patch_type]" id="patch_woven" value="Woven Patches">
+            <label for="patch_woven" class="patch-type-label">
+              <span class="patch-type-icon">🪡</span>
+              <span class="patch-type-name">Woven Patches</span>
+            </label>
+          </div>
+          <div class="patch-type-option">
+            <input type="radio" name="contact[patch_type]" id="patch_chenille" value="Chenille Patches">
+            <label for="patch_chenille" class="patch-type-label">
+              <span class="patch-type-icon">✨</span>
+              <span class="patch-type-name">Chenille Patches</span>
+            </label>
+          </div>
+          <div class="patch-type-option">
+            <input type="radio" name="contact[patch_type]" id="patch_pvc" value="PVC / Rubber Patches">
+            <label for="patch_pvc" class="patch-type-label">
+              <span class="patch-type-icon">🔲</span>
+              <span class="patch-type-name">PVC / Rubber Patches</span>
+            </label>
+          </div>
+          <div class="patch-type-option">
+            <input type="radio" name="contact[patch_type]" id="patch_leather" value="Leather Patches">
+            <label for="patch_leather" class="patch-type-label">
+              <span class="patch-type-icon">🟤</span>
+              <span class="patch-type-name">Leather Patches</span>
+            </label>
+          </div>
+          <div class="patch-type-option">
+            <input type="radio" name="contact[patch_type]" id="patch_sublimation" value="Sublimation Patches">
+            <label for="patch_sublimation" class="patch-type-label">
+              <span class="patch-type-icon">🎨</span>
+              <span class="patch-type-name">Sublimation Patches</span>
+            </label>
+          </div>
+          <div class="patch-type-option">
+            <input type="radio" name="contact[patch_type]" id="patch_print_embroidery" value="Print Embroidery">
+            <label for="patch_print_embroidery" class="patch-type-label">
+              <span class="patch-type-icon">🖨️</span>
+              <span class="patch-type-name">Print Embroidery</span>
+            </label>
+          </div>
+          <div class="patch-type-option">
+            <input type="radio" name="contact[patch_type]" id="patch_silicone" value="Silicone Patches">
+            <label for="patch_silicone" class="patch-type-label">
+              <span class="patch-type-icon">💧</span>
+              <span class="patch-type-name">Silicone Patches</span>
+            </label>
+          </div>
+          <div class="patch-type-option">
+            <input type="radio" name="contact[patch_type]" id="patch_labels" value="Labels & Tags">
+            <label for="patch_labels" class="patch-type-label">
+              <span class="patch-type-icon">🏷️</span>
+              <span class="patch-type-name">Labels & Tags</span>
+            </label>
+          </div>
+          <div class="patch-type-option">
+            <input type="radio" name="contact[patch_type]" id="patch_dtf" value="DTF (Heat Transfer)">
+            <label for="patch_dtf" class="patch-type-label">
+              <span class="patch-type-icon">🔥</span>
+              <span class="patch-type-name">DTF (Heat Transfer)</span>
+            </label>
+          </div>
+          <div class="patch-type-option">
+            <input type="radio" name="contact[patch_type]" id="patch_other" value="Not Sure / Other">
+            <label for="patch_other" class="patch-type-label">
+              <span class="patch-type-icon">❓</span>
+              <span class="patch-type-name">Not Sure / Other</span>
+            </label>
+          </div>
+        </div>
+        <span class="form-error">Please select the type of patch you need</span>
+      </div>
+      
+      <!-- Backing Type -->
+      <div class="form-group">
+        <label class="form-label">Backing Type <span class="required">*</span></label>
+        <select name="contact[backing_type]" class="form-select" required>
+          <option value="">-- Select Backing Type --</option>
+          <option value="Heat Applied (Iron-On)">Heat Applied (Iron-On)</option>
+          <option value="Peel & Stick">Peel & Stick</option>
+          <option value="Velcro (Hook & Loop)">Velcro (Hook & Loop)</option>
+          <option value="Sew-On">Sew-On</option>
+          <option value="Magnetic">Magnetic</option>
+          <option value="No Backing">No Backing</option>
+          <option value="Not Sure">Not Sure</option>
+        </select>
+        <span class="form-error">Please select a backing type</span>
+      </div>
+      
+      <!-- Border Style -->
+      <div class="form-group" style="margin-top: 1.5rem;">
+        <label class="form-label">Border Style <span class="required">*</span></label>
+        <select name="contact[border_style]" class="form-select" required>
+          <option value="Hot Cut Border (Free)" selected>Hot Cut Border (Free)</option>
+          <option value="Merrowed Border">Merrowed Border</option>
+          <option value="No Border">No Border</option>
+          <option value="Not Sure">Not Sure</option>
+        </select>
+      </div>
+      
+      <!-- Patch Dimensions -->
+      <h3 class="form-section-title">Patch Dimensions</h3>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Width (inches)</label>
+          <input type="number" name="contact[width_inches]" class="form-input" step="0.25" min="0.5" max="20" placeholder="2.5">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Height (inches)</label>
+          <input type="number" name="contact[height_inches]" class="form-input" step="0.25" min="0.5" max="20" placeholder="2.5">
+        </div>
+      </div>
+      
+      <!-- File Upload -->
+      {% if section.settings.show_file_upload %}
+      <h3 class="form-section-title">Design File Upload (Optional)</h3>
+      
+      <div class="form-group">
+        <div class="file-upload-area" id="fileUploadArea">
+          <input type="file" name="contact[design_file]" id="fileInput" class="file-upload-input" accept=".jpg,.jpeg,.png,.gif,.pdf,.eps,.ai,.svg" data-max-size="5242880">
+          <div class="file-upload-icon">📁</div>
+          <div class="file-upload-text">Click to upload a file</div>
+          <div class="file-upload-hint">or drag and drop<br>Supported formats: JPG, PNG, GIF, PDF, EPS, AI, SVG (Max 5MB)</div>
+        </div>
+        <div class="file-preview" id="filePreview">
+          <img id="filePreviewImg" src="" alt="Preview">
+          <div class="file-preview-info">
+            <div class="file-preview-name" id="fileName"></div>
+            <div class="file-preview-size" id="fileSize"></div>
+          </div>
+          <button type="button" class="file-remove" id="fileRemove">×</button>
+        </div>
+      </div>
+      {% endif %}
+      
+      <!-- How did you hear about us -->
+      <div class="form-group" style="margin-top: 1.5rem;">
+        <label class="form-label">How did you hear about us?</label>
+        <select name="contact[referral_source]" class="form-select">
+          <option value="">Select an option</option>
+          <option value="Google">Google</option>
+          <option value="Facebook">Facebook</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Twitter/X">Twitter/X</option>
+          <option value="YouTube">YouTube</option>
+          <option value="Friend/Colleague">Friend/Colleague</option>
+          <option value="Repeat Customer">Repeat Customer</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      
+      <!-- Additional Information -->
+      <h3 class="form-section-title">Additional Information</h3>
+      
+      <div class="form-group">
+        <label class="form-label">Tell us about your design, colors, special requirements, etc.</label>
+        <textarea name="contact[additional_info]" class="form-textarea" rows="6" placeholder="Please describe your project in detail..."></textarea>
+      </div>
+      
+      <button type="submit" class="quote-submit-btn" id="submitBtn">Get My Free Quote</button>
+    </form>
+    
+    <div class="form-success" id="formSuccess">
+      <div class="form-success-icon">✅</div>
+      <h3 class="form-success-title">Quote Request Submitted!</h3>
+      <p class="form-success-message">Thank you for your request. We'll review your details and get back to you within 24 hours with a detailed quote.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('quoteForm');
+    const fileInput = document.getElementById('fileInput');
+    const fileUploadArea = document.getElementById('fileUploadArea');
+    const filePreview = document.getElementById('filePreview');
+    const filePreviewImg = document.getElementById('filePreviewImg');
+    const fileName = document.getElementById('fileName');
+    const fileSize = document.getElementById('fileSize');
+    const fileRemove = document.getElementById('fileRemove');
+    const submitBtn = document.getElementById('submitBtn');
+    const formSuccess = document.getElementById('formSuccess');
+    
+    if (!form) return;
+    
+    // File upload handling
+    if (fileInput && fileUploadArea) {
+      // Drag and drop
+      ['dragenter', 'dragover'].forEach(eventName => {
+        fileUploadArea.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          fileUploadArea.classList.add('dragover');
+        });
+      });
+      
+      ['dragleave', 'drop'].forEach(eventName => {
+        fileUploadArea.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          fileUploadArea.classList.remove('dragover');
+        });
+      });
+      
+      fileUploadArea.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          fileInput.files = files;
+          handleFileSelect(files[0]);
+        }
+      });
+      
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+          handleFileSelect(e.target.files[0]);
+        }
+      });
+      
+      function handleFileSelect(file) {
+        const maxSize = parseInt(fileInput.dataset.maxSize) || 5242880;
+        
+        if (file.size > maxSize) {
+          alert('File size must be less than 5MB');
+          fileInput.value = '';
+          return;
+        }
+        
+        fileName.textContent = file.name;
+        fileSize.textContent = formatFileSize(file.size);
+        
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            filePreviewImg.src = e.target.result;
+            filePreviewImg.style.display = 'block';
+          };
+          reader.readAsDataURL(file);
+        } else {
+          filePreviewImg.style.display = 'none';
+        }
+        
+        filePreview.classList.add('active');
+      }
+      
+      if (fileRemove) {
+        fileRemove.addEventListener('click', () => {
+          fileInput.value = '';
+          filePreview.classList.remove('active');
+        });
+      }
+      
+      function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+      }
+    }
+    
+    // Form submission
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Clear previous errors
+      form.querySelectorAll('.form-group').forEach(group => {
+        group.classList.remove('error');
+      });
+      
+      let hasError = false;
+      
+      // Validate required fields
+      const requiredFields = form.querySelectorAll('[required]');
+      requiredFields.forEach(field => {
+        if (!field.value || field.value.trim() === '') {
+          field.closest('.form-group').classList.add('error');
+          hasError = true;
+        }
+      });
+      
+      // Validate email
+      const emailField = form.querySelector('[name="contact[email]"]');
+      if (emailField && emailField.value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailField.value)) {
+          emailField.closest('.form-group').classList.add('error');
+          hasError = true;
+        }
+      }
+      
+      if (hasError) {
+        // Scroll to first error
+        const firstError = form.querySelector('.form-group.error');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+      }
+      
+      // Submit form
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+      
+      try {
+        const formData = new FormData(form);
+        
+        const response = await fetch('/contact', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          form.style.display = 'none';
+          formSuccess.classList.add('active');
+          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        alert('There was an error submitting your quote request. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Get My Free Quote';
+      }
+    });
+  });
+</script>
