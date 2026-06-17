@@ -222,6 +222,18 @@
             "badge": "10pc min",
             "image_url": "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png"
           }
+        },
+        "patch_item_ERjFeW": {
+          "type": "patch_item",
+          "settings": {
+            "image": "shopify://shop_images/custom_keychains_main_1774616515923.jpg",
+            "title": "Custom PVC Keychains",
+            "price": "As low as $1.90 ea.",
+            "description": "Create bold, custom pvc rubber keychains with vibrant 3D detailed PVC construction.",
+            "product_url": "shopify://products/custom-keychains",
+            "badge": "10pc min",
+            "image_url": "https://cdn.shopify.com/s/files/1/0819/2170/4255/files/og_d8d2043c-7a4d-4a69-a794-454178d674a9.png"
+          }
         }
       },
       "block_order": [
@@ -240,7 +252,8 @@
         "patch_name",
         "patch_matte_white",
         "patch_chrome_flex",
-        "patch_tackle_twill"
+        "patch_tackle_twill",
+        "patch_item_ERjFeW"
       ],
       "settings": {
         "heading": "Shop All Patch Types"
