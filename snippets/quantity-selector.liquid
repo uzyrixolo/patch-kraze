@@ -9,6 +9,7 @@
   @param {string} [class] - custom class for the quantity selector, optional
   @param {boolean} [can_update_quantity] - whether the quantity can be updated, defaults to true
   @param {number} [min] - override the minimum quantity (e.g., 0 for quick order list)
+  @param {block} [block] - The block object, used for Shopify editor attributes.
 {%- enddoc -%}
 
 {% liquid
@@ -26,6 +27,29 @@
     assign min_quantity = min
   else
     assign min_quantity = variant.quantity_rule.min | default: 1
+  endif
+
+  assign tier_min = nil
+  assign tier_max = nil
+  if line_index != null
+    assign variant_label = variant.option1 | default: variant.title
+    if variant_label != blank
+      assign option_parts = variant_label | split: ' - '
+      if option_parts.size > 1
+        assign qty_part = option_parts | last | strip
+        if qty_part contains '+'
+          assign tier_min = qty_part | remove: '+' | strip | times: 1
+        elsif qty_part contains '-'
+          assign range_parts = qty_part | split: '-'
+          assign tier_min = range_parts[0] | strip | times: 1
+          assign tier_max = range_parts[1] | strip | times: 1
+        endif
+      endif
+    endif
+  endif
+
+  if tier_min and tier_min > min_quantity
+    assign min_quantity = tier_min
   endif
 %}
 
@@ -68,11 +92,14 @@
       on:blur="/setQuantity"
       on:focus="/selectInputValue"
       ref="quantityInput"
+      aria-live="polite"
       aria-label="{{ 'accessibility.quantity' | t }}"
       {% if line_index %}
         data-cart-line="{{ line_index | plus: 1 }}"
       {% endif %}
-      {% if variant.quantity_rule.max %}
+      {% if tier_max %}
+        max="{{ tier_max }}"
+      {% elsif variant.quantity_rule.max %}
         max="{{ variant.quantity_rule.max }}"
       {% endif %}
       step="{{ variant.quantity_rule.increment | default: 1 }}"
@@ -171,5 +198,12 @@
     @media screen and (min-width: 750px) {
       gap: var(--gap-sm);
     }
+  }
+
+  .price-per-item {
+    display: block;
+    color: var(--color-foreground);
+    font-size: var(--font-size--sm);
+    font-weight: normal;
   }
 {% endstylesheet %}
