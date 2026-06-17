@@ -43,6 +43,7 @@
       ref="quantitySelectors[]"
     {% endif %}
   >
+    {% unless line_index %}
     <button
       class="button quantity-minus button-unstyled"
       type="button"
@@ -58,6 +59,7 @@
         {{- 'icon-minus.svg' | inline_asset_content -}}
       </span>
     </button>
+    {% endunless %}
     <input
       type="number"
       name="{% if line_index %}updates[]{% else %}quantity{% endif %}"
@@ -65,12 +67,15 @@
       data-cart-quantity="{{ cart | item_count_for_variant: variant.id }}"
       min="{{ min_quantity }}"
       data-min="{{ variant.quantity_rule.min | default: 1 }}"
+      {% unless line_index %}
       on:blur="/setQuantity"
       on:focus="/selectInputValue"
+      {% endunless %}
       ref="quantityInput"
       aria-label="{{ 'accessibility.quantity' | t }}"
       {% if line_index %}
         data-cart-line="{{ line_index | plus: 1 }}"
+        readonly
       {% endif %}
       {% if variant.quantity_rule.max %}
         max="{{ variant.quantity_rule.max }}"
@@ -80,6 +85,7 @@
         disabled
       {% endif %}
     >
+    {% unless line_index %}
     <button
       class="button quantity-plus button-unstyled"
       type="button"
@@ -95,6 +101,7 @@
         {{- 'icon-plus.svg' | inline_asset_content -}}
       </span>
     </button>
+    {% endunless %}
   </{{ component_name }}>
 
   {%- if line_index == null -%}
