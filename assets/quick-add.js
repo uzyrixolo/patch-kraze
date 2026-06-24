@@ -3,6 +3,7 @@ import { Component } from '@theme/component';
 import { CartUpdateEvent, ThemeEvents, VariantSelectedEvent } from '@theme/events';
 import { DialogComponent, DialogCloseEvent } from '@theme/dialog';
 import { mediaQueryLarge, isMobileBreakpoint, getIOSVersion } from '@theme/utilities';
+import VariantPicker from '@theme/variant-picker';
 
 export class QuickAddComponent extends Component {
   /** @type {AbortController | null} */
@@ -71,6 +72,18 @@ export class QuickAddComponent extends Component {
   };
 
   /**
+   * Re-renders the variant picker in the quick-add modal.
+   * @param {Element} newHtml - The element to re-render.
+   */
+  #updateVariantPicker(newHtml) {
+    const modalContent = document.getElementById('quick-add-modal-content');
+    if (!modalContent) return;
+    const variantPicker = /** @type {VariantPicker | null} */ (modalContent.querySelector('variant-picker'));
+    if (!variantPicker) return;
+    variantPicker.updateVariantPicker(newHtml);
+  }
+
+  /**
    * Handles quick add button click
    * @param {Event} event - The click event
    */
@@ -99,10 +112,21 @@ export class QuickAddComponent extends Component {
       // Use a fresh clone from the cache
       const freshContent = /** @type {Element} */ (productGrid.cloneNode(true));
       await this.updateQuickAddModal(freshContent);
+      this.#updateVariantPicker(productGrid);
     }
 
     this.#openQuickAddModal();
   };
+
+  #resetScroll() {
+    const dialogComponent = document.getElementById('quick-add-dialog');
+    if (!(dialogComponent instanceof QuickAddDialog)) return;
+
+    const productDetails = dialogComponent.querySelector('.product-details');
+    const productMedia = dialogComponent.querySelector('.product-information__media');
+    productDetails?.scrollTo({ top: 0, behavior: 'instant' });
+    productMedia?.scrollTo({ top: 0, behavior: 'instant' });
+  }
 
   /** @param {QuickAddDialog} dialogComponent */
   #stayVisibleUntilDialogCloses(dialogComponent) {
@@ -120,6 +144,12 @@ export class QuickAddComponent extends Component {
     this.#stayVisibleUntilDialogCloses(dialogComponent);
 
     dialogComponent.showDialog();
+
+    // is nondeterministic when the open attribute is set on the dialog element after .showDialog() is called.
+    // Waiting until the open animation starts seemed to be the most reliable metric here.
+    const dialog = dialogComponent.refs?.dialog;
+    if (!dialog) return;
+    dialog.addEventListener('animationstart', this.#resetScroll.bind(this), { once: true });
   };
 
   #closeQuickAddModal = () => {

@@ -13,7 +13,7 @@
 
 {% style %}
   {% if request.visual_preview_mode %}
-    product-card-link {
+    product-card[data-product-transition] {
       width: 100%;
       min-width: 250px;
     }
@@ -33,6 +33,7 @@
 
   assign product_card_id = 'product-card-link-' | append: block.id | append: '-' | append: product.id
   assign product_card_gap_value = product_card_gap | default: block_settings.product_card_gap
+  assign product_view_context = product_view_context | default: 'collection'
 
   # Logic to determine which variant URL to use (matching swatch selection logic)
   assign variant_to_link = product.selected_or_first_available_variant
@@ -54,21 +55,16 @@
   endif
 %}
 
-{%- if settings.transition_to_main_product -%}
-  <product-card-link
-    data-product-id="{{ product.id }}"
-    data-featured-media-url="{{ featured_media_url }}"
-    data-product-transition="{{ settings.transition_to_main_product }}"
-    {% if onboarding %}
-      data-placeholder="true"
-    {% endif %}
-  >
-{%- endif -%}
 <product-card
-  class="product-card"
+  class="product-card size-style"
+  style="{% render 'size-style', settings: block_settings %}"
   data-product-id="{{ product.id }}"
   id="product-card-{{ block.id }}"
-  data-product-transition="{{ settings.transition_to_main_product }}"
+  {% if settings.transition_to_main_product %}
+    data-product-transition="true"
+    data-featured-media-url="{{ featured_media_url }}"
+    on:click="/handleViewTransition"
+  {% endif %}
   {{ block.shopify_attributes }}
   {% if onboarding %}
     data-placeholder="true"
@@ -114,33 +110,19 @@
     {{ children }}
   </div>
 </product-card>
-{%- if settings.transition_to_main_product -%}
-  </product-card-link>
-{%- endif -%}
 
 {% stylesheet %}
-  product-card-link,
-  :not(product-card-link) product-card {
-    width: 100%;
-  }
-
   .product-card__placeholder-image svg {
     height: 100%;
+  }
+
+  .product-card__content slideshow-component {
+    --cursor: pointer;
   }
 
   @media screen and (max-width: 749px) {
     .product-card slideshow-arrows .slideshow-control {
       display: none;
     }
-  }
-
-  /* Hide "Add" button when "Choose" button is shown */
-  :is(.product-card):has([data-quick-add-button='choose']) add-to-cart-component {
-    display: none;
-  }
-
-  /* Hide "Add" button when "Choose" button is shown */
-  :is(.product-card):has([data-quick-add-button='add']) .quick-add__button--choose {
-    display: none;
   }
 {% endstylesheet %}

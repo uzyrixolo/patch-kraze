@@ -66,8 +66,13 @@
     "discount_menu": "Zľavové kódy",
     "remove": "Odstrániť",
     "view_pricing_info": "Zobraziť informácie o cenách",
-    "open_hotspot": "Otvoriť hotspot",
-    "slideshow": "Prezentácia"
+    "slideshow": "Prezentácia",
+    "header_navigation_label": "Primárna",
+    "home": "Domov",
+    "active_filters": "Aktívne filtre:",
+    "product_details": "Detaily produktu",
+    "show_product_details": "Zobraziť detaily produktu {{ product_name }}",
+    "featured_product": "Odporúčaný produkt"
   },
   "actions": {
     "add_to_cart": "Pridať do košíka",
@@ -338,7 +343,9 @@
       "quantity_increments": "Prírastky po {{ increment }}",
       "quantity_minimum": "Minimálne {{ minimum }} ks",
       "quantity_maximum": "Maximálne {{ maximum }} ks",
-      "in_cart": "v košíku"
+      "in_cart": "v košíku",
+      "default_title": "Predvolený názov",
+      "sticky_add_to_cart": "Panel rýchleho pridania do košíka"
     }
   }
 }

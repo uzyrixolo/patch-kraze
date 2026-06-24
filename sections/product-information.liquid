@@ -87,12 +87,12 @@
         data-singleton="{{ product.has_only_default_variant }}"
         data-single-option="{{ has_single_option }}"
       >
-        <h3
+        <p
           class="sticky-add-to-cart__title"
           data-testid="sticky-product-title"
         >
           {{ product.title | escape }}
-        </h3>
+        </p>
         <div
           class="sticky-add-to-cart__variant"
           data-testid="sticky-variant-title"
@@ -118,7 +118,7 @@
 
       <button
         type="button"
-        class="sticky-add-to-cart__button add-to-cart-button button button--primary"
+        class="sticky-add-to-cart__button add-to-cart-button button"
         ref="addToCartButton"
         on:click="/handleAddToCartClick"
         {% unless current_variant.available %}
@@ -144,7 +144,6 @@
               {%- endif -%}
             </span>
             <span
-              class="quantity-display"
               ref="quantityDisplay"
               {% if current_variant.available and initial_quantity > 1 %}
                 style="display: inline;"
@@ -263,6 +262,7 @@
   .sticky-add-to-cart__title {
     font-size: var(--font-paragraph-medium--size);
     font-weight: var(--font-weight-semibold);
+    line-height: var(--font-paragraph--line-height);
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -295,10 +295,10 @@
       &::before {
         --border: 1px;
       }
+    }
 
-      .add-to-cart-text__content {
-        display: none;
-      }
+    .sticky-add-to-cart__bar .add-to-cart-text__content {
+      display: none;
     }
 
     .sticky-add-to-cart__info[data-has-image='false'] {
@@ -351,6 +351,7 @@
     .sticky-add-to-cart__info[data-single-option='true'] .sticky-add-to-cart__title {
       display: block;
     }
+
     .sticky-add-to-cart__info[data-single-option='true'] .sticky-add-to-cart__variant {
       display: block;
       overflow: hidden;

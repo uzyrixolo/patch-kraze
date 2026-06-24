@@ -76,7 +76,16 @@ export class DialogComponent extends Component {
     this.removeEventListener('click', this.#handleClick);
     this.removeEventListener('keydown', this.#handleKeyDown);
 
+    // Force browser to restart animation by resetting it
+    // Temporarily remove any existing animation state
+    dialog.style.animation = 'none';
+
+    // Force a reflow
+    void dialog.offsetWidth;
+
+    // Now add the closing class and restore animation
     dialog.classList.add('dialog-closing');
+    dialog.style.animation = '';
 
     await onAnimationEnd(dialog, undefined, {
       subtree: false,
@@ -172,7 +181,6 @@ document.addEventListener(
     if (event.target instanceof HTMLDetailsElement) {
       if (event.target.hasAttribute('scroll-lock')) {
         const { open } = event.target;
-
         if (open) {
           document.documentElement.setAttribute('scroll-lock', '');
         } else {

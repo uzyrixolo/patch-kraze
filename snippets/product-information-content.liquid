@@ -135,7 +135,7 @@
     min-width: 100%;
   }
 
-  .product-information__media .placeholder-image {
+  .product-information__media .product-media-gallery__placeholder-image {
     width: 100%;
     height: 100%;
   }
@@ -288,19 +288,26 @@
         .product-information__grid--half,
         .product-information--media-none
       ).product-information--media-left {
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 1fr 1fr;
     }
 
     .product-information__grid:not(
         .product-information__grid--half,
         .product-information--media-none
       ).product-information--media-right {
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 1fr 1fr;
     }
   }
 
   .product-information__grid--limit-details .product-details > .group-block {
-    max-width: var(--sidebar-width);
+    --details-max-width: var(--sidebar-width);
+    max-width: var(--details-max-width);
+  }
+
+  @media screen and (min-width: 1600px) {
+    .product-information__grid--limit-details .product-details > .group-block {
+      --details-max-width: 32rem;
+    }
   }
 
   /* If the header is sticky, make product details content stick underneath the header */

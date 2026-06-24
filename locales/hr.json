@@ -65,8 +65,13 @@
     "discount_menu": "Kodovi za popust",
     "remove": "Ukloni",
     "view_pricing_info": "Prikaži informacije o cijeni",
-    "open_hotspot": "Otvori hotspot",
-    "slideshow": "Prezentacija"
+    "slideshow": "Prezentacija",
+    "header_navigation_label": "Primarna",
+    "home": "Početna",
+    "active_filters": "Aktivni filtri:",
+    "product_details": "Pojedinosti o proizvodu",
+    "show_product_details": "Prikaži pojedinosti za proizvod {{ product_name }}",
+    "featured_product": "Istaknuti proizvod"
   },
   "actions": {
     "add_to_cart": "Dodaj u košaricu",
@@ -307,7 +312,9 @@
       "quantity_increments": "Povećanje od {{ increment }}",
       "quantity_minimum": "Minimalno {{ minimum }}",
       "quantity_maximum": "Maksimalno {{ maximum }}",
-      "in_cart": "u košarici"
+      "in_cart": "u košarici",
+      "default_title": "Zadani naziv",
+      "sticky_add_to_cart": "Traka za brzo dodavanje u košaricu"
     }
   },
   "fields": {

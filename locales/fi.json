@@ -64,8 +64,13 @@
     "nested_product": "{{ product_title }} – {{ parent_title }}",
     "remove": "Poista",
     "view_pricing_info": "Näytä hinnoittelutiedot",
-    "open_hotspot": "Avoin yhteyspiste",
-    "slideshow": "Diaesitys"
+    "slideshow": "Diaesitys",
+    "header_navigation_label": "Ensisijainen",
+    "home": "Etusivu",
+    "active_filters": "AKtiiviset suodattimet:",
+    "product_details": "Tuotetiedot",
+    "show_product_details": "Näytä tuotteen {{ product_name }} tuotetiedot",
+    "featured_product": "Esittelyssä oleva tuote"
   },
   "actions": {
     "add_to_cart": "Lisää ostoskoriin",
@@ -301,7 +306,9 @@
       "quantity_increments": "Lisäysten koko: {{ increment }}",
       "quantity_minimum": "Vähimmäismäärä {{ minimum }}",
       "quantity_maximum": "Enimmäismäärä {{ maximum }}",
-      "in_cart": "ostoskorissa"
+      "in_cart": "ostoskorissa",
+      "default_title": "Oletusotsikko",
+      "sticky_add_to_cart": "Pikalisäys ostoskoririville"
     }
   },
   "fields": {

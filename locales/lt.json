@@ -66,8 +66,13 @@
     "discount_menu": "Nuolaidų kodai",
     "remove": "Pašalinti",
     "view_pricing_info": "Peržiūrėti kainodaros informaciją",
-    "open_hotspot": "Atverti interneto prieigos tašką",
-    "slideshow": "Skaidrių demonstracija"
+    "slideshow": "Skaidrių demonstracija",
+    "header_navigation_label": "Pagrindinis",
+    "home": "Pradžia",
+    "active_filters": "Aktyvūs filtrai:",
+    "product_details": "Išsami produkto informacija",
+    "show_product_details": "Rodyti išsamią produkto {{ product_name }} informaciją",
+    "featured_product": "Rekomenduojamas produktas"
   },
   "actions": {
     "add_to_cart": "Įdėti į krepšelį",
@@ -338,7 +343,9 @@
       "quantity_increments": "Kiekis didėja kas {{ increment }}",
       "quantity_minimum": "Mažiausiai {{ minimum }}",
       "quantity_maximum": "Daugiausiai {{ maximum }}",
-      "in_cart": "krepšelyje"
+      "in_cart": "krepšelyje",
+      "default_title": "Numatytasis pavadinimas",
+      "sticky_add_to_cart": "Greito pridėjimo į krepšelį juosta"
     }
   }
 }

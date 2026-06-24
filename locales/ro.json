@@ -65,8 +65,13 @@
     "discount_menu": "Coduri de reduceri",
     "remove": "Elimină",
     "view_pricing_info": "Vezi informațiile de tarifare",
-    "open_hotspot": "Deschide hotspot",
-    "slideshow": "Prezentare"
+    "slideshow": "Prezentare de diapozitive",
+    "header_navigation_label": "principală",
+    "home": "Acasă",
+    "active_filters": "Filtre active:",
+    "product_details": "Detalii produs",
+    "show_product_details": "Afișează detaliile produsului pentru {{ product_name }}",
+    "featured_product": "Produs recomandat"
   },
   "actions": {
     "add_to_cart": "Adaugă în coș",
@@ -331,7 +336,9 @@
       "quantity_increments": "Creșteri de {{ increment }}",
       "quantity_minimum": "Minim {{ minimum }}",
       "quantity_maximum": "Maxim {{ maximum }}",
-      "in_cart": "în coș"
+      "in_cart": "în coș",
+      "default_title": "Titlu implicit",
+      "sticky_add_to_cart": "Bara de adăugare rapidă în coș"
     }
   }
 }

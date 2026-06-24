@@ -1,5 +1,5 @@
 import { Component } from '@theme/component';
-import { onDocumentLoaded, changeMetaThemeColor } from '@theme/utilities';
+import { onDocumentLoaded, changeMetaThemeColor, setHeaderMenuStyle } from '@theme/utilities';
 
 /**
  * @typedef {Object} HeaderComponentRefs
@@ -52,10 +52,10 @@ class HeaderComponent extends Component {
   #timeout = null;
 
   /**
-   * The duration to wait for hiding animation, when sticky behavior is 'scroll-up'
-   * @constant {number}
+   * RAF ID for scroll handler throttling
+   * @type {number | null}
    */
-  #animationDelay = 150;
+  #scrollRafId = null;
 
   /**
    * Keeps the global `--header-height` custom property up to date,
@@ -93,7 +93,7 @@ class HeaderComponent extends Component {
 
       if (alwaysSticky) {
         this.dataset.stickyState = isIntersecting ? 'inactive' : 'active';
-        changeMetaThemeColor(this.refs.headerRowTop);
+        if (this.dataset.themeColor) changeMetaThemeColor(this.dataset.themeColor);
       } else {
         this.#offscreen = !isIntersecting || this.dataset.stickyState === 'active';
       }
@@ -116,30 +116,37 @@ class HeaderComponent extends Component {
    */
   #updateMenuVisibility(hideMenu) {
     if (hideMenu) {
-      this.refs.headerDrawerContainer.classList.remove('desktop:hidden');
       this.#menuDrawerHiddenWidth = window.innerWidth;
-      this.refs.headerMenu.classList.add('hidden');
     } else {
-      this.refs.headerDrawerContainer.classList.add('desktop:hidden');
       this.#menuDrawerHiddenWidth = null;
-      this.refs.headerMenu.classList.remove('hidden');
     }
+    setHeaderMenuStyle();
   }
 
   #handleWindowScroll = () => {
+    if (this.#scrollRafId !== null) return;
+
+    this.#scrollRafId = requestAnimationFrame(() => {
+      this.#scrollRafId = null;
+      this.#updateScrollState();
+    });
+  };
+
+  #updateScrollState = () => {
     const stickyMode = this.getAttribute('sticky');
     if (!this.#offscreen && stickyMode !== 'always') return;
 
     const scrollTop = document.scrollingElement?.scrollTop ?? 0;
+    const headerTop = this.getBoundingClientRect().top;
     const isScrollingUp = scrollTop < this.#lastScrollTop;
+    const isAtTop = headerTop >= 0;
+
     if (this.#timeout) {
       clearTimeout(this.#timeout);
       this.#timeout = null;
     }
 
     if (stickyMode === 'always') {
-      const isAtTop = this.getBoundingClientRect().top >= 0;
-
       if (isAtTop) {
         this.dataset.scrollDirection = 'none';
       } else if (isScrollingUp) {
@@ -153,9 +160,7 @@ class HeaderComponent extends Component {
     }
 
     if (isScrollingUp) {
-      this.removeAttribute('data-animating');
-
-      if (this.getBoundingClientRect().top >= 0) {
+      if (isAtTop) {
         // reset sticky state when header is scrolled up to natural position
         this.#offscreen = false;
         this.dataset.stickyState = 'inactive';
@@ -167,13 +172,8 @@ class HeaderComponent extends Component {
       }
     } else if (this.dataset.stickyState === 'active') {
       this.dataset.scrollDirection = 'none';
-      // delay transitioning to idle hidden state for hiding animation
-      this.setAttribute('data-animating', '');
 
-      this.#timeout = setTimeout(() => {
-        this.dataset.stickyState = 'idle';
-        this.removeAttribute('data-animating');
-      }, this.#animationDelay);
+      this.dataset.stickyState = 'idle';
     } else {
       this.dataset.scrollDirection = 'none';
       this.dataset.stickyState = 'idle';
@@ -203,6 +203,10 @@ class HeaderComponent extends Component {
     this.#intersectionObserver?.disconnect();
     this.removeEventListener('overflowMinimum', this.#handleOverflowMinimum);
     document.removeEventListener('scroll', this.#handleWindowScroll);
+    if (this.#scrollRafId !== null) {
+      cancelAnimationFrame(this.#scrollRafId);
+      this.#scrollRafId = null;
+    }
     document.body.style.setProperty('--header-height', '0px');
   }
 }

@@ -23,6 +23,7 @@
 {% endcapture %}
 
 <featured-product-information id="{{ section.id }}">
+  <h2 class="visually-hidden">{{ 'accessibility.featured_product' | t }}</h2>
   {% render 'product-information-content',
     product_media_size: section.settings.product.media.size,
     section_id: section.id,
@@ -162,7 +163,7 @@
             "hide_variants": true,
             "slideshow_controls_style": "counter",
             "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "right",
+            "thumbnail_position": "bottom",
             "thumbnail_width": 44
           }
         },
@@ -187,12 +188,16 @@
                   "type": "product-title",
                   "name": "t:names.title",
                   "settings": {
-                    "type_preset": "h3"
+                    "type_preset": "rte"
                   }
                 },
                 "price": {
                   "type": "price",
-                  "name": "t:names.product_price"
+                  "name": "t:names.product_price",
+                  "settings": {
+                    "show_installments": true,
+                    "show_tax_info": true
+                  }
                 }
               },
               "block_order": ["title", "price"]

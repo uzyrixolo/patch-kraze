@@ -64,8 +64,13 @@
     "nested_product": "{{ product_title }} för {{ parent_title }}",
     "remove": "Ta bort",
     "view_pricing_info": "Visa prissättningsinformation",
-    "open_hotspot": "Öppna hotspot",
-    "slideshow": "Bildspel"
+    "slideshow": "Bildspel",
+    "header_navigation_label": "Primär",
+    "home": "Hem",
+    "active_filters": "Aktiva filter:",
+    "product_details": "Produktdetaljer",
+    "show_product_details": "Visa produktdetaljer för {{ product_name }}",
+    "featured_product": "Utvald produkt"
   },
   "actions": {
     "add_to_cart": "Lägg till i varukorgen",
@@ -324,7 +329,9 @@
       "quantity_increments": "Ökningar i steg om {{ increment }}",
       "quantity_minimum": "Minimum {{ minimum }}",
       "quantity_maximum": "Maximum {{ maximum }}",
-      "in_cart": "i varukorg"
+      "in_cart": "i varukorg",
+      "default_title": "Standardtitel",
+      "sticky_add_to_cart": "Fält för att lägga till snabbt i varukorgen"
     }
   }
 }

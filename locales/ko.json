@@ -64,8 +64,13 @@
     "nested_product": "{{ parent_title }}용 {{ product_title }}",
     "remove": "제거",
     "view_pricing_info": "가격 정보 보기",
-    "open_hotspot": "핫스팟 열기",
-    "slideshow": "슬라이드쇼"
+    "slideshow": "슬라이드 쇼",
+    "header_navigation_label": "기본",
+    "home": "홈",
+    "active_filters": "활성 필터:",
+    "product_details": "제품 세부 정보",
+    "show_product_details": "{{ product_name }} 제품 세부 정보 표시",
+    "featured_product": "추천 제품"
   },
   "actions": {
     "add_to_cart": "카트에 추가",
@@ -301,7 +306,9 @@
       "quantity_increments": "{{ increment }}개씩 증가",
       "quantity_minimum": "최소 {{ minimum }}개",
       "quantity_maximum": "최대 {{ maximum }}개",
-      "in_cart": "카트에 있음"
+      "in_cart": "카트에 있음",
+      "default_title": "기본 이름",
+      "sticky_add_to_cart": "빠른 카트 추가 바"
     }
   },
   "fields": {

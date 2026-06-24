@@ -64,8 +64,13 @@
     "discount_menu": "Кодове за отстъпка",
     "remove": "Премахване",
     "view_pricing_info": "Преглед на информация за ценообразуването",
-    "open_hotspot": "Отвори горещ точка",
-    "slideshow": "Слайдшоу"
+    "slideshow": "Слайдшоу",
+    "header_navigation_label": "Основна",
+    "home": "Начало",
+    "active_filters": "Активни филтри:",
+    "product_details": "Подробности за продукта",
+    "show_product_details": "Показване на подробности за продукта {{ product_name }}",
+    "featured_product": "Представен продукт"
   },
   "actions": {
     "add_to_cart": "Добавяне към количката",
@@ -301,7 +306,9 @@
       "quantity_increments": "Стъпки от {{ increment }}",
       "quantity_minimum": "Минимум: {{ minimum }}",
       "quantity_maximum": "Максимум: {{ maximum }}",
-      "in_cart": "в количката"
+      "in_cart": "в количката",
+      "default_title": "Заглавие по подразбиране",
+      "sticky_add_to_cart": "Лента за бързо добавяне в количката"
     }
   },
   "fields": {

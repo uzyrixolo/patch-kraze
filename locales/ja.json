@@ -64,8 +64,12 @@
     "nested_product": "{{ parent_title }}向けの{{ product_title }}",
     "remove": "削除",
     "view_pricing_info": "価格情報を表示する",
-    "open_hotspot": "ホットスポットを開く",
-    "slideshow": "スライドショー"
+    "slideshow": "スライドショー",
+    "header_navigation_label": "プライマリ",
+    "home": "ホーム",
+    "product_details": "商品詳細",
+    "show_product_details": "{{ product_name }} の商品詳細を表示",
+    "featured_product": "おすすめ商品"
   },
   "actions": {
     "add_to_cart": "カートに追加",
@@ -301,7 +305,9 @@
       "quantity_increments": "{{ increment }}の増分",
       "quantity_minimum": "最小{{ minimum }}",
       "quantity_maximum": "最大{{ maximum }}",
-      "in_cart": "カート内"
+      "in_cart": "カート内",
+      "default_title": "デフォルトのタイトル",
+      "sticky_add_to_cart": "クイック「カートに追加」バー"
     }
   },
   "fields": {

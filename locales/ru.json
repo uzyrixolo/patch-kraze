@@ -66,8 +66,13 @@
     "discount_menu": "Коды скидок",
     "remove": "Удалить",
     "view_pricing_info": "Посмотреть информацию о ценах",
-    "open_hotspot": "Открыть хотспот",
-    "slideshow": "Слайд-шоу"
+    "slideshow": "Слайд-шоу",
+    "header_navigation_label": "Основная",
+    "home": "Главная",
+    "active_filters": "Активные фильтры:",
+    "product_details": "Подробности о товаре",
+    "show_product_details": "Показать подробности о товаре {{ product_name }}",
+    "featured_product": "Рекомендуемый товар"
   },
   "actions": {
     "add_to_cart": "Добавить в корзину",
@@ -338,7 +343,9 @@
       "quantity_increments": "Прирост: {{ increment }}",
       "quantity_minimum": "Минимум: {{ minimum }}",
       "quantity_maximum": "Максимум: {{ maximum }}",
-      "in_cart": "в корзине"
+      "in_cart": "в корзине",
+      "default_title": "Название по умолчанию",
+      "sticky_add_to_cart": "Быстрое добавление в корзину"
     }
   }
 }

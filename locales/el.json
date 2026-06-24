@@ -64,8 +64,13 @@
     "discount_menu": "Κωδικοί έκπτωσης",
     "remove": "Κατάργηση",
     "view_pricing_info": "Προβολή πληροφοριών τιμολόγησης",
-    "open_hotspot": "Άνοιγμα hotspot",
-    "slideshow": "Παρουσίαση διαφανειών"
+    "slideshow": "Προβολή διαφανειών",
+    "header_navigation_label": "Κύρια",
+    "home": "Αρχική",
+    "active_filters": "Ενεργά φίλτρα:",
+    "product_details": "Λεπτομέρειες προϊόντος",
+    "show_product_details": "Εμφάνιση λεπτομερειών προϊόντος για {{ product_name }}",
+    "featured_product": "Προτεινόμενο προϊόν"
   },
   "actions": {
     "add_to_cart": "Προσθήκη στο καλάθι",
@@ -301,7 +306,9 @@
       "quantity_increments": "Ποσότητες των {{ increment }}",
       "quantity_minimum": "Ελάχιστο όριο {{ minimum }}",
       "quantity_maximum": "Μέγιστο όριο {{ maximum }}",
-      "in_cart": "στο καλάθι"
+      "in_cart": "στο καλάθι",
+      "default_title": "Προεπιλεγμένος τίτλος",
+      "sticky_add_to_cart": "Γρήγορη προσθήκη στο καλάθι"
     }
   },
   "fields": {

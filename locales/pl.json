@@ -66,8 +66,13 @@
     "nested_product": "{{ product_title }}: {{ parent_title }}",
     "remove": "Usuń",
     "view_pricing_info": "Wyświetl informacje o cenach",
-    "open_hotspot": "Otwórz hotspot",
-    "slideshow": "Pokaz slajdów"
+    "slideshow": "Pokaz slajdów",
+    "header_navigation_label": "Główna",
+    "home": "Strona główna",
+    "active_filters": "Aktywne filtry:",
+    "product_details": "Szczegóły produktu",
+    "show_product_details": "Pokaż szczegóły produktu dla {{ product_name }}",
+    "featured_product": "Polecany produkt"
   },
   "actions": {
     "add_to_cart": "Dodaj do koszyka",
@@ -338,7 +343,9 @@
       "quantity_increments": "Przyrost o {{ increment }}",
       "quantity_minimum": "Minimum {{ minimum }}",
       "quantity_maximum": "Maksimum {{ maximum }}",
-      "in_cart": "w koszyku"
+      "in_cart": "w koszyku",
+      "default_title": "Tytuł domyślny",
+      "sticky_add_to_cart": "Pasek szybkiego dodawania do koszyka"
     }
   }
 }

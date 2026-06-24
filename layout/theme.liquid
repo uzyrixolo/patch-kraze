@@ -1,6 +1,8 @@
 <!doctype html>
 <html
-  class="no-js{% if request.design_mode %} shopify-design-mode{% endif %}"
+  {% if request.design_mode %}
+    class="shopify-design-mode"
+  {% endif %}
   lang="{{ request.locale.iso_code }}"
 >
   <head>
@@ -13,12 +15,14 @@
     {%- endif -%}
 
     {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
-    <link
-      rel="expect"
-      href="#MainContent"
-      blocking="render"
-      id="view-transition-render-blocker"
-    >
+    {% if settings.transition_to_main_product or settings.page_transition_enabled %}
+      <link
+        rel="expect"
+        href="#MainContent"
+        blocking="render"
+        id="view-transition-render-blocker"
+      >
+    {% endif %}
 
     {%- render 'meta-tags' -%}
     {%- render 'stylesheets' -%}
@@ -31,20 +35,12 @@
       {%- render 'theme-editor' -%}
     {% endif %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --font-body--family: 'Inter', sans-serif !important;
-        --font-heading--family: 'Inter', sans-serif !important;
-      }
-      body, h1, h2, h3, h4, h5, h6, p, span, a, div, input, button {
-        font-family: 'Inter', sans-serif !important;
-      }
-    </style>
-
     {{ content_for_header }}
+
+        {% # BaadMay CSS/JS Start %}
+            <link rel="stylesheet" href="{{ 'baadmay-styles.css' | asset_url }}">
+            <script src="{{ 'baadmay-scripts.js' | asset_url }}" async></script>
+        {% # BaadMay CSS/JS End %}
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
@@ -54,8 +50,8 @@
     </div>
 
     <script>
-      // Inline header height calculation to prevent layout shift
-      // Note: Updates in calculateHeaderGroupHeight() and updateTransparentHeaderOffset()utilities.js should be kept in sync with this function
+      // Inline header height and menu style calculations to prevent layout shift
+      // Note: Updates in calculateHeaderGroupHeight(), updateTransparentHeaderOffset() and setHeaderMenuStyle() utilities.js should be kept in sync with this function
       (function setHeaderHeighCustomProperties() {
         /*
          * Header calculation functions for maintaining CSS variables
@@ -67,6 +63,7 @@
 
         if (!header || !headerGroup) return;
 
+        const headerTopRow = header.querySelector('.header__row--top');
         const headerHeight = header.offsetHeight;
 
         // Calculate the total height of the header group
@@ -87,6 +84,12 @@
         document.body.style.setProperty('--header-height', `${headerHeight}px`);
         document.body.style.setProperty('--header-group-height', `${headerGroupHeight}px`);
 
+        if (headerTopRow) {
+          window.requestAnimationFrame(function () {
+            document.body.style.setProperty('--top-row-height', `${headerTopRow.offsetHeight}px`);
+          });
+        }
+
         /**
          * Updates CSS custom properties for transparent header offset calculation
          * Mimic updateTransparentHeaderOffset() in utilities.js
@@ -102,6 +105,16 @@
         const shouldApplyOffset = !hasImmediateSection ? '1' : '0';
         document.body.style.setProperty('--transparent-header-offset-boolean', shouldApplyOffset);
       })();
+
+      (function setHeaderMenuStyle() {
+        const headerComponent = document.querySelector('#header-component');
+        if (headerComponent) {
+          const isTouchDevice = 'ontouchstart' in window && navigator.maxTouchPoints > 0;
+          const overflowList = headerComponent?.querySelector('overflow-list');
+          const hasReachedMinimum = overflowList && overflowList.hasAttribute('minimum-reached');
+          headerComponent.dataset.menuStyle = isTouchDevice || hasReachedMinimum ? 'drawer' : 'menu';
+        }
+      })();
     </script>
 
     <main
@@ -115,7 +128,9 @@
       {{ content_for_layout }}
     </main>
 
-    {% sections 'footer-group' %}
+    <footer>
+      {% sections 'footer-group' %}
+    </footer>
 
     {% render 'search-modal' %}
 

@@ -64,8 +64,13 @@
     "discount_menu": "Kode Diskon",
     "remove": "Hapus",
     "view_pricing_info": "Lihat informasi harga",
-    "open_hotspot": "Buka hotspot",
-    "slideshow": "Tayangan slide"
+    "slideshow": "Tayangan slide",
+    "header_navigation_label": "Utama",
+    "home": "Beranda",
+    "active_filters": "Filter aktif:",
+    "featured_product": "Produk unggulan",
+    "product_details": "Detail produk",
+    "show_product_details": "Tampilkan detail produk untuk {{ product_name }}"
   },
   "actions": {
     "add_to_cart": "Tambahkan ke keranjang",
@@ -282,7 +287,7 @@
     "search": "Cari",
     "product_title": "Judul produk",
     "collection_title": "Judul koleksi",
-    "blog_posts": "Postingan Blog",
+    "blog_posts": "Postingan blog",
     "blog_post_title": "Judul",
     "blog_post_author": "Penulis",
     "blog_post_date": "Tanggal",
@@ -301,7 +306,9 @@
       "quantity_increments": "Nilai peningkatan {{ increment }}",
       "quantity_minimum": "Minimum {{ minimum }}",
       "quantity_maximum": "Maksimum {{ maximum }}",
-      "in_cart": "di keranjang"
+      "in_cart": "di keranjang",
+      "default_title": "Judul Bawaan",
+      "sticky_add_to_cart": "Bilah penambahan cepat ke keranjang"
     }
   },
   "fields": {

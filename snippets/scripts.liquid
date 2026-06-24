@@ -1,3 +1,9 @@
+{% doc %}
+  Renders all global scripts, module preloads, and importmaps for the theme.
+
+  @param {object} [product] - The product object, available on product pages.
+{% enddoc %}
+
 <script type="importmap">
   {
     "imports": {
@@ -15,6 +21,7 @@
       "@theme/scrolling": "{{ 'scrolling.js' | asset_url }}",
       "@theme/section-renderer": "{{ 'section-renderer.js' | asset_url }}",
       "@theme/section-hydration": "{{ 'section-hydration.js' | asset_url }}",
+      "@theme/money-formatting": "{{ 'money-formatting.js' | asset_url }}",
       "@theme/utilities": "{{ 'utilities.js' | asset_url }}",
       "@theme/variant-picker": "{{ 'variant-picker.js' | asset_url }}",
       "@theme/media-gallery": "{{ 'media-gallery.js' | asset_url }}",
@@ -29,15 +36,13 @@
   }
 </script>
 
-{% if settings.transition_to_main_product %}
-  {% # theme-check-disable ParserBlockingScript %}
-  <script
-    src="{{ 'view-transitions.js' | asset_url }}"
-    async
+<script
+  src="{{ 'view-transitions.js' | asset_url }}"
+  async
+  {% if settings.page_transition_enabled or settings.transition_to_main_product %}
     blocking="render"
-  ></script>
-  {% # theme-check-enable %}
-{% endif %}
+  {% endif %}
+></script>
 
 <link
   rel="modulepreload"
@@ -158,11 +163,6 @@
   fetchpriority="low"
 ></script>
 <script
-  src="{{ 'disclosure-custom.js' | asset_url }}"
-  type="module"
-  fetchpriority="low"
-></script>
-<script
   src="{{ 'media.js' | asset_url }}"
   type="module"
   fetchpriority="low"
@@ -273,14 +273,6 @@
   </script>
 {% endif %}
 
-{% if settings.transition_to_main_product %}
-  <script
-    src="{{ 'product-card-link.js' | asset_url }}"
-    type="module"
-    fetchpriority="low"
-  ></script>
-{% endif %}
-
 <script
   src="{{ 'auto-close-details.js' | asset_url }}"
   defer="defer"
@@ -296,6 +288,7 @@
       recipient_form_error: `{{ 'content.recipient_form_error' | t }}`,
       items_added_to_cart_one: `{{ 'content.items_added_to_cart.one' | t }}`,
       items_added_to_cart_other: `{{ 'content.items_added_to_cart.other' | t }}`,
+      cart_count: `{{ 'accessibility.cart_count' | t }}`,
     },
     routes: {
       cart_add_url: '{{ routes.cart_add_url | append: '.js' }}',
