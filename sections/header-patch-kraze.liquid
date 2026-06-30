@@ -431,10 +431,32 @@
       }
     ],
     readymade: [
-      { 
-        title: "Ready Made Patches", 
-        image: "{% if ready_made_collection.products.first %}{{ ready_made_collection.products.first.featured_image | img_url: '800x' }}{% endif %}", 
-        href: "/collections/ready-made-patches" 
+      {
+        title: "Ready Made Patches",
+        image: "{% if ready_made_collection.products.first %}{{ ready_made_collection.products.first.featured_image | img_url: '800x' }}{% endif %}",
+        href: "/collections/ready-made-patches"
+      }
+    ],
+    services: [
+      {
+        title: "Direct Embroidery",
+        image: "{{ embroidered_patches.featured_image | img_url: '800x' }}",
+        href: "/pages/direct-embroidery"
+      },
+      {
+        title: "Screen Printing",
+        image: "{{ full_color_printed.featured_image | img_url: '800x' }}",
+        href: "/pages/screen-printing"
+      },
+      {
+        title: "Heat Press Service",
+        image: "{{ dtf_transfers.featured_image | img_url: '800x' }}",
+        href: "/pages/heat-press-service"
+      },
+      {
+        title: "Tees with DTF Prints",
+        image: "{{ dtf_transfers.featured_image | img_url: '800x' }}",
+        href: "/pages/tees-with-dtf-prints"
       }
     ]
   };
@@ -454,6 +476,7 @@
     { label: "DTF Transfers", key: "dtf", hasDropdown: true },
     { label: "Ready Made Patches", key: "readymade", hasDropdown: false, href: "/collections/ready-made-patches" },
     { label: "Patch Kraze Blanks", key: "blanks", hasDropdown: false, href: "/collections/patch-kraze-blanks" },
+    { label: "Services", key: "services", hasDropdown: true },
     // { label: "Support", key: "support", hasDropdown: true, href: "/pages/contact" }
   ];
 
