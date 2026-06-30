@@ -87,18 +87,47 @@
   </div>
 </div>
 
+{% liquid
+  assign min_order_cents = 7000
+  assign cart_total_cents = cart.total_price
+  assign meets_minimum = true
+  if cart_total_cents < min_order_cents
+    assign meets_minimum = false
+  endif
+  assign remaining_cents = min_order_cents | minus: cart_total_cents
+  assign progress_percent = cart_total_cents | times: 100 | divided_by: min_order_cents
+  if progress_percent > 100
+    assign progress_percent = 100
+  endif
+%}
+
+{% unless meets_minimum %}
+  <div class="cart-minimum-order">
+    <div class="cart-minimum-order__bar">
+      <div class="cart-minimum-order__fill" style="width: {{ progress_percent }}%;"></div>
+    </div>
+    <p class="cart-minimum-order__text">
+      Add <strong>{{ remaining_cents | money }}</strong> more to place your order
+    </p>
+  </div>
+{% endunless %}
+
 <div class="cart__ctas">
   <button
     type="submit"
     id="checkout"
     class="cart__checkout-button button"
     name="checkout"
-    {% if cart == empty %}
+    {% if cart == empty or meets_minimum == false %}
       disabled
     {% endif %}
     form="cart-form"
   >
-    {{ 'content.checkout' | t }}
+    {% if meets_minimum %}
+      {{ 'content.checkout' | t }}
+    {% else %}
+      Minimum order {{ min_order_cents | money }}
+    {% endif %}
   </button>
 
   {% if additional_checkout_buttons and settings.show_accelerated_checkout_buttons %}
@@ -107,6 +136,7 @@
         additional-checkout-buttons
         {% if accelerated_checkout_buttons_layout == 'vertical' %}additional-checkout-buttons--vertical{% endif %}
       "
+      {% unless meets_minimum %}style="display:none;"{% endunless %}
     >
       {{ content_for_additional_checkout_buttons }}
     </div>
@@ -136,4 +166,53 @@
   .cart__installments {
     color: var(--color-foreground);
   }
+
+  .cart-minimum-order {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+    margin-block-end: var(--margin-md);
+  }
+
+  .cart-minimum-order__bar {
+    width: 100%;
+    height: 6px;
+    background: rgb(var(--color-foreground-rgb) / 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .cart-minimum-order__fill {
+    height: 100%;
+    background: var(--color-primary, #000);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .cart-minimum-order__text {
+    font-size: var(--font-size--xs);
+    color: rgb(var(--color-foreground-rgb) / 0.7);
+    margin: 0;
+    text-align: center;
+  }
+
+  .cart__checkout-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 {% endstylesheet %}
+
+{% javascript %}
+  document.addEventListener('submit', function(e) {
+    const form = e.target;
+    if (form.id === 'cart-form' || form.action?.includes('/cart')) {
+      const totalText = document.querySelector('[data-cart-subtotal]')?.getAttribute('value') || '';
+      const totalNum = parseFloat(totalText.replace(/[^0-9.]/g, ''));
+      if (totalNum < 70) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return false;
+      }
+    }
+  }, true);
+{% endjavascript %}
