@@ -1,0 +1,425 @@
+{% schema %}
+{
+  "name": "Service Landing",
+  "tag": "section",
+  "class": "section-service-landing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Service Name"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Professional quality, fast turnaround"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Service Description",
+      "default": "<p>Describe your service here.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_title",
+      "label": "Feature 1 Title",
+      "default": "Premium Quality"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_desc",
+      "label": "Feature 1 Description",
+      "default": "Top-grade materials and expert craftsmanship"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_title",
+      "label": "Feature 2 Title",
+      "default": "Fast Turnaround"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_desc",
+      "label": "Feature 2 Description",
+      "default": "Quick production without compromising quality"
+    },
+    {
+      "type": "text",
+      "id": "feature_3_title",
+      "label": "Feature 3 Title",
+      "default": "No Minimums"
+    },
+    {
+      "type": "text",
+      "id": "feature_3_desc",
+      "label": "Feature 3 Description",
+      "default": "Order any quantity that fits your needs"
+    },
+    {
+      "type": "text",
+      "id": "feature_4_title",
+      "label": "Feature 4 Title",
+      "default": "Free Setup"
+    },
+    {
+      "type": "text",
+      "id": "feature_4_desc",
+      "label": "Feature 4 Description",
+      "default": "No hidden fees — setup and artwork are on us"
+    },
+    {
+      "type": "text",
+      "id": "process_1",
+      "label": "Process Step 1",
+      "default": "Submit Your Design"
+    },
+    {
+      "type": "text",
+      "id": "process_2",
+      "label": "Process Step 2",
+      "default": "Approve Your Proof"
+    },
+    {
+      "type": "text",
+      "id": "process_3",
+      "label": "Process Step 3",
+      "default": "We Produce & Ship"
+    },
+    {
+      "type": "text",
+      "id": "process_4",
+      "label": "Process Step 4",
+      "default": "Apply & Enjoy"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service Landing"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .service-hero {
+    background: #111827;
+    padding: 4rem 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-hero-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 768px) {
+    .service-hero { padding: 3rem 1rem; }
+    .service-hero-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+  .service-hero-content h1 {
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    margin: 0 0 0.75rem;
+  }
+  .service-hero-sub {
+    font-size: 1.25rem;
+    color: #10b981;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  .service-hero-desc {
+    color: #d1d5db;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  .service-hero-desc p { margin: 0; }
+  .service-hero-cta {
+    display: inline-block;
+    background: #10b981;
+    color: #fff;
+    padding: 0.875rem 2.5rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .service-hero-cta:hover {
+    background: #059669;
+    transform: translateY(-2px);
+  }
+  .service-hero-image {
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+  }
+  .service-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .service-hero-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #1f2937, #374151);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    color: #6b7280;
+    font-size: 1.1rem;
+  }
+  @media (max-width: 768px) {
+    .service-hero-content h1 { font-size: 2rem; }
+    .service-hero-image { order: -1; }
+  }
+
+  .service-features {
+    padding: 4rem 1rem;
+    background: var(--color-background);
+  }
+  .service-features-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .service-features-heading {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-foreground);
+    margin-bottom: 3rem;
+  }
+  .service-features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  @media (max-width: 768px) {
+    .service-features-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .service-features-grid { grid-template-columns: 1fr; }
+  }
+  .service-feature-card {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+    background: var(--color-background);
+  }
+  .service-feature-card:hover {
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+  }
+  .service-feature-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #ecfdf5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+  }
+  .service-feature-title {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--color-foreground);
+    margin-bottom: 0.5rem;
+  }
+  .service-feature-desc {
+    font-size: 0.9rem;
+    color: #6b7280;
+    line-height: 1.5;
+  }
+
+  .service-process {
+    padding: 4rem 1rem;
+    background: #f9fafb;
+  }
+  .service-process-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .service-process-heading {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-foreground);
+    margin-bottom: 3rem;
+  }
+  .service-process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    position: relative;
+  }
+  @media (max-width: 768px) {
+    .service-process-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .service-process-steps { grid-template-columns: 1fr; }
+  }
+  .service-step {
+    text-align: center;
+    position: relative;
+  }
+  .service-step-number {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #10b981;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.25rem;
+    margin: 0 auto 1rem;
+  }
+  .service-step-label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-foreground);
+  }
+  .service-step-connector {
+    display: none;
+  }
+  @media (min-width: 769px) {
+    .service-step-connector {
+      display: block;
+      position: absolute;
+      top: 24px;
+      left: calc(50% + 30px);
+      width: calc(100% - 60px);
+      height: 2px;
+      background: #d1d5db;
+    }
+    .service-step:last-child .service-step-connector { display: none; }
+  }
+
+  .service-quote-intro {
+    text-align: center;
+    padding: 3rem 1rem 0;
+    background: var(--color-background);
+  }
+  .service-quote-intro h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-foreground);
+    margin-bottom: 0.5rem;
+  }
+  .service-quote-intro p {
+    color: #6b7280;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+</style>
+
+<div class="service-hero">
+  <div class="service-hero-container">
+    <div class="service-hero-content">
+      <h1>{{ section.settings.heading }}</h1>
+      <div class="service-hero-sub">{{ section.settings.subheading }}</div>
+      <div class="service-hero-desc">{{ section.settings.description }}</div>
+      <a href="#service-quote" class="service-hero-cta">Get a Free Quote</a>
+    </div>
+    <div class="service-hero-image">
+      {% if section.settings.hero_image %}
+        {{ section.settings.hero_image | image_url: width: 800 | image_tag: loading: 'eager' }}
+      {% else %}
+        <div class="service-hero-placeholder">Upload an image in theme editor</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="service-features">
+  <div class="service-features-container">
+    <h2 class="service-features-heading">Why Choose Patch Kraze?</h2>
+    <div class="service-features-grid">
+      <div class="service-feature-card">
+        <div class="service-feature-icon">&#9733;</div>
+        <div class="service-feature-title">{{ section.settings.feature_1_title }}</div>
+        <div class="service-feature-desc">{{ section.settings.feature_1_desc }}</div>
+      </div>
+      <div class="service-feature-card">
+        <div class="service-feature-icon">&#9889;</div>
+        <div class="service-feature-title">{{ section.settings.feature_2_title }}</div>
+        <div class="service-feature-desc">{{ section.settings.feature_2_desc }}</div>
+      </div>
+      <div class="service-feature-card">
+        <div class="service-feature-icon">&#10003;</div>
+        <div class="service-feature-title">{{ section.settings.feature_3_title }}</div>
+        <div class="service-feature-desc">{{ section.settings.feature_3_desc }}</div>
+      </div>
+      <div class="service-feature-card">
+        <div class="service-feature-icon">&#10024;</div>
+        <div class="service-feature-title">{{ section.settings.feature_4_title }}</div>
+        <div class="service-feature-desc">{{ section.settings.feature_4_desc }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="service-process">
+  <div class="service-process-container">
+    <h2 class="service-process-heading">How It Works</h2>
+    <div class="service-process-steps">
+      <div class="service-step">
+        <div class="service-step-connector"></div>
+        <div class="service-step-number">1</div>
+        <div class="service-step-label">{{ section.settings.process_1 }}</div>
+      </div>
+      <div class="service-step">
+        <div class="service-step-connector"></div>
+        <div class="service-step-number">2</div>
+        <div class="service-step-label">{{ section.settings.process_2 }}</div>
+      </div>
+      <div class="service-step">
+        <div class="service-step-connector"></div>
+        <div class="service-step-number">3</div>
+        <div class="service-step-label">{{ section.settings.process_3 }}</div>
+      </div>
+      <div class="service-step">
+        <div class="service-step-number">4</div>
+        <div class="service-step-label">{{ section.settings.process_4 }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="service-quote-intro" id="service-quote">
+  <h2>Ready to Get Started?</h2>
+  <p>Fill out the form below and we'll get back to you within 24 hours with a detailed quote.</p>
+</div>

@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "service_landing": {
+      "type": "service-landing",
+      "settings": {
+        "heading": "Heat Press Service",
+        "subheading": "Professional heat transfer application for your products",
+        "description": "<p>Don't have a heat press? No problem. Send us your garments and patches or transfers — we'll professionally apply them with precision temperature, pressure, and timing for a flawless finish every time.</p>",
+        "feature_1_title": "Precision Application",
+        "feature_1_desc": "Commercial-grade presses with exact temperature & pressure control",
+        "feature_2_title": "All Transfer Types",
+        "feature_2_desc": "DTF, vinyl, sublimation, patches — we handle them all",
+        "feature_3_title": "Bulk Processing",
+        "feature_3_desc": "Send us hundreds of garments and we'll press them all",
+        "feature_4_title": "Quality Guaranteed",
+        "feature_4_desc": "Every piece inspected for adhesion, alignment, and finish",
+        "process_1": "Ship Us Your Items",
+        "process_2": "We Prep & Press",
+        "process_3": "Quality Inspection",
+        "process_4": "Ship Back to You",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "quote_form": {
+      "type": "quote-form",
+      "settings": {
+        "heading": "Request a Heat Press Service Quote",
+        "description": "<p>Tell us what you need pressed and we'll provide a detailed quote within 24 hours.</p>",
+        "show_file_upload": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "service_landing",
+    "quote_form"
+  ]
+}

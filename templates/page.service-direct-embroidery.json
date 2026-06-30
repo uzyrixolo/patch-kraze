@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "service_landing": {
+      "type": "service-landing",
+      "settings": {
+        "heading": "Direct Embroidery",
+        "subheading": "Premium embroidery directly on your garments & apparel",
+        "description": "<p>Skip the patches — get your logos, names, and designs embroidered directly onto hats, polos, jackets, bags, and more. Our state-of-the-art embroidery machines deliver crisp, durable stitching that lasts the life of the garment.</p>",
+        "feature_1_title": "Premium Thread",
+        "feature_1_desc": "Polyester & rayon threads for vibrant, fade-resistant results",
+        "feature_2_title": "Any Garment",
+        "feature_2_desc": "Hats, polos, jackets, hoodies, bags, beanies & more",
+        "feature_3_title": "Fast Turnaround",
+        "feature_3_desc": "Most orders completed within 5-7 business days",
+        "feature_4_title": "Free Digitizing",
+        "feature_4_desc": "We convert your artwork to embroidery-ready files at no charge",
+        "process_1": "Send Your Design",
+        "process_2": "We Digitize & Proof",
+        "process_3": "Embroider & QC",
+        "process_4": "Ship to Your Door",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "quote_form": {
+      "type": "quote-form",
+      "settings": {
+        "heading": "Request a Direct Embroidery Quote",
+        "description": "<p>Tell us about your project and we'll provide a detailed quote within 24 hours.</p>",
+        "show_file_upload": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "service_landing",
+    "quote_form"
+  ]
+}
