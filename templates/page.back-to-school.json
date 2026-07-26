@@ -1,0 +1,121 @@
+{
+  "sections": {
+    "bts_landing": {
+      "type": "back-to-school-landing",
+      "blocks": {
+        "cat_uniform": {
+          "type": "category",
+          "settings": {
+            "title": "School Uniform Patches",
+            "subtitle": "Custom embroidered patches for any school uniform",
+            "emoji": "🎽",
+            "link": "/products/custom-uniform-patches"
+          }
+        },
+        "cat_letterman": {
+          "type": "category",
+          "settings": {
+            "title": "Letterman Jacket Patches",
+            "subtitle": "Classic varsity letters and chenille patches",
+            "emoji": "🧥",
+            "link": "/products/letterman-jacket-patches"
+          }
+        },
+        "cat_sports": {
+          "type": "category",
+          "settings": {
+            "title": "Sports Team Patches",
+            "subtitle": "Team logos, mascots and player numbers",
+            "emoji": "🏈",
+            "link": "/products/sports-patches"
+          }
+        },
+        "cat_club": {
+          "type": "category",
+          "settings": {
+            "title": "Club Patches",
+            "subtitle": "Debate, robotics, scouts, band and more",
+            "emoji": "🎗️",
+            "link": "/products/embroidered-patches"
+          }
+        },
+        "cat_achievement": {
+          "type": "category",
+          "settings": {
+            "title": "Achievement & Honor Roll Patches",
+            "subtitle": "Reward excellence with custom award patches",
+            "emoji": "⭐",
+            "link": "/pages/quote"
+          }
+        },
+        "cat_graduation": {
+          "type": "category",
+          "settings": {
+            "title": "Graduation Patches",
+            "subtitle": "Class of '26 chenille letters and keepsakes",
+            "emoji": "🎓",
+            "link": "/products/chenille-letter-patches"
+          }
+        },
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The patches were perfect for our team jackets — great quality stitching and they arrived ahead of schedule.",
+            "author": "Coach Martinez",
+            "organization": "High School Athletics Program"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "We ordered honor roll patches for the whole semester. The free proof made it easy to get the design exactly right.",
+            "author": "A. Thompson",
+            "organization": "Middle School PTA"
+          }
+        }
+      },
+      "block_order": [
+        "cat_uniform",
+        "cat_letterman",
+        "cat_sports",
+        "cat_club",
+        "cat_achievement",
+        "cat_graduation",
+        "testimonial_1",
+        "testimonial_2"
+      ],
+      "settings": {
+        "badge_text": "Back to School Sale",
+        "heading": "Back to School! Upgrade Your Gear",
+        "subheading": "Design Your Own Custom Patches",
+        "description": "<p>Custom embroidered patches for uniforms, letterman jackets, teams, clubs and more. Free artwork setup, fast turnaround, shipped from California.</p>",
+        "order_button_label": "Order Now",
+        "order_button_link": "/products/embroidered-patches",
+        "quote_button_label": "Get a Free Quote",
+        "quote_button_link": "/pages/quote",
+        "promo_1": "🎒 Back to School Discount",
+        "promo_2": "⚡ Fast California Turnaround",
+        "promo_3": "🎨 Free Artwork & Setup",
+        "categories_heading": "Shop Patches for Every School Need",
+        "testimonials_heading": "Trusted by Schools & Organizations",
+        "cta_heading": "Ready for the New School Year?",
+        "cta_subtext": "Send us your design today — free proof within 24 hours."
+      }
+    },
+    "quote_form": {
+      "type": "quote-form",
+      "settings": {
+        "heading": "Get Your Free Back to School Quote",
+        "description": "<p>Tell us about your school or team project and we'll send a detailed quote within 24 hours.</p>",
+        "show_file_upload": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "bts_landing",
+    "quote_form"
+  ]
+}

@@ -1,0 +1,618 @@
+{% schema %}
+{
+  "name": "Back to School Landing",
+  "tag": "section",
+  "class": "section-bts-landing",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Back to School Sale"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Back to School! Upgrade Your Gear"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Design Your Own Custom Patches"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Custom embroidered patches for uniforms, letterman jackets, teams, clubs and more. Free artwork setup, fast turnaround, shipped from California.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "order_button_label",
+      "label": "Order button label",
+      "default": "Order Now"
+    },
+    {
+      "type": "url",
+      "id": "order_button_link",
+      "label": "Order button link"
+    },
+    {
+      "type": "text",
+      "id": "quote_button_label",
+      "label": "Quote button label",
+      "default": "Get a Free Quote"
+    },
+    {
+      "type": "url",
+      "id": "quote_button_link",
+      "label": "Quote button link"
+    },
+    {
+      "type": "header",
+      "content": "Promo bar"
+    },
+    {
+      "type": "text",
+      "id": "promo_1",
+      "label": "Promo item 1",
+      "default": "🎒 Back to School Discount"
+    },
+    {
+      "type": "text",
+      "id": "promo_2",
+      "label": "Promo item 2",
+      "default": "⚡ Fast California Turnaround"
+    },
+    {
+      "type": "text",
+      "id": "promo_3",
+      "label": "Promo item 3",
+      "default": "🎨 Free Artwork & Setup"
+    },
+    {
+      "type": "header",
+      "content": "Categories"
+    },
+    {
+      "type": "text",
+      "id": "categories_heading",
+      "label": "Categories heading",
+      "default": "Shop Patches for Every School Need"
+    },
+    {
+      "type": "header",
+      "content": "Video (optional)"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "YouTube embed URL",
+      "info": "e.g. https://www.youtube.com/embed/XXXXXXX. Leave empty to hide."
+    },
+    {
+      "type": "header",
+      "content": "Testimonials"
+    },
+    {
+      "type": "text",
+      "id": "testimonials_heading",
+      "label": "Testimonials heading",
+      "default": "Trusted by Schools & Organizations"
+    },
+    {
+      "type": "header",
+      "content": "Final call to action"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA heading",
+      "default": "Ready for the New School Year?"
+    },
+    {
+      "type": "text",
+      "id": "cta_subtext",
+      "label": "CTA subtext",
+      "default": "Send us your design today — free proof within 24 hours."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "School Uniform Patches"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Custom embroidered for any uniform"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Fallback emoji (if no image)",
+          "default": "🎽"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "gallery_image",
+      "name": "Gallery image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The patches were perfect for our team jackets — great quality and arrived fast."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Coach M."
+        },
+        {
+          "type": "text",
+          "id": "organization",
+          "label": "School / Organization",
+          "default": "High School Athletics"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Back to School Landing",
+      "blocks": [
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "testimonial" },
+        { "type": "testimonial" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .bts-hero {
+    background: #14274e;
+    background: linear-gradient(135deg, #14274e 0%, #1e3a6e 60%, #27446f 100%);
+    padding: 4rem 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .bts-hero-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  .bts-badge {
+    display: inline-block;
+    background: #facc15;
+    color: #14274e;
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+  }
+  .bts-hero h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.08;
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+  }
+  .bts-hero-sub {
+    font-size: 1.35rem;
+    color: #facc15;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+  }
+  .bts-hero-desc {
+    color: #d5deed;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  .bts-hero-desc p { margin: 0; }
+  .bts-hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .bts-btn {
+    display: inline-block;
+    padding: 0.95rem 2.25rem;
+    border-radius: 0.5rem;
+    font-weight: 800;
+    font-size: 1.05rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .bts-btn-primary {
+    background: #f97316;
+    color: #fff;
+    box-shadow: 0 10px 20px -8px rgba(249,115,22,0.6);
+  }
+  .bts-btn-primary:hover { background: #ea580c; transform: translateY(-2px); }
+  .bts-btn-secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #facc15;
+  }
+  .bts-btn-secondary:hover { background: #facc15; color: #14274e; transform: translateY(-2px); }
+  .bts-hero-image {
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.45);
+  }
+  .bts-hero-image img { width: 100%; height: auto; display: block; }
+  .bts-hero-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #1e3a6e, #f97316 220%);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+  }
+  @media (max-width: 768px) {
+    .bts-hero { padding: 3rem 1rem; }
+    .bts-hero-container { grid-template-columns: 1fr; text-align: center; }
+    .bts-hero h1 { font-size: 2.1rem; }
+    .bts-hero-ctas { justify-content: center; }
+    .bts-hero-image { order: -1; }
+  }
+
+  .bts-promo-bar {
+    background: #f97316;
+    padding: 0.9rem 1rem;
+  }
+  .bts-promo-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .bts-promo-item {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+
+  .bts-categories {
+    padding: 4rem 1rem;
+    background: var(--color-background, #fff);
+  }
+  .bts-categories-container { max-width: 1100px; margin: 0 auto; }
+  .bts-section-heading {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-foreground, #111827);
+    margin-bottom: 2.5rem;
+  }
+  .bts-category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  @media (max-width: 900px) { .bts-category-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .bts-category-grid { grid-template-columns: 1fr; } }
+  .bts-category-card {
+    display: block;
+    text-decoration: none;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: var(--color-background, #fff);
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+  }
+  .bts-category-card:hover {
+    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+    border-color: #f97316;
+  }
+  .bts-category-media {
+    aspect-ratio: 16/10;
+    background: linear-gradient(135deg, #eef2f7, #dde5ef);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    overflow: hidden;
+  }
+  .bts-category-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bts-category-body { padding: 1.1rem 1.25rem 1.35rem; }
+  .bts-category-title {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--color-foreground, #111827);
+    margin-bottom: 0.25rem;
+  }
+  .bts-category-sub {
+    font-size: 0.9rem;
+    color: #6b7280;
+    line-height: 1.5;
+  }
+  .bts-category-cta {
+    display: inline-block;
+    margin-top: 0.75rem;
+    color: #f97316;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .bts-gallery {
+    padding: 0 1rem 4rem;
+    background: var(--color-background, #fff);
+  }
+  .bts-gallery-container { max-width: 1100px; margin: 0 auto; }
+  .bts-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 900px) { .bts-gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+  .bts-gallery-item {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    position: relative;
+  }
+  .bts-gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 1/1; }
+  .bts-gallery-caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.65));
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 1.25rem 0.75rem 0.6rem;
+  }
+  .bts-video-wrap {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.3);
+  }
+  .bts-video-wrap iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: block;
+    border: 0;
+  }
+
+  .bts-testimonials {
+    padding: 4rem 1rem;
+    background: #f6f8fb;
+  }
+  .bts-testimonials-container { max-width: 1100px; margin: 0 auto; }
+  .bts-testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .bts-testimonial-card {
+    background: #fff;
+    border-radius: 0.75rem;
+    padding: 1.75rem;
+    border: 1px solid #e5e7eb;
+  }
+  .bts-testimonial-stars { color: #facc15; font-size: 1rem; margin-bottom: 0.75rem; letter-spacing: 0.1em; }
+  .bts-testimonial-quote {
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+  .bts-testimonial-author { font-weight: 700; color: #111827; font-size: 0.95rem; }
+  .bts-testimonial-org { color: #6b7280; font-size: 0.85rem; }
+
+  .bts-final-cta {
+    background: #14274e;
+    padding: 4rem 1rem;
+    text-align: center;
+  }
+  .bts-final-cta h2 {
+    color: #fff;
+    font-size: 2.25rem;
+    font-weight: 900;
+    margin: 0 0 0.75rem;
+  }
+  .bts-final-cta p {
+    color: #d5deed;
+    font-size: 1.1rem;
+    margin: 0 0 2rem;
+  }
+  .bts-final-ctas { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+</style>
+
+{%- assign order_link = section.settings.order_button_link | default: '/products/embroidered-patches' -%}
+{%- assign quote_link = section.settings.quote_button_link | default: '/pages/quote' -%}
+
+<div class="bts-hero">
+  <div class="bts-hero-container">
+    <div class="bts-hero-content">
+      {%- if section.settings.badge_text != blank -%}
+        <span class="bts-badge">{{ section.settings.badge_text }}</span>
+      {%- endif -%}
+      <h1>{{ section.settings.heading }}</h1>
+      {%- if section.settings.subheading != blank -%}
+        <div class="bts-hero-sub">{{ section.settings.subheading }}</div>
+      {%- endif -%}
+      <div class="bts-hero-desc">{{ section.settings.description }}</div>
+      <div class="bts-hero-ctas">
+        <a href="{{ order_link }}" class="bts-btn bts-btn-primary">{{ section.settings.order_button_label }}</a>
+        <a href="{{ quote_link }}" class="bts-btn bts-btn-secondary">{{ section.settings.quote_button_label }}</a>
+      </div>
+    </div>
+    <div>
+      {%- if section.settings.hero_image != blank -%}
+        <div class="bts-hero-image">
+          {{ section.settings.hero_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: section.settings.heading }}
+        </div>
+      {%- else -%}
+        <div class="bts-hero-placeholder">🎒🧵⭐</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<div class="bts-promo-bar">
+  <div class="bts-promo-container">
+    {%- if section.settings.promo_1 != blank -%}<span class="bts-promo-item">{{ section.settings.promo_1 }}</span>{%- endif -%}
+    {%- if section.settings.promo_2 != blank -%}<span class="bts-promo-item">{{ section.settings.promo_2 }}</span>{%- endif -%}
+    {%- if section.settings.promo_3 != blank -%}<span class="bts-promo-item">{{ section.settings.promo_3 }}</span>{%- endif -%}
+  </div>
+</div>
+
+{%- assign category_blocks = section.blocks | where: 'type', 'category' -%}
+{%- if category_blocks.size > 0 -%}
+<div class="bts-categories" id="categories">
+  <div class="bts-categories-container">
+    <h2 class="bts-section-heading">{{ section.settings.categories_heading }}</h2>
+    <div class="bts-category-grid">
+      {%- for block in category_blocks -%}
+        <a href="{{ block.settings.link | default: quote_link }}" class="bts-category-card" {{ block.shopify_attributes }}>
+          <div class="bts-category-media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.title }}
+            {%- else -%}
+              <span>{{ block.settings.emoji }}</span>
+            {%- endif -%}
+          </div>
+          <div class="bts-category-body">
+            <div class="bts-category-title">{{ block.settings.title }}</div>
+            {%- if block.settings.subtitle != blank -%}
+              <div class="bts-category-sub">{{ block.settings.subtitle }}</div>
+            {%- endif -%}
+            <span class="bts-category-cta">Shop now →</span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{%- assign gallery_blocks = section.blocks | where: 'type', 'gallery_image' -%}
+{%- if gallery_blocks.size > 0 or section.settings.video_url != blank -%}
+<div class="bts-gallery">
+  <div class="bts-gallery-container">
+    {%- if section.settings.video_url != blank -%}
+      <div class="bts-video-wrap">
+        <iframe src="{{ section.settings.video_url }}" title="School patches video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    {%- endif -%}
+    {%- if gallery_blocks.size > 0 -%}
+      <div class="bts-gallery-grid">
+        {%- for block in gallery_blocks -%}
+          <div class="bts-gallery-item" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.caption | default: 'School patch example' }}
+            {%- endif -%}
+            {%- if block.settings.caption != blank -%}
+              <div class="bts-gallery-caption">{{ block.settings.caption }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+{%- endif -%}
+
+{%- assign testimonial_blocks = section.blocks | where: 'type', 'testimonial' -%}
+{%- if testimonial_blocks.size > 0 -%}
+<div class="bts-testimonials">
+  <div class="bts-testimonials-container">
+    <h2 class="bts-section-heading">{{ section.settings.testimonials_heading }}</h2>
+    <div class="bts-testimonial-grid">
+      {%- for block in testimonial_blocks -%}
+        <div class="bts-testimonial-card" {{ block.shopify_attributes }}>
+          <div class="bts-testimonial-stars">★★★★★</div>
+          <div class="bts-testimonial-quote">“{{ block.settings.quote }}”</div>
+          <div class="bts-testimonial-author">{{ block.settings.author }}</div>
+          {%- if block.settings.organization != blank -%}
+            <div class="bts-testimonial-org">{{ block.settings.organization }}</div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+<div class="bts-final-cta">
+  <h2>{{ section.settings.cta_heading }}</h2>
+  <p>{{ section.settings.cta_subtext }}</p>
+  <div class="bts-final-ctas">
+    <a href="{{ order_link }}" class="bts-btn bts-btn-primary">{{ section.settings.order_button_label }}</a>
+    <a href="{{ quote_link }}" class="bts-btn bts-btn-secondary">{{ section.settings.quote_button_label }}</a>
+  </div>
+</div>

@@ -33,7 +33,7 @@
   .gallery-scroller::-webkit-scrollbar { display: none; }
   .gallery-slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; scroll-snap-stop: always; display: flex; align-items: center; justify-content: center; }
   .gallery-slide img { width: 100%; height: 100%; object-fit: contain; padding: 0rem; }
-
+  
   .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 3rem; height: 3rem; background-color: white; border: 1px solid #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: all 0.2s; }
   .nav-arrow:hover { background-color: #f9fafb; scale: 1.05; }
   .nav-arrow.prev { left: 1rem; }
@@ -76,7 +76,7 @@
   /* Info Column */
   .product-info { display: flex; flex-direction: column; gap: 1rem; }
   .product-title { font-size: 2.25rem; font-weight: 700; color: #111827; margin: 0; line-height: 1.1; letter-spacing: -0.025em; }
-
+  
   .reviews-row { display: flex; align-items: center; gap: 0.5rem; font-weight: 500; font-size: 0.95rem; color: #374151; }
   .stars { color: #fbbf24; letter-spacing: 1px; }
 
@@ -105,19 +105,19 @@
   }
   .upload-box-wrapper:hover { background-color: #d1fae5; border-color: #10b981; }
   .native-file-input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 50; }
-
+  
   .upload-cloud-icon {
-    width: 3rem; height: 3rem;
+    width: 3rem; height: 3rem; 
     background: #34d399; /* Green cloud */
-    color: white; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
+    color: white; border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; 
     margin: 0 auto 1rem;
     box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
   }
-
+  
   .upload-title { font-size: 1.25rem; font-weight: 700; color: #064e3b; margin-bottom: 0.5rem; }
   .upload-subtitle { color: #4b5563; margin-bottom: 1rem; font-size: 0.9rem; }
-
+  
   .btn-green-browse {
     background-color: #10b981; color: white; border: none; padding: 0.75rem 2rem; border-radius: 0.5rem; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3); transition: background 0.2s;
   }
@@ -128,11 +128,11 @@
   @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
   .file-success-bar {
-    background: #ecfdf5; border: 1px solid #10b981; padding: 1rem; border-radius: 0.75rem;
+    background: #ecfdf5; border: 1px solid #10b981; padding: 1rem; border-radius: 0.75rem; 
     display: none; align-items: center; gap: 1rem; margin-bottom: 2rem;
   }
   .file-thumb { width: 3.5rem; height: 3.5rem; background: #fff; border-radius: 0.5rem; border: 1px solid #d1fae5; object-fit: cover; }
-
+  
   /* Pricing Table */
   .pricing-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
   .pricing-header { background: #f9fafb; padding: 0.75rem 1rem; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #111827; display: flex; justify-content: space-between; font-size: 0.9rem; }
@@ -174,11 +174,11 @@
     .stepper-btn { width: 2.75rem; height: 2.75rem; }
     .shape-grid { grid-template-columns: repeat(2, 1fr); }
   }
-
+  
   @media (max-width: 600px) {
     .product-title { font-size: 1.5rem; }
   }
-
+  
   @media (max-width: 480px) {
     .shape-grid { grid-template-columns: repeat(2, 1fr); }
     .nav-arrow { width: 2rem; height: 2rem; }
@@ -195,7 +195,7 @@
 
   /* Shape Grid Responsive */
   .shape-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 2rem; }
-
+  
   .shape-card {
     border: 1px solid #d1d5db;
     border-radius: 0.5rem;
@@ -206,10 +206,10 @@
     background: #fff;
   }
   .shape-card:hover { border-color: #10b981; background-color: #f0fdf4; }
-  .shape-card.selected {
-    border-color: #10b981;
-    background-color: #ecfdf5;
-    box-shadow: 0 0 0 1px #10b981 inset;
+  .shape-card.selected { 
+    border-color: #10b981; 
+    background-color: #ecfdf5; 
+    box-shadow: 0 0 0 1px #10b981 inset; 
     font-weight: 600; color: #064e3b;
   }
   .shape-image {
@@ -223,7 +223,7 @@
   @media (min-width: 640px) {
     .shape-grid { grid-template-columns: repeat(5, 1fr); }
     .shape-image { height: 70px; }
-  }
+  } 
 
   /* Backing Styles */
   .backing-card {
@@ -237,9 +237,9 @@
     padding-bottom: 0.75rem;
   }
   .backing-card:hover { border-color: #10b981; }
-  .backing-card.selected {
-    border-color: #10b981;
-    box-shadow: 0 0 0 2px #10b981 inset;
+  .backing-card.selected { 
+    border-color: #10b981; 
+    box-shadow: 0 0 0 2px #10b981 inset; 
     font-weight: 700; color: #064e3b;
   }
   .backing-preview {
@@ -271,42 +271,42 @@
 
   /* Stepper Input Styles - Ninja Style Polish */
   .dimension-group h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; color: #111827; }
-  .stepper-control {
-    display: flex; align-items: center;
-    border: 1px solid #d1d5db; border-radius: 0.5rem;
-    height: 3.5rem; background: #fff; overflow:hidden;
+  .stepper-control { 
+    display: flex; align-items: center; 
+    border: 1px solid #d1d5db; border-radius: 0.5rem; 
+    height: 3.5rem; background: #fff; overflow:hidden; 
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     transition: border-color 0.2s, box-shadow 0.2s;
   }
   .stepper-control:focus-within { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
-  .stepper-btn {
-    width: 3.5rem; height: 100%; border: none; background: #f9fafb;
-    cursor: pointer; font-size: 1.25rem; color: #6b7280;
-    display:flex; align-items:center; justify-content:center;
+  .stepper-btn { 
+    width: 3.5rem; height: 100%; border: none; background: #f9fafb; 
+    cursor: pointer; font-size: 1.25rem; color: #6b7280; 
+    display:flex; align-items:center; justify-content:center; 
     border-right: 1px solid #f3f4f6; transition: background 0.2s;
   }
   .stepper-btn:last-child { border-right: none; border-left: 1px solid #f3f4f6; }
   .stepper-btn:hover { background: #e5e7eb; color: #111827; }
-  .stepper-input {
+  .stepper-input { 
     flex: 1; text-align: center; border: none; font-size: 1.25rem; font-weight: 600; color: #111827; outline: none; background: transparent;
-    -moz-appearance: textfield;
+    -moz-appearance: textfield; 
   }
   .stepper-input::-webkit-outer-spin-button, .stepper-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
   /* Tooltip Styles */
   .size-display-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem; margin-bottom: 1.5rem; font-size: 1.1rem; font-weight: 700; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 1.5rem; }
   .size-value-green { color: #10b981; margin-left: 0.25rem; }
-
+  
   .tooltip-container { position: relative; display: inline-flex; cursor: pointer; }
   .info-icon { width: 1.25rem; height: 1.25rem; color: #1f2937; background: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
-  .tooltip-text {
+  .tooltip-text { 
     visibility: hidden; width: 220px; background-color: #1f2937; color: #fff; text-align: center; border-radius: 6px; padding: 0.75rem; position: absolute; z-index: 10; bottom: 125%; left: 50%; margin-left: -110px; opacity: 0; transition: opacity 0.2s; font-size: 0.85rem; font-weight: 400; line-height: 1.4;
   }
   @media (max-width: 400px) {
     .tooltip-text { left: auto; right: 0; margin-left: 0; transform: translateX(20px); }
   }
   .tooltip-container:hover .tooltip-text { visibility: visible; opacity: 1; }
-
+  
   .qty-box-large { border: 1px solid #d1d5db; border-radius: 0.375rem; height: 3.5rem; width: 100%; text-align: center; font-size: 1.25rem; font-weight: 700; }
   .total-price-large { font-size: 2rem; font-weight: 800; color: #111827; line-height: 1; margin:0; }
 
@@ -343,7 +343,7 @@
 
 <div class="product-page-main">
   <div class="product-container">
-
+    
     <!-- Gallery -->
     <div class="product-gallery">
       <div class="main-image-wrapper">
@@ -418,11 +418,11 @@
     <div class="product-info">
       <h1 class="product-title">{{ product.title }}</h1>
       <div class="reviews-row"><span class="stars">★★★★★</span><span>16 Reviews</span></div>
-
+      
       <div class="price-block">
         <span class="price-value" id="header-price">{{ product.price | money }}</span> each at <span id="header-qty">100</span> pieces.
       </div>
-
+      
       <div class="description-text">
         {{ product.description | strip_html | truncate: 500 }}
       </div>
@@ -441,7 +441,7 @@
       <form method="post" enctype="multipart/form-data" id="product-form-pk" data-custom-handler="true">
         <!-- HIDDEN VARIANT ID INPUT -->
         <input type="hidden" name="id" id="real-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
-
+        
         <!-- STAGE 1: UPLOAD -->
         <div id="upload-stage" class="upload-box-wrapper">
           <input type="file" name="properties[Design File]" id="file-input" class="native-file-input" accept="image/*,.pdf">
@@ -455,7 +455,7 @@
 
         <!-- STAGE 2: CUSTOMIZE -->
         <div id="customize-stage" class="customize-ui">
-
+          
           <div class="file-success-bar">
             <img id="file-preview-img" class="file-thumb" src="" width="56" height="56">
             <div style="flex:1; min-width:0;">
@@ -504,7 +504,7 @@
                </div>
              </div>
           </div>
-
+          
           <div class="row-3" style="margin-bottom: 1rem;">
              <div class="control-group" style="margin-bottom:0;">
                 <label class="control-label">Price</label>
@@ -535,7 +535,7 @@
             <span style="flex-shrink:0; font-size:1rem; line-height:1;">💡</span>
             <span><strong>Need a size like 3.75" or 2.25"?</strong> Our size selector steps in 0.5" increments. If your design falls between sizes (e.g.&nbsp;0.25" or 0.75" values), please pick the closest size and add your exact dimensions in the <strong>Design Notes</strong> box below — we'll match it for you at no extra cost.</span>
           </div>
-
+          
           <div class="control-group">
             <h3 class="control-label" style="font-size:1.5rem; margin-top:2rem;">Select Your Options Below</h3>
             <p style="color:#6b7280; margin-bottom:1.5rem;">These do not affect your final price.</p>
@@ -667,20 +667,20 @@
               });
             </script>
           </div>
-
+          
           <div style="margin-top:1.5rem; margin-bottom:1.5rem; padding:1rem; background:#f9fafb; border-radius:0.75rem; border:1px solid #e5e7eb;">
             <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; font-size:0.95rem; line-height:1.5; color:#374151;">
               <input type="checkbox" name="properties[Mockup Request]" id="mockup-request-checkbox" style="width:1.2rem; height:1.2rem; margin-top:0.15rem; flex-shrink:0;">
               <span>Would you like to see a mockup before production? <strong style="color:#10b981;">Please note:</strong> It takes 24-48 hours.</span>
             </label>
           </div>
-
+          
           <div style="text-align:center; margin-bottom:1.5rem;">
             <a href="/pages/quote" style="color:#10b981; font-weight:600; font-size:1rem; text-decoration:underline;">
               Still confused? Get a free quote!
             </a>
           </div>
-
+          
           <button type="submit" name="add" class="checkout-btn">Add to Cart</button>
 
         </div>
@@ -694,27 +694,27 @@
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('product-form-pk');
     if(!form) return;
-
+    
     // Override submit with button click handler instead
     const btn = form.querySelector('.checkout-btn');
     if(!btn) return;
-
+    
     console.log('[Cart Handler] Initialized');
-
+    
     btn.addEventListener('click', async function(e) {
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
-
+      
       // Validate form
       if(!form.checkValidity()) {
         form.reportValidity();
         return false;
       }
-
+      
       const formData = new FormData(form);
       const originalText = btn.innerText;
-
+      
       // Add sections parameter for cart drawer rendering
       const cartItemsComponents = document.querySelectorAll('cart-items-component');
       const sectionIds = [];
@@ -726,10 +726,10 @@
       if(sectionIds.length > 0) {
         formData.append('sections', sectionIds.join(','));
       }
-
+      
       btn.disabled = true;
       btn.innerText = 'Adding...';
-
+      
       // Check if we need to add velcro backing (for all patch products with backing option)
       const backingInput = document.getElementById('backing-input');
       const qtyInput = document.getElementById('qty-input');
@@ -737,16 +737,16 @@
       // List of patch products that support velcro backing
       const PATCH_PRODUCTS_WITH_BACKING = [
         'embroidered-patches',
-        'chenille-patches',
+        'chenille-patches', 
         '3d-embroidered-patches',
         'woven-patches',
         'pvc-rubber-patches',
         'print-embroidery-patches'
       ];
-      const needsVelcroBacking = PATCH_PRODUCTS_WITH_BACKING.includes(productHandle) &&
+      const needsVelcroBacking = PATCH_PRODUCTS_WITH_BACKING.includes(productHandle) && 
                                   backingInput && backingInput.value.includes('Velcro');
       const patchQty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
-
+      
       console.log('[Velcro] Check:', {
         productHandle,
         backingValue: backingInput ? backingInput.value : 'no input',
@@ -754,15 +754,15 @@
         patchQty,
         totalVelcroCost: needsVelcroBacking ? (patchQty * 0.25).toFixed(2) : 0
       });
-
+      
       try {
         const response = await fetch('/cart/add.js', {
           method: 'POST',
           body: formData
         });
-
+        
         const responseData = await response.json();
-
+        
         if(response.ok) {
           // Show success immediately - don't wait for background tasks
           btn.innerText = 'Added!';
@@ -770,7 +770,7 @@
             btn.disabled = false;
             btn.innerText = originalText;
           }, 1500);
-
+          
           // Open cart drawer immediately
           const cartDrawer = document.querySelector('cart-drawer-component');
           if(cartDrawer) {
@@ -780,7 +780,7 @@
               cartDrawer.showDialog();
             }
           }
-
+          
           // Background: Add velcro backing if needed (don't block UI)
           if(needsVelcroBacking) {
             console.log('[Velcro] Adding velcro backing in background...');
@@ -789,7 +789,7 @@
                 const velcroRes = await fetch('/products/velcro-backing.js');
                 const velcroProduct = await velcroRes.json();
                 const velcroVariant = velcroProduct.variants && velcroProduct.variants[0];
-
+                
                 if(velcroVariant) {
                   const velcroFormData = new FormData();
                   velcroFormData.append('id', velcroVariant.id);
@@ -797,12 +797,12 @@
                   velcroFormData.append('properties[_added_with]', 'embroidered-patches');
                   velcroFormData.append('properties[_backing_type]', 'Velcro');
                   velcroFormData.append('properties[_price_per_piece]', '$0.25');
-
+                  
                   const velcroAddRes = await fetch('/cart/add.js', {
                     method: 'POST',
                     body: velcroFormData
                   });
-
+                  
                   if(velcroAddRes.ok) {
                     console.log('[Velcro] Successfully added', patchQty, 'velcro backings');
                   } else {
@@ -814,7 +814,7 @@
               }
             })();
           }
-
+          
           // Background: Re-render cart drawer sections and dispatch event
           setTimeout(async () => {
             if (responseData.sections) {
@@ -828,7 +828,7 @@
                 }
               });
             }
-
+            
             try {
               const cartRes = await fetch('/cart.js');
               const cartData = await cartRes.json();
@@ -857,10 +857,10 @@
         btn.disabled = false;
         alert('Error: ' + error.message);
       }
-
+      
       return false;
     }, true);
-
+    
     // Also prevent form submission
     form.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -878,7 +878,7 @@
     const scroller = document.getElementById('galleryScroller');
     const slides = scroller.querySelectorAll('.gallery-slide');
     let currentImg = null;
-
+    
     // Find the slide that's most visible in the viewport
     let maxVisible = 0;
     let activeSlide = null;
@@ -891,18 +891,18 @@
         currentImg = slide.querySelector('img');
       }
     });
-
+    
     // Don't zoom video/iframe slides
     if (activeSlide && (activeSlide.dataset.mediaType === 'video' || activeSlide.dataset.mediaType === 'external_video')) {
       return;
     }
-
+    
     // Fallback to mainProductImage if no visible image found
     if (!currentImg) {
       currentImg = document.getElementById('mainProductImage');
     }
     if (!currentImg) return;
-
+    
     const modal = document.createElement('div');
     modal.style.cssText = `
       position: fixed;
@@ -918,7 +918,7 @@
       padding: 2rem;
       cursor: zoom-out;
     `;
-
+    
     const zoomedImg = document.createElement('img');
     zoomedImg.src = currentImg.src.replace(/width=\d+/, 'width=2000');
     zoomedImg.style.cssText = `
@@ -927,7 +927,7 @@
       object-fit: contain;
       border-radius: 0.5rem;
     `;
-
+    
     const closeBtn = document.createElement('button');
     closeBtn.innerHTML = `
       <svg width="32" height="32" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
@@ -951,11 +951,11 @@
     `;
     closeBtn.onmouseover = () => closeBtn.style.background = 'rgba(0, 0, 0, 0.8)';
     closeBtn.onmouseout = () => closeBtn.style.background = 'rgba(0, 0, 0, 0.5)';
-
+    
     const closeModal = () => document.body.removeChild(modal);
     modal.onclick = closeModal;
     closeBtn.onclick = closeModal;
-
+    
     modal.appendChild(zoomedImg);
     modal.appendChild(closeBtn);
     document.body.appendChild(modal);
@@ -966,7 +966,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     // 1. INJECT SHOPIFY VARIANTS
     const shopifyVariants = {{ product.variants | json }};
-
+    
     // 2. PRODUCT HANDLE
     const PRODUCT_HANDLE = '{{ product.handle }}';
 
@@ -1046,32 +1046,329 @@
     };
     const PRODUCT_CONFIG = PRODUCT_CONFIGS[PRODUCT_HANDLE] || PRODUCT_CONFIGS['embroidered-patches'];
 
-    // 4. PRICING MATRIX -- sourced from the `custom.prices` product metafield.
-    // Populated via Shopify Admin for all patch/sticker products; see
-    // /backups/custom-prices-metafield-backup-*.json for a point-in-time snapshot,
-    // and /backups/main-product-patch-kraze.liquid.bak-* for the prior hardcoded version.
-    const METAFIELD_MATRIX = {{ product.metafields.custom.prices.value | json }};
-
-    // Fallback matrix used only if a product is missing the metafield (should not happen
-    // for existing products; guards against newly added products that haven't been configured yet).
-    const FALLBACK_MATRIX = {
-      sizeBrackets: [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0],
-      quantityTiers: [
-        { min: 25, max: 49, prices: [1.23, 1.86, 2.48, 3.11, 3.71, 4.31, 4.95, 5.55, 6.18, 7.41, 8.64, 9.87, 11.10, 12.33, 13.58, 14.82] },
-        { min: 50, max: 99, prices: [1.07, 1.62, 2.15, 2.69, 3.21, 3.75, 4.29, 4.82, 5.37, 6.44, 7.52, 8.58, 9.65, 10.73, 11.81, 12.89] },
-        { min: 100, max: 199, prices: [0.80, 1.19, 1.59, 2.00, 2.39, 2.79, 3.17, 3.57, 3.96, 4.77, 5.57, 6.35, 7.14, 7.95, 8.73, 9.53] },
-        { min: 200, max: 499, prices: [0.57, 0.84, 1.07, 1.41, 1.67, 1.95, 2.24, 2.52, 2.79, 3.36, 3.90, 4.47, 5.01, 5.58, 6.14, 6.71] },
-        { min: 500, max: 999, prices: [0.41, 0.62, 0.81, 1.02, 1.22, 1.41, 1.64, 1.83, 2.04, 2.46, 2.85, 3.26, 3.68, 4.08, 4.49, 4.89] },
-        { min: 1000, max: 999999, prices: [0.38, 0.56, 0.74, 0.92, 1.10, 1.26, 1.47, 1.67, 1.82, 2.19, 2.55, 2.94, 3.29, 3.65, 4.01, 4.38] }
-      ]
+    // 4. ALL PRICING MATRICES keyed by product handle
+    const ALL_MATRICES = {
+      'embroidered-patches': {
+        sizeBrackets: [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [1.23, 1.86, 2.48, 3.11, 3.71, 4.31, 4.95, 5.55, 6.18, 7.41, 8.64, 9.87, 11.10, 12.33, 13.58, 14.82] },
+          { min: 50, max: 99, prices: [1.07, 1.62, 2.15, 2.69, 3.21, 3.75, 4.29, 4.82, 5.37, 6.44, 7.52, 8.58, 9.65, 10.73, 11.81, 12.89] },
+          { min: 100, max: 199, prices: [0.80, 1.19, 1.59, 2.00, 2.39, 2.79, 3.17, 3.57, 3.96, 4.77, 5.57, 6.35, 7.14, 7.95, 8.73, 9.53] },
+          { min: 200, max: 499, prices: [0.57, 0.84, 1.07, 1.41, 1.67, 1.95, 2.24, 2.52, 2.79, 3.36, 3.90, 4.47, 5.01, 5.58, 6.14, 6.71] },
+          { min: 500, max: 999, prices: [0.41, 0.62, 0.81, 1.02, 1.22, 1.41, 1.64, 1.83, 2.04, 2.46, 2.85, 3.26, 3.68, 4.08, 4.49, 4.89] },
+          { min: 1000, max: 999999, prices: [0.38, 0.56, 0.74, 0.92, 1.10, 1.26, 1.47, 1.67, 1.82, 2.19, 2.55, 2.94, 3.29, 3.65, 4.01, 4.38] }
+        ]
+      },
+      'chenille-patches': {
+        sizeBrackets: [4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 13.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [6.63, 9.57, 11.28, 12.12, 12.75, 13.40, 14.67, 15.56, 17.85] },
+          { min: 50, max: 99, prices: [5.61, 6.63, 7.53, 8.67, 9.57, 10.85, 11.48, 12.44, 14.03] },
+          { min: 100, max: 199, prices: [4.79, 6.06, 6.63, 7.65, 8.30, 9.57, 10.20, 10.71, 11.87] },
+          { min: 200, max: 499, prices: [3.20, 4.98, 5.75, 6.26, 6.77, 7.91, 8.30, 8.87, 10.20] },
+          { min: 500, max: 999, prices: [2.55, 3.20, 4.08, 4.47, 4.98, 5.36, 5.75, 6.63, 7.91] },
+          { min: 1000, max: 999999, prices: [2.24, 2.81, 3.71, 4.08, 4.47, 4.98, 5.24, 5.87, 6.63] }
+        ]
+      },
+      'sublimation-patches-for-hats': {
+        sizeBrackets: [2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [1.44, 1.59, 1.74, 1.82, 1.95, 2.25, 2.51, 3.11, 3.84, 4.05, 5.36, 5.61] },
+          { min: 50, max: 99, prices: [1.17, 1.29, 1.35, 1.46, 1.58, 1.77, 2.01, 2.48, 3.06, 3.24, 4.29, 4.50] },
+          { min: 100, max: 199, prices: [0.93, 1.02, 1.08, 1.17, 1.25, 1.43, 1.59, 1.95, 2.46, 2.60, 3.44, 3.59] },
+          { min: 200, max: 499, prices: [0.83, 0.92, 0.98, 1.07, 1.14, 1.29, 1.44, 1.76, 2.21, 2.34, 3.09, 3.23] },
+          { min: 500, max: 999, prices: [0.68, 0.74, 0.80, 0.86, 0.92, 1.04, 1.17, 1.41, 1.79, 1.89, 2.51, 2.61] },
+          { min: 1000, max: 999999, prices: [0.62, 0.68, 0.72, 0.77, 0.83, 0.93, 1.07, 1.29, 1.62, 1.71, 2.25, 2.36] }
+        ]
+      },
+      'full-color-printed-patches': {
+        sizeBrackets: [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [1.23, 1.86, 2.48, 3.11, 3.71, 4.31, 4.95, 5.55, 6.18, 7.41, 8.64, 9.87, 11.10, 12.33, 13.58, 14.82] },
+          { min: 50, max: 99, prices: [1.07, 1.62, 2.15, 2.69, 3.21, 3.75, 4.29, 4.82, 5.37, 6.44, 7.52, 8.58, 9.65, 10.73, 11.81, 12.89] },
+          { min: 100, max: 199, prices: [0.80, 1.19, 1.59, 2.00, 2.39, 2.79, 3.17, 3.57, 3.96, 4.77, 5.57, 6.35, 7.14, 7.95, 8.73, 9.53] },
+          { min: 200, max: 499, prices: [0.57, 0.84, 1.07, 1.41, 1.67, 1.95, 2.24, 2.52, 2.79, 3.36, 3.90, 4.47, 5.01, 5.58, 6.14, 6.71] },
+          { min: 500, max: 999, prices: [0.41, 0.62, 0.81, 1.02, 1.22, 1.41, 1.64, 1.83, 2.04, 2.46, 2.85, 3.26, 3.68, 4.08, 4.49, 4.89] },
+          { min: 1000, max: 999999, prices: [0.38, 0.56, 0.74, 0.92, 1.10, 1.26, 1.47, 1.67, 1.82, 2.19, 2.55, 2.94, 3.29, 3.65, 4.01, 4.38] }
+        ]
+      },
+      '3d-embroidered-patches': {
+        sizeBrackets: [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [1.94, 2.91, 3.87, 4.83, 5.79, 6.77, 7.73, 8.81, 10.05, 11.45, 13.05, 14.88, 16.97, 19.43, 21.36, 23.31] },
+          { min: 50, max: 99, prices: [1.29, 1.94, 2.58, 3.23, 3.87, 4.50, 5.15, 5.88, 6.69, 7.64, 8.72, 9.92, 11.31, 12.96, 14.24, 15.51] },
+          { min: 100, max: 199, prices: [0.96, 1.43, 1.91, 2.39, 2.85, 3.36, 3.80, 4.34, 4.94, 5.64, 6.42, 7.32, 8.34, 9.59, 10.55, 11.49] },
+          { min: 200, max: 499, prices: [0.68, 1.01, 1.29, 1.68, 2.00, 2.34, 2.69, 3.08, 3.50, 3.99, 4.55, 5.19, 5.91, 6.75, 7.43, 8.10] },
+          { min: 500, max: 999, prices: [0.51, 0.75, 0.98, 1.23, 1.46, 1.70, 1.98, 2.25, 2.57, 2.93, 3.33, 3.80, 4.32, 4.89, 5.42, 5.91] },
+          { min: 1000, max: 999999, prices: [0.45, 0.66, 0.89, 1.10, 1.32, 1.52, 1.77, 2.01, 2.30, 2.61, 2.99, 3.41, 3.87, 4.40, 4.85, 5.30] }
+        ]
+      },
+      'pvc-rubber-patches': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+        quantityTiers: [
+          { min: 10, max: 49, prices: [4.50, 4.55, 5.55, 5.57, 6.51, 7.49] },
+          { min: 50, max: 99, prices: [3.47, 3.50, 4.26, 4.28, 5.01, 5.78] },
+          { min: 100, max: 199, prices: [2.39, 2.40, 2.85, 2.85, 3.27, 3.77] },
+          { min: 200, max: 499, prices: [1.67, 1.67, 1.89, 1.92, 2.16, 2.49] },
+          { min: 500, max: 999, prices: [1.35, 1.38, 1.64, 1.65, 1.83, 2.09] },
+          { min: 1000, max: 999999, prices: [1.23, 1.25, 1.49, 1.49, 1.65, 1.91] }
+        ]
+      },
+      'woven-patches': {
+        sizeBrackets: [2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [2.54, 3.41, 3.81, 3.84, 9.00, 10.28, 11.55, 12.83, 17.93] },
+          { min: 50, max: 99, prices: [2.00, 2.45, 2.69, 3.08, 6.54, 7.28, 8.01, 9.48, 10.97] },
+          { min: 100, max: 199, prices: [1.65, 2.01, 2.22, 2.52, 5.39, 6.00, 6.60, 7.82, 9.03] },
+          { min: 200, max: 499, prices: [1.17, 1.44, 1.59, 1.80, 3.84, 4.29, 4.73, 5.58, 6.45] },
+          { min: 500, max: 999, prices: [1.07, 1.32, 1.46, 1.65, 3.48, 3.87, 4.26, 5.04, 5.82] },
+          { min: 1000, max: 999999, prices: [0.93, 1.16, 1.28, 1.46, 3.11, 3.45, 3.81, 4.52, 5.22] }
+        ]
+      },
+      'leather-patches': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 6.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [2.54, 2.84, 3.20, 3.53, 3.83, 4.17, 4.34, 4.52] },
+          { min: 50, max: 99, prices: [1.62, 1.92, 2.33, 2.84, 3.20, 3.36, 3.59, 3.77] },
+          { min: 100, max: 199, prices: [1.16, 1.49, 1.97, 2.30, 2.37, 2.54, 2.72, 2.90] },
+          { min: 200, max: 499, prices: [0.89, 1.20, 1.71, 1.82, 1.92, 2.15, 2.33, 2.43] },
+          { min: 500, max: 999, prices: [0.80, 1.13, 1.34, 1.41, 1.50, 1.74, 1.92, 2.03] },
+          { min: 1000, max: 999999, prices: [0.75, 1.07, 1.22, 1.31, 1.40, 1.58, 1.74, 1.92] }
+        ]
+      },
+      'faux-leather-patches': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 6.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [1.95, 2.18, 2.45, 2.70, 2.94, 3.20, 3.35, 3.48] },
+          { min: 50, max: 99, prices: [1.23, 1.49, 1.79, 2.18, 2.45, 2.60, 2.76, 2.90] },
+          { min: 100, max: 199, prices: [0.90, 1.14, 1.52, 1.76, 1.82, 1.95, 2.09, 2.22] },
+          { min: 200, max: 499, prices: [0.68, 0.92, 1.32, 1.41, 1.47, 1.65, 1.79, 1.88] },
+          { min: 500, max: 999, prices: [0.62, 0.86, 1.02, 1.08, 1.16, 1.34, 1.47, 1.58] },
+          { min: 1000, max: 999999, prices: [0.57, 0.83, 0.93, 1.01, 1.07, 1.20, 1.34, 1.47] }
+        ]
+      },
+      'full-color-flex-patches': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [5.17, 5.23, 6.38, 6.90, 7.47, 8.62] },
+          { min: 50, max: 99, prices: [3.99, 4.02, 4.90, 5.29, 5.75, 6.61] },
+          { min: 100, max: 199, prices: [2.75, 2.76, 3.28, 3.51, 3.80, 4.31] },
+          { min: 200, max: 499, prices: [1.92, 1.92, 2.17, 2.32, 2.52, 2.85] },
+          { min: 500, max: 999, prices: [1.55, 1.59, 1.89, 2.01, 2.19, 2.47] },
+          { min: 1000, max: 999999, prices: [1.41, 1.44, 1.71, 1.83, 1.98, 2.24] }
+        ]
+      },
+      'silver-flex-patches': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [5.17, 5.23, 6.38, 6.90, 7.47, 8.62] },
+          { min: 50, max: 99, prices: [3.99, 4.02, 4.90, 5.29, 5.75, 6.61] },
+          { min: 100, max: 199, prices: [2.75, 2.76, 3.28, 3.51, 3.80, 4.31] },
+          { min: 200, max: 499, prices: [1.92, 1.92, 2.17, 2.32, 2.52, 2.85] },
+          { min: 500, max: 999, prices: [1.55, 1.59, 1.89, 2.01, 2.19, 2.47] },
+          { min: 1000, max: 999999, prices: [1.41, 1.44, 1.71, 1.83, 1.98, 2.24] }
+        ]
+      },
+      'gold-flex-patches': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [5.17, 5.23, 6.38, 6.90, 7.47, 8.62] },
+          { min: 50, max: 99, prices: [3.99, 4.02, 4.90, 5.29, 5.75, 6.61] },
+          { min: 100, max: 199, prices: [2.75, 2.76, 3.28, 3.51, 3.80, 4.31] },
+          { min: 200, max: 499, prices: [1.92, 1.92, 2.17, 2.32, 2.52, 2.85] },
+          { min: 500, max: 999, prices: [1.55, 1.59, 1.89, 2.01, 2.19, 2.47] },
+          { min: 1000, max: 999999, prices: [1.41, 1.44, 1.71, 1.83, 1.98, 2.24] }
+        ]
+      },
+      'custom-vinyl-stickers': {
+        type: 'stickers',
+        basePrice: 1.28,
+        pricePerStyle: 0.40,
+        quantityTiers: [
+          { min: 25, max: 49, multiplier: 1.0 },
+          { min: 50, max: 99, multiplier: 0.63 },
+          { min: 100, max: 249, multiplier: 0.42 },
+          { min: 250, max: 499, multiplier: 0.31 },
+          { min: 500, max: 999999, multiplier: 0.21 }
+        ]
+      },
+      'holographic-stickers': {
+        type: 'stickers',
+        basePrice: 0.24,
+        pricePerStyle: 0.07,
+        quantityTiers: [
+          { min: 25, max: 49, multiplier: 1.0 },
+          { min: 50, max: 99, multiplier: 0.60 },
+          { min: 100, max: 249, multiplier: 0.38 },
+          { min: 250, max: 499, multiplier: 0.30 },
+          { min: 500, max: 999999, multiplier: 0.19 }
+        ]
+      },
+      'uv-transparent-stickers': {
+        type: 'stickers',
+        basePrice: 1.54,
+        pricePerStyle: 0.48,
+        quantityTiers: [
+          { min: 25, max: 49, multiplier: 1.0 },
+          { min: 50, max: 99, multiplier: 0.63 },
+          { min: 100, max: 249, multiplier: 0.42 },
+          { min: 250, max: 499, multiplier: 0.31 },
+          { min: 500, max: 999999, multiplier: 0.21 }
+        ]
+      },
+      'custom-stickers': {
+        type: 'stickers',
+        basePrice: 0.24,
+        pricePerStyle: 0.07,
+        quantityTiers: [
+          { min: 25, max: 49, multiplier: 1.0 },
+          { min: 50, max: 99, multiplier: 0.60 },
+          { min: 100, max: 249, multiplier: 0.38 },
+          { min: 250, max: 499, multiplier: 0.30 },
+          { min: 500, max: 999999, multiplier: 0.19 }
+        ]
+      },
+      'custom-tackle-twill': {
+        sizeBrackets: [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [1.01, 1.53, 2.03, 2.55, 3.04, 3.53, 4.06, 4.55, 5.07, 6.08, 7.08, 8.09, 9.10, 10.11, 11.14, 12.15] },
+          { min: 50, max: 99, prices: [0.88, 1.33, 1.76, 2.21, 2.63, 3.08, 3.52, 3.95, 4.40, 5.28, 6.17, 7.04, 7.91, 8.80, 9.68, 10.57] },
+          { min: 100, max: 199, prices: [0.66, 0.98, 1.30, 1.64, 1.96, 2.29, 2.60, 2.93, 3.25, 3.91, 4.57, 5.21, 5.85, 6.52, 7.16, 7.81] },
+          { min: 200, max: 499, prices: [0.47, 0.69, 0.88, 1.16, 1.37, 1.60, 1.84, 2.07, 2.29, 2.76, 3.20, 3.67, 4.11, 4.58, 5.03, 5.50] },
+          { min: 500, max: 999, prices: [0.34, 0.51, 0.66, 0.84, 1.00, 1.16, 1.34, 1.50, 1.67, 2.02, 2.34, 2.67, 3.02, 3.35, 3.68, 4.01] },
+          { min: 1000, max: 999999, prices: [0.31, 0.46, 0.61, 0.75, 0.90, 1.03, 1.21, 1.37, 1.49, 1.80, 2.09, 2.41, 2.70, 2.99, 3.29, 3.59] }
+        ]
+      },
+      'print-stitch-patches': {
+        sizeBrackets: [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [1.23, 1.86, 2.48, 3.11, 3.71, 4.31, 4.95, 5.55, 6.18, 7.41, 8.64, 9.87, 11.10, 12.33, 13.58, 14.82] },
+          { min: 50, max: 99, prices: [1.07, 1.62, 2.15, 2.69, 3.21, 3.75, 4.29, 4.82, 5.37, 6.44, 7.52, 8.58, 9.65, 10.73, 11.81, 12.89] },
+          { min: 100, max: 199, prices: [0.80, 1.19, 1.59, 2.00, 2.39, 2.79, 3.17, 3.57, 3.96, 4.77, 5.57, 6.35, 7.14, 7.95, 8.73, 9.53] },
+          { min: 200, max: 499, prices: [0.57, 0.84, 1.07, 1.41, 1.67, 1.95, 2.24, 2.52, 2.79, 3.36, 3.90, 4.47, 5.01, 5.58, 6.14, 6.71] },
+          { min: 500, max: 999, prices: [0.41, 0.62, 0.81, 1.02, 1.22, 1.41, 1.64, 1.83, 2.04, 2.46, 2.85, 3.26, 3.68, 4.08, 4.49, 4.89] },
+          { min: 1000, max: 999999, prices: [0.38, 0.56, 0.74, 0.92, 1.10, 1.26, 1.47, 1.67, 1.82, 2.19, 2.55, 2.94, 3.29, 3.65, 4.01, 4.38] }
+        ]
+      },
+      'print-embroidery-patches': {
+        sizeBrackets: [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [1.23, 1.86, 2.48, 3.11, 3.71, 4.31, 4.95, 5.55, 6.18, 7.41, 8.64, 9.87, 11.10, 12.33, 13.58, 14.82] },
+          { min: 50, max: 99, prices: [1.07, 1.62, 2.15, 2.69, 3.21, 3.75, 4.29, 4.82, 5.37, 6.44, 7.52, 8.58, 9.65, 10.73, 11.81, 12.89] },
+          { min: 100, max: 199, prices: [0.80, 1.19, 1.59, 2.00, 2.39, 2.79, 3.17, 3.57, 3.96, 4.77, 5.57, 6.35, 7.14, 7.95, 8.73, 9.53] },
+          { min: 200, max: 499, prices: [0.57, 0.84, 1.07, 1.41, 1.67, 1.95, 2.24, 2.52, 2.79, 3.36, 3.90, 4.47, 5.01, 5.58, 6.14, 6.71] },
+          { min: 500, max: 999, prices: [0.41, 0.62, 0.81, 1.02, 1.22, 1.41, 1.64, 1.83, 2.04, 2.46, 2.85, 3.26, 3.68, 4.08, 4.49, 4.89] },
+          { min: 1000, max: 999999, prices: [0.38, 0.56, 0.74, 0.92, 1.10, 1.26, 1.47, 1.67, 1.82, 2.19, 2.55, 2.94, 3.29, 3.65, 4.01, 4.38] }
+        ]
+      },
+      'custom-keychains': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [4.50, 4.55, 5.55, 5.57, 6.51, 7.49] },
+          { min: 50, max: 99, prices: [3.47, 3.50, 4.26, 4.28, 5.01, 5.78] },
+          { min: 100, max: 199, prices: [2.39, 2.40, 2.85, 2.85, 3.27, 3.77] },
+          { min: 200, max: 499, prices: [1.67, 1.67, 1.89, 1.92, 2.16, 2.49] },
+          { min: 500, max: 999, prices: [1.35, 1.38, 1.64, 1.65, 1.83, 2.09] },
+          { min: 1000, max: 999999, prices: [1.23, 1.25, 1.49, 1.49, 1.65, 1.91] }
+        ]
+      },
+      'rubber-patches-for-hats': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [4.50, 4.55, 5.55, 5.57, 6.51, 7.49] },
+          { min: 50, max: 99, prices: [3.47, 3.50, 4.26, 4.28, 5.01, 5.78] },
+          { min: 100, max: 199, prices: [2.39, 2.40, 2.85, 2.85, 3.27, 3.77] },
+          { min: 200, max: 499, prices: [1.67, 1.67, 1.89, 1.92, 2.16, 2.49] },
+          { min: 500, max: 999, prices: [1.35, 1.38, 1.64, 1.65, 1.83, 2.09] },
+          { min: 1000, max: 999999, prices: [1.23, 1.25, 1.49, 1.49, 1.65, 1.91] }
+        ]
+      },
+      'glow-in-the-dark-pvc-rubber-patches': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [4.65, 4.70, 5.70, 5.72, 6.66, 7.64] },
+          { min: 50, max: 99, prices: [3.62, 3.65, 4.41, 4.43, 5.16, 5.93] },
+          { min: 100, max: 199, prices: [2.54, 2.55, 3.00, 3.00, 3.42, 3.92] },
+          { min: 200, max: 499, prices: [1.82, 1.82, 2.04, 2.07, 2.31, 2.64] },
+          { min: 500, max: 999, prices: [1.50, 1.53, 1.79, 1.80, 1.98, 2.24] },
+          { min: 1000, max: 999999, prices: [1.38, 1.40, 1.64, 1.64, 1.80, 2.06] }
+        ]
+      },
+      'varsity-jacket-patches': {
+        sizeBrackets: [4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 13.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [6.63, 9.57, 11.28, 12.12, 12.75, 13.40, 14.67, 15.56, 17.85] },
+          { min: 50, max: 99, prices: [5.61, 6.63, 7.53, 8.67, 9.57, 10.85, 11.48, 12.44, 14.03] },
+          { min: 100, max: 199, prices: [4.79, 6.06, 6.63, 7.65, 8.30, 9.57, 10.20, 10.71, 11.87] },
+          { min: 200, max: 499, prices: [3.20, 4.98, 5.75, 6.26, 6.77, 7.91, 8.30, 8.87, 10.20] },
+          { min: 500, max: 999, prices: [2.55, 3.20, 4.08, 4.47, 4.98, 5.36, 5.75, 6.63, 7.91] },
+          { min: 1000, max: 999999, prices: [2.24, 2.81, 3.71, 4.08, 4.47, 4.98, 5.24, 5.87, 6.63] }
+        ]
+      },
+      'chenille-letter-patches': {
+        sizeBrackets: [4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 13.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [6.63, 9.57, 11.28, 12.12, 12.75, 13.40, 14.67, 15.56, 17.85] },
+          { min: 50, max: 99, prices: [5.61, 6.63, 7.53, 8.67, 9.57, 10.85, 11.48, 12.44, 14.03] },
+          { min: 100, max: 199, prices: [4.79, 6.06, 6.63, 7.65, 8.30, 9.57, 10.20, 10.71, 11.87] },
+          { min: 200, max: 499, prices: [3.20, 4.98, 5.75, 6.26, 6.77, 7.91, 8.30, 8.87, 10.20] },
+          { min: 500, max: 999, prices: [2.55, 3.20, 4.08, 4.47, 4.98, 5.36, 5.75, 6.63, 7.91] },
+          { min: 1000, max: 999999, prices: [2.24, 2.81, 3.71, 4.08, 4.47, 4.98, 5.24, 5.87, 6.63] }
+        ]
+      },
+      'silicone-patches': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+        quantityTiers: [
+          { min: 10, max: 24, prices: [13.34, 14.66, 15.19, 16.00, 16.80, 17.60] },
+          { min: 25, max: 49, prices: [7.87, 8.65, 8.96, 9.44, 9.91, 10.38] },
+          { min: 50, max: 99, prices: [5.20, 5.72, 5.93, 6.24, 6.55, 6.86] },
+          { min: 100, max: 249, prices: [3.87, 4.25, 4.40, 4.64, 4.87, 5.10] },
+          { min: 250, max: 499, prices: [3.07, 3.37, 3.49, 3.68, 3.86, 4.05] },
+          { min: 500, max: 999999, prices: [2.40, 2.64, 2.73, 2.88, 3.02, 3.17] }
+        ]
+      },
+      'leather-patches-for-jackets': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 6.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [2.54, 2.84, 3.20, 3.53, 3.83, 4.17, 4.34, 4.52] },
+          { min: 50, max: 99, prices: [1.62, 1.92, 2.33, 2.84, 3.20, 3.36, 3.59, 3.77] },
+          { min: 100, max: 199, prices: [1.16, 1.49, 1.97, 2.30, 2.37, 2.54, 2.72, 2.90] },
+          { min: 200, max: 499, prices: [0.89, 1.20, 1.71, 1.82, 1.92, 2.15, 2.33, 2.43] },
+          { min: 500, max: 999, prices: [0.80, 1.13, 1.34, 1.41, 1.50, 1.74, 1.92, 2.03] },
+          { min: 1000, max: 999999, prices: [0.75, 1.07, 1.22, 1.31, 1.40, 1.58, 1.74, 1.92] }
+        ]
+      },
+      'leather-patches-for-hats': {
+        sizeBrackets: [1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 6.0],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [2.54, 2.84, 3.20, 3.53, 3.83, 4.17, 4.34, 4.52] },
+          { min: 50, max: 99, prices: [1.62, 1.92, 2.33, 2.84, 3.20, 3.36, 3.59, 3.77] },
+          { min: 100, max: 199, prices: [1.16, 1.49, 1.97, 2.30, 2.37, 2.54, 2.72, 2.90] },
+          { min: 200, max: 499, prices: [0.89, 1.20, 1.71, 1.82, 1.92, 2.15, 2.33, 2.43] },
+          { min: 500, max: 999, prices: [0.80, 1.13, 1.34, 1.41, 1.50, 1.74, 1.92, 2.03] },
+          { min: 1000, max: 999999, prices: [0.75, 1.07, 1.22, 1.31, 1.40, 1.58, 1.74, 1.92] }
+        ]
+      },
+      'dtf-transfers': {
+        sizeBrackets: [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144],
+        quantityTiers: [
+          { min: 25, max: 49, prices: [0.22, 0.49, 0.87, 1.36, 1.96, 2.67, 3.49, 4.41, 5.45, 6.59, 7.85] },
+          { min: 50, max: 99, prices: [0.15, 0.34, 0.61, 0.95, 1.37, 1.87, 2.44, 3.09, 3.81, 4.62, 5.49] },
+          { min: 100, max: 199, prices: [0.12, 0.27, 0.48, 0.75, 1.08, 1.47, 1.92, 2.43, 3.0, 3.63, 4.32] },
+          { min: 200, max: 499, prices: [0.09, 0.21, 0.37, 0.57, 0.82, 1.12, 1.46, 1.85, 2.29, 2.77, 3.3] },
+          { min: 500, max: 999, prices: [0.08, 0.17, 0.31, 0.48, 0.69, 0.93, 1.22, 1.55, 1.91, 2.31, 2.75] },
+          { min: 1000, max: 999999, prices: [0.07, 0.15, 0.26, 0.41, 0.59, 0.8, 1.05, 1.32, 1.64, 1.98, 2.35] }
+        ]
+      }
     };
+    // Aliases for 404 fix products (point to existing matrices)
+    ALL_MATRICES['letterman-jacket-patches'] = ALL_MATRICES['chenille-patches'];
+    ALL_MATRICES['pvc-patches'] = ALL_MATRICES['pvc-rubber-patches'];
+    ALL_MATRICES['genuine-leather-patches'] = ALL_MATRICES['faux-leather-patches'];
 
-    // Select the right matrix for current product: metafield value, else fallback
-    const PRICING_MATRIX = METAFIELD_MATRIX || FALLBACK_MATRIX;
-    if (!METAFIELD_MATRIX) {
-      console.warn('[Pricing] No custom.prices metafield found for product "' + PRODUCT_HANDLE + '" -- using fallback embroidered-patches matrix.');
-    }
-
+    // Select the right matrix for current product (fallback to embroidered)
+    const PRICING_MATRIX = ALL_MATRICES[PRODUCT_HANDLE] || ALL_MATRICES['embroidered-patches'];
+    
     // Helper: Find size bracket index
     function getSizeBracketIndex(avgSize) {
       for(let i = 0; i < PRICING_MATRIX.sizeBrackets.length; i++) {
@@ -1081,7 +1378,7 @@
       }
       return PRICING_MATRIX.sizeBrackets.length - 1; // Max bracket
     }
-
+    
     // Helper: Find quantity tier
     function getQuantityTier(qty) {
       for(let tier of PRICING_MATRIX.quantityTiers) {
@@ -1091,21 +1388,21 @@
       }
       return PRICING_MATRIX.quantityTiers[0]; // Default to first tier
     }
-
+    
     // Helper: Lookup exact price from matrix
     function lookupPrice(avgSize, qty) {
       // Handle sticker products differently
       if (PRICING_MATRIX.type === 'stickers') {
         const qtyTier = PRICING_MATRIX.quantityTiers.find(t => qty >= t.min && qty <= t.max);
         if (!qtyTier) return PRICING_MATRIX.basePrice;
-
+        
         // Calculate style number (1-20)
         const styleNum = Math.ceil(avgSize / 5); // Styles are groups of 5 (1-5, 6-10, etc.)
         const styleMultiplier = 1 + (styleNum - 1) * (PRICING_MATRIX.pricePerStyle / PRICING_MATRIX.basePrice);
-
+        
         return PRICING_MATRIX.basePrice * styleMultiplier * qtyTier.multiplier;
       }
-
+      
       // Regular patch pricing
       const sizeIdx = getSizeBracketIndex(avgSize);
       const qtyTier = getQuantityTier(qty);
@@ -1123,7 +1420,7 @@
 
     // Make functions safe if elements missing
     if (!fileInput) return;
-
+    
     // Product-specific minimum quantity overrides (default is 10 for all)
     const minQtyLabels = {
       // Sticker products require a minimum of 25
@@ -1133,19 +1430,19 @@
       'custom-stickers': 25
     };
     const productMinQty = minQtyLabels[PRODUCT_HANDLE] || 10;
-
+    
     // Update feature bar if different from default HTML
     const featureBar = document.querySelector('.feature-bar .feature-green');
     if(featureBar && productMinQty !== 10) {
       featureBar.innerText = `${productMinQty} Minimum Quantity`;
     }
-
+    
     // Update qty error message if different from default HTML
     const qtyError = document.getElementById('qty-error');
     if(qtyError && productMinQty !== 10) {
       qtyError.innerText = `${productMinQty} Piece Minimum Required`;
     }
-
+    
     // Update qty min label if different from default HTML
     const qtyMinLabel = qtyInput ? qtyInput.parentElement.querySelector('div:last-child') : null;
     if(qtyMinLabel && productMinQty !== 10) {
@@ -1158,7 +1455,7 @@
       const currentVal = parseInt(qtyInput.value) || 0;
       if(currentVal < productMinQty) qtyInput.value = productMinQty;
     }
-
+    
     // Update pricing row labels if different from default HTML
     if(productMinQty !== 10) {
       const firstPricingRow = document.querySelector('.pricing-row[data-min="10"]');
@@ -1170,22 +1467,22 @@
         }
       }
     }
-
+    
     // File Preview
     fileInput.addEventListener('change', function() {
       if(this.files && this.files.length > 0) {
          console.log('[File Upload] File selected:', this.files[0].name);
-         const file = this.files[0];
+         const file = this.files[0]; 
          const nameDisplay = document.getElementById('filename-display');
          if(nameDisplay) nameDisplay.innerText = file.name;
-
+         
          const reader = new FileReader();
-         reader.onload = function(e){
+         reader.onload = function(e){ 
              const img = document.getElementById('file-preview-img');
-             if(img) img.src = e.target.result;
+             if(img) img.src = e.target.result; 
          }
          reader.readAsDataURL(file);
-
+         
          // Show file success bar, collapse upload box
          if(uploadStage) {
            console.log('[File Upload] Hiding upload stage');
@@ -1244,24 +1541,24 @@
 
     // Check if this is a sticker product
     const IS_STICKER = PRODUCT_HANDLE.includes('sticker');
-
+    
     // Update labels for stickers on page load
     if (IS_STICKER) {
       const sizeSelectorLabel = document.getElementById('size-selector-label');
       const sizeGuideLabel = document.getElementById('size-guide-label');
-
+      
       // Hide the 6th pricing tier row (stickers only have 5 tiers)
       const tier6 = document.querySelector('.pricing-row[data-min="1000"]');
       if (tier6) tier6.style.display = 'none';
       const sizeDisplayLabel = document.getElementById('size-display-label');
       const sizeTooltip = document.getElementById('size-tooltip');
-
+      
       if (sizeSelectorLabel) sizeSelectorLabel.innerText = 'Select Your Sticker Size:';
       if (sizeGuideLabel) sizeGuideLabel.innerText = 'Sticker Size Guide';
       if (sizeDisplayLabel) sizeDisplayLabel.innerText = 'Sticker Size';
       if (sizeTooltip) sizeTooltip.style.display = 'none'; // Hide tooltip for stickers
     }
-
+    
     // Sticker style brackets (based on square inches: width * height)
     function getStickerStyleBracket(w, h) {
       const sqInches = w * h;
@@ -1289,7 +1586,7 @@
       if (sqInches <= 95) return '91-95';
       return '96-100';
     }
-
+    
     // Sticker quantity tier
     function getStickerQtyTier(qty) {
       // qty below 25 falls into first tier (25-49) since CSV has no smaller bucket
@@ -1304,7 +1601,7 @@
     function updatePriceAndVariant() {
       if(!qtyInput) return;
       let qty = parseInt(qtyInput.value) || productMinQty;
-
+      
       // Show error if qty < minimum
       const qtyError = document.getElementById('qty-error');
       if(qty < productMinQty) {
@@ -1313,21 +1610,21 @@
       } else {
         if(qtyError) qtyError.style.display = 'none';
       }
-
+      
       // Calculate Size: (W + H) / 2 for patches, max(W, H) for DTF
       let w = parseFloat(widthInput ? widthInput.value : 2) || 2;
       let h = parseFloat(heightInput ? heightInput.value : 2) || 2;
       let avgSize = PRODUCT_HANDLE === 'dtf-transfers' ? (w * h) : (w + h) / 2;
-
+      
       // Handle STICKER products differently
       if (IS_STICKER) {
         console.log('[STICKER MODE] Product:', PRODUCT_HANDLE, 'Variants count:', shopifyVariants.length);
-
+        
         // Update Size Text for stickers
         if(calculatedSizeDisplay) {
           calculatedSizeDisplay.innerText = `${w.toFixed(2).replace(/\.00$/, '')}" x ${h.toFixed(2).replace(/\.00$/, '')}"`;
         }
-
+        
         // If no variants, show error
         if (!shopifyVariants || shopifyVariants.length === 0) {
           console.error('[STICKER ERROR] No variants found! CSV must be uploaded to Shopify.');
@@ -1335,7 +1632,7 @@
           if(totalDisplay) totalDisplay.innerText = '$0.00';
           return;
         }
-
+        
         const styleBracket = getStickerStyleBracket(w, h);
         const qtyTier = getStickerQtyTier(qty);
         const searchPattern = `Style #${styleBracket} - ${qtyTier}`;
@@ -1379,32 +1676,32 @@
             }
           }
         });
-
+        
         console.log('[Sticker Variant Search]', { w, h, styleBracket, qty, qtyTier, searchPattern });
         console.log('[Available Variants]', shopifyVariants.map(v => ({ title: v.title, option1: v.option1, price: v.price, id: v.id })));
-
+        
         // Try matching by option1 first (for CSV-imported products), then by title
-        let selectedVariant = shopifyVariants.find(v =>
+        let selectedVariant = shopifyVariants.find(v => 
           v.option1 && v.option1.includes(searchPattern)
         );
-
+        
         // Fallback to title matching
         if (!selectedVariant) {
-          selectedVariant = shopifyVariants.find(v =>
+          selectedVariant = shopifyVariants.find(v => 
             v.title && v.title.includes(searchPattern)
           );
         }
-
+        
         console.log('[Sticker Variant Match]', selectedVariant ? selectedVariant.title : 'NO MATCH', 'Pattern:', searchPattern);
         console.log('[Selected Variant Price RAW]', selectedVariant ? selectedVariant.price : 'N/A');
         console.log('[Selected Variant Price Type]', selectedVariant ? typeof selectedVariant.price : 'N/A');
-
+        
         if (selectedVariant) {
           const unitPrice = parseFloat(selectedVariant.price) / 100;
           const total = unitPrice * qty;
-
+          
           console.log('[Updating Price]', { unitPrice, total, unitPriceDisplayExists: !!unitPriceDisplay, totalDisplayExists: !!totalDisplay });
-
+          
           // UPDATE MAIN UI
           if(unitPriceDisplay) {
             unitPriceDisplay.innerHTML = '$' + unitPrice.toFixed(2) + ' <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span>';
@@ -1427,11 +1724,11 @@
                else row.classList.remove('active');
             });
           }
-
+          
           // Update hidden variant input
           const variantInput = document.getElementById('real-variant-id');
           if(variantInput) variantInput.value = selectedVariant.id;
-
+          
           // Update quantity input max
           if(qtyInput) {
             qtyInput.max = selectedVariant.inventory_quantity || 9999;
@@ -1442,12 +1739,12 @@
           if(unitPriceDisplay) unitPriceDisplay.innerHTML = '<span style="color: #ef4444;">Select valid options</span>';
           if(totalDisplay) totalDisplay.innerText = '$0.00';
         }
-
+        
         // Update pricing table for stickers - already handled above via shopifyVariants direct lookup
-
+        
         return; // Exit early for stickers
       }
-
+      
       // Update Size Text for non-stickers
       if(calculatedSizeDisplay) {
          if (PRODUCT_HANDLE === 'dtf-transfers') {
@@ -1463,15 +1760,15 @@
       const qtyTier = getQuantityTier(qty);
       const sizeIdx = getSizeBracketIndex(avgSize);
       const sizeBracket = PRICING_MATRIX.sizeBrackets[sizeIdx];
-
+      
       // Find variant that matches: "Size inch - QtyRange"
       // E.g., "3.5 inch - 100-199" or fallback to just size
       // For DTF: uses '2" x 2" - 25-49' format
       let selectedVariant = null;
-
+      
       // Try to find exact match with quantity range in title
       const qtyRangeStr = qty >= 1000 ? '1000+' : `${qtyTier.min}-${qtyTier.max}`;
-
+      
       let searchPattern1;
       let searchPatternAlt; // Alternate format for products using '.0' inch
       if (PRODUCT_HANDLE === 'dtf-transfers') {
@@ -1492,7 +1789,7 @@
         searchPattern1 = `${sizeBracketStr} inch - ${qtyRangeStr}`;
         searchPatternAlt = `${sizeBracketStrAlt} inch - ${qtyRangeStr}`;
       }
-
+      
       console.log('[Variant Search]', {
         avgSize,
         sizeBracket,
@@ -1501,7 +1798,7 @@
         searchPattern: searchPattern1,
         availableVariants: shopifyVariants.map(v => v.title)
       });
-
+      
       selectedVariant = shopifyVariants.find(v =>
         v.title === searchPattern1 || (v.option1 && v.option1 === searchPattern1)
       );
@@ -1524,9 +1821,9 @@
           v.title && v.title.indexOf(searchPatternAlt) === 0
         );
       }
-
+      
       console.log('[Variant Match]', selectedVariant ? selectedVariant.title : 'NO MATCH - using fallback');
-
+      
       if(!selectedVariant) {
         // Fallback: find variant with matching size only (anchored to avoid substring bleed)
         selectedVariant = shopifyVariants.find(v => {
@@ -1549,7 +1846,7 @@
           }
         });
       }
-
+      
       // Final fallback
       if(!selectedVariant && shopifyVariants.length > 0) {
         selectedVariant = shopifyVariants[0];
@@ -1561,7 +1858,7 @@
       if(headerQty) headerQty.innerText = qty;
       if(unitPriceDisplay) unitPriceDisplay.innerHTML = '$' + unitPrice.toFixed(2) + ' <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span>';
       if(totalDisplay) totalDisplay.innerText = '$' + (qty * unitPrice).toFixed(2);
-
+      
       // Update pricing rows highlighting
       pricingRows.forEach(row => {
          const min = parseInt(row.dataset.min);
@@ -1581,7 +1878,7 @@
       } else {
          console.warn('[Variant Update FAILED]', { selectedVariant, variantInput });
       }
-
+      
       // Update pricing table preview with current size prices + dynamic discounts
       if (PRICING_MATRIX.type === 'stickers') {
         // Sticker pricing table
@@ -1646,13 +1943,13 @@
        el.classList.add('selected');
        const input = document.getElementById('backing-input');
        if(input) input.value = val;
-
+       
        // Show/hide velcro surcharge notice
        const surchargeNotice = document.getElementById('velcro-surcharge-notice');
        if(surchargeNotice) {
          surchargeNotice.style.display = val.includes('Velcro') ? 'block' : 'none';
        }
-
+       
        // Update label
        const labelMap = {
          'Heat Applied': 'Heat Applied (Most Popular)',
@@ -1691,7 +1988,7 @@
     const btnNext = document.getElementById('btnNext');
     const thumbnails = document.querySelectorAll('.thumbnail-btn');
     const slides = document.querySelectorAll('.gallery-slide');
-
+    
     let currentImageIndex = 0;
     const totalSlides = slides.length;
 
@@ -1699,14 +1996,14 @@
       if (!galleryScroller || totalSlides === 0) return;
       if (index < 0) index = totalSlides - 1;
       if (index >= totalSlides) index = 0;
-
+      
       // Pause all videos in gallery
       galleryScroller.querySelectorAll('video').forEach(v => v.pause());
-
+      
       currentImageIndex = index;
       const slideWidth = galleryScroller.offsetWidth;
       galleryScroller.scrollTo({ left: slideWidth * index, behavior: 'smooth' });
-
+      
       // Update thumbnails
       thumbnails.forEach((thumb, i) => {
         thumb.classList.toggle('active', i === currentImageIndex);
