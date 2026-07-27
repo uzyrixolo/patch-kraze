@@ -546,24 +546,15 @@
         </div>
       </div>
       
-      <!-- File Upload -->
+      <!-- Design File Link -->
       {% if section.settings.show_file_upload %}
-      <h3 class="form-section-title">Design File Upload (Optional)</h3>
-      
+      <h3 class="form-section-title">Your Design (Optional)</h3>
+
       <div class="form-group">
-        <div class="file-upload-area" id="fileUploadArea">
-          <input type="file" name="contact[design_file]" id="fileInput" class="file-upload-input" accept=".jpg,.jpeg,.png,.gif,.pdf,.eps,.ai,.svg" data-max-size="5242880">
-          <div class="file-upload-icon">📁</div>
-          <div class="file-upload-text">Click to upload a file</div>
-          <div class="file-upload-hint">or drag and drop<br>Supported formats: JPG, PNG, GIF, PDF, EPS, AI, SVG (Max 5MB)</div>
-        </div>
-        <div class="file-preview" id="filePreview">
-          <img id="filePreviewImg" src="" alt="Preview">
-          <div class="file-preview-info">
-            <div class="file-preview-name" id="fileName"></div>
-            <div class="file-preview-size" id="fileSize"></div>
-          </div>
-          <button type="button" class="file-remove" id="fileRemove">×</button>
+        <label class="form-label">Link to your design file</label>
+        <input type="url" name="contact[Design File Link]" class="form-input" placeholder="https://drive.google.com/... or Dropbox / WeTransfer link">
+        <div class="file-upload-hint" style="margin-top:0.5rem;">
+          Paste a share link from Google Drive, Dropbox, or WeTransfer. You can also email your file to <a href="mailto:orders@patchkraze.com" style="color:#10b981; font-weight:600;">orders@patchkraze.com</a> after submitting.
         </div>
       </div>
       {% endif %}
@@ -617,7 +608,30 @@
     const formSuccess = document.getElementById('formSuccess');
     
     if (!form) return;
-    
+
+    // Create/update a Shopify customer (tagged 'quote-request') when the quote is submitted.
+    // Uses the native storefront customer form endpoint via sendBeacon so it completes
+    // even as the page navigates. Best-effort: if the store's bot protection challenges
+    // the request, the quote email still goes through normally.
+    form.addEventListener('submit', function() {
+      try {
+        var emailEl = form.querySelector('[name="contact[email]"]');
+        if (!emailEl || !emailEl.value) return;
+        var fd = new FormData();
+        fd.append('form_type', 'customer');
+        fd.append('utf8', '✓');
+        fd.append('contact[email]', emailEl.value);
+        var fn = form.querySelector('[name="contact[first_name]"]');
+        var ln = form.querySelector('[name="contact[last_name]"]');
+        var ph = form.querySelector('[name="contact[phone]"]');
+        if (fn && fn.value) fd.append('contact[first_name]', fn.value);
+        if (ln && ln.value) fd.append('contact[last_name]', ln.value);
+        if (ph && ph.value) fd.append('contact[phone]', ph.value);
+        fd.append('contact[tags]', 'quote-request');
+        navigator.sendBeacon('/contact', fd);
+      } catch (e) { /* non-blocking */ }
+    });
+
     // File upload handling
     if (fileInput && fileUploadArea) {
       // Drag and drop
