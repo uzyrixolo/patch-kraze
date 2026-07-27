@@ -39,13 +39,19 @@ Cart enforces a $70 minimum. All variant prices AND `custom.prices` metafields w
 - The Shopify app: "Quote Backend" in the Partners dashboard (org 2626091, app id 402895667201), custom distribution to patchkraze.
 - `quote-backend/setup_railway.py` — one-shot Railway provisioning script (creates project/service from this repo, sets root dir, env vars, domain). Contains a Railway account token; prompts for Shopify client credentials.
 
-### Current status / next steps
+### Current status (July 2026): LIVE and working
 
-1. Shopify app: scopes must be granted (Partners → app → API access requests) and app **installed** on patchkraze via the Distribution install link.
-2. Railway: not yet deployed — run `python3 quote-backend/setup_railway.py` (or set up manually per `quote-backend/README.md`).
-3. After deploy: set `backend_url` in the quote-form section settings (theme editor on each page using it, or in the template JSON files) to the Railway domain.
-4. Verify: submit a test quote → file in Content → Files, customer tagged `quote-request`, entry in Content → Metaobjects → Quote Request, email received.
-5. Add product photos to `letterman-jackets`; add hero banner image to back-to-school page via theme editor.
+- Railway: project `patch-kraze-quote`, service `patch-kraze-quote`, URL `https://patch-kraze-quote-production.up.railway.app`. Deploy with `railway up --service patch-kraze-quote` from `quote-backend/`.
+- Shopify app "Quote Backend" is a **Dev Dashboard app** (dashboard org 128992815, app id 402895667201). Client ID `60c05d84a31426d23482cffad0b51458` (note: starts with 60c, easy to misread as 68c).
+- **Client credentials grant does NOT work here** (`shop_not_permitted`): the store belongs to a different org (user only has collaborator access). Auth instead uses the **authorization code grant**: one-time browser flow at `{backend}/auth` (redirect URL registered in the app version) → permanent offline `shpca_` token, stored in Railway as `SHOPIFY_ADMIN_TOKEN`. Re-run `/auth` only if the token is revoked/reinstalled.
+- `quote_request` metaobject definition was created via Shopify MCP (the token lacks `write_metaobject_definitions`; boot-time ensureQuoteDefinition logs a scope error — harmless since the definition exists).
+- `backend_url` is set in all quote-form templates (quote, back-to-school, 4 service pages).
+- End-to-end verified 2026-07-28: file upload, customer tagged `quote-request`, metaobject created.
+
+### Remaining
+
+- Add product photos to `letterman-jackets`; add hero banner image to back-to-school page via theme editor.
+- Create the 4 service pages in admin (assign templates page.service-*).
 
 ## Conventions
 
