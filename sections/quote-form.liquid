@@ -23,6 +23,12 @@
       "default": true
     },
     {
+      "type": "text",
+      "id": "backend_url",
+      "label": "Quote backend URL",
+      "info": "e.g. https://quote-backend-production-xxxx.up.railway.app — enables real file uploads, customer creation and quote records in admin. Leave empty to use email-only submission."
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "Color scheme",
@@ -546,12 +552,31 @@
         </div>
       </div>
       
-      <!-- Design File Link -->
+      <!-- Design File -->
       {% if section.settings.show_file_upload %}
       <h3 class="form-section-title">Your Design (Optional)</h3>
 
+      {% if section.settings.backend_url != blank %}
       <div class="form-group">
-        <label class="form-label">Link to your design file</label>
+        <div class="file-upload-area" id="fileUploadArea">
+          <input type="file" id="fileInput" class="file-upload-input" accept=".jpg,.jpeg,.png,.gif,.pdf,.eps,.ai,.svg,.webp" data-max-size="20971520">
+          <div class="file-upload-icon">📁</div>
+          <div class="file-upload-text">Click to upload your design file</div>
+          <div class="file-upload-hint">or drag and drop — JPG, PNG, GIF, PDF, EPS, AI, SVG (Max 20MB)</div>
+        </div>
+        <div class="file-preview" id="filePreview">
+          <img id="filePreviewImg" src="" alt="Preview">
+          <div class="file-preview-info">
+            <div class="file-preview-name" id="fileName"></div>
+            <div class="file-preview-size" id="fileSize"></div>
+          </div>
+          <button type="button" class="file-remove" id="fileRemove">×</button>
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="form-group" style="margin-top:1rem;">
+        <label class="form-label">Or link to your design file</label>
         <input type="url" name="contact[Design File Link]" class="form-input" placeholder="https://drive.google.com/... or Dropbox / WeTransfer link">
         <div class="file-upload-hint" style="margin-top:0.5rem;">
           Paste a share link from Google Drive, Dropbox, or WeTransfer. You can also email your file to <a href="mailto:orders@patchkraze.com" style="color:#10b981; font-weight:600;">orders@patchkraze.com</a> after submitting.
@@ -609,11 +634,14 @@
     
     if (!form) return;
 
-    // Create/update a Shopify customer (tagged 'quote-request') when the quote is submitted.
-    // Uses the native storefront customer form endpoint via sendBeacon so it completes
-    // even as the page navigates. Best-effort: if the store's bot protection challenges
-    // the request, the quote email still goes through normally.
-    form.addEventListener('submit', function() {
+    // Backend endpoint (Railway). When set, submissions go there first:
+    // real file upload -> Shopify Files, customer creation, quote metaobject.
+    // The native contact email still fires as a backup via sendBeacon.
+    const BACKEND_URL = ({{ section.settings.backend_url | json }} || '').replace(/\/+$/, '');
+
+    // Best-effort customer creation via native customer form (used only when
+    // no backend is configured; the backend handles customers server-side).
+    function customerBeacon() {
       try {
         var emailEl = form.querySelector('[name="contact[email]"]');
         if (!emailEl || !emailEl.value) return;
@@ -630,6 +658,42 @@
         fd.append('contact[tags]', 'quote-request');
         navigator.sendBeacon('/contact', fd);
       } catch (e) { /* non-blocking */ }
+    }
+
+    form.addEventListener('submit', function(e) {
+      if (!BACKEND_URL) { customerBeacon(); return; } // native email-only flow
+
+      e.preventDefault();
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Submitting...'; }
+
+      // Map contact[Field Name] -> field_name for the backend
+      var payload = new FormData();
+      new FormData(form).forEach(function(v, k) {
+        var m = k.match(/^contact\[(.+)\]$/);
+        if (m) payload.append(m[1].toLowerCase().replace(/[^a-z0-9]+/g, '_'), v);
+      });
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        payload.append('design_file', fileInput.files[0]);
+      }
+
+      fetch(BACKEND_URL + '/quote', { method: 'POST', body: payload })
+        .then(function(r) { return r.json().then(function(j) { return { ok: r.ok && j.ok }; }); })
+        .then(function(res) {
+          if (!res.ok) throw new Error('backend rejected');
+          // Backup email via native contact endpoint (no navigation)
+          try { navigator.sendBeacon('/contact', new FormData(form)); } catch (_) {}
+          form.style.display = 'none';
+          if (formSuccess) {
+            formSuccess.classList.add('active');
+            formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        })
+        .catch(function() {
+          // Backend unreachable -> fall back to the native email-only submission
+          customerBeacon();
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Get My Free Quote'; }
+          form.submit();
+        });
     });
 
     // File upload handling
@@ -667,7 +731,7 @@
         const maxSize = parseInt(fileInput.dataset.maxSize) || 5242880;
         
         if (file.size > maxSize) {
-          alert('File size must be less than 5MB');
+          alert('File size must be less than 20MB');
           fileInput.value = '';
           return;
         }

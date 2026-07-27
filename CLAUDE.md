@@ -1,0 +1,55 @@
+# Patch Kraze — Shopify Theme + Quote Backend
+
+Shopify theme for **patchkraze.com** (store: `patchkraze.myshopify.com`, admin: `admin.shopify.com/store/patchkraze`). Custom patch e-commerce: embroidered/chenille/PVC/leather patches, stickers, DTF transfers, letterman jackets.
+
+## Deployment — IMPORTANT
+
+- This repo is **git-connected to the LIVE Shopify theme** (`patch-kraze/main`, theme id `140182224980`). **Every push to `main` auto-deploys to the live storefront within ~1 minute.** There is no staging branch — treat pushes as production deploys.
+- The Shopify GitHub integration only syncs theme directories (`assets, blocks, config, layout, locales, sections, snippets, templates`). Non-theme folders (`backups/`, `quote-backend/`) are ignored by the sync — safe to keep in the repo.
+- Direct theme-file writes to the live theme via Admin API are blocked by tooling policy; git push IS the deploy path.
+- Note: this working copy previously had a stale `.git/index.lock` blocking commits. If git commands fail, `rm .git/index.lock` first. If local is behind origin, `git pull` (recent work was pushed from a separate clone).
+
+## Pricing architecture (the heart of this theme)
+
+`sections/main-product-patch-kraze.liquid` (~1750 lines) is the custom product page for all patch/sticker/DTF products. Inside its main script:
+
+- **`PRODUCT_CONFIGS`** — per-handle size limits/defaults (min/max/default inches, step).
+- **`METAFIELD_MATRIX`** — pricing grid injected from the **`custom.prices` product metafield** (JSON type, namespace `custom`, key `prices`, on ~58 products). Grid shape: `{ sizeBrackets: [...], quantityTiers: [{min, max, prices: [...]}] }`. Sticker products have a formula-shaped value (`type: 'stickers'`) which is **inert** — see below.
+- **`FALLBACK_MATRIX`** — embroidered-patches grid used only if a product lacks the metafield (e.g. newly added products).
+- **Display vs charge:** the matrix drives *displayed* prices; the actual cart price comes from matching a real Shopify **variant** by title (e.g. `"2.0 inch - 25-49"`, `"4 sq in - 25-49"` for DTF, `"3\" - 25-49"` for flex, `"Style #1-5 - 25-49"` for stickers). Metafield and variant prices must be kept in sync when changing prices.
+- **Stickers** (`custom-vinyl-stickers`, `holographic-stickers`, `uv-transparent-stickers`, `custom-stickers`) bypass the matrix entirely and read live variant prices directly (`IS_STICKER` branch).
+- Variant title quirks: `full-color-printed-patches` uses `"1 inch"` (no `.0`) for whole sizes; `pvc-patches` tier labels are `25-49` even though its matrix first tier is `min:10`; sticker last tier label is `"500+"`.
+
+### $70 minimum-order floor (July 2026)
+
+Cart enforces a $70 minimum. All variant prices AND `custom.prices` metafields were raised so that `tier_min_qty × price ≥ $70` (rounded up to $0.25) on every violating cell (~200 cells across 47 products). **Backups** (pre-change snapshots): `backups/custom-prices-metafield-backup-2026-07-07.json` (all metafield values + definition id) and `backups/main-product-patch-kraze.liquid.bak-2026-07-07` (pre-metafield-cutover liquid with the old hardcoded `ALL_MATRICES`).
+
+## Back to School landing page
+
+- `sections/back-to-school-landing.liquid` + `templates/page.back-to-school.json` → live at **/pages/back-to-school** (page already created in admin, templateSuffix `back-to-school`).
+- Category cards + hero pull `featured_image` and URL from real products via `all_products[...]` (block setting `product`), overridable with `image`/`link` settings. Includes card for the `letterman-jackets` product.
+- `letterman-jackets` product: $100, 18 variants (Black/Navy/Red/Royal Blue/Forest Green/Maroon × S/M/L), standard product template. **Still needs photos.**
+
+## Quote form + backend
+
+- `sections/quote-form.liquid` — used on `/pages/quote`, service pages, back-to-school. Uses native `{% form 'contact' %}` (a previous hand-rolled version silently discarded every submission — do not regress this).
+- Section setting **`backend_url`**: when set (in theme editor or template JSON), submissions POST to `{backend_url}/quote` (multipart, includes real file upload) with the native contact email fired via sendBeacon as backup; when empty, email-only flow + best-effort customer creation via `form_type=customer` beacon.
+- **`quote-backend/`** — Node/Express service (deploy target: Railway, root directory `quote-backend`). Per quote: uploads design file to Shopify Files (staged upload), upserts customer tagged `quote-request`, creates a `quote_request` **metaobject** (definition auto-created on boot; view in admin under Content → Metaobjects).
+- **Auth (Shopify 2026 model):** no static `shpat_` tokens. Backend exchanges `SHOPIFY_CLIENT_ID` + `SHOPIFY_CLIENT_SECRET` for short-lived Admin tokens via client-credentials grant (`POST /admin/oauth/access_token`), auto-refreshing. Requires the app installed on the store with scopes: `read/write_files, read/write_customers, read/write_metaobjects`.
+- The Shopify app: "Quote Backend" in the Partners dashboard (org 2626091, app id 402895667201), custom distribution to patchkraze.
+- `quote-backend/setup_railway.py` — one-shot Railway provisioning script (creates project/service from this repo, sets root dir, env vars, domain). Contains a Railway account token; prompts for Shopify client credentials.
+
+### Current status / next steps
+
+1. Shopify app: scopes must be granted (Partners → app → API access requests) and app **installed** on patchkraze via the Distribution install link.
+2. Railway: not yet deployed — run `python3 quote-backend/setup_railway.py` (or set up manually per `quote-backend/README.md`).
+3. After deploy: set `backend_url` in the quote-form section settings (theme editor on each page using it, or in the template JSON files) to the Railway domain.
+4. Verify: submit a test quote → file in Content → Files, customer tagged `quote-request`, entry in Content → Metaobjects → Quote Request, email received.
+5. Add product photos to `letterman-jackets`; add hero banner image to back-to-school page via theme editor.
+
+## Conventions
+
+- Sections are self-contained: `{% schema %}` first, then `<style>`, then markup/JS. Plain CSS classes, no external deps.
+- Theme is OS 2.0 (JSON templates). Default product template is `product-information` (Horizon); patch products use the custom section via their template.
+- When changing prices: update BOTH variant prices and `custom.prices` metafields, and respect the $70 floor rule.
+- Cart quirk: velcro backing adds a companion `velcro-backing` product line item (+$0.25/pc) via JS on add-to-cart.
