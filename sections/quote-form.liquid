@@ -364,10 +364,18 @@
     <h2 class="quote-form-heading">{{ section.settings.heading }}</h2>
     <div class="quote-form-description">{{ section.settings.description }}</div>
     
-    <form class="quote-form" id="quoteForm" method="post" action="/contact#quote-form" enctype="multipart/form-data">
-      <input type="hidden" name="contact[form_type]" value="quote">
-      <input type="hidden" name="contact[form_id]" value="quote-request">
-      
+    {% form 'contact', id: 'quoteForm', class: 'quote-form' %}
+      <input type="hidden" name="contact[Request Type]" value="Quote Request">
+
+      {% if form.posted_successfully? %}
+        <script>window.__quotePosted = true;</script>
+      {% endif %}
+      {% if form.errors %}
+        <div style="background:#fef2f2; border:1px solid #ef4444; color:#991b1b; padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem;">
+          {{ form.errors | default_errors }}
+        </div>
+      {% endif %}
+
       <!-- Contact Information -->
       <h3 class="form-section-title">Contact Information</h3>
       
@@ -585,8 +593,8 @@
       </div>
       
       <button type="submit" class="quote-submit-btn" id="submitBtn">Get My Free Quote</button>
-    </form>
-    
+    {% endform %}
+
     <div class="form-success" id="formSuccess">
       <div class="form-success-icon">✅</div>
       <h3 class="form-success-title">Quote Request Submitted!</h3>
@@ -683,7 +691,16 @@
       }
     }
     
-    // Form submission - let Shopify handle it natively
-    // No JavaScript needed for form submission
+    // Form submission - let Shopify handle it natively.
+    // On success Shopify redirects back with ?contact_posted=true (or re-renders
+    // with form.posted_successfully? which sets window.__quotePosted).
+    const params = new URLSearchParams(window.location.search);
+    if (window.__quotePosted || params.get('contact_posted') === 'true') {
+      form.style.display = 'none';
+      if (formSuccess) {
+        formSuccess.classList.add('active');
+        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
   });
 </script>

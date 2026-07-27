@@ -9,6 +9,7 @@
             "title": "School Uniform Patches",
             "subtitle": "Custom embroidered patches for any school uniform",
             "emoji": "🎽",
+            "product": "custom-uniform-patches",
             "link": "/products/custom-uniform-patches"
           }
         },
@@ -18,6 +19,7 @@
             "title": "Letterman Jacket Patches",
             "subtitle": "Classic varsity letters and chenille patches",
             "emoji": "🧥",
+            "product": "letterman-jacket-patches",
             "link": "/products/letterman-jacket-patches"
           }
         },
@@ -27,6 +29,7 @@
             "title": "Sports Team Patches",
             "subtitle": "Team logos, mascots and player numbers",
             "emoji": "🏈",
+            "product": "sports-patches",
             "link": "/products/sports-patches"
           }
         },
@@ -36,6 +39,7 @@
             "title": "Club Patches",
             "subtitle": "Debate, robotics, scouts, band and more",
             "emoji": "🎗️",
+            "product": "girl-scout-patches",
             "link": "/products/embroidered-patches"
           }
         },
@@ -45,6 +49,7 @@
             "title": "Achievement & Honor Roll Patches",
             "subtitle": "Reward excellence with custom award patches",
             "emoji": "⭐",
+            "product": "name-patches",
             "link": "/pages/quote"
           }
         },
@@ -54,7 +59,18 @@
             "title": "Graduation Patches",
             "subtitle": "Class of '26 chenille letters and keepsakes",
             "emoji": "🎓",
+            "product": "chenille-letter-patches",
             "link": "/products/chenille-letter-patches"
+          }
+        },
+        "cat_jackets": {
+          "type": "category",
+          "settings": {
+            "title": "Letterman Jackets",
+            "subtitle": "Customizable varsity jackets — 6 colors, S/M/L",
+            "emoji": "🧥",
+            "product": "letterman-jackets",
+            "link": "/products/letterman-jackets"
           }
         },
         "testimonial_1": {
@@ -81,11 +97,13 @@
         "cat_club",
         "cat_achievement",
         "cat_graduation",
+        "cat_jackets",
         "testimonial_1",
         "testimonial_2"
       ],
       "settings": {
         "badge_text": "Back to School Sale",
+        "hero_product": "embroidered-patches",
         "heading": "Back to School! Upgrade Your Gear",
         "subheading": "Design Your Own Custom Patches",
         "description": "<p>Custom embroidered patches for uniforms, letterman jackets, teams, clubs and more. Free artwork setup, fast turnaround, shipped from California.</p>",

@@ -38,6 +38,11 @@
       "label": "Hero image"
     },
     {
+      "type": "product",
+      "id": "hero_product",
+      "label": "Hero product (image used if no hero image set)"
+    },
+    {
       "type": "text",
       "id": "order_button_label",
       "label": "Order button label",
@@ -148,7 +153,12 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "Image (overrides product image)"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product (supplies image and link)"
         },
         {
           "type": "text",
@@ -159,7 +169,7 @@
         {
           "type": "url",
           "id": "link",
-          "label": "Link"
+          "label": "Link (overrides product link)"
         }
       ]
     },
@@ -512,9 +522,14 @@
       </div>
     </div>
     <div>
+      {%- assign hero_product = all_products[section.settings.hero_product] -%}
       {%- if section.settings.hero_image != blank -%}
         <div class="bts-hero-image">
           {{ section.settings.hero_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: section.settings.heading }}
+        </div>
+      {%- elsif hero_product.featured_image != blank -%}
+        <div class="bts-hero-image">
+          {{ hero_product.featured_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: section.settings.heading }}
         </div>
       {%- else -%}
         <div class="bts-hero-placeholder">🎒🧵⭐</div>
@@ -538,10 +553,14 @@
     <h2 class="bts-section-heading">{{ section.settings.categories_heading }}</h2>
     <div class="bts-category-grid">
       {%- for block in category_blocks -%}
-        <a href="{{ block.settings.link | default: quote_link }}" class="bts-category-card" {{ block.shopify_attributes }}>
+        {%- assign card_product = all_products[block.settings.product] -%}
+        {%- assign card_link = block.settings.link | default: card_product.url | default: quote_link -%}
+        <a href="{{ card_link }}" class="bts-category-card" {{ block.shopify_attributes }}>
           <div class="bts-category-media">
             {%- if block.settings.image != blank -%}
               {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.title }}
+            {%- elsif card_product.featured_image != blank -%}
+              {{ card_product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.title }}
             {%- else -%}
               <span>{{ block.settings.emoji }}</span>
             {%- endif -%}
