@@ -8,10 +8,16 @@
  *   3. Stores the quote as a 'quote_request' metaobject (Content > Metaobjects)
  *
  * Env vars (set in Railway):
- *   SHOPIFY_SHOP         e.g. patchkraze.myshopify.com
- *   SHOPIFY_ADMIN_TOKEN  shpat_... (custom app Admin API token)
- *   ALLOWED_ORIGINS      comma-separated, e.g. https://patchkraze.com,https://www.patchkraze.com
- *   PORT                 provided by Railway automatically
+ *   SHOPIFY_SHOP           e.g. patchkraze.myshopify.com
+ *   SHOPIFY_CLIENT_ID      app Client ID (from Partner/Dev Dashboard app)
+ *   SHOPIFY_CLIENT_SECRET  app Client Secret (shpss_...)
+ *   SHOPIFY_ADMIN_TOKEN    optional legacy shpat_ token (used directly if set)
+ *   ALLOWED_ORIGINS        comma-separated, e.g. https://patchkraze.com,https://www.patchkraze.com
+ *   PORT                   provided by Railway automatically
+ *
+ * Auth: Shopify's 2026+ model - the app must be INSTALLED on the store, then
+ * this server exchanges client_id/client_secret for short-lived Admin API
+ * access tokens via the client credentials grant, refreshing automatically.
  */
 
 const express = require('express');
@@ -19,15 +25,51 @@ const multer = require('multer');
 const cors = require('cors');
 
 const SHOP = process.env.SHOPIFY_SHOP;
-const TOKEN = process.env.SHOPIFY_ADMIN_TOKEN;
+const STATIC_TOKEN = process.env.SHOPIFY_ADMIN_TOKEN; // legacy fallback
+const CLIENT_ID = process.env.SHOPIFY_CLIENT_ID;
+const CLIENT_SECRET = process.env.SHOPIFY_CLIENT_SECRET;
 const API_VERSION = process.env.SHOPIFY_API_VERSION || '2026-01';
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS ||
   'https://patchkraze.com,https://www.patchkraze.com')
   .split(',')
   .map((s) => s.trim());
 
-if (!SHOP || !TOKEN) {
-  console.error('Missing SHOPIFY_SHOP or SHOPIFY_ADMIN_TOKEN env vars.');
+if (!SHOP || (!STATIC_TOKEN && !(CLIENT_ID && CLIENT_SECRET))) {
+  console.error(
+    'Missing env vars: need SHOPIFY_SHOP plus either SHOPIFY_ADMIN_TOKEN or SHOPIFY_CLIENT_ID + SHOPIFY_CLIENT_SECRET.'
+  );
+}
+
+// --- Access token management (client credentials grant) ---------------------
+let _cachedToken = null;
+let _cachedTokenExpiry = 0;
+
+async function getAccessToken() {
+  if (STATIC_TOKEN) return STATIC_TOKEN;
+  if (_cachedToken && Date.now() < _cachedTokenExpiry) return _cachedToken;
+
+  const res = await fetch(`https://${SHOP}/admin/oauth/access_token`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      grant_type: 'client_credentials',
+    }),
+  });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(
+      `Token exchange failed (HTTP ${res.status}): ${body}. ` +
+        'Is the app installed on the store with the required scopes?'
+    );
+  }
+  const j = await res.json();
+  _cachedToken = j.access_token;
+  const ttl = Math.max(60, (j.expires_in || 86400) - 300); // refresh 5 min early
+  _cachedTokenExpiry = Date.now() + ttl * 1000;
+  console.log(`[auth] Minted Admin API token (scopes: ${j.scope || 'n/a'}, ttl ${ttl}s)`);
+  return _cachedToken;
 }
 
 const app = express();
@@ -50,11 +92,12 @@ app.use(
 // Shopify Admin GraphQL helper
 // ---------------------------------------------------------------------------
 async function gql(query, variables) {
+  const token = await getAccessToken();
   const res = await fetch(`https://${SHOP}/admin/api/${API_VERSION}/graphql.json`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Shopify-Access-Token': TOKEN,
+      'X-Shopify-Access-Token': token,
     },
     body: JSON.stringify({ query, variables }),
   });
