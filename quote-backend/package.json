@@ -1,0 +1,17 @@
+{
+  "name": "patch-kraze-quote-backend",
+  "version": "1.0.0",
+  "description": "Quote form backend for patchkraze.com: file uploads to Shopify Files, customer creation, quote metaobjects",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}
