@@ -82,6 +82,7 @@
     "quote_form": {
       "type": "quote-form",
       "settings": {
+        "backend_url": "https://patch-kraze-quote-production.up.railway.app",
         "heading": "Get Your Free Quote",
         "description": "<p>Fill out the form below and we'll get back to you within 24 hours with a detailed quote.</p>",
         "show_file_upload": true,

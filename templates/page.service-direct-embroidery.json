@@ -5,7 +5,7 @@
       "settings": {
         "heading": "Direct Embroidery",
         "subheading": "Premium embroidery directly on your garments & apparel",
-        "description": "<p>Skip the patches — get your logos, names, and designs embroidered directly onto hats, polos, jackets, bags, and more. Our state-of-the-art embroidery machines deliver crisp, durable stitching that lasts the life of the garment.</p>",
+        "description": "<p>Skip the patches \u2014 get your logos, names, and designs embroidered directly onto hats, polos, jackets, bags, and more. Our state-of-the-art embroidery machines deliver crisp, durable stitching that lasts the life of the garment.</p>",
         "feature_1_title": "Premium Thread",
         "feature_1_desc": "Polyester & rayon threads for vibrant, fade-resistant results",
         "feature_2_title": "Any Garment",
@@ -29,7 +29,8 @@
         "show_file_upload": true,
         "color_scheme": "scheme-1",
         "padding_top": 20,
-        "padding_bottom": 60
+        "padding_bottom": 60,
+        "backend_url": "https://patch-kraze-quote-production.up.railway.app"
       }
     }
   },

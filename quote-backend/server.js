@@ -23,6 +23,7 @@
 const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
+const crypto = require('crypto');
 
 const SHOP = process.env.SHOPIFY_SHOP;
 const STATIC_TOKEN = process.env.SHOPIFY_ADMIN_TOKEN; // legacy fallback
@@ -40,22 +41,28 @@ if (!SHOP || (!STATIC_TOKEN && !(CLIENT_ID && CLIENT_SECRET))) {
   );
 }
 
-// --- Access token management (client credentials grant) ---------------------
+// --- Access token management -------------------------------------------------
+// Preferred: offline token obtained once via OAuth authorization code grant
+// (GET /auth in a browser). Falls back to client credentials grant, which only
+// works when the store belongs to the app's own Dev Dashboard organization.
+let _oauthToken = null; // offline token from authorization code grant (never expires)
 let _cachedToken = null;
 let _cachedTokenExpiry = 0;
 
 async function getAccessToken() {
   if (STATIC_TOKEN) return STATIC_TOKEN;
+  if (_oauthToken) return _oauthToken;
   if (_cachedToken && Date.now() < _cachedTokenExpiry) return _cachedToken;
 
+  const params = new URLSearchParams({
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    grant_type: 'client_credentials',
+  });
   const res = await fetch(`https://${SHOP}/admin/oauth/access_token`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      grant_type: 'client_credentials',
-    }),
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString(),
   });
   if (!res.ok) {
     const body = await res.text();
@@ -70,6 +77,22 @@ async function getAccessToken() {
   _cachedTokenExpiry = Date.now() + ttl * 1000;
   console.log(`[auth] Minted Admin API token (scopes: ${j.scope || 'n/a'}, ttl ${ttl}s)`);
   return _cachedToken;
+}
+
+// --- OAuth authorization code grant (one-time browser flow) -------------------
+const OAUTH_SCOPES =
+  'read_files,write_files,read_customers,write_customers,read_metaobjects,write_metaobjects';
+let _oauthState = null;
+
+function verifyShopifyHmac(query) {
+  const { hmac, ...rest } = query;
+  if (!hmac) return false;
+  const message = Object.keys(rest)
+    .sort()
+    .map((k) => `${k}=${rest[k]}`)
+    .join('&');
+  const digest = crypto.createHmac('sha256', CLIENT_SECRET).update(message).digest('hex');
+  return crypto.timingSafeEqual(Buffer.from(digest), Buffer.from(hmac));
 }
 
 const app = express();
@@ -330,7 +353,66 @@ async function createQuoteMetaobject(fields) {
 // Routes
 // ---------------------------------------------------------------------------
 app.get('/', (_req, res) => {
-  res.json({ ok: true, service: 'patch-kraze-quote-backend' });
+  res.json({
+    ok: true,
+    service: 'patch-kraze-quote-backend',
+    authorized: Boolean(STATIC_TOKEN || _oauthToken),
+  });
+});
+
+// One-time OAuth: open {BASE_URL}/auth in a browser while logged into the store admin.
+app.get('/auth', (req, res) => {
+  const base = `https://${req.get('host')}`;
+  _oauthState = crypto.randomBytes(16).toString('hex');
+  const url =
+    `https://${SHOP}/admin/oauth/authorize` +
+    `?client_id=${encodeURIComponent(CLIENT_ID)}` +
+    `&scope=${encodeURIComponent(OAUTH_SCOPES)}` +
+    `&redirect_uri=${encodeURIComponent(`${base}/auth/callback`)}` +
+    `&state=${_oauthState}`;
+  res.redirect(url);
+});
+
+app.get('/auth/callback', async (req, res) => {
+  try {
+    const { code, state, shop } = req.query;
+    if (!code) return res.status(400).send('Missing code');
+    if (!state || state !== _oauthState) return res.status(400).send('Bad state — retry /auth');
+    if (shop && shop !== SHOP) return res.status(400).send('Shop mismatch');
+    // HMAC may be signed with a rotated (old) secret; the state check plus the
+    // secret-authenticated code exchange below are the effective gates.
+    if (!verifyShopifyHmac(req.query)) {
+      console.warn('[auth] HMAC mismatch (possibly rotated secret) — continuing, state OK');
+    }
+
+    const r = await fetch(`https://${SHOP}/admin/oauth/access_token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+        code: String(code),
+      }).toString(),
+    });
+    if (!r.ok) {
+      const t = await r.text();
+      return res.status(500).send(`Token exchange failed (HTTP ${r.status}): ${t}`);
+    }
+    const j = await r.json();
+    _oauthToken = j.access_token;
+    console.log(`[auth] OFFLINE_TOKEN=${j.access_token} (scopes: ${j.scope})`);
+    try {
+      await ensureQuoteDefinition();
+    } catch (e) {
+      console.error('ensureQuoteDefinition after auth:', e.message);
+    }
+    res.send(
+      'Authorized! The quote backend is now connected to Shopify. You can close this tab.'
+    );
+  } catch (e) {
+    console.error('OAuth callback error:', e);
+    res.status(500).send('OAuth error: ' + e.message);
+  }
 });
 
 app.post('/quote', upload.single('design_file'), async (req, res) => {

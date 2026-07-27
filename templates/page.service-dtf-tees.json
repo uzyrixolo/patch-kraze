@@ -5,15 +5,15 @@
       "settings": {
         "heading": "Tees with DTF Prints",
         "subheading": "Full-color custom printed tees, ready to wear",
-        "description": "<p>Get custom t-shirts with vibrant DTF (Direct to Film) prints — full color, no minimums, and soft to the touch. Perfect for events, teams, brands, or merch drops. We print and ship complete, ready-to-wear tees.</p>",
+        "description": "<p>Get custom t-shirts with vibrant DTF (Direct to Film) prints \u2014 full color, no minimums, and soft to the touch. Perfect for events, teams, brands, or merch drops. We print and ship complete, ready-to-wear tees.</p>",
         "feature_1_title": "Full Color Prints",
         "feature_1_desc": "Unlimited colors, gradients, and photo-quality detail",
         "feature_2_title": "Soft Hand Feel",
         "feature_2_desc": "Thin, flexible transfers that feel part of the fabric",
         "feature_3_title": "Low Minimums",
-        "feature_3_desc": "Order as few as 10 pieces — perfect for small runs",
+        "feature_3_desc": "Order as few as 10 pieces \u2014 perfect for small runs",
         "feature_4_title": "Premium Blanks",
-        "feature_4_desc": "Gildan, Bella+Canvas, Next Level — your choice of brand",
+        "feature_4_desc": "Gildan, Bella+Canvas, Next Level \u2014 your choice of brand",
         "process_1": "Send Your Design",
         "process_2": "Pick Tee Style & Color",
         "process_3": "We Print & Press",
@@ -29,7 +29,8 @@
         "show_file_upload": true,
         "color_scheme": "scheme-1",
         "padding_top": 20,
-        "padding_bottom": 60
+        "padding_bottom": 60,
+        "backend_url": "https://patch-kraze-quote-production.up.railway.app"
       }
     }
   },

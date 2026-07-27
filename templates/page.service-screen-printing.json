@@ -13,7 +13,7 @@
         "feature_3_title": "Durable Prints",
         "feature_3_desc": "Plastisol & water-based inks that last wash after wash",
         "feature_4_title": "Free Screens",
-        "feature_4_desc": "No setup or screen fees — pricing includes everything",
+        "feature_4_desc": "No setup or screen fees \u2014 pricing includes everything",
         "process_1": "Upload Your Art",
         "process_2": "Approve Color Proof",
         "process_3": "Print & Quality Check",
@@ -29,7 +29,8 @@
         "show_file_upload": true,
         "color_scheme": "scheme-1",
         "padding_top": 20,
-        "padding_bottom": 60
+        "padding_bottom": 60,
+        "backend_url": "https://patch-kraze-quote-production.up.railway.app"
       }
     }
   },

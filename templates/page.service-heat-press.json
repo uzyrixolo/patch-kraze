@@ -5,11 +5,11 @@
       "settings": {
         "heading": "Heat Press Service",
         "subheading": "Professional heat transfer application for your products",
-        "description": "<p>Don't have a heat press? No problem. Send us your garments and patches or transfers — we'll professionally apply them with precision temperature, pressure, and timing for a flawless finish every time.</p>",
+        "description": "<p>Don't have a heat press? No problem. Send us your garments and patches or transfers \u2014 we'll professionally apply them with precision temperature, pressure, and timing for a flawless finish every time.</p>",
         "feature_1_title": "Precision Application",
         "feature_1_desc": "Commercial-grade presses with exact temperature & pressure control",
         "feature_2_title": "All Transfer Types",
-        "feature_2_desc": "DTF, vinyl, sublimation, patches — we handle them all",
+        "feature_2_desc": "DTF, vinyl, sublimation, patches \u2014 we handle them all",
         "feature_3_title": "Bulk Processing",
         "feature_3_desc": "Send us hundreds of garments and we'll press them all",
         "feature_4_title": "Quality Guaranteed",
@@ -29,7 +29,8 @@
         "show_file_upload": true,
         "color_scheme": "scheme-1",
         "padding_top": 20,
-        "padding_bottom": 60
+        "padding_bottom": 60,
+        "backend_url": "https://patch-kraze-quote-production.up.railway.app"
       }
     }
   },
