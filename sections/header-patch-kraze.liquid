@@ -103,6 +103,8 @@
   .pk-nav-item { height: 100%; display: flex; align-items: center; }
   .pk-nav-btn { background: transparent; border: none; padding: 0 0.85rem; height: 100%; display: flex; align-items: center; cursor: pointer; color: #111827; transition: color 0.15s; font-size: 0.8125rem; font-weight: 500;font-family:inherit;}
   .pk-nav-btn:hover { color: #06b6d4; }
+  .pk-nav-quote-cta { background: #10b981; color: #fff; border-radius: 999px; height: 2.1rem; align-self: center; margin-left: 0.35rem; padding: 0 1rem; font-weight: 700; }
+  .pk-nav-quote-cta:hover { background: #059669; color: #fff; }
   .pk-chevron { width: 0.75rem; height: 0.75rem; margin-left: 0.25rem; }
 
   /* MEGA MENU */
@@ -477,6 +479,7 @@
     { label: "Ready Made Patches", key: "readymade", hasDropdown: false, href: "/collections/ready-made-patches" },
     { label: "Patch Kraze Blanks", key: "blanks", hasDropdown: false, href: "/collections/patch-kraze-blanks" },
     { label: "Services", key: "services", hasDropdown: true },
+    { label: "Get a Quote", key: "getquote", hasDropdown: false, href: "/pages/quote", highlight: true },
     // { label: "Support", key: "support", hasDropdown: true, href: "/pages/contact" }
   ];
 
@@ -495,7 +498,7 @@
        li.className = 'pk-nav-item';
        
        const btn = document.createElement('button');
-       btn.className = 'pk-nav-btn';
+       btn.className = 'pk-nav-btn' + (item.highlight ? ' pk-nav-quote-cta' : '');
        btn.innerHTML = `<span>${item.label}</span>`;
        if (item.hasDropdown) {
          btn.innerHTML += `<svg class="pk-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>`;

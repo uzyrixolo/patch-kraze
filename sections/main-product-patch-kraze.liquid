@@ -683,8 +683,178 @@
 
           <button type="submit" name="add" class="checkout-btn">Add to Cart</button>
 
+          <button type="button" id="mockup-quote-btn" class="mockup-quote-btn" onclick="openQuoteModal()">
+            Not ready to order? Get Mockup / Quote First
+          </button>
+
         </div>
       </form>
+
+      <!-- QUOTE / MOCKUP MODAL -->
+      <div id="quote-modal-overlay" class="quote-modal-overlay" onclick="if(event.target===this)closeQuoteModal()">
+        <div class="quote-modal">
+          <button type="button" class="quote-modal-close" onclick="closeQuoteModal()" aria-label="Close">&times;</button>
+          <div id="quote-modal-form-wrap">
+            <h3 style="font-size:1.25rem; font-weight:800; margin-bottom:0.25rem;">Get Your Free Quote or Mockup</h3>
+            <p style="font-size:0.9rem; color:#6b7280; margin-bottom:1rem;">We'll use the options you've selected on this page. Just tell us how to reach you — no payment needed.</p>
+            <div class="quote-modal-fields">
+              <div class="row-2" style="gap:0.75rem;">
+                <input type="text" id="qm-first-name" class="text-input" placeholder="First name *" required>
+                <input type="text" id="qm-last-name" class="text-input" placeholder="Last name">
+              </div>
+              <input type="email" id="qm-email" class="text-input" placeholder="Email *" required>
+              <input type="tel" id="qm-phone" class="text-input" placeholder="Phone (optional)">
+              <select id="qm-want" class="text-input">
+                <option value="Quote">I want a price quote</option>
+                <option value="Design mockup">I want a design mockup (24-48 hrs)</option>
+                <option value="Quote + mockup" selected>Both — quote and mockup</option>
+              </select>
+              <div id="qm-file-note" style="font-size:0.8rem; color:#059669; display:none;">✓ Your uploaded design file will be included</div>
+              <div id="qm-error" style="font-size:0.85rem; color:#ef4444; display:none;"></div>
+              <button type="button" id="qm-submit" class="checkout-btn" style="margin-top:0.25rem;" onclick="submitQuoteModal()">Send My Request</button>
+            </div>
+          </div>
+          <div id="quote-modal-success" style="display:none; text-align:center; padding:1.5rem 0.5rem;">
+            <div style="font-size:2.5rem; margin-bottom:0.5rem;">🎉</div>
+            <h3 style="font-size:1.2rem; font-weight:800; margin-bottom:0.5rem;">Request received!</h3>
+            <p style="font-size:0.95rem; color:#6b7280;">We'll get back to you within 24 hours{% if product.title != blank %} about your {{ product.title | downcase | escape }}{% endif %}. You can close this window.</p>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        .mockup-quote-btn {
+          display: block;
+          width: 100%;
+          margin-top: 0.75rem;
+          padding: 0.9rem 1rem;
+          background: #fff;
+          color: #10b981;
+          border: 2px solid #10b981;
+          border-radius: 0.75rem;
+          font-weight: 700;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background 0.15s, color 0.15s;
+        }
+        .mockup-quote-btn:hover { background: #ecfdf5; }
+        .quote-modal-overlay {
+          display: none;
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.55);
+          z-index: 9999;
+          align-items: center;
+          justify-content: center;
+          padding: 1rem;
+        }
+        .quote-modal-overlay.open { display: flex; }
+        .quote-modal {
+          position: relative;
+          background: #fff;
+          border-radius: 1rem;
+          max-width: 26rem;
+          width: 100%;
+          padding: 1.5rem;
+          box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+          max-height: 90vh;
+          overflow-y: auto;
+        }
+        .quote-modal-close {
+          position: absolute;
+          top: 0.6rem;
+          right: 0.9rem;
+          background: none;
+          border: none;
+          font-size: 1.6rem;
+          color: #9ca3af;
+          cursor: pointer;
+          line-height: 1;
+        }
+        .quote-modal-fields { display: flex; flex-direction: column; gap: 0.7rem; }
+        .quote-modal-fields .text-input { width: 100%; }
+      </style>
+
+      <script>
+        const QUOTE_BACKEND = 'https://patch-kraze-quote-production.up.railway.app';
+
+        function openQuoteModal() {
+          const overlay = document.getElementById('quote-modal-overlay');
+          overlay.classList.add('open');
+          const fileInput = document.getElementById('file-input');
+          const note = document.getElementById('qm-file-note');
+          if (fileInput && fileInput.files && fileInput.files.length > 0) note.style.display = 'block';
+          else note.style.display = 'none';
+        }
+        function closeQuoteModal() {
+          document.getElementById('quote-modal-overlay').classList.remove('open');
+        }
+
+        async function submitQuoteModal() {
+          const firstName = document.getElementById('qm-first-name').value.trim();
+          const email = document.getElementById('qm-email').value.trim();
+          const errEl = document.getElementById('qm-error');
+          errEl.style.display = 'none';
+          if (!firstName || !email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+            errEl.textContent = 'Please enter your first name and a valid email.';
+            errEl.style.display = 'block';
+            return;
+          }
+
+          const btn = document.getElementById('qm-submit');
+          btn.disabled = true;
+          btn.textContent = 'Sending...';
+
+          const val = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
+          const want = val('qm-want');
+          const notesEl = document.getElementById('design-notes-input');
+          const shape = val('shape-input');
+          const backing = val('backing-input');
+
+          const infoParts = [
+            'Request type: ' + want,
+            'Product: {{ product.title | escape }}',
+            'Page: ' + window.location.href,
+          ];
+          if (shape) infoParts.push('Shape: ' + shape);
+          const bgColor = document.querySelector('input[name="properties[Patch Background Color]"]');
+          if (bgColor && bgColor.value) infoParts.push('Background color: ' + bgColor.value);
+          const threadColor = document.querySelector('input[name="properties[Border Thread Color]"]');
+          if (threadColor && threadColor.value) infoParts.push('Border thread color: ' + threadColor.value);
+          if (notesEl && notesEl.value) infoParts.push('Design notes: ' + notesEl.value);
+
+          const fd = new FormData();
+          fd.append('first_name', firstName);
+          fd.append('last_name', val('qm-last-name'));
+          fd.append('email', email);
+          fd.append('phone', val('qm-phone'));
+          fd.append('patch_type', '{{ product.title | escape }}');
+          fd.append('backing_type', backing);
+          fd.append('width_inches', val('width-input'));
+          fd.append('height_inches', val('height-input'));
+          fd.append('quantity', val('qty-input'));
+          fd.append('additional_info', infoParts.join('\n'));
+
+          const fileInput = document.getElementById('file-input');
+          if (fileInput && fileInput.files && fileInput.files.length > 0) {
+            fd.append('design_file', fileInput.files[0]);
+          }
+
+          try {
+            const res = await fetch(QUOTE_BACKEND + '/quote', { method: 'POST', body: fd });
+            const j = await res.json().catch(() => ({}));
+            if (!res.ok || !j.ok) throw new Error(j.error || 'Request failed');
+            document.getElementById('quote-modal-form-wrap').style.display = 'none';
+            document.getElementById('quote-modal-success').style.display = 'block';
+          } catch (e) {
+            errEl.textContent = 'Something went wrong. Please try again or use our quote page.';
+            errEl.style.display = 'block';
+          } finally {
+            btn.disabled = false;
+            btn.textContent = 'Send My Request';
+          }
+        }
+      </script>
     </div>
   </div>
 </div>
