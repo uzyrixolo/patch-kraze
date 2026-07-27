@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "bts_landing": {
@@ -8,8 +17,8 @@
           "settings": {
             "title": "School Uniform Patches",
             "subtitle": "Custom embroidered patches for any school uniform",
-            "emoji": "\ud83c\udfbd",
             "product": "custom-uniform-patches",
+            "emoji": "🎽",
             "link": "/products/custom-uniform-patches"
           }
         },
@@ -18,8 +27,8 @@
           "settings": {
             "title": "Letterman Jacket Patches",
             "subtitle": "Classic varsity letters and chenille patches",
-            "emoji": "\ud83e\udde5",
             "product": "letterman-jacket-patches",
+            "emoji": "🧥",
             "link": "/products/letterman-jacket-patches"
           }
         },
@@ -28,8 +37,8 @@
           "settings": {
             "title": "Sports Team Patches",
             "subtitle": "Team logos, mascots and player numbers",
-            "emoji": "\ud83c\udfc8",
             "product": "sports-patches",
+            "emoji": "🏈",
             "link": "/products/sports-patches"
           }
         },
@@ -38,8 +47,8 @@
           "settings": {
             "title": "Club Patches",
             "subtitle": "Debate, robotics, scouts, band and more",
-            "emoji": "\ud83c\udf97\ufe0f",
             "product": "girl-scout-patches",
+            "emoji": "🎗️",
             "link": "/products/embroidered-patches"
           }
         },
@@ -48,8 +57,8 @@
           "settings": {
             "title": "Achievement & Honor Roll Patches",
             "subtitle": "Reward excellence with custom award patches",
-            "emoji": "\u2b50",
             "product": "name-patches",
+            "emoji": "⭐",
             "link": "/pages/quote"
           }
         },
@@ -58,8 +67,8 @@
           "settings": {
             "title": "Graduation Patches",
             "subtitle": "Class of '26 chenille letters and keepsakes",
-            "emoji": "\ud83c\udf93",
             "product": "chenille-letter-patches",
+            "emoji": "🎓",
             "link": "/products/chenille-letter-patches"
           }
         },
@@ -67,16 +76,16 @@
           "type": "category",
           "settings": {
             "title": "Letterman Jackets",
-            "subtitle": "Customizable varsity jackets \u2014 6 colors, S/M/L",
-            "emoji": "\ud83e\udde5",
+            "subtitle": "Customizable varsity jackets — 6 colors, S/M/L",
             "product": "letterman-jackets",
+            "emoji": "🧥",
             "link": "/products/letterman-jackets"
           }
         },
         "testimonial_1": {
           "type": "testimonial",
           "settings": {
-            "quote": "The patches were perfect for our team jackets \u2014 great quality stitching and they arrived ahead of schedule.",
+            "quote": "The patches were perfect for our team jackets — great quality stitching and they arrived ahead of schedule.",
             "author": "Coach Martinez",
             "organization": "High School Athletics Program"
           }
@@ -103,21 +112,23 @@
       ],
       "settings": {
         "badge_text": "Back to School Sale",
-        "hero_product": "embroidered-patches",
         "heading": "Back to School! Upgrade Your Gear",
         "subheading": "Design Your Own Custom Patches",
         "description": "<p>Custom embroidered patches for uniforms, letterman jackets, teams, clubs and more. Free artwork setup, fast turnaround, shipped from California.</p>",
+        "hero_image": "shopify://shop_images/WhatsApp_Image_2026-07-25_at_02.22.13.jpg",
+        "hero_product": "embroidered-patches",
         "order_button_label": "Order Now",
         "order_button_link": "/products/embroidered-patches",
         "quote_button_label": "Get a Free Quote",
         "quote_button_link": "/pages/quote",
-        "promo_1": "\ud83c\udf92 Back to School Discount",
-        "promo_2": "\u26a1 Fast California Turnaround",
-        "promo_3": "\ud83c\udfa8 Free Artwork & Setup",
+        "promo_1": "🎒 Back to School Discount",
+        "promo_2": "⚡ Fast California Turnaround",
+        "promo_3": "🎨 Free Artwork & Setup",
         "categories_heading": "Shop Patches for Every School Need",
+        "video_url": "",
         "testimonials_heading": "Trusted by Schools & Organizations",
         "cta_heading": "Ready for the New School Year?",
-        "cta_subtext": "Send us your design today \u2014 free proof within 24 hours."
+        "cta_subtext": "Send us your design today — free proof within 24 hours."
       }
     },
     "quote_form": {
@@ -126,10 +137,10 @@
         "heading": "Get Your Free Back to School Quote",
         "description": "<p>Tell us about your school or team project and we'll send a detailed quote within 24 hours.</p>",
         "show_file_upload": true,
+        "backend_url": "https://patch-kraze-quote-production.up.railway.app",
         "color_scheme": "scheme-1",
         "padding_top": 20,
-        "padding_bottom": 60,
-        "backend_url": "https://patch-kraze-quote-production.up.railway.app"
+        "padding_bottom": 60
       }
     }
   },
