@@ -599,6 +599,66 @@
         "card_4"
       ],
       "settings": {}
+    },
+    "patch_shelves_more": {
+      "type": "patch-shelves",
+      "blocks": {
+        "card_1": {
+          "type": "product_card",
+          "settings": {
+            "product": "3d-embroidered-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_2": {
+          "type": "product_card",
+          "settings": {
+            "product": "faux-leather-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_3": {
+          "type": "product_card",
+          "settings": {
+            "product": "silicone-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_4": {
+          "type": "product_card",
+          "settings": {
+            "product": "chenille-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_5": {
+          "type": "product_card",
+          "settings": {
+            "product": "woven-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5"
+      ],
+      "settings": {
+        "heading": "",
+        "view_all_label": "",
+        "columns": 5,
+        "rail_label": "Explore more patch styles",
+        "rail_sub": "Faux leather, chenille, silicone, woven & more",
+        "moq_text": "10 pc min"
+      }
     }
   },
   "order": [
@@ -606,6 +666,7 @@
     "patches_hero",
     "customer_gallery",
     "patch_shelves",
+    "patch_shelves_more",
     "shop_all_patches",
     "shop_popular_products",
     "credibility",
