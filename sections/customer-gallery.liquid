@@ -1,0 +1,152 @@
+{% comment %}
+  Auto-scrolling customer photo marquee with optional review lightbox.
+  Add tiles as blocks (photo + optional review). With no blocks, falls back to
+  product photos from the configured collection so the strip is never empty.
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Customer Gallery",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Trusted by businesses, teams & creators" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Real patches from real customers. Click any image to take a closer look." },
+    { "type": "range", "id": "scroll_speed", "label": "Scroll duration (seconds, lower = faster)", "min": 20, "max": 180, "step": 5, "default": 90 },
+    { "type": "collection", "id": "fallback_collection", "label": "Fallback collection (used when no tiles added)" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#fafafa" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Photo Tile",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "review_headline", "label": "Review headline" },
+        { "type": "textarea", "id": "review_text", "label": "Review text" },
+        { "type": "text", "id": "author", "label": "Customer name" },
+        { "type": "range", "id": "rating", "label": "Star rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "url", "id": "link", "label": "Product link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Customer Gallery" }]
+}
+{% endschema %}
+
+<style>
+  .pk-cgallery { background: {{ section.settings.bg }}; padding: 3rem 0 3.5rem; overflow: hidden; }
+  .pk-cgallery__header { text-align: center; max-width: 46rem; margin: 0 auto 2rem; padding: 0 1.25rem; }
+  .pk-cgallery__heading { font-size: 1.5rem; font-weight: 800; margin: 0 0 0.5rem; color: #111827; }
+  .pk-cgallery__sub { font-size: 1rem; color: #6b7280; margin: 0; }
+  .pk-cgallery__marquee { display: flex; width: max-content; animation: pk-cg-scroll {{ section.settings.scroll_speed }}s linear infinite; }
+  .pk-cgallery__marquee:hover { animation-play-state: paused; }
+  @keyframes pk-cg-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .pk-cgallery__track { display: flex; list-style: none; margin: 0; padding: 0; }
+  .pk-cgallery__tile { position: relative; width: 170px; height: 170px; flex-shrink: 0; margin-right: 10px; border-radius: 0.5rem; overflow: hidden; background: #e5e7eb; cursor: pointer; }
+  .pk-cgallery__tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.25s; }
+  .pk-cgallery__tile:hover img { transform: scale(1.06); }
+  .pk-cgallery__badge { position: absolute; right: 0.45rem; bottom: 0.45rem; background: #10b981; color: #fff; border-radius: 999px; width: 1.5rem; height: 1.5rem; display: flex; align-items: center; justify-content: center; }
+  .pk-cgallery__badge svg { width: 0.85rem; height: 0.85rem; }
+  /* Lightbox */
+  .pk-cgallery__lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 1rem; }
+  .pk-cgallery__lightbox.open { display: flex; }
+  .pk-cgallery__lb-card { background: #fff; border-radius: 0.75rem; max-width: 44rem; width: 100%; max-height: 88vh; overflow-y: auto; display: flex; flex-wrap: wrap; }
+  .pk-cgallery__lb-img { flex: 1 1 45%; min-width: 260px; }
+  .pk-cgallery__lb-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pk-cgallery__lb-body { flex: 1 1 45%; min-width: 240px; padding: 1.5rem; position: relative; }
+  .pk-cgallery__lb-close { position: absolute; top: 0.5rem; right: 0.75rem; background: none; border: none; font-size: 1.6rem; color: #9ca3af; cursor: pointer; }
+  .pk-cgallery__lb-stars { color: #f59e0b; letter-spacing: 2px; font-size: 1rem; margin-bottom: 0.4rem; }
+  .pk-cgallery__lb-headline { font-weight: 800; font-size: 1.1rem; margin: 0 0 0.5rem; color: #111827; }
+  .pk-cgallery__lb-text { font-size: 0.95rem; color: #4b5563; line-height: 1.55; margin: 0 0 0.75rem; }
+  .pk-cgallery__lb-author { font-size: 0.85rem; color: #6b7280; margin-bottom: 1rem; }
+  .pk-cgallery__lb-link { display: inline-block; background: #10b981; color: #fff; font-weight: 700; font-size: 0.9rem; padding: 0.6rem 1.1rem; border-radius: 0.5rem; text-decoration: none; }
+  .pk-cgallery__lb-link:hover { background: #059669; }
+  @media (max-width: 640px) {
+    .pk-cgallery__tile { width: 130px; height: 130px; }
+    .pk-cgallery__heading { font-size: 1.2rem; }
+  }
+</style>
+
+{%- capture tiles_html -%}
+  {%- if section.blocks.size > 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.settings.image != blank -%}
+        <li class="pk-cgallery__tile"
+            data-img="{{ block.settings.image | img_url: '1200x' }}"
+            data-headline="{{ block.settings.review_headline | escape }}"
+            data-text="{{ block.settings.review_text | escape }}"
+            data-author="{{ block.settings.author | escape }}"
+            data-rating="{{ block.settings.rating }}"
+            data-link="{{ block.settings.link }}"
+            {{ block.shopify_attributes }}>
+          <img src="{{ block.settings.image | img_url: '400x400', crop: 'center' }}" loading="lazy" alt="{{ block.settings.author | default: 'Customer patch photo' | escape }}">
+          {%- if block.settings.review_text != blank -%}
+            <span class="pk-cgallery__badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg></span>
+          {%- endif -%}
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- assign fb = section.settings.fallback_collection | default: collections['ready-made-patches'] -%}
+    {%- for product in fb.products limit: 16 -%}
+      {%- if product.featured_image -%}
+        <li class="pk-cgallery__tile"
+            data-img="{{ product.featured_image | img_url: '1200x' }}"
+            data-headline="{{ product.title | escape }}"
+            data-text=""
+            data-author=""
+            data-rating="5"
+            data-link="{{ product.url }}">
+          <img src="{{ product.featured_image | img_url: '400x400', crop: 'center' }}" loading="lazy" alt="{{ product.title | escape }}">
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+<section class="pk-cgallery">
+  <div class="pk-cgallery__header">
+    <h2 class="pk-cgallery__heading">{{ section.settings.heading }}</h2>
+    {%- if section.settings.subheading != blank -%}
+      <p class="pk-cgallery__sub">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+  </div>
+  <div class="pk-cgallery__marquee">
+    <ul class="pk-cgallery__track" role="list">{{ tiles_html }}</ul>
+    <ul class="pk-cgallery__track" role="list" aria-hidden="true">{{ tiles_html }}</ul>
+  </div>
+
+  <div class="pk-cgallery__lightbox" id="pk-cg-lightbox" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="pk-cgallery__lb-card">
+      <div class="pk-cgallery__lb-img"><img id="pk-cg-lb-img" src="" alt=""></div>
+      <div class="pk-cgallery__lb-body">
+        <button type="button" class="pk-cgallery__lb-close" onclick="document.getElementById('pk-cg-lightbox').classList.remove('open')">&times;</button>
+        <div class="pk-cgallery__lb-stars" id="pk-cg-lb-stars"></div>
+        <h3 class="pk-cgallery__lb-headline" id="pk-cg-lb-headline"></h3>
+        <p class="pk-cgallery__lb-text" id="pk-cg-lb-text"></p>
+        <div class="pk-cgallery__lb-author" id="pk-cg-lb-author"></div>
+        <a class="pk-cgallery__lb-link" id="pk-cg-lb-link" href="#" style="display:none;">View this product</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const lightbox = document.getElementById('pk-cg-lightbox');
+    document.querySelectorAll('.pk-cgallery__tile').forEach(tile => {
+      tile.addEventListener('click', function() {
+        document.getElementById('pk-cg-lb-img').src = this.dataset.img;
+        const rating = parseInt(this.dataset.rating) || 5;
+        document.getElementById('pk-cg-lb-stars').textContent = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+        document.getElementById('pk-cg-lb-headline').textContent = this.dataset.headline || '';
+        document.getElementById('pk-cg-lb-text').textContent = this.dataset.text || '';
+        document.getElementById('pk-cg-lb-author').textContent = this.dataset.author ? this.dataset.author + ' — Verified Buyer' : '';
+        const link = document.getElementById('pk-cg-lb-link');
+        if (this.dataset.link) { link.href = this.dataset.link; link.style.display = 'inline-block'; }
+        else { link.style.display = 'none'; }
+        lightbox.classList.add('open');
+      });
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
+  })();
+</script>

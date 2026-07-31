@@ -28,7 +28,7 @@
       "type": "patches-hero",
       "settings": {
         "title": "Premium Custom Patches with Low 10-Piece Minimums",
-        "subtitle": "Premium custom patches for any design — embroidered, woven, PVC, leather and more. Low minimums, fast turnaround.",
+        "subtitle": "Premium custom patches for any design \u2014 embroidered, woven, PVC, leather and more. Low minimums, fast turnaround.",
         "prop_1": "Free Fast Shipping",
         "prop_2": "100% Satisfaction",
         "prop_3": "No Setup Fees",
@@ -297,7 +297,7 @@
           "settings": {
             "image": "shopify://shop_images/4-step.jpg",
             "title": "Upload Your Designs & Place Order Online",
-            "description": "Use designs with unlimited colors, simple or high detail artwork. Upload any design you want and we’ll turn it into high quality custom patches."
+            "description": "Use designs with unlimited colors, simple or high detail artwork. Upload any design you want and we\u2019ll turn it into high quality custom patches."
           }
         },
         "process_step_w7Qh9j": {
@@ -551,11 +551,16 @@
         "padding_top": 48,
         "padding_bottom": 48
       }
+    },
+    "customer_gallery": {
+      "type": "customer-gallery",
+      "settings": {}
     }
   },
   "order": [
     "video_section_patch_kraze_DwW7mE",
     "patches_hero",
+    "customer_gallery",
     "shop_all_patches",
     "shop_popular_products",
     "credibility",
