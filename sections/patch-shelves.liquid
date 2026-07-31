@@ -1,0 +1,116 @@
+{% comment %}
+  Ninja-style product card rail ("Best sellers"). Blocks pick products; the
+  card auto-pulls image and from-price, with optional rating/review count.
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Patch Shelves",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Section heading", "default": "Shop All Patch Types" },
+    { "type": "text", "id": "view_all_label", "label": "View-all link label", "default": "View all types" },
+    { "type": "url", "id": "view_all_link", "label": "View-all link" },
+    { "type": "text", "id": "rail_label", "label": "Rail label", "default": "Best sellers" },
+    { "type": "text", "id": "rail_sub", "label": "Rail subtext", "default": "Our most-ordered styles" },
+    { "type": "text", "id": "moq_text", "label": "Badge text", "default": "10 pc min" }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "image_picker", "id": "image", "label": "Image override (optional)" },
+        { "type": "text", "id": "rating", "label": "Star rating (e.g. 4.8, blank to hide)", "default": "4.8" },
+        { "type": "text", "id": "review_count", "label": "Review count (blank to hide)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Patch Shelves" }]
+}
+{% endschema %}
+
+<style>
+  .patch-shelves { background: #fff; padding: 3rem 0; }
+  .patch-shelves__inner { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .patch-shelves__header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .patch-shelves__heading { font-size: 1.75rem; font-weight: 800; margin: 0; color: #111827; }
+  .patch-shelves__viewall { font-size: 0.95rem; font-weight: 600; color: #111827; text-decoration: none; border-left: 1px solid #d1d5db; padding-left: 1rem; }
+  .patch-shelves__viewall:hover { color: #10b981; }
+  .patch-shelves__rail-head { margin-bottom: 1rem; }
+  .patch-shelves__rail-label { font-size: 1.1rem; font-weight: 800; margin: 0; color: #111827; }
+  .patch-shelves__rail-sub { font-size: 0.9rem; color: #6b7280; margin: 0.15rem 0 0; }
+  .patch-shelves__track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .patch-shelves__tile { display: block; text-decoration: none; }
+  .patch-shelves__media { position: relative; border-radius: 0.9rem; overflow: hidden; background: #f3f4f6; aspect-ratio: 1 / 1.05; }
+  .patch-shelves__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+  .patch-shelves__tile:hover .patch-shelves__img { transform: scale(1.04); }
+  .patch-shelves__moq { position: absolute; top: 0.7rem; right: 0.7rem; background: #10b981; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.7rem; border-radius: 999px; }
+  .patch-shelves__info { padding: 0.8rem 0.15rem 0; }
+  .patch-shelves__title { font-weight: 700; font-size: 1rem; color: #111827; display: block; }
+  .patch-shelves__meta { display: flex; align-items: center; gap: 0.6rem; margin: 0.3rem 0 0.7rem; flex-wrap: wrap; }
+  .patch-shelves__price { font-size: 0.9rem; color: #059669; font-weight: 600; }
+  .patch-shelves__rating { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.85rem; color: #374151; }
+  .patch-shelves__star { color: #f59e0b; }
+  .patch-shelves__count { color: #9ca3af; }
+  .patch-shelves__btn { display: inline-block; background: #111827; color: #fff; font-size: 0.85rem; font-weight: 700; padding: 0.55rem 1.1rem; border-radius: 0.5rem; transition: background 0.15s; }
+  .patch-shelves__tile:hover .patch-shelves__btn { background: #10b981; }
+  @media (max-width: 899px) {
+    .patch-shelves__track { grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+    .patch-shelves__heading { font-size: 1.35rem; }
+  }
+</style>
+
+<section class="patch-shelves">
+  <div class="patch-shelves__inner">
+    <div class="patch-shelves__header">
+      <h2 class="patch-shelves__heading">{{ section.settings.heading }}</h2>
+      {%- if section.settings.view_all_label != blank -%}
+        <a class="patch-shelves__viewall" href="{{ section.settings.view_all_link | default: '/collections/all' }}">{{ section.settings.view_all_label }} &rarr;</a>
+      {%- endif -%}
+    </div>
+    <div class="patch-shelves__rail">
+      <div class="patch-shelves__rail-head">
+        <h3 class="patch-shelves__rail-label">{{ section.settings.rail_label }}</h3>
+        {%- if section.settings.rail_sub != blank -%}
+          <p class="patch-shelves__rail-sub">{{ section.settings.rail_sub }}</p>
+        {%- endif -%}
+      </div>
+      <div class="patch-shelves__track">
+        {%- for block in section.blocks -%}
+          {%- assign product = block.settings.product -%}
+          {%- if product != blank -%}
+            <div class="patch-shelves__item" {{ block.shopify_attributes }}>
+              <a class="patch-shelves__tile" href="{{ product.url }}">
+                <div class="patch-shelves__media">
+                  {%- assign card_image = block.settings.image | default: product.featured_image -%}
+                  {%- if card_image -%}
+                    <img class="patch-shelves__img" src="{{ card_image | img_url: '560x560', crop: 'center' }}" loading="lazy" alt="{{ product.title | escape }}">
+                  {%- endif -%}
+                  {%- if section.settings.moq_text != blank -%}
+                    <span class="patch-shelves__moq">{{ section.settings.moq_text }}</span>
+                  {%- endif -%}
+                </div>
+                <div class="patch-shelves__info">
+                  <span class="patch-shelves__title">{{ product.title }}</span>
+                  <div class="patch-shelves__meta">
+                    <span class="patch-shelves__price">From {{ product.price_min | money }}</span>
+                    {%- if block.settings.rating != blank -%}
+                      <span class="patch-shelves__rating">
+                        <span class="patch-shelves__star">&#9733;</span>{{ block.settings.rating }}
+                        {%- if block.settings.review_count != blank -%}
+                          <span class="patch-shelves__count">({{ block.settings.review_count }})</span>
+                        {%- endif -%}
+                      </span>
+                    {%- endif -%}
+                  </div>
+                  <span class="patch-shelves__btn">Customize</span>
+                </div>
+              </a>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>

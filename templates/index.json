@@ -555,12 +555,57 @@
     "customer_gallery": {
       "type": "customer-gallery",
       "settings": {}
+    },
+    "patch_shelves": {
+      "type": "patch-shelves",
+      "blocks": {
+        "card_1": {
+          "type": "product_card",
+          "settings": {
+            "product": "embroidered-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_2": {
+          "type": "product_card",
+          "settings": {
+            "product": "full-color-printed-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_3": {
+          "type": "product_card",
+          "settings": {
+            "product": "pvc-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_4": {
+          "type": "product_card",
+          "settings": {
+            "product": "leather-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "video_section_patch_kraze_DwW7mE",
     "patches_hero",
     "customer_gallery",
+    "patch_shelves",
     "shop_all_patches",
     "shop_popular_products",
     "credibility",
