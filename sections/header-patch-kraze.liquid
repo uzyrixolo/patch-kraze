@@ -38,6 +38,11 @@
 
   /* TOP BAR */
   .pk-top-bar { background-color: #000; color: #fff; border-bottom: 2px solid #b62b2a; height: 48px; position: relative; z-index: 50; }
+  @media (max-width: 1023px) {
+    .pk-top-bar { height: auto; }
+    .pk-top-bar .pk-mobile-brand-tabs { height: 40px; border-bottom: 1px solid #1f2937; }
+    .pk-top-bar .pk-mobile-brand-tabs .pk-brand-link { font-size: 0.65rem; }
+  }
   .pk-brand-link { 
     display: flex; flex-direction: column; justify-content: center; height: 100%; padding: 0 0.75rem; 
     font-size: 0.75rem; font-weight: 700; line-height: 1.1; font-style: italic; letter-spacing: 0.025em; text-decoration: none; transition: background 0.2s;
@@ -174,24 +179,20 @@
   
   <!-- TOP BAR -->
   <div class="pk-top-bar">
+    <!-- Mobile Top Bar Tabs -->
+     <div class="lg:pk-hidden pk-flex pk-items-center pk-mobile-brand-tabs" style="overflow-x: auto;">
+        <a href="/" class="pk-brand-link pk-bg-white-link" style="min-width: 90px; text-align: center;"><span>PATCH KRAZE</span><span>PATCHES</span></a>
+        <a href="/collections/patch-kraze-blanks" class="pk-brand-link pk-text-cyan" style="min-width: 90px; text-align: center;"><span>PATCH KRAZE</span><span>BLANKS</span></a>
+     </div>
     <div class="pk-container lg:pk-flex pk-items-center pk-justify-between" style="height: 100%;">
-      <div class="pk-flex" style="height: 100%; display: none !important;">
-        <a href="{{ section.settings.url_transfers | default: '/products/dtf-transfers' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>TRANSFERS</span></a>
-        <a href="{{ section.settings.url_blanks | default: '/collections/blanks' }}" class="pk-brand-link pk-bg-white-link"><span>PATCH KRAZE</span><span>BLANKS</span><span class="pk-link-underline"></span></a>
-        <a href="{{ section.settings.url_patches | default: '/products/embroidered-patches' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>PATCHES</span></a>
-        <a href="{{ section.settings.url_printhouse | default: '/pages/printhouse' }}" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>PRINTHOUSE</span></a>
-        <a href="{{ section.settings.url_pod | default: '/pages/pod' }}" class="pk-brand-link pk-text-pink"><span>PATCH KRAZE</span><span>POD</span></a>
+      <div class="pk-hidden lg:pk-flex" style="height: 100%;">
+        <a href="/" class="pk-brand-link pk-bg-white-link"><span>PATCH KRAZE</span><span>PATCHES</span><span class="pk-link-underline"></span></a>
+        <a href="/collections/patch-kraze-blanks" class="pk-brand-link pk-text-cyan"><span>PATCH KRAZE</span><span>BLANKS</span></a>
       </div>
-      <div style="font-size: 0.75rem; font-weight: 500; text-align: center; width: 100%;padding-top:6px;">
+      <div style="font-size: 0.75rem; font-weight: 500; text-align: center; flex: 1; padding: 6px 8px;">
         Select Patches Ship as Fast as 5 Business Days with PatchFast. 10pc Mins with Free Shipping!
       </div>
     </div>
-    <!-- Mobile Top Bar Content -->
-     <div class="lg:pk-hidden pk-flex pk-items-center" style="overflow-x: auto; height: 100%; display:none">
-        <a href="{{ section.settings.url_transfers | default: '/products/dtf-transfers' }}" class="pk-brand-link pk-text-cyan" style="min-width: 80px; text-align: center;"><span>PATCH KRAZE</span><span>TRANSFERS</span></a>
-        <a href="{{ section.settings.url_blanks | default: '/collections/blanks' }}" class="pk-brand-link pk-bg-white-link" style="min-width: 80px; text-align: center;"><span>PATCH KRAZE</span><span>BLANKS</span></a>
-        <a href="{{ section.settings.url_patches | default: '/products/embroidered-patches' }}" class="pk-brand-link pk-text-cyan" style="min-width: 80px; text-align: center;"><span>PATCH KRAZE</span><span>PATCHES</span></a>
-     </div>
   </div>
 
   <!-- MAIN HEADER (DESKTOP) -->
@@ -477,7 +478,6 @@
     { label: "Stickers", key: "stickers", hasDropdown: true },
     { label: "DTF Transfers", key: "dtf", hasDropdown: true },
     { label: "Ready Made Patches", key: "readymade", hasDropdown: false, href: "/collections/ready-made-patches" },
-    { label: "Patch Kraze Blanks", key: "blanks", hasDropdown: false, href: "/collections/patch-kraze-blanks" },
     { label: "Services", key: "services", hasDropdown: true },
     { label: "Get a Quote", key: "getquote", hasDropdown: false, href: "/pages/quote", highlight: true },
     // { label: "Support", key: "support", hasDropdown: true, href: "/pages/contact" }
