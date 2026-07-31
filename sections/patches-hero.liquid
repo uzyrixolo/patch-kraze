@@ -1,0 +1,133 @@
+{% comment %}
+  Ninja-style homepage hero: dark panel, left headline + value props + CTAs,
+  right stat card + patches imagery with a starburst badge.
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Patches Hero",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Premium Custom Patches with Low 10-Piece Minimums" },
+    { "type": "textarea", "id": "subtitle", "label": "Subheading", "default": "Premium custom patches for any design — embroidered, woven, PVC, leather and more. Low minimums, fast turnaround." },
+    { "type": "text", "id": "prop_1", "label": "Value prop 1", "default": "Free Fast Shipping" },
+    { "type": "text", "id": "prop_2", "label": "Value prop 2", "default": "100% Satisfaction" },
+    { "type": "text", "id": "prop_3", "label": "Value prop 3", "default": "No Setup Fees" },
+    { "type": "text", "id": "btn_primary_label", "label": "Primary button label", "default": "Shop Custom Patches" },
+    { "type": "url", "id": "btn_primary_link", "label": "Primary button link" },
+    { "type": "text", "id": "btn_secondary_label", "label": "Secondary button label", "default": "Get a Free Quote" },
+    { "type": "url", "id": "btn_secondary_link", "label": "Secondary button link" },
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "NEW! 10 PIECE MINIMUM" },
+    { "type": "text", "id": "stat_1_value", "label": "Stat 1 value", "default": "15+ Varieties" },
+    { "type": "text", "id": "stat_1_label", "label": "Stat 1 label", "default": "Of Patch Types" },
+    { "type": "text", "id": "stat_2_value", "label": "Stat 2 value", "default": "10 Piece" },
+    { "type": "text", "id": "stat_2_label", "label": "Stat 2 label", "default": "Minimum Order" },
+    { "type": "text", "id": "stat_banner", "label": "Stat card banner", "default": "Ships as Fast as 5 Business Days!" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (right side)" }
+  ],
+  "presets": [{ "name": "Patches Hero" }]
+}
+{% endschema %}
+
+<style>
+  .patches-hero { background: #0a0a0a; color: #fff; position: relative; overflow: hidden; }
+  .patches-hero__glow { position: absolute; top: -40%; right: -10%; width: 60%; height: 180%; background: radial-gradient(closest-side, rgba(16,185,129,0.18), transparent 70%); pointer-events: none; }
+  .patches-hero__inner { max-width: 1200px; margin: 0 auto; padding: 3.5rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; position: relative; }
+  .patches-hero__title { font-size: 2.6rem; line-height: 1.12; font-weight: 800; margin: 0 0 1rem; }
+  .patches-hero__subtitle { font-size: 1.05rem; line-height: 1.55; color: #d1d5db; margin: 0 0 1.4rem; max-width: 34rem; }
+  .patches-hero__props { display: flex; flex-wrap: wrap; gap: 1.25rem 1.75rem; margin-bottom: 1.75rem; }
+  .patches-hero__prop { display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; color: #e5e7eb; }
+  .patches-hero__prop-icon { width: 1.15rem; height: 1.15rem; color: #10b981; flex-shrink: 0; }
+  .patches-hero__buttons { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+  .patches-hero__btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 1.5rem; border-radius: 0.6rem; font-weight: 700; font-size: 1rem; text-decoration: none; transition: transform 0.15s, background 0.15s; }
+  .patches-hero__btn:hover { transform: translateY(-1px); }
+  .patches-hero__btn--primary { background: #10b981; color: #fff; }
+  .patches-hero__btn--primary:hover { background: #059669; }
+  .patches-hero__btn--secondary { background: #1f2937; color: #fff; border: 1px solid #374151; }
+  .patches-hero__btn--secondary:hover { background: #111827; }
+  .patches-hero__btn-arrow { width: 1.1rem; height: 1.1rem; }
+  .patches-hero__right { position: relative; min-height: 320px; display: flex; align-items: center; justify-content: center; }
+  .patches-hero__img { max-width: 100%; max-height: 420px; object-fit: contain; border-radius: 0.75rem; }
+  .patches-hero__card { position: absolute; top: 0; left: 0; background: #fff; color: #111827; border-radius: 0.6rem; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35); z-index: 2; }
+  .patches-hero__card-stats { display: flex; }
+  .patches-hero__card-stat { padding: 0.8rem 1.1rem; }
+  .patches-hero__card-stat + .patches-hero__card-stat { border-left: 1px solid #e5e7eb; }
+  .patches-hero__card-value { font-weight: 800; font-size: 1rem; }
+  .patches-hero__card-label { font-size: 0.78rem; color: #6b7280; }
+  .patches-hero__card-banner { background: #10b981; color: #fff; text-align: center; font-size: 0.82rem; font-weight: 700; padding: 0.45rem 0.75rem; font-style: italic; }
+  .patches-hero__badge { position: absolute; top: -1.25rem; right: 8%; z-index: 3; background: #dc2626; color: #fff; font-weight: 800; font-style: italic; font-size: 0.8rem; line-height: 1.15; text-align: center; padding: 1rem 0.8rem; border-radius: 999px; transform: rotate(12deg); box-shadow: 0 6px 18px rgba(220,38,38,0.45); }
+  @media (max-width: 899px) {
+    .patches-hero__inner { grid-template-columns: 1fr; padding: 2.5rem 1.25rem; }
+    .patches-hero__title { font-size: 1.9rem; }
+    .patches-hero__right { min-height: 0; margin-top: 1rem; }
+    .patches-hero__card { position: static; margin: 0 auto 1rem; width: fit-content; }
+    .patches-hero__badge { top: auto; bottom: -0.5rem; right: 2%; }
+  }
+</style>
+
+<section class="patches-hero">
+  <div class="patches-hero__glow"></div>
+  <div class="patches-hero__inner">
+    <div class="patches-hero__left">
+      <h1 class="patches-hero__title">{{ section.settings.title }}</h1>
+      <p class="patches-hero__subtitle">{{ section.settings.subtitle }}</p>
+      <div class="patches-hero__props">
+        {% assign prop_icons = 'bolt,check,dollar' | split: ',' %}
+        {% for i in (1..3) %}
+          {% assign prop_key = 'prop_' | append: i %}
+          {% assign prop_text = section.settings[prop_key] %}
+          {% if prop_text != blank %}
+            <div class="patches-hero__prop">
+              {% case forloop.index %}
+                {% when 1 %}
+                  <svg class="patches-hero__prop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                {% when 2 %}
+                  <svg class="patches-hero__prop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                {% else %}
+                  <svg class="patches-hero__prop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10"/><path d="M14.5 9.3a2.6 2.6 0 0 0-2.5-1.6 2.2 2.2 0 0 0 0 4.4 2.2 2.2 0 0 1 0 4.4 2.6 2.6 0 0 1-2.5-1.6"/></svg>
+              {% endcase %}
+              <span class="patches-hero__prop-label">{{ prop_text }}</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="patches-hero__buttons">
+        <a class="patches-hero__btn patches-hero__btn--primary" href="{{ section.settings.btn_primary_link | default: '/products/embroidered-patches' }}">
+          {{ section.settings.btn_primary_label }}
+          <svg class="patches-hero__btn-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h10"/><path d="M11 6l4 4-4 4"/></svg>
+        </a>
+        <a class="patches-hero__btn patches-hero__btn--secondary" href="{{ section.settings.btn_secondary_link | default: '/pages/quote' }}">
+          {{ section.settings.btn_secondary_label }}
+          <svg class="patches-hero__btn-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h10"/><path d="M11 6l4 4-4 4"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="patches-hero__right">
+      {% if section.settings.badge_text != blank %}
+        <div class="patches-hero__badge">{{ section.settings.badge_text | newline_to_br }}</div>
+      {% endif %}
+      <div class="patches-hero__card">
+        <div class="patches-hero__card-stats">
+          <div class="patches-hero__card-stat">
+            <div class="patches-hero__card-value">{{ section.settings.stat_1_value }}</div>
+            <div class="patches-hero__card-label">{{ section.settings.stat_1_label }}</div>
+          </div>
+          <div class="patches-hero__card-stat">
+            <div class="patches-hero__card-value">{{ section.settings.stat_2_value }}</div>
+            <div class="patches-hero__card-label">{{ section.settings.stat_2_label }}</div>
+          </div>
+        </div>
+        {% if section.settings.stat_banner != blank %}
+          <div class="patches-hero__card-banner">{{ section.settings.stat_banner }}</div>
+        {% endif %}
+      </div>
+      {% if section.settings.hero_image != blank %}
+        <img class="patches-hero__img" src="{{ section.settings.hero_image | img_url: '900x' }}" alt="{{ section.settings.hero_image.alt | default: 'Custom patches' }}" loading="eager">
+      {% else %}
+        {% assign fallback_product = all_products['full-color-printed-patches'] %}
+        {% if fallback_product.featured_image %}
+          <img class="patches-hero__img" src="{{ fallback_product.featured_image | img_url: '900x' }}" alt="Custom patches collage" loading="eager">
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</section>

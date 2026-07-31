@@ -23,11 +23,6 @@
         "padding_bottom": 0
       }
     },
-    "hero_banner": {
-      "type": "hero-banner-patch-kraze",
-      "disabled": true,
-      "settings": {}
-    },
     "shop_all_patches": {
       "type": "shop-all-patches",
       "blocks": {
@@ -281,7 +276,7 @@
           "settings": {
             "image": "shopify://shop_images/4-step.jpg",
             "title": "Upload Your Designs & Place Order Online",
-            "description": "Use designs with unlimited colors, simple or high detail artwork. Upload any design you want and we’ll turn it into high quality custom patches."
+            "description": "Use designs with unlimited colors, simple or high detail artwork. Upload any design you want and we\u2019ll turn it into high quality custom patches."
           }
         },
         "process_step_w7Qh9j": {
@@ -535,11 +530,15 @@
         "padding_top": 48,
         "padding_bottom": 48
       }
+    },
+    "patches_hero": {
+      "type": "patches-hero",
+      "settings": {}
     }
   },
   "order": [
     "video_section_patch_kraze_DwW7mE",
-    "hero_banner",
+    "patches_hero",
     "shop_all_patches",
     "shop_popular_products",
     "credibility",
