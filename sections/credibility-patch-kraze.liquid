@@ -23,17 +23,25 @@
     padding: 0 1rem;
   }
   
-  /* Brand Logos */
+  /* Brand Logos: infinite marquee */
+  .credibility-logos-marquee {
+    overflow: hidden;
+    margin-bottom: 4rem;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
   .credibility-logos {
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 3rem;
-    margin-bottom: 4rem;
-    flex-wrap: wrap;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    width: max-content;
+    padding-right: 3rem; /* keeps gap even at the loop seam */
+    animation: credibility-scroll 40s linear infinite;
+  }
+  .credibility-logos-marquee:hover .credibility-logos { animation-play-state: paused; }
+  @keyframes credibility-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
   .brand-logo {
     height: 2.5rem; /* h-10 */
@@ -41,16 +49,19 @@
     object-fit: contain;
     filter: grayscale(100%);
     opacity: 0.6;
-    transition: all 0.3s ease;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+    flex-shrink: 0;
   }
   .brand-logo:hover {
     filter: grayscale(0%);
     opacity: 1;
-    transform: scale(1.05);
   }
   @media (max-width: 640px) {
-    .credibility-logos { gap: 2rem; }
+    .credibility-logos { gap: 2rem; padding-right: 2rem; }
     .brand-logo { height: 2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .credibility-logos { animation: none; flex-wrap: wrap; justify-content: center; width: auto; }
   }
 
   /* Headline */
@@ -108,27 +119,30 @@
 <div class="credibility-section">
   <div class="credibility-container">
     
-    <!-- Brand Logos Row -->
-    <div class="credibility-logos">
-      <!-- Row 1 -->
-      <img src="https://masterscustompatches.com/images/brands/apple.png" alt="Apple" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/google.png" alt="Google" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/amazon.png" alt="Amazon" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/nike.png" alt="Nike" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/pepsi.png" alt="Pepsi" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/spotify.png" alt="Spotify" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/tesla.png" alt="Tesla" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/north-face.png" alt="The North Face" class="brand-logo">
-      
-      <!-- Row 2 -->
-      <img src="https://masterscustompatches.com/images/brands/linkedin.png" alt="LinkedIn" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/mcdonalds.png" alt="McDonald's" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/honda.png" alt="Honda" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/kfc.png" alt="KFC" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/shopify.png" alt="Shopify" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/adidas.png" alt="Adidas" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/tiktok.png" alt="TikTok" class="brand-logo">
-      <img src="https://masterscustompatches.com/images/brands/youtube.png" alt="YouTube" class="brand-logo">
+    <!-- Brand Logos: infinite marquee (logo set rendered twice for a seamless loop) -->
+    {%- capture brand_logos -%}
+      <img src="https://masterscustompatches.com/images/brands/apple.png" alt="Apple" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/google.png" alt="Google" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/amazon.png" alt="Amazon" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/nike.png" alt="Nike" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/pepsi.png" alt="Pepsi" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/spotify.png" alt="Spotify" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/tesla.png" alt="Tesla" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/north-face.png" alt="The North Face" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/linkedin.png" alt="LinkedIn" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/mcdonalds.png" alt="McDonald's" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/honda.png" alt="Honda" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/kfc.png" alt="KFC" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/shopify.png" alt="Shopify" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/adidas.png" alt="Adidas" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/tiktok.png" alt="TikTok" class="brand-logo" loading="lazy">
+      <img src="https://masterscustompatches.com/images/brands/youtube.png" alt="YouTube" class="brand-logo" loading="lazy">
+    {%- endcapture -%}
+    <div class="credibility-logos-marquee">
+      <div class="credibility-logos">
+        {{ brand_logos }}
+        {{ brand_logos }}
+      </div>
     </div>
 
     <!-- Headline and Subtitle -->
