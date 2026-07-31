@@ -219,13 +219,31 @@
       </button>
 
       <div class="pk-actions">
-        <div class="pk-action-item">
+        <div class="pk-action-item" onclick="pkOpenLiveChat()" style="cursor: pointer;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')pkOpenLiveChat()">
           <div class="pk-live-chat">
              <span class="pk-dot"></span>
              <span class="pk-action-title" style="color:#059669;">Live Chat 24/7</span>
           </div>
           <span class="pk-action-sub">Chat with Us</span>
         </div>
+        <script>
+          function pkOpenLiveChat() {
+            // Shopify Inbox chat widget: activator lives in #shopify-element-wrapper,
+            // sometimes inside a web component's shadow root.
+            let btn = document.querySelector('#shopify-element-wrapper button.activator, #shopify-element-wrapper .activator');
+            if (!btn) {
+              const hosts = document.querySelectorAll('#shopify-element-wrapper *, shopify-chat');
+              for (const host of hosts) {
+                if (host.shadowRoot) {
+                  const found = host.shadowRoot.querySelector('button.activator, button[aria-label="Chat"]');
+                  if (found) { btn = found; break; }
+                }
+              }
+            }
+            if (btn) btn.click();
+            else window.location.href = '/pages/contact';
+          }
+        </script>
         <a href="{{ routes.account_url }}" class="pk-action-item" style="text-decoration:none;">
           <span class="pk-action-title">Hello, sign in</span>
           <span class="pk-action-sub">Account & Reorder</span>
