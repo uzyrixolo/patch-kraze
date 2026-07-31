@@ -350,6 +350,78 @@ async function createQuoteMetaobject(fields) {
 }
 
 // ---------------------------------------------------------------------------
+// AI image generation (OpenAI gpt-image-1) with per-IP + global daily limits
+// ---------------------------------------------------------------------------
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const GEN_IP_DAILY_LIMIT = parseInt(process.env.GEN_IP_DAILY_LIMIT || '10', 10);
+const GEN_GLOBAL_DAILY_LIMIT = parseInt(process.env.GEN_GLOBAL_DAILY_LIMIT || '300', 10);
+const GEN_QUALITY = process.env.GEN_QUALITY || 'medium'; // low | medium | high
+
+const _genByIp = new Map();
+let _genGlobal = { day: '', count: 0 };
+
+function genAllowed(ip) {
+  const day = new Date().toISOString().slice(0, 10);
+  if (_genGlobal.day !== day) { _genGlobal = { day, count: 0 }; _genByIp.clear(); }
+  if (_genGlobal.count >= GEN_GLOBAL_DAILY_LIMIT) return { ok: false, why: 'The generator is very busy today. Please try again tomorrow.' };
+  const rec = _genByIp.get(ip) || 0;
+  if (rec >= GEN_IP_DAILY_LIMIT) return { ok: false, why: `Daily limit of ${GEN_IP_DAILY_LIMIT} images reached. Come back tomorrow!` };
+  return { ok: true };
+}
+
+function genRecord(ip) {
+  _genGlobal.count += 1;
+  _genByIp.set(ip, (_genByIp.get(ip) || 0) + 1);
+}
+
+app.post('/generate', express.json({ limit: '10kb' }), async (req, res) => {
+  try {
+    if (!OPENAI_API_KEY) {
+      return res.status(503).json({ ok: false, error: 'Image generation is not configured yet.' });
+    }
+    const prompt = String((req.body && req.body.prompt) || '').trim();
+    if (prompt.length < 3 || prompt.length > 600) {
+      return res.status(400).json({ ok: false, error: 'Please describe your design in 3-600 characters.' });
+    }
+    const ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
+    const gate = genAllowed(ip);
+    if (!gate.ok) return res.status(429).json({ ok: false, error: gate.why });
+
+    const styled =
+      `Patch design: ${prompt}. Bold vector-style artwork suitable for a custom embroidered patch: ` +
+      'clean edges, limited color palette, high contrast, centered composition on a plain light background.';
+
+    const r = await fetch('https://api.openai.com/v1/images/generations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-image-1',
+        prompt: styled,
+        n: 1,
+        size: '1024x1024',
+        quality: GEN_QUALITY,
+      }),
+    });
+    if (!r.ok) {
+      const t = await r.text();
+      console.error('OpenAI image error:', r.status, t.slice(0, 500));
+      return res.status(502).json({ ok: false, error: 'Image generation failed. Please try again.' });
+    }
+    const j = await r.json();
+    const b64 = j.data && j.data[0] && j.data[0].b64_json;
+    if (!b64) return res.status(502).json({ ok: false, error: 'No image returned. Please try again.' });
+    genRecord(ip);
+    res.json({ ok: true, image: `data:image/png;base64,${b64}` });
+  } catch (e) {
+    console.error('Generate error:', e);
+    res.status(500).json({ ok: false, error: 'Something went wrong. Please try again.' });
+  }
+});
+
+// ---------------------------------------------------------------------------
 // Routes
 // ---------------------------------------------------------------------------
 app.get('/', (_req, res) => {

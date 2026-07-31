@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "ai-image-generator",
+      "settings": {
+        "backend_url": "https://patch-kraze-quote-production.up.railway.app"
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,195 @@
+{% comment %}
+  AI Image Generator page: prompt box -> quote-backend /generate (OpenAI),
+  local history in localStorage, download + order-as-patch options.
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "AI Image Generator",
+  "settings": [
+    { "type": "text", "id": "backend_url", "label": "Backend URL", "default": "https://patch-kraze-quote-production.up.railway.app" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Create Your Patch Design with AI" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Describe your idea and our AI will draw it. Then order it as a real patch — embroidered, PVC, leather and more." }
+  ],
+  "presets": [{ "name": "AI Image Generator" }]
+}
+{% endschema %}
+
+<style>
+  .pk-aigen { max-width: 900px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  .pk-aigen__head { text-align: center; margin-bottom: 2rem; }
+  .pk-aigen__title { font-size: 2.1rem; font-weight: 800; margin: 0 0 0.6rem; color: #111827; }
+  .pk-aigen__sub { font-size: 1.05rem; color: #6b7280; margin: 0 auto; max-width: 38rem; }
+  .pk-aigen__box { background: #0a0a0a; border-radius: 1rem; padding: 1.5rem; color: #fff; }
+  .pk-aigen__label { font-weight: 700; margin-bottom: 0.6rem; display: block; }
+  .pk-aigen__row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .pk-aigen__input { flex: 1; min-width: 240px; background: #1f2937; color: #fff; border: 1px solid #374151; border-radius: 0.6rem; padding: 0.9rem 1rem; font-size: 1rem; }
+  .pk-aigen__input:focus { outline: 2px solid #10b981; }
+  .pk-aigen__btn { background: #10b981; color: #fff; font-weight: 800; font-size: 1rem; border: none; border-radius: 0.6rem; padding: 0.9rem 1.6rem; cursor: pointer; }
+  .pk-aigen__btn:hover { background: #059669; }
+  .pk-aigen__btn:disabled { opacity: 0.6; cursor: wait; }
+  .pk-aigen__chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.9rem; }
+  .pk-aigen__chip { background: #1f2937; border: 1px solid #374151; color: #d1d5db; font-size: 0.82rem; border-radius: 999px; padding: 0.35rem 0.85rem; cursor: pointer; }
+  .pk-aigen__chip:hover { border-color: #10b981; color: #fff; }
+  .pk-aigen__error { color: #fca5a5; font-size: 0.9rem; margin-top: 0.75rem; display: none; }
+  .pk-aigen__result { margin-top: 1.5rem; display: none; text-align: center; }
+  .pk-aigen__result img { max-width: 100%; width: 420px; border-radius: 0.75rem; background: #fff; }
+  .pk-aigen__actions { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+  .pk-aigen__dl { background: #fff; color: #111827; font-weight: 700; border-radius: 0.6rem; padding: 0.7rem 1.2rem; text-decoration: none; }
+  .pk-aigen__order { background: #10b981; color: #fff; font-weight: 700; border-radius: 0.6rem; padding: 0.7rem 1.2rem; text-decoration: none; }
+  .pk-aigen__loading { display: none; margin-top: 1.5rem; text-align: center; color: #d1d5db; }
+  .pk-aigen__spinner { width: 2.2rem; height: 2.2rem; border: 3px solid #374151; border-top-color: #10b981; border-radius: 50%; margin: 0 auto 0.7rem; animation: pk-aigen-spin 0.9s linear infinite; }
+  @keyframes pk-aigen-spin { to { transform: rotate(360deg); } }
+  .pk-aigen__history-head { display: flex; align-items: baseline; justify-content: space-between; margin: 2.5rem 0 1rem; }
+  .pk-aigen__history-title { font-weight: 800; font-size: 1.15rem; color: #111827; margin: 0; }
+  .pk-aigen__clear { background: none; border: none; color: #6b7280; font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
+  .pk-aigen__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.75rem; }
+  .pk-aigen__grid img { width: 100%; border-radius: 0.5rem; cursor: pointer; border: 1px solid #e5e7eb; }
+  .pk-aigen__ordergrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.75rem; margin-top: 1rem; }
+  .pk-aigen__ordercard { border: 1px solid #e5e7eb; border-radius: 0.6rem; padding: 0.8rem; text-align: center; text-decoration: none; color: #111827; font-weight: 600; font-size: 0.9rem; }
+  .pk-aigen__ordercard:hover { border-color: #10b981; color: #059669; }
+  .pk-aigen__order-note { color: #6b7280; font-size: 0.9rem; margin-top: 0.5rem; }
+</style>
+
+<div class="pk-aigen">
+  <div class="pk-aigen__head">
+    <h1 class="pk-aigen__title">{{ section.settings.heading }}</h1>
+    <p class="pk-aigen__sub">{{ section.settings.subheading }}</p>
+  </div>
+
+  <div class="pk-aigen__box">
+    <label class="pk-aigen__label" for="pk-aigen-prompt">What do you want to make?</label>
+    <div class="pk-aigen__row">
+      <input type="text" id="pk-aigen-prompt" class="pk-aigen__input" maxlength="600" placeholder="e.g. A grizzly bear mountain camping badge with retro colors">
+      <button type="button" class="pk-aigen__btn" id="pk-aigen-go">Generate</button>
+    </div>
+    <div class="pk-aigen__chips">
+      <button type="button" class="pk-aigen__chip">Colorful gym logo</button>
+      <button type="button" class="pk-aigen__chip">Vintage motorcycle club badge</button>
+      <button type="button" class="pk-aigen__chip">Cute cat astronaut</button>
+      <button type="button" class="pk-aigen__chip">Retro mountain adventure patch</button>
+      <button type="button" class="pk-aigen__chip">Groovy party design</button>
+    </div>
+    <div class="pk-aigen__error" id="pk-aigen-error"></div>
+    <div class="pk-aigen__loading" id="pk-aigen-loading">
+      <div class="pk-aigen__spinner"></div>
+      Drawing your design… usually takes 10–30 seconds
+    </div>
+    <div class="pk-aigen__result" id="pk-aigen-result">
+      <img id="pk-aigen-img" src="" alt="Your AI generated patch design">
+      <div class="pk-aigen__actions">
+        <a class="pk-aigen__dl" id="pk-aigen-download" href="#" download="patch-design.png">Download PNG</a>
+        <a class="pk-aigen__order" href="#pk-aigen-order">Order as a Patch &darr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pk-aigen__history-head">
+    <h2 class="pk-aigen__history-title">Recently generated</h2>
+    <button type="button" class="pk-aigen__clear" id="pk-aigen-clear">Clear all</button>
+  </div>
+  <div class="pk-aigen__grid" id="pk-aigen-history"></div>
+
+  <div id="pk-aigen-order" style="margin-top: 3rem;">
+    <h2 class="pk-aigen__history-title">Ordering options</h2>
+    <p class="pk-aigen__order-note">Download your design, then upload it on any product page — pricing updates live as you customize.</p>
+    <div class="pk-aigen__ordergrid">
+      <a class="pk-aigen__ordercard" href="/products/embroidered-patches">Embroidered Patches</a>
+      <a class="pk-aigen__ordercard" href="/products/3d-embroidered-patches">3D Embroidered</a>
+      <a class="pk-aigen__ordercard" href="/products/full-color-printed-patches">Full Color Printed</a>
+      <a class="pk-aigen__ordercard" href="/products/pvc-patches">PVC Rubber</a>
+      <a class="pk-aigen__ordercard" href="/products/leather-patches">Genuine Leather</a>
+      <a class="pk-aigen__ordercard" href="/products/faux-leather-patches">Faux Leather</a>
+      <a class="pk-aigen__ordercard" href="/products/woven-patches">Woven</a>
+      <a class="pk-aigen__ordercard" href="/products/chenille-patches">Chenille</a>
+      <a class="pk-aigen__ordercard" href="/products/silicone-patches">Silicone</a>
+      <a class="pk-aigen__ordercard" href="/products/full-color-flex-patches">Full Color Flex</a>
+      <a class="pk-aigen__ordercard" href="/products/name-patches">Name Patches</a>
+      <a class="pk-aigen__ordercard" href="/products/dtf-transfers">DTF Transfers</a>
+      <a class="pk-aigen__ordercard" href="/products/tackle-twill-letters">Tackle Twill</a>
+      <a class="pk-aigen__ordercard" href="/products/custom-keychains">PVC Keychains</a>
+      <a class="pk-aigen__ordercard" href="/pages/quote">Not sure? Get a Quote</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const BACKEND = ({{ section.settings.backend_url | json }} || '').replace(/\/+$/, '');
+    const promptEl = document.getElementById('pk-aigen-prompt');
+    const goBtn = document.getElementById('pk-aigen-go');
+    const errEl = document.getElementById('pk-aigen-error');
+    const loadEl = document.getElementById('pk-aigen-loading');
+    const resEl = document.getElementById('pk-aigen-result');
+    const imgEl = document.getElementById('pk-aigen-img');
+    const dlEl = document.getElementById('pk-aigen-download');
+    const histEl = document.getElementById('pk-aigen-history');
+    const KEY = 'pk_aigen_history_v1';
+
+    function loadHistory() {
+      let items = [];
+      try { items = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
+      histEl.innerHTML = '';
+      items.forEach(src => {
+        const im = document.createElement('img');
+        im.src = src; im.loading = 'lazy'; im.alt = 'Previously generated design';
+        im.onclick = () => { imgEl.src = src; dlEl.href = src; resEl.style.display = 'block'; window.scrollTo({top: 0, behavior: 'smooth'}); };
+        histEl.appendChild(im);
+      });
+      document.querySelector('.pk-aigen__history-head').style.display = items.length ? 'flex' : 'none';
+    }
+
+    function saveToHistory(src) {
+      let items = [];
+      try { items = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
+      items.unshift(src);
+      items = items.slice(0, 12); // cap so localStorage doesn't overflow
+      try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {}
+      loadHistory();
+    }
+
+    document.getElementById('pk-aigen-clear').addEventListener('click', () => {
+      localStorage.removeItem(KEY); loadHistory();
+    });
+
+    document.querySelectorAll('.pk-aigen__chip').forEach(chip => {
+      chip.addEventListener('click', () => { promptEl.value = chip.textContent.trim(); promptEl.focus(); });
+    });
+
+    async function generate() {
+      const prompt = promptEl.value.trim();
+      errEl.style.display = 'none';
+      if (prompt.length < 3) {
+        errEl.textContent = 'Please describe your design first.';
+        errEl.style.display = 'block';
+        return;
+      }
+      goBtn.disabled = true;
+      resEl.style.display = 'none';
+      loadEl.style.display = 'block';
+      try {
+        const r = await fetch(BACKEND + '/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt })
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok || !j.ok) throw new Error(j.error || 'Generation failed');
+        imgEl.src = j.image;
+        dlEl.href = j.image;
+        resEl.style.display = 'block';
+        saveToHistory(j.image);
+      } catch (e) {
+        errEl.textContent = e.message || 'Something went wrong. Please try again.';
+        errEl.style.display = 'block';
+      } finally {
+        goBtn.disabled = false;
+        loadEl.style.display = 'none';
+      }
+    }
+
+    goBtn.addEventListener('click', generate);
+    promptEl.addEventListener('keydown', e => { if (e.key === 'Enter') generate(); });
+    loadHistory();
+  })();
+</script>
