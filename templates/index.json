@@ -273,7 +273,8 @@
       ],
       "settings": {
         "heading": "Shop All Patch Types"
-      }
+      },
+      "disabled": true
     },
     "shop_popular_products": {
       "type": "shop-popular-products",
@@ -622,7 +623,7 @@
         "card_3": {
           "type": "product_card",
           "settings": {
-            "product": "silicone-patches",
+            "product": "woven-patches",
             "rating": "4.8",
             "review_count": ""
           }
@@ -630,7 +631,7 @@
         "card_4": {
           "type": "product_card",
           "settings": {
-            "product": "chenille-patches",
+            "product": "metallic-flex-patches",
             "rating": "4.8",
             "review_count": ""
           }
@@ -638,7 +639,71 @@
         "card_5": {
           "type": "product_card",
           "settings": {
-            "product": "woven-patches",
+            "product": "full-color-flex-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_6": {
+          "type": "product_card",
+          "settings": {
+            "product": "matte-black-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_7": {
+          "type": "product_card",
+          "settings": {
+            "product": "chenille-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_8": {
+          "type": "product_card",
+          "settings": {
+            "product": "silicone-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_9": {
+          "type": "product_card",
+          "settings": {
+            "product": "name-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_10": {
+          "type": "product_card",
+          "settings": {
+            "product": "dtf-transfers",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_11": {
+          "type": "product_card",
+          "settings": {
+            "product": "chrome-flex-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_12": {
+          "type": "product_card",
+          "settings": {
+            "product": "tackle-twill-letters",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_13": {
+          "type": "product_card",
+          "settings": {
+            "product": "custom-keychains",
             "rating": "4.8",
             "review_count": ""
           }
@@ -649,14 +714,22 @@
         "card_2",
         "card_3",
         "card_4",
-        "card_5"
+        "card_5",
+        "card_6",
+        "card_7",
+        "card_8",
+        "card_9",
+        "card_10",
+        "card_11",
+        "card_12",
+        "card_13"
       ],
       "settings": {
         "heading": "",
         "view_all_label": "",
         "columns": 5,
         "rail_label": "Explore more patch styles",
-        "rail_sub": "Faux leather, chenille, silicone, woven & more",
+        "rail_sub": "Faux leather, chenille, silicone, woven, flex & more",
         "moq_text": "10 pc min"
       }
     }
