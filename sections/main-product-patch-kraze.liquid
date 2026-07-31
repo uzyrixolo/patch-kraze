@@ -1341,6 +1341,27 @@
       }
     }
 
+    // Rebuild pricing rows from the matrix when the tier count differs from the
+    // static 6-row markup (e.g. products with an added 10-24 tier).
+    if (PRICING_MATRIX.type !== 'stickers' && PRICING_MATRIX.quantityTiers &&
+        PRICING_MATRIX.quantityTiers.length !== 6) {
+      const card = document.querySelector('.pricing-card');
+      if (card) {
+        const header = card.querySelector('.pricing-header');
+        card.querySelectorAll('.pricing-row').forEach(r => r.remove());
+        PRICING_MATRIX.quantityTiers.forEach((tier, idx) => {
+          const rowMin = idx === 0 ? Math.min(tier.min, productMinQty) : tier.min;
+          const label = tier.max >= 999999 ? `${tier.min}+ pcs` : `${rowMin}-${tier.max} pcs`;
+          const row = document.createElement('div');
+          row.className = 'pricing-row';
+          row.dataset.min = rowMin;
+          row.dataset.max = tier.max;
+          row.innerHTML = `<span>${label}</span><span id="price-tier-${idx + 1}">Calculating...</span><span id="discount-tier-${idx + 1}">${idx === 0 ? 'Base' : '...'}</span>`;
+          card.appendChild(row);
+        });
+      }
+    }
+
     // File Preview
     fileInput.addEventListener('change', function() {
       if(this.files && this.files.length > 0) {
@@ -1732,8 +1753,8 @@
       if(unitPriceDisplay) unitPriceDisplay.innerHTML = '$' + unitPrice.toFixed(2) + ' <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span>';
       if(totalDisplay) totalDisplay.innerText = '$' + (qty * unitPrice).toFixed(2);
 
-      // Update pricing rows highlighting
-      pricingRows.forEach(row => {
+      // Update pricing rows highlighting (query live — rows may be rebuilt from matrix)
+      document.querySelectorAll('.pricing-row').forEach(row => {
          const min = parseInt(row.dataset.min);
          const max = parseInt(row.dataset.max);
          if(qty >= min && qty <= max) row.classList.add('active');
