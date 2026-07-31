@@ -88,7 +88,7 @@
 </div>
 
 {% liquid
-  assign min_order_cents = 7000
+  assign min_order_cents = 6990
   assign cart_total_cents = cart.total_price
   assign meets_minimum = true
   if cart_total_cents < min_order_cents
@@ -208,7 +208,7 @@
     if (form.id === 'cart-form' || form.action?.includes('/cart')) {
       const totalText = document.querySelector('[data-cart-subtotal]')?.getAttribute('value') || '';
       const totalNum = parseFloat(totalText.replace(/[^0-9.]/g, ''));
-      if (totalNum < 70) {
+      if (totalNum < 69.90) {
         e.preventDefault();
         e.stopImmediatePropagation();
         return false;
