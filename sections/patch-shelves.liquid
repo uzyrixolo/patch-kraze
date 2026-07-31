@@ -45,7 +45,8 @@
   .patch-shelves__media { position: relative; border-radius: 0.9rem; overflow: hidden; background: #f3f4f6; aspect-ratio: 1 / 1.05; }
   .patch-shelves__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
   .patch-shelves__tile:hover .patch-shelves__img { transform: scale(1.04); }
-  .patch-shelves__moq { position: absolute; top: 0.7rem; right: 0.7rem; background: #10b981; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.7rem; border-radius: 999px; }
+  .patch-shelves__moq { position: absolute; top: 0.7rem; right: 0.7rem; background: #10b981; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.7rem; border-radius: 999px; z-index: 2; }
+  .patch-shelves__scrim { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(17,24,39,0.06), inset 0 -34px 44px -18px rgba(17,24,39,0.18); pointer-events: none; z-index: 1; }
   .patch-shelves__info { padding: 0.8rem 0.15rem 0; }
   .patch-shelves__title { font-weight: 700; font-size: 1rem; color: #111827; display: block; }
   .patch-shelves__meta { display: flex; align-items: center; gap: 0.6rem; margin: 0.3rem 0 0.7rem; flex-wrap: wrap; }
@@ -53,7 +54,7 @@
   .patch-shelves__rating { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.85rem; color: #374151; }
   .patch-shelves__star { color: #f59e0b; }
   .patch-shelves__count { color: #9ca3af; }
-  .patch-shelves__btn { display: inline-block; background: #111827; color: #fff; font-size: 0.85rem; font-weight: 700; padding: 0.55rem 1.1rem; border-radius: 0.5rem; transition: background 0.15s; }
+  .patch-shelves__btn { display: block; width: 100%; text-align: center; background: #111827; color: #fff; font-size: 0.85rem; font-weight: 700; padding: 0.65rem 1.1rem; border-radius: 0.5rem; transition: background 0.15s; box-sizing: border-box; }
   .patch-shelves__tile:hover .patch-shelves__btn { background: #10b981; }
   @media (max-width: 899px) {
     .patch-shelves__track { grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
@@ -87,6 +88,7 @@
                   {%- if card_image -%}
                     <img class="patch-shelves__img" src="{{ card_image | img_url: '560x560', crop: 'center' }}" loading="lazy" alt="{{ product.title | escape }}">
                   {%- endif -%}
+                  <span class="patch-shelves__scrim" aria-hidden="true"></span>
                   {%- if section.settings.moq_text != blank -%}
                     <span class="patch-shelves__moq">{{ section.settings.moq_text }}</span>
                   {%- endif -%}
