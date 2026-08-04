@@ -27,7 +27,8 @@
     { "type": "video", "id": "hero_video", "label": "Video", "info": "Shopify-hosted video. Falls back to the hero image if left empty or if the video fails to load." },
     { "type": "video_url", "id": "hero_video_url", "label": "External video URL", "accept": ["youtube", "vimeo"], "info": "Used only when no Shopify-hosted video is chosen. Plays in an embed, so it cannot autoplay silently." },
     { "type": "checkbox", "id": "video_autoplay", "label": "Autoplay and loop silently", "default": true, "info": "Muted autoplay. Turn off to show a play button instead." },
-    { "type": "checkbox", "id": "video_controls", "label": "Show video controls", "default": false }
+    { "type": "checkbox", "id": "video_controls", "label": "Show video controls", "default": false },
+    { "type": "range", "id": "video_max_height", "label": "Video height", "unit": "px", "min": 240, "max": 720, "step": 20, "default": 420, "info": "The video keeps its own aspect ratio, so this caps its height." }
   ],
   "presets": [{ "name": "Patches Hero" }]
 }
@@ -52,7 +53,8 @@
   .patches-hero__btn-arrow { width: 1.1rem; height: 1.1rem; }
   .patches-hero__right { position: relative; min-height: 320px; display: flex; align-items: center; justify-content: center; }
   .patches-hero__img { max-width: 100%; max-height: 420px; object-fit: contain; border-radius: 0.75rem; }
-  .patches-hero__video { width: 100%; max-width: 100%; max-height: 420px; object-fit: contain; border-radius: 0.75rem; display: block; background: #0a0a0a; }
+  {% comment %} Width/height stay auto so the element takes the video's own aspect ratio — forcing width:100% pillarboxes portrait clips with black bars. {% endcomment %}
+  .patches-hero__video { display: block; width: auto; height: auto; max-width: 100%; max-height: var(--hero-video-height, 420px); object-fit: contain; border-radius: 0.75rem; background: transparent; }
   .patches-hero__embed { position: relative; width: 100%; max-width: 560px; aspect-ratio: 16 / 9; border-radius: 0.75rem; overflow: hidden; background: #0a0a0a; }
   .patches-hero__embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   .patches-hero__card { position: absolute; top: 0; left: 0; background: #fff; color: #111827; border-radius: 0.6rem; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35); z-index: 2; }
@@ -142,6 +144,7 @@
       {%- if section.settings.hero_video != blank -%}
         <video
           class="patches-hero__video"
+          style="--hero-video-height: {{ section.settings.video_max_height }}px;{% if section.settings.hero_video.aspect_ratio %} aspect-ratio: {{ section.settings.hero_video.aspect_ratio }};{% endif %}"
           {% if hero_img %}poster="{{ hero_img | image_url: width: 900 }}"{% endif %}
           {% if section.settings.video_autoplay %}autoplay muted loop{% endif %}
           {% if section.settings.video_controls %}controls{% endif %}
