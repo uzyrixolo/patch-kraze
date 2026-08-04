@@ -181,8 +181,14 @@
     display: block; {% if pos == 'left' %}flex: 0 0 45%;{% endif %}
   }
   #promo-popup-{{ section.id }} .promo-popup-media img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    {% if pos == 'top' %}aspect-ratio: 1/1;{% endif %}
+    width: 100%; display: block;
+    {% if pos == 'only' %}
+      /* Full creative - show it uncropped at its natural ratio. */
+      height: auto;
+    {% else %}
+      height: 100%; object-fit: cover;
+      {% if pos == 'top' %}aspect-ratio: 1/1;{% endif %}
+    {% endif %}
   }
   #promo-popup-{{ section.id }} .promo-popup-content {
     padding: 1.5rem; text-align: {% if pos == 'left' %}left{% else %}center{% endif %};

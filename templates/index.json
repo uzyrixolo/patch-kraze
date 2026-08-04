@@ -737,7 +737,7 @@
       "type": "promo-popup",
       "settings": {
         "enabled": true,
-        "image_position": "top",
+        "image_position": "only",
         "eyebrow": "LIMITED TIME",
         "heading": "25 Patches for $119",
         "body": "<p>Custom embroidered patches up to 4 inches. Free mockup, no setup fees. Normally $199.</p>",
@@ -749,7 +749,8 @@
         "show_on_mobile": true,
         "accent_color": "#10b981",
         "overlay_opacity": 60,
-        "corner_radius": 16
+        "corner_radius": 16,
+        "image": "shopify://shop_images/WhatsApp_Image_2026-08-05_at_12.31.15_AM.jpg"
       }
     }
   },
