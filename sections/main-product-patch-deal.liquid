@@ -513,6 +513,66 @@
   var form = document.getElementById('pkdeal-form');
   if (!form) return;
 
+  // Section ids the cart drawer renders into. Passing these to /cart/add.js gets
+  // the re-rendered drawer HTML back in the same round trip.
+  function cartSectionIds() {
+    var ids = [];
+    document.querySelectorAll('cart-items-component').forEach(function(el) {
+      if (el instanceof HTMLElement && el.dataset.sectionId) ids.push(el.dataset.sectionId);
+    });
+    return ids;
+  }
+
+  // Swap in the freshly rendered drawer markup, then tell the theme the cart
+  // changed. The event name must be 'cart:update' - that is what cart-drawer,
+  // cart-icon and cart-items all listen for.
+  async function refreshCart(responseData) {
+    if (responseData && responseData.sections) {
+      Object.entries(responseData.sections).forEach(function(entry) {
+        var sectionId = entry[0], html = entry[1];
+        var el = document.querySelector('[data-section-id="' + sectionId + '"]');
+        if (!el) return;
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var fresh = doc.querySelector('[data-section-id="' + sectionId + '"]');
+        if (fresh) el.innerHTML = fresh.innerHTML;
+      });
+    }
+    try {
+      var cart = await (await fetch('/cart.js')).json();
+      document.dispatchEvent(new CustomEvent('cart:update', {
+        bubbles: true,
+        detail: {
+          resource: cart,
+          data: {
+            source: 'product-form-component',
+            itemCount: cart.item_count,
+            sections: (responseData && responseData.sections) || {}
+          }
+        }
+      }));
+    } catch (err) {
+      console.error('[PK Deal] Cart refresh failed:', err);
+    }
+  }
+
+  function buildFormData() {
+    var fd = new FormData(form);
+
+    // An untouched file input still submits a zero-byte file, which forces a
+    // multipart upload for every add even when there is no design to send.
+    var design = fd.get('properties[Design File]');
+    if (design instanceof File && design.size === 0) fd.delete('properties[Design File]');
+
+    // Drop blank optional properties so they don't show as empty rows on the order.
+    ['properties[Design Notes]'].forEach(function(key) {
+      if (String(fd.get(key) || '').trim() === '') fd.delete(key);
+    });
+
+    var ids = cartSectionIds();
+    if (ids.length) fd.append('sections', ids.join(','));
+    return fd;
+  }
+
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     var btn = document.getElementById('pkdeal-add');
@@ -524,10 +584,11 @@
     var needsVelcro = CHARGE_VELCRO && backing.indexOf('Velcro') !== -1;
 
     try {
-      var res = await fetch('/cart/add.js', { method: 'POST', body: new FormData(form) });
+      var res = await fetch('/cart/add.js', { method: 'POST', body: buildFormData() });
       var data = await res.json();
 
-      if (!res.ok) {
+      // Shopify signals add failures with a `status` field on a 4xx response.
+      if (!res.ok || data.status) {
         btn.disabled = false;
         btn.innerHTML = original;
         alert(data.description || data.message || 'Could not add to cart. Please try again.');
@@ -537,35 +598,39 @@
       btn.textContent = 'Added!';
       setTimeout(function() { btn.disabled = false; btn.innerHTML = original; }, 1500);
 
-      var drawer = document.querySelector('cart-drawer-component');
-      if (drawer) {
-        if (typeof drawer.open === 'function') drawer.open();
-        else if (typeof drawer.showDialog === 'function') drawer.showDialog();
-      }
-
       // Velcro companion line item, mirroring the standard patch page behaviour.
+      // Chained so the drawer is refreshed once, after both lines are in.
       if (needsVelcro) {
-        (async function() {
-          try {
-            var vRes = await fetch('/products/velcro-backing.js');
-            var vProduct = await vRes.json();
-            var vVariant = vProduct.variants && vProduct.variants[0];
-            if (!vVariant) return;
+        try {
+          var vProduct = await (await fetch('/products/velcro-backing.js')).json();
+          var vVariant = vProduct.variants && vProduct.variants[0];
+          if (vVariant) {
             var vForm = new FormData();
             vForm.append('id', vVariant.id);
             vForm.append('quantity', DEAL_QTY);
             vForm.append('properties[_added_with]', '{{ product.handle }}');
             vForm.append('properties[_backing_type]', 'Velcro');
             vForm.append('properties[_price_per_piece]', '$0.25');
-            await fetch('/cart/add.js', { method: 'POST', body: vForm });
-            document.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
-          } catch (err) {
-            console.error('[PK Deal] Velcro companion failed:', err);
+            var vIds = cartSectionIds();
+            if (vIds.length) vForm.append('sections', vIds.join(','));
+            var vRes = await fetch('/cart/add.js', { method: 'POST', body: vForm });
+            var vData = await vRes.json();
+            if (vRes.ok && !vData.status) data = vData;
           }
-        })();
+        } catch (err) {
+          console.error('[PK Deal] Velcro companion failed:', err);
+        }
       }
 
-      document.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
+      await refreshCart(data);
+
+      // The drawer opens itself on cart:update when it has auto-open; open it
+      // manually only when it doesn't.
+      var drawer = document.querySelector('cart-drawer-component');
+      if (drawer && !drawer.hasAttribute('auto-open')) {
+        if (typeof drawer.open === 'function') drawer.open();
+        else if (typeof drawer.showDialog === 'function') drawer.showDialog();
+      }
     } catch (err) {
       console.error('[PK Deal] Add to cart failed:', err);
       btn.disabled = false;
