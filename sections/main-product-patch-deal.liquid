@@ -311,7 +311,14 @@
 
       <form method="post" action="{{ routes.cart_add_url }}" enctype="multipart/form-data" id="pkdeal-form">
         <input type="hidden" name="id" value="{{ variant.id }}">
-        <input type="hidden" name="quantity" id="pkdeal-qty" value="{{ deal_qty }}">
+        {%- comment -%}
+          The variant IS the whole bundle - its price is the full deal price, not
+          a per-patch price. So this must stay 1: sending {{ deal_qty }} here bills
+          the customer {{ deal_qty }} x the bundle price. The piece count is carried
+          as a line item property and drives the velcro companion quantity.
+        {%- endcomment -%}
+        <input type="hidden" name="quantity" id="pkdeal-qty" value="1">
+        <input type="hidden" name="properties[Pieces]" value="{{ deal_qty }}">
         <input type="hidden" name="properties[Deal]" value="{{ deal_qty }} patches for {{ variant.price | money }}">
 
         <!-- UPLOAD -->
