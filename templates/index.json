@@ -732,6 +732,25 @@
         "rail_sub": "Faux leather, chenille, silicone, woven, flex & more",
         "moq_text": "10 pc min"
       }
+    },
+    "promo_popup": {
+      "type": "promo-popup",
+      "settings": {
+        "enabled": true,
+        "image_position": "top",
+        "eyebrow": "LIMITED TIME",
+        "heading": "25 Patches for $119",
+        "body": "<p>Custom embroidered patches up to 4 inches. Free mockup, no setup fees. Normally $199.</p>",
+        "button_label": "Grab the deal",
+        "product": "embroidered-patches-deal-119-only",
+        "custom_link": "",
+        "delay": 5,
+        "frequency": "session",
+        "show_on_mobile": true,
+        "accent_color": "#10b981",
+        "overlay_opacity": 60,
+        "corner_radius": 16
+      }
     }
   },
   "order": [
@@ -749,6 +768,7 @@
     "faq",
     "explore_products",
     "featured_blog_posts_xihL69",
-    "video_carousel_patch_kraze_HQHGpj"
+    "video_carousel_patch_kraze_HQHGpj",
+    "promo_popup"
   ]
 }

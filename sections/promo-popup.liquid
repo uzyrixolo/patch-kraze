@@ -1,0 +1,313 @@
+{% schema %}
+{
+  "name": "Promo Popup",
+  "tag": "section",
+  "class": "promo-popup-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable popup",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Popup image",
+      "info": "Recommended 800 x 800 px or wider. The whole image is clickable."
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "top", "label": "Above the text" },
+        { "value": "left", "label": "Beside the text" },
+        { "value": "only", "label": "Image only (no text)" }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "LIMITED TIME"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "25 Patches for $119"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Text",
+      "default": "<p>Custom embroidered patches up to 4 inches. Free mockup, no setup fees.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Grab the deal"
+    },
+    {
+      "type": "header",
+      "content": "Link target"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Link to product",
+      "info": "The image and button both open this product."
+    },
+    {
+      "type": "url",
+      "id": "custom_link",
+      "label": "Custom link (overrides product)",
+      "info": "Leave empty to use the product above."
+    },
+    {
+      "type": "header",
+      "content": "Behaviour"
+    },
+    {
+      "type": "range",
+      "id": "delay",
+      "label": "Delay before showing",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "select",
+      "id": "frequency",
+      "label": "How often to show",
+      "options": [
+        { "value": "session", "label": "Once per browsing session" },
+        { "value": "day", "label": "Once per day" },
+        { "value": "always", "label": "Every page load (testing only)" }
+      ],
+      "default": "session"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent / button colour",
+      "default": "#10b981"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay darkness",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "presets": [{ "name": "Promo Popup" }]
+}
+{% endschema %}
+
+{%- liquid
+  assign link = section.settings.custom_link
+  if link == blank and section.settings.product != blank
+    assign link = section.settings.product.url
+  endif
+  assign pos = section.settings.image_position
+-%}
+
+{%- if section.settings.enabled -%}
+<style>
+  #promo-popup-{{ section.id }} {
+    position: fixed; inset: 0; z-index: 9999;
+    display: none; align-items: center; justify-content: center;
+    background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+    padding: 1rem;
+  }
+  #promo-popup-{{ section.id }}.is-open { display: flex; }
+  #promo-popup-{{ section.id }} .promo-popup-box {
+    position: relative; background: #fff; width: 100%; max-width: {% if pos == 'left' %}720px{% else %}440px{% endif %};
+    max-height: 90vh; overflow-y: auto; border-radius: {{ section.settings.corner_radius }}px;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.35);
+    {% if pos == 'left' %}display: flex; align-items: stretch;{% endif %}
+    animation: promoPopIn .25s ease-out;
+  }
+  @keyframes promoPopIn {
+    from { opacity: 0; transform: translateY(12px) scale(.97); }
+    to   { opacity: 1; transform: none; }
+  }
+  #promo-popup-{{ section.id }} .promo-popup-close {
+    position: absolute; top: 0.6rem; right: 0.6rem; z-index: 2;
+    width: 2rem; height: 2rem; border-radius: 50%; border: none; cursor: pointer;
+    background: rgba(255,255,255,0.9); color: #374151; font-size: 1.35rem; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  #promo-popup-{{ section.id }} .promo-popup-close:hover { background: #fff; color: #111827; }
+  #promo-popup-{{ section.id }} .promo-popup-media {
+    display: block; {% if pos == 'left' %}flex: 0 0 45%;{% endif %}
+  }
+  #promo-popup-{{ section.id }} .promo-popup-media img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    {% if pos == 'top' %}aspect-ratio: 1/1;{% endif %}
+  }
+  #promo-popup-{{ section.id }} .promo-popup-content {
+    padding: 1.5rem; text-align: {% if pos == 'left' %}left{% else %}center{% endif %};
+    {% if pos == 'left' %}flex: 1; display: flex; flex-direction: column; justify-content: center;{% endif %}
+  }
+  #promo-popup-{{ section.id }} .promo-popup-eyebrow {
+    display: inline-block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em;
+    color: {{ section.settings.accent_color }}; margin-bottom: 0.5rem;
+  }
+  #promo-popup-{{ section.id }} .promo-popup-heading {
+    font-size: 1.5rem; font-weight: 800; line-height: 1.2; color: #111827; margin: 0 0 0.5rem;
+  }
+  #promo-popup-{{ section.id }} .promo-popup-body { font-size: 0.95rem; color: #4b5563; margin-bottom: 1.25rem; }
+  #promo-popup-{{ section.id }} .promo-popup-body p { margin: 0; }
+  #promo-popup-{{ section.id }} .promo-popup-btn {
+    display: inline-block; background: {{ section.settings.accent_color }}; color: #fff;
+    padding: 0.85rem 1.75rem; border-radius: 0.6rem; font-weight: 700; font-size: 1rem;
+    text-decoration: none; transition: filter .15s;
+  }
+  #promo-popup-{{ section.id }} .promo-popup-btn:hover { filter: brightness(0.93); }
+  #promo-popup-{{ section.id }} .promo-popup-dismiss {
+    display: block; margin-top: 0.85rem; background: none; border: none; cursor: pointer;
+    font-size: 0.8rem; color: #9ca3af; text-decoration: underline; width: 100%;
+  }
+  @media (max-width: 640px) {
+    {% unless section.settings.show_on_mobile %}
+      #promo-popup-{{ section.id }} { display: none !important; }
+    {% endunless %}
+    #promo-popup-{{ section.id }} .promo-popup-box { {% if pos == 'left' %}flex-direction: column;{% endif %} max-width: 380px; }
+    #promo-popup-{{ section.id }} .promo-popup-media { flex: none; }
+    #promo-popup-{{ section.id }} .promo-popup-heading { font-size: 1.25rem; }
+  }
+</style>
+
+<div id="promo-popup-{{ section.id }}" role="dialog" aria-modal="true"
+     aria-label="{{ section.settings.heading | default: 'Promotion' | escape }}">
+  <div class="promo-popup-box">
+    <button type="button" class="promo-popup-close" aria-label="Close">&times;</button>
+
+    {%- if section.settings.image != blank -%}
+      {%- if link != blank -%}<a href="{{ link }}" class="promo-popup-media">{%- else -%}<div class="promo-popup-media">{%- endif -%}
+        <img src="{{ section.settings.image | image_url: width: 900 }}"
+             alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+             width="900"
+             height="{{ 900 | divided_by: section.settings.image.aspect_ratio | round }}"
+             loading="lazy">
+      {%- if link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+    {%- endif -%}
+
+    {%- unless pos == 'only' -%}
+      <div class="promo-popup-content">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="promo-popup-eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="promo-popup-heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.body != blank -%}
+          <div class="promo-popup-body">{{ section.settings.body }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank and link != blank -%}
+          <a href="{{ link }}" class="promo-popup-btn">{{ section.settings.button_label }}</a>
+        {%- endif -%}
+        <button type="button" class="promo-popup-dismiss">No thanks</button>
+      </div>
+    {%- endunless -%}
+  </div>
+</div>
+
+<script>
+(function() {
+  var root = document.getElementById('promo-popup-{{ section.id }}');
+  if (!root) return;
+
+  var KEY       = 'pk_promo_popup_{{ section.id }}';
+  var DELAY     = {{ section.settings.delay | default: 5 }} * 1000;
+  var FREQUENCY = {{ section.settings.frequency | json }};
+  var MOBILE_OK = {{ section.settings.show_on_mobile | json }};
+  var inEditor  = window.Shopify && window.Shopify.designMode;
+
+  function alreadySeen() {
+    if (FREQUENCY === 'always') return false;
+    try {
+      if (FREQUENCY === 'session') return sessionStorage.getItem(KEY) === '1';
+      var until = parseInt(localStorage.getItem(KEY) || '0', 10);
+      return Date.now() < until;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function remember() {
+    try {
+      if (FREQUENCY === 'session') sessionStorage.setItem(KEY, '1');
+      else if (FREQUENCY === 'day') localStorage.setItem(KEY, String(Date.now() + 86400000));
+    } catch (e) { /* private mode - just skip */ }
+  }
+
+  function open() {
+    root.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    root.classList.remove('is-open');
+    document.body.style.overflow = '';
+    remember();
+  }
+
+  root.querySelector('.promo-popup-close').addEventListener('click', close);
+  var dismiss = root.querySelector('.promo-popup-dismiss');
+  if (dismiss) dismiss.addEventListener('click', close);
+
+  root.addEventListener('click', function(e) { if (e.target === root) close(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && root.classList.contains('is-open')) close();
+  });
+  // Clicking through to the product counts as satisfied - don't nag again.
+  root.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', remember); });
+
+  if (inEditor) { open(); return; }
+  if (!MOBILE_OK && window.matchMedia('(max-width: 640px)').matches) return;
+  if (alreadySeen()) return;
+
+  setTimeout(open, DELAY);
+})();
+</script>
+{%- endif -%}

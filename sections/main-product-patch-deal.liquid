@@ -1,0 +1,577 @@
+{% schema %}
+{
+  "name": "Patch Deal Product",
+  "tag": "section",
+  "class": "pkdeal-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Deal setup"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Deal badge",
+      "default": "LIMITED TIME DEAL"
+    },
+    {
+      "type": "number",
+      "id": "deal_qty",
+      "label": "Pieces included in the bundle",
+      "default": 25,
+      "info": "Quantity is locked to this number. The variant price must equal the full bundle price."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compare_at",
+      "label": "Show compare-at price struck through",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Patch size"
+    },
+    {
+      "type": "text",
+      "id": "size_label",
+      "label": "Size selector label",
+      "default": "Choose Your Patch Size (up to 4 inches)"
+    },
+    {
+      "type": "range",
+      "id": "max_size",
+      "label": "Maximum size (inches)",
+      "min": 2,
+      "max": 12,
+      "step": 0.5,
+      "unit": "in",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "default_size",
+      "label": "Default size (inches)",
+      "min": 1,
+      "max": 12,
+      "step": 0.5,
+      "unit": "in",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Turnaround"
+    },
+    {
+      "type": "text",
+      "id": "turnaround_standard",
+      "label": "Standard option label",
+      "default": "Standard Mockup"
+    },
+    {
+      "type": "text",
+      "id": "turnaround_standard_note",
+      "label": "Standard option note",
+      "default": "Mockup in 24-48 hrs - production after approval"
+    },
+    {
+      "type": "text",
+      "id": "turnaround_fast",
+      "label": "Fast option label",
+      "default": "Fast Mockup - 7 Day Delivery"
+    },
+    {
+      "type": "text",
+      "id": "turnaround_fast_note",
+      "label": "Fast option note",
+      "default": "Priority mockup and delivered within 7 days"
+    },
+    {
+      "type": "header",
+      "content": "Backing"
+    },
+    {
+      "type": "checkbox",
+      "id": "charge_velcro",
+      "label": "Charge extra for velcro backing",
+      "default": true,
+      "info": "Matches the rest of the store: adds the velcro-backing companion product at $0.25/pc. Turn off to include velcro in the flat deal price."
+    }
+  ],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "Patch Deal Product" }]
+}
+{% endschema %}
+
+<style>
+  .pkdeal-wrap { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem 3rem; }
+  .pkdeal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .pkdeal-grid { grid-template-columns: 1fr; gap: 2rem; } }
+
+  /* Gallery */
+  .pkdeal-gallery { position: sticky; top: 1rem; }
+  @media (max-width: 900px) { .pkdeal-gallery { position: static; } }
+  .pkdeal-main-img {
+    width: 100%; aspect-ratio: 1/1; border-radius: 1rem; overflow: hidden;
+    background: #f9fafb; border: 1px solid #e5e7eb;
+  }
+  .pkdeal-main-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pkdeal-thumbs { display: flex; gap: 0.5rem; margin-top: 0.75rem; overflow-x: auto; padding-bottom: 0.25rem; }
+  .pkdeal-thumb {
+    flex: 0 0 auto; width: 4.5rem; height: 4.5rem; border-radius: 0.5rem; overflow: hidden;
+    border: 2px solid #e5e7eb; background: none; padding: 0; cursor: pointer;
+  }
+  .pkdeal-thumb.active { border-color: #10b981; }
+  .pkdeal-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Header */
+  .pkdeal-badge {
+    display: inline-block; background: #10b981; color: #fff; font-size: 0.75rem; font-weight: 800;
+    letter-spacing: 0.08em; padding: 0.35rem 0.75rem; border-radius: 999px; margin-bottom: 0.75rem;
+  }
+  .pkdeal-title { font-size: 2rem; font-weight: 800; line-height: 1.2; margin: 0 0 0.5rem; color: #111827; }
+  @media (max-width: 600px) { .pkdeal-title { font-size: 1.5rem; } }
+  .pkdeal-reviews { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #6b7280; margin-bottom: 1rem; }
+  .pkdeal-stars { color: #f59e0b; letter-spacing: 0.1em; }
+
+  .pkdeal-price-row { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+  .pkdeal-price { font-size: 2.5rem; font-weight: 800; color: #064e3b; line-height: 1; }
+  .pkdeal-compare { font-size: 1.25rem; color: #9ca3af; text-decoration: line-through; }
+  .pkdeal-save {
+    background: #ecfdf5; color: #047857; border: 1px solid #10b981;
+    font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 999px;
+  }
+  .pkdeal-price-sub { font-size: 0.9rem; color: #6b7280; margin-bottom: 1.25rem; }
+
+  .pkdeal-included {
+    background: #ecfdf5; border: 1px solid #10b981; border-radius: 0.75rem;
+    padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+  }
+  .pkdeal-included ul { margin: 0; padding-left: 1.1rem; }
+  .pkdeal-included li { font-size: 0.92rem; color: #065f46; margin-bottom: 0.35rem; }
+  .pkdeal-included li:last-child { margin-bottom: 0; }
+
+  /* Upload */
+  .pkdeal-upload {
+    position: relative; border: 2px dashed #10b981; background: #f0fdf4; border-radius: 1rem;
+    padding: 1.75rem 1.25rem; text-align: center; cursor: pointer; transition: background .2s, border-color .2s;
+    margin-bottom: 1.5rem;
+  }
+  .pkdeal-upload:hover { background: #d1fae5; }
+  .pkdeal-upload input[type="file"] {
+    position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;
+  }
+  .pkdeal-upload-title { font-size: 1.15rem; font-weight: 700; color: #064e3b; margin-bottom: 0.35rem; }
+  .pkdeal-upload-sub { font-size: 0.85rem; color: #4b5563; }
+  .pkdeal-browse {
+    margin-top: 0.85rem; background: #10b981; color: #fff; border: none; border-radius: 0.5rem;
+    padding: 0.6rem 1.5rem; font-weight: 700; cursor: pointer; font-size: 0.95rem;
+  }
+  .pkdeal-file-ok {
+    display: none; align-items: center; gap: 0.75rem; background: #ecfdf5; border: 1px solid #10b981;
+    border-radius: 0.75rem; padding: 0.85rem 1rem; margin-bottom: 1.5rem;
+  }
+  .pkdeal-file-ok.show { display: flex; }
+  .pkdeal-file-thumb { width: 3.5rem; height: 3.5rem; border-radius: 0.5rem; object-fit: cover; background: #fff; flex-shrink: 0; }
+  .pkdeal-change { text-decoration: underline; font-size: 0.75rem; cursor: pointer; color: #047857; }
+
+  /* Option groups */
+  .pkdeal-group { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; }
+  .pkdeal-group:last-of-type { border-bottom: none; }
+  .pkdeal-group-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.75rem; color: #111827; }
+
+  .pkdeal-cards { display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
+  .pkdeal-card {
+    border: 2px solid #e5e7eb; border-radius: 0.75rem; padding: 0.85rem 1rem; cursor: pointer;
+    background: #fff; transition: border-color .15s, background .15s;
+  }
+  .pkdeal-card:hover { border-color: #10b981; }
+  .pkdeal-card.selected { border-color: #10b981; background: #ecfdf5; box-shadow: 0 0 0 1px #10b981 inset; }
+  .pkdeal-card-label { font-weight: 700; font-size: 0.95rem; color: #111827; }
+  .pkdeal-card-note { font-size: 0.82rem; color: #6b7280; margin-top: 0.15rem; }
+
+  /* Size steppers */
+  .pkdeal-size-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .pkdeal-dim h4 { font-size: 0.85rem; font-weight: 600; color: #4b5563; margin: 0 0 0.4rem; }
+  .pkdeal-stepper {
+    display: flex; align-items: center; border: 1px solid #d1d5db; border-radius: 0.5rem;
+    height: 3.25rem; background: #fff; overflow: hidden;
+  }
+  .pkdeal-stepper-btn {
+    width: 3rem; height: 100%; border: none; background: #f9fafb; cursor: pointer;
+    font-size: 1.25rem; color: #6b7280; display: flex; align-items: center; justify-content: center;
+  }
+  .pkdeal-stepper-btn:hover { background: #f3f4f6; color: #10b981; }
+  .pkdeal-stepper input {
+    flex: 1; min-width: 0; border: none; text-align: center; font-size: 1rem; font-weight: 700;
+    color: #111827; -moz-appearance: textfield; background: #fff;
+  }
+  .pkdeal-stepper input::-webkit-outer-spin-button,
+  .pkdeal-stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+  /* Qty locked */
+  .pkdeal-qty-locked {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.75rem; padding: 0.9rem 1.1rem;
+  }
+  .pkdeal-qty-num { font-size: 1.35rem; font-weight: 800; color: #064e3b; }
+  .pkdeal-qty-note { font-size: 0.8rem; color: #6b7280; }
+
+  .pkdeal-notes-toggle { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; font-size: 0.92rem; color: #374151; }
+  .pkdeal-textarea {
+    width: 100%; margin-top: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.5rem;
+    padding: 0.75rem; font-size: 0.92rem; font-family: inherit; resize: vertical;
+  }
+
+  .pkdeal-add {
+    width: 100%; background: #10b981; color: #fff; border: none; border-radius: 0.75rem;
+    padding: 1.1rem; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: background .15s;
+  }
+  .pkdeal-add:hover { background: #059669; }
+  .pkdeal-add:disabled { background: #9ca3af; cursor: not-allowed; }
+  .pkdeal-quote-link { display: block; text-align: center; margin-top: 1rem; color: #10b981; font-weight: 600; font-size: 0.95rem; }
+</style>
+
+{%- liquid
+  assign deal_qty = section.settings.deal_qty | default: 25
+  assign max_size = section.settings.max_size | default: 4
+  assign def_size = section.settings.default_size | default: 3
+  assign variant = product.selected_or_first_available_variant
+-%}
+
+<div class="pkdeal-wrap">
+  <div class="pkdeal-grid">
+
+    <!-- GALLERY -->
+    <div class="pkdeal-gallery">
+      <div class="pkdeal-main-img">
+        {% if product.featured_image %}
+          <img id="pkdeal-main-image"
+               src="{{ product.featured_image | image_url: width: 1000 }}"
+               alt="{{ product.featured_image.alt | escape }}"
+               width="1000" height="1000" loading="eager">
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag }}
+        {% endif %}
+      </div>
+      {% if product.images.size > 1 %}
+        <div class="pkdeal-thumbs">
+          {% for image in product.images limit: 8 %}
+            <button type="button" class="pkdeal-thumb{% if forloop.first %} active{% endif %}"
+                    data-full="{{ image | image_url: width: 1000 }}">
+              <img src="{{ image | image_url: width: 200 }}" alt="{{ image.alt | escape }}" width="200" height="200" loading="lazy">
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- INFO -->
+    <div class="pkdeal-info">
+      {% if section.settings.badge_text != blank %}
+        <span class="pkdeal-badge">{{ section.settings.badge_text }}</span>
+      {% endif %}
+
+      <h1 class="pkdeal-title">{{ product.title }}</h1>
+
+      <div class="pkdeal-reviews">
+        <span class="pkdeal-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span>16 Reviews</span>
+      </div>
+
+      <div class="pkdeal-price-row">
+        <span class="pkdeal-price">{{ variant.price | money }}</span>
+        {% if section.settings.show_compare_at and variant.compare_at_price > variant.price %}
+          <span class="pkdeal-compare">{{ variant.compare_at_price | money }}</span>
+          {%- assign saved = variant.compare_at_price | minus: variant.price -%}
+          <span class="pkdeal-save">Save {{ saved | money }}</span>
+        {% endif %}
+      </div>
+      <div class="pkdeal-price-sub">
+        Flat price for {{ deal_qty }} patches &mdash;
+        {{ variant.price | divided_by: deal_qty | money }} each. No setup fees.
+      </div>
+
+      <div class="pkdeal-included">
+        <ul>
+          <li><strong>{{ deal_qty }} custom embroidered patches</strong>, any size up to {{ max_size }} inches</li>
+          <li>Free digital mockup before production</li>
+          <li>Your choice of backing type</li>
+          <li>Upload your artwork &mdash; we do the rest</li>
+        </ul>
+      </div>
+
+      <div class="product-app-blocks">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when '@app' %}
+              {% render block %}
+          {% endcase %}
+        {% endfor %}
+      </div>
+
+      <form method="post" action="{{ routes.cart_add_url }}" enctype="multipart/form-data" id="pkdeal-form">
+        <input type="hidden" name="id" value="{{ variant.id }}">
+        <input type="hidden" name="quantity" id="pkdeal-qty" value="{{ deal_qty }}">
+        <input type="hidden" name="properties[Deal]" value="{{ deal_qty }} patches for {{ variant.price | money }}">
+
+        <!-- UPLOAD -->
+        <div class="pkdeal-upload" id="pkdeal-upload">
+          <input type="file" name="properties[Design File]" id="pkdeal-file" accept="image/*,.pdf">
+          <div class="pkdeal-upload-title">Upload your design to get started</div>
+          <div class="pkdeal-upload-sub">PNG, JPG, PDF or AI &mdash; any size</div>
+          <button type="button" class="pkdeal-browse">Browse files</button>
+        </div>
+
+        <div class="pkdeal-file-ok" id="pkdeal-file-ok">
+          <img class="pkdeal-file-thumb" id="pkdeal-file-thumb" alt="" width="56" height="56" hidden>
+          <div style="flex:1; min-width:0;">
+            <div style="font-weight:700; color:#064e3b;">File uploaded</div>
+            <div id="pkdeal-file-name" style="font-size:0.85rem; color:#059669; overflow-wrap:anywhere;"></div>
+            <div class="pkdeal-change" id="pkdeal-file-change">Change</div>
+          </div>
+        </div>
+
+        <!-- SIZE -->
+        <div class="pkdeal-group">
+          <div class="pkdeal-group-title">{{ section.settings.size_label }}</div>
+          <div class="pkdeal-size-row">
+            <div class="pkdeal-dim">
+              <h4>Width (inches)</h4>
+              <div class="pkdeal-stepper">
+                <button type="button" class="pkdeal-stepper-btn" data-dim="width" data-delta="-0.5">&ndash;</button>
+                <input type="number" name="properties[Width]" id="pkdeal-width"
+                       value="{{ def_size }}" min="1" max="{{ max_size }}" step="0.5" readonly>
+                <button type="button" class="pkdeal-stepper-btn" data-dim="width" data-delta="0.5">+</button>
+              </div>
+            </div>
+            <div class="pkdeal-dim">
+              <h4>Height (inches)</h4>
+              <div class="pkdeal-stepper">
+                <button type="button" class="pkdeal-stepper-btn" data-dim="height" data-delta="-0.5">&ndash;</button>
+                <input type="number" name="properties[Height]" id="pkdeal-height"
+                       value="{{ def_size }}" min="1" max="{{ max_size }}" step="0.5" readonly>
+                <button type="button" class="pkdeal-stepper-btn" data-dim="height" data-delta="0.5">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BACKING -->
+        <div class="pkdeal-group">
+          <div class="pkdeal-group-title">Backing Type</div>
+          <div class="pkdeal-cards" id="pkdeal-backing-cards">
+            <div class="pkdeal-card selected" data-value="Heat Applied (Most Popular)">
+              <div class="pkdeal-card-label">Heat Applied</div>
+              <div class="pkdeal-card-note">Most popular &mdash; iron or heat press onto fabric</div>
+            </div>
+            <div class="pkdeal-card" data-value="Velcro (Both Sides of Velcro Included)">
+              <div class="pkdeal-card-label">Velcro (both sides included)</div>
+              <div class="pkdeal-card-note">
+                Removable hook &amp; loop backing{% if section.settings.charge_velcro %} &mdash; adds $0.25 per patch{% endif %}
+              </div>
+            </div>
+            <div class="pkdeal-card" data-value="Peel &amp; Stick">
+              <div class="pkdeal-card-label">Peel &amp; Stick</div>
+              <div class="pkdeal-card-note">Self-adhesive, best for temporary use</div>
+            </div>
+          </div>
+          <input type="hidden" name="properties[Backing]" id="pkdeal-backing" value="Heat Applied (Most Popular)">
+        </div>
+
+        <!-- TURNAROUND -->
+        <div class="pkdeal-group">
+          <div class="pkdeal-group-title">Mockup &amp; Delivery</div>
+          <div class="pkdeal-cards" id="pkdeal-turnaround-cards">
+            <div class="pkdeal-card selected" data-value="{{ section.settings.turnaround_standard | escape }}">
+              <div class="pkdeal-card-label">{{ section.settings.turnaround_standard }}</div>
+              <div class="pkdeal-card-note">{{ section.settings.turnaround_standard_note }}</div>
+            </div>
+            <div class="pkdeal-card" data-value="{{ section.settings.turnaround_fast | escape }}">
+              <div class="pkdeal-card-label">{{ section.settings.turnaround_fast }}</div>
+              <div class="pkdeal-card-note">{{ section.settings.turnaround_fast_note }}</div>
+            </div>
+          </div>
+          <input type="hidden" name="properties[Turnaround]" id="pkdeal-turnaround"
+                 value="{{ section.settings.turnaround_standard | escape }}">
+        </div>
+
+        <!-- QUANTITY (locked) -->
+        <div class="pkdeal-group">
+          <div class="pkdeal-qty-locked">
+            <div>
+              <div class="pkdeal-group-title" style="margin-bottom:0.15rem;">Quantity</div>
+              <div class="pkdeal-qty-note">Fixed bundle &mdash; {{ deal_qty }} patches included</div>
+            </div>
+            <div class="pkdeal-qty-num">{{ deal_qty }} pcs</div>
+          </div>
+        </div>
+
+        <!-- DESIGN NOTES -->
+        <div class="pkdeal-group">
+          <label class="pkdeal-notes-toggle">
+            <input type="checkbox" id="pkdeal-notes-toggle" style="width:1.1rem; height:1.1rem;">
+            <span>Add design notes for our team</span>
+          </label>
+          <div id="pkdeal-notes-wrap" style="display:none;">
+            <textarea name="properties[Design Notes]" id="pkdeal-notes" class="pkdeal-textarea" rows="4"
+                      placeholder="i.e. Keep the white inside of the text. Change the logo border to blue."></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="pkdeal-add" id="pkdeal-add">Add to Cart &mdash; {{ variant.price | money }}</button>
+        <a href="/pages/quote" class="pkdeal-quote-link">Not ready to order? Get a free quote or mockup</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var DEAL_QTY = {{ deal_qty | json }};
+  var MAX_SIZE = {{ max_size | json }};
+  var CHARGE_VELCRO = {{ section.settings.charge_velcro | json }};
+
+  /* ---------- Gallery ---------- */
+  var mainImg = document.getElementById('pkdeal-main-image');
+  document.querySelectorAll('.pkdeal-thumb').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (mainImg) mainImg.src = btn.dataset.full;
+      document.querySelectorAll('.pkdeal-thumb').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+    });
+  });
+
+  /* ---------- Upload ---------- */
+  var fileInput  = document.getElementById('pkdeal-file');
+  var uploadBox  = document.getElementById('pkdeal-upload');
+  var fileOk     = document.getElementById('pkdeal-file-ok');
+  var fileName   = document.getElementById('pkdeal-file-name');
+  var fileThumb  = document.getElementById('pkdeal-file-thumb');
+
+  if (fileInput) {
+    fileInput.addEventListener('change', function() {
+      var f = this.files && this.files[0];
+      if (!f) return;
+      fileName.textContent = f.name;
+      if (f.type.indexOf('image/') === 0) {
+        fileThumb.src = URL.createObjectURL(f);
+        fileThumb.hidden = false;
+      } else {
+        fileThumb.hidden = true;
+      }
+      uploadBox.style.display = 'none';
+      fileOk.classList.add('show');
+    });
+  }
+
+  var changeBtn = document.getElementById('pkdeal-file-change');
+  if (changeBtn) {
+    changeBtn.addEventListener('click', function() {
+      fileInput.value = '';
+      fileOk.classList.remove('show');
+      uploadBox.style.display = 'block';
+    });
+  }
+
+  /* ---------- Size steppers ---------- */
+  document.querySelectorAll('.pkdeal-stepper-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var input = document.getElementById('pkdeal-' + btn.dataset.dim);
+      if (!input) return;
+      var next = (parseFloat(input.value) || 1) + parseFloat(btn.dataset.delta);
+      next = Math.min(MAX_SIZE, Math.max(1, next));
+      input.value = next.toFixed(1);
+    });
+  });
+
+  /* ---------- Card pickers ---------- */
+  function wireCards(wrapId, hiddenId) {
+    var wrap = document.getElementById(wrapId);
+    if (!wrap) return;
+    wrap.querySelectorAll('.pkdeal-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        wrap.querySelectorAll('.pkdeal-card').forEach(function(c) { c.classList.remove('selected'); });
+        card.classList.add('selected');
+        document.getElementById(hiddenId).value = card.dataset.value;
+      });
+    });
+  }
+  wireCards('pkdeal-backing-cards', 'pkdeal-backing');
+  wireCards('pkdeal-turnaround-cards', 'pkdeal-turnaround');
+
+  /* ---------- Design notes ---------- */
+  var notesToggle = document.getElementById('pkdeal-notes-toggle');
+  if (notesToggle) {
+    notesToggle.addEventListener('change', function() {
+      var wrap = document.getElementById('pkdeal-notes-wrap');
+      wrap.style.display = this.checked ? 'block' : 'none';
+      if (!this.checked) document.getElementById('pkdeal-notes').value = '';
+    });
+  }
+
+  /* ---------- Add to cart ---------- */
+  var form = document.getElementById('pkdeal-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var btn = document.getElementById('pkdeal-add');
+    var original = btn.innerHTML;
+    btn.disabled = true;
+    btn.textContent = 'Adding...';
+
+    var backing = document.getElementById('pkdeal-backing').value;
+    var needsVelcro = CHARGE_VELCRO && backing.indexOf('Velcro') !== -1;
+
+    try {
+      var res = await fetch('/cart/add.js', { method: 'POST', body: new FormData(form) });
+      var data = await res.json();
+
+      if (!res.ok) {
+        btn.disabled = false;
+        btn.innerHTML = original;
+        alert(data.description || data.message || 'Could not add to cart. Please try again.');
+        return;
+      }
+
+      btn.textContent = 'Added!';
+      setTimeout(function() { btn.disabled = false; btn.innerHTML = original; }, 1500);
+
+      var drawer = document.querySelector('cart-drawer-component');
+      if (drawer) {
+        if (typeof drawer.open === 'function') drawer.open();
+        else if (typeof drawer.showDialog === 'function') drawer.showDialog();
+      }
+
+      // Velcro companion line item, mirroring the standard patch page behaviour.
+      if (needsVelcro) {
+        (async function() {
+          try {
+            var vRes = await fetch('/products/velcro-backing.js');
+            var vProduct = await vRes.json();
+            var vVariant = vProduct.variants && vProduct.variants[0];
+            if (!vVariant) return;
+            var vForm = new FormData();
+            vForm.append('id', vVariant.id);
+            vForm.append('quantity', DEAL_QTY);
+            vForm.append('properties[_added_with]', '{{ product.handle }}');
+            vForm.append('properties[_backing_type]', 'Velcro');
+            vForm.append('properties[_price_per_piece]', '$0.25');
+            await fetch('/cart/add.js', { method: 'POST', body: vForm });
+            document.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
+          } catch (err) {
+            console.error('[PK Deal] Velcro companion failed:', err);
+          }
+        })();
+      }
+
+      document.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
+    } catch (err) {
+      console.error('[PK Deal] Add to cart failed:', err);
+      btn.disabled = false;
+      btn.innerHTML = original;
+      alert('Could not add to cart. Please try again.');
+    }
+  });
+})();
+</script>
