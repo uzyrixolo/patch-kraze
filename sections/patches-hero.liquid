@@ -68,7 +68,8 @@
   @media (max-width: 899px) {
     .patches-hero__inner { grid-template-columns: 1fr; padding: 2.5rem 1.25rem; }
     .patches-hero__title { font-size: 1.9rem; }
-    .patches-hero__right { min-height: 0; margin-top: 1rem; }
+    {% comment %} The card goes static here, so the column direction is what stacks it above the media instead of squeezing both into one flex row. {% endcomment %}
+    .patches-hero__right { min-height: 0; margin-top: 1rem; flex-direction: column; }
     .patches-hero__card { position: static; margin: 0 auto 1rem; width: fit-content; }
     .patches-hero__badge { top: auto; bottom: -0.5rem; right: 2%; }
   }
