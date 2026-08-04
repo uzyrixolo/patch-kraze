@@ -28,7 +28,7 @@
       "type": "patches-hero",
       "settings": {
         "title": "Premium Custom Patches with Low 10-Piece Minimums",
-        "subtitle": "Premium custom patches for any design \u2014 embroidered, woven, PVC, leather and more. Low minimums, fast turnaround.",
+        "subtitle": "Premium custom patches for any design — embroidered, woven, PVC, leather and more. Low minimums, fast turnaround.",
         "prop_1": "Free Fast Shipping",
         "prop_2": "100% Satisfaction",
         "prop_3": "No Setup Fees",
@@ -41,7 +41,206 @@
         "stat_1_label": "Of Patch Types",
         "stat_2_value": "10 Piece",
         "stat_2_label": "Minimum Order",
-        "stat_banner": "Ships as Fast as 5 Business Days!"
+        "stat_banner": "Ships as Fast as 5 Business Days!",
+        "hero_video": "shopify://files/videos/WhatsApp Video 2026-08-05 at 2.14.31 AM.mp4",
+        "hero_video_url": "",
+        "video_autoplay": true,
+        "video_controls": false
+      }
+    },
+    "customer_gallery": {
+      "type": "customer-gallery",
+      "settings": {
+        "heading": "Trusted by businesses, teams & creators",
+        "subheading": "Real patches from real customers. Click any image to take a closer look.",
+        "scroll_speed": 90,
+        "fallback_collection": "",
+        "bg": "#fafafa"
+      }
+    },
+    "patch_shelves": {
+      "type": "patch-shelves",
+      "blocks": {
+        "card_1": {
+          "type": "product_card",
+          "settings": {
+            "product": "embroidered-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_2": {
+          "type": "product_card",
+          "settings": {
+            "product": "full-color-printed-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_3": {
+          "type": "product_card",
+          "settings": {
+            "product": "pvc-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_4": {
+          "type": "product_card",
+          "settings": {
+            "product": "leather-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "heading": "Shop All Patch Types",
+        "columns": 4,
+        "view_all_label": "View all types",
+        "view_all_link": "",
+        "rail_label": "Best sellers",
+        "rail_sub": "Our most-ordered styles",
+        "moq_text": "10 pc min"
+      }
+    },
+    "patch_shelves_more": {
+      "type": "patch-shelves",
+      "blocks": {
+        "card_1": {
+          "type": "product_card",
+          "settings": {
+            "product": "3d-embroidered-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_2": {
+          "type": "product_card",
+          "settings": {
+            "product": "faux-leather-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_3": {
+          "type": "product_card",
+          "settings": {
+            "product": "woven-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_4": {
+          "type": "product_card",
+          "settings": {
+            "product": "metallic-flex-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_5": {
+          "type": "product_card",
+          "settings": {
+            "product": "full-color-flex-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_6": {
+          "type": "product_card",
+          "settings": {
+            "product": "silver-flex-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_7": {
+          "type": "product_card",
+          "settings": {
+            "product": "chenille-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_8": {
+          "type": "product_card",
+          "settings": {
+            "product": "silicone-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_9": {
+          "type": "product_card",
+          "settings": {
+            "product": "name-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_10": {
+          "type": "product_card",
+          "settings": {
+            "product": "dtf-transfers",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_11": {
+          "type": "product_card",
+          "settings": {
+            "product": "gold-flex-patches",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_12": {
+          "type": "product_card",
+          "settings": {
+            "product": "tackle-twill-letters",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        },
+        "card_13": {
+          "type": "product_card",
+          "settings": {
+            "product": "custom-keychains",
+            "rating": "4.8",
+            "review_count": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5",
+        "card_6",
+        "card_7",
+        "card_8",
+        "card_9",
+        "card_10",
+        "card_11",
+        "card_12",
+        "card_13"
+      ],
+      "settings": {
+        "heading": "",
+        "columns": 5,
+        "view_all_label": "",
+        "view_all_link": "",
+        "rail_label": "Explore more patch styles",
+        "rail_sub": "Faux leather, chenille, silicone, woven, flex & more",
+        "moq_text": "10 pc min"
       }
     },
     "shop_all_patches": {
@@ -271,10 +470,10 @@
         "patch_tackle_twill",
         "patch_item_ERjFeW"
       ],
+      "disabled": true,
       "settings": {
         "heading": "Shop All Patch Types"
-      },
-      "disabled": true
+      }
     },
     "shop_popular_products": {
       "type": "shop-popular-products",
@@ -298,7 +497,7 @@
           "settings": {
             "image": "shopify://shop_images/4-step.jpg",
             "title": "Upload Your Designs & Place Order Online",
-            "description": "Use designs with unlimited colors, simple or high detail artwork. Upload any design you want and we\u2019ll turn it into high quality custom patches."
+            "description": "Use designs with unlimited colors, simple or high detail artwork. Upload any design you want and we’ll turn it into high quality custom patches."
           }
         },
         "process_step_w7Qh9j": {
@@ -553,190 +752,11 @@
         "padding_bottom": 48
       }
     },
-    "customer_gallery": {
-      "type": "customer-gallery",
-      "settings": {}
-    },
-    "patch_shelves": {
-      "type": "patch-shelves",
-      "blocks": {
-        "card_1": {
-          "type": "product_card",
-          "settings": {
-            "product": "embroidered-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_2": {
-          "type": "product_card",
-          "settings": {
-            "product": "full-color-printed-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_3": {
-          "type": "product_card",
-          "settings": {
-            "product": "pvc-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_4": {
-          "type": "product_card",
-          "settings": {
-            "product": "leather-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        }
-      },
-      "block_order": [
-        "card_1",
-        "card_2",
-        "card_3",
-        "card_4"
-      ],
-      "settings": {}
-    },
-    "patch_shelves_more": {
-      "type": "patch-shelves",
-      "blocks": {
-        "card_1": {
-          "type": "product_card",
-          "settings": {
-            "product": "3d-embroidered-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_2": {
-          "type": "product_card",
-          "settings": {
-            "product": "faux-leather-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_3": {
-          "type": "product_card",
-          "settings": {
-            "product": "woven-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_4": {
-          "type": "product_card",
-          "settings": {
-            "product": "metallic-flex-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_5": {
-          "type": "product_card",
-          "settings": {
-            "product": "full-color-flex-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_6": {
-          "type": "product_card",
-          "settings": {
-            "product": "silver-flex-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_7": {
-          "type": "product_card",
-          "settings": {
-            "product": "chenille-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_8": {
-          "type": "product_card",
-          "settings": {
-            "product": "silicone-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_9": {
-          "type": "product_card",
-          "settings": {
-            "product": "name-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_10": {
-          "type": "product_card",
-          "settings": {
-            "product": "dtf-transfers",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_11": {
-          "type": "product_card",
-          "settings": {
-            "product": "gold-flex-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_12": {
-          "type": "product_card",
-          "settings": {
-            "product": "tackle-twill-letters",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_13": {
-          "type": "product_card",
-          "settings": {
-            "product": "custom-keychains",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        }
-      },
-      "block_order": [
-        "card_1",
-        "card_2",
-        "card_3",
-        "card_4",
-        "card_5",
-        "card_6",
-        "card_7",
-        "card_8",
-        "card_9",
-        "card_10",
-        "card_11",
-        "card_12",
-        "card_13"
-      ],
-      "settings": {
-        "heading": "",
-        "view_all_label": "",
-        "columns": 5,
-        "rail_label": "Explore more patch styles",
-        "rail_sub": "Faux leather, chenille, silicone, woven, flex & more",
-        "moq_text": "10 pc min"
-      }
-    },
     "promo_popup": {
       "type": "promo-popup",
       "settings": {
         "enabled": true,
+        "image": "shopify://shop_images/WhatsApp_Image_2026-08-05_at_12.31.15_AM.jpg",
         "image_position": "only",
         "eyebrow": "LIMITED TIME",
         "heading": "25 Patches for $119",
@@ -749,8 +769,7 @@
         "show_on_mobile": true,
         "accent_color": "#10b981",
         "overlay_opacity": 60,
-        "corner_radius": 16,
-        "image": "shopify://shop_images/WhatsApp_Image_2026-08-05_at_12.31.15_AM.jpg"
+        "corner_radius": 16
       }
     }
   },
