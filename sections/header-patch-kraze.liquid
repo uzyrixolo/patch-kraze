@@ -11,7 +11,14 @@
     { "type": "url", "id": "url_blanks", "label": "Blanks URL" },
     { "type": "url", "id": "url_patches", "label": "Patches URL" },
     { "type": "url", "id": "url_printhouse", "label": "Printhouse URL" },
-    { "type": "url", "id": "url_pod", "label": "POD URL" }
+    { "type": "url", "id": "url_pod", "label": "POD URL" },
+    {
+       "type": "header",
+       "content": "Header contact"
+    },
+    { "type": "text", "id": "contact_phone", "label": "Phone number", "default": "909-931-6231", "info": "Shown under the rotating label and used for the tap-to-call link." },
+    { "type": "text", "id": "contact_label_1", "label": "Rotating label 1", "default": "Live Chat 24/7" },
+    { "type": "text", "id": "contact_label_2", "label": "Rotating label 2", "default": "Talk to Patch Kraze", "info": "Leave empty to show label 1 only, with no rotation." }
   ]
 }
 {% endschema %}
@@ -75,6 +82,17 @@
   .pk-action-sub { font-size: 0.75rem; color: #4b5563; }
   .pk-live-chat { display: flex; align-items: center; gap: 0.5rem; }
   .pk-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background-color: #22c55e; } /* Green dot */
+  .pk-call { text-decoration: none; color: inherit; }
+  /* Both labels sit in one grid cell, so the cell is as wide as the longer of the
+     two and the header never reflows as they swap. */
+  .pk-rotate { display: inline-grid; }
+  .pk-rotate > * { grid-area: 1 / 1; white-space: nowrap; }
+  .pk-rotate__ghost { visibility: hidden; }
+  .pk-rotate__live { transition: opacity 0.3s ease; }
+  .pk-rotate__live[data-fading='true'] { opacity: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .pk-rotate__live { transition: none; }
+  }
 
   /* Cart Icon Alignment */
   .pk-action-item cart-icon {
@@ -129,6 +147,8 @@
   .pk-mobile-header { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0.75rem; border-bottom: 1px solid #e5e7eb; }
   .pk-mobile-logo { height: 2.5rem; width: auto; }
   .pk-mobile-icons { display: flex; gap: 0.75rem; align-items: center; }
+  /* Rides on .pk-icon-btn so it inherits the search/cart icon colour and padding. */
+  .pk-mobile-phone { display: inline-flex; align-items: center; text-decoration: none; }
   .pk-icon-btn { padding: 0.5rem; background: transparent; border: none; color: #374151; position: relative; }
   
   /* Mobile Cart Icon */
@@ -219,31 +239,33 @@
       </button>
 
       <div class="pk-actions">
-        <div class="pk-action-item" onclick="pkOpenLiveChat()" style="cursor: pointer;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')pkOpenLiveChat()">
+        {%- liquid
+          assign pk_phone = section.settings.contact_phone | default: '909-931-6231'
+          assign pk_tel = pk_phone | remove: '-' | remove: ' ' | remove: '(' | remove: ')' | remove: '.'
+          assign pk_label_1 = section.settings.contact_label_1 | default: 'Live Chat 24/7'
+          assign pk_label_2 = section.settings.contact_label_2
+        -%}
+        <a
+          href="tel:+1{{ pk_tel }}"
+          class="pk-action-item pk-call"
+          aria-label="Call Patch Kraze at {{ pk_phone }}"
+        >
           <div class="pk-live-chat">
              <span class="pk-dot"></span>
-             <span class="pk-action-title" style="color:#059669;">Live Chat 24/7</span>
+             <span class="pk-action-title" style="color:#059669;">
+               {%- if pk_label_2 != blank -%}
+                 <span class="pk-rotate">
+                   <span class="pk-rotate__ghost" aria-hidden="true">{{ pk_label_1 }}</span>
+                   <span class="pk-rotate__ghost" aria-hidden="true">{{ pk_label_2 }}</span>
+                   <span class="pk-rotate__live" data-pk-rotate="{{ section.id }}" aria-hidden="true">{{ pk_label_1 }}</span>
+                 </span>
+               {%- else -%}
+                 {{ pk_label_1 }}
+               {%- endif -%}
+             </span>
           </div>
-          <span class="pk-action-sub">Chat with Us</span>
-        </div>
-        <script>
-          function pkOpenLiveChat() {
-            // Shopify Inbox chat widget: activator lives in #shopify-element-wrapper,
-            // sometimes inside a web component's shadow root.
-            let btn = document.querySelector('#shopify-element-wrapper button.activator, #shopify-element-wrapper .activator');
-            if (!btn) {
-              const hosts = document.querySelectorAll('#shopify-element-wrapper *, shopify-chat');
-              for (const host of hosts) {
-                if (host.shadowRoot) {
-                  const found = host.shadowRoot.querySelector('button.activator, button[aria-label="Chat"]');
-                  if (found) { btn = found; break; }
-                }
-              }
-            }
-            if (btn) btn.click();
-            else window.location.href = '/pages/contact';
-          }
-        </script>
+          <span class="pk-action-sub">{{ pk_phone }}</span>
+        </a>
         <a href="{{ routes.account_url }}" class="pk-action-item" style="text-decoration:none;">
           <span class="pk-action-title">Hello, sign in</span>
           <span class="pk-action-sub">Account & Reorder</span>
@@ -268,12 +290,43 @@
       <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo.webp?v=1770364953" width="100" height="40" class="pk-mobile-logo">
     </a>
     <div class="pk-mobile-icons lg:pk-hidden desktop:hidden">
+       <a href="tel:+1{{ pk_tel }}" class="pk-icon-btn pk-mobile-phone" aria-label="Call Patch Kraze at {{ pk_phone }}">
+         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+       </a>
        <button class="pk-icon-btn" onclick="document.querySelector('#search-modal dialog')?.showModal()"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
        <button class="pk-icon-btn" onclick="document.querySelector('cart-drawer-component').open()">
           {% render 'cart-icon-component' %}
        </button>
     </div>
   </div>
+
+  {%- if pk_label_2 != blank -%}
+    <script>
+      (function () {
+        var nodes = document.querySelectorAll('[data-pk-rotate="{{ section.id }}"]');
+        if (!nodes.length) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        var labels = [{{ pk_label_1 | json }}, {{ pk_label_2 | json }}];
+        var HOLD = 2600;
+        var FADE = 320;
+        var i = 0;
+
+        window.setInterval(function () {
+          nodes.forEach(function (node) {
+            node.setAttribute('data-fading', 'true');
+          });
+          window.setTimeout(function () {
+            i = (i + 1) % labels.length;
+            nodes.forEach(function (node) {
+              node.textContent = labels[i];
+              node.removeAttribute('data-fading');
+            });
+          }, FADE);
+        }, HOLD);
+      })();
+    </script>
+  {%- endif -%}
 
   <!-- HORIZON SEARCH MODAL (with predictive search) -->
   {% render 'search-modal' %}
