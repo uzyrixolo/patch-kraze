@@ -7,6 +7,9 @@
 {
   "name": "Patches Hero",
   "settings": [
+    { "type": "text", "id": "eyebrow_text", "label": "Eyebrow text (above heading)", "default": "Made in USA", "info": "Leave empty to hide it." },
+    { "type": "checkbox", "id": "eyebrow_animate", "label": "Type the eyebrow letter by letter on a loop", "default": true },
+    { "type": "range", "id": "eyebrow_speed", "label": "Typing speed", "unit": "ms", "min": 40, "max": 220, "step": 10, "default": 110, "info": "Delay per letter." },
     { "type": "text", "id": "title", "label": "Heading", "default": "Premium Custom Patches with Low 10-Piece Minimums" },
     { "type": "textarea", "id": "subtitle", "label": "Subheading", "default": "Premium custom patches for any design — embroidered, woven, PVC, leather and more. Low minimums, fast turnaround." },
     { "type": "text", "id": "prop_1", "label": "Value prop 1", "default": "Free Fast Shipping" },
@@ -38,6 +41,21 @@
   .patches-hero { background: #0a0a0a; color: #fff; position: relative; overflow: hidden; }
   .patches-hero__glow { position: absolute; top: -40%; right: -10%; width: 60%; height: 180%; background: radial-gradient(closest-side, rgba(16,185,129,0.18), transparent 70%); pointer-events: none; }
   .patches-hero__inner { max-width: 1200px; margin: 0 auto; padding: 3.5rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; position: relative; }
+  {% comment %} Stars-and-stripes eyebrow. The gradient rides the border via a padding-box/border-box pair so the pill interior stays flat black. {% endcomment %}
+  .patches-hero__eyebrow { display: inline-flex; align-items: center; gap: 0.55rem; margin: 0 0 1rem; padding: 0.4rem 0.9rem 0.4rem 0.55rem; border: 1px solid transparent; border-radius: 999px; background: linear-gradient(#111318, #111318) padding-box, linear-gradient(90deg, #b22234, #ffffff 50%, #5b7fd4) border-box; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; }
+  .patches-hero__flag { width: 1.35rem; height: 0.9rem; flex-shrink: 0; border-radius: 2px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.5); display: block; }
+  {% comment %} The ghost copy reserves the final width so the pill does not jitter while the letters land. {% endcomment %}
+  .patches-hero__eyebrow-type { position: relative; display: inline-block; }
+  {% comment %} opacity, not visibility — the ghost stays in the accessibility tree so the label is still announced while the typed copy is aria-hidden. {% endcomment %}
+  .patches-hero__eyebrow-ghost { opacity: 0; }
+  .patches-hero__eyebrow-out { position: absolute; left: 0; top: 0; white-space: nowrap; transition: opacity 0.3s ease; }
+  .patches-hero__eyebrow-out[data-fading='true'] { opacity: 0; }
+  .patches-hero__eyebrow--typing .patches-hero__eyebrow-out::after { content: ''; display: inline-block; width: 2px; height: 0.95em; margin-left: 3px; vertical-align: -0.12em; background: #e11d2f; animation: pk-eyebrow-caret 0.9s steps(1, end) infinite; }
+  @keyframes pk-eyebrow-caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .patches-hero__eyebrow-out { transition: none; }
+    .patches-hero__eyebrow--typing .patches-hero__eyebrow-out::after { animation: none; opacity: 0; }
+  }
   .patches-hero__title { font-size: 2.6rem; line-height: 1.12; font-weight: 800; margin: 0 0 1rem; }
   .patches-hero__subtitle { font-size: 1.05rem; line-height: 1.55; color: #d1d5db; margin: 0 0 1.4rem; max-width: 34rem; }
   .patches-hero__props { display: flex; flex-wrap: wrap; gap: 1.25rem 1.75rem; margin-bottom: 1.75rem; }
@@ -79,6 +97,36 @@
   <div class="patches-hero__glow"></div>
   <div class="patches-hero__inner">
     <div class="patches-hero__left">
+      {%- if section.settings.eyebrow_text != blank -%}
+        <p
+          class="patches-hero__eyebrow{% if section.settings.eyebrow_animate %} patches-hero__eyebrow--typing{% endif %}"
+          id="PatchesHeroEyebrow-{{ section.id }}"
+        >
+          <svg class="patches-hero__flag" viewBox="0 0 26 18" role="img" aria-label="United States flag">
+            <rect width="26" height="18" fill="#fff"/>
+            <g fill="#b22234">
+              <rect width="26" height="2.77"/>
+              <rect y="5.54" width="26" height="2.77"/>
+              <rect y="11.08" width="26" height="2.77"/>
+              <rect y="16.62" width="26" height="1.38"/>
+            </g>
+            <rect width="11" height="9.69" fill="#3c3b6e"/>
+            <g fill="#fff">
+              <circle cx="2.4" cy="2.2" r="0.7"/><circle cx="5.5" cy="2.2" r="0.7"/><circle cx="8.6" cy="2.2" r="0.7"/>
+              <circle cx="3.95" cy="4.8" r="0.7"/><circle cx="7.05" cy="4.8" r="0.7"/>
+              <circle cx="2.4" cy="7.4" r="0.7"/><circle cx="5.5" cy="7.4" r="0.7"/><circle cx="8.6" cy="7.4" r="0.7"/>
+            </g>
+          </svg>
+          {%- if section.settings.eyebrow_animate -%}
+            <span class="patches-hero__eyebrow-type">
+              <span class="patches-hero__eyebrow-ghost">{{ section.settings.eyebrow_text }}</span>
+              <span class="patches-hero__eyebrow-out" data-eyebrow-out aria-hidden="true"></span>
+            </span>
+          {%- else -%}
+            <span>{{ section.settings.eyebrow_text }}</span>
+          {%- endif -%}
+        </p>
+      {%- endif -%}
       <h1 class="patches-hero__title">{{ section.settings.title }}</h1>
       <p class="patches-hero__subtitle">{{ section.settings.subtitle }}</p>
       <div class="patches-hero__props">
@@ -186,3 +234,81 @@
     </div>
   </div>
 </section>
+
+{%- if section.settings.eyebrow_text != blank and section.settings.eyebrow_animate -%}
+  <script>
+    (function () {
+      var wrap = document.getElementById('PatchesHeroEyebrow-{{ section.id }}');
+      if (!wrap) return;
+
+      var out = wrap.querySelector('[data-eyebrow-out]');
+      var text = {{ section.settings.eyebrow_text | json }};
+      var SPEED = {{ section.settings.eyebrow_speed | default: 110 }};
+      var HOLD = 1600;
+      var GAP = 500;
+      if (!out || !text) return;
+
+      // Reduced motion: show the finished line and never animate it.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        out.textContent = text;
+        return;
+      }
+
+      var timers = [];
+      function later(fn, ms) {
+        timers.push(window.setTimeout(fn, ms));
+      }
+      function stop() {
+        timers.forEach(window.clearTimeout);
+        timers = [];
+      }
+
+      function type(i) {
+        out.textContent = text.slice(0, i);
+        if (i < text.length) {
+          later(function () {
+            type(i + 1);
+          }, SPEED);
+          return;
+        }
+        later(vanish, HOLD);
+      }
+
+      function vanish() {
+        out.setAttribute('data-fading', 'true');
+        later(function () {
+          out.textContent = '';
+          out.removeAttribute('data-fading');
+          later(function () {
+            type(1);
+          }, GAP);
+        }, 320);
+      }
+
+      // Only run while the hero is on screen — a hidden loop is wasted work.
+      var loopRunning = false;
+      function start() {
+        if (loopRunning) return;
+        loopRunning = true;
+        type(1);
+      }
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              start();
+            } else if (loopRunning) {
+              loopRunning = false;
+              stop();
+              out.textContent = '';
+              out.removeAttribute('data-fading');
+            }
+          });
+        }, { threshold: 0.1 }).observe(wrap);
+      } else {
+        start();
+      }
+    })();
+  </script>
+{%- endif -%}
