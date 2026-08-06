@@ -4072,3 +4072,21 @@ padding:20px;
     border: 1px solid #ccc;
 }
 
+
+/* Product page add-to-cart: solid black with a white label. Set through the
+   theme's button custom properties rather than background-color directly, so
+   the border and hover state stay in step. Quick-add buttons on product cards
+   are deliberately left alone. */
+.product-form-buttons .add-to-cart-button,
+.sticky-add-to-cart__button.add-to-cart-button {
+  --button-color: #fff;
+  --button-background-color: #000;
+  --button-border-color: #000;
+}
+
+.product-form-buttons .add-to-cart-button:hover,
+.sticky-add-to-cart__button.add-to-cart-button:hover {
+  --button-color: #fff;
+  --button-background-color: #1f2937;
+  --button-border-color: #1f2937;
+}
