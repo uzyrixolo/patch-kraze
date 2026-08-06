@@ -1,0 +1,222 @@
+{% comment %}
+  Category rail for the Blanks collection page: pill cards across the top, the
+  matching product grid underneath. The first block renders expanded, so the
+  page opens on whichever category is ordered first (Hats).
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Blanks Categories",
+  "class": "section-blanks-categories",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop Blanks by Category" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Pick a category to browse every blank we stock." },
+    { "type": "range", "id": "limit", "label": "Products per category", "min": 4, "max": 48, "step": 4, "default": 24 },
+    { "type": "checkbox", "id": "show_view_all", "label": "Show a \"View all\" link per category", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Label", "info": "Defaults to the collection title." },
+        { "type": "image_picker", "id": "image", "label": "Card image", "info": "Defaults to the collection image, then its first product image." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blanks Categories",
+      "blocks": [{ "type": "category" }, { "type": "category" }]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .bkc { max-width: 1280px; margin: 0 auto; padding: 2rem 1rem 3rem; }
+  .bkc__head { margin-bottom: 1.5rem; }
+  .bkc__heading { font-size: 1.75rem; font-weight: 800; color: #111827; margin: 0 0 0.35rem; }
+  .bkc__sub { font-size: 0.95rem; color: #6b7280; margin: 0; }
+
+  /* Card rail: scrolls sideways on small screens rather than wrapping to a
+     second row, which is what the reference layout does. */
+  .bkc__rail { display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 2rem; scrollbar-width: thin; }
+  .bkc__card { display: flex; align-items: center; gap: 0.7rem; flex: 0 0 auto; padding: 0.6rem 1rem 0.6rem 0.6rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 0.85rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); cursor: pointer; font-family: inherit; font-size: 0.95rem; font-weight: 600; color: #111827; transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s; }
+  .bkc__card:hover { border-color: #10b981; transform: translateY(-1px); }
+  .bkc__card[aria-selected='true'] { border-color: #10b981; box-shadow: 0 0 0 1px #10b981; }
+  .bkc__card-icon { width: 3rem; height: 3rem; border-radius: 0.65rem; overflow: hidden; background: #f3f4f6; flex-shrink: 0; display: block; }
+  .bkc__card-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bkc__card-chevron { width: 0.85rem; height: 0.85rem; color: #9ca3af; flex-shrink: 0; }
+
+  .bkc__panel[hidden] { display: none; }
+  .bkc__panel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+  .bkc__panel-title { font-size: 1.15rem; font-weight: 700; color: #111827; margin: 0; }
+  .bkc__view-all { font-size: 0.875rem; font-weight: 600; color: #059669; text-decoration: none; white-space: nowrap; }
+  .bkc__view-all:hover { text-decoration: underline; }
+
+  .bkc__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1.5rem 1.25rem; }
+  .bkc__product { display: block; text-decoration: none; color: inherit; }
+  .bkc__product-img { aspect-ratio: 1; border-radius: 0.75rem; overflow: hidden; background: #f9fafb; margin-bottom: 0.6rem; }
+  .bkc__product-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.25s ease; }
+  .bkc__product:hover .bkc__product-img img { transform: scale(1.04); }
+  .bkc__product-title { font-size: 0.9rem; font-weight: 600; color: #111827; margin: 0 0 0.2rem; line-height: 1.35; }
+  .bkc__product-price { font-size: 0.9rem; color: #4b5563; margin: 0; }
+  .bkc__empty { color: #6b7280; font-size: 0.95rem; margin: 0; }
+
+  @media (max-width: 749px) {
+    .bkc { padding: 1.5rem 1rem 2.5rem; }
+    .bkc__heading { font-size: 1.4rem; }
+    .bkc__grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.25rem 0.9rem; }
+    .bkc__card-icon { width: 2.5rem; height: 2.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bkc__card, .bkc__product-img img { transition: none; }
+  }
+</style>
+
+<div class="bkc" id="BlanksCats-{{ section.id }}">
+  {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+    <div class="bkc__head">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="bkc__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="bkc__sub">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="bkc__rail" role="tablist" aria-label="{{ section.settings.heading | default: 'Categories' | escape }}">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign cat = block.settings.collection
+        assign label = block.settings.label | default: cat.title | default: 'Category'
+        assign card_image = block.settings.image | default: cat.image | default: cat.products.first.featured_image
+      -%}
+      <button
+        type="button"
+        class="bkc__card"
+        role="tab"
+        id="BkcTab-{{ block.id }}"
+        aria-controls="BkcPanel-{{ block.id }}"
+        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+        tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
+        data-bkc-handle="{{ cat.handle }}"
+        {{ block.shopify_attributes }}
+      >
+        <span class="bkc__card-icon">
+          {%- if card_image -%}
+            {{ card_image | image_url: width: 120 | image_tag: widths: '60,90,120', sizes: '48px', alt: label, loading: 'lazy' }}
+          {%- endif -%}
+        </span>
+        <span class="bkc__card-label">{{ label }}</span>
+        <svg class="bkc__card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    {%- endfor -%}
+  </div>
+
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign cat = block.settings.collection
+      assign label = block.settings.label | default: cat.title | default: 'Category'
+    -%}
+    <div
+      class="bkc__panel"
+      role="tabpanel"
+      id="BkcPanel-{{ block.id }}"
+      aria-labelledby="BkcTab-{{ block.id }}"
+      tabindex="0"
+      {% unless forloop.first %}hidden{% endunless %}
+    >
+      <div class="bkc__panel-head">
+        <h3 class="bkc__panel-title">{{ label }}</h3>
+        {%- if section.settings.show_view_all and cat != blank -%}
+          <a class="bkc__view-all" href="{{ cat.url }}">View all {{ cat.all_products_count }} &rarr;</a>
+        {%- endif -%}
+      </div>
+
+      {%- if cat != blank and cat.products.size > 0 -%}
+        <div class="bkc__grid">
+          {%- for product in cat.products limit: section.settings.limit -%}
+            <a class="bkc__product" href="{{ product.url }}">
+              <div class="bkc__product-img">
+                {%- if product.featured_image -%}
+                  {{ product.featured_image | image_url: width: 500 | image_tag: widths: '190,300,400,500', sizes: '(max-width: 749px) 45vw, 240px', alt: product.title, loading: 'lazy' }}
+                {%- endif -%}
+              </div>
+              <p class="bkc__product-title">{{ product.title }}</p>
+              <p class="bkc__product-price">
+                {%- if product.price_varies -%}
+                  From {{ product.price_min | money }}
+                {%- else -%}
+                  {{ product.price | money }}
+                {%- endif -%}
+              </p>
+            </a>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <p class="bkc__empty">Nothing in this category yet — check back soon.</p>
+      {%- endif -%}
+    </div>
+  {%- endfor -%}
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('BlanksCats-{{ section.id }}');
+    if (!root) return;
+
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+    if (!tabs.length) return;
+
+    function select(tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !on;
+      });
+      if (focus) tab.focus();
+
+      // Keep the category in the URL so a chosen tab survives refresh and sharing.
+      var handle = tab.getAttribute('data-bkc-handle');
+      if (handle && window.history.replaceState) {
+        var url = new URL(window.location.href);
+        url.searchParams.set('category', handle);
+        window.history.replaceState({}, '', url);
+      }
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        select(tab, false);
+      });
+      tab.addEventListener('keydown', function (event) {
+        var i = tabs.indexOf(tab);
+        var next = null;
+        if (event.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+        if (event.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (event.key === 'Home') next = tabs[0];
+        if (event.key === 'End') next = tabs[tabs.length - 1];
+        if (!next) return;
+        event.preventDefault();
+        select(next, true);
+      });
+    });
+
+    // Deep link: ?category=<handle> wins over the default first tab.
+    var wanted = new URLSearchParams(window.location.search).get('category');
+    if (wanted) {
+      var match = tabs.filter(function (t) {
+        return t.getAttribute('data-bkc-handle') === wanted;
+      })[0];
+      if (match) select(match, false);
+    }
+  })();
+</script>

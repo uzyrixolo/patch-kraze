@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "categories": {
+      "type": "blanks-categories",
+      "blocks": {
+        "hats": {
+          "type": "category",
+          "settings": {
+            "collection": "caps",
+            "label": "Hats"
+          }
+        },
+        "jackets": {
+          "type": "category",
+          "settings": {
+            "collection": "letterman-jacket",
+            "label": "Jackets"
+          }
+        }
+      },
+      "block_order": [
+        "hats",
+        "jackets"
+      ],
+      "settings": {
+        "heading": "Patch Kraze Blanks",
+        "subheading": "Blank hats and jackets, ready for your custom patches.",
+        "limit": 24,
+        "show_view_all": true
+      }
+    }
+  },
+  "order": [
+    "categories"
+  ]
+}
