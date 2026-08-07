@@ -51,7 +51,34 @@
             assign option_id_attribute = 'data-option-id="' | append: fieldset_id | append: '"'
             assign longest_value = 0
           endif
+
+          # A colour option with no admin swatch data falls back to chips derived
+          # from the value names, but only when every value resolves — a partial
+          # match would leave blank holes in the row.
+          assign name_swatch = false
+          assign option_key = product_option.name | downcase
         -%}
+
+        {%- if swatch_count == 0
+          and block_settings.show_swatches
+          and block_settings.variant_style == 'buttons'
+          and option_key contains 'colo'
+        -%}
+          {%- assign mapped_count = 0 -%}
+          {%- for option_value in product_option.values -%}
+            {%- capture probe_result %}{% render 'color-name-swatch', value: option_value.name, probe: true %}{% endcapture -%}
+            {%- if probe_result contains 'ok' -%}
+              {%- assign mapped_count = mapped_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if mapped_count == product_option.values.size -%}
+            {%- liquid
+              assign name_swatch = true
+              assign variant_style = 'swatch'
+              assign option_id_attribute = ''
+            -%}
+          {%- endif -%}
+        {%- endif -%}
 
         {%- if variant_style == 'swatch' or block_settings.variant_style == 'buttons' -%}
           {%- assign fieldset_index = forloop.index0 -%}
@@ -110,11 +137,15 @@
                     endif
                   %}
 
-                  {% render 'swatch',
-                    swatch: product_option_value.swatch,
-                    variant_image: featured_media,
-                    mode: 'unscaled'
-                  %}
+                  {% if name_swatch %}
+                    {% render 'color-name-swatch', value: product_option_value.name %}
+                  {% else %}
+                    {% render 'swatch',
+                      swatch: product_option_value.swatch,
+                      variant_image: featured_media,
+                      mode: 'unscaled'
+                    %}
+                  {% endif %}
                 {% else %}
                   {% if product_option_value.available == true %}
                     <span class="variant-option__button-label__pill"></span>
@@ -124,7 +155,7 @@
                 {% render 'strikethrough-variant', product_option: product_option_value %}
               </label>
             {%- endfor -%}
-            {% if option_id_attribute %}
+            {% if option_id_attribute != blank %}
               {% style %}
                 [data-option-id="{{ fieldset_id }}"] {
                   --variant-ch: {{ longest_value | times: 0.65 }}em;

@@ -1,0 +1,51 @@
+{%- doc -%}
+  Renders a colour chip for an option value whose name describes the colour,
+  for products that have no swatch data set in the admin.
+
+  Two-tone names split on "/" and render as a diagonally split chip — the
+  letterman jackets are sold as body/sleeve pairs like "Black / White Sleeves",
+  which a single flat colour cannot represent. Single names render solid.
+
+  Outputs the theme's own `.swatch` element, so sizing, border and selected
+  states come from the existing swatch styles rather than anything new.
+
+  Outputs nothing when the name yields no colour. Callers probe with
+  `probe: true` first and only switch to the swatch layout when every value in
+  the option resolves — a half-mapped option would render blank chips.
+
+  @param {string} value - The option value name, e.g. "Black / White Sleeves".
+  @param {boolean} [probe] - When true, output 'ok' instead of markup.
+
+  @example
+  {% render 'color-name-swatch', value: option_value.name %}
+{%- enddoc -%}
+
+{%- liquid
+  assign parts = value | downcase | split: '/'
+  assign body_word = parts[0]
+  assign sleeve_word = parts[1] | default: parts[0]
+-%}
+{%- capture body_hex %}{% render 'color-word-to-hex', word: body_word %}{% endcapture -%}
+{%- capture sleeve_hex %}{% render 'color-word-to-hex', word: sleeve_word %}{% endcapture -%}
+{%- liquid
+  assign body_hex = body_hex | strip
+  assign sleeve_hex = sleeve_hex | strip
+  if sleeve_hex == blank
+    assign sleeve_hex = body_hex
+  endif
+-%}
+
+{%- if body_hex != blank -%}
+  {%- if probe -%}
+    ok
+  {%- else -%}
+    {%- if body_hex == sleeve_hex -%}
+      {%- assign chip_background = body_hex -%}
+    {%- else -%}
+      {%- capture chip_background -%}
+        linear-gradient(115deg, {{ body_hex }} 0 50%, {{ sleeve_hex }} 50% 100%)
+      {%- endcapture -%}
+    {%- endif -%}
+    <span class="swatch swatch--unscaled" style="--swatch-background: {{ chip_background | strip }};"></span>
+  {%- endif -%}
+{%- endif -%}

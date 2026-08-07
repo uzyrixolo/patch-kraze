@@ -1,0 +1,60 @@
+{%- doc -%}
+  Maps a colour word to a hex value, or outputs nothing when the word is not a
+  colour we know. Compound names are tested before their base colour so that
+  "royal blue" does not fall through to plain "blue".
+
+  @param {string} word - Text to search, already lower-cased.
+
+  @example
+  {% render 'color-word-to-hex', word: 'royal blue' %}
+{%- enddoc -%}
+
+{%- liquid
+  if word contains 'royal blue'
+    echo '#1e40af'
+  elsif word contains 'navy'
+    echo '#1b2a4a'
+  elsif word contains 'light blue' or word contains 'sky'
+    echo '#7dd3fc'
+  elsif word contains 'forest'
+    echo '#14532d'
+  elsif word contains 'burgundy'
+    echo '#5c0f1f'
+  elsif word contains 'maroon'
+    echo '#6b1f2a'
+  elsif word contains 'charcoal'
+    echo '#36454f'
+  elsif word contains 'silver'
+    echo '#c0c0c0'
+  elsif word contains 'cream' or word contains 'ivory' or word contains 'natural'
+    echo '#f5f0e1'
+  elsif word contains 'black'
+    echo '#111111'
+  elsif word contains 'white'
+    echo '#ffffff'
+  elsif word contains 'gold'
+    echo '#d4af37'
+  elsif word contains 'purple'
+    echo '#5b2d90'
+  elsif word contains 'green'
+    echo '#1f7a3f'
+  elsif word contains 'blue'
+    echo '#1d4ed8'
+  elsif word contains 'red'
+    echo '#c8102e'
+  elsif word contains 'orange'
+    echo '#f97316'
+  elsif word contains 'yellow'
+    echo '#facc15'
+  elsif word contains 'brown'
+    echo '#6b4423'
+  elsif word contains 'tan' or word contains 'khaki'
+    echo '#d2b48c'
+  elsif word contains 'pink'
+    echo '#ec4899'
+  elsif word contains 'teal'
+    echo '#0d9488'
+  elsif word contains 'grey' or word contains 'gray'
+    echo '#808080'
+  endif
+-%}
