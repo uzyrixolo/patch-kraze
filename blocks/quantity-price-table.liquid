@@ -1,0 +1,337 @@
+{%- doc -%}
+  Volume pricing table for products that carry a quantity-tier option.
+
+  The tiers are the values of the product's "Quantity" option — the same option
+  the real variants are built from — so the table never drifts from what the
+  cart charges. Ranges are parsed from the value text ("1", "2-12", "37+"), so
+  adding or renaming a tier in the admin is enough; nothing here hardcodes them.
+
+  The customer never picks a tier. They type a quantity, the block selects the
+  matching option value on the variant picker, and Shopify prices the line at
+  that variant.
+{%- enddoc -%}
+
+{% schema %}
+{
+  "name": "Quantity price table",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shows a volume price table built from the product's \"Quantity\" option. Typing a quantity selects the matching tier automatically."
+    },
+    { "type": "text", "id": "option_name", "label": "Quantity option name", "default": "Quantity" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Volume pricing" },
+    { "type": "checkbox", "id": "hide_option", "label": "Hide the quantity option from the variant picker", "default": true },
+    { "type": "checkbox", "id": "show_savings", "label": "Show the savings column", "default": true },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    }
+  ]
+}
+{% endschema %}
+
+{%- liquid
+  assign target_product = closest.product
+  assign option_name = block.settings.option_name | default: 'Quantity'
+  assign option_key = option_name | downcase
+
+  assign qty_option = null
+  assign qty_position = 0
+  for product_option in target_product.options_with_values
+    assign this_key = product_option.name | downcase
+    if this_key == option_key
+      assign qty_option = product_option
+      assign qty_position = product_option.position
+    endif
+  endfor
+-%}
+
+{%- if qty_option != blank -%}
+  {%- assign current = target_product.selected_or_first_available_variant -%}
+
+  <style>
+    .qpt-{{ block.id }} {
+      padding-block-start: {{ block.settings.padding-block-start }}px;
+      padding-block-end: {{ block.settings.padding-block-end }}px;
+    }
+    .qpt__heading { font-size: 0.95rem; font-weight: 700; margin: 0 0 0.6rem; }
+    .qpt__table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .qpt__table th,
+    .qpt__table td { padding: 0.55rem 0.7rem; text-align: left; border-bottom: 1px solid rgb(var(--color-foreground-rgb) / 0.12); }
+    .qpt__table th { font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.65; }
+    .qpt__table td:not(:first-child),
+    .qpt__table th:not(:first-child) { text-align: right; }
+    .qpt__row[data-active='true'] { background: rgb(var(--color-foreground-rgb) / 0.06); font-weight: 700; }
+    .qpt__row[data-active='true'] td:first-child::before { content: '▸ '; }
+    .qpt__save { color: #059669; }
+    .qpt__summary { margin: 0.7rem 0 0; font-size: 0.9rem; display: flex; justify-content: space-between; gap: 1rem; }
+    .qpt__summary-total { font-weight: 700; }
+    .qpt__note { margin: 0.35rem 0 0; font-size: 0.8rem; opacity: 0.65; }
+    {%- if block.settings.hide_option %}
+      /* The tier follows the quantity box, so the raw option would be a second,
+         conflicting control. Kept in the DOM — the picker still drives it. */
+      .variant-option[data-option-id$='-{{ option_name | handleize }}'] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+    {%- endif %}
+  </style>
+
+  <div
+    class="qpt-{{ block.id }} qpt"
+    data-qpt
+    data-option-position="{{ qty_position }}"
+    data-option-name="{{ option_name | escape }}"
+    data-option-handle="{{ option_name | handleize }}"
+    data-show-savings="{{ block.settings.show_savings }}"
+    {{ block.shopify_attributes }}
+  >
+    {%- if block.settings.heading != blank -%}
+      <p class="qpt__heading">{{ block.settings.heading }}</p>
+    {%- endif -%}
+
+    <table class="qpt__table">
+      <thead>
+        <tr>
+          <th scope="col">{{ option_name }}</th>
+          <th scope="col">Price each</th>
+          {%- if block.settings.show_savings -%}
+            <th scope="col">You save</th>
+          {%- endif -%}
+        </tr>
+      </thead>
+      <tbody data-qpt-body>
+        {%- for value in qty_option.values -%}
+          <tr class="qpt__row" data-qpt-row="{{ value | escape }}">
+            <td>{{ value }}</td>
+            <td data-qpt-unit></td>
+            {%- if block.settings.show_savings -%}
+              <td class="qpt__save" data-qpt-save></td>
+            {%- endif -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+
+    <p class="qpt__summary">
+      <span data-qpt-line></span>
+      <span class="qpt__summary-total" data-qpt-total></span>
+    </p>
+    <p class="qpt__note" data-qpt-note hidden></p>
+
+    <script type="application/json" data-qpt-variants>
+      [
+        {%- for variant in target_product.variants -%}
+          {
+            "id": {{ variant.id }},
+            "o1": {{ variant.option1 | json }},
+            "o2": {{ variant.option2 | json }},
+            "o3": {{ variant.option3 | json }},
+            "price": {{ variant.price }},
+            "available": {{ variant.available }}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    </script>
+    <script type="application/json" data-qpt-money>{{ shop.money_format | json }}</script>
+  </div>
+{%- elsif request.design_mode -%}
+  <p>Quantity price table: this product has no “{{ option_name }}” option, so nothing renders on the storefront.</p>
+{%- endif -%}
+
+<script>
+  (function () {
+    if (window.__qptReady) return;
+    window.__qptReady = true;
+
+    // Parses "1", "2-12", "37+" into a numeric range. Anything unparseable is
+    // skipped rather than guessed at, so a stray option value cannot silently
+    // capture every quantity.
+    function parseRange(label) {
+      var text = String(label).replace(/\s/g, '');
+      var plus = text.match(/^(\d+)\+$/);
+      if (plus) return { min: parseInt(plus[1], 10), max: Infinity };
+      var span = text.match(/^(\d+)[-–](\d+)$/);
+      if (span) return { min: parseInt(span[1], 10), max: parseInt(span[2], 10) };
+      var one = text.match(/^(\d+)$/);
+      if (one) return { min: parseInt(one[1], 10), max: parseInt(one[1], 10) };
+      return null;
+    }
+
+    function money(cents, format) {
+      var amount = (cents / 100).toFixed(2);
+      if (format && format.indexOf('{{') !== -1) {
+        return format.replace(/\{\{\s*amount\s*\}\}/, amount).replace(/\{\{\s*amount_no_decimals\s*\}\}/, Math.round(cents / 100));
+      }
+      return '$' + amount;
+    }
+
+    function readJSON(root, selector, fallback) {
+      var el = root.querySelector(selector);
+      if (!el) return fallback;
+      try {
+        return JSON.parse(el.textContent);
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function currentOption(picker, position) {
+      var checked = picker.querySelectorAll('.variant-option input:checked');
+      return checked[position - 1] ? checked[position - 1].value : null;
+    }
+
+    function render(root) {
+      var variants = readJSON(root, '[data-qpt-variants]', []);
+      var format = readJSON(root, '[data-qpt-money]', '');
+      if (!variants.length) return;
+
+      var position = parseInt(root.getAttribute('data-option-position'), 10);
+      var picker = document.querySelector('variant-picker');
+      var qtyInput = document.querySelector('input[name="quantity"]');
+      if (!picker || !qtyInput) return;
+
+      var keys = ['o1', 'o2', 'o3'];
+      var tierKey = keys[position - 1];
+      var otherKeys = keys.filter(function (k, i) {
+        return i + 1 !== position && i < 3;
+      });
+
+      // The other options as the shopper has them set right now.
+      var selected = {};
+      keys.forEach(function (k, i) {
+        if (i + 1 === position) return;
+        selected[k] = currentOption(picker, i + 1);
+      });
+
+      var matching = variants.filter(function (v) {
+        return otherKeys.every(function (k) {
+          return selected[k] == null || v[k] === selected[k];
+        });
+      });
+      if (!matching.length) return;
+
+      var qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+
+      var rows = [].slice.call(root.querySelectorAll('[data-qpt-row]'));
+      var baseCents = null;
+      var activeRow = null;
+      var activeCents = null;
+
+      rows.forEach(function (row) {
+        var label = row.getAttribute('data-qpt-row');
+        var range = parseRange(label);
+        var variant = matching.filter(function (v) {
+          return v[tierKey] === label;
+        })[0];
+        var unitCell = row.querySelector('[data-qpt-unit]');
+        var saveCell = row.querySelector('[data-qpt-save]');
+
+        if (!variant) {
+          if (unitCell) unitCell.textContent = '—';
+          if (saveCell) saveCell.textContent = '';
+          return;
+        }
+
+        if (baseCents === null) baseCents = variant.price;
+        if (unitCell) unitCell.textContent = money(variant.price, format);
+        if (saveCell) {
+          var off = baseCents ? Math.round((1 - variant.price / baseCents) * 100) : 0;
+          saveCell.textContent = off > 0 ? off + '%' : '';
+        }
+
+        var active = range && qty >= range.min && qty <= range.max;
+        row.setAttribute('data-active', active ? 'true' : 'false');
+        if (active) {
+          activeRow = label;
+          activeCents = variant.price;
+        }
+      });
+
+      // Point the picker at the tier the typed quantity falls into, then let
+      // Horizon's own change handling swap the variant and the displayed price.
+      if (activeRow) {
+        var input = picker.querySelector(
+          '.variant-option input[value="' + activeRow.replace(/"/g, '\\"') + '"]'
+        );
+        if (input && !input.checked) {
+          input.checked = true;
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+
+      var lineEl = root.querySelector('[data-qpt-line]');
+      var totalEl = root.querySelector('[data-qpt-total]');
+      if (activeCents != null) {
+        if (lineEl) lineEl.textContent = qty + ' × ' + money(activeCents, format);
+        if (totalEl) totalEl.textContent = money(activeCents * qty, format);
+      } else {
+        if (lineEl) lineEl.textContent = '';
+        if (totalEl) totalEl.textContent = '';
+      }
+
+      var note = root.querySelector('[data-qpt-note]');
+      if (note) {
+        var next = null;
+        rows.forEach(function (row) {
+          var range = parseRange(row.getAttribute('data-qpt-row'));
+          if (range && range.min > qty && (next === null || range.min < next)) next = range.min;
+        });
+        if (next) {
+          var nextVariant = matching.filter(function (v) {
+            var r = parseRange(v[tierKey]);
+            return r && r.min === next;
+          })[0];
+          if (nextVariant && activeCents != null && nextVariant.price < activeCents) {
+            note.hidden = false;
+            note.textContent =
+              'Add ' + (next - qty) + ' more to pay ' + money(nextVariant.price, format) + ' each.';
+            return;
+          }
+        }
+        note.hidden = true;
+      }
+    }
+
+    function renderAll() {
+      document.querySelectorAll('[data-qpt]').forEach(render);
+    }
+
+    // Delegated so the block keeps working after Horizon re-renders the section.
+    document.addEventListener('input', function (event) {
+      if (event.target && event.target.name === 'quantity') renderAll();
+    });
+    document.addEventListener('change', function (event) {
+      var t = event.target;
+      if (!t) return;
+      if (t.name === 'quantity' || t.closest('.variant-option')) renderAll();
+    });
+    document.addEventListener('shopify:section:load', renderAll);
+    document.addEventListener('DOMContentLoaded', renderAll);
+    if (document.readyState !== 'loading') renderAll();
+  })();
+</script>

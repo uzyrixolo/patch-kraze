@@ -1,0 +1,121 @@
+Handle,Title,Option1 Name,Option1 Value,Option2 Name,Option2 Value,Option3 Name,Option3 Value,Variant Grams,Variant Inventory Tracker,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Requires Shipping,Variant Taxable,Variant Weight Unit
+letterman-jackets,Letterman Jackets,Color,Black / White Sleeves,Size,M,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,M,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,M,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,M,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,M,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,L,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,L,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,L,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,L,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,L,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,XL,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,XL,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,XL,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,XL,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,XL,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,2XL,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,2XL,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,2XL,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,2XL,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / White Sleeves,Size,2XL,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,M,Quantity,1,0,,0,deny,manual,130.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,M,Quantity,2-12,0,,0,deny,manual,120.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,M,Quantity,13-24,0,,0,deny,manual,110.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,M,Quantity,25-36,0,,0,deny,manual,95.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,M,Quantity,37+,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,L,Quantity,1,0,,0,deny,manual,130.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,L,Quantity,2-12,0,,0,deny,manual,120.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,L,Quantity,13-24,0,,0,deny,manual,110.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,L,Quantity,25-36,0,,0,deny,manual,95.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,L,Quantity,37+,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,XL,Quantity,1,0,,0,deny,manual,130.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,XL,Quantity,2-12,0,,0,deny,manual,120.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,XL,Quantity,13-24,0,,0,deny,manual,110.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,XL,Quantity,25-36,0,,0,deny,manual,95.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,XL,Quantity,37+,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,2XL,Quantity,1,0,,0,deny,manual,130.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,2XL,Quantity,2-12,0,,0,deny,manual,120.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,2XL,Quantity,13-24,0,,0,deny,manual,110.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,2XL,Quantity,25-36,0,,0,deny,manual,95.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Black / Black Leather Sleeves,Size,2XL,Quantity,37+,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,M,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,M,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,M,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,M,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,M,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,L,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,L,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,L,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,L,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,L,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,XL,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,XL,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,XL,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,XL,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,XL,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,2XL,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,2XL,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,2XL,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,2XL,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Purple / Gold Sleeves,Size,2XL,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,M,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,M,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,M,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,M,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,M,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,L,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,L,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,L,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,L,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,L,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,XL,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,XL,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,XL,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,XL,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,XL,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,2XL,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,2XL,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,2XL,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,2XL,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Green / White Sleeves,Size,2XL,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,M,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,M,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,M,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,M,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,M,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,L,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,L,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,L,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,L,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,L,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,XL,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,XL,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,XL,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,XL,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,XL,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,2XL,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,2XL,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,2XL,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,2XL,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Blue / White Sleeves,Size,2XL,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,M,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,M,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,M,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,M,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,M,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,L,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,L,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,L,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,L,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,L,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,XL,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,XL,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,XL,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,XL,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,XL,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,2XL,Quantity,1,0,,0,deny,manual,100.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,2XL,Quantity,2-12,0,,0,deny,manual,90.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,2XL,Quantity,13-24,0,,0,deny,manual,80.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,2XL,Quantity,25-36,0,,0,deny,manual,65.00,TRUE,TRUE,lb
+letterman-jackets,,Color,Red / Blue Sleeves,Size,2XL,Quantity,37+,0,,0,deny,manual,50.00,TRUE,TRUE,lb

@@ -229,6 +229,17 @@
               },
               "blocks": {}
             },
+            "quantity_price_table_lj": {
+              "type": "quantity-price-table",
+              "settings": {
+                "option_name": "Quantity",
+                "heading": "Volume pricing",
+                "hide_option": true,
+                "show_savings": true,
+                "padding-block-start": 0,
+                "padding-block-end": 8
+              }
+            },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
               "settings": {
@@ -299,6 +310,7 @@
             "build_a_gang_sheet_gang_builder_upload_cBjB9F",
             "divider_VJhene",
             "variant_picker_R3rGDr",
+            "quantity_price_table_lj",
             "buy_buttons_eYQEYi",
             "text_aEtTtq"
           ]
