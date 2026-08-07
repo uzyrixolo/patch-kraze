@@ -1142,7 +1142,10 @@
 
     // 3. PER-PRODUCT CONFIGS (min/max/default sizes)
     const PRODUCT_CONFIGS = {
-      'embroidered-patches': { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
+      // maxSize is raised to 16 only for products already migrated to the 20-bracket
+      // grid. Products still on the 16-bracket grid must stay at 12 - they have no
+      // 13"-16" variants for the low quantity tiers.
+      'embroidered-patches': { minSize: 1.0, maxSize: 16.0, defaultSize: 2.0, step: 0.5 },
       'chenille-patches':    { minSize: 4.0, maxSize: 13.0, defaultSize: 4.0, step: 0.5 },
       '3d-embroidered-patches':       { minSize: 1.0, maxSize: 12.0, defaultSize: 2.0, step: 0.5 },
       'sublimation-patches-for-hats':  { minSize: 2.0, maxSize: 10.0, defaultSize: 2.0, step: 0.5 },
@@ -1351,7 +1354,10 @@
         card.querySelectorAll('.pricing-row').forEach(r => r.remove());
         PRICING_MATRIX.quantityTiers.forEach((tier, idx) => {
           const rowMin = idx === 0 ? Math.min(tier.min, productMinQty) : tier.min;
-          const label = tier.max >= 999999 ? `${tier.min}+ pcs` : `${rowMin}-${tier.max} pcs`;
+          // A tier covering a single quantity reads as "10 pcs", not "10-10 pcs".
+          const label = tier.max >= 999999
+            ? `${tier.min}+ pcs`
+            : (rowMin === tier.max ? `${rowMin} pcs` : `${rowMin}-${tier.max} pcs`);
           const row = document.createElement('div');
           row.className = 'pricing-row';
           row.dataset.min = rowMin;
@@ -1661,7 +1667,12 @@
       let selectedVariant = null;
 
       // Try to find exact match with quantity range in title
-      const qtyRangeStr = qty >= 1000 ? '1000+' : `${qtyTier.min}-${qtyTier.max}`;
+      // Variant titles carry the tier label: "1000+", a single quantity like "10"
+      // (the new embroidery grid prices exactly 10 pcs on its own), or a range
+      // like "26-50". Must match the Shopify variant titles exactly.
+      const qtyRangeStr = qty >= 1000
+        ? '1000+'
+        : (qtyTier.min === qtyTier.max ? `${qtyTier.min}` : `${qtyTier.min}-${qtyTier.max}`);
 
       let searchPattern1;
       let searchPatternAlt; // Alternate format for products using '.0' inch
