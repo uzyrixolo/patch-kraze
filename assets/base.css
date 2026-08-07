@@ -4090,3 +4090,20 @@ padding:20px;
   --button-background-color: #1f2937;
   --button-border-color: #1f2937;
 }
+
+/* Letterman jacket size buttons: outline the unselected ones too. The picker's
+   own border width is 0 in this theme, so only the selected size was visible.
+   Scoped to the letterman template, and skipped for the colour chips (which
+   carry their own swatch border) and sold-out values (whose border is
+   deliberately dropped so the strikethrough can clip in). */
+[data-template='product.letterman']
+  .variant-option__button-label:not(.variant-option__button-label--has-swatch):not(:has(:checked)):not(
+    :has([data-option-available='false'])
+  ) {
+  border: 1px solid #d1d5db;
+}
+
+[data-template='product.letterman']
+  .variant-option__button-label:not(.variant-option__button-label--has-swatch):not(:has(:checked)):hover {
+  border-color: #9ca3af;
+}
