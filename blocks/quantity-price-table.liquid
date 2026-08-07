@@ -197,7 +197,10 @@
       if (!variants.length) return;
 
       var currency = readJSON(root, '[data-qpt-currency]', 'USD');
-      var fmt = new Intl.NumberFormat(undefined, { style: 'currency', currency: currency });
+      // Pinned to en-US: the browser locale renders USD as "US$100.00", which
+      // reads as a different currency to the "$100.00 USD" Shopify prints
+      // everywhere else on the page.
+      var fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: currency });
       function money(cents) {
         return fmt.format(cents / 100);
       }
