@@ -1,5 +1,6 @@
 {%- doc -%}
-  Volume pricing table for products that carry a quantity-tier option.
+  "Buy More. Save More." volume pricing card, styled to match the patch product
+  pages (sections/main-product-patch-kraze.liquid).
 
   The tiers are the values of the product's "Quantity" option — the same option
   the real variants are built from — so the table never drifts from what the
@@ -9,6 +10,10 @@
   The customer never picks a tier. They type a quantity, the block selects the
   matching option value on the variant picker, and Shopify prices the line at
   that variant.
+
+  NOTE: never write a literal double curly brace inside the script below —
+  Liquid lexes it as an output tag and the whole file fails to parse, which
+  makes Shopify reject the sync rather than just this block.
 {%- enddoc -%}
 
 {% schema %}
@@ -21,9 +26,10 @@
       "content": "Shows a volume price table built from the product's \"Quantity\" option. Typing a quantity selects the matching tier automatically."
     },
     { "type": "text", "id": "option_name", "label": "Quantity option name", "default": "Quantity" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Volume pricing" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Buy More. Save More." },
+    { "type": "text", "id": "unit_label", "label": "Unit label", "default": "pcs", "info": "Appended to each quantity row, e.g. \"13-24 pcs\"." },
     { "type": "checkbox", "id": "hide_option", "label": "Hide the quantity option from the variant picker", "default": true },
-    { "type": "checkbox", "id": "show_savings", "label": "Show the savings column", "default": true },
+    { "type": "checkbox", "id": "show_total", "label": "Show the running total", "default": true },
     {
       "type": "range",
       "id": "padding-block-start",
@@ -42,7 +48,7 @@
       "max": 100,
       "step": 1,
       "unit": "px",
-      "default": 8
+      "default": 16
     }
   ]
 }
@@ -65,26 +71,26 @@
 -%}
 
 {%- if qty_option != blank -%}
-  {%- assign current = target_product.selected_or_first_available_variant -%}
-
   <style>
-    .qpt-{{ block.id }} {
+    .qpt {
       padding-block-start: {{ block.settings.padding-block-start }}px;
       padding-block-end: {{ block.settings.padding-block-end }}px;
     }
-    .qpt__heading { font-size: 0.95rem; font-weight: 700; margin: 0 0 0.6rem; }
-    .qpt__table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-    .qpt__table th,
-    .qpt__table td { padding: 0.55rem 0.7rem; text-align: left; border-bottom: 1px solid rgb(var(--color-foreground-rgb) / 0.12); }
-    .qpt__table th { font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.65; }
-    .qpt__table td:not(:first-child),
-    .qpt__table th:not(:first-child) { text-align: right; }
-    .qpt__row[data-active='true'] { background: rgb(var(--color-foreground-rgb) / 0.06); font-weight: 700; }
-    .qpt__row[data-active='true'] td:first-child::before { content: '▸ '; }
-    .qpt__save { color: #059669; }
-    .qpt__summary { margin: 0.7rem 0 0; font-size: 0.9rem; display: flex; justify-content: space-between; gap: 1rem; }
-    .qpt__summary-total { font-weight: 700; }
-    .qpt__note { margin: 0.35rem 0 0; font-size: 0.8rem; opacity: 0.65; }
+    .qpt__label { color: #10b981; font-weight: 700; margin-bottom: 0.5rem; display: block; font-size: 0.9rem; text-transform: uppercase; }
+    .qpt__card { border: 1px solid #e5e7eb; border-radius: 0.5rem; overflow: hidden; background: #fff; }
+    .qpt__head,
+    .qpt__row { display: flex; justify-content: space-between; gap: 0.5rem; padding: 0.75rem 1rem; font-size: 0.9rem; }
+    .qpt__head { background: #f9fafb; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #111827; }
+    .qpt__row { border-bottom: 1px solid #f3f4f6; color: #4b5563; }
+    .qpt__row:last-child { border-bottom: none; }
+    .qpt__row[data-active='true'] { background-color: #ecfdf5; color: #065f46; font-weight: 600; }
+    .qpt__head span:nth-child(2),
+    .qpt__row span:nth-child(2) { flex: 0 0 33%; text-align: center; }
+    .qpt__head span:nth-child(3),
+    .qpt__row span:nth-child(3) { flex: 0 0 25%; text-align: right; }
+    .qpt__total { display: flex; justify-content: space-between; gap: 1rem; margin: 0.75rem 0 0; font-size: 0.95rem; color: #111827; }
+    .qpt__total-value { font-weight: 700; }
+    .qpt__note { margin: 0.35rem 0 0; font-size: 0.8rem; color: #059669; }
     {%- if block.settings.hide_option %}
       /* The tier follows the quantity box, so the raw option would be a second,
          conflicting control. Kept in the DOM — the picker still drives it. */
@@ -102,62 +108,51 @@
   </style>
 
   <div
-    class="qpt-{{ block.id }} qpt"
+    class="qpt"
     data-qpt
     data-option-position="{{ qty_position }}"
-    data-option-name="{{ option_name | escape }}"
-    data-option-handle="{{ option_name | handleize }}"
-    data-show-savings="{{ block.settings.show_savings }}"
     {{ block.shopify_attributes }}
   >
     {%- if block.settings.heading != blank -%}
-      <p class="qpt__heading">{{ block.settings.heading }}</p>
+      <span class="qpt__label">{{ block.settings.heading }}</span>
     {%- endif -%}
 
-    <table class="qpt__table">
-      <thead>
-        <tr>
-          <th scope="col">{{ option_name }}</th>
-          <th scope="col">Price each</th>
-          {%- if block.settings.show_savings -%}
-            <th scope="col">You save</th>
-          {%- endif -%}
-        </tr>
-      </thead>
-      <tbody data-qpt-body>
-        {%- for value in qty_option.values -%}
-          <tr class="qpt__row" data-qpt-row="{{ value | escape }}">
-            <td>{{ value }}</td>
-            <td data-qpt-unit></td>
-            {%- if block.settings.show_savings -%}
-              <td class="qpt__save" data-qpt-save></td>
-            {%- endif -%}
-          </tr>
-        {%- endfor -%}
-      </tbody>
-    </table>
+    <div class="qpt__card">
+      <div class="qpt__head">
+        <span>Qty</span>
+        <span>Price</span>
+        <span>Discount</span>
+      </div>
+      {%- for value in qty_option.values -%}
+        <div class="qpt__row" data-qpt-row="{{ value | escape }}">
+          <span>{{ value }} {{ block.settings.unit_label }}</span>
+          <span data-qpt-unit>&hellip;</span>
+          <span data-qpt-save>{% if forloop.first %}Base{% else %}&hellip;{% endif %}</span>
+        </div>
+      {%- endfor -%}
+    </div>
 
-    <p class="qpt__summary">
-      <span data-qpt-line></span>
-      <span class="qpt__summary-total" data-qpt-total></span>
-    </p>
+    {%- if block.settings.show_total -%}
+      <p class="qpt__total">
+        <span data-qpt-line></span>
+        <span class="qpt__total-value" data-qpt-total></span>
+      </p>
+    {%- endif -%}
     <p class="qpt__note" data-qpt-note hidden></p>
 
     <script type="application/json" data-qpt-variants>
       [
         {%- for variant in target_product.variants -%}
           {
-            "id": {{ variant.id }},
             "o1": {{ variant.option1 | json }},
             "o2": {{ variant.option2 | json }},
             "o3": {{ variant.option3 | json }},
-            "price": {{ variant.price }},
-            "available": {{ variant.available }}
+            "price": {{ variant.price }}
           }{% unless forloop.last %},{% endunless %}
         {%- endfor -%}
       ]
     </script>
-    <script type="application/json" data-qpt-money>{{ shop.money_format | json }}</script>
+    <script type="application/json" data-qpt-currency>{{ cart.currency.iso_code | json }}</script>
   </div>
 {%- elsif request.design_mode -%}
   <p>Quantity price table: this product has no “{{ option_name }}” option, so nothing renders on the storefront.</p>
@@ -182,14 +177,6 @@
       return null;
     }
 
-    function money(cents, format) {
-      var amount = (cents / 100).toFixed(2);
-      if (format && format.indexOf('{{') !== -1) {
-        return format.replace(/\{\{\s*amount\s*\}\}/, amount).replace(/\{\{\s*amount_no_decimals\s*\}\}/, Math.round(cents / 100));
-      }
-      return '$' + amount;
-    }
-
     function readJSON(root, selector, fallback) {
       var el = root.querySelector(selector);
       if (!el) return fallback;
@@ -207,8 +194,13 @@
 
     function render(root) {
       var variants = readJSON(root, '[data-qpt-variants]', []);
-      var format = readJSON(root, '[data-qpt-money]', '');
       if (!variants.length) return;
+
+      var currency = readJSON(root, '[data-qpt-currency]', 'USD');
+      var fmt = new Intl.NumberFormat(undefined, { style: 'currency', currency: currency });
+      function money(cents) {
+        return fmt.format(cents / 100);
+      }
 
       var position = parseInt(root.getAttribute('data-option-position'), 10);
       var picker = document.querySelector('variant-picker');
@@ -217,14 +209,13 @@
 
       var keys = ['o1', 'o2', 'o3'];
       var tierKey = keys[position - 1];
-      var otherKeys = keys.filter(function (k, i) {
-        return i + 1 !== position && i < 3;
-      });
 
       // The other options as the shopper has them set right now.
       var selected = {};
+      var otherKeys = [];
       keys.forEach(function (k, i) {
         if (i + 1 === position) return;
+        otherKeys.push(k);
         selected[k] = currentOption(picker, i + 1);
       });
 
@@ -236,13 +227,12 @@
       if (!matching.length) return;
 
       var qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
-
       var rows = [].slice.call(root.querySelectorAll('[data-qpt-row]'));
       var baseCents = null;
       var activeRow = null;
       var activeCents = null;
 
-      rows.forEach(function (row) {
+      rows.forEach(function (row, index) {
         var label = row.getAttribute('data-qpt-row');
         var range = parseRange(label);
         var variant = matching.filter(function (v) {
@@ -258,10 +248,10 @@
         }
 
         if (baseCents === null) baseCents = variant.price;
-        if (unitCell) unitCell.textContent = money(variant.price, format);
+        if (unitCell) unitCell.textContent = money(variant.price) + ' ea';
         if (saveCell) {
           var off = baseCents ? Math.round((1 - variant.price / baseCents) * 100) : 0;
-          saveCell.textContent = off > 0 ? off + '%' : '';
+          saveCell.textContent = index === 0 || off <= 0 ? 'Base' : 'Save ' + off + '%';
         }
 
         var active = range && qty >= range.min && qty <= range.max;
@@ -287,8 +277,8 @@
       var lineEl = root.querySelector('[data-qpt-line]');
       var totalEl = root.querySelector('[data-qpt-total]');
       if (activeCents != null) {
-        if (lineEl) lineEl.textContent = qty + ' × ' + money(activeCents, format);
-        if (totalEl) totalEl.textContent = money(activeCents * qty, format);
+        if (lineEl) lineEl.textContent = qty + ' × ' + money(activeCents);
+        if (totalEl) totalEl.textContent = money(activeCents * qty);
       } else {
         if (lineEl) lineEl.textContent = '';
         if (totalEl) totalEl.textContent = '';
@@ -301,19 +291,20 @@
           var range = parseRange(row.getAttribute('data-qpt-row'));
           if (range && range.min > qty && (next === null || range.min < next)) next = range.min;
         });
+        var nextVariant = null;
         if (next) {
-          var nextVariant = matching.filter(function (v) {
+          nextVariant = matching.filter(function (v) {
             var r = parseRange(v[tierKey]);
             return r && r.min === next;
           })[0];
-          if (nextVariant && activeCents != null && nextVariant.price < activeCents) {
-            note.hidden = false;
-            note.textContent =
-              'Add ' + (next - qty) + ' more to pay ' + money(nextVariant.price, format) + ' each.';
-            return;
-          }
         }
-        note.hidden = true;
+        if (nextVariant && activeCents != null && nextVariant.price < activeCents) {
+          note.hidden = false;
+          note.textContent =
+            'Add ' + (next - qty) + ' more to pay ' + money(nextVariant.price) + ' each.';
+        } else {
+          note.hidden = true;
+        }
       }
     }
 

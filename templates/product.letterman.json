@@ -233,11 +233,12 @@
               "type": "quantity-price-table",
               "settings": {
                 "option_name": "Quantity",
-                "heading": "Volume pricing",
+                "heading": "Buy More. Save More.",
+                "unit_label": "pcs",
                 "hide_option": true,
-                "show_savings": true,
+                "show_total": true,
                 "padding-block-start": 0,
-                "padding-block-end": 8
+                "padding-block-end": 16
               }
             },
             "buy_buttons_eYQEYi": {
