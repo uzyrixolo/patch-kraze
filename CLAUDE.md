@@ -24,6 +24,38 @@ Shopify theme for **patchkraze.com** (store: `patchkraze.myshopify.com`, admin: 
 
 Cart enforces a $70 minimum. All variant prices AND `custom.prices` metafields were raised so that `tier_min_qty × price ≥ $70` (rounded up to $0.25) on every violating cell (~200 cells across 47 products). **Backups** (pre-change snapshots): `backups/custom-prices-metafield-backup-2026-07-07.json` (all metafield values + definition id) and `backups/main-product-patch-kraze.liquid.bak-2026-07-07` (pre-metafield-cutover liquid with the old hardcoded `ALL_MATRICES`).
 
+### New pricing grids (August 2026)
+
+Source: `New Patch Kraze Pricing.xlsx` (8 sheets). Applied to **39 products** across 5
+categories; every cell verified against the workbook. Pre-change snapshot:
+`backups/shopify-full-backup-2026-08-08.jsonl` (all products, options, variant
+ids/titles/prices/SKUs).
+
+- **Embroidery — 31 products, 20 sizes x 8 tiers = 160 variants each.** Sizes now run to
+  **16"** (was 12"); `PRODUCT_CONFIGS.maxSize` raised to 16 for these 31 only.
+- **`{min:10, max:10}` is a real tier** — the workbook prices *exactly 10 pcs* on its own,
+  with graduated pricing starting at `11-25`. Variant titles must render a single-quantity
+  tier as `"10"`, not `"10-10"`. Both `qtyRangeStr` (variant lookup) and the pricing-table
+  row label special-case `min === max`. Getting this wrong sends the lookup to
+  `"2.0 inch - 10-10"`, which misses and silently falls back to a same-size variant at the
+  wrong price.
+- 3D / Chenille / PVC / Woven kept their size axes; each gained a `10-24` tier.
+- **`full-color-printed-patches` was deliberately left on the old grid** ("keep intact"), so
+  it now diverges from the 30 products it used to share a grid with.
+- `backpack-patches` and `patches-for-beanies` have no `custom.prices` metafield and fall
+  back to `FALLBACK_MATRIX` (still the old grid) — also now out of step.
+- **Woven inverts at 5"-7"**: 10 pcs is cheaper per piece than 25 pcs ($8.21 vs $11.95 at
+  7"). That's how the workbook is written; "Buy More. Save More." reads backwards there.
+- ~14 embroidered-grid products have `templateSuffix: null` — they render on the **default**
+  product template, not `patch`, so they never use the matrix at all (no size stepper, no
+  tier table, every variant directly selectable from a dropdown). Predates this work.
+
+**Migration order matters.** Variants first, metafield last — ideally the price updates and
+the `metafieldsSet` in one aliased mutation so there is no window where the displayed price
+(metafield) and the charged price (variant) disagree. Setting metafields first makes the
+theme compute new tier labels that have no matching variants, and the fallback at
+`main-product-patch-kraze.liquid` ~L1731 then picks any same-size variant at the wrong price.
+
 ## Back to School landing page
 
 - `sections/back-to-school-landing.liquid` + `templates/page.back-to-school.json` → live at **/pages/back-to-school** (page already created in admin, templateSuffix `back-to-school`).
