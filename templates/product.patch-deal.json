@@ -22,7 +22,7 @@
         "turnaround_standard_note": "Mockup in 24-48 hrs - production after approval",
         "turnaround_fast": "Fast Mockup - 7 Day Delivery",
         "turnaround_fast_note": "Priority mockup and delivered within 7 days",
-        "charge_velcro": true
+        "charge_velcro": false
       }
     },
     "product_details": {
