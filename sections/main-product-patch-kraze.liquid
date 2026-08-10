@@ -1219,8 +1219,12 @@
     // and /backups/main-product-patch-kraze.liquid.bak-* for the prior hardcoded version.
     const METAFIELD_MATRIX = {{ product.metafields.custom.prices.value | json }};
 
-    // Fallback matrix used only if a product is missing the metafield (should not happen
-    // for existing products; guards against newly added products that haven't been configured yet).
+    // Fallback matrix used ONLY if a product is missing the metafield - an
+    // emergency guard for newly added, not-yet-configured products. These are
+    // the LEGACY 2025 prices (6 tiers, 12" max); they do NOT match the August
+    // 2026 price books, and displayed prices will not match charged variant
+    // prices. Seed custom.prices plus matching variants instead of relying on
+    // this.
     const FALLBACK_MATRIX = {
       sizeBrackets: [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0],
       quantityTiers: [
@@ -1236,7 +1240,7 @@
     // Select the right matrix for current product: metafield value, else fallback
     const PRICING_MATRIX = METAFIELD_MATRIX || FALLBACK_MATRIX;
     if (!METAFIELD_MATRIX) {
-      console.warn('[Pricing] No custom.prices metafield found for product "' + PRODUCT_HANDLE + '" -- using fallback embroidered-patches matrix.');
+      console.error('[Pricing] No custom.prices metafield for "' + PRODUCT_HANDLE + '" -- falling back to LEGACY 2025 embroidered prices. Displayed prices will not match charged variant prices until the metafield and variants are seeded.');
     }
 
     // Helper: Find size bracket index
