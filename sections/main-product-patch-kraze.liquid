@@ -515,6 +515,7 @@
              <div class="control-group" style="margin-bottom:0;">
                 <label class="control-label">Total</label>
                 <div class="total-price-large" id="total-price-display">$159.00</div>
+                <div id="total-velcro-note" style="display:none; font-size:0.8rem; color:#6b7280; margin-top:0.25rem;">Includes Velcro backing (+$0.25/pc)</div>
                 <div id="velcro-surcharge-notice" style="display:none; text-align:center; font-size:0.75rem; color:#dc2626; margin-top:0.25rem; font-weight:600;">+$0.25/pc Velcro surcharge</div>
              </div>
           </div>
@@ -1763,7 +1764,14 @@
       const headerQty = document.getElementById('header-qty');
       if(headerQty) headerQty.innerText = qty;
       if(unitPriceDisplay) unitPriceDisplay.innerHTML = '$' + unitPrice.toFixed(2) + ' <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span>';
-      if(totalDisplay) totalDisplay.innerText = '$' + (qty * unitPrice).toFixed(2);
+      // The velcro surcharge is charged as a companion line item in the cart;
+      // reflect it in the displayed total so the page and the cart agree.
+      const backingSel = document.getElementById('backing-input');
+      const velcroInTotal = PRODUCT_HANDLE !== 'dtf-transfers' &&
+                            backingSel && backingSel.value.includes('Velcro');
+      if(totalDisplay) totalDisplay.innerText = '$' + (qty * unitPrice + (velcroInTotal ? qty * 0.25 : 0)).toFixed(2);
+      const velcroNote = document.getElementById('total-velcro-note');
+      if(velcroNote) velcroNote.style.display = velcroInTotal ? 'block' : 'none';
 
       // Update pricing rows highlighting (query live — rows may be rebuilt from matrix)
       document.querySelectorAll('.pricing-row').forEach(row => {
@@ -1873,6 +1881,9 @@
        };
        const desc = document.getElementById('backing-description');
        if(desc) desc.innerText = descMap[val] || '';
+
+       // Backing choice changes the displayed total (velcro surcharge)
+       if (typeof updatePriceAndVariant === 'function') updatePriceAndVariant();
     }
 
     window.selectLeatherColor = function(el, val) {
