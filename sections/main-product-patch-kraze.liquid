@@ -1631,9 +1631,14 @@
           const variantInput = document.getElementById('real-variant-id');
           if(variantInput) variantInput.value = selectedVariant.id;
 
-          // Update quantity input max
+          // Update quantity input max. Only cap by stock when Shopify would
+          // actually refuse the order (tracked inventory, policy deny) -
+          // stickers are made to order, so untracked/continue variants get
+          // the generous default.
           if(qtyInput) {
-            qtyInput.max = selectedVariant.inventory_quantity || 9999;
+            const capByStock = selectedVariant.inventory_management === 'shopify' &&
+                               selectedVariant.inventory_policy === 'deny';
+            qtyInput.max = (capByStock ? selectedVariant.inventory_quantity : 0) || 9999;
             if(qtyInput.value > qtyInput.max) qtyInput.value = qtyInput.max;
           }
         } else {
