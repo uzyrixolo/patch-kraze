@@ -904,16 +904,10 @@
       const backingInput = document.getElementById('backing-input');
       const qtyInput = document.getElementById('qty-input');
       const productHandle = '{{ product.handle }}';
-      // List of patch products that support velcro backing
-      const PATCH_PRODUCTS_WITH_BACKING = [
-        'embroidered-patches',
-        'chenille-patches',
-        '3d-embroidered-patches',
-        'woven-patches',
-        'pvc-rubber-patches',
-        'print-embroidery-patches'
-      ];
-      const needsVelcroBacking = PATCH_PRODUCTS_WITH_BACKING.includes(productHandle) &&
+      // Velcro surcharge applies to every product that renders the backing
+      // selector - the whole patch template except stickers and DTF transfers.
+      const needsVelcroBacking = !productHandle.includes('sticker') &&
+                                  productHandle !== 'dtf-transfers' &&
                                   backingInput && backingInput.value.includes('Velcro');
       const patchQty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
 
@@ -964,7 +958,7 @@
                   const velcroFormData = new FormData();
                   velcroFormData.append('id', velcroVariant.id);
                   velcroFormData.append('quantity', patchQty);
-                  velcroFormData.append('properties[_added_with]', 'embroidered-patches');
+                  velcroFormData.append('properties[_added_with]', productHandle);
                   velcroFormData.append('properties[_backing_type]', 'Velcro');
                   velcroFormData.append('properties[_price_per_piece]', '$0.25');
 
