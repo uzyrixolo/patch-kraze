@@ -162,47 +162,6 @@
                 "price_tVjtKg"
               ]
             },
-            "build_a_gang_sheet_main_product_cd9zwy": {
-              "type": "shopify://apps/build-a-gang-sheet/blocks/main-product/ee9ed31c-1d66-4e11-bf77-f31e69c2ec2b",
-              "settings": {
-                "btn-label": "Build your own Gang Sheet",
-                "btn-bg": "#000000",
-                "btn-fg": "#ffffff",
-                "show_quantity": false,
-                "product": "{{closest.product}}",
-                "custom_button_css": ""
-              }
-            },
-            "build_a_gang_sheet_gang_upload_7bRMpe": {
-              "type": "shopify://apps/build-a-gang-sheet/blocks/gang-upload/ee9ed31c-1d66-4e11-bf77-f31e69c2ec2b",
-              "settings": {
-                "btn-upload-label": "Upload your file",
-                "btn-bg": "#000000",
-                "btn-fg": "#ffffff",
-                "box-bg": "#008000"
-              }
-            },
-            "build_a_gang_sheet_gang_size_6UM9DD": {
-              "type": "shopify://apps/build-a-gang-sheet/blocks/gang-size/ee9ed31c-1d66-4e11-bf77-f31e69c2ec2b",
-              "settings": {
-                "btn-label": "Upload Image by Size",
-                "btn-bg": "#000000",
-                "btn-fg": "#ffffff",
-                "product": "{{closest.product}}"
-              }
-            },
-            "build_a_gang_sheet_gang_builder_upload_cBjB9F": {
-              "type": "shopify://apps/build-a-gang-sheet/blocks/gang-builder-upload/ee9ed31c-1d66-4e11-bf77-f31e69c2ec2b",
-              "settings": {
-                "btn-upload-heading": "Upload your file(s)",
-                "btn-upload-subheading": "Drag and drop file(s) here or click to browse",
-                "btn-upload-label": "Browse",
-                "btn-upload-footer": "to get started",
-                "btn-upload-bg": "#EEF9FF",
-                "btn-bg": "#0059B2",
-                "btn-fg": "#ffffff"
-              }
-            },
             "divider_VJhene": {
               "type": "_divider",
               "name": "t:names.divider",
@@ -293,10 +252,6 @@
           },
           "block_order": [
             "group_icgrde",
-            "build_a_gang_sheet_main_product_cd9zwy",
-            "build_a_gang_sheet_gang_upload_7bRMpe",
-            "build_a_gang_sheet_gang_size_6UM9DD",
-            "build_a_gang_sheet_gang_builder_upload_cBjB9F",
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
