@@ -1329,8 +1329,10 @@
       qtyMinLabel.innerText = `${productMinQty} Piece Min`;
     }
 
-    // Sync qty input min attribute and bump value if below minimum
-    if(qtyInput && productMinQty !== 10) {
+    // Sync qty input min attribute and bump value if below minimum.
+    // Always set it: the static markup ships min="1", which would let
+    // below-minimum quantities pass checkValidity() on add-to-cart.
+    if(qtyInput) {
       qtyInput.min = productMinQty;
       const currentVal = parseInt(qtyInput.value) || 0;
       if(currentVal < productMinQty) qtyInput.value = productMinQty;
