@@ -116,6 +116,76 @@
   else
     assign sorted_media = selected_product.media
   endif
+
+  # Colour-grouped gallery. Shopify attaches one image per variant, so a product
+  # photographed several times per colour cannot express that through variant
+  # images alone. Instead a photo declares its colour by naming it in the alt
+  # text or the filename, and the gallery then shows only the selected colour's
+  # photos plus any unlabelled ones, which are treated as shared.
+  #
+  # Entirely opt-in: until at least one photo names a colour, sorted_media is
+  # left exactly as it was, so every other product renders as before.
+  assign colour_option = null
+  for product_option in selected_product.options_with_values
+    assign option_key = product_option.name | downcase
+    if option_key contains 'colo' and colour_option == null
+      assign colour_option = product_option
+    endif
+  endfor
+
+  if colour_option != blank
+    assign chosen_variant = selected_product.selected_or_first_available_variant
+    case colour_option.position
+      when 1
+        assign chosen_colour = chosen_variant.option1
+      when 2
+        assign chosen_colour = chosen_variant.option2
+      else
+        assign chosen_colour = chosen_variant.option3
+    endcase
+  endif
+
+  if colour_option != blank and chosen_colour != blank
+    assign chosen_alt_key = chosen_colour | downcase
+    assign chosen_file_key = chosen_colour | handleize
+    assign grouped_media = '' | split: ','
+    assign any_media_labelled = false
+
+    for media in sorted_media
+      assign media_alt = media.alt | default: '' | downcase
+      assign media_src = media.preview_image.src | default: '' | downcase
+      assign labels_a_colour = false
+
+      for colour_value in colour_option.values
+        assign value_alt_key = colour_value.name | downcase
+        assign value_file_key = colour_value.name | handleize
+        if media_alt contains value_alt_key or media_src contains value_file_key
+          assign labels_a_colour = true
+        endif
+      endfor
+
+      if labels_a_colour
+        assign any_media_labelled = true
+      endif
+
+      assign keep = false
+      if media_alt contains chosen_alt_key or media_src contains chosen_file_key
+        assign keep = true
+      elsif labels_a_colour == false
+        assign keep = true
+      endif
+
+      if keep
+        assign found_media = sorted_media | where: 'id', media.id
+        assign grouped_media = grouped_media | concat: found_media
+      endif
+    endfor
+
+    if any_media_labelled and grouped_media.size > 0
+      assign sorted_media = grouped_media
+    endif
+  endif
+
   assign has_image_drop = sorted_media | has: 'media_type', 'image'
 
   # Determine if we're in single column mode (carousel or grid with one column)
