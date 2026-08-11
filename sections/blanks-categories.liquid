@@ -193,13 +193,32 @@
                       {%- endcapture -%}
                       {%- if chip != blank -%}
                         {%- assign shown = shown | plus: 1 -%}
+                        {%- liquid
+                          # Prefer the variant image, but fall back to the first photo
+                          # named after this colour — the same filename/alt convention
+                          # the product gallery groups by. Variant images come and go
+                          # when media is re-uploaded; the naming does not.
+                          assign chip_image = value.variant.featured_image
+                          if chip_image == blank
+                            assign value_file_key = value.name | handleize
+                            assign value_alt_key = value.name | downcase
+                            for candidate in product.images
+                              assign candidate_src = candidate.src | downcase
+                              assign candidate_alt = candidate.alt | default: '' | downcase
+                              if candidate_src contains value_file_key or candidate_alt contains value_alt_key
+                                assign chip_image = candidate
+                                break
+                              endif
+                            endfor
+                          endif
+                        -%}
                         <a
                           class="bkc__chip"
                           href="{{ product.url }}?variant={{ value.variant.id }}"
                           title="{{ value.name | escape }}"
                           aria-label="{{ product.title | escape }} — {{ value.name | escape }}"
-                          {% if value.variant.featured_image %}
-                            data-bkc-swap="{{ value.variant.featured_image | image_url: width: 500 }}"
+                          {% if chip_image %}
+                            data-bkc-swap="{{ chip_image | image_url: width: 500 }}"
                           {% endif %}
                         >{{ chip }}</a>
                       {%- endif -%}
