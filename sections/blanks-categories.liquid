@@ -13,7 +13,9 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Shop Blanks by Category" },
     { "type": "text", "id": "subheading", "label": "Subheading", "default": "Pick a category to browse every blank we stock." },
     { "type": "range", "id": "limit", "label": "Products per category", "min": 4, "max": 48, "step": 4, "default": 24 },
-    { "type": "checkbox", "id": "show_view_all", "label": "Show a \"View all\" link per category", "default": true }
+    { "type": "checkbox", "id": "show_view_all", "label": "Show a \"View all\" link per category", "default": true },
+    { "type": "checkbox", "id": "show_swatches", "label": "Show colour swatches on product cards", "default": true },
+    { "type": "range", "id": "swatch_limit", "label": "Swatches per card", "min": 3, "max": 12, "step": 1, "default": 6, "info": "Remaining colours are summarised as \"+N\"." }
   ],
   "blocks": [
     {
@@ -58,10 +60,19 @@
   .bkc__view-all:hover { text-decoration: underline; }
 
   .bkc__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1.5rem 1.25rem; }
-  .bkc__product { display: block; text-decoration: none; color: inherit; }
+  .bkc__product { display: block; }
+  .bkc__product-link { display: block; text-decoration: none; color: inherit; }
   .bkc__product-img { aspect-ratio: 1; border-radius: 0.75rem; overflow: hidden; background: #f9fafb; margin-bottom: 0.6rem; }
   .bkc__product-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.25s ease; }
   .bkc__product:hover .bkc__product-img img { transform: scale(1.04); }
+  /* Colour rail under each card. Sized through the theme's own swatch variables
+     so both native swatches and the name-derived chips land the same size. */
+  .bkc__chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin-top: 0.5rem; }
+  .bkc__chip { display: inline-flex; line-height: 0; border-radius: 50%; outline: 2px solid transparent; outline-offset: 2px; transition: outline-color 0.15s; }
+  .bkc__chip:hover, .bkc__chip:focus-visible { outline-color: #111827; }
+  .bkc__chips .swatch { --swatch-width: 18px; --swatch-height: 18px; border-radius: 50%; }
+  .bkc__chip-more { font-size: 0.75rem; font-weight: 600; color: #4b5563; text-decoration: none; padding-inline-start: 0.15rem; }
+  .bkc__chip-more:hover { color: #111827; text-decoration: underline; }
   .bkc__product-title { font-size: 0.9rem; font-weight: 600; color: #111827; margin: 0 0 0.2rem; line-height: 1.35; }
   .bkc__product-price { font-size: 0.9rem; color: #4b5563; margin: 0; }
   .bkc__empty { color: #6b7280; font-size: 0.95rem; margin: 0; }
@@ -142,21 +153,71 @@
       {%- if cat != blank and cat.products.size > 0 -%}
         <div class="bkc__grid">
           {%- for product in cat.products limit: section.settings.limit -%}
-            <a class="bkc__product" href="{{ product.url }}">
-              <div class="bkc__product-img">
-                {%- if product.featured_image -%}
-                  {{ product.featured_image | image_url: width: 500 | image_tag: widths: '190,300,400,500', sizes: '(max-width: 749px) 45vw, 240px', alt: product.title, loading: 'lazy' }}
+            {%- liquid
+              assign color_option = null
+              for product_option in product.options_with_values
+                assign option_key = product_option.name | downcase
+                if option_key contains 'colo' and color_option == null
+                  assign color_option = product_option
+                endif
+              endfor
+            -%}
+            <div class="bkc__product">
+              <a class="bkc__product-link" href="{{ product.url }}">
+                <div class="bkc__product-img">
+                  {%- if product.featured_image -%}
+                    {{ product.featured_image | image_url: width: 500 | image_tag: widths: '190,300,400,500', sizes: '(max-width: 749px) 45vw, 240px', alt: product.title, loading: 'lazy', class: 'bkc__product-photo' }}
+                  {%- endif -%}
+                </div>
+                <p class="bkc__product-title">{{ product.title }}</p>
+                <p class="bkc__product-price">
+                  {%- if product.price_varies -%}
+                    From {{ product.price_min | money }}
+                  {%- else -%}
+                    {{ product.price | money }}
+                  {%- endif -%}
+                </p>
+              </a>
+
+              {%- if color_option != blank and section.settings.show_swatches -%}
+                {%- assign shown = 0 -%}
+                {%- capture chips -%}
+                  {%- for value in color_option.values -%}
+                    {%- if shown < section.settings.swatch_limit -%}
+                      {%- capture chip -%}
+                        {%- if value.swatch -%}
+                          {% render 'swatch', swatch: value.swatch, mode: 'unscaled' %}
+                        {%- else -%}
+                          {% render 'color-name-swatch', value: value.name %}
+                        {%- endif -%}
+                      {%- endcapture -%}
+                      {%- if chip != blank -%}
+                        {%- assign shown = shown | plus: 1 -%}
+                        <a
+                          class="bkc__chip"
+                          href="{{ product.url }}?variant={{ value.variant.id }}"
+                          title="{{ value.name | escape }}"
+                          aria-label="{{ product.title | escape }} — {{ value.name | escape }}"
+                          {% if value.variant.featured_image %}
+                            data-bkc-swap="{{ value.variant.featured_image | image_url: width: 500 }}"
+                          {% endif %}
+                        >{{ chip }}</a>
+                      {%- endif -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endcapture -%}
+
+                {%- if shown > 0 -%}
+                  {%- assign extra = color_option.values.size | minus: shown -%}
+                  <div class="bkc__chips">
+                    {{ chips }}
+                    {%- if extra > 0 -%}
+                      <a class="bkc__chip-more" href="{{ product.url }}">+{{ extra }}</a>
+                    {%- endif -%}
+                  </div>
                 {%- endif -%}
-              </div>
-              <p class="bkc__product-title">{{ product.title }}</p>
-              <p class="bkc__product-price">
-                {%- if product.price_varies -%}
-                  From {{ product.price_min | money }}
-                {%- else -%}
-                  {{ product.price | money }}
-                {%- endif -%}
-              </p>
-            </a>
+              {%- endif -%}
+            </div>
           {%- endfor -%}
         </div>
       {%- else -%}
@@ -209,6 +270,35 @@
         select(next, true);
       });
     });
+
+    // Hovering a colour shows that colour's photo without leaving the grid.
+    root.addEventListener('mouseover', swapOn);
+    root.addEventListener('focusin', swapOn);
+    root.addEventListener('mouseout', swapOff);
+    root.addEventListener('focusout', swapOff);
+
+    function cardPhoto(chip) {
+      var card = chip.closest('.bkc__product');
+      return card ? card.querySelector('.bkc__product-photo') : null;
+    }
+
+    function swapOn(event) {
+      var chip = event.target.closest && event.target.closest('[data-bkc-swap]');
+      if (!chip) return;
+      var photo = cardPhoto(chip);
+      if (!photo) return;
+      if (!photo.dataset.bkcOriginal) photo.dataset.bkcOriginal = photo.getAttribute('src');
+      photo.removeAttribute('srcset');
+      photo.setAttribute('src', chip.getAttribute('data-bkc-swap'));
+    }
+
+    function swapOff(event) {
+      var chip = event.target.closest && event.target.closest('[data-bkc-swap]');
+      if (!chip) return;
+      var photo = cardPhoto(chip);
+      if (!photo || !photo.dataset.bkcOriginal) return;
+      photo.setAttribute('src', photo.dataset.bkcOriginal);
+    }
 
     // Deep link: ?category=<handle> wins over the default first tab.
     var wanted = new URLSearchParams(window.location.search).get('category');
