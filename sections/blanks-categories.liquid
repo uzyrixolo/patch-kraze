@@ -59,22 +59,29 @@
   .bkc__view-all { font-size: 0.875rem; font-weight: 600; color: #059669; text-decoration: none; white-space: nowrap; }
   .bkc__view-all:hover { text-decoration: underline; }
 
-  .bkc__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1.5rem 1.25rem; }
-  .bkc__product { display: block; }
+  .bkc__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; }
+  /* Each product sits in its own white card, so the photo, the colours and the
+     price read as one unit against the page. */
+  .bkc__product { display: flex; flex-direction: column; background: #fff; border: 1px solid #e5e7eb; border-radius: 0.9rem; padding: 0.85rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); transition: box-shadow 0.18s ease, transform 0.18s ease; }
+  .bkc__product:hover { box-shadow: 0 10px 26px rgba(0,0,0,0.10); transform: translateY(-2px); }
   .bkc__product-link { display: block; text-decoration: none; color: inherit; }
-  .bkc__product-img { aspect-ratio: 1; border-radius: 0.75rem; overflow: hidden; background: #f9fafb; margin-bottom: 0.6rem; }
-  .bkc__product-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.25s ease; }
+  .bkc__product-img { aspect-ratio: 1; border-radius: 0.6rem; overflow: hidden; background: #fff; }
+  /* contain, not cover: these are catalogue product shots, and cropping a cap
+     or a jacket to fill a square hides the shape the shopper is judging. */
+  .bkc__product-img img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform 0.25s ease; }
   .bkc__product:hover .bkc__product-img img { transform: scale(1.04); }
-  /* Colour rail under each card. Sized through the theme's own swatch variables
-     so both native swatches and the name-derived chips land the same size. */
-  .bkc__chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin-top: 0.5rem; }
-  .bkc__chip { display: inline-flex; line-height: 0; border-radius: 50%; outline: 2px solid transparent; outline-offset: 2px; transition: outline-color 0.15s; }
+  /* Colour rail. Sized through the theme's own swatch variables so both native
+     swatches and the name-derived chips land the same size. */
+  .bkc__chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; margin: 0.75rem 0 0; }
+  .bkc__chip { display: inline-flex; line-height: 0; border-radius: 4px; outline: 2px solid transparent; outline-offset: 2px; transition: outline-color 0.15s; }
   .bkc__chip:hover, .bkc__chip:focus-visible { outline-color: #111827; }
-  .bkc__chips .swatch { --swatch-width: 18px; --swatch-height: 18px; border-radius: 50%; }
-  .bkc__chip-more { font-size: 0.75rem; font-weight: 600; color: #4b5563; text-decoration: none; padding-inline-start: 0.15rem; }
+  .bkc__chips .swatch { --swatch-width: 20px; --swatch-height: 20px; border-radius: 4px; }
+  .bkc__chip-more { font-size: 0.75rem; font-weight: 600; color: #6b7280; text-decoration: none; padding-inline-start: 0.15rem; }
   .bkc__chip-more:hover { color: #111827; text-decoration: underline; }
-  .bkc__product-title { font-size: 0.9rem; font-weight: 600; color: #111827; margin: 0 0 0.2rem; line-height: 1.35; }
-  .bkc__product-price { font-size: 0.9rem; color: #4b5563; margin: 0; }
+  .bkc__product-meta { margin-top: 0.75rem; }
+  .bkc__product-eyebrow { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #9ca3af; margin-bottom: 0.1rem; }
+  .bkc__product-price { display: block; font-size: 1.15rem; font-weight: 800; color: #16a34a; line-height: 1.2; }
+  .bkc__product-title { display: block; font-size: 0.85rem; font-weight: 500; color: #4b5563; margin-top: 0.3rem; line-height: 1.35; }
   .bkc__empty { color: #6b7280; font-size: 0.95rem; margin: 0; }
 
   @media (max-width: 749px) {
@@ -169,14 +176,6 @@
                     {{ product.featured_image | image_url: width: 500 | image_tag: widths: '190,300,400,500', sizes: '(max-width: 749px) 45vw, 240px', alt: product.title, loading: 'lazy', class: 'bkc__product-photo' }}
                   {%- endif -%}
                 </div>
-                <p class="bkc__product-title">{{ product.title }}</p>
-                <p class="bkc__product-price">
-                  {%- if product.price_varies -%}
-                    From {{ product.price_min | money }}
-                  {%- else -%}
-                    {{ product.price | money }}
-                  {%- endif -%}
-                </p>
               </a>
 
               {%- if color_option != blank and section.settings.show_swatches -%}
@@ -236,6 +235,16 @@
                   </div>
                 {%- endif -%}
               {%- endif -%}
+
+              <a class="bkc__product-link bkc__product-meta" href="{{ product.url }}">
+                {%- if product.price_varies -%}
+                  <span class="bkc__product-eyebrow">As low as</span>
+                  <span class="bkc__product-price">{{ product.price_min | money }}</span>
+                {%- else -%}
+                  <span class="bkc__product-price">{{ product.price | money }}</span>
+                {%- endif -%}
+                <span class="bkc__product-title">{{ product.title }}</span>
+              </a>
             </div>
           {%- endfor -%}
         </div>
