@@ -148,7 +148,13 @@
   if colour_option != blank and chosen_colour != blank
     assign chosen_alt_key = chosen_colour | downcase
     assign chosen_file_key = chosen_colour | handleize
-    assign grouped_media = '' | split: ','
+
+    # First pass: does the chosen colour have photos of its own? A colour that
+    # has its own set gets only those — sliding through the gallery must not
+    # wander into other colours. A colour that has none yet falls back to the
+    # unlabelled photos, so half-labelled products never show an empty gallery.
+    assign chosen_media = '' | split: ','
+    assign shared_media = '' | split: ','
     assign any_media_labelled = false
 
     for media in sorted_media
@@ -164,25 +170,22 @@
         endif
       endfor
 
-      if labels_a_colour
-        assign any_media_labelled = true
-      endif
+      assign found_media = sorted_media | where: 'id', media.id
 
-      assign keep = false
       if media_alt contains chosen_alt_key or media_src contains chosen_file_key
-        assign keep = true
-      elsif labels_a_colour == false
-        assign keep = true
-      endif
-
-      if keep
-        assign found_media = sorted_media | where: 'id', media.id
-        assign grouped_media = grouped_media | concat: found_media
+        assign any_media_labelled = true
+        assign chosen_media = chosen_media | concat: found_media
+      elsif labels_a_colour
+        assign any_media_labelled = true
+      else
+        assign shared_media = shared_media | concat: found_media
       endif
     endfor
 
-    if any_media_labelled and grouped_media.size > 0
-      assign sorted_media = grouped_media
+    if chosen_media.size > 0
+      assign sorted_media = chosen_media
+    elsif any_media_labelled and shared_media.size > 0
+      assign sorted_media = shared_media
     endif
   endif
 
