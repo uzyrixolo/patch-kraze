@@ -399,6 +399,7 @@
   {% assign chenille_patches = all_products['chenille-patches'] %}
   {% assign tackle_twill = all_products['tackle-twill-letters'] %}
   {% assign pvc_rubber = all_products['pvc-rubber-patches'] %}
+  {% assign pvc_3d = all_products['3d-pvc-patches'] %}
   {% assign keychains = all_products['custom-keychains'] %}
   {% assign leather_patches = all_products['leather-patches'] %}
   {% assign faux_leather = all_products['faux-leather-patches'] %}
@@ -444,15 +445,20 @@
       }
     ],
     pvcRubber: [
-      { 
-        title: "Standard PVC Rubber", 
-        image: "{{ pvc_rubber.featured_image | img_url: '800x' }}", 
-        href: "/products/pvc-rubber-patches" 
+      {
+        title: "Standard PVC Rubber",
+        image: "{{ pvc_rubber.featured_image | img_url: '800x' }}",
+        href: "/products/pvc-rubber-patches"
       },
-      { 
-        title: "Custom Keychains", 
-        image: "{{ keychains.featured_image | img_url: '800x' }}", 
-        href: "/products/custom-keychains" 
+      {
+        title: "3D PVC Patches",
+        image: "{{ pvc_3d.featured_image | img_url: '800x' }}",
+        href: "/products/3d-pvc-patches"
+      },
+      {
+        title: "Custom Keychains",
+        image: "{{ keychains.featured_image | img_url: '800x' }}",
+        href: "/products/custom-keychains"
       }
     ],
     leather: [
