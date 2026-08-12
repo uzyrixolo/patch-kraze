@@ -499,6 +499,16 @@
                  </div>
                </div>
              </div>
+
+             <button type="button" class="pk-size-chart-trigger" onclick="openSizeChart()" aria-haspopup="dialog" aria-controls="size-chart-modal">
+               <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+               <span>Size Guide</span>
+             </button>
+             <style>
+               .pk-size-chart-trigger { display: flex; align-items: center; justify-content: center; gap: 0.35rem; width: 100%; margin-top: 0.75rem; padding: 0.55rem; background: none; border: 1px dashed #d1d5db; border-radius: 0.5rem; color: #059669; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+               .pk-size-chart-trigger:hover, .pk-size-chart-trigger:focus-visible { background: #ecfdf5; border-color: #a7f3d0; }
+               .pk-size-chart-trigger span { text-decoration: underline; text-underline-offset: 2px; }
+             </style>
           </div>
 
           <div class="row-3" style="margin-bottom: 1rem;">
@@ -1974,3 +1984,4 @@
 </script>
 
 {% render 'size-guide-modal' %}
+{% render 'size-chart-modal' %}

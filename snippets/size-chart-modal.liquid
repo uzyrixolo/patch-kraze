@@ -1,0 +1,88 @@
+{%- doc -%}
+  "Size Guide" popup: shows the size chart image. Separate from size-guide-modal.liquid
+  (the older "Patch Size Guide" link + table) on purpose — this is a distinct trigger with
+  its own id/functions (openSizeChart / closeSizeChart) so it does not touch that one.
+{%- enddoc -%}
+
+<style>
+  .pk-chart-modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;
+    padding: 1.25rem;
+  }
+  .pk-chart-modal-overlay.open { display: flex; animation: pkChartModalFadeIn 0.2s ease; }
+  .pk-chart-modal-content {
+    background: white; width: 100%; max-width: 460px; max-height: 90vh;
+    border-radius: 1rem; padding: 1.5rem; position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+  }
+  .pk-chart-close-btn {
+    position: absolute; top: 0.75rem; right: 0.75rem; width: 2rem; height: 2rem;
+    display: flex; align-items: center; justify-content: center;
+    background: #f3f4f6; border: none; border-radius: 999px; font-size: 1.35rem;
+    line-height: 1; cursor: pointer; color: #374151;
+  }
+  .pk-chart-close-btn:hover { background: #e5e7eb; }
+  .pk-chart-modal-title { font-size: 1.25rem; font-weight: 700; margin: 0 0 1rem; text-align: center; padding-right: 2rem; }
+  .pk-size-chart-img { display: block; width: 100%; height: auto; border-radius: 0.6rem; }
+
+  @keyframes pkChartModalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 480px) {
+    .pk-chart-modal-content { padding: 1.1rem; border-radius: 0.85rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pk-chart-modal-overlay.open { animation: none; }
+  }
+</style>
+
+<div id="size-chart-modal" class="pk-chart-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="size-chart-modal-title" hidden>
+  <div class="pk-chart-modal-content">
+    <button type="button" class="pk-chart-close-btn" onclick="closeSizeChart()" aria-label="Close size guide">&times;</button>
+    <h3 id="size-chart-modal-title" class="pk-chart-modal-title">Size Guide</h3>
+    <img
+      class="pk-size-chart-img"
+      src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Size_Chart.webp?v=1786571864"
+      width="768"
+      height="1376"
+      alt="Patch size guide: recommended patch sizes for hats, chests, sleeves and other placements"
+      loading="lazy"
+    >
+  </div>
+</div>
+
+<script>
+  (function () {
+    var modal = document.getElementById('size-chart-modal');
+    var lastFocused = null;
+
+    window.openSizeChart = function () {
+      lastFocused = document.activeElement;
+      modal.hidden = false;
+      requestAnimationFrame(function () {
+        modal.classList.add('open');
+      });
+      modal.querySelector('.pk-chart-close-btn').focus();
+      document.addEventListener('keydown', onKeydown);
+    };
+
+    window.closeSizeChart = function () {
+      modal.classList.remove('open');
+      document.removeEventListener('keydown', onKeydown);
+      window.setTimeout(function () {
+        modal.hidden = true;
+      }, 200);
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    };
+
+    function onKeydown(event) {
+      if (event.key === 'Escape') closeSizeChart();
+    }
+
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) closeSizeChart();
+    });
+  })();
+</script>
