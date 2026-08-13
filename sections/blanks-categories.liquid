@@ -75,21 +75,38 @@
   /* ---- Filter sidebar + grid layout ---- */
   .bkc__panel-body { display: flex; align-items: flex-start; gap: 1.75rem; }
 
-  .bkc__filters { flex: 0 0 216px; width: 216px; }
+  /* The whole panel sits in one bordered card, matching the product cards below
+     it, rather than floating loose against the page background. */
+  .bkc__filters { flex: 0 0 216px; width: 216px; background: #fff; border: 1px solid #e5e7eb; border-radius: 0.9rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); overflow: hidden; }
   .bkc__filters-toggle { display: none; }
-  .bkc__filters-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+  .bkc__filters-body { padding: 1.1rem 1.1rem 0.5rem; }
+  .bkc__filters-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
   .bkc__filters-title { font-weight: 700; font-size: 0.95rem; color: #111827; }
   .bkc__filters-clear { background: none; border: none; color: #059669; font-size: 0.8rem; font-weight: 600; cursor: pointer; padding: 0; }
   .bkc__filters-clear:hover { text-decoration: underline; }
-  .bkc__filter-group { border-top: 1px solid #e5e7eb; padding: 1rem 0; }
-  .bkc__filter-group:first-child { border-top: none; padding-top: 0; }
-  .bkc__filter-heading { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #374151; margin: 0 0 0.65rem; }
+
+  /* Each facet is a native <details> accordion — free open/close behaviour and
+     keyboard support with no JS of our own to maintain. */
+  .bkc__filter-group { border-top: 1px solid #e5e7eb; padding: 0.9rem 0; }
+  .bkc__filter-group:first-of-type { border-top: none; padding-top: 0.15rem; }
+  .bkc__filter-heading {
+    display: flex; align-items: center; justify-content: space-between; cursor: pointer;
+    font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    color: #374151; margin: 0; list-style: none;
+  }
+  .bkc__filter-heading::-webkit-details-marker { display: none; }
+  .bkc__filter-chevron { width: 0.8rem; height: 0.8rem; color: #9ca3af; flex-shrink: 0; transition: transform 0.15s; }
+  .bkc__filter-group[open] .bkc__filter-chevron { transform: rotate(180deg); }
+  .bkc__filter-group > *:not(summary) { margin-top: 0.75rem; }
 
   .bkc__filter-swatches { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .bkc__filter-swatch { display: inline-flex; padding: 2px; border-radius: 6px; border: none; background: none; cursor: pointer; line-height: 0; outline: 2px solid transparent; outline-offset: 1px; transition: outline-color 0.15s; }
   .bkc__filter-swatch:hover { outline-color: #d1d5db; }
   .bkc__filter-swatch[aria-pressed='true'] { outline-color: #111827; }
   .bkc__filter-swatch .swatch { --swatch-width: 22px; --swatch-height: 22px; border-radius: 5px; }
+  /* Fixed rainbow-wheel icon for "Multi Color" — it stands for the whole two-tone
+     bucket, not any one product's colours, so it isn't drawn from swatch data. */
+  .bkc__multi-swatch { background: conic-gradient(from 0deg, #ef4444, #f59e0b, #eab308, #22c55e, #0ea5e9, #6366f1, #a855f7, #ef4444) !important; }
   .bkc__show-more { display: block; margin-top: 0.6rem; background: none; border: none; padding: 0; font-size: 0.8rem; font-weight: 600; color: #059669; cursor: pointer; }
   .bkc__show-more:hover { text-decoration: underline; }
 
@@ -134,7 +151,7 @@
     .bkc__card-icon { width: 2.5rem; height: 2.5rem; }
 
     .bkc__panel-body { flex-direction: column; }
-    .bkc__filters { width: 100%; flex-basis: auto; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; margin-bottom: 1.25rem; }
+    .bkc__filters { width: 100%; flex-basis: auto; border-radius: 0.75rem; margin-bottom: 1.25rem; }
     .bkc__filters-toggle {
       display: flex; width: 100%; align-items: center; justify-content: space-between;
       padding: 0.8rem 1rem; background: #f9fafb; border: none; font-weight: 600;
@@ -220,6 +237,7 @@
         {%- liquid
           assign filter_color_values = '' | split: ','
           assign seen_color_handles = '' | split: ','
+          assign has_multi_color = false
 
           assign count_dadcap = 0
           assign count_trucker = 0
@@ -258,13 +276,21 @@
 
             if color_option != blank
               for value in color_option.values
-                assign value_handle = value.name | handleize
-                unless seen_color_handles contains value_handle
-                  assign one_handle = value_handle | split: '|'
-                  assign seen_color_handles = seen_color_handles | concat: one_handle
-                  assign matching_value = color_option.values | where: 'name', value.name
-                  assign filter_color_values = filter_color_values | concat: matching_value
-                endunless
+                if value.name contains '/'
+                  # Two-tone values ("Black / White Sleeves") join the single "Multi
+                  # Color" swatch instead of each becoming their own filter entry —
+                  # matches the reference site's "Multi" bucket rather than listing
+                  # every body/sleeve combination as its own colour.
+                  assign has_multi_color = true
+                else
+                  assign value_handle = value.name | handleize
+                  unless seen_color_handles contains value_handle
+                    assign one_handle = value_handle | split: '|'
+                    assign seen_color_handles = seen_color_handles | concat: one_handle
+                    assign matching_value = color_option.values | where: 'name', value.name
+                    assign filter_color_values = filter_color_values | concat: matching_value
+                  endunless
+                endif
               endfor
             endif
 
@@ -384,7 +410,7 @@
           endif
 
           assign has_any_facet = false
-          if filter_color_values.size > 0 or price_span > 0 or has_style_facet or has_fabric_facet
+          if filter_color_values.size > 0 or has_multi_color or price_span > 0 or has_style_facet or has_fabric_facet
             assign has_any_facet = true
           endif
         -%}
@@ -403,10 +429,10 @@
                   <button type="button" class="bkc__filters-clear" data-bkc-clear hidden>Clear all</button>
                 </div>
 
-                {%- if filter_color_values.size > 0 -%}
+                {%- if filter_color_values.size > 0 or has_multi_color -%}
                   {%- assign filter_swatch_limit = section.settings.filter_swatch_limit -%}
-                  <div class="bkc__filter-group">
-                    <h4 class="bkc__filter-heading">Colors</h4>
+                  <details class="bkc__filter-group" open>
+                    <summary class="bkc__filter-heading">Colors<svg class="bkc__filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
                     <div class="bkc__filter-swatches" data-bkc-swatch-list>
                       {%- for value in filter_color_values -%}
                         <button
@@ -425,16 +451,32 @@
                           {%- endif -%}
                         </button>
                       {%- endfor -%}
+                      {%- if has_multi_color -%}
+                        {%- comment %} Represents every two-tone value as one bucket, the same
+                           way the reference site's "Multi" swatch does — a specific
+                           "Black / White Sleeves" combo isn't a useful filter on its own,
+                           but "has more than one colour" is. {%- endcomment %}
+                        <button
+                          type="button"
+                          class="bkc__filter-swatch"
+                          data-facet="color"
+                          data-value="multi-color"
+                          aria-pressed="false"
+                          title="Multi Color"
+                        >
+                          <span class="swatch swatch--unscaled bkc__multi-swatch"></span>
+                        </button>
+                      {%- endif -%}
                     </div>
                     {%- if filter_color_values.size > filter_swatch_limit -%}
                       <button type="button" class="bkc__show-more" data-bkc-show-more>Show all ({{ filter_color_values.size }})</button>
                     {%- endif -%}
-                  </div>
+                  </details>
                 {%- endif -%}
 
                 {%- if price_span > 0 -%}
-                  <div class="bkc__filter-group">
-                    <h4 class="bkc__filter-heading">Price</h4>
+                  <details class="bkc__filter-group" open>
+                    <summary class="bkc__filter-heading">Price<svg class="bkc__filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
                     {%- if count_price_0 > 0 -%}
                       <label class="bkc__filter-check"><input type="checkbox" data-facet="price" value="0"> Under ${{ price_break_1_display }} <span>({{ count_price_0 }})</span></label>
                     {%- endif -%}
@@ -444,12 +486,12 @@
                     {%- if count_price_2 > 0 -%}
                       <label class="bkc__filter-check"><input type="checkbox" data-facet="price" value="2"> ${{ price_break_2_display }}+ <span>({{ count_price_2 }})</span></label>
                     {%- endif -%}
-                  </div>
+                  </details>
                 {%- endif -%}
 
                 {%- if has_style_facet -%}
-                  <div class="bkc__filter-group">
-                    <h4 class="bkc__filter-heading">Style</h4>
+                  <details class="bkc__filter-group" open>
+                    <summary class="bkc__filter-heading">Style<svg class="bkc__filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
                     {%- if count_trucker > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Trucker' | handleize }}"> Trucker <span>({{ count_trucker }})</span></label>{%- endif -%}
                     {%- if count_snapback > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Snapback' | handleize }}"> Snapback <span>({{ count_snapback }})</span></label>{%- endif -%}
                     {%- if count_dadcap > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Dad Cap' | handleize }}"> Dad Cap <span>({{ count_dadcap }})</span></label>{%- endif -%}
@@ -464,12 +506,12 @@
                     {%- if count_safety > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Safety' | handleize }}"> Safety <span>({{ count_safety }})</span></label>{%- endif -%}
                     {%- if count_cuff > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Cuff' | handleize }}"> Cuff <span>({{ count_cuff }})</span></label>{%- endif -%}
                     {%- if count_distressed > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Distressed' | handleize }}"> Distressed <span>({{ count_distressed }})</span></label>{%- endif -%}
-                  </div>
+                  </details>
                 {%- endif -%}
 
                 {%- if has_fabric_facet -%}
-                  <div class="bkc__filter-group">
-                    <h4 class="bkc__filter-heading">Fabric</h4>
+                  <details class="bkc__filter-group" open>
+                    <summary class="bkc__filter-heading">Fabric<svg class="bkc__filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
                     {%- if count_cottontwill > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Cotton Twill' | handleize }}"> Cotton Twill <span>({{ count_cottontwill }})</span></label>{%- endif -%}
                     {%- if count_woolblend > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Wool Blend' | handleize }}"> Wool Blend <span>({{ count_woolblend }})</span></label>{%- endif -%}
                     {%- if count_foammesh > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Foam Mesh' | handleize }}"> Foam Mesh <span>({{ count_foammesh }})</span></label>{%- endif -%}
@@ -477,7 +519,7 @@
                     {%- if count_knit > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Knit' | handleize }}"> Knit <span>({{ count_knit }})</span></label>{%- endif -%}
                     {%- if count_piqueknit > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Pique Knit' | handleize }}"> Pique Knit <span>({{ count_piqueknit }})</span></label>{%- endif -%}
                     {%- if count_hemp > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Hemp' | handleize }}"> Hemp <span>({{ count_hemp }})</span></label>{%- endif -%}
-                  </div>
+                  </details>
                 {%- endif -%}
               </div>
             </aside>
@@ -504,7 +546,11 @@
                   assign color_handles = '' | split: ','
                   if color_option != blank
                     for value in color_option.values
-                      assign one_color_handle = value.name | handleize | split: '|'
+                      if value.name contains '/'
+                        assign one_color_handle = 'multi-color' | split: '|'
+                      else
+                        assign one_color_handle = value.name | handleize | split: '|'
+                      endif
                       assign color_handles = color_handles | concat: one_color_handle
                     endfor
                   endif
