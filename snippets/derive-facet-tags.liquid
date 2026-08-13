@@ -1,0 +1,94 @@
+{%- doc -%}
+  Derives Style/Fabric filter tags for the Blanks category page from a
+  product's title. There is no fabric or style metafield on these products,
+  so this reads real words already present in the title (e.g. "Cotton Twill",
+  "Snapback", "Unstructured") rather than inventing a filter with fabricated
+  data. A product whose title names none of these simply gets no tags for
+  that facet — it stays out of that facet's checkboxes rather than being
+  force-fit into a wrong one, and keeps showing up when no filter is applied.
+
+  Outputs a comma-separated list of human-readable labels (e.g.
+  "Dad Cap,Performance"). Callers handleize per-item themselves when they need
+  a machine-safe token for matching/data-attributes.
+
+  @param {string} title - product.title (any case; this lowercases it).
+  @param {string} kind - 'style' or 'fabric'.
+
+  @example
+  {% render 'derive-facet-tags', title: product.title, kind: 'style' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign t = title | downcase
+  assign tags = '' | split: ','
+
+  if kind == 'style'
+    # unstructured/structured checked as a pair first — "unstructured" contains
+    # "structured" as a substring, so the plain check must not also fire.
+    if t contains 'unstructured'
+      assign tags = tags | concat: ('Unstructured' | split: '|')
+    elsif t contains 'structured'
+      assign tags = tags | concat: ('Structured' | split: '|')
+    endif
+
+    if t contains 'dad cap'
+      assign tags = tags | concat: ('Dad Cap' | split: '|')
+    endif
+    if t contains 'trucker'
+      assign tags = tags | concat: ('Trucker' | split: '|')
+    endif
+    if t contains 'snapback'
+      assign tags = tags | concat: ('Snapback' | split: '|')
+    endif
+    if t contains 'fitted'
+      assign tags = tags | concat: ('Fitted' | split: '|')
+    endif
+    if t contains 'cadet'
+      assign tags = tags | concat: ('Cadet' | split: '|')
+    endif
+    if t contains 'driver'
+      assign tags = tags | concat: ('Driver' | split: '|')
+    endif
+    if t contains 'distressed'
+      assign tags = tags | concat: ('Distressed' | split: '|')
+    endif
+    if t contains 'cuff'
+      assign tags = tags | concat: ('Cuff' | split: '|')
+    endif
+    if t contains 'low-profile' or t contains 'low profile'
+      assign tags = tags | concat: ('Low-Profile' | split: '|')
+    endif
+    if t contains 'baseball'
+      assign tags = tags | concat: ('Baseball' | split: '|')
+    endif
+    if t contains 'safety'
+      assign tags = tags | concat: ('Safety' | split: '|')
+    endif
+    if t contains 'performance' or t contains 'performer' or t contains 'pro-formance' or t contains 'cool & dry' or t contains 'sport'
+      assign tags = tags | concat: ('Performance' | split: '|')
+    endif
+
+  elsif kind == 'fabric'
+    if t contains 'twill'
+      assign tags = tags | concat: ('Cotton Twill' | split: '|')
+    endif
+    if t contains 'wool'
+      assign tags = tags | concat: ('Wool Blend' | split: '|')
+    endif
+    if t contains 'foam'
+      assign tags = tags | concat: ('Foam Mesh' | split: '|')
+    endif
+    if t contains 'hemp'
+      assign tags = tags | concat: ('Hemp' | split: '|')
+    endif
+    if t contains 'poly'
+      assign tags = tags | concat: ('Poly' | split: '|')
+    endif
+    if t contains 'piqu'
+      assign tags = tags | concat: ('Pique Knit' | split: '|')
+    elsif t contains 'knit'
+      assign tags = tags | concat: ('Knit' | split: '|')
+    endif
+  endif
+-%}
+{{- tags | join: ',' -}}

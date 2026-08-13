@@ -1,7 +1,18 @@
 {% comment %}
-  Category rail for the Blanks collection page: pill cards across the top, the
-  matching product grid underneath. The first block renders expanded, so the
-  page opens on whichever category is ordered first (Hats).
+  Category rail for the Blanks collection page: pill cards across the top, a
+  filter sidebar, and the matching product grid underneath. The first block
+  renders expanded, so the page opens on whichever category is ordered first
+  (Hats).
+
+  Filters are client-side (checkbox/swatch toggles show or hide the already-
+  rendered cards) rather than real Shopify collection filters, because this
+  section renders a fixed product list per category block, not a paginated
+  collection object main-collection can filter natively.
+
+  Style and Fabric have no metafield on these products, so those two facets
+  are derived from words already in the product title (see
+  snippets/derive-facet-tags.liquid) rather than invented. A product whose
+  title names none of the known words simply carries no tag for that facet.
 {% endcomment %}
 
 {% schema %}
@@ -15,7 +26,9 @@
     { "type": "range", "id": "limit", "label": "Products per category", "min": 4, "max": 48, "step": 4, "default": 24 },
     { "type": "checkbox", "id": "show_view_all", "label": "Show a \"View all\" link per category", "default": true },
     { "type": "checkbox", "id": "show_swatches", "label": "Show colour swatches on product cards", "default": true },
-    { "type": "range", "id": "swatch_limit", "label": "Swatches per card", "min": 3, "max": 12, "step": 1, "default": 6, "info": "Remaining colours are summarised as \"+N\"." }
+    { "type": "range", "id": "swatch_limit", "label": "Swatches per card", "min": 3, "max": 12, "step": 1, "default": 6, "info": "Remaining colours are summarised as \"+N\"." },
+    { "type": "range", "id": "filter_swatch_limit", "label": "Colour swatches shown before \"Show all\"", "min": 8, "max": 48, "step": 4, "default": 24 },
+    { "type": "checkbox", "id": "enable_filters", "label": "Show the filter sidebar", "default": true, "info": "Colour, Price, Style and Fabric — only facets with at least one matching product are shown." }
   ],
   "blocks": [
     {
@@ -59,11 +72,41 @@
   .bkc__view-all { font-size: 0.875rem; font-weight: 600; color: #059669; text-decoration: none; white-space: nowrap; }
   .bkc__view-all:hover { text-decoration: underline; }
 
+  /* ---- Filter sidebar + grid layout ---- */
+  .bkc__panel-body { display: flex; align-items: flex-start; gap: 1.75rem; }
+
+  .bkc__filters { flex: 0 0 216px; width: 216px; }
+  .bkc__filters-toggle { display: none; }
+  .bkc__filters-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+  .bkc__filters-title { font-weight: 700; font-size: 0.95rem; color: #111827; }
+  .bkc__filters-clear { background: none; border: none; color: #059669; font-size: 0.8rem; font-weight: 600; cursor: pointer; padding: 0; }
+  .bkc__filters-clear:hover { text-decoration: underline; }
+  .bkc__filter-group { border-top: 1px solid #e5e7eb; padding: 1rem 0; }
+  .bkc__filter-group:first-child { border-top: none; padding-top: 0; }
+  .bkc__filter-heading { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #374151; margin: 0 0 0.65rem; }
+
+  .bkc__filter-swatches { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .bkc__filter-swatch { display: inline-flex; padding: 2px; border-radius: 6px; border: none; background: none; cursor: pointer; line-height: 0; outline: 2px solid transparent; outline-offset: 1px; transition: outline-color 0.15s; }
+  .bkc__filter-swatch:hover { outline-color: #d1d5db; }
+  .bkc__filter-swatch[aria-pressed='true'] { outline-color: #111827; }
+  .bkc__filter-swatch .swatch { --swatch-width: 22px; --swatch-height: 22px; border-radius: 5px; }
+  .bkc__show-more { display: block; margin-top: 0.6rem; background: none; border: none; padding: 0; font-size: 0.8rem; font-weight: 600; color: #059669; cursor: pointer; }
+  .bkc__show-more:hover { text-decoration: underline; }
+
+  .bkc__filter-check { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; padding: 0.3rem 0; cursor: pointer; }
+  .bkc__filter-check input { accent-color: #10b981; width: 15px; height: 15px; flex-shrink: 0; }
+  .bkc__filter-check span { color: #9ca3af; }
+
+  .bkc__grid-wrap { flex: 1; min-width: 0; }
+  .bkc__result-count { font-size: 0.85rem; color: #6b7280; margin: 0 0 0.85rem; }
+  .bkc__no-results { color: #6b7280; font-size: 0.95rem; padding: 2.5rem 0; text-align: center; }
+
   .bkc__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; }
   /* Each product sits in its own white card, so the photo, the colours and the
      price read as one unit against the page. */
   .bkc__product { display: flex; flex-direction: column; background: #fff; border: 1px solid #e5e7eb; border-radius: 0.9rem; padding: 0.85rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); transition: box-shadow 0.18s ease, transform 0.18s ease; }
   .bkc__product:hover { box-shadow: 0 10px 26px rgba(0,0,0,0.10); transform: translateY(-2px); }
+  .bkc__product[hidden] { display: none; }
   .bkc__product-link { display: block; text-decoration: none; color: inherit; }
   .bkc__product-img { aspect-ratio: 1; border-radius: 0.6rem; overflow: hidden; background: #fff; }
   /* contain, not cover: these are catalogue product shots, and cropping a cap
@@ -84,15 +127,27 @@
   .bkc__product-title { display: block; font-size: 0.85rem; font-weight: 500; color: #4b5563; margin-top: 0.3rem; line-height: 1.35; }
   .bkc__empty { color: #6b7280; font-size: 0.95rem; margin: 0; }
 
-  @media (max-width: 749px) {
+  @media (max-width: 899px) {
     .bkc { padding: 1.5rem 1rem 2.5rem; }
     .bkc__heading { font-size: 1.4rem; }
     .bkc__grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.25rem 0.9rem; }
     .bkc__card-icon { width: 2.5rem; height: 2.5rem; }
+
+    .bkc__panel-body { flex-direction: column; }
+    .bkc__filters { width: 100%; flex-basis: auto; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; margin-bottom: 1.25rem; }
+    .bkc__filters-toggle {
+      display: flex; width: 100%; align-items: center; justify-content: space-between;
+      padding: 0.8rem 1rem; background: #f9fafb; border: none; font-weight: 600;
+      font-size: 0.9rem; color: #111827; cursor: pointer;
+    }
+    .bkc__filters-toggle svg { width: 1rem; height: 1rem; transition: transform 0.15s; }
+    .bkc__filters--open .bkc__filters-toggle svg { transform: rotate(180deg); }
+    .bkc__filters-body { display: none; padding: 0 1rem 1.1rem; }
+    .bkc__filters--open .bkc__filters-body { display: block; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .bkc__card, .bkc__product-img img { transition: none; }
+    .bkc__card, .bkc__product-img img, .bkc__filters-toggle svg { transition: none; }
   }
 </style>
 
@@ -141,6 +196,7 @@
     {%- liquid
       assign cat = block.settings.collection
       assign label = block.settings.label | default: cat.title | default: 'Category'
+      assign panel_products = cat.products
     -%}
     <div
       class="bkc__panel"
@@ -157,96 +213,412 @@
         {%- endif -%}
       </div>
 
-      {%- if cat != blank and cat.products.size > 0 -%}
-        <div class="bkc__grid">
-          {%- for product in cat.products limit: section.settings.limit -%}
-            {%- liquid
-              assign color_option = null
-              for product_option in product.options_with_values
-                assign option_key = product_option.name | downcase
-                if option_key contains 'colo' and color_option == null
-                  assign color_option = product_option
-                endif
+      {%- if cat != blank and panel_products.size > 0 -%}
+        {%- comment %} ---- Facet pre-pass: one sweep over this category's products to
+             collect distinct colours and count Price/Style/Fabric matches, all computed
+             fresh per category so Hats and Jackets never leak into each other. ---- {%- endcomment %}
+        {%- liquid
+          assign filter_color_values = '' | split: ','
+          assign seen_color_handles = '' | split: ','
+
+          assign count_dadcap = 0
+          assign count_trucker = 0
+          assign count_snapback = 0
+          assign count_unstructured = 0
+          assign count_structured = 0
+          assign count_fitted = 0
+          assign count_cadet = 0
+          assign count_driver = 0
+          assign count_distressed = 0
+          assign count_cuff = 0
+          assign count_lowprofile = 0
+          assign count_baseball = 0
+          assign count_safety = 0
+          assign count_performance = 0
+
+          assign count_cottontwill = 0
+          assign count_woolblend = 0
+          assign count_foammesh = 0
+          assign count_hemp = 0
+          assign count_poly = 0
+          assign count_knit = 0
+          assign count_piqueknit = 0
+
+          assign price_min_overall = null
+          assign price_max_overall = null
+
+          for product in panel_products
+            assign color_option = null
+            for product_option in product.options_with_values
+              assign option_key = product_option.name | downcase
+              if option_key contains 'colo' and color_option == null
+                assign color_option = product_option
+              endif
+            endfor
+
+            if color_option != blank
+              for value in color_option.values
+                assign value_handle = value.name | handleize
+                unless seen_color_handles contains value_handle
+                  assign seen_color_handles = seen_color_handles | concat: (value_handle | split: '|')
+                  assign filter_color_values = filter_color_values | concat: (color_option.values | where: 'name', value.name)
+                endunless
               endfor
-            -%}
-            <div class="bkc__product">
-              <a class="bkc__product-link" href="{{ product.url }}">
-                <div class="bkc__product-img">
-                  {%- if product.featured_image -%}
-                    {{ product.featured_image | image_url: width: 500 | image_tag: widths: '190,300,400,500', sizes: '(max-width: 749px) 45vw, 240px', alt: product.title, loading: 'lazy', class: 'bkc__product-photo' }}
-                  {%- endif -%}
+            endif
+
+            capture style_csv
+              render 'derive-facet-tags', title: product.title, kind: 'style'
+            endcapture
+            capture fabric_csv
+              render 'derive-facet-tags', title: product.title, kind: 'fabric'
+            endcapture
+
+            if style_csv contains 'Dad Cap'
+              assign count_dadcap = count_dadcap | plus: 1
+            endif
+            if style_csv contains 'Trucker'
+              assign count_trucker = count_trucker | plus: 1
+            endif
+            if style_csv contains 'Snapback'
+              assign count_snapback = count_snapback | plus: 1
+            endif
+            if style_csv contains 'Unstructured'
+              assign count_unstructured = count_unstructured | plus: 1
+            elsif style_csv contains 'Structured'
+              assign count_structured = count_structured | plus: 1
+            endif
+            if style_csv contains 'Fitted'
+              assign count_fitted = count_fitted | plus: 1
+            endif
+            if style_csv contains 'Cadet'
+              assign count_cadet = count_cadet | plus: 1
+            endif
+            if style_csv contains 'Driver'
+              assign count_driver = count_driver | plus: 1
+            endif
+            if style_csv contains 'Distressed'
+              assign count_distressed = count_distressed | plus: 1
+            endif
+            if style_csv contains 'Cuff'
+              assign count_cuff = count_cuff | plus: 1
+            endif
+            if style_csv contains 'Low-Profile'
+              assign count_lowprofile = count_lowprofile | plus: 1
+            endif
+            if style_csv contains 'Baseball'
+              assign count_baseball = count_baseball | plus: 1
+            endif
+            if style_csv contains 'Safety'
+              assign count_safety = count_safety | plus: 1
+            endif
+            if style_csv contains 'Performance'
+              assign count_performance = count_performance | plus: 1
+            endif
+
+            if fabric_csv contains 'Cotton Twill'
+              assign count_cottontwill = count_cottontwill | plus: 1
+            endif
+            if fabric_csv contains 'Wool Blend'
+              assign count_woolblend = count_woolblend | plus: 1
+            endif
+            if fabric_csv contains 'Foam Mesh'
+              assign count_foammesh = count_foammesh | plus: 1
+            endif
+            if fabric_csv contains 'Hemp'
+              assign count_hemp = count_hemp | plus: 1
+            endif
+            if fabric_csv contains 'Poly'
+              assign count_poly = count_poly | plus: 1
+            endif
+            if fabric_csv contains 'Pique Knit'
+              assign count_piqueknit = count_piqueknit | plus: 1
+            elsif fabric_csv contains 'Knit'
+              assign count_knit = count_knit | plus: 1
+            endif
+
+            assign this_price = product.price_min
+            if price_min_overall == null or this_price < price_min_overall
+              assign price_min_overall = this_price
+            endif
+            if price_max_overall == null or this_price > price_max_overall
+              assign price_max_overall = this_price
+            endif
+          endfor
+
+          assign price_span = 0
+          if price_min_overall != null and price_max_overall != null
+            assign price_span = price_max_overall | minus: price_min_overall
+          endif
+
+          if price_span > 0
+            assign price_break_1 = price_span | times: 0.34 | plus: price_min_overall
+            assign price_break_2 = price_span | times: 0.67 | plus: price_min_overall
+            assign price_break_1_display = price_break_1 | round
+            assign price_break_2_display = price_break_2 | round
+
+            assign count_price_0 = 0
+            assign count_price_1 = 0
+            assign count_price_2 = 0
+            for product in panel_products
+              assign this_price = product.price_min
+              if this_price <= price_break_1
+                assign count_price_0 = count_price_0 | plus: 1
+              elsif this_price <= price_break_2
+                assign count_price_1 = count_price_1 | plus: 1
+              else
+                assign count_price_2 = count_price_2 | plus: 1
+              endif
+            endfor
+          endif
+
+          assign has_style_facet = false
+          if count_dadcap > 0 or count_trucker > 0 or count_snapback > 0 or count_unstructured > 0 or count_structured > 0 or count_fitted > 0 or count_cadet > 0 or count_driver > 0 or count_distressed > 0 or count_cuff > 0 or count_lowprofile > 0 or count_baseball > 0 or count_safety > 0 or count_performance > 0
+            assign has_style_facet = true
+          endif
+
+          assign has_fabric_facet = false
+          if count_cottontwill > 0 or count_woolblend > 0 or count_foammesh > 0 or count_hemp > 0 or count_poly > 0 or count_knit > 0 or count_piqueknit > 0
+            assign has_fabric_facet = true
+          endif
+
+          assign has_any_facet = false
+          if filter_color_values.size > 0 or price_span > 0 or has_style_facet or has_fabric_facet
+            assign has_any_facet = true
+          endif
+        -%}
+
+        <div class="bkc__panel-body">
+          {%- if section.settings.enable_filters and has_any_facet -%}
+            <aside class="bkc__filters" data-bkc-filters aria-label="Filter {{ label | escape }}">
+              <button type="button" class="bkc__filters-toggle" data-bkc-filters-toggle aria-expanded="false">
+                <span>Filters</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+
+              <div class="bkc__filters-body">
+                <div class="bkc__filters-head">
+                  <span class="bkc__filters-title">Filters</span>
+                  <button type="button" class="bkc__filters-clear" data-bkc-clear hidden>Clear all</button>
                 </div>
-              </a>
 
-              {%- if color_option != blank and section.settings.show_swatches -%}
-                {%- assign shown = 0 -%}
-                {%- capture chips -%}
-                  {%- for value in color_option.values -%}
-                    {%- if shown < section.settings.swatch_limit -%}
-                      {%- capture chip -%}
-                        {%- if value.swatch -%}
-                          {% render 'swatch', swatch: value.swatch, mode: 'unscaled' %}
-                        {%- else -%}
-                          {% render 'color-name-swatch', value: value.name %}
-                        {%- endif -%}
-                      {%- endcapture -%}
-                      {%- if chip != blank -%}
-                        {%- assign shown = shown | plus: 1 -%}
-                        {%- liquid
-                          # Prefer the variant image, but fall back to the first photo
-                          # named after this colour — the same filename/alt convention
-                          # the product gallery groups by. Variant images come and go
-                          # when media is re-uploaded; the naming does not.
-                          assign chip_image = value.variant.featured_image
-                          if chip_image == blank
-                            assign value_file_key = value.name | handleize
-                            assign value_alt_key = value.name | downcase
-                            for candidate in product.images
-                              assign candidate_src = candidate.src | downcase
-                              assign candidate_alt = candidate.alt | default: '' | downcase
-                              if candidate_src contains value_file_key or candidate_alt contains value_alt_key
-                                assign chip_image = candidate
-                                break
-                              endif
-                            endfor
-                          endif
-                        -%}
-                        <a
-                          class="bkc__chip"
-                          href="{{ product.url }}?variant={{ value.variant.id }}"
+                {%- if filter_color_values.size > 0 -%}
+                  {%- assign filter_swatch_limit = section.settings.filter_swatch_limit -%}
+                  <div class="bkc__filter-group">
+                    <h4 class="bkc__filter-heading">Colors</h4>
+                    <div class="bkc__filter-swatches" data-bkc-swatch-list>
+                      {%- for value in filter_color_values -%}
+                        <button
+                          type="button"
+                          class="bkc__filter-swatch{% if forloop.index0 >= filter_swatch_limit %} bkc__filter-swatch--extra{% endif %}"
+                          data-facet="color"
+                          data-value="{{ value.name | handleize }}"
+                          aria-pressed="false"
                           title="{{ value.name | escape }}"
-                          aria-label="{{ product.title | escape }} — {{ value.name | escape }}"
-                          {% if chip_image %}
-                            data-bkc-swap="{{ chip_image | image_url: width: 500 }}"
-                          {% endif %}
-                        >{{ chip }}</a>
-                      {%- endif -%}
-                    {%- endif -%}
-                  {%- endfor -%}
-                {%- endcapture -%}
-
-                {%- if shown > 0 -%}
-                  {%- assign extra = color_option.values.size | minus: shown -%}
-                  <div class="bkc__chips">
-                    {{ chips }}
-                    {%- if extra > 0 -%}
-                      <a class="bkc__chip-more" href="{{ product.url }}">+{{ extra }}</a>
+                          {% if forloop.index0 >= filter_swatch_limit %}hidden{% endif %}
+                        >
+                          {%- if value.swatch -%}
+                            {% render 'swatch', swatch: value.swatch, mode: 'unscaled' %}
+                          {%- else -%}
+                            {% render 'color-name-swatch', value: value.name %}
+                          {%- endif -%}
+                        </button>
+                      {%- endfor -%}
+                    </div>
+                    {%- if filter_color_values.size > filter_swatch_limit -%}
+                      <button type="button" class="bkc__show-more" data-bkc-show-more>Show all ({{ filter_color_values.size }})</button>
                     {%- endif -%}
                   </div>
                 {%- endif -%}
-              {%- endif -%}
 
-              <a class="bkc__product-link bkc__product-meta" href="{{ product.url }}">
-                {%- if product.price_varies -%}
-                  <span class="bkc__product-eyebrow">As low as</span>
-                  <span class="bkc__product-price">{{ product.price_min | money }}</span>
-                {%- else -%}
-                  <span class="bkc__product-price">{{ product.price | money }}</span>
+                {%- if price_span > 0 -%}
+                  <div class="bkc__filter-group">
+                    <h4 class="bkc__filter-heading">Price</h4>
+                    {%- if count_price_0 > 0 -%}
+                      <label class="bkc__filter-check"><input type="checkbox" data-facet="price" value="0"> Under ${{ price_break_1_display }} <span>({{ count_price_0 }})</span></label>
+                    {%- endif -%}
+                    {%- if count_price_1 > 0 -%}
+                      <label class="bkc__filter-check"><input type="checkbox" data-facet="price" value="1"> ${{ price_break_1_display }} &ndash; ${{ price_break_2_display }} <span>({{ count_price_1 }})</span></label>
+                    {%- endif -%}
+                    {%- if count_price_2 > 0 -%}
+                      <label class="bkc__filter-check"><input type="checkbox" data-facet="price" value="2"> ${{ price_break_2_display }}+ <span>({{ count_price_2 }})</span></label>
+                    {%- endif -%}
+                  </div>
                 {%- endif -%}
-                <span class="bkc__product-title">{{ product.title }}</span>
-              </a>
+
+                {%- if has_style_facet -%}
+                  <div class="bkc__filter-group">
+                    <h4 class="bkc__filter-heading">Style</h4>
+                    {%- if count_trucker > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Trucker' | handleize }}"> Trucker <span>({{ count_trucker }})</span></label>{%- endif -%}
+                    {%- if count_snapback > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Snapback' | handleize }}"> Snapback <span>({{ count_snapback }})</span></label>{%- endif -%}
+                    {%- if count_dadcap > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Dad Cap' | handleize }}"> Dad Cap <span>({{ count_dadcap }})</span></label>{%- endif -%}
+                    {%- if count_unstructured > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Unstructured' | handleize }}"> Unstructured <span>({{ count_unstructured }})</span></label>{%- endif -%}
+                    {%- if count_structured > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Structured' | handleize }}"> Structured <span>({{ count_structured }})</span></label>{%- endif -%}
+                    {%- if count_fitted > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Fitted' | handleize }}"> Fitted <span>({{ count_fitted }})</span></label>{%- endif -%}
+                    {%- if count_performance > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Performance' | handleize }}"> Performance <span>({{ count_performance }})</span></label>{%- endif -%}
+                    {%- if count_cadet > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Cadet' | handleize }}"> Cadet <span>({{ count_cadet }})</span></label>{%- endif -%}
+                    {%- if count_driver > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Driver' | handleize }}"> Driver <span>({{ count_driver }})</span></label>{%- endif -%}
+                    {%- if count_lowprofile > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Low-Profile' | handleize }}"> Low-Profile <span>({{ count_lowprofile }})</span></label>{%- endif -%}
+                    {%- if count_baseball > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Baseball' | handleize }}"> Baseball <span>({{ count_baseball }})</span></label>{%- endif -%}
+                    {%- if count_safety > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Safety' | handleize }}"> Safety <span>({{ count_safety }})</span></label>{%- endif -%}
+                    {%- if count_cuff > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Cuff' | handleize }}"> Cuff <span>({{ count_cuff }})</span></label>{%- endif -%}
+                    {%- if count_distressed > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="style" value="{{ 'Distressed' | handleize }}"> Distressed <span>({{ count_distressed }})</span></label>{%- endif -%}
+                  </div>
+                {%- endif -%}
+
+                {%- if has_fabric_facet -%}
+                  <div class="bkc__filter-group">
+                    <h4 class="bkc__filter-heading">Fabric</h4>
+                    {%- if count_cottontwill > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Cotton Twill' | handleize }}"> Cotton Twill <span>({{ count_cottontwill }})</span></label>{%- endif -%}
+                    {%- if count_woolblend > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Wool Blend' | handleize }}"> Wool Blend <span>({{ count_woolblend }})</span></label>{%- endif -%}
+                    {%- if count_foammesh > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Foam Mesh' | handleize }}"> Foam Mesh <span>({{ count_foammesh }})</span></label>{%- endif -%}
+                    {%- if count_poly > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Poly' | handleize }}"> Poly <span>({{ count_poly }})</span></label>{%- endif -%}
+                    {%- if count_knit > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Knit' | handleize }}"> Knit <span>({{ count_knit }})</span></label>{%- endif -%}
+                    {%- if count_piqueknit > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Pique Knit' | handleize }}"> Pique Knit <span>({{ count_piqueknit }})</span></label>{%- endif -%}
+                    {%- if count_hemp > 0 -%}<label class="bkc__filter-check"><input type="checkbox" data-facet="fabric" value="{{ 'Hemp' | handleize }}"> Hemp <span>({{ count_hemp }})</span></label>{%- endif -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            </aside>
+          {%- endif -%}
+
+          <div class="bkc__grid-wrap">
+            <p class="bkc__result-count" data-bkc-count>{{ panel_products.size }} product{% if panel_products.size != 1 %}s{% endif %}</p>
+
+            <div class="bkc__grid" data-bkc-grid>
+              {%- for product in panel_products limit: section.settings.limit -%}
+                {%- liquid
+                  assign color_option = null
+                  for product_option in product.options_with_values
+                    assign option_key = product_option.name | downcase
+                    if option_key contains 'colo' and color_option == null
+                      assign color_option = product_option
+                    endif
+                  endfor
+
+                  assign color_handles = '' | split: ','
+                  if color_option != blank
+                    for value in color_option.values
+                      assign color_handles = color_handles | concat: (value.name | handleize | split: '|')
+                    endfor
+                  endif
+
+                  capture card_style_csv
+                    render 'derive-facet-tags', title: product.title, kind: 'style'
+                  endcapture
+                  assign card_style_list = card_style_csv | split: ','
+                  assign style_handles = '' | split: ','
+                  for label in card_style_list
+                    assign style_handles = style_handles | concat: (label | handleize | split: '|')
+                  endfor
+
+                  capture card_fabric_csv
+                    render 'derive-facet-tags', title: product.title, kind: 'fabric'
+                  endcapture
+                  assign card_fabric_list = card_fabric_csv | split: ','
+                  assign fabric_handles = '' | split: ','
+                  for label in card_fabric_list
+                    assign fabric_handles = fabric_handles | concat: (label | handleize | split: '|')
+                  endfor
+
+                  assign card_price_bucket = 0
+                  if price_span > 0
+                    if product.price_min <= price_break_1
+                      assign card_price_bucket = 0
+                    elsif product.price_min <= price_break_2
+                      assign card_price_bucket = 1
+                    else
+                      assign card_price_bucket = 2
+                    endif
+                  endif
+                -%}
+                <div
+                  class="bkc__product"
+                  data-color="{{ color_handles | join: ',' }}"
+                  data-style="{{ style_handles | join: ',' }}"
+                  data-fabric="{{ fabric_handles | join: ',' }}"
+                  data-price-bucket="{{ card_price_bucket }}"
+                >
+                  <a class="bkc__product-link" href="{{ product.url }}">
+                    <div class="bkc__product-img">
+                      {%- if product.featured_image -%}
+                        {{ product.featured_image | image_url: width: 500 | image_tag: widths: '190,300,400,500', sizes: '(max-width: 749px) 45vw, 240px', alt: product.title, loading: 'lazy', class: 'bkc__product-photo' }}
+                      {%- endif -%}
+                    </div>
+                  </a>
+
+                  {%- if color_option != blank and section.settings.show_swatches -%}
+                    {%- assign shown = 0 -%}
+                    {%- capture chips -%}
+                      {%- for value in color_option.values -%}
+                        {%- if shown < section.settings.swatch_limit -%}
+                          {%- capture chip -%}
+                            {%- if value.swatch -%}
+                              {% render 'swatch', swatch: value.swatch, mode: 'unscaled' %}
+                            {%- else -%}
+                              {% render 'color-name-swatch', value: value.name %}
+                            {%- endif -%}
+                          {%- endcapture -%}
+                          {%- if chip != blank -%}
+                            {%- assign shown = shown | plus: 1 -%}
+                            {%- liquid
+                              # Prefer the variant image, but fall back to the first photo
+                              # named after this colour — the same filename/alt convention
+                              # the product gallery groups by. Variant images come and go
+                              # when media is re-uploaded; the naming does not.
+                              assign chip_image = value.variant.featured_image
+                              if chip_image == blank
+                                assign value_file_key = value.name | handleize
+                                assign value_alt_key = value.name | downcase
+                                for candidate in product.images
+                                  assign candidate_src = candidate.src | downcase
+                                  assign candidate_alt = candidate.alt | default: '' | downcase
+                                  if candidate_src contains value_file_key or candidate_alt contains value_alt_key
+                                    assign chip_image = candidate
+                                    break
+                                  endif
+                                endfor
+                              endif
+                            -%}
+                            <a
+                              class="bkc__chip"
+                              href="{{ product.url }}?variant={{ value.variant.id }}"
+                              title="{{ value.name | escape }}"
+                              aria-label="{{ product.title | escape }} — {{ value.name | escape }}"
+                              {% if chip_image %}
+                                data-bkc-swap="{{ chip_image | image_url: width: 500 }}"
+                              {% endif %}
+                            >{{ chip }}</a>
+                          {%- endif -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+                    {%- endcapture -%}
+
+                    {%- if shown > 0 -%}
+                      {%- assign extra = color_option.values.size | minus: shown -%}
+                      <div class="bkc__chips">
+                        {{ chips }}
+                        {%- if extra > 0 -%}
+                          <a class="bkc__chip-more" href="{{ product.url }}">+{{ extra }}</a>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  <a class="bkc__product-link bkc__product-meta" href="{{ product.url }}">
+                    {%- if product.price_varies -%}
+                      <span class="bkc__product-eyebrow">As low as</span>
+                      <span class="bkc__product-price">{{ product.price_min | money }}</span>
+                    {%- else -%}
+                      <span class="bkc__product-price">{{ product.price | money }}</span>
+                    {%- endif -%}
+                    <span class="bkc__product-title">{{ product.title }}</span>
+                  </a>
+                </div>
+              {%- endfor -%}
             </div>
-          {%- endfor -%}
+
+            <p class="bkc__no-results" data-bkc-no-results hidden>No products match these filters.</p>
+          </div>
         </div>
       {%- else -%}
         <p class="bkc__empty">Nothing in this category yet — check back soon.</p>
@@ -327,6 +699,106 @@
       if (!photo || !photo.dataset.bkcOriginal) return;
       photo.setAttribute('src', photo.dataset.bkcOriginal);
     }
+
+    // ---- Facet filtering: client-side, since each panel is a fixed, already-
+    // rendered product list rather than a paginated Shopify collection. ----
+    root.querySelectorAll('.bkc__panel').forEach(function (panel) {
+      var grid = panel.querySelector('[data-bkc-grid]');
+      if (!grid) return;
+      var cards = Array.prototype.slice.call(grid.querySelectorAll('.bkc__product'));
+      var countEl = panel.querySelector('[data-bkc-count]');
+      var noResultsEl = panel.querySelector('[data-bkc-no-results]');
+      var clearBtn = panel.querySelector('[data-bkc-clear]');
+      var controls = Array.prototype.slice.call(panel.querySelectorAll('[data-facet]'));
+      if (!controls.length) return;
+
+      function isOn(el) {
+        return el.tagName === 'BUTTON' ? el.getAttribute('aria-pressed') === 'true' : el.checked;
+      }
+
+      function selectedValues(facet) {
+        return controls
+          .filter(function (el) { return el.dataset.facet === facet && isOn(el); })
+          .map(function (el) { return el.value || el.dataset.value; });
+      }
+
+      function cardMatches(card, facetKey, values) {
+        if (!values.length) return true;
+        if (facetKey === 'price') return values.indexOf(card.dataset.priceBucket) !== -1;
+        var list = (card.dataset[facetKey] || '').split(',').filter(Boolean);
+        return values.some(function (v) { return list.indexOf(v) !== -1; });
+      }
+
+      function apply() {
+        var sel = {
+          color: selectedValues('color'),
+          price: selectedValues('price'),
+          style: selectedValues('style'),
+          fabric: selectedValues('fabric')
+        };
+        var anyActive = sel.color.length || sel.price.length || sel.style.length || sel.fabric.length;
+        if (clearBtn) clearBtn.hidden = !anyActive;
+
+        var visible = 0;
+        cards.forEach(function (card) {
+          var show =
+            cardMatches(card, 'color', sel.color) &&
+            cardMatches(card, 'price', sel.price) &&
+            cardMatches(card, 'style', sel.style) &&
+            cardMatches(card, 'fabric', sel.fabric);
+          card.hidden = !show;
+          if (show) visible++;
+        });
+
+        if (countEl) countEl.textContent = visible + (visible === 1 ? ' product' : ' products');
+        if (noResultsEl) noResultsEl.hidden = visible !== 0;
+      }
+
+      controls.forEach(function (el) {
+        var evt = el.tagName === 'BUTTON' ? 'click' : 'change';
+        el.addEventListener(evt, function () {
+          if (el.tagName === 'BUTTON') {
+            el.setAttribute('aria-pressed', isOn(el) ? 'false' : 'true');
+          }
+          apply();
+        });
+      });
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+          controls.forEach(function (el) {
+            if (el.tagName === 'BUTTON') el.setAttribute('aria-pressed', 'false');
+            else el.checked = false;
+          });
+          apply();
+        });
+      }
+
+      // Mobile: filters collapse behind a toggle so a long list doesn't push
+      // the grid below the fold; desktop shows the sidebar open via CSS.
+      var toggle = panel.querySelector('[data-bkc-filters-toggle]');
+      var aside = panel.querySelector('[data-bkc-filters]');
+      if (toggle && aside) {
+        toggle.addEventListener('click', function () {
+          var open = aside.classList.toggle('bkc__filters--open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+
+      // "Show all (N)" reveals the swatches past the configured cap.
+      var showMore = panel.querySelector('[data-bkc-show-more]');
+      if (showMore) {
+        showMore.addEventListener('click', function () {
+          var list = showMore.previousElementSibling;
+          if (list) {
+            list.querySelectorAll('.bkc__filter-swatch--extra[hidden]').forEach(function (el) {
+              el.hidden = false;
+            });
+          }
+          showMore.hidden = true;
+        });
+      }
+    });
 
     // Deep link: ?category=<handle> wins over the default first tab.
     var wanted = new URLSearchParams(window.location.search).get('category');
