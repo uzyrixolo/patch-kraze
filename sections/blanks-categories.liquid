@@ -260,8 +260,10 @@
               for value in color_option.values
                 assign value_handle = value.name | handleize
                 unless seen_color_handles contains value_handle
-                  assign seen_color_handles = seen_color_handles | concat: (value_handle | split: '|')
-                  assign filter_color_values = filter_color_values | concat: (color_option.values | where: 'name', value.name)
+                  assign one_handle = value_handle | split: '|'
+                  assign seen_color_handles = seen_color_handles | concat: one_handle
+                  assign matching_value = color_option.values | where: 'name', value.name
+                  assign filter_color_values = filter_color_values | concat: matching_value
                 endunless
               endfor
             endif
@@ -481,8 +483,12 @@
             </aside>
           {%- endif -%}
 
+          {%- comment %} Rendered-card count, not the category's full size — the grid below
+             stops at section.settings.limit, and the JS filter engine's own count (which
+             counts actual DOM cards) would otherwise disagree with this initial number. {%- endcomment %}
+          {%- assign shown_count = panel_products.size | at_most: section.settings.limit -%}
           <div class="bkc__grid-wrap">
-            <p class="bkc__result-count" data-bkc-count>{{ panel_products.size }} product{% if panel_products.size != 1 %}s{% endif %}</p>
+            <p class="bkc__result-count" data-bkc-count>{{ shown_count }} product{% if shown_count != 1 %}s{% endif %}</p>
 
             <div class="bkc__grid" data-bkc-grid>
               {%- for product in panel_products limit: section.settings.limit -%}
@@ -498,7 +504,8 @@
                   assign color_handles = '' | split: ','
                   if color_option != blank
                     for value in color_option.values
-                      assign color_handles = color_handles | concat: (value.name | handleize | split: '|')
+                      assign one_color_handle = value.name | handleize | split: '|'
+                      assign color_handles = color_handles | concat: one_color_handle
                     endfor
                   endif
 
@@ -508,7 +515,8 @@
                   assign card_style_list = card_style_csv | split: ','
                   assign style_handles = '' | split: ','
                   for label in card_style_list
-                    assign style_handles = style_handles | concat: (label | handleize | split: '|')
+                    assign one_style_handle = label | handleize | split: '|'
+                    assign style_handles = style_handles | concat: one_style_handle
                   endfor
 
                   capture card_fabric_csv
@@ -517,7 +525,8 @@
                   assign card_fabric_list = card_fabric_csv | split: ','
                   assign fabric_handles = '' | split: ','
                   for label in card_fabric_list
-                    assign fabric_handles = fabric_handles | concat: (label | handleize | split: '|')
+                    assign one_fabric_handle = label | handleize | split: '|'
+                    assign fabric_handles = fabric_handles | concat: one_fabric_handle
                   endfor
 
                   assign card_price_bucket = 0
