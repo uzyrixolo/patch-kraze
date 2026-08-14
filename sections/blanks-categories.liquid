@@ -125,11 +125,30 @@
   .bkc__product:hover { box-shadow: 0 10px 26px rgba(0,0,0,0.10); transform: translateY(-2px); }
   .bkc__product[hidden] { display: none; }
   .bkc__product-link { display: block; text-decoration: none; color: inherit; }
-  .bkc__product-img { aspect-ratio: 1; border-radius: 0.6rem; overflow: hidden; background: #fff; }
+  .bkc__product-img { position: relative; aspect-ratio: 1; border-radius: 0.6rem; overflow: hidden; background: #fff; }
   /* contain, not cover: these are catalogue product shots, and cropping a cap
      or a jacket to fill a square hides the shape the shopper is judging. */
   .bkc__product-img img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform 0.25s ease; }
   .bkc__product:hover .bkc__product-img img { transform: scale(1.04); }
+
+  /* Quick Buy: a bar that slides up over the bottom of the photo on hover,
+     matching the reference site. A sibling of the image link (not nested
+     inside it) so a <button> never ends up inside an <a>. */
+  .bkc__quickbuy-btn {
+    position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center;
+    justify-content: center; gap: 0.4rem; padding: 0.6rem 0.5rem; margin: 0; border: none;
+    background: rgba(17, 24, 39, 0.88); color: #fff; font-family: inherit; font-size: 0.78rem;
+    font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; cursor: pointer;
+    transform: translateY(100%); transition: transform 0.18s ease; z-index: 1;
+  }
+  .bkc__quickbuy-btn svg { width: 0.95rem; height: 0.95rem; flex-shrink: 0; }
+  .bkc__product:hover .bkc__quickbuy-btn,
+  .bkc__product:focus-within .bkc__quickbuy-btn { transform: translateY(0); }
+  @media (max-width: 899px) {
+    /* No hover on touch devices - keep it always visible so mobile shoppers
+       can still reach it. */
+    .bkc__quickbuy-btn { transform: translateY(0); padding: 0.5rem; font-size: 0.7rem; }
+  }
   /* Colour rail. Sized through the theme's own swatch variables so both native
      swatches and the name-derived chips land the same size. */
   .bkc__chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; margin: 0.75rem 0 0; }
@@ -165,6 +184,73 @@
 
   @media (prefers-reduced-motion: reduce) {
     .bkc__card, .bkc__product-img img, .bkc__filters-toggle svg { transition: none; }
+  }
+
+  /* ---- Quick Buy modal ---- */
+  .bkc__qb-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    z-index: 1000; justify-content: center; align-items: center; padding: 1.25rem;
+  }
+  .bkc__qb-overlay.open { display: flex; animation: bkcQbFadeIn 0.2s ease; }
+  .bkc__qb-content {
+    position: relative; background: #fff; width: 100%; max-width: 720px; max-height: 90vh;
+    border-radius: 1rem; box-shadow: 0 20px 50px rgba(0,0,0,0.25); overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .bkc__qb-close {
+    position: absolute; top: 0.75rem; right: 0.75rem; width: 2rem; height: 2rem; z-index: 2;
+    display: flex; align-items: center; justify-content: center; background: #f3f4f6;
+    border: none; border-radius: 999px; font-size: 1.35rem; line-height: 1; cursor: pointer; color: #374151;
+  }
+  .bkc__qb-close:hover { background: #e5e7eb; }
+  .bkc__qb-body { display: flex; width: 100%; }
+  .bkc__qb-media { flex: 0 0 45%; background: #f9fafb; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+  .bkc__qb-media img { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; display: block; }
+  .bkc__qb-info { flex: 1; min-width: 0; padding: 1.75rem 1.75rem 1.75rem 1rem; }
+  .bkc__qb-title { font-size: 1.2rem; font-weight: 800; color: #111827; margin: 0 0 0.35rem; padding-right: 1.5rem; }
+  .bkc__qb-view-details { font-size: 0.82rem; font-weight: 600; color: #059669; text-decoration: none; }
+  .bkc__qb-view-details:hover { text-decoration: underline; }
+  .bkc__qb-price { font-size: 1.3rem; font-weight: 800; color: #16a34a; margin: 0.75rem 0; }
+  .bkc__qb-price-eyebrow { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: #9ca3af; margin-bottom: 0.15rem; }
+  .bkc__qb-option { margin-bottom: 1.1rem; }
+  .bkc__qb-option-label { display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #374151; margin-bottom: 0.5rem; }
+  .bkc__qb-option-label span { text-transform: none; letter-spacing: 0; font-weight: 500; color: #6b7280; }
+  .bkc__qb-swatches { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .bkc__qb-swatch {
+    width: 2.1rem; height: 2.1rem; border-radius: 50%; border: 2px solid #e5e7eb; padding: 0;
+    cursor: pointer; box-shadow: inset 0 0 0 2px #fff;
+  }
+  .bkc__qb-swatch[aria-pressed='true'] { border-color: #111827; }
+  .bkc__qb-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .bkc__qb-pill {
+    padding: 0.45rem 0.9rem; border-radius: 0.5rem; border: 1px solid #d1d5db; background: #fff;
+    color: #374151; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: inherit;
+  }
+  .bkc__qb-pill:hover { border-color: #9ca3af; }
+  .bkc__qb-pill[aria-pressed='true'] { border-color: #111827; background: #111827; color: #fff; }
+  .bkc__qb-pill[disabled] { opacity: 0.4; cursor: not-allowed; text-decoration: line-through; }
+  .bkc__qb-status { font-size: 0.85rem; color: #b91c1c; margin: 0 0 0.75rem; min-height: 1.2em; }
+  .bkc__qb-add-btn {
+    width: 100%; padding: 0.85rem 1rem; border: none; border-radius: 0.6rem; background: #111827;
+    color: #fff; font-family: inherit; font-size: 0.95rem; font-weight: 700; cursor: pointer;
+    transition: background-color 0.15s;
+  }
+  .bkc__qb-add-btn:hover { background: #1f2937; }
+  .bkc__qb-add-btn[disabled] { background: #9ca3af; cursor: not-allowed; }
+  .bkc__qb-loading { padding: 3rem; text-align: center; color: #6b7280; font-size: 0.9rem; }
+
+  @media (max-width: 640px) {
+    .bkc__qb-content { max-height: 92vh; }
+    .bkc__qb-body { flex-direction: column; }
+    .bkc__qb-media { flex-basis: auto; padding: 1rem; }
+    .bkc__qb-media img { max-width: 220px; margin: 0 auto; }
+    .bkc__qb-info { padding: 1.25rem; }
+  }
+
+  @keyframes bkcQbFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bkc__qb-overlay.open { animation: none; }
   }
 </style>
 
@@ -593,13 +679,24 @@
                   data-fabric="{{ fabric_handles | join: ',' }}"
                   data-price-bucket="{{ card_price_bucket }}"
                 >
-                  <a class="bkc__product-link" href="{{ product.url }}">
-                    <div class="bkc__product-img">
+                  <div class="bkc__product-img">
+                    <a class="bkc__product-link" href="{{ product.url }}">
                       {%- if product.featured_image -%}
                         {{ product.featured_image | image_url: width: 500 | image_tag: widths: '190,300,400,500', sizes: '(max-width: 749px) 45vw, 240px', alt: product.title, loading: 'lazy', class: 'bkc__product-photo' }}
                       {%- endif -%}
-                    </div>
-                  </a>
+                    </a>
+                    <button
+                      type="button"
+                      class="bkc__quickbuy-btn"
+                      data-bkc-quickbuy
+                      data-product-url="{{ product.url }}"
+                      aria-haspopup="dialog"
+                      aria-label="Quick buy {{ product.title | escape }}"
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                      <span>Quick Buy</span>
+                    </button>
+                  </div>
 
                   {%- if color_option != blank and section.settings.show_swatches -%}
                     {%- assign shown = 0 -%}
@@ -680,6 +777,15 @@
       {%- endif -%}
     </div>
   {%- endfor -%}
+
+  <div id="BkcQuickBuy-{{ section.id }}" class="bkc__qb-overlay" role="dialog" aria-modal="true" aria-labelledby="BkcQbTitle-{{ section.id }}" hidden>
+    <div class="bkc__qb-content">
+      <button type="button" class="bkc__qb-close" data-bkc-qb-close aria-label="Close quick buy">&times;</button>
+      <div class="bkc__qb-body" data-bkc-qb-body>
+        <p class="bkc__qb-loading">Loading&hellip;</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -754,6 +860,260 @@
       if (!photo || !photo.dataset.bkcOriginal) return;
       photo.setAttribute('src', photo.dataset.bkcOriginal);
     }
+
+    // ---- Quick Buy: fetch the product's variant data on demand and let the
+    // shopper pick options and add to cart without leaving the grid. ----
+    (function () {
+      var overlay = document.getElementById('BkcQuickBuy-{{ section.id }}');
+      if (!overlay) return;
+      var body = overlay.querySelector('[data-bkc-qb-body]');
+      var closeBtn = overlay.querySelector('[data-bkc-qb-close]');
+      var lastFocused = null;
+      var productCache = {};
+
+      // Mirrors snippets/color-word-to-hex.liquid's keyword list (first match
+      // wins, most specific compound words first) - duplicated here because
+      // this runs client-side against JSON, not through Liquid. Keep the two
+      // lists in sync if colours are added there.
+      var COLOR_WORDS = [
+        ['royal blue', '#1e40af'], ['royal', '#1e40af'], ['navy', '#1b2a4a'],
+        ['light blue', '#7dd3fc'], ['sky', '#7dd3fc'], ['forest', '#14532d'],
+        ['burgundy', '#5c0f1f'], ['maroon', '#6b1f2a'], ['charcoal', '#36454f'],
+        ['silver', '#c0c0c0'], ['cream', '#f5f0e1'], ['ivory', '#f5f0e1'], ['natural', '#f5f0e1'],
+        ['wine', '#722f37'], ['aqua', '#2fbfc9'], ['turquoise', '#2fbfc9'], ['olive', '#6b7a3a'],
+        ['mint', '#9fe2bf'], ['lavender', '#b57edc'], ['beige', '#e3d5b8'], ['sand', '#e3d5b8'],
+        ['stone', '#a49f8c'], ['heather', '#9599a3'], ['spruce', '#2f4f3e'], ['hunter', '#355e3b'],
+        ['loden', '#4a5d4e'], ['sea foam', '#93e2c4'], ['cranberry', '#9d2235'], ['coral', '#ff7f50'],
+        ['blush', '#f4c2c2'], ['coffee', '#4b3621'], ['butter', '#f3e5ab'], ['lemon', '#fde047'],
+        ['lime', '#a3e635'], ['denim', '#4a6b8a'], ['mud', '#5a4632'], ['black', '#111111'],
+        ['white', '#ffffff'], ['gold', '#d4af37'], ['purple', '#5b2d90'], ['green', '#1f7a3f'],
+        ['blue', '#1d4ed8'], ['red', '#c8102e'], ['orange', '#f97316'], ['yellow', '#facc15'],
+        ['brown', '#6b4423'], ['tan', '#d2b48c'], ['khaki', '#d2b48c'], ['pink', '#ec4899'],
+        ['teal', '#0d9488'], ['grey', '#808080'], ['gray', '#808080']
+      ];
+
+      function colorToHex(name) {
+        var lower = name.toLowerCase();
+        for (var i = 0; i < COLOR_WORDS.length; i++) {
+          if (lower.indexOf(COLOR_WORDS[i][0]) !== -1) return COLOR_WORDS[i][1];
+        }
+        return null;
+      }
+
+      function swatchBackground(name) {
+        var parts = name.split('/').map(function (s) { return s.trim(); });
+        var hexes = parts.map(colorToHex).filter(Boolean);
+        if (hexes.length >= 2) return 'linear-gradient(135deg, ' + hexes[0] + ' 50%, ' + hexes[1] + ' 50%)';
+        if (hexes.length === 1) return hexes[0];
+        return '#e5e7eb';
+      }
+
+      function money(cents) {
+        return '$' + (cents / 100).toFixed(2);
+      }
+
+      function findVariant(product, selected) {
+        return product.variants.find(function (v) {
+          return product.options.every(function (opt, i) {
+            var key = 'option' + (i + 1);
+            return v[key] === selected[opt.name];
+          });
+        });
+      }
+
+      function render(product) {
+        var selected = {};
+        // Default to the first available variant's option values, falling
+        // back to each option's first value if every variant is sold out.
+        var defaultVariant = product.variants.find(function (v) { return v.available; }) || product.variants[0];
+        product.options.forEach(function (opt, i) {
+          selected[opt.name] = defaultVariant ? defaultVariant['option' + (i + 1)] : opt.values[0];
+        });
+
+        var html = '' +
+          '<div class="bkc__qb-media"><img id="BkcQbImg-{{ section.id }}" src="' + (product.featured_image || '') + '" alt="' + product.title.replace(/"/g, '&quot;') + '"></div>' +
+          '<div class="bkc__qb-info">' +
+            '<h3 class="bkc__qb-title" id="BkcQbTitle-{{ section.id }}">' + product.title + '</h3>' +
+            '<a class="bkc__qb-view-details" href="' + product.url + '">View Full Details</a>' +
+            '<div class="bkc__qb-price" id="BkcQbPrice-{{ section.id }}"></div>' +
+            '<div id="BkcQbOptions-{{ section.id }}"></div>' +
+            '<p class="bkc__qb-status" id="BkcQbStatus-{{ section.id }}"></p>' +
+            '<button type="button" class="bkc__qb-add-btn" id="BkcQbAdd-{{ section.id }}">Add To Cart</button>' +
+          '</div>';
+        body.innerHTML = html;
+
+        var imgEl = body.querySelector('#BkcQbImg-{{ section.id }}');
+        var priceEl = body.querySelector('#BkcQbPrice-{{ section.id }}');
+        var optionsEl = body.querySelector('#BkcQbOptions-{{ section.id }}');
+        var statusEl = body.querySelector('#BkcQbStatus-{{ section.id }}');
+        var addBtn = body.querySelector('#BkcQbAdd-{{ section.id }}');
+
+        function isColorOption(name) {
+          return name.toLowerCase().indexOf('colo') !== -1;
+        }
+
+        function refresh() {
+          var variant = findVariant(product, selected);
+
+          optionsEl.querySelectorAll('[data-qb-option]').forEach(function (group) {
+            var optName = group.getAttribute('data-qb-option');
+            group.querySelectorAll('[data-qb-value]').forEach(function (btn) {
+              var val = btn.getAttribute('data-qb-value');
+              btn.setAttribute('aria-pressed', selected[optName] === val ? 'true' : 'false');
+              // Disable a value only when NO variant at all offers it in
+              // combination with the currently selected values of every
+              // other option - avoids disabling everything at once.
+              var others = Object.assign({}, selected);
+              others[optName] = val;
+              var possible = product.variants.some(function (v) {
+                return product.options.every(function (opt, i) {
+                  return v['option' + (i + 1)] === others[opt.name];
+                });
+              });
+              btn.disabled = !possible;
+            });
+          });
+
+          if (variant) {
+            priceEl.innerHTML = money(variant.price);
+            if (variant.featured_image && variant.featured_image.src) {
+              imgEl.src = variant.featured_image.src;
+            }
+            addBtn.disabled = !variant.available;
+            addBtn.textContent = variant.available ? 'Add To Cart' : 'Sold Out';
+            statusEl.textContent = '';
+          } else {
+            addBtn.disabled = true;
+            addBtn.textContent = 'Select Options';
+            statusEl.textContent = '';
+          }
+        }
+
+        var optionsHtml = '';
+        product.options.forEach(function (opt) {
+          optionsHtml += '<div class="bkc__qb-option" data-qb-option="' + opt.name + '">' +
+            '<span class="bkc__qb-option-label">' + opt.name + ': <span data-qb-selected-label>' + selected[opt.name] + '</span></span>' +
+            '<div class="' + (isColorOption(opt.name) ? 'bkc__qb-swatches' : 'bkc__qb-pills') + '">' +
+            opt.values.map(function (val) {
+              if (isColorOption(opt.name)) {
+                return '<button type="button" class="bkc__qb-swatch" data-qb-value="' + val.replace(/"/g, '&quot;') + '" title="' + val.replace(/"/g, '&quot;') + '" style="background:' + swatchBackground(val) + '"></button>';
+              }
+              return '<button type="button" class="bkc__qb-pill" data-qb-value="' + val.replace(/"/g, '&quot;') + '">' + val + '</button>';
+            }).join('') +
+            '</div></div>';
+        });
+        optionsEl.innerHTML = optionsHtml;
+
+        optionsEl.querySelectorAll('[data-qb-option]').forEach(function (group) {
+          var optName = group.getAttribute('data-qb-option');
+          var label = group.querySelector('[data-qb-selected-label]');
+          group.querySelectorAll('[data-qb-value]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              if (btn.disabled) return;
+              selected[optName] = btn.getAttribute('data-qb-value');
+              if (label) label.textContent = selected[optName];
+              refresh();
+            });
+          });
+        });
+
+        refresh();
+
+        addBtn.addEventListener('click', function () {
+          var variant = findVariant(product, selected);
+          if (!variant || !variant.available) return;
+          addBtn.disabled = true;
+          var originalText = addBtn.textContent;
+          addBtn.textContent = 'Adding...';
+          statusEl.textContent = '';
+
+          var formData = new FormData();
+          formData.append('id', variant.id);
+          formData.append('quantity', 1);
+
+          var sectionIds = Array.prototype.slice.call(document.querySelectorAll('cart-items-component'))
+            .map(function (el) { return el.dataset.sectionId; })
+            .filter(Boolean);
+          if (sectionIds.length) formData.append('sections', sectionIds.join(','));
+
+          fetch('/cart/add.js', { method: 'POST', body: formData })
+            .then(function (res) { return res.json().then(function (data) { return { ok: res.ok, data: data }; }); })
+            .then(function (result) {
+              if (!result.ok) throw new Error(result.data.description || 'Failed to add to cart');
+
+              addBtn.textContent = 'Added!';
+              setTimeout(function () { closeQuickBuy(); }, 700);
+
+              if (result.data.sections) {
+                Object.entries(result.data.sections).forEach(function (entry) {
+                  var el = document.querySelector('[data-section-id="' + entry[0] + '"]');
+                  if (!el) return;
+                  var doc = new DOMParser().parseFromString(entry[1], 'text/html');
+                  var newEl = doc.querySelector('[data-section-id="' + entry[0] + '"]');
+                  if (newEl) el.innerHTML = newEl.innerHTML;
+                });
+              }
+
+              var cartDrawer = document.querySelector('cart-drawer-component');
+              if (cartDrawer) {
+                if (typeof cartDrawer.open === 'function') cartDrawer.open();
+                else if (typeof cartDrawer.showDialog === 'function') cartDrawer.showDialog();
+              }
+
+              fetch('/cart.js').then(function (r) { return r.json(); }).then(function (cartData) {
+                document.dispatchEvent(new CustomEvent('cart:update', {
+                  bubbles: true,
+                  detail: { resource: cartData, data: { source: 'bkc-quick-buy', itemCount: cartData.item_count, sections: result.data.sections || {} } }
+                }));
+              });
+            })
+            .catch(function (error) {
+              statusEl.textContent = error.message;
+              addBtn.disabled = false;
+              addBtn.textContent = originalText;
+            });
+        });
+      }
+
+      window.openQuickBuy = function (url) {
+        lastFocused = document.activeElement;
+        overlay.hidden = false;
+        requestAnimationFrame(function () { overlay.classList.add('open'); });
+        document.addEventListener('keydown', onKeydown);
+        body.innerHTML = '<p class="bkc__qb-loading">Loading&hellip;</p>';
+
+        var request = productCache[url]
+          ? Promise.resolve(productCache[url])
+          : fetch(url + '.js').then(function (r) { return r.json(); }).then(function (p) { productCache[url] = p; return p; });
+
+        request.then(render).catch(function () {
+          body.innerHTML = '<p class="bkc__qb-loading">Sorry, this product could not be loaded.</p>';
+        });
+      };
+
+      window.closeQuickBuy = function () {
+        overlay.classList.remove('open');
+        document.removeEventListener('keydown', onKeydown);
+        setTimeout(function () { overlay.hidden = true; }, 200);
+        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      };
+
+      function onKeydown(event) {
+        if (event.key === 'Escape') window.closeQuickBuy();
+      }
+
+      overlay.addEventListener('click', function (event) {
+        if (event.target === overlay) window.closeQuickBuy();
+      });
+      closeBtn.addEventListener('click', function () { window.closeQuickBuy(); });
+
+      root.addEventListener('click', function (event) {
+        var trigger = event.target.closest && event.target.closest('[data-bkc-quickbuy]');
+        if (!trigger) return;
+        event.preventDefault();
+        window.openQuickBuy(trigger.getAttribute('data-product-url'));
+      });
+    })();
 
     // ---- Facet filtering: client-side, since each panel is a fixed, already-
     // rendered product list rather than a paginated Shopify collection. ----

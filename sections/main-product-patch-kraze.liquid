@@ -1687,8 +1687,8 @@
       // Variant titles carry the tier label: "1000+", a single quantity like "10"
       // (the new embroidery grid prices exactly 10 pcs on its own), or a range
       // like "26-50". Must match the Shopify variant titles exactly.
-      const qtyRangeStr = qty >= 1000
-        ? '1000+'
+      const qtyRangeStr = qtyTier.max >= 999999
+        ? `${qtyTier.min}+`
         : (qtyTier.min === qtyTier.max ? `${qtyTier.min}` : `${qtyTier.min}-${qtyTier.max}`);
 
       let searchPattern1;
