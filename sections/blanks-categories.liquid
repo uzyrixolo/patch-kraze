@@ -103,7 +103,10 @@
   .bkc__filter-swatch { display: inline-flex; padding: 2px; border-radius: 6px; border: none; background: none; cursor: pointer; line-height: 0; outline: 2px solid transparent; outline-offset: 1px; transition: outline-color 0.15s; }
   .bkc__filter-swatch:hover { outline-color: #d1d5db; }
   .bkc__filter-swatch[aria-pressed='true'] { outline-color: #111827; }
-  .bkc__filter-swatch .swatch { --swatch-width: 22px; --swatch-height: 22px; border-radius: 5px; }
+  /* Explicit border so a white (or other pale) swatch reads as a chip against
+     the white sidebar instead of disappearing into it - the theme's own
+     swatch border setting resolves to none here. */
+  .bkc__filter-swatch .swatch { --swatch-width: 22px; --swatch-height: 22px; border-radius: 5px; border: 1px solid #d1d5db; }
   /* Fixed rainbow-wheel icon for "Multi Color" — it stands for the whole two-tone
      bucket, not any one product's colours, so it isn't drawn from swatch data. */
   .bkc__multi-swatch { background: conic-gradient(from 0deg, #ef4444, #f59e0b, #eab308, #22c55e, #0ea5e9, #6366f1, #a855f7, #ef4444) !important; }
@@ -162,7 +165,9 @@
   .bkc__chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; margin: 0.75rem 0 0; }
   .bkc__chip { display: inline-flex; line-height: 0; text-decoration: none; border-radius: 4px; outline: 2px solid transparent; outline-offset: 2px; transition: outline-color 0.15s; }
   .bkc__chip:hover, .bkc__chip:focus-visible { outline-color: #111827; }
-  .bkc__chips .swatch { --swatch-width: 20px; --swatch-height: 20px; border-radius: 4px; }
+  /* Same reasoning as the filter swatches above - a white product colour chip
+     needs its own border to stay visible on the white card background. */
+  .bkc__chips .swatch { --swatch-width: 20px; --swatch-height: 20px; border-radius: 4px; border: 1px solid #d1d5db; }
   .bkc__chip-more { font-size: 0.75rem; font-weight: 600; color: #6b7280; text-decoration: none; padding-inline-start: 0.15rem; }
   .bkc__chip-more:hover { color: #111827; text-decoration: underline; }
   .bkc__product-meta { margin-top: 0.75rem; }
