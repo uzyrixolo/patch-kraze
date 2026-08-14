@@ -143,15 +143,19 @@
     justify-content: center; gap: 0.4rem; padding: 0.6rem 0.5rem; margin: 0; border: none;
     background: rgba(17, 24, 39, 0.88); color: #fff; font-family: inherit; font-size: 0.78rem;
     font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; cursor: pointer;
-    transform: translateY(100%); transition: transform 0.18s ease; z-index: 1;
+    /* opacity: 0 on top of the translateY hides it completely - relying on the
+       transform alone left a sub-pixel sliver of this bar's dark background
+       visible under the photo at some zoom levels, since translateY(100%) can
+       round to slightly less than a full pixel of travel. */
+    opacity: 0; transform: translateY(100%); transition: transform 0.18s ease, opacity 0.18s ease; z-index: 1;
   }
   .bkc__quickbuy-btn svg { width: 0.95rem; height: 0.95rem; flex-shrink: 0; }
   .bkc__product:hover .bkc__quickbuy-btn,
-  .bkc__product:focus-within .bkc__quickbuy-btn { transform: translateY(0); }
+  .bkc__product:focus-within .bkc__quickbuy-btn { opacity: 1; transform: translateY(0); }
   @media (max-width: 899px) {
     /* No hover on touch devices - keep it always visible so mobile shoppers
        can still reach it. */
-    .bkc__quickbuy-btn { transform: translateY(0); padding: 0.5rem; font-size: 0.7rem; }
+    .bkc__quickbuy-btn { opacity: 1; transform: translateY(0); padding: 0.5rem; font-size: 0.7rem; }
   }
   /* Colour rail. Sized through the theme's own swatch variables so both native
      swatches and the name-derived chips land the same size. */
