@@ -121,8 +121,12 @@
   .bkc__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; }
   /* Each product sits in its own white card, so the photo, the colours and the
      price read as one unit against the page. */
-  .bkc__product { display: flex; flex-direction: column; background: #fff; border: 1px solid #e5e7eb; border-radius: 0.9rem; padding: 0.85rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); transition: box-shadow 0.18s ease, transform 0.18s ease; }
-  .bkc__product:hover { box-shadow: 0 10px 26px rgba(0,0,0,0.10); transform: translateY(-2px); }
+  /* translateZ(0) forces its own compositing layer so Chrome pixel-snaps this
+     card's contents as a unit - without it, the fractional widths that fall
+     out of the auto-fill grid columns can leave a faint sub-pixel seam
+     between the swatch row and the price at some browser zoom levels. */
+  .bkc__product { display: flex; flex-direction: column; background: #fff; border: 1px solid #e5e7eb; border-radius: 0.9rem; padding: 0.85rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); transform: translateZ(0); transition: box-shadow 0.18s ease, transform 0.18s ease; }
+  .bkc__product:hover { box-shadow: 0 10px 26px rgba(0,0,0,0.10); transform: translateY(-2px) translateZ(0); }
   .bkc__product[hidden] { display: none; }
   .bkc__product-link { display: block; text-decoration: none; color: inherit; }
   .bkc__product-img { position: relative; aspect-ratio: 1; border-radius: 0.6rem; overflow: hidden; background: #fff; }
