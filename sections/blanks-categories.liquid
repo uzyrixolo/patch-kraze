@@ -24,7 +24,6 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Shop Blanks by Category" },
     { "type": "text", "id": "subheading", "label": "Subheading", "default": "Pick a category to browse every blank we stock." },
     { "type": "range", "id": "limit", "label": "Products per category", "min": 4, "max": 48, "step": 4, "default": 24 },
-    { "type": "checkbox", "id": "show_view_all", "label": "Show a \"View all\" link per category", "default": true },
     { "type": "checkbox", "id": "show_swatches", "label": "Show colour swatches on product cards", "default": true },
     { "type": "range", "id": "swatch_limit", "label": "Swatches per card", "min": 3, "max": 12, "step": 1, "default": 6, "info": "Remaining colours are summarised as \"+N\"." },
     { "type": "range", "id": "filter_swatch_limit", "label": "Colour swatches shown before \"Show all\"", "min": 8, "max": 48, "step": 4, "default": 24 },
@@ -69,8 +68,6 @@
   .bkc__panel[hidden] { display: none; }
   .bkc__panel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
   .bkc__panel-title { font-size: 1.15rem; font-weight: 700; color: #111827; margin: 0; }
-  .bkc__view-all { font-size: 0.875rem; font-weight: 600; color: #059669; text-decoration: none; white-space: nowrap; }
-  .bkc__view-all:hover { text-decoration: underline; }
 
   /* ---- Filter sidebar + grid layout ---- */
   .bkc__panel-body { display: flex; align-items: flex-start; gap: 1.75rem; }
@@ -118,7 +115,16 @@
   .bkc__filter-check span { color: #9ca3af; }
 
   .bkc__grid-wrap { flex: 1; min-width: 0; }
-  .bkc__result-count { font-size: 0.85rem; color: #6b7280; margin: 0 0 1rem; }
+  .bkc__toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+  .bkc__result-count { font-size: 0.85rem; color: #6b7280; margin: 0; }
+  .bkc__sort { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; white-space: nowrap; }
+  .bkc__sort select {
+    font-family: inherit; font-size: 0.85rem; color: #111827; background: #fff;
+    border: 1px solid #d1d5db; border-radius: 0.5rem; padding: 0.35rem 0.6rem; cursor: pointer;
+  }
+  @media (max-width: 480px) {
+    .bkc__toolbar { flex-wrap: wrap; }
+  }
   .bkc__no-results { color: #6b7280; font-size: 0.95rem; padding: 2.5rem 0; text-align: center; }
 
   /* 5 across on desktop, matching the reference site. Narrower than that, 5
@@ -330,9 +336,6 @@
     >
       <div class="bkc__panel-head">
         <h3 class="bkc__panel-title">{{ label }}</h3>
-        {%- if section.settings.show_view_all and cat != blank -%}
-          <a class="bkc__view-all" href="{{ cat.url }}">View all {{ cat.all_products_count }} &rarr;</a>
-        {%- endif -%}
       </div>
 
       {%- if cat != blank and panel_products.size > 0 -%}
@@ -542,7 +545,19 @@
            Sits above both columns so the filter sidebar and the grid start flush at the
            same top edge, instead of the sidebar poking up above the first row of cards. {%- endcomment %}
         {%- assign shown_count = panel_products.size | at_most: section.settings.limit -%}
-        <p class="bkc__result-count" data-bkc-count>{{ shown_count }} product{% if shown_count != 1 %}s{% endif %}</p>
+        <div class="bkc__toolbar">
+          <p class="bkc__result-count" data-bkc-count>{{ shown_count }} product{% if shown_count != 1 %}s{% endif %}</p>
+          <label class="bkc__sort">
+            <span>Sort by</span>
+            <select data-bkc-sort aria-label="Sort {{ label | escape }}">
+              <option value="featured">Featured</option>
+              <option value="title-ascending">Alphabetically, A-Z</option>
+              <option value="title-descending">Alphabetically, Z-A</option>
+              <option value="price-ascending">Price, low to high</option>
+              <option value="price-descending">Price, high to low</option>
+            </select>
+          </label>
+        </div>
 
         <div class="bkc__panel-body">
           {%- if section.settings.enable_filters and has_any_facet -%}
@@ -715,6 +730,8 @@
                   data-style="{{ style_handles | join: ',' }}"
                   data-fabric="{{ fabric_handles | join: ',' }}"
                   data-price-bucket="{{ card_price_bucket }}"
+                  data-index="{{ forloop.index0 }}"
+                  data-price="{{ product.price_min }}"
                 >
                   <div class="bkc__product-img">
                     <a class="bkc__product-link" href="{{ product.url }}">
@@ -1158,6 +1175,33 @@
       var grid = panel.querySelector('[data-bkc-grid]');
       if (!grid) return;
       var cards = Array.prototype.slice.call(grid.querySelectorAll('.bkc__product'));
+
+      // ---- Sort: reorders the already-rendered cards in place (this is a
+      // fixed list, not a paginated collection, so there's no query to
+      // re-run) - wired up independently of the filter controls below since
+      // a category with no facets still gets the sort dropdown. ----
+      var sortSelect = panel.querySelector('[data-bkc-sort]');
+      if (sortSelect) {
+        sortSelect.addEventListener('change', function () {
+          var value = sortSelect.value;
+          var sorted = cards.slice();
+          if (value === 'featured') {
+            sorted.sort(function (a, b) { return Number(a.dataset.index) - Number(b.dataset.index); });
+          } else if (value === 'price-ascending') {
+            sorted.sort(function (a, b) { return Number(a.dataset.price) - Number(b.dataset.price); });
+          } else if (value === 'price-descending') {
+            sorted.sort(function (a, b) { return Number(b.dataset.price) - Number(a.dataset.price); });
+          } else if (value === 'title-ascending' || value === 'title-descending') {
+            sorted.sort(function (a, b) {
+              var ta = a.querySelector('.bkc__product-title').textContent.trim().toLowerCase();
+              var tb = b.querySelector('.bkc__product-title').textContent.trim().toLowerCase();
+              return value === 'title-ascending' ? ta.localeCompare(tb) : tb.localeCompare(ta);
+            });
+          }
+          sorted.forEach(function (card) { grid.appendChild(card); });
+        });
+      }
+
       var countEl = panel.querySelector('[data-bkc-count]');
       var noResultsEl = panel.querySelector('[data-bkc-no-results]');
       var clearBtn = panel.querySelector('[data-bkc-clear]');
