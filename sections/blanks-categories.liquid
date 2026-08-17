@@ -118,10 +118,16 @@
   .bkc__filter-check span { color: #9ca3af; }
 
   .bkc__grid-wrap { flex: 1; min-width: 0; }
-  .bkc__result-count { font-size: 0.85rem; color: #6b7280; margin: 0 0 0.85rem; }
+  .bkc__result-count { font-size: 0.85rem; color: #6b7280; margin: 0 0 1rem; }
   .bkc__no-results { color: #6b7280; font-size: 0.95rem; padding: 2.5rem 0; text-align: center; }
 
-  .bkc__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; }
+  /* 5 across on desktop, matching the reference site. Narrower than that, 5
+     columns would squeeze each card too thin, so it steps down to 3 for
+     tablet-width windows before the mobile breakpoint below takes over. */
+  .bkc__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  @media (min-width: 1200px) {
+    .bkc__grid { grid-template-columns: repeat(5, 1fr); }
+  }
   /* Each product sits in its own white card, so the photo, the colours and the
      price read as one unit against the page. */
   /* translateZ(0) forces its own compositing layer so Chrome pixel-snaps this
@@ -514,6 +520,14 @@
           endif
         -%}
 
+        {%- comment %} Rendered-card count, not the category's full size — the grid below
+           stops at section.settings.limit, and the JS filter engine's own count (which
+           counts actual DOM cards) would otherwise disagree with this initial number.
+           Sits above both columns so the filter sidebar and the grid start flush at the
+           same top edge, instead of the sidebar poking up above the first row of cards. {%- endcomment %}
+        {%- assign shown_count = panel_products.size | at_most: section.settings.limit -%}
+        <p class="bkc__result-count" data-bkc-count>{{ shown_count }} product{% if shown_count != 1 %}s{% endif %}</p>
+
         <div class="bkc__panel-body">
           {%- if section.settings.enable_filters and has_any_facet -%}
             <aside class="bkc__filters" data-bkc-filters aria-label="Filter {{ label | escape }}">
@@ -624,13 +638,7 @@
             </aside>
           {%- endif -%}
 
-          {%- comment %} Rendered-card count, not the category's full size — the grid below
-             stops at section.settings.limit, and the JS filter engine's own count (which
-             counts actual DOM cards) would otherwise disagree with this initial number. {%- endcomment %}
-          {%- assign shown_count = panel_products.size | at_most: section.settings.limit -%}
           <div class="bkc__grid-wrap">
-            <p class="bkc__result-count" data-bkc-count>{{ shown_count }} product{% if shown_count != 1 %}s{% endif %}</p>
-
             <div class="bkc__grid" data-bkc-grid>
               {%- for product in panel_products limit: section.settings.limit -%}
                 {%- liquid
