@@ -294,7 +294,9 @@
   .stepper-input::-webkit-outer-spin-button, .stepper-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
   /* Tooltip Styles */
-  .size-display-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem; margin-bottom: 1.5rem; font-size: 1.1rem; font-weight: 700; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 1.5rem; }
+  .size-display-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 1.5rem; margin-bottom: 1.5rem; font-size: 1.1rem; font-weight: 700; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 1.5rem; }
+  .size-formula { color: #6b7280; font-weight: 600; }
+  .size-formula:empty { display: none; }
   .size-value-green { color: #10b981; margin-left: 0.25rem; }
 
   .tooltip-container { position: relative; display: inline-flex; cursor: pointer; }
@@ -531,7 +533,7 @@
           </div>
 
           <div class="size-display-row">
-            <span id="size-display-label">Patch Size</span> <span style="margin: 0 0.5rem;">-</span> <span id="calculated-size-display" class="size-value-green">2"</span>
+            <span id="size-display-label">Patch Size</span> <span style="margin: 0 0.5rem;">-</span> <span id="size-formula-display" class="size-formula"></span> <span id="calculated-size-display" class="size-value-green">2"</span>
             <div class="tooltip-container" id="size-tooltip">
                <div class="info-icon">i</div>
                <span class="tooltip-text">Patch size is calculated by adding Length + Width and dividing by 2.</span>
@@ -1422,6 +1424,7 @@
     const heightInput = document.getElementById('height-input');
     const unitPriceDisplay = document.getElementById('unit-price-display');
     const calculatedSizeDisplay = document.getElementById('calculated-size-display');
+    const sizeFormulaDisplay = document.getElementById('size-formula-display');
 
     // Stepper Logic with dynamic min/max from product config
     window.stepSize = function(type, delta) {
@@ -1536,6 +1539,7 @@
         if(calculatedSizeDisplay) {
           calculatedSizeDisplay.innerText = `${w.toFixed(2).replace(/\.00$/, '')}" x ${h.toFixed(2).replace(/\.00$/, '')}"`;
         }
+        if(sizeFormulaDisplay) sizeFormulaDisplay.innerText = '';
 
         // If no variants, show error
         if (!shopifyVariants || shopifyVariants.length === 0) {
@@ -1667,7 +1671,13 @@
          if (PRODUCT_HANDLE === 'dtf-transfers') {
            // DTF: show W x H dimensions
            calculatedSizeDisplay.innerText = `${w}" x ${h}"`;
+           if(sizeFormulaDisplay) sizeFormulaDisplay.innerText = '';
          } else {
+           if(sizeFormulaDisplay) {
+             const fw = w.toFixed(2).replace(/\.00$/, '');
+             const fh = h.toFixed(2).replace(/\.00$/, '');
+             sizeFormulaDisplay.innerText = `(${fw}" + ${fh}") ÷ 2 =`;
+           }
            calculatedSizeDisplay.innerText = avgSize.toFixed(2).replace(/\.00$/, '') + '"';
          }
       }
