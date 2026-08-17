@@ -46,6 +46,16 @@ ids/titles/prices/SKUs).
   back to `FALLBACK_MATRIX` (still the old grid) — also now out of step.
 - **Woven inverts at 5"-7"**: 10 pcs is cheaper per piece than 25 pcs ($8.21 vs $11.95 at
   7"). That's how the workbook is written; "Buy More. Save More." reads backwards there.
+- **2026-08-18 size-inversion regrade (diverges from workbook):** the embroidery grid
+  priced small patches above bigger ones. Fixed on all 32 embroidery-grid products (the 31
+  plus `velcro-hat-patches`, which lacks 1"/1.5" variants): 11-25 tier sizes 1"-2" dropped
+  6.99 → 6.36 (joins the 2.5"-4.5" plateau; 11 × 6.36 = $69.96 still clears the $69.90 cart
+  minimum in `snippets/cart-summary.liquid`), and 51-100 tier sizes 2.5"-3" raised
+  2.20/2.14 → 2.40 (joins the 1"-2" plateau). Variants and metafields updated together;
+  pre-change snapshot: `backups/embroidery-1125-51100-regrade-backup-2026-08-18.json`.
+  The sublimation pair (`sublimation-patches-for-hats`, `full-color-printed-patches`, now
+  on the sublimation book) had the same 51-100 dip and got the same fix: sizes 2.5"-3"
+  raised 1.38 → 1.44 (row now 1.44 ×5, then 1.5). Same backup file covers all 34 products.
 - ~14 embroidered-grid products have `templateSuffix: null` — they render on the **default**
   product template, not `patch`, so they never use the matrix at all (no size stepper, no
   tier table, every variant directly selectable from a dropdown). Predates this work.
