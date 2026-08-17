@@ -390,10 +390,26 @@
                 else
                   assign value_handle = value.name | handleize
                   unless seen_color_handles contains value_handle
-                    assign one_handle = value_handle | split: '|'
-                    assign seen_color_handles = seen_color_handles | concat: one_handle
-                    assign matching_value = color_option.values | where: 'name', value.name
-                    assign filter_color_values = filter_color_values | concat: matching_value
+                    # Skip values that would render as an invisible, near-zero-width
+                    # swatch button (e.g. "Kryptek Highlander" - a camo pattern name,
+                    # not a colour word color-name-swatch can map to hex). Without
+                    # this check the filter grid grows an invisible gap per unmapped
+                    # value, throwing off how many real swatches fit per row.
+                    assign color_resolves = true
+                    if value.swatch == blank
+                      capture probe_result
+                        render 'color-name-swatch', value: value.name, probe: true
+                      endcapture
+                      unless probe_result contains 'ok'
+                        assign color_resolves = false
+                      endunless
+                    endif
+                    if color_resolves
+                      assign one_handle = value_handle | split: '|'
+                      assign seen_color_handles = seen_color_handles | concat: one_handle
+                      assign matching_value = color_option.values | where: 'name', value.name
+                      assign filter_color_values = filter_color_values | concat: matching_value
+                    endif
                   endunless
                 endif
               endfor
