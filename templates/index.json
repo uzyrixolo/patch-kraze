@@ -27,8 +27,11 @@
     "patches_hero": {
       "type": "patches-hero",
       "settings": {
+        "eyebrow_text": "Made in USA",
+        "eyebrow_animate": true,
+        "eyebrow_speed": 110,
         "title": "Premium Custom Patches with Low 10-Piece Minimums",
-        "subtitle": "Premium custom patches for any design \u2014 embroidered, woven, PVC, leather and more. Low minimums, fast turnaround.",
+        "subtitle": "Premium custom patches for any design — embroidered, woven, PVC, leather and more. Low minimums, fast turnaround.",
         "prop_1": "Free Fast Shipping",
         "prop_2": "100% Satisfaction",
         "prop_3": "No Setup Fees",
@@ -45,7 +48,8 @@
         "hero_video": "shopify://files/videos/WhatsApp Video 2026-08-05 at 2.14.31 AM.mp4",
         "hero_video_url": "",
         "video_autoplay": true,
-        "video_controls": false
+        "video_controls": false,
+        "video_max_height": 420
       }
     },
     "customer_gallery": {
@@ -497,7 +501,7 @@
           "settings": {
             "image": "shopify://shop_images/4-step.jpg",
             "title": "Upload Your Designs & Place Order Online",
-            "description": "Use designs with unlimited colors, simple or high detail artwork. Upload any design you want and we\u2019ll turn it into high quality custom patches."
+            "description": "Use designs with unlimited colors, simple or high detail artwork. Upload any design you want and we’ll turn it into high quality custom patches."
           }
         },
         "process_step_w7Qh9j": {
@@ -755,7 +759,7 @@
     "promo_popup": {
       "type": "promo-popup",
       "settings": {
-        "enabled": false,
+        "enabled": true,
         "image": "shopify://shop_images/WhatsApp_Image_2026-08-05_at_12.31.15_AM.jpg",
         "image_position": "only",
         "eyebrow": "LIMITED TIME",
