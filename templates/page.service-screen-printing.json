@@ -15,6 +15,7 @@
         "heading": "Screen Printing",
         "subheading": "Bold, vibrant prints for apparel & merchandise",
         "description": "<p>From team uniforms to brand merchandise, our screen printing delivers rich, long-lasting color on t-shirts, hoodies, tote bags, and more. Perfect for large runs with consistent quality on every piece.</p>",
+        "hero_image": "shopify://shop_images/services_5.webp",
         "feature_1_title": "Vivid Colors",
         "feature_1_desc": "PMS color matching for exact brand consistency",
         "feature_2_title": "Bulk Friendly",
@@ -22,7 +23,7 @@
         "feature_3_title": "Durable Prints",
         "feature_3_desc": "Plastisol & water-based inks that last wash after wash",
         "feature_4_title": "Free Screens",
-        "feature_4_desc": "No setup or screen fees \u2014 pricing includes everything",
+        "feature_4_desc": "No setup or screen fees — pricing includes everything",
         "process_1": "Upload Your Art",
         "process_2": "Approve Color Proof",
         "process_3": "Print & Quality Check",
@@ -36,10 +37,10 @@
         "heading": "Request a Screen Printing Quote",
         "description": "<p>Tell us about your project and we'll provide a detailed quote within 24 hours.</p>",
         "show_file_upload": true,
+        "backend_url": "https://patch-kraze-quote-production.up.railway.app",
         "color_scheme": "scheme-1",
         "padding_top": 20,
-        "padding_bottom": 60,
-        "backend_url": "https://patch-kraze-quote-production.up.railway.app"
+        "padding_bottom": 60
       }
     }
   },
