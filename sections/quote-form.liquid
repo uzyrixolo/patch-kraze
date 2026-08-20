@@ -23,6 +23,13 @@
       "default": true
     },
     {
+      "type": "checkbox",
+      "id": "enable_file_upload",
+      "label": "Enable direct file upload",
+      "info": "Off while quote notification emails are being fixed - customers link to their artwork instead. Turn back on once the backend notification email is confirmed working. Also needs a backend URL below.",
+      "default": false
+    },
+    {
       "type": "text",
       "id": "backend_url",
       "label": "Quote backend URL",
@@ -564,7 +571,12 @@
       {% if section.settings.show_file_upload %}
       <h3 class="form-section-title">Your Design (Optional)</h3>
 
-      {% if section.settings.backend_url != blank %}
+      {% assign file_upload_on = false %}
+      {% if section.settings.backend_url != blank and section.settings.enable_file_upload %}
+        {% assign file_upload_on = true %}
+      {% endif %}
+
+      {% if file_upload_on %}
       <div class="form-group">
         <div class="file-upload-area" id="fileUploadArea">
           <input type="file" id="fileInput" class="file-upload-input" accept=".jpg,.jpeg,.png,.gif,.pdf,.eps,.ai,.svg,.webp" data-max-size="20971520">
@@ -584,7 +596,7 @@
       {% endif %}
 
       <div class="form-group" style="margin-top:1rem;">
-        <label class="form-label">Or link to your design file</label>
+        <label class="form-label">{% if file_upload_on %}Or link to your design file{% else %}Link to your design file{% endif %}</label>
         <input type="url" name="contact[Design File Link]" class="form-input" placeholder="https://drive.google.com/... or Dropbox / WeTransfer link">
         <div class="file-upload-hint" style="margin-top:0.5rem;">
           Paste a share link from Google Drive, Dropbox, or WeTransfer. You can also email your file to <a href="mailto:orders@patchkraze.com" style="color:#10b981; font-weight:600;">orders@patchkraze.com</a> after submitting.
