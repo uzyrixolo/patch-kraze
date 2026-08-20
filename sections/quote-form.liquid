@@ -685,9 +685,17 @@
       }
 
       fetch(BACKEND_URL + '/quote', { method: 'POST', body: payload })
-        .then(function(r) { return r.json().then(function(j) { return { ok: r.ok && j.ok }; }); })
+        .then(function(r) { return r.json().then(function(j) { return { ok: r.ok && j.ok, fileUrl: j.fileUrl }; }); })
         .then(function(res) {
           if (!res.ok) throw new Error('backend rejected');
+          // The uploaded file itself never reaches the email - Shopify's
+          // native contact form has no concept of an attachment - so drop
+          // the Shopify Files link the backend just created into the same
+          // "design file link" field a pasted Drive/Dropbox link would use,
+          // giving the notification email something clickable instead of
+          // nothing at all.
+          var linkField = form.querySelector('[name="contact[Design File Link]"]');
+          if (linkField && !linkField.value && res.fileUrl) linkField.value = res.fileUrl;
           // Backup email via native contact endpoint (no navigation)
           try { navigator.sendBeacon('/contact', new FormData(form)); } catch (_) {}
           form.style.display = 'none';

@@ -232,7 +232,12 @@ async function uploadFileToShopify(file) {
   const created = await gql(
     `mutation($files: [FileCreateInput!]!) {
       fileCreate(files: $files) {
-        files { id fileStatus }
+        files {
+          id
+          fileStatus
+          ... on GenericFile { url }
+          ... on MediaImage { image { url } }
+        }
         userErrors { field message }
       }
     }`,
@@ -249,7 +254,29 @@ async function uploadFileToShopify(file) {
 
   const errs = created.fileCreate.userErrors;
   if (errs && errs.length) throw new Error('fileCreate: ' + JSON.stringify(errs));
-  return created.fileCreate.files[0].id; // gid://shopify/GenericFile/... or MediaImage
+
+  const createdFile = created.fileCreate.files[0];
+  const fileId = createdFile.id; // gid://shopify/GenericFile/... or MediaImage
+  let fileUrl = createdFile.url || (createdFile.image && createdFile.image.url) || null;
+
+  // Shopify processes a newly created file asynchronously, so the CDN url is
+  // often not on the fileCreate response yet - poll briefly rather than
+  // emailing the quote notification with no link to the design at all.
+  for (let i = 0; i < 5 && !fileUrl; i++) {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const check = await gql(
+      `query($id: ID!) {
+        node(id: $id) {
+          ... on GenericFile { url }
+          ... on MediaImage { image { url } }
+        }
+      }`,
+      { id: fileId }
+    );
+    fileUrl = check.node && (check.node.url || (check.node.image && check.node.image.url)) || null;
+  }
+
+  return { id: fileId, url: fileUrl };
 }
 
 // ---------------------------------------------------------------------------
@@ -495,9 +522,12 @@ app.post('/quote', upload.single('design_file'), async (req, res) => {
 
     // 1. Upload file (if provided)
     let fileId = null;
+    let fileUrl = null;
     if (req.file && req.file.size > 0) {
       try {
-        fileId = await uploadFileToShopify(req.file);
+        const uploaded = await uploadFileToShopify(req.file);
+        fileId = uploaded.id;
+        fileUrl = uploaded.url;
       } catch (e) {
         console.error('File upload failed (continuing without file):', e.message);
       }
@@ -541,7 +571,7 @@ app.post('/quote', upload.single('design_file'), async (req, res) => {
       submitted_at: new Date().toISOString(),
     });
 
-    res.json({ ok: true, quote: quote.handle, customer: Boolean(customerId), file: Boolean(fileId) });
+    res.json({ ok: true, quote: quote.handle, customer: Boolean(customerId), file: Boolean(fileId), fileUrl });
   } catch (e) {
     console.error('Quote submission error:', e);
     res.status(500).json({ ok: false, error: 'Something went wrong. Please try again or email us.' });
