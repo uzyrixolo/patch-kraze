@@ -514,6 +514,111 @@ app.get('/auth/callback', async (req, res) => {
   }
 });
 
+// ---------------------------------------------------------------------------
+// Quote notification email (Resend)
+//
+// Shopify's native contact form is not a usable notification channel for this:
+// it is captcha-gated (a rejected submission is silent - no email, no error),
+// and it cannot carry the design file at all. Sending from here keeps the
+// notification independent of the storefront, and lets the email carry a real
+// link to the file that was just uploaded.
+// ---------------------------------------------------------------------------
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const NOTIFY_TO = (process.env.QUOTE_NOTIFY_TO || 'orders@patchkraze.com')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+// Must be on a domain verified in Resend, or Resend rejects the send.
+const NOTIFY_FROM = process.env.QUOTE_NOTIFY_FROM || 'Patch Kraze Quotes <quotes@patchkraze.com>';
+
+function esc(v) {
+  return String(v == null ? '' : v)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+async function sendQuoteNotification(fields, fileUrl) {
+  if (!RESEND_API_KEY) {
+    console.error('Quote email skipped: RESEND_API_KEY not set');
+    return false;
+  }
+
+  const rows = [
+    ['Name', fields.name],
+    ['Email', fields.email],
+    ['Phone', fields.phone],
+    ['Patch type', fields.patch_type],
+    ['Backing', fields.backing_type],
+    ['Border', fields.border_style],
+    ['Size', fields.size],
+    ['Quantity', fields.quantity],
+    ['Need by', fields.need_by_date],
+    ['Heard via', fields.referral_source],
+    ['Notes', fields.additional_info],
+  ].filter(([, v]) => v != null && String(v).trim() !== '');
+
+  const fileBlock = fileUrl
+    ? `<p style="margin:24px 0"><a href="${esc(fileUrl)}"
+         style="background:#111827;color:#fff;padding:12px 20px;border-radius:6px;
+         text-decoration:none;display:inline-block">View design file</a></p>
+       <p style="font-size:12px;color:#6b7280;word-break:break-all">${esc(fileUrl)}</p>`
+    : `<p style="margin:24px 0;color:#b45309"><strong>No design file was attached.</strong></p>`;
+
+  const linkBlock = fields.design_file_link
+    ? `<p style="margin:8px 0">Customer-provided link:
+         <a href="${esc(fields.design_file_link)}">${esc(fields.design_file_link)}</a></p>`
+    : '';
+
+  const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:640px">
+    <h2 style="margin:0 0 4px">New quote request</h2>
+    <p style="margin:0 0 20px;color:#6b7280">${esc(fields.name)} &middot; ${esc(fields.email)}</p>
+    <table cellpadding="6" style="border-collapse:collapse;width:100%;font-size:14px">
+      ${rows
+        .map(
+          ([k, v]) =>
+            `<tr><td style="border-bottom:1px solid #e5e7eb;color:#6b7280;width:140px">${esc(
+              k
+            )}</td><td style="border-bottom:1px solid #e5e7eb;white-space:pre-wrap">${esc(
+              v
+            )}</td></tr>`
+        )
+        .join('')}
+    </table>
+    ${fileBlock}
+    ${linkBlock}
+  </div>`;
+
+  const text =
+    `New quote request\n\n` +
+    rows.map(([k, v]) => `${k}: ${v}`).join('\n') +
+    `\n\nDesign file: ${fileUrl || 'none attached'}` +
+    (fields.design_file_link ? `\nCustomer link: ${fields.design_file_link}` : '');
+
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: NOTIFY_FROM,
+      to: NOTIFY_TO,
+      subject: `New quote request - ${fields.name || fields.email}`,
+      html,
+      text,
+      // so staff can reply straight to the customer
+      reply_to: fields.email || undefined,
+    }),
+  });
+
+  if (!r.ok) {
+    throw new Error(`Resend HTTP ${r.status}: ${await r.text()}`);
+  }
+  return true;
+}
+
 app.post('/quote', upload.single('design_file'), async (req, res) => {
   try {
     const b = req.body || {};
@@ -553,7 +658,7 @@ app.post('/quote', upload.single('design_file'), async (req, res) => {
         ? `${b.width_inches || '?'}" x ${b.height_inches || '?'}"`
         : '';
 
-    const quote = await createQuoteMetaobject({
+    const quoteFields = {
       name,
       email,
       phone: b.phone,
@@ -565,13 +670,33 @@ app.post('/quote', upload.single('design_file'), async (req, res) => {
       need_by_date: b.need_by_date,
       referral_source: b.referral_source,
       additional_info: b.additional_info,
-      design_file: fileId,
       design_file_link: b.design_file_link,
+    };
+
+    const quote = await createQuoteMetaobject({
+      ...quoteFields,
+      design_file: fileId,
       status: 'New',
       submitted_at: new Date().toISOString(),
     });
 
-    res.json({ ok: true, quote: quote.handle, customer: Boolean(customerId), file: Boolean(fileId), fileUrl });
+    // 4. Notify staff. Never fail the submission over this - the quote is
+    // already safely recorded by the time we get here.
+    let emailed = false;
+    try {
+      emailed = await sendQuoteNotification(quoteFields, fileUrl);
+    } catch (e) {
+      console.error('Quote notification email failed:', e.message);
+    }
+
+    res.json({
+      ok: true,
+      quote: quote.handle,
+      customer: Boolean(customerId),
+      file: Boolean(fileId),
+      fileUrl,
+      emailed,
+    });
   } catch (e) {
     console.error('Quote submission error:', e);
     res.status(500).json({ ok: false, error: 'Something went wrong. Please try again or email us.' });
