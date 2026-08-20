@@ -157,6 +157,14 @@
     border-color: #10b981;
     box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
   }
+  /* Without this, placeholders inherit full-opacity black from somewhere in
+     the theme's base styles and read as real, already-typed answers. */
+  .form-input::placeholder,
+  .form-select::placeholder,
+  .form-textarea::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+  }
   .form-textarea {
     resize: vertical;
     min-height: 120px;
