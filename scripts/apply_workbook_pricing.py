@@ -8,7 +8,7 @@ Usage:
 """
 import os, json, sys, time, argparse, subprocess
 
-WORKBOOK = os.path.expanduser('~/Downloads/New Patch Kraze Pricing.xlsx')
+WORKBOOK = os.environ.get('PRICING_WORKBOOK', '/Users/zolo/patch-kraze/New Patch Kraze Pricing.xlsx')
 SHOP = os.environ.get('SHOPIFY_SHOP', 'patchkraze.myshopify.com')
 TOKEN = os.environ.get('SHOPIFY_ADMIN_TOKEN')
 API = '2026-01'
@@ -49,6 +49,8 @@ def load_family(sheet):
     for r in rows[hi + 1:]:
         if r[qcol] in (None, ''): continue
         label = str(r[qcol]).strip()
+        # sheets can hold a second, unrelated table below the main grid
+        if not label[0].isdigit(): break
         prices = [r[i] for i in size_cols]
         if all(p is None for p in prices): continue
         mn, mx = tier_bounds(label)
