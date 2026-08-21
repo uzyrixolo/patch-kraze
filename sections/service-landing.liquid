@@ -180,11 +180,15 @@
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+    background: linear-gradient(135deg, #1f2937, #374151);
   }
   .service-hero-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* contain, not cover - some of these photos have baked-in text (e.g.
+       "Heat Press Service at Patch Kraze") that a portrait-shaped source
+       cropped to this landscape box would slice through. */
+    object-fit: contain;
     display: block;
   }
   .service-hero-placeholder {
