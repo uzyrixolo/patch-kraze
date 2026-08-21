@@ -533,22 +533,22 @@
     services: [
       {
         title: "Direct Embroidery",
-        image: "{{ embroidered_patches.featured_image | img_url: '800x' }}",
+        image: "{{ images['services_4.webp'] | image_url: width: 800 }}",
         href: "/pages/direct-embroidery"
       },
       {
         title: "Screen Printing",
-        image: "{{ full_color_printed.featured_image | img_url: '800x' }}",
+        image: "{{ images['services_5.webp'] | image_url: width: 800 }}",
         href: "/pages/screen-printing"
       },
       {
         title: "Heat Press Service",
-        image: "{{ dtf_transfers.featured_image | img_url: '800x' }}",
+        image: "{{ images['services_1.webp'] | image_url: width: 800 }}",
         href: "/pages/heat-press-service"
       },
       {
         title: "Tees with DTF Prints",
-        image: "{{ dtf_transfers.featured_image | img_url: '800x' }}",
+        image: "{{ images['services_2.webp'] | image_url: width: 800 }}",
         href: "/pages/tees-with-dtf-prints"
       }
     ]
