@@ -112,12 +112,17 @@ def plan_product(p, sizes, tiers):
     # current variants in workbook order, matched by (size, tier) position
     old_titles = list(existing.keys())
     # tier labels currently on the product, in their existing order of appearance
-    old_tiers, seen = [], set()
+    # Tier labels are NOT stored in ascending order on the product (a real
+    # product lists '200-499' before '10'), so sort by the tier's lower bound.
+    # Relying on order of appearance silently maps bulk prices onto the small
+    # tiers and scrambles every price on the product.
+    seen = set()
     for t in old_titles:
-        if ' - ' not in t: continue
-        lab = t.split(' - ', 1)[1]
-        if lab not in seen:
-            seen.add(lab); old_tiers.append(lab)
+        if ' - ' in t:
+            seen.add(t.split(' - ', 1)[1])
+    def _lab_min(lab):
+        return int(lab.replace('+', '').split('-')[0])
+    old_tiers = sorted(seen, key=_lab_min)
     new_tiers = [tier_variant_label(t['min'], t['max']) for t in tiers]
 
     updates, creates, report = [], [], []
