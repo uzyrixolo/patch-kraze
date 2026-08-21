@@ -140,6 +140,12 @@
   .pk-mega-img-box { width: 100%; aspect-ratio: 1; background: #f3f4f6; border-radius: 0.5rem; overflow: hidden; margin-bottom: 0.75rem; }
   .pk-mega-img { width: 100%; height: 100%; object-fit: cover; transition: scale 0.2s; }
   .pk-mega-item:hover .pk-mega-img { transform: scale(1.05); }
+  /* Services menu only: those photos have baked-in text (e.g. "Heat Press
+     Service at Patch Kraze"), and cover-cropping a portrait source into this
+     square box was slicing through it. Scoped to [data-menu="services"] so
+     every other mega-menu's square-crop thumbnails are untouched. */
+  .pk-mega-img-box[data-menu="services"] { background: linear-gradient(135deg, #1f2937, #374151); }
+  .pk-mega-img-box[data-menu="services"] .pk-mega-img { object-fit: contain; }
   .pk-mega-title { font-size: 0.75rem; font-weight: 600; color: #1f2937; text-align: center; }
   .pk-mega-item:hover .pk-mega-title { color: #06b6d4; }
 
@@ -615,7 +621,7 @@
     const items = MEGA_MENUS[key] || [];
     megaMenuContent.innerHTML = items.map(subItem => `
       <a href="${subItem.href}" class="pk-mega-item">
-        <div class="pk-mega-img-box"><img src="${subItem.image}" class="pk-mega-img"></div>
+        <div class="pk-mega-img-box" data-menu="${key}"><img src="${subItem.image}" class="pk-mega-img"></div>
         <div class="pk-mega-title">${subItem.title}</div>
       </a>
     `).join('');
