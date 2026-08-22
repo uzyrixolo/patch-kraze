@@ -129,27 +129,24 @@
 
   .file-success-bar {
     background: #ecfdf5; border: 1px solid #10b981; padding: 1rem; border-radius: 0.75rem;
-    display: none; align-items: center; gap: 1rem; margin-bottom: 2rem;
+    display: none; align-items: center; gap: 1rem; margin-bottom: 1.25rem;
   }
   .file-thumb { width: 3.5rem; height: 3.5rem; background: #fff; border-radius: 0.5rem; border: 1px solid #d1fae5; object-fit: contain; }
 
-  /* Artwork preview - shows the design at the patch's real proportions, so a
-     tall design is not silently previewed as a square. Checkerboard reads as
-     transparency, matching how the cut patch will look. */
-  .pk-preview { margin-bottom: 1.25rem; }
-  .pk-preview__label { font-size: 0.85rem; color: #4b5563; margin-bottom: 0.5rem; text-align: center; }
-  .pk-preview__stage { display: flex; align-items: center; justify-content: center; padding: 0.75rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.75rem; }
+  /* Artwork preview - lives inside the upload bar so one file needs one card.
+     Frame takes the patch's proportions; checkerboard reads as transparency. */
   .pk-preview__frame {
-    max-width: 100%; max-height: 260px; outline: 2px dashed #9ca3af; outline-offset: 2px;
+    flex-shrink: 0; width: 96px; height: 96px;
+    outline: 2px dashed #9ca3af; outline-offset: 2px;
     background-color: #fff;
     background-image:
       linear-gradient(45deg, #e5e7eb 25%, transparent 25%, transparent 75%, #e5e7eb 75%),
       linear-gradient(45deg, #e5e7eb 25%, transparent 25%, transparent 75%, #e5e7eb 75%);
-    background-size: 16px 16px; background-position: 0 0, 8px 8px;
+    background-size: 12px 12px; background-position: 0 0, 6px 6px;
     display: flex; align-items: center; justify-content: center; overflow: hidden;
   }
   .pk-preview__frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
-  .pk-preview__dims { text-align: center; font-size: 0.8rem; color: #6b7280; margin-top: 0.5rem; }
+  .pk-preview__dims { font-size: 0.75rem; color: #6b7280; margin-top: 0.15rem; }
 
   /* Pricing Table */
   .pricing-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
@@ -472,22 +469,15 @@
         <!-- STAGE 2: CUSTOMIZE -->
         <div id="customize-stage" class="customize-ui">
 
-          <div class="pk-preview" id="pk-preview" style="display:none;">
-            <div class="pk-preview__label">Preview: the image will print as shown below.</div>
-            <div class="pk-preview__stage">
-              <div class="pk-preview__frame" id="pk-preview-frame">
-                <img id="pk-preview-img" src="" alt="Your uploaded design">
-              </div>
-            </div>
-            <div class="pk-preview__dims" id="pk-preview-dims"></div>
-          </div>
-
           <div class="file-success-bar">
-            <img id="file-preview-img" class="file-thumb" src="" width="56" height="56">
+            <div class="pk-preview__frame" id="pk-preview-frame">
+              <img id="pk-preview-img" src="" alt="Your uploaded design">
+            </div>
             <div style="flex:1; min-width:0;">
-              <div style="font-weight:700; color:#064e3b;">File Uploaded!</div>
+              <div style="font-weight:700; color:#064e3b;">File uploaded &mdash; prints as shown</div>
               <div id="filename-display" style="font-size:0.85rem; color:#059669; word-break:break-all; overflow-wrap:anywhere;">filename.png</div>
-              <div style="text-decoration:underline; font-size:0.75rem; cursor:pointer;" onclick="resetUpload()">Change</div>
+              <div class="pk-preview__dims" id="pk-preview-dims"></div>
+              <div style="text-decoration:underline; font-size:0.75rem; cursor:pointer; margin-top:0.25rem;" onclick="resetUpload()">Change</div>
             </div>
           </div>
 
@@ -1426,14 +1416,12 @@
 
          const reader = new FileReader();
          reader.onload = function(e){
-             const img = document.getElementById('file-preview-img');
-             if(img) img.src = e.target.result;
              // PDFs and anything the browser can't decode keep manual sizing.
-             const pv = document.getElementById('pk-preview');
+             const pv = document.getElementById('pk-preview-frame');
              const pvImg = document.getElementById('pk-preview-img');
              if (pvImg) pvImg.src = e.target.result;
              if (file.type && file.type.indexOf('image/') === 0) {
-               if (pv) pv.style.display = 'block';
+               if (pv) pv.style.display = 'flex';
                measureArtwork(file).then(function(m) {
                  setSizeFromArtwork(m.w, m.h, m.trimmed);
                  updateArtworkPreview();
@@ -1587,12 +1575,12 @@
       const dims = document.getElementById('pk-preview-dims');
       if (!frame || !widthInput || !heightInput) return;
       const w = parseFloat(widthInput.value) || 1, h = parseFloat(heightInput.value) || 1;
-      const longest = Math.max(w, h), px = 240;
+      const longest = Math.max(w, h), px = 96;
       frame.style.width  = Math.round(px * (w / longest)) + 'px';
       frame.style.height = Math.round(px * (h / longest)) + 'px';
       if (dims) {
         const f = (n) => n.toFixed(2).replace(/\.00$/, '');
-        dims.textContent = 'Shown at ' + f(w) + '" \u00d7 ' + f(h) + '" \u2014 actual patch proportions';
+        dims.textContent = f(w) + '" \u00d7 ' + f(h) + '" \u2014 actual patch shape';
       }
     }
 
