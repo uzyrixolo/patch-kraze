@@ -208,6 +208,7 @@
      right - same breakpoint the page already uses to decide there's room
      for two columns (see .product-container above). */
   .pk-customize-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
+  .pk-customize-grid__left, .pk-customize-grid__right { min-width: 0; }
   @media (min-width: 1024px) {
     .pk-customize-grid { grid-template-columns: 1.7fr 1fr; }
     .pk-customize-grid__right { position: sticky; top: 1rem; }
@@ -365,7 +366,6 @@
 
   /* Pricing Table Mobile Tweak */
   .pricing-card { overflow-x: auto; }
-  .pricing-header, .pricing-row { min-width: 300px; } /* Ensure table doesn't squash too much */
 
   /* Stepper Input Styles - Ninja Style Polish */
   .dimension-group h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; color: #111827; }
