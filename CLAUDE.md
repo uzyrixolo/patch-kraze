@@ -60,6 +60,50 @@ ids/titles/prices/SKUs).
   product template, not `patch`, so they never use the matrix at all (no size stepper, no
   tier table, every variant directly selectable from a dropdown). Predates this work.
 
+### Workbook migration — 10-tier grids (August 2026, later pass)
+
+Source: `New Patch Kraze Pricing.xlsx` (kept in the repo root). The store was moved
+**wholesale onto the workbook**, on explicit instruction, including consequences that were
+flagged and accepted: bulk prices rise steeply (1" at 301-400 went $0.27 -> $1.60, +493%),
+three 16-25 cells fall below the $69.90 cart minimum and are unbuyable as written, and the
+workbook's nine size-axis dips were reinstated (the 2.51-3.00" column is cheaper than 2" in
+every tier from 51-100 down).
+
+- **Quantity axis changed from 8 tiers to 10** on the embroidery family:
+  `10-15, 16-25, 26-50, 51-100, 101-200, 201-300, 301-400, 401-500, 501-700, 701+`.
+  Old `10`/`11-25`/`101-199`/`200-499`/`500-999`/`1000+` were renamed; `501-700` and `701+`
+  are new. 30 embroidery products went 160 -> 200 variants; `velcro-hat-patches` was sparse
+  (40) and went to 200.
+- Sublimation (2 products) and leather (3 + 1 faux) already matched their sheets' tier
+  structure, so those were price-only updates - no renames, no new variants.
+- **38 products migrated, 6912 cells, all verified**: 856 cells re-read from Shopify across
+  all four families with zero mismatches, and the live PDP confirmed resolving the new
+  `501-700`/`701+` tiers to real variants.
+- **Tier labels are NOT stored in ascending order on a product** - a real product lists
+  `200-499` before `10`. Any positional remap must sort by the tier's lower bound first;
+  walking them in order of appearance scrambles every price on the product (it maps the
+  workbook's cheapest tier onto the most expensive variants). Cost an entire near-miss.
+- No theme change was needed: `qtyRangeStr` and the pricing-table label logic in
+  `main-product-patch-kraze.liquid` already derive labels from whatever tiers the metafield
+  carries, including `701+` (max >= 999999) and single-quantity tiers.
+
+**Not migrated - 23 products need a decision.** The PVC (5), woven (1) and 3D (1) sheets
+carry a *different size axis* than the live products (PVC sheet has 14 sizes vs 6 live), so
+following them changes which sizes customers can order and needs a theme stepper change too.
+Seven products have no sheet at all (`dtf-transfers`, the 5 flex products,
+`letterman-jacket-patches`) - my first classification pass would have swept these onto the
+embroidery grid, which is badly wrong since DTF prices by square inch. Chenille (2) uses a
+different sheet layout. Six more sit on older 16-size or 6-size grids.
+
+Tooling: `scripts/apply_workbook_pricing.py` (applies a sheet to given handles, `--dry-run`
+supported; reads `SHOPIFY_ADMIN_TOKEN` from env, never logs it), `scripts/plan_workbook_offline.py`
+(classifies every product against the sheets offline), `scripts/dryrun_report.py` (per-cell
+CSV of every change). Backups: `backups/shopify-full-backup-2026-08-21-pre-workbook.jsonl`
+(full pre-change snapshot) and `backups/workbook-migration-dryrun-2026-08-21.csv`.
+
+Note: the backend's OAuth scope list is hardcoded in `quote-backend/server.js` - the Dev
+Dashboard granting a scope is not enough, and a released app version is required too.
+
 **Migration order matters.** Variants first, metafield last — ideally the price updates and
 the `metafieldsSet` in one aliased mutation so there is no window where the displayed price
 (metafield) and the charged price (variant) disagree. Setting metafields first makes the
