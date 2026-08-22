@@ -131,7 +131,25 @@
     background: #ecfdf5; border: 1px solid #10b981; padding: 1rem; border-radius: 0.75rem;
     display: none; align-items: center; gap: 1rem; margin-bottom: 2rem;
   }
-  .file-thumb { width: 3.5rem; height: 3.5rem; background: #fff; border-radius: 0.5rem; border: 1px solid #d1fae5; object-fit: cover; }
+  .file-thumb { width: 3.5rem; height: 3.5rem; background: #fff; border-radius: 0.5rem; border: 1px solid #d1fae5; object-fit: contain; }
+
+  /* Artwork preview - shows the design at the patch's real proportions, so a
+     tall design is not silently previewed as a square. Checkerboard reads as
+     transparency, matching how the cut patch will look. */
+  .pk-preview { margin-bottom: 1.25rem; }
+  .pk-preview__label { font-size: 0.85rem; color: #4b5563; margin-bottom: 0.5rem; text-align: center; }
+  .pk-preview__stage { display: flex; align-items: center; justify-content: center; padding: 0.75rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.75rem; }
+  .pk-preview__frame {
+    max-width: 100%; max-height: 260px; outline: 2px dashed #9ca3af; outline-offset: 2px;
+    background-color: #fff;
+    background-image:
+      linear-gradient(45deg, #e5e7eb 25%, transparent 25%, transparent 75%, #e5e7eb 75%),
+      linear-gradient(45deg, #e5e7eb 25%, transparent 25%, transparent 75%, #e5e7eb 75%);
+    background-size: 16px 16px; background-position: 0 0, 8px 8px;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .pk-preview__frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .pk-preview__dims { text-align: center; font-size: 0.8rem; color: #6b7280; margin-top: 0.5rem; }
 
   /* Pricing Table */
   .pricing-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
@@ -453,6 +471,16 @@
 
         <!-- STAGE 2: CUSTOMIZE -->
         <div id="customize-stage" class="customize-ui">
+
+          <div class="pk-preview" id="pk-preview" style="display:none;">
+            <div class="pk-preview__label">Preview: the image will print as shown below.</div>
+            <div class="pk-preview__stage">
+              <div class="pk-preview__frame" id="pk-preview-frame">
+                <img id="pk-preview-img" src="" alt="Your uploaded design">
+              </div>
+            </div>
+            <div class="pk-preview__dims" id="pk-preview-dims"></div>
+          </div>
 
           <div class="file-success-bar">
             <img id="file-preview-img" class="file-thumb" src="" width="56" height="56">
@@ -1400,12 +1428,19 @@
              const img = document.getElementById('file-preview-img');
              if(img) img.src = e.target.result;
              // PDFs and anything the browser can't decode keep manual sizing.
+             const pv = document.getElementById('pk-preview');
+             const pvImg = document.getElementById('pk-preview-img');
+             if (pvImg) pvImg.src = e.target.result;
              if (file.type && file.type.indexOf('image/') === 0) {
+               if (pv) pv.style.display = 'block';
                const probe = new Image();
                probe.onload = function() {
                  setSizeFromArtwork(probe.naturalWidth, probe.naturalHeight);
+                 updateArtworkPreview();
                };
                probe.src = e.target.result;
+             } else if (pv) {
+               pv.style.display = 'none';   // PDFs have nothing to preview
              }
          }
          reader.readAsDataURL(file);
@@ -1468,6 +1503,22 @@
       return { w: snapSize(w), h: snapSize(h) };
     }
 
+    // The preview frame takes the patch's proportions, so what the customer sees
+    // is the shape they will actually receive - it re-shapes as they resize.
+    function updateArtworkPreview() {
+      const frame = document.getElementById('pk-preview-frame');
+      const dims = document.getElementById('pk-preview-dims');
+      if (!frame || !widthInput || !heightInput) return;
+      const w = parseFloat(widthInput.value) || 1, h = parseFloat(heightInput.value) || 1;
+      const longest = Math.max(w, h), px = 240;
+      frame.style.width  = Math.round(px * (w / longest)) + 'px';
+      frame.style.height = Math.round(px * (h / longest)) + 'px';
+      if (dims) {
+        const f = (n) => n.toFixed(2).replace(/\.00$/, '');
+        dims.textContent = 'Shown at ' + f(w) + '" \u00d7 ' + f(h) + '" \u2014 actual patch proportions';
+      }
+    }
+
     // Keep the opposite axis in proportion when one axis is driven.
     function applyRatio(driver) {
       if (!ratioLocked || !artworkRatio || !widthInput || !heightInput) return;
@@ -1523,6 +1574,7 @@
       if(val > PRODUCT_CONFIG.maxSize) val = PRODUCT_CONFIG.maxSize;
       el.value = val.toFixed(2);
       applyRatio(type);
+      updateArtworkPreview();
       updatePriceAndVariant();
     };
 
@@ -1536,6 +1588,7 @@
         const v = parseFloat(el.value);
         el.value = (isNaN(v) ? PRODUCT_CONFIG.defaultSize : snapSize(v)).toFixed(2);
         applyRatio(name);
+        updateArtworkPreview();
         updatePriceAndVariant();
       });
     });
