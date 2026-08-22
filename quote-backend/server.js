@@ -81,7 +81,8 @@ async function getAccessToken() {
 
 // --- OAuth authorization code grant (one-time browser flow) -------------------
 const OAUTH_SCOPES =
-  'read_files,write_files,read_customers,write_customers,read_metaobjects,write_metaobjects';
+  'read_files,write_files,read_customers,write_customers,read_metaobjects,write_metaobjects,' +
+  'read_products,write_products';
 let _oauthState = null;
 
 function verifyShopifyHmac(query) {
