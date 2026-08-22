@@ -140,7 +140,7 @@
     background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.75rem; padding: 1.25rem;
   }
   .pk-preview-frame-lg {
-    position: relative; max-width: 100%; max-height: 280px; min-width: 96px; min-height: 96px;
+    position: relative; max-width: 100%; max-height: 320px; min-width: 64px; min-height: 64px;
     outline: 2px dashed #9ca3af; outline-offset: 2px;
     background-color: #fff;
     background-image:
@@ -198,11 +198,25 @@
     padding: 0.6rem 0.8rem; font-size: 0.8rem; color: #5b21b6; line-height: 1.4;
   }
   @media (max-width: 480px) { .pk-edit-ai-btn { margin-left: 0; } }
+  /* Hidden for now: Remove Background / Edit with AI aren't connected to a
+     real image-processing service yet. Crop's own trim logic keeps running
+     as the default in the background either way. Delete this rule to bring
+     the toolbar back once that's wired up. */
+  .pk-ai-toolbar { display: none !important; }
+
+  /* Preview/size-selector on the left, a narrower pricing table on the
+     right - same breakpoint the page already uses to decide there's room
+     for two columns (see .product-container above). */
+  .pk-customize-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
+  @media (min-width: 1024px) {
+    .pk-customize-grid { grid-template-columns: 1.7fr 1fr; }
+    .pk-customize-grid__right { position: sticky; top: 1rem; }
+  }
 
   /* Pricing Table */
   .pricing-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .pricing-header { background: #f9fafb; padding: 0.75rem 1rem; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #111827; display: flex; justify-content: space-between; font-size: 0.9rem; }
-  .pricing-row { display: flex; flex-direction: column; gap: 0.35rem; padding: 0.75rem 1rem; border-bottom: 1px solid #f3f4f6; font-size: 0.9rem; color: #4b5563; }
+  .pricing-header { background: #f9fafb; padding: 0.6rem 0.85rem; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #111827; display: flex; justify-content: space-between; font-size: 0.85rem; }
+  .pricing-row { display: flex; flex-direction: column; gap: 0.3rem; padding: 0.6rem 0.85rem; border-bottom: 1px solid #f3f4f6; font-size: 0.85rem; color: #4b5563; }
   .pricing-row:last-child { border-bottom: none; }
   .pricing-row.active { background-color: #ecfdf5; color: #065f46; font-weight: 600; }
   .pricing-row__cols { display: flex; justify-content: space-between; }
@@ -538,6 +552,9 @@
         <!-- STAGE 2: CUSTOMIZE -->
         <div id="customize-stage" class="customize-ui">
 
+          <div class="pk-customize-grid">
+          <div class="pk-customize-grid__left">
+
           <div class="pk-artwork-panel" id="pk-artwork-panel">
             <div class="pk-preview-label"><strong>Preview:</strong> the image will print as shown below.</div>
             <div class="pk-preview-stage">
@@ -577,17 +594,6 @@
             <div style="text-align:center; margin-top:0.6rem;">
               <a href="#" style="font-size:0.8rem; color:#059669; font-weight:600; text-decoration:underline;" onclick="resetUpload(); return false;">Upload a different file</a>
             </div>
-          </div>
-
-          <div class="buy-more-label">Buy More. Save More.</div>
-          <div class="pricing-card">
-            <div class="pricing-header"><span>Qty</span><span>Price</span><span>Discount</span></div>
-            <div class="pricing-row" data-min="10" data-max="49"><div class="pricing-row__cols"><span>10-49 pcs</span><span id="price-tier-1">Calculating...</span><span id="discount-tier-1">Base</span></div><div class="pricing-row__msg" id="tier-msg-1"></div></div>
-            <div class="pricing-row" data-min="50" data-max="99"><div class="pricing-row__cols"><span>50-99 pcs</span><span id="price-tier-2">Calculating...</span><span id="discount-tier-2">...</span></div><div class="pricing-row__msg" id="tier-msg-2"></div></div>
-            <div class="pricing-row" data-min="100" data-max="199"><div class="pricing-row__cols"><span>100-199 pcs</span><span id="price-tier-3">Calculating...</span><span id="discount-tier-3">...</span></div><div class="pricing-row__msg" id="tier-msg-3"></div></div>
-            <div class="pricing-row" data-min="200" data-max="499"><div class="pricing-row__cols"><span>200-499 pcs</span><span id="price-tier-4">Calculating...</span><span id="discount-tier-4">...</span></div><div class="pricing-row__msg" id="tier-msg-4"></div></div>
-            <div class="pricing-row" data-min="500" data-max="999"><div class="pricing-row__cols"><span>500-999 pcs</span><span id="price-tier-5">Calculating...</span><span id="discount-tier-5">...</span></div><div class="pricing-row__msg" id="tier-msg-5"></div></div>
-            <div class="pricing-row" data-min="1000" data-max="999999"><div class="pricing-row__cols"><span>1000+ pcs</span><span id="price-tier-6">Calculating...</span><span id="discount-tier-6">...</span></div><div class="pricing-row__msg" id="tier-msg-6"></div></div>
           </div>
 
           <div class="pk-notes-accordion">
@@ -679,6 +685,23 @@
           <div id="size-custom-note" style="display:flex; align-items:flex-start; gap:0.5rem; background:#fef3c7; border:1px solid #fcd34d; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:1.25rem; font-size:0.875rem; color:#92400e; line-height:1.4;">
             <span style="flex-shrink:0; font-size:1rem; line-height:1;">💡</span>
             <span><strong>Need a size like 3.75" or 2.25"?</strong> Our size selector steps in 0.5" increments. If your design falls between sizes (e.g.&nbsp;0.25" or 0.75" values), please pick the closest size and add your exact dimensions in the <strong>Design Notes</strong> box below — we'll match it for you at no extra cost.</span>
+          </div>
+
+          </div>
+
+          <div class="pk-customize-grid__right">
+          <div class="buy-more-label">Buy More. Save More.</div>
+          <div class="pricing-card">
+            <div class="pricing-header"><span>Qty</span><span>Price</span><span>Discount</span></div>
+            <div class="pricing-row" data-min="10" data-max="49"><div class="pricing-row__cols"><span>10-49 pcs</span><span id="price-tier-1">Calculating...</span><span id="discount-tier-1">Base</span></div><div class="pricing-row__msg" id="tier-msg-1"></div></div>
+            <div class="pricing-row" data-min="50" data-max="99"><div class="pricing-row__cols"><span>50-99 pcs</span><span id="price-tier-2">Calculating...</span><span id="discount-tier-2">...</span></div><div class="pricing-row__msg" id="tier-msg-2"></div></div>
+            <div class="pricing-row" data-min="100" data-max="199"><div class="pricing-row__cols"><span>100-199 pcs</span><span id="price-tier-3">Calculating...</span><span id="discount-tier-3">...</span></div><div class="pricing-row__msg" id="tier-msg-3"></div></div>
+            <div class="pricing-row" data-min="200" data-max="499"><div class="pricing-row__cols"><span>200-499 pcs</span><span id="price-tier-4">Calculating...</span><span id="discount-tier-4">...</span></div><div class="pricing-row__msg" id="tier-msg-4"></div></div>
+            <div class="pricing-row" data-min="500" data-max="999"><div class="pricing-row__cols"><span>500-999 pcs</span><span id="price-tier-5">Calculating...</span><span id="discount-tier-5">...</span></div><div class="pricing-row__msg" id="tier-msg-5"></div></div>
+            <div class="pricing-row" data-min="1000" data-max="999999"><div class="pricing-row__cols"><span>1000+ pcs</span><span id="price-tier-6">Calculating...</span><span id="discount-tier-6">...</span></div><div class="pricing-row__msg" id="tier-msg-6"></div></div>
+          </div>
+
+          </div>
           </div>
 
           <div class="control-group">
@@ -1766,11 +1789,17 @@
     // The preview frame takes the patch's proportions, so what the customer sees
     // is the shape they will actually receive - it re-shapes as they resize.
     function updateArtworkPreview() {
+      const stage = document.querySelector('.pk-preview-stage');
       const frame = document.getElementById('pk-preview-frame');
       const dims = document.getElementById('pk-preview-dims');
       if (!frame || !widthInput || !heightInput) return;
       const w = parseFloat(widthInput.value) || 1, h = parseFloat(heightInput.value) || 1;
-      const longest = Math.max(w, h), px = 96;
+      const longest = Math.max(w, h);
+      // Fill the stage (minus its own padding) up to a sensible cap, instead
+      // of a fixed px guess that no longer matched the panel's real size.
+      const cap = 320;
+      const available = stage ? Math.max(120, stage.clientWidth - 40) : cap;
+      const px = Math.min(cap, available);
       frame.style.width  = Math.round(px * (w / longest)) + 'px';
       frame.style.height = Math.round(px * (h / longest)) + 'px';
       if (dims) {
