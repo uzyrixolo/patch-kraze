@@ -568,6 +568,7 @@
             </div>
           </div>
 
+          <div id="artwork-dpi-warning" style="display:none; align-items:flex-start; gap:0.5rem; background:#fef3c7; border:1px solid #fcd34d; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:0.75rem; font-size:0.875rem; color:#92400e; line-height:1.4;"></div>
           <div id="artwork-size-note" style="display:none; align-items:flex-start; gap:0.5rem; background:#ecfdf5; border:1px solid #a7f3d0; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:0.75rem; font-size:0.875rem; color:#065f46; line-height:1.4;">
             <span style="flex-shrink:0; font-size:1rem; line-height:1;">📐</span>
             <span><strong id="artwork-size-text">Sized to your artwork.</strong> <span id="artwork-size-detail"></span>
@@ -1433,12 +1434,13 @@
              if (pvImg) pvImg.src = e.target.result;
              if (file.type && file.type.indexOf('image/') === 0) {
                if (pv) pv.style.display = 'block';
-               const probe = new Image();
-               probe.onload = function() {
-                 setSizeFromArtwork(probe.naturalWidth, probe.naturalHeight);
+               measureArtwork(file).then(function(m) {
+                 setSizeFromArtwork(m.w, m.h, m.trimmed);
                  updateArtworkPreview();
-               };
-               probe.src = e.target.result;
+               }).catch(function() {
+                 // Undecodable image: leave the size alone rather than guessing.
+                 showArtworkFallback();
+               });
              } else if (pv) {
                pv.style.display = 'none';   // PDFs have nothing to preview
              }
@@ -1480,6 +1482,81 @@
     // sensibly when the shape matches the artwork it will be made from.
     let artworkRatio = null;   // intrinsic width / height of the uploaded image
     let ratioLocked = false;
+
+    // Decode with EXIF orientation applied. Phone photos carry a rotation flag;
+    // reading raw pixel dimensions gives a sideways aspect ratio without it.
+    function decodeArtwork(file) {
+      if (window.createImageBitmap) {
+        try {
+          return createImageBitmap(file, { imageOrientation: 'from-image' })
+            .catch(function() { return decodeViaImg(file); });
+        } catch (e) { /* older browsers ignore the options arg */ }
+      }
+      return decodeViaImg(file);
+    }
+    function decodeViaImg(file) {
+      return new Promise(function(res, rej) {
+        const img = new Image();
+        const url = URL.createObjectURL(file);
+        img.onload = function() { res(img); };
+        img.onerror = function() { URL.revokeObjectURL(url); rej(new Error('decode failed')); };
+        img.src = url;
+      });
+    }
+
+    // Bounding box of the actual design, ignoring transparent or near-white
+    // padding. A logo centred in a square export is square by pixel count but
+    // often a wide design - sizing to the canvas gets the patch shape wrong.
+    function artworkBounds(src, w, h) {
+      const MAX = 400;                       // sampling cap; bounds only need to be close
+      const scale = Math.min(1, MAX / Math.max(w, h));
+      const cw = Math.max(1, Math.round(w * scale)), ch = Math.max(1, Math.round(h * scale));
+      const c = document.createElement('canvas');
+      c.width = cw; c.height = ch;
+      const ctx = c.getContext('2d', { willReadFrequently: true });
+      if (!ctx) return null;
+      ctx.drawImage(src, 0, 0, cw, ch);
+      let d;
+      try { d = ctx.getImageData(0, 0, cw, ch).data; } catch (err) { return null; }
+      let minX = cw, minY = ch, maxX = -1, maxY = -1;
+      for (let y = 0; y < ch; y++) {
+        for (let x = 0; x < cw; x++) {
+          const i = (y * cw + x) * 4;
+          if (d[i + 3] < 16) continue;                                   // transparent
+          if (d[i] > 244 && d[i + 1] > 244 && d[i + 2] > 244) continue;  // near-white
+          if (x < minX) minX = x;
+          if (x > maxX) maxX = x;
+          if (y < minY) minY = y;
+          if (y > maxY) maxY = y;
+        }
+      }
+      if (maxX < 0) return null;             // fully blank / all-white
+      return { w: Math.round((maxX - minX + 1) / scale),
+               h: Math.round((maxY - minY + 1) / scale) };
+    }
+
+    function measureArtwork(file) {
+      return Promise.resolve(decodeArtwork(file)).then(function(src) {
+        const natW = src.width || src.naturalWidth;
+        const natH = src.height || src.naturalHeight;
+        if (!natW || !natH) throw new Error('no dimensions');
+        const b = artworkBounds(src, natW, natH);
+        // Only prefer the trimmed box when it is meaningfully smaller, so noise
+        // or a faint border does not nudge the shape around.
+        const trimmed = !!(b && (b.w / natW < 0.92 || b.h / natH < 0.92));
+        return { w: trimmed ? b.w : natW, h: trimmed ? b.h : natH, trimmed: trimmed };
+      });
+    }
+
+    function showArtworkFallback() {
+      const note = document.getElementById('artwork-size-note');
+      const detail = document.getElementById('artwork-size-detail');
+      if (!note || !detail) return;
+      detail.innerHTML = "We couldn't read this file's dimensions, so please set the width and height yourself. ";
+      const unlock = document.getElementById('artwork-size-unlock');
+      if (unlock) unlock.style.display = 'none';
+      note.style.display = 'flex';
+    }
 
     function snapSize(v) {
       const step = PRODUCT_CONFIG.step || 0.5;
@@ -1529,7 +1606,7 @@
       }
     }
 
-    function setSizeFromArtwork(pxW, pxH) {
+    function setSizeFromArtwork(pxW, pxH, trimmed) {
       if (!pxW || !pxH || !widthInput || !heightInput) return;
       artworkRatio = pxW / pxH;
       const fit = fitRatio(artworkRatio);
@@ -1544,12 +1621,28 @@
         // rather than letting the customer discover it on the proof.
         const got = fit.w / fit.h;
         const off = Math.abs(got - artworkRatio) / artworkRatio > 0.08;
-        detail.innerHTML = 'Your design is ' + pxW + '&times;' + pxH + 'px, so we set '
+        // Effective print resolution at the size we just chose.
+        const dpi = Math.min(pxW / fit.w, pxH / fit.h);
+        detail.innerHTML = (trimmed ? 'Ignoring the blank space around it, your' : 'Your')
+          + ' design is ' + pxW + '&times;' + pxH + 'px, so we set '
           + '<strong>' + fit.w.toFixed(2).replace(/\.00$/, '') + '&quot; &times; '
           + fit.h.toFixed(2).replace(/\.00$/, '') + '&quot;</strong> to match its shape. '
           + (off ? 'Sizes step in ' + (PRODUCT_CONFIG.step || 0.5) + '&quot;, so this is the closest fit. ' : '')
           + 'Changing one side now adjusts the other. ';
         note.style.display = 'flex';
+
+        // Low-resolution artwork stitches badly; say so before they order.
+        const dpiWarn = document.getElementById('artwork-dpi-warning');
+        if (dpiWarn) {
+          if (dpi < 150) {
+            dpiWarn.innerHTML = '<strong>Heads up:</strong> at this size your file works out to about '
+              + Math.round(dpi) + ' DPI. Under 150 DPI can look soft or jagged &mdash; a larger file, '
+              + 'or a smaller patch, will reproduce better.';
+            dpiWarn.style.display = 'flex';
+          } else {
+            dpiWarn.style.display = 'none';
+          }
+        }
       }
       updatePriceAndVariant();
     }
@@ -1558,9 +1651,18 @@
     if (unlockLink) {
       unlockLink.addEventListener('click', function(e) {
         e.preventDefault();
-        ratioLocked = false;
-        const note = document.getElementById('artwork-size-note');
-        if (note) note.style.display = 'none';
+        if (!artworkRatio) return;
+        ratioLocked = !ratioLocked;
+        unlockLink.textContent = ratioLocked
+          ? 'Set width & height separately'
+          : "Match my design's shape again";
+        if (ratioLocked) {          // snap back to the artwork's proportions
+          const fit = fitRatio(artworkRatio);
+          widthInput.value = fit.w.toFixed(2);
+          heightInput.value = fit.h.toFixed(2);
+          updateArtworkPreview();
+          updatePriceAndVariant();
+        }
       });
     }
 
