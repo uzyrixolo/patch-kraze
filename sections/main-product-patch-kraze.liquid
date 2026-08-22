@@ -540,6 +540,11 @@
             </div>
           </div>
 
+          <div id="artwork-size-note" style="display:none; align-items:flex-start; gap:0.5rem; background:#ecfdf5; border:1px solid #a7f3d0; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:0.75rem; font-size:0.875rem; color:#065f46; line-height:1.4;">
+            <span style="flex-shrink:0; font-size:1rem; line-height:1;">📐</span>
+            <span><strong id="artwork-size-text">Sized to your artwork.</strong> <span id="artwork-size-detail"></span>
+              <a href="#" id="artwork-size-unlock" style="color:#047857; font-weight:600; text-decoration:underline;">Set width &amp; height separately</a></span>
+          </div>
           <div id="size-custom-note" style="display:flex; align-items:flex-start; gap:0.5rem; background:#fef3c7; border:1px solid #fcd34d; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:1.25rem; font-size:0.875rem; color:#92400e; line-height:1.4;">
             <span style="flex-shrink:0; font-size:1rem; line-height:1;">💡</span>
             <span><strong>Need a size like 3.75" or 2.25"?</strong> Our size selector steps in 0.5" increments. If your design falls between sizes (e.g.&nbsp;0.25" or 0.75" values), please pick the closest size and add your exact dimensions in the <strong>Design Notes</strong> box below — we'll match it for you at no extra cost.</span>
@@ -1394,6 +1399,14 @@
          reader.onload = function(e){
              const img = document.getElementById('file-preview-img');
              if(img) img.src = e.target.result;
+             // PDFs and anything the browser can't decode keep manual sizing.
+             if (file.type && file.type.indexOf('image/') === 0) {
+               const probe = new Image();
+               probe.onload = function() {
+                 setSizeFromArtwork(probe.naturalWidth, probe.naturalHeight);
+               };
+               probe.src = e.target.result;
+             }
          }
          reader.readAsDataURL(file);
 
@@ -1426,6 +1439,80 @@
     const calculatedSizeDisplay = document.getElementById('calculated-size-display');
     const sizeFormulaDisplay = document.getElementById('size-formula-display');
 
+    // --- Artwork-driven sizing ------------------------------------------------
+    // The uploaded design's aspect ratio drives both size inputs, so a square
+    // logo can't be ordered as 2" x 10". Price uses (W+H)/2, which only reads
+    // sensibly when the shape matches the artwork it will be made from.
+    let artworkRatio = null;   // intrinsic width / height of the uploaded image
+    let ratioLocked = false;
+
+    function snapSize(v) {
+      const step = PRODUCT_CONFIG.step || 0.5;
+      let s = Math.round(v / step) * step;
+      if (s < PRODUCT_CONFIG.minSize) s = PRODUCT_CONFIG.minSize;
+      if (s > PRODUCT_CONFIG.maxSize) s = PRODUCT_CONFIG.maxSize;
+      return s;
+    }
+
+    // Largest patch matching `ratio` that still fits the product's size limits.
+    function fitRatio(ratio) {
+      const min = PRODUCT_CONFIG.minSize, max = PRODUCT_CONFIG.maxSize;
+      const target = PRODUCT_CONFIG.defaultSize || 2.0;
+      let w, h;
+      if (ratio >= 1) { w = target; h = target / ratio; }
+      else            { h = target; w = target * ratio; }
+      const shortest = Math.min(w, h);
+      if (shortest < min) { const k = min / shortest; w *= k; h *= k; }
+      const longest = Math.max(w, h);
+      if (longest > max) { const k = max / longest; w *= k; h *= k; }
+      return { w: snapSize(w), h: snapSize(h) };
+    }
+
+    // Keep the opposite axis in proportion when one axis is driven.
+    function applyRatio(driver) {
+      if (!ratioLocked || !artworkRatio || !widthInput || !heightInput) return;
+      if (driver === 'width') {
+        heightInput.value = snapSize(parseFloat(widthInput.value) / artworkRatio).toFixed(2);
+      } else {
+        widthInput.value = snapSize(parseFloat(heightInput.value) * artworkRatio).toFixed(2);
+      }
+    }
+
+    function setSizeFromArtwork(pxW, pxH) {
+      if (!pxW || !pxH || !widthInput || !heightInput) return;
+      artworkRatio = pxW / pxH;
+      const fit = fitRatio(artworkRatio);
+      widthInput.value = fit.w.toFixed(2);
+      heightInput.value = fit.h.toFixed(2);
+      ratioLocked = true;
+
+      const note = document.getElementById('artwork-size-note');
+      const detail = document.getElementById('artwork-size-detail');
+      if (note && detail) {
+        // Snapping to 0.5" steps can't always hold the exact ratio - say so
+        // rather than letting the customer discover it on the proof.
+        const got = fit.w / fit.h;
+        const off = Math.abs(got - artworkRatio) / artworkRatio > 0.08;
+        detail.innerHTML = 'Your design is ' + pxW + '&times;' + pxH + 'px, so we set '
+          + '<strong>' + fit.w.toFixed(2).replace(/\.00$/, '') + '&quot; &times; '
+          + fit.h.toFixed(2).replace(/\.00$/, '') + '&quot;</strong> to match its shape. '
+          + (off ? 'Sizes step in ' + (PRODUCT_CONFIG.step || 0.5) + '&quot;, so this is the closest fit. ' : '')
+          + 'Changing one side now adjusts the other. ';
+        note.style.display = 'flex';
+      }
+      updatePriceAndVariant();
+    }
+
+    const unlockLink = document.getElementById('artwork-size-unlock');
+    if (unlockLink) {
+      unlockLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        ratioLocked = false;
+        const note = document.getElementById('artwork-size-note');
+        if (note) note.style.display = 'none';
+      });
+    }
+
     // Stepper Logic with dynamic min/max from product config
     window.stepSize = function(type, delta) {
       const el = type === 'width' ? widthInput : heightInput;
@@ -1435,8 +1522,23 @@
       if(val < PRODUCT_CONFIG.minSize) val = PRODUCT_CONFIG.minSize;
       if(val > PRODUCT_CONFIG.maxSize) val = PRODUCT_CONFIG.maxSize;
       el.value = val.toFixed(2);
+      applyRatio(type);
       updatePriceAndVariant();
     };
+
+    // Typing a size directly never recalculated the price - only the +/- buttons
+    // were wired up.
+    [['width', widthInput], ['height', heightInput]].forEach(function(pair) {
+      const name = pair[0], el = pair[1];
+      if (!el) return;
+      el.addEventListener('input', updatePriceAndVariant);
+      el.addEventListener('change', function() {
+        const v = parseFloat(el.value);
+        el.value = (isNaN(v) ? PRODUCT_CONFIG.defaultSize : snapSize(v)).toFixed(2);
+        applyRatio(name);
+        updatePriceAndVariant();
+      });
+    });
 
     // Apply product-specific defaults to inputs on load
     if(widthInput) {
