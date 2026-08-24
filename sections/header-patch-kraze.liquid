@@ -137,8 +137,13 @@
   }
   .pk-mega-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 140px)); justify-content: start; gap: 1.5rem; }
   .pk-mega-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; group: hover; }
-  .pk-mega-img-box { width: 100%; max-width: 140px; aspect-ratio: 1; background: #f3f4f6; border-radius: 0.5rem; overflow: hidden; margin-bottom: 0.75rem; }
+  .pk-mega-img-box { position: relative; width: 100%; max-width: 140px; aspect-ratio: 1; background: #f3f4f6; border-radius: 0.5rem; overflow: hidden; margin-bottom: 0.75rem; }
   .pk-mega-img { width: 100%; height: 100%; object-fit: cover; transition: scale 0.2s; }
+  .pk-mega-badge {
+    position: absolute; top: 0.4rem; left: 0.4rem; z-index: 1; background: #10b981; color: #fff;
+    font-size: 0.625rem; font-weight: 700; letter-spacing: 0.02em; padding: 0.15rem 0.5rem;
+    border-radius: 999px; line-height: 1.4;
+  }
   .pk-mega-item:hover .pk-mega-img { transform: scale(1.05); }
   .pk-mega-title { font-size: 0.75rem; font-weight: 600; color: #1f2937; text-align: center; }
   .pk-mega-item:hover .pk-mega-title { color: #06b6d4; }
@@ -418,42 +423,49 @@
   
   const MEGA_MENUS = {
     embroidery: [
-      { 
-        title: "Standard Embroidery", 
-        image: "{{ embroidered_patches.featured_image | img_url: '800x' }}", 
-        href: "/products/embroidered-patches" 
+      {
+        title: "Standard Embroidery",
+        image: "{{ embroidered_patches.featured_image | img_url: '800x' }}",
+        href: "/products/embroidered-patches",
+        minQty: 10
       },
-      { 
-        title: "3D Embroidery", 
-        image: "{{ patches_3d.featured_image | img_url: '800x' }}", 
-        href: "/products/3d-embroidered-patches" 
+      {
+        title: "3D Embroidery",
+        image: "{{ patches_3d.featured_image | img_url: '800x' }}",
+        href: "/products/3d-embroidered-patches",
+        minQty: 10
       },
-      { 
-        title: "Custom Name Patches", 
-        image: "{{ name_patches.featured_image | img_url: '800x' }}", 
-        href: "/products/name-patches" 
+      {
+        title: "Custom Name Patches",
+        image: "{{ name_patches.featured_image | img_url: '800x' }}",
+        href: "/products/name-patches",
+        minQty: 10
       },
-      { 
-        title: "Chenille", 
-        image: "{{ chenille_patches.featured_image | img_url: '800x' }}", 
-        href: "/products/chenille-patches" 
+      {
+        title: "Chenille",
+        image: "{{ chenille_patches.featured_image | img_url: '800x' }}",
+        href: "/products/chenille-patches",
+        minQty: 10
       },
-      { 
-        title: "Custom Tackle Twill Letters", 
-        image: "{{ tackle_twill.featured_image | img_url: '800x' }}", 
-        href: "/products/tackle-twill-letters" 
+      {
+        title: "Custom Tackle Twill Letters",
+        image: "{{ tackle_twill.featured_image | img_url: '800x' }}",
+        href: "/products/tackle-twill-letters",
+        minQty: 10
       }
     ],
     pvcRubber: [
       {
         title: "Standard PVC Rubber",
         image: "{{ pvc_rubber.featured_image | img_url: '800x' }}",
-        href: "/products/pvc-rubber-patches"
+        href: "/products/pvc-rubber-patches",
+        minQty: 10
       },
       {
         title: "3D PVC Patches",
         image: "{{ pvc_3d.featured_image | img_url: '800x' }}",
-        href: "/products/3d-pvc-patches"
+        href: "/products/3d-pvc-patches",
+        minQty: 10
       },
       {
         title: "Custom Keychains",
@@ -462,65 +474,74 @@
       }
     ],
     leather: [
-      { 
-        title: "Genuine Leather", 
-        image: "{{ leather_patches.featured_image | img_url: '800x' }}", 
-        href: "/products/leather-patches" 
+      {
+        title: "Genuine Leather",
+        image: "{{ leather_patches.featured_image | img_url: '800x' }}",
+        href: "/products/leather-patches",
+        minQty: 10
       },
-      { 
-        title: "Faux Leather", 
-        image: "{{ faux_leather.featured_image | img_url: '800x' }}", 
-        href: "/products/faux-leather-patches" 
+      {
+        title: "Faux Leather",
+        image: "{{ faux_leather.featured_image | img_url: '800x' }}",
+        href: "/products/faux-leather-patches",
+        minQty: 10
       }
     ],
     TPUFLEXPatches: [
-     
-      { 
-        title: "TPU GOLD Flex", 
-        image: "{{ gold_flex.featured_image | img_url: '800x' }}", 
-        href: "/products/gold-flex-patches" 
+
+      {
+        title: "TPU GOLD Flex",
+        image: "{{ gold_flex.featured_image | img_url: '800x' }}",
+        href: "/products/gold-flex-patches",
+        minQty: 10
       },
-      
-      { 
-        title: "TPU Silver Flex", 
-        image: "{{ silver_flex.featured_image | img_url: '800x' }}", 
-        href: "/products/silver-flex-patches" 
+
+      {
+        title: "TPU Silver Flex",
+        image: "{{ silver_flex.featured_image | img_url: '800x' }}",
+        href: "/products/silver-flex-patches",
+        minQty: 10
       },
-      { 
-        title: "Full Color Flex", 
-        image: "{{ full_color_flex.featured_image | img_url: '800x' }}", 
-        href: "/products/full-color-flex-patches" 
+      {
+        title: "Full Color Flex",
+        image: "{{ full_color_flex.featured_image | img_url: '800x' }}",
+        href: "/products/full-color-flex-patches",
+        minQty: 10
       }
     ],
     stickers: [
-      { 
-        title: "Custom Vinyl Stickers", 
-        image: "{{ vinyl_stickers.featured_image | img_url: '800x' }}", 
-        href: "/products/custom-vinyl-stickers" 
+      {
+        title: "Custom Vinyl Stickers",
+        image: "{{ vinyl_stickers.featured_image | img_url: '800x' }}",
+        href: "/products/custom-vinyl-stickers",
+        minQty: 25
       },
-      { 
-        title: "Holographic Stickers", 
-        image: "{{ bumper_stickers.featured_image | img_url: '800x' }}", 
-        href: "/products/holographic-stickers" 
+      {
+        title: "Holographic Stickers",
+        image: "{{ bumper_stickers.featured_image | img_url: '800x' }}",
+        href: "/products/holographic-stickers",
+        minQty: 25
       },
-      { 
-        title: "UV Transparent Stickers", 
-        image: "{{ uv_stickers.featured_image | img_url: '800x' }}", 
-        href: "/products/uv-transparent-stickers" 
+      {
+        title: "UV Transparent Stickers",
+        image: "{{ uv_stickers.featured_image | img_url: '800x' }}",
+        href: "/products/uv-transparent-stickers",
+        minQty: 25
       }
     ],
     dtf: [
-      { 
-        title: "DTF Transfers", 
-        image: "{{ dtf_transfers.featured_image | img_url: '800x' }}", 
-        href: "/products/dtf-transfers" 
+      {
+        title: "DTF Transfers",
+        image: "{{ dtf_transfers.featured_image | img_url: '800x' }}",
+        href: "/products/dtf-transfers"
       }
     ],
     fullColor: [
-      { 
-        title: "Full Color Printed Patches", 
-        image: "{{ full_color_printed.featured_image | img_url: '800x' }}", 
-        href: "/products/full-color-printed-patches" 
+      {
+        title: "Full Color Printed Patches",
+        image: "{{ full_color_printed.featured_image | img_url: '800x' }}",
+        href: "/products/full-color-printed-patches",
+        minQty: 10
       }
     ],
     readymade: [
@@ -615,7 +636,10 @@
     const items = MEGA_MENUS[key] || [];
     megaMenuContent.innerHTML = items.map(subItem => `
       <a href="${subItem.href}" class="pk-mega-item">
-        <div class="pk-mega-img-box"><img src="${subItem.image}" class="pk-mega-img"></div>
+        <div class="pk-mega-img-box">
+          ${subItem.minQty ? `<span class="pk-mega-badge">${subItem.minQty} PC MIN</span>` : ''}
+          <img src="${subItem.image}" class="pk-mega-img">
+        </div>
         <div class="pk-mega-title">${subItem.title}</div>
       </a>
     `).join('');
