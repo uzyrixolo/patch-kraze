@@ -135,9 +135,9 @@
     position: absolute; top: 100%; left: 0; right: 0; background: #fff; border-bottom: 1px solid #e5e7eb;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); z-index: 50; padding: 2rem 0; display: none;
   }
-  .pk-mega-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; }
+  .pk-mega-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 140px)); justify-content: center; gap: 1.5rem; }
   .pk-mega-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; group: hover; }
-  .pk-mega-img-box { width: 100%; aspect-ratio: 1; background: #f3f4f6; border-radius: 0.5rem; overflow: hidden; margin-bottom: 0.75rem; }
+  .pk-mega-img-box { width: 100%; max-width: 140px; aspect-ratio: 1; background: #f3f4f6; border-radius: 0.5rem; overflow: hidden; margin-bottom: 0.75rem; }
   .pk-mega-img { width: 100%; height: 100%; object-fit: cover; transition: scale 0.2s; }
   .pk-mega-item:hover .pk-mega-img { transform: scale(1.05); }
   .pk-mega-title { font-size: 0.75rem; font-weight: 600; color: #1f2937; text-align: center; }
