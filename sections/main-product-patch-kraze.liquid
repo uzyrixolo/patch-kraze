@@ -204,23 +204,30 @@
      the toolbar back once that's wired up. */
   .pk-ai-toolbar { display: none !important; }
 
-  /* Preview/size-selector on the left, a narrower pricing table on the
-     right - same breakpoint the page already uses to decide there's room
-     for two columns (see .product-container above). */
+  /* Size-selector on top, pricing table stacked full-width underneath - at
+     every viewport width. A side-by-side split was tried, but this grid
+     sits nested inside .product-container's own 0.8fr/1.2fr column, so the
+     pricing side kept getting squeezed narrow enough to wrap/overflow no
+     matter where the two-column breakpoint was set. Full-width avoids that
+     entirely and matches the clean stacked look this already had on mobile. */
   .pk-customize-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
   .pk-customize-grid__left, .pk-customize-grid__right { min-width: 0; }
-  @media (min-width: 1024px) {
-    .pk-customize-grid { grid-template-columns: 1.7fr 1fr; }
-    .pk-customize-grid__right { position: sticky; top: 1rem; }
-  }
 
   /* Pricing Table */
   .pricing-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .pricing-header { background: #f9fafb; padding: 0.6rem 0.85rem; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #111827; display: flex; justify-content: space-between; font-size: 0.85rem; }
+  /* Grid, not flex - flex's justify-content: space-between sizes each row to
+     its own content, so Qty/Price/Discount drift out of line with each
+     other row to row depending on how long that row's text happens to be.
+     A shared grid-template-columns keeps every row's columns the same width
+     as the header's, so values always land in a straight line. */
+  .pricing-header { background: #f9fafb; padding: 0.6rem 0.85rem; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #111827; display: grid; grid-template-columns: 1fr 1fr 1fr; font-size: 0.85rem; }
+  .pricing-header span:first-child, .pricing-row__cols span:first-child { text-align: left; }
+  .pricing-header span:nth-child(2), .pricing-row__cols span:nth-child(2) { text-align: center; }
+  .pricing-header span:last-child, .pricing-row__cols span:last-child { text-align: right; }
   .pricing-row { display: flex; flex-direction: column; gap: 0.3rem; padding: 0.6rem 0.85rem; border-bottom: 1px solid #f3f4f6; font-size: 0.85rem; color: #4b5563; }
   .pricing-row:last-child { border-bottom: none; }
   .pricing-row.active { background-color: #ecfdf5; color: #065f46; font-weight: 600; }
-  .pricing-row__cols { display: flex; justify-content: space-between; }
+  .pricing-row__cols { display: grid; grid-template-columns: 1fr 1fr 1fr; }
   .pricing-row__msg { display: none; font-size: 0.78rem; font-weight: 600; color: #065f46; background: #d1fae5; border-radius: 0.375rem; padding: 0.4rem 0.6rem; }
   .pricing-row__msg.show { display: block; }
   .pricing-row__msg b { font-weight: 800; }
