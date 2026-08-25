@@ -41,7 +41,7 @@
   .pk-cgallery__marquee:hover { animation-play-state: paused; }
   @keyframes pk-cg-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .pk-cgallery__track { display: flex; list-style: none; margin: 0; padding: 0; }
-  .pk-cgallery__tile { position: relative; width: 170px; height: 170px; flex-shrink: 0; margin-right: 10px; border-radius: 0.5rem; overflow: hidden; background: #e5e7eb; cursor: pointer; }
+  .pk-cgallery__tile { position: relative; width: 170px; height: 170px; flex-shrink: 0; margin-right: 16px; border-radius: 0.85rem; overflow: hidden; background: #e5e7eb; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.14); border: 1px solid rgba(0,0,0,0.06); }
   .pk-cgallery__tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.25s; }
   .pk-cgallery__tile:hover img { transform: scale(1.06); }
   .pk-cgallery__badge { position: absolute; right: 0.45rem; bottom: 0.45rem; background: #10b981; color: #fff; border-radius: 999px; width: 1.5rem; height: 1.5rem; display: flex; align-items: center; justify-content: center; }
@@ -97,6 +97,7 @@
             data-rating="5"
             data-link="{{ product.url }}">
           <img src="{{ product.featured_image | img_url: '400x400', crop: 'center' }}" loading="lazy" alt="{{ product.title | escape }}">
+          <span class="pk-cgallery__badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg></span>
         </li>
       {%- endif -%}
     {%- endfor -%}
