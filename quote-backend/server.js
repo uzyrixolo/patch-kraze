@@ -449,6 +449,58 @@ app.post('/generate', express.json({ limit: '10kb' }), async (req, res) => {
   }
 });
 
+// Background removal and "Edit with AI" both boil down to an image edit call -
+// the frontend supplies the prompt (a fixed one for bg removal, free text for
+// AI edits), this endpoint just forwards image + prompt to OpenAI. Shares the
+// same daily rate limiter as /generate rather than a separate budget.
+app.post('/edit-image', upload.single('image'), async (req, res) => {
+  try {
+    if (!OPENAI_API_KEY) {
+      return res.status(503).json({ ok: false, error: 'Image editing is not configured yet.' });
+    }
+    if (!req.file) {
+      return res.status(400).json({ ok: false, error: 'No image uploaded.' });
+    }
+    const prompt = String((req.body && req.body.prompt) || '').trim();
+    if (prompt.length < 3 || prompt.length > 600) {
+      return res.status(400).json({ ok: false, error: 'Please describe the edit in 3-600 characters.' });
+    }
+    const ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
+    const gate = genAllowed(ip);
+    if (!gate.ok) return res.status(429).json({ ok: false, error: gate.why });
+
+    const form = new FormData();
+    form.append('model', 'gpt-image-1');
+    form.append('prompt', prompt);
+    form.append(
+      'image',
+      new Blob([req.file.buffer], { type: req.file.mimetype || 'image/png' }),
+      req.file.originalname || 'image.png'
+    );
+    form.append('size', '1024x1024');
+    form.append('quality', GEN_QUALITY);
+
+    const r = await fetch('https://api.openai.com/v1/images/edits', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${OPENAI_API_KEY}` },
+      body: form,
+    });
+    if (!r.ok) {
+      const t = await r.text();
+      console.error('OpenAI edit error:', r.status, t.slice(0, 500));
+      return res.status(502).json({ ok: false, error: 'Image edit failed. Please try again.' });
+    }
+    const j = await r.json();
+    const b64 = j.data && j.data[0] && j.data[0].b64_json;
+    if (!b64) return res.status(502).json({ ok: false, error: 'No image returned. Please try again.' });
+    genRecord(ip);
+    res.json({ ok: true, image: `data:image/png;base64,${b64}` });
+  } catch (e) {
+    console.error('Edit-image error:', e);
+    res.status(500).json({ ok: false, error: 'Something went wrong. Please try again.' });
+  }
+});
+
 // ---------------------------------------------------------------------------
 // Routes
 // ---------------------------------------------------------------------------

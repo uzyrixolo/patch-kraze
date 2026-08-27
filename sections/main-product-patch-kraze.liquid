@@ -2,7 +2,9 @@
 {
   "name": "Main Product PK",
   "class": "section-main-product",
-  "settings": [],
+  "settings": [
+    { "type": "text", "id": "backend_url", "label": "AI backend URL", "info": "Used for Remove Background and Edit with AI. Leave default unless the quote backend moves.", "default": "https://patch-kraze-quote-production.up.railway.app" }
+  ],
   "blocks": [
     {
       "type": "@app"
@@ -197,12 +199,9 @@
     background: #f3e8ff; border: 1px solid #ddd6fe; border-radius: 0.5rem;
     padding: 0.6rem 0.8rem; font-size: 0.8rem; color: #5b21b6; line-height: 1.4;
   }
+  .pk-ai-note--error { background: #fef2f2; border-color: #fecaca; color: #b91c1c; }
+  .pk-ai-toolbar--busy { opacity: 0.6; pointer-events: none; }
   @media (max-width: 480px) { .pk-edit-ai-btn { margin-left: 0; } }
-  /* Hidden for now: Remove Background / Edit with AI aren't connected to a
-     real image-processing service yet. Crop's own trim logic keeps running
-     as the default in the background either way. Delete this rule to bring
-     the toolbar back once that's wired up. */
-  .pk-ai-toolbar { display: none !important; }
 
   /* Size-selector on top, pricing table stacked full-width underneath - at
      every viewport width. A side-by-side split was tried, but this grid
@@ -1289,6 +1288,9 @@
     // 2. PRODUCT HANDLE
     const PRODUCT_HANDLE = '{{ product.handle }}';
 
+    // AI backend (Remove Background / Edit with AI)
+    const AI_BACKEND_URL = ({{ section.settings.backend_url | json }} || '').replace(/\/+$/, '');
+
     // 3. PER-PRODUCT CONFIGS (min/max/default sizes)
     const PRODUCT_CONFIGS = {
       // maxSize is raised to 16 only for products already migrated to the 20-bracket
@@ -1538,6 +1540,16 @@
          const nameDisplay = document.getElementById('filename-display');
          if(nameDisplay) nameDisplay.innerText = file.name;
 
+         // A genuine new upload (not an AI-edit dispatching a synthetic change
+         // event) resets the AI edit state - a stale bg-removed cache or
+         // "on" toggle from the last file must not silently carry over.
+         if (!isApplyingAiEdit) {
+           originalFile = file;
+           bgRemovedFile = null;
+           setToggleState('pk-toggle-removebg', false);
+         }
+         isApplyingAiEdit = false;
+
          // PDFs have nothing to crop / remove background from - hide the
          // image-only stage and AI toolbar rather than showing dead controls.
          const stage = document.querySelector('.pk-preview-stage');
@@ -1591,6 +1603,9 @@
       ratioLocked = false;
       lastArtworkNat = null;
       lastArtworkTrim = null;
+      originalFile = null;
+      bgRemovedFile = null;
+      setToggleState('pk-toggle-removebg', false);
       const sizeNote = document.getElementById('artwork-size-note');
       if (sizeNote) sizeNote.style.display = 'none';
       const dpiWarn = document.getElementById('artwork-dpi-warning');
@@ -1642,25 +1657,122 @@
       }
     };
 
-    // Background removal and AI edits need an image-processing service this
-    // store doesn't have configured yet - say so plainly rather than a
-    // toggle/button that silently does nothing when clicked.
-    window.pkToggleRemoveBg = function() {
-      const el = document.getElementById('pk-toggle-removebg');
-      const on = el ? !el.classList.contains('on') : true;
-      setToggleState('pk-toggle-removebg', on);
+    // Background removal and Edit with AI both call quote-backend's
+    // /edit-image (OpenAI gpt-image-1 edit) with the current file + a prompt.
+    function pkShowAiNote(html, isError) {
       const note = document.getElementById('pk-ai-note');
-      if (note) {
-        note.innerHTML = '<strong>Background removal isn&rsquo;t connected yet.</strong> For now, upload artwork with the background already removed (a transparent PNG works best) &mdash; or add a note below and our designers will handle it.';
-        note.style.display = 'flex';
+      if (!note) return;
+      note.innerHTML = html;
+      note.style.display = 'flex';
+      note.classList.toggle('pk-ai-note--error', !!isError);
+    }
+
+    function pkSetAiBusy(busy) {
+      const toolbar = document.querySelector('.pk-ai-toolbar');
+      if (toolbar) toolbar.classList.toggle('pk-ai-toolbar--busy', busy);
+      const removeBgToggle = document.getElementById('pk-toggle-removebg');
+      const editBtn = document.querySelector('.pk-edit-ai-btn');
+      if (removeBgToggle) removeBgToggle.style.pointerEvents = busy ? 'none' : '';
+      if (editBtn) editBtn.disabled = busy;
+    }
+
+    async function pkCallEditImage(file, prompt) {
+      const fd = new FormData();
+      fd.append('image', file, file.name || 'design.png');
+      fd.append('prompt', prompt);
+      const r = await fetch(AI_BACKEND_URL + '/edit-image', { method: 'POST', body: fd });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || !j.ok) throw new Error(j.error || 'The AI edit failed. Please try again.');
+      return j.image; // data:image/png;base64,...
+    }
+
+    // Swaps a File directly into fileInput and replays the same 'change'
+    // handler that a real file-picker selection triggers (preview, artwork
+    // measurement, size sync) instead of duplicating that logic here.
+    function pkSwapInFile(file) {
+      const dt = new DataTransfer();
+      dt.items.add(file);
+      isApplyingAiEdit = true;
+      fileInput.files = dt.files;
+      fileInput.dispatchEvent(new Event('change'));
+    }
+
+    async function pkDataUrlToFile(dataUrl, suffix) {
+      const blob = await (await fetch(dataUrl)).blob();
+      const baseName = ((originalFile && originalFile.name) || 'design').replace(/\.[^.]+$/, '');
+      return new File([blob], `${baseName}-${suffix}.png`, { type: 'image/png' });
+    }
+
+    function pkHideAiNote() {
+      const note = document.getElementById('pk-ai-note');
+      if (note) note.style.display = 'none';
+    }
+
+    window.pkToggleRemoveBg = async function() {
+      if (!originalFile) return;
+      const el = document.getElementById('pk-toggle-removebg');
+      const turningOn = el ? !el.classList.contains('on') : true;
+
+      if (!turningOn) {
+        setToggleState('pk-toggle-removebg', false);
+        pkHideAiNote();
+        pkSwapInFile(originalFile);
+        return;
+      }
+
+      if (!AI_BACKEND_URL) {
+        setToggleState('pk-toggle-removebg', false);
+        pkShowAiNote('<strong>Background removal isn&rsquo;t configured yet.</strong> Add a note below and our designers will handle it.', true);
+        return;
+      }
+
+      setToggleState('pk-toggle-removebg', true);
+      if (bgRemovedFile) {
+        pkHideAiNote();
+        pkSwapInFile(bgRemovedFile);
+        return;
+      }
+
+      pkSetAiBusy(true);
+      pkShowAiNote('<strong>Removing the background&hellip;</strong> usually takes 10&ndash;30 seconds.', false);
+      try {
+        const image = await pkCallEditImage(
+          originalFile,
+          'Remove the background from this image entirely and make it fully transparent. ' +
+          'Keep the main subject exactly as-is: same position, size, colors, and details - only the background changes.'
+        );
+        const newFile = await pkDataUrlToFile(image, 'no-bg');
+        bgRemovedFile = newFile;
+        pkHideAiNote();
+        pkSwapInFile(newFile);
+      } catch (e) {
+        setToggleState('pk-toggle-removebg', false);
+        pkShowAiNote(`<strong>Background removal failed.</strong> ${e.message || 'Please try again.'}`, true);
+      } finally {
+        pkSetAiBusy(false);
       }
     };
 
-    window.pkEditWithAI = function() {
-      const note = document.getElementById('pk-ai-note');
-      if (note) {
-        note.innerHTML = '<strong>AI editing isn&rsquo;t connected yet.</strong> Tell us what you&rsquo;d like changed in a note below and our designers will make the edit by hand.';
-        note.style.display = 'flex';
+    window.pkEditWithAI = async function() {
+      if (!fileInput.files || !fileInput.files[0]) return;
+      if (!AI_BACKEND_URL) {
+        pkShowAiNote('<strong>AI editing isn&rsquo;t configured yet.</strong> Tell us what you&rsquo;d like changed in a note below and our designers will make the edit by hand.', true);
+        return;
+      }
+      const prompt = window.prompt('Describe what you’d like changed about this design:');
+      if (!prompt || !prompt.trim()) return;
+
+      pkSetAiBusy(true);
+      pkShowAiNote('<strong>Applying your edit&hellip;</strong> usually takes 10&ndash;30 seconds.', false);
+      try {
+        const image = await pkCallEditImage(fileInput.files[0], prompt.trim());
+        const newFile = await pkDataUrlToFile(image, 'edited');
+        pkHideAiNote();
+        pkSwapInFile(newFile);
+      } catch (e) {
+        pkShowAiNote(`<strong>AI edit failed.</strong> ${e.message || 'Please try again.'}`, true);
+      } finally {
+        pkSetAiBusy(false);
       }
     };
 
@@ -1687,6 +1799,9 @@
     let ratioLocked = false;
     let lastArtworkNat = null;   // {w,h} full decoded pixel size of the last upload
     let lastArtworkTrim = null;  // {w,h} trimmed bounding box, or null if not meaningfully smaller
+    let originalFile = null;      // file as the customer actually uploaded, pre-AI-edit
+    let bgRemovedFile = null;     // cached result so toggling off/on doesn't re-call the API
+    let isApplyingAiEdit = false; // true only while we're programmatically swapping fileInput.files
     let cropEnabled = true;      // Crop toggle: prefer the trimmed box when one exists
 
     function activeArtworkDims() {
