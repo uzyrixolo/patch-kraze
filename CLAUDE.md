@@ -151,6 +151,35 @@ different sheet layout. Six more sit on older 16-size or 6-size grids.
     diff — a metafield/API re-read alone would not have caught this, since the metafield was
     already correct.
 
+- **2026-08-27: Woven Patches (`woven-patches`) migrated to the 10-tier grid.** Same request
+  batch as 3D above ("update the woven and 3D size sheets too"). Re-verified against a fresh
+  read of the workbook before writing anything (not just the prior session's dry-run CSV) —
+  confirmed the "Woven Patches" sheet has a second, single-row mini-table (rows 23-24, finer
+  half-inch sizes, "Qty 10" only) whose 6"/7" values ($7.26/$8.208) match the *old* live
+  10-24 tier prices almost exactly. That mini-table is legacy reference data, not a second
+  source to reconcile against — the migration draws entirely from the sheet's main
+  quantity-tier table (rows 4-14), same as the already-delivered dry-run. 9 sizes (2"-7",
+  no 1"/1.5" — this product never sold those) × 7 old tiers → 10 new tiers (adds `11-25`,
+  `301-400`, `401-500`; renames the rest, same shape as the embroidery/3D migrations). 63
+  variants renamed+repriced (3 chunks of ≤27), 27 created new (**one single call this time**,
+  specifically to avoid repeating the 3D near-miss above), metafield replaced. Verified via a
+  fresh API re-read (90/90 variants match the metafield exactly) and live PDP checks at
+  2.5"/11pcs, 4.0"/350pcs (new 301-400 tier), 6.0"/450pcs (new 401-500 tier), and 7.0"/800pcs
+  (701+ tier) — all resolved the correct variant, no fallback.
+  - **Same $69.90-floor problem as 3D, caught before writing this time**: the sheet's `11-25`
+    tier prices sizes 2.5"-4.5" as low as $4.30, which × 11 pcs undercuts the cart minimum by
+    as much as $22.60. Applied the same fix pre-emptively, per your explicit instruction on
+    3D earlier the same day: sizes 2.5"/3.0"/3.5"/4.0"/4.5" raised to **$6.36** (any sheet
+    value already ≥ $6.36 — 2.0", 5.0", 6.0", 7.0" — was left alone). No other tier had a
+    floor violation (checked every tier's minimum-quantity cell against $69.90 before
+    writing). Backup: `backups/woven-workbook-backup-2026-08-27.json`.
+  - **Root cause of the old "25 pieces cheaper than 24" inversion, now resolved as a side
+    effect**: live 6"/7" prices at the old 10-24 tier ($7.26/$8.21, from the mini-table) were
+    *higher* per-unit than the old 25-49 tier ($8.55/$11.95, from the main table) — buying 25
+    cost more per patch than buying 24. The new grid draws both tiers from the same main
+    table throughout, so this specific inversion is gone; the sheet's own smaller dips
+    (documented project-wide, e.g. 3D's 5"→6" dip) were not hunted down separately here.
+
 Tooling: `scripts/apply_workbook_pricing.py` (applies a sheet to given handles, `--dry-run`
 supported; reads `SHOPIFY_ADMIN_TOKEN` from env, never logs it), `scripts/plan_workbook_offline.py`
 (classifies every product against the sheets offline), `scripts/dryrun_report.py` (per-cell
