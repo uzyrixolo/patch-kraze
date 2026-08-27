@@ -87,13 +87,45 @@ every tier from 51-100 down).
   `main-product-patch-kraze.liquid` already derive labels from whatever tiers the metafield
   carries, including `701+` (max >= 999999) and single-quantity tiers.
 
-**Not migrated - 23 products need a decision.** The PVC (5), woven (1) and 3D (1) sheets
-carry a *different size axis* than the live products (PVC sheet has 14 sizes vs 6 live), so
-following them changes which sizes customers can order and needs a theme stepper change too.
-Seven products have no sheet at all (`dtf-transfers`, the 5 flex products,
+**Not migrated - 23 products need a decision** *(superseded 2026-08-27, see below - most of
+this list turned out to already be fine once actually checked)*. The PVC (5), woven (1) and
+3D (1) sheets carry a *different size axis* than the live products (PVC sheet has 14 sizes vs
+6 live), so following them changes which sizes customers can order and needs a theme stepper
+change too. Seven products have no sheet at all (`dtf-transfers`, the 5 flex products,
 `letterman-jacket-patches`) - my first classification pass would have swept these onto the
 embroidery grid, which is badly wrong since DTF prices by square inch. Chenille (2) uses a
 different sheet layout. Six more sit on older 16-size or 6-size grids.
+
+- **2026-08-27: audited the full "23 products" list against live data + every workbook
+  sheet, on explicit request ("do the 23 remaining products next").** Conclusion: most of it
+  was already fine; the original count was never re-verified against actual current state.
+  - **7 products need zero changes - already match their sheet exactly, cell for cell**:
+    `chenille-patches`, `chenille-letter-patches`, `letterman-jacket-patches`, and
+    `varsity-jacket-patches` (a name not previously tracked anywhere in this file) all match
+    the **Chenille** sheet's main table (rows 4-10, tiers `10-24` through `1000+`) exactly -
+    "Chenille uses a different sheet layout" was true (transposed, plus a legacy `Qty 10`
+    half-inch mini-table at rows 12-13 that isn't a pricing source, same red herring pattern
+    as Woven's mini-table) but the *prices* were already right. Separately,
+    `custom-soccer-patches`, `american-flag-patches`, and `designer-patches` (also not
+    previously named anywhere) are already on the correct 10-tier **Embroidery** grid,
+    matching the sheet exactly - they were evidently part of the original 38-product pass's
+    unlisted remainder, not stragglers. `custom-keychains` was already confirmed separately
+    on 2026-08-27 (PVC section above).
+  - **PVC size-axis expansion: explicitly declined.** `pvc-patches`/`pvc-rubber-patches`/
+    `3d-pvc-patches` already have correct prices at the 6 sizes they sell; asked whether to
+    add the sheet's 8 larger sizes (4.55"-8", which would need a `PRODUCT_CONFIGS.maxSize`/
+    stepper change, not just new prices) - user chose to leave them at 6 sizes. No further
+    PVC work pending.
+  - **9 products have no matching sheet anywhere in the workbook - nothing to apply without
+    new source data from the user**: `dtf-transfers` (prices by sq in; no such table exists),
+    the 5 flex products (`full-color-flex-patches`, `silver-flex-patches`,
+    `gold-flex-patches`, `metallic-flex-patches`, `matte-black-flex-patches`),
+    `glow-in-the-dark-pvc-rubber-patches` (already known, see PVC section above),
+    `tackle-twill-letters`, and `silicone-patches` (each has its own unique tier structure
+    matching no sheet). **Flagged but not fixed**: `metallic-flex-patches` charges the exact
+    same price at every quantity tier from `25-49` through `1000+` - no bulk discount at all,
+    which reads as a data bug independent of any workbook question. Needs the user to supply
+    correct numbers; not something "follow the sheet" can resolve since there's no sheet.
 
 - **2026-08-27: PVC prices updated (still not size-axis migrated).** On explicit request,
   `pvc-patches`/`pvc-rubber-patches`/`3d-pvc-patches` (identical grid) and `custom-keychains`
