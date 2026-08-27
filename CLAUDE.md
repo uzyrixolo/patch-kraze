@@ -141,6 +141,47 @@ different sheet layout. Six more sit on older 16-size or 6-size grids.
   (up to 11", 19 size buckets) - not evaluated further since the size-axis question was just
   declined above.
 
+- **2026-08-27 (later same day): reversed course, migrated `pvc-patches`/`pvc-rubber-patches`/
+  `3d-pvc-patches` to the full 20-size grid from `PVC UPDATE PRICING.xlsx`.** User pointed at
+  a specific cell ("PVC Rubber Patches, 2x2 its 8, 10 piece") that turned out to be the exact
+  `10-24` mini-table value already flagged above - but this time wanted it applied, reversing
+  the "leave as-is" call. Scope confirmed explicitly via follow-up questions: apply to all
+  three products (not just Rubber), and go to the file's full 11" range rather than a smaller
+  cap. Also caught mid-implementation: **`3d-pvc-patches` had no `PRODUCT_CONFIGS` entry at
+  all** and was silently using the `embroidered-patches` fallback (1.0"-16.0" stepper range
+  with no PVC price data past 4.0") - added its own entry as part of this change, independent
+  of the size-axis decision.
+  - **Sizes now run 1.5" to 11.0", 20 points, not a uniform step.** The file's own size list
+    is clean 0.5" steps from 1.5" to 10.0" (18 sizes) then jumps straight to 11.0", skipping
+    10.5" - and the theme's stepper (`PRODUCT_CONFIGS` min/max/step) only supports one uniform
+    step per product, unlike the metafield's explicit `sizeBrackets` array. Confirmed via
+    explicit follow-up question: **10.5" is linearly interpolated** between the file's 10.0"
+    and 11.0" values, per tier - not a literal sheet number. The `10-24` tier's own separate
+    mini-table has an *additional*, different gap (skips 8.5", not 10.5") - **8.5" is also
+    interpolated** for that one tier only, applying the same approved principle without
+    re-asking (a natural extension of "interpolate it yourself," not a new decision).
+  - **10-24 tier, existing 6 sizes (1.5"-4.0"): raised from the old workbook's
+    `[10,12,13,14,15,16]` to the new file's `[6.8,8,8.5,9.2,10,11.5]`, with 1.5" floor-fixed
+    to $7.00** (10 x $7.00 = $70.00, clears $69.90; $6.80 would have been $68.00). No other
+    tier or size needed a floor fix - every other tier's minimum-quantity cell was checked
+    against $69.90 before writing (25-49 tier's cheapest cell alone is $125, etc.).
+  - **112 new variants created per product (14 new sizes x 8 tiers), 6 existing `10-24`
+    variants repriced, metafield replaced - 336 variants total across 3 products.** All
+    variant-create chunks (4 x 28 per product) fired in parallel per product, since chunks
+    within one product don't overlap and don't depend on each other - unlike the 3D
+    Embroidered near-miss, nothing here required a second pass. Verified: fresh API re-read
+    (160/160 variants match the metafield on all 3 products) plus live PDP checks at the new
+    ceiling (11.0"), both interpolated sizes (8.5" and 10.5"), and confirming `3d-pvc-patches`
+    now resolves a real config (`max` attribute reads 11, not the old 16 fallback).
+  - **Deployment order inverted from the usual pattern, and this matters**: the stepper range
+    itself lives in theme code (`PRODUCT_CONFIGS`), not the metafield, and git push auto-
+    deploys within ~1 minute. Pushing the code first would have let customers select sizes up
+    to 11" *before* any matching variants or metafield existed - the same "no matching price"
+    failure mode this file already warns about, just triggered by a deploy instead of a
+    partial API write. Order used: all Admin API writes (variants + metafields, all 3
+    products) completed and verified first, theme code committed and pushed last.
+  - Backup: `backups/pvc-size-expansion-backup-2026-08-27.json`.
+
 - **2026-08-27: PVC prices updated (still not size-axis migrated).** On explicit request,
   `pvc-patches`/`pvc-rubber-patches`/`3d-pvc-patches` (identical grid) and `custom-keychains`
   had prices set to match the sheet's "Pvc Patches" tab, but **only at the 6 sizes
