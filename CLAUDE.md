@@ -127,6 +127,20 @@ different sheet layout. Six more sit on older 16-size or 6-size grids.
     which reads as a data bug independent of any workbook question. Needs the user to supply
     correct numbers; not something "follow the sheet" can resolve since there's no sheet.
 
+- **2026-08-27: compared a separate new file, `PVC UPDATE PRICING.xlsx` (in Downloads, not
+  the repo), against live PVC prices - no changes made.** The `25-49` through `1000+` tiers
+  are byte-identical to what's already live on `pvc-patches`/`pvc-rubber-patches`/
+  `3d-pvc-patches`/`custom-keychains` at all 6 sizes - confirms those prices are current.
+  The file also has a `10-24` tier in a separate, disconnected mini-table (same shape as the
+  legacy mini-tables on Woven/Chenille) with meaningfully lower values (e.g. 1.5" $10.00 live
+  vs $6.80 in the file) - and applying $6.80 would put 1.5" at qty 10 ($68.00) under the
+  $69.90 cart minimum. User chose to leave the `10-24` tier as-is rather than trust the
+  mini-table, same call as the Woven/Chenille precedent. The file's `10-24` tier for
+  `custom-keychains` (which has no `10-24` tier at all today) was left un-added for the same
+  reason. The file also extends PVC's size axis further than even the original workbook
+  (up to 11", 19 size buckets) - not evaluated further since the size-axis question was just
+  declined above.
+
 - **2026-08-27: PVC prices updated (still not size-axis migrated).** On explicit request,
   `pvc-patches`/`pvc-rubber-patches`/`3d-pvc-patches` (identical grid) and `custom-keychains`
   had prices set to match the sheet's "Pvc Patches" tab, but **only at the 6 sizes
