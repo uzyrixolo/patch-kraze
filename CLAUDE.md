@@ -95,6 +95,22 @@ Seven products have no sheet at all (`dtf-transfers`, the 5 flex products,
 embroidery grid, which is badly wrong since DTF prices by square inch. Chenille (2) uses a
 different sheet layout. Six more sit on older 16-size or 6-size grids.
 
+- **2026-08-27: PVC prices updated (still not size-axis migrated).** On explicit request,
+  `pvc-patches`/`pvc-rubber-patches`/`3d-pvc-patches` (identical grid) and `custom-keychains`
+  had prices set to match the sheet's "Pvc Patches" tab, but **only at the 6 sizes
+  (1.5"-4.0") the live products already sell** - the sheet's larger sizes (4.55"-8", 8 more
+  columns) were deliberately not added, since that's a stepper/`PRODUCT_CONFIGS.maxSize`
+  change, not a price change. The main PVC grid's quantity axis went from 7 tiers to 8: the
+  sheet splits what was one `200-499` tier into `200-399` and `400-499` at different prices
+  (avoids reinstating a same-shape inversion to the one fixed in the embroidery grid on
+  2026-08-18 - a customer ordering 450 must not pay less than one ordering 350). Verified
+  live: variant counts (48/48/48/36), a fresh metafield re-read, and PDP price/variant
+  resolution at 250/450/600 pcs all matched the sheet with no fallback. `custom-keychains`
+  was a straight price-only update (its tier structure already matched the sheet 1:1, no
+  10-24 tier, no 200-499 split). **`glow-in-the-dark-pvc-rubber-patches` was left untouched**
+  - the workbook has no sheet/section for it, so its prices were never guessed at. Backup:
+  `backups/pvc-workbook-price-update-backup-2026-08-27.json`.
+
 Tooling: `scripts/apply_workbook_pricing.py` (applies a sheet to given handles, `--dry-run`
 supported; reads `SHOPIFY_ADMIN_TOKEN` from env, never logs it), `scripts/plan_workbook_offline.py`
 (classifies every product against the sheets offline), `scripts/dryrun_report.py` (per-cell

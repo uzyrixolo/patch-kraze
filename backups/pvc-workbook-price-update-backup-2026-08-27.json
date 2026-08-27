@@ -1,0 +1,840 @@
+{
+ "description": "Pre-change snapshot before applying workbook PVC prices (user-requested, boss-approved).",
+ "date": "2026-08-27",
+ "products": [
+  {
+   "handle": "pvc-patches",
+   "productId": "gid://shopify/Product/9235706511444",
+   "variants_before": [
+    {
+     "id": "gid://shopify/ProductVariant/44683025383508",
+     "title": "1.5 inch - 25-49",
+     "price": "3.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025416276",
+     "title": "1.5 inch - 50-99",
+     "price": "2.80"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025449044",
+     "title": "1.5 inch - 100-199",
+     "price": "2.60"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025481812",
+     "title": "1.5 inch - 200-499",
+     "price": "2.40"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025514580",
+     "title": "1.5 inch - 500-999",
+     "price": "2.10"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025547348",
+     "title": "1.5 inch - 1000+",
+     "price": "1.50"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025580116",
+     "title": "2.0 inch - 25-49",
+     "price": "3.03"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025612884",
+     "title": "2.0 inch - 50-99",
+     "price": "2.90"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025645652",
+     "title": "2.0 inch - 100-199",
+     "price": "2.75"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025678420",
+     "title": "2.0 inch - 200-499",
+     "price": "2.50"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025711188",
+     "title": "2.0 inch - 500-999",
+     "price": "2.15"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025743956",
+     "title": "2.0 inch - 1000+",
+     "price": "1.55"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025776724",
+     "title": "2.5 inch - 25-49",
+     "price": "3.70"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025809492",
+     "title": "2.5 inch - 50-99",
+     "price": "3.50"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025842260",
+     "title": "2.5 inch - 100-199",
+     "price": "2.80"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025875028",
+     "title": "2.5 inch - 200-499",
+     "price": "2.60"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025907796",
+     "title": "2.5 inch - 500-999",
+     "price": "2.20"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025940564",
+     "title": "2.5 inch - 1000+",
+     "price": "1.80"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683025973332",
+     "title": "3.0 inch - 25-49",
+     "price": "3.71"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026006100",
+     "title": "3.0 inch - 50-99",
+     "price": "3.60"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026038868",
+     "title": "3.0 inch - 100-199",
+     "price": "2.90"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026071636",
+     "title": "3.0 inch - 200-499",
+     "price": "2.75"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026104404",
+     "title": "3.0 inch - 500-999",
+     "price": "2.30"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026137172",
+     "title": "3.0 inch - 1000+",
+     "price": "1.95"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026169940",
+     "title": "3.5 inch - 25-49",
+     "price": "4.34"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026202708",
+     "title": "3.5 inch - 50-99",
+     "price": "3.34"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026235476",
+     "title": "3.5 inch - 100-199",
+     "price": "2.95"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026268244",
+     "title": "3.5 inch - 200-499",
+     "price": "2.80"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026301012",
+     "title": "3.5 inch - 500-999",
+     "price": "2.35"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026333780",
+     "title": "3.5 inch - 1000+",
+     "price": "2.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026366548",
+     "title": "4.0 inch - 25-49",
+     "price": "4.99"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026399316",
+     "title": "4.0 inch - 50-99",
+     "price": "3.85"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026432084",
+     "title": "4.0 inch - 100-199",
+     "price": "3.15"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026464852",
+     "title": "4.0 inch - 200-499",
+     "price": "2.95"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026497620",
+     "title": "4.0 inch - 500-999",
+     "price": "2.40"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/44683026530388",
+     "title": "4.0 inch - 1000+",
+     "price": "2.10"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776358484",
+     "title": "1.5 inch - 10-24",
+     "price": "10.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776391252",
+     "title": "2.0 inch - 10-24",
+     "price": "12.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776424020",
+     "title": "2.5 inch - 10-24",
+     "price": "13.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776456788",
+     "title": "3.0 inch - 10-24",
+     "price": "14.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776489556",
+     "title": "3.5 inch - 10-24",
+     "price": "15.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776522324",
+     "title": "4.0 inch - 10-24",
+     "price": "16.00"
+    }
+   ]
+  },
+  {
+   "handle": "pvc-rubber-patches",
+   "productId": "gid://shopify/Product/7820591693908",
+   "variants_before": [
+    {
+     "id": "gid://shopify/ProductVariant/42948644470868",
+     "title": "1.5 inch - 50-99",
+     "price": "2.80"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644503636",
+     "title": "1.5 inch - 100-199",
+     "price": "2.60"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644536404",
+     "title": "1.5 inch - 200-499",
+     "price": "2.40"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644569172",
+     "title": "1.5 inch - 500-999",
+     "price": "2.10"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644601940",
+     "title": "1.5 inch - 1000+",
+     "price": "1.50"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644667476",
+     "title": "2.0 inch - 50-99",
+     "price": "2.90"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644700244",
+     "title": "2.0 inch - 100-199",
+     "price": "2.75"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644733012",
+     "title": "2.0 inch - 200-499",
+     "price": "2.50"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644765780",
+     "title": "2.0 inch - 500-999",
+     "price": "2.15"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644798548",
+     "title": "2.0 inch - 1000+",
+     "price": "1.55"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644864084",
+     "title": "2.5 inch - 50-99",
+     "price": "3.50"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644896852",
+     "title": "2.5 inch - 100-199",
+     "price": "2.80"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644929620",
+     "title": "2.5 inch - 200-499",
+     "price": "2.60"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644962388",
+     "title": "2.5 inch - 500-999",
+     "price": "2.20"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948644995156",
+     "title": "2.5 inch - 1000+",
+     "price": "1.80"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645060692",
+     "title": "3.0 inch - 50-99",
+     "price": "3.60"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645093460",
+     "title": "3.0 inch - 100-199",
+     "price": "2.90"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645126228",
+     "title": "3.0 inch - 200-499",
+     "price": "2.75"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645158996",
+     "title": "3.0 inch - 500-999",
+     "price": "2.30"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645191764",
+     "title": "3.0 inch - 1000+",
+     "price": "1.95"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645257300",
+     "title": "3.5 inch - 50-99",
+     "price": "3.34"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645290068",
+     "title": "3.5 inch - 100-199",
+     "price": "2.95"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645322836",
+     "title": "3.5 inch - 200-499",
+     "price": "2.80"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645355604",
+     "title": "3.5 inch - 500-999",
+     "price": "2.35"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645388372",
+     "title": "3.5 inch - 1000+",
+     "price": "2.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645453908",
+     "title": "4.0 inch - 50-99",
+     "price": "3.85"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645486676",
+     "title": "4.0 inch - 100-199",
+     "price": "3.15"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645519444",
+     "title": "4.0 inch - 200-499",
+     "price": "2.95"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645552212",
+     "title": "4.0 inch - 500-999",
+     "price": "2.40"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/42948645584980",
+     "title": "4.0 inch - 1000+",
+     "price": "2.10"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776555092",
+     "title": "1.5 inch - 10-24",
+     "price": "10.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776587860",
+     "title": "2.0 inch - 10-24",
+     "price": "12.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776620628",
+     "title": "2.5 inch - 10-24",
+     "price": "13.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776653396",
+     "title": "3.0 inch - 10-24",
+     "price": "14.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776686164",
+     "title": "3.5 inch - 10-24",
+     "price": "15.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776718932",
+     "title": "4.0 inch - 10-24",
+     "price": "16.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776751700",
+     "title": "1.5 inch - 25-49",
+     "price": "3.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776784468",
+     "title": "2.0 inch - 25-49",
+     "price": "3.03"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776817236",
+     "title": "2.5 inch - 25-49",
+     "price": "3.70"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776850004",
+     "title": "3.0 inch - 25-49",
+     "price": "3.71"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776882772",
+     "title": "3.5 inch - 25-49",
+     "price": "4.34"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47487776915540",
+     "title": "4.0 inch - 25-49",
+     "price": "4.99"
+    }
+   ]
+  },
+  {
+   "handle": "3d-pvc-patches",
+   "productId": "gid://shopify/Product/10273412120660",
+   "variants_before": [
+    {
+     "id": "gid://shopify/ProductVariant/47498060300372",
+     "title": "1.5 inch - 50-99",
+     "price": "2.80"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060333140",
+     "title": "1.5 inch - 100-199",
+     "price": "2.60"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060365908",
+     "title": "1.5 inch - 200-499",
+     "price": "2.40"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060398676",
+     "title": "1.5 inch - 500-999",
+     "price": "2.10"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060431444",
+     "title": "1.5 inch - 1000+",
+     "price": "1.50"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060464212",
+     "title": "2.0 inch - 50-99",
+     "price": "2.90"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060496980",
+     "title": "2.0 inch - 100-199",
+     "price": "2.75"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060529748",
+     "title": "2.0 inch - 200-499",
+     "price": "2.50"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060562516",
+     "title": "2.0 inch - 500-999",
+     "price": "2.15"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060595284",
+     "title": "2.0 inch - 1000+",
+     "price": "1.55"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060628052",
+     "title": "2.5 inch - 50-99",
+     "price": "3.50"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060660820",
+     "title": "2.5 inch - 100-199",
+     "price": "2.80"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060693588",
+     "title": "2.5 inch - 200-499",
+     "price": "2.60"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060726356",
+     "title": "2.5 inch - 500-999",
+     "price": "2.20"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060759124",
+     "title": "2.5 inch - 1000+",
+     "price": "1.80"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060791892",
+     "title": "3.0 inch - 50-99",
+     "price": "3.60"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060824660",
+     "title": "3.0 inch - 100-199",
+     "price": "2.90"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060857428",
+     "title": "3.0 inch - 200-499",
+     "price": "2.75"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060890196",
+     "title": "3.0 inch - 500-999",
+     "price": "2.30"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060922964",
+     "title": "3.0 inch - 1000+",
+     "price": "1.95"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060955732",
+     "title": "3.5 inch - 50-99",
+     "price": "3.34"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498060988500",
+     "title": "3.5 inch - 100-199",
+     "price": "2.95"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061021268",
+     "title": "3.5 inch - 200-499",
+     "price": "2.80"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061054036",
+     "title": "3.5 inch - 500-999",
+     "price": "2.35"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061086804",
+     "title": "3.5 inch - 1000+",
+     "price": "2.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061119572",
+     "title": "4.0 inch - 50-99",
+     "price": "3.85"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061152340",
+     "title": "4.0 inch - 100-199",
+     "price": "3.15"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061185108",
+     "title": "4.0 inch - 200-499",
+     "price": "2.95"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061217876",
+     "title": "4.0 inch - 500-999",
+     "price": "2.40"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061250644",
+     "title": "4.0 inch - 1000+",
+     "price": "2.10"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061283412",
+     "title": "1.5 inch - 10-24",
+     "price": "10.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061316180",
+     "title": "2.0 inch - 10-24",
+     "price": "12.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061348948",
+     "title": "2.5 inch - 10-24",
+     "price": "13.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061381716",
+     "title": "3.0 inch - 10-24",
+     "price": "14.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061414484",
+     "title": "3.5 inch - 10-24",
+     "price": "15.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061447252",
+     "title": "4.0 inch - 10-24",
+     "price": "16.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061480020",
+     "title": "1.5 inch - 25-49",
+     "price": "3.00"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061512788",
+     "title": "2.0 inch - 25-49",
+     "price": "3.03"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061545556",
+     "title": "2.5 inch - 25-49",
+     "price": "3.70"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061578324",
+     "title": "3.0 inch - 25-49",
+     "price": "3.71"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061611092",
+     "title": "3.5 inch - 25-49",
+     "price": "4.34"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/47498061643860",
+     "title": "4.0 inch - 25-49",
+     "price": "4.99"
+    }
+   ]
+  },
+  {
+   "handle": "custom-keychains",
+   "productId": "gid://shopify/Product/7820587073620",
+   "variants_before": [
+    {
+     "id": "gid://shopify/ProductVariant/43492956045396",
+     "title": "1.5 inch - 25-49",
+     "price": "4.50"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956078164",
+     "title": "1.5 inch - 50-99",
+     "price": "3.47"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956110932",
+     "title": "1.5 inch - 100-199",
+     "price": "2.39"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956143700",
+     "title": "1.5 inch - 200-499",
+     "price": "1.67"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956176468",
+     "title": "1.5 inch - 500-999",
+     "price": "1.35"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956209236",
+     "title": "1.5 inch - 1000+",
+     "price": "1.23"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956242004",
+     "title": "2.0 inch - 25-49",
+     "price": "4.55"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956274772",
+     "title": "2.0 inch - 50-99",
+     "price": "3.50"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956307540",
+     "title": "2.0 inch - 100-199",
+     "price": "2.40"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956340308",
+     "title": "2.0 inch - 200-499",
+     "price": "1.67"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956373076",
+     "title": "2.0 inch - 500-999",
+     "price": "1.38"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956405844",
+     "title": "2.0 inch - 1000+",
+     "price": "1.25"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956438612",
+     "title": "2.5 inch - 25-49",
+     "price": "5.55"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956471380",
+     "title": "2.5 inch - 50-99",
+     "price": "4.26"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956504148",
+     "title": "2.5 inch - 100-199",
+     "price": "2.85"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956536916",
+     "title": "2.5 inch - 200-499",
+     "price": "1.89"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956569684",
+     "title": "2.5 inch - 500-999",
+     "price": "1.64"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956602452",
+     "title": "2.5 inch - 1000+",
+     "price": "1.49"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956635220",
+     "title": "3.0 inch - 25-49",
+     "price": "5.57"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956667988",
+     "title": "3.0 inch - 50-99",
+     "price": "4.28"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956700756",
+     "title": "3.0 inch - 100-199",
+     "price": "2.85"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956733524",
+     "title": "3.0 inch - 200-499",
+     "price": "1.92"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956766292",
+     "title": "3.0 inch - 500-999",
+     "price": "1.65"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956799060",
+     "title": "3.0 inch - 1000+",
+     "price": "1.49"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956831828",
+     "title": "3.5 inch - 25-49",
+     "price": "6.51"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956864596",
+     "title": "3.5 inch - 50-99",
+     "price": "5.01"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956897364",
+     "title": "3.5 inch - 100-199",
+     "price": "3.27"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956930132",
+     "title": "3.5 inch - 200-499",
+     "price": "2.16"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956962900",
+     "title": "3.5 inch - 500-999",
+     "price": "1.83"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492956995668",
+     "title": "3.5 inch - 1000+",
+     "price": "1.65"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492957028436",
+     "title": "4.0 inch - 25-49",
+     "price": "7.49"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492957061204",
+     "title": "4.0 inch - 50-99",
+     "price": "5.78"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492957093972",
+     "title": "4.0 inch - 100-199",
+     "price": "3.77"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492957126740",
+     "title": "4.0 inch - 200-499",
+     "price": "2.49"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492957159508",
+     "title": "4.0 inch - 500-999",
+     "price": "2.09"
+    },
+    {
+     "id": "gid://shopify/ProductVariant/43492957192276",
+     "title": "4.0 inch - 1000+",
+     "price": "1.91"
+    }
+   ]
+  }
+ ]
+}
