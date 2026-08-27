@@ -635,6 +635,8 @@
   function showMegaMenu(key, triggerEl) {
     currentOpenMenu = key;
     const items = MEGA_MENUS[key] || [];
+    const cols = Math.max(1, Math.min(items.length, 5));
+    megaMenuContent.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 140px))`;
     megaMenuContent.innerHTML = items.map(subItem => `
       <a href="${subItem.href}" class="pk-mega-item">
         <div class="pk-mega-img-box">
