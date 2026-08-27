@@ -286,6 +286,7 @@
   .pk-artwork-colors { display: flex; flex-wrap: wrap; gap: 1rem 0.6rem; margin-bottom: 0.5rem; }
   .pk-artwork-colors-empty { font-size: 0.8rem; color: #9ca3af; margin-bottom: 0.85rem; }
   .pk-cswatch-subheading { font-size: 0.72rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 0.6rem; }
+  .pk-color-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06); padding: 1.25rem 1.25rem 1.5rem; }
   /* Responsive Adjustments */
   @media (max-width: 768px) {
     .product-page-main { padding: 0 0 4rem 0; }
@@ -779,7 +780,7 @@
           {%- liquid
             assign std_colors = "White|#FFFFFF,Black|#000000,Cream|#F3E9D2,Gray|#9CA3AF,Charcoal|#36454F,Brown|#6F4E37,Red|#DC2626,Maroon|#7F1D1D,Orange|#EA580C,Gold|#D4AF37,Yellow|#FACC15,Kelly Green|#4CBB17,Green|#16A34A,Forest Green|#228B22,Teal|#0D9488,Sky Blue|#38BDF8,Royal Blue|#2563EB,Navy|#1E3A8A" | split: ","
           -%}
-          <div class="control-group">
+          <div class="control-group pk-color-card">
             <label class="control-label">Patch Background Color:</label>
             <button type="button" class="pk-match-artwork-btn" onclick="matchMyArtwork('bg-color-input', 'bg-artwork-colors')">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v10m-12-12v18m0 0H5a2 2 0 0 1-2-2V9m6 12h10a2 2 0 0 0 2-2V9"/></svg>
@@ -803,7 +804,7 @@
             <input type="hidden" id="bg-color-input" name="properties[Patch Background Color]" class="pk-color-swatch" value="">
           </div>
 
-          <div class="control-group">
+          <div class="control-group pk-color-card">
             <label class="control-label">Border Thread Color:</label>
             <button type="button" class="pk-match-artwork-btn" onclick="matchMyArtwork('thread-color-input', 'thread-artwork-colors')">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v10m-12-12v18m0 0H5a2 2 0 0 1-2-2V9m6 12h10a2 2 0 0 0 2-2V9"/></svg>
