@@ -133,8 +133,8 @@
 
   /* MEGA MENU */
   .pk-mega-menu {
-    position: absolute; top: 100%; left: 0; width: fit-content; background: #fff; border-bottom: 1px solid #e5e7eb;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); z-index: 50; padding: 2rem 0; display: none;
+    position: absolute; top: 100%; left: 0; width: fit-content; background: #fff; border: 1px solid #e5e7eb;
+    border-radius: 0.75rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); z-index: 50; padding: 2rem 0; display: none;
   }
   .pk-mega-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 140px)); justify-content: start; gap: 1.5rem; }
   .pk-mega-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; group: hover; }
@@ -621,7 +621,7 @@
        // Hover Events
        li.addEventListener('mouseenter', () => {
          if (item.hasDropdown && MEGA_MENUS[item.key]) {
-           showMegaMenu(item.key);
+           showMegaMenu(item.key, li);
          } else {
            hideMegaMenu();
          }
@@ -632,7 +632,7 @@
     });
   }
 
-  function showMegaMenu(key) {
+  function showMegaMenu(key, triggerEl) {
     currentOpenMenu = key;
     const items = MEGA_MENUS[key] || [];
     megaMenuContent.innerHTML = items.map(subItem => `
@@ -645,6 +645,17 @@
       </a>
     `).join('');
     megaMenuContainer.style.display = 'block';
+
+    // Align the panel under its trigger, clamped so it never overflows the nav's right edge.
+    if (triggerEl) {
+      const navRect = document.querySelector('.pk-nav').getBoundingClientRect();
+      const triggerRect = triggerEl.getBoundingClientRect();
+      const panelWidth = megaMenuContainer.getBoundingClientRect().width;
+      let left = triggerRect.left - navRect.left;
+      left = Math.min(left, navRect.width - panelWidth);
+      left = Math.max(left, 0);
+      megaMenuContainer.style.left = left + 'px';
+    }
   }
 
   function hideMegaMenu() {
