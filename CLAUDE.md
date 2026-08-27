@@ -123,11 +123,21 @@ different sheet layout. Six more sit on older 16-size or 6-size grids.
   replaced in one pass; final state verified both via a fresh API re-read (160/160 variants
   match the metafield exactly) and live PDP checks across old/new/extrapolated tiers and
   sizes. Backup: `backups/3d-embroidered-workbook-backup-2026-08-27.json`.
-  - **Two flagged, not fixed, issues**: (1) the sheet itself inverts in the `11-25` tier —
-    2.0"→2.5" drops $6.99→$4.40, 5.0"→6.0" drops $7.60→$7.50 — "follow the sheet" was
-    explicit, so this was applied as-is rather than silently corrected like the 2026-08-18
-    embroidery regrade. (2) that $4.40 cell × 11 pcs = $48.40, **under the $69.90 cart
-    minimum** — that quantity/size combination is currently unbuyable. Needs a decision.
+  - **Two flagged issues, one fixed, one left as-is**: (1) the sheet itself inverts in the
+    `11-25` tier — 5.0"→6.0" still drops $7.60→$7.50; this is real sheet data and "follow
+    the sheet" was explicit, so it was applied as-is, same as the 2026-08-18 embroidery
+    regrade left comparable dips alone. (2) **2026-08-27 (same day), on explicit follow-up
+    request ("fix the 11-25 tier so it doesn't undercut $69.90")**: sizes 2.5"/3.0"/3.5"/4.0"
+    in the `11-25` tier were below the cart floor at qty 11 (as low as $4.40 → $48.40 total).
+    Raised all four to **$6.36** — the same floor-clearing price already established for this
+    exact constraint (11 × $6.36 = $69.96) in the 2026-08-18 regrade — rather than a fresh
+    per-cell computation, so the tier now reads 6.99, 6.99, 6.99, 6.36, 6.36, 6.36, 6.36, 6.40,
+    7.60... This also shrinks (but doesn't eliminate) the 2.0"→2.5" dip from $6.99→$4.40 down
+    to $6.99→$6.36. Variants + metafield updated together, verified live at 2.5"/4.0" × 11 pcs
+    (both resolve the correct variant, cart total $69.96). Backup:
+    `backups/3d-embroidered-workbook-backup-2026-08-27.json` (pre-migration) plus
+    `backups/3d-embroidered-1125-floor-fix-backup-2026-08-27.json` (the 4 cells just before
+    this fix).
   - **Near-miss caught by live verification, not by the write itself**: the 48 new variants
     were meant to be created in two chunks (sizes 1"-4.5" then 5"-12"), but only the first
     chunk actually ran before this was picked back up — the product was live for a period
