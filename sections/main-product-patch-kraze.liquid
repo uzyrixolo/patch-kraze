@@ -257,6 +257,14 @@
   .control-label { display: block; font-weight: 700; margin-bottom: 0.75rem; color: #111827; font-size: 0.95rem; }
   .text-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem; background: #fff; }
   .text-input:focus { border-color: #10b981; outline: none; ring: 2px solid #d1fae5; }
+  .pk-color-field { display: flex; align-items: center; gap: 0.6rem; }
+  .pk-color-swatch {
+    width: 2.75rem; height: 2.5rem; padding: 0.15rem; border: 1px solid #d1d5db; border-radius: 0.5rem;
+    background: #fff; cursor: pointer; flex-shrink: 0;
+  }
+  .pk-color-swatch::-webkit-color-swatch-wrapper { padding: 0; }
+  .pk-color-swatch::-webkit-color-swatch { border: none; border-radius: 0.3rem; }
+  .pk-color-hex { font-size: 0.9rem; font-family: ui-monospace, monospace; color: #6b7280; }
   /* Responsive Adjustments */
   @media (max-width: 768px) {
     .product-page-main { padding: 0 0 4rem 0; }
@@ -749,12 +757,18 @@
 
           <div class="control-group">
             <label class="control-label">Patch Background Color:</label>
-            <input type="text" name="properties[Patch Background Color]" class="text-input" placeholder="">
+            <div class="pk-color-field">
+              <input type="color" id="bg-color-input" name="properties[Patch Background Color]" class="pk-color-swatch" value="#000000" oninput="this.dataset.touched='1'; document.getElementById('bg-color-hex').textContent=this.value;">
+              <span class="pk-color-hex" id="bg-color-hex">Not set</span>
+            </div>
           </div>
 
           <div class="control-group">
             <label class="control-label">Border Thread Color :</label>
-            <input type="text" name="properties[Border Thread Color]" class="text-input" placeholder="">
+            <div class="pk-color-field">
+              <input type="color" id="thread-color-input" name="properties[Border Thread Color]" class="pk-color-swatch" value="#000000" oninput="this.dataset.touched='1'; document.getElementById('thread-color-hex').textContent=this.value;">
+              <span class="pk-color-hex" id="thread-color-hex">Not set</span>
+            </div>
           </div>
 
           <label class="control-label">Select Your Backing: <span id="backing-label-extra" style="font-weight:400; color:#6b7280;">Heat Applied (Most Popular)</span></label>
@@ -978,9 +992,9 @@
           ];
           if (shape) infoParts.push('Shape: ' + shape);
           const bgColor = document.querySelector('input[name="properties[Patch Background Color]"]');
-          if (bgColor && bgColor.value) infoParts.push('Background color: ' + bgColor.value);
+          if (bgColor && bgColor.dataset.touched === '1') infoParts.push('Background color: ' + bgColor.value);
           const threadColor = document.querySelector('input[name="properties[Border Thread Color]"]');
-          if (threadColor && threadColor.value) infoParts.push('Border thread color: ' + threadColor.value);
+          if (threadColor && threadColor.dataset.touched === '1') infoParts.push('Border thread color: ' + threadColor.value);
           if (notesEl && notesEl.value) infoParts.push('Design notes: ' + notesEl.value);
 
           const fd = new FormData();
@@ -1042,7 +1056,14 @@
         return false;
       }
 
+      // Native color inputs always carry a value (default #000000) - disable
+      // the ones the customer never touched so FormData skips them instead of
+      // silently attaching "chose black" to every single order.
+      const untouchedColorInputs = Array.from(form.querySelectorAll('.pk-color-swatch'))
+        .filter(el => el.dataset.touched !== '1');
+      untouchedColorInputs.forEach(el => { el.disabled = true; });
       const formData = new FormData(form);
+      untouchedColorInputs.forEach(el => { el.disabled = false; });
       const originalText = btn.innerText;
 
       // Add sections parameter for cart drawer rendering
