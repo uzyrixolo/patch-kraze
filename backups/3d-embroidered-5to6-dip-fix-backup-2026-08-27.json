@@ -1,0 +1,7 @@
+{
+  "description": "Pre-change snapshot before fixing the 5.0\"->6.0\" price dip in 3d-embroidered-patches' 11-25 tier ($7.60 -> $7.50, a bigger patch cheaper than a smaller one). User-requested follow-up.",
+  "product_id": "gid://shopify/Product/7820590448724",
+  "date": "2026-08-27",
+  "variant_before": {"id": "gid://shopify/ProductVariant/47562894540884", "title": "6.0 inch - 11-25", "price": "7.50"},
+  "metafield_11_25_tier_before": {"min": 11, "max": 25, "prices": [6.99,6.99,6.99,6.36,6.36,6.36,6.36,6.4,7.6,7.5,9.5,11.5,13.5,15.5,17.5,19.5]}
+}

@@ -123,11 +123,16 @@ different sheet layout. Six more sit on older 16-size or 6-size grids.
   replaced in one pass; final state verified both via a fresh API re-read (160/160 variants
   match the metafield exactly) and live PDP checks across old/new/extrapolated tiers and
   sizes. Backup: `backups/3d-embroidered-workbook-backup-2026-08-27.json`.
-  - **Two flagged issues, one fixed, one left as-is**: (1) the sheet itself inverts in the
-    `11-25` tier — 5.0"→6.0" still drops $7.60→$7.50; this is real sheet data and "follow
-    the sheet" was explicit, so it was applied as-is, same as the 2026-08-18 embroidery
-    regrade left comparable dips alone. (2) **2026-08-27 (same day), on explicit follow-up
-    request ("fix the 11-25 tier so it doesn't undercut $69.90")**: sizes 2.5"/3.0"/3.5"/4.0"
+  - **Two flagged issues, both now fixed**: (1) the sheet itself inverted in the `11-25`
+    tier — 5.0"→6.0" dropped $7.60→$7.50 (bigger patch cheaper than a smaller one). Initially
+    applied as-is since "follow the sheet" was explicit, same as the 2026-08-18 embroidery
+    regrade left comparable dips alone — but on explicit follow-up request ("fix the 5 to 6
+    dip on 3D too"), raised 6.0" from $7.50 to **$7.60** to match 5.0" (rather than lowering
+    5.0", to avoid cutting revenue on a cell nobody flagged). Verified live at 6.0"/15pcs
+    ($7.60, correct variant). Backup:
+    `backups/3d-embroidered-5to6-dip-fix-backup-2026-08-27.json`. (2) **2026-08-27 (same
+    day), on explicit follow-up request ("fix the 11-25 tier so it doesn't undercut
+    $69.90")**: sizes 2.5"/3.0"/3.5"/4.0"
     in the `11-25` tier were below the cart floor at qty 11 (as low as $4.40 → $48.40 total).
     Raised all four to **$6.36** — the same floor-clearing price already established for this
     exact constraint (11 × $6.36 = $69.96) in the 2026-08-18 regrade — rather than a fresh
