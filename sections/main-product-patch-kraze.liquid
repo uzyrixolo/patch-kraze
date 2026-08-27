@@ -201,6 +201,12 @@
   }
   .pk-ai-note--error { background: #fef2f2; border-color: #fecaca; color: #b91c1c; }
   .pk-ai-toolbar--busy { opacity: 0.6; pointer-events: none; }
+  .pk-ai-spinner {
+    width: 0.9rem; height: 0.9rem; margin-top: 0.1rem; flex-shrink: 0;
+    border: 2px solid #ddd6fe; border-top-color: #7c3aed; border-radius: 50%;
+    animation: pk-ai-spin 0.8s linear infinite;
+  }
+  @keyframes pk-ai-spin { to { transform: rotate(360deg); } }
   @media (max-width: 480px) { .pk-edit-ai-btn { margin-left: 0; } }
 
   /* Size-selector on top, pricing table stacked full-width underneath - at
@@ -1667,6 +1673,12 @@
       note.classList.toggle('pk-ai-note--error', !!isError);
     }
 
+    // Same note element, but with a spinner - the 10-30s wait needs a visible
+    // sign of active progress, not just dimmed buttons and static text.
+    function pkShowAiLoading(text) {
+      pkShowAiNote(`<span class="pk-ai-spinner"></span><span><strong>${text}</strong> usually takes 10&ndash;30 seconds.</span>`, false);
+    }
+
     function pkSetAiBusy(busy) {
       const toolbar = document.querySelector('.pk-ai-toolbar');
       if (toolbar) toolbar.classList.toggle('pk-ai-toolbar--busy', busy);
@@ -1734,7 +1746,7 @@
       }
 
       pkSetAiBusy(true);
-      pkShowAiNote('<strong>Removing the background&hellip;</strong> usually takes 10&ndash;30 seconds.', false);
+      pkShowAiLoading('Removing the background&hellip;');
       try {
         const image = await pkCallEditImage(
           originalFile,
@@ -1763,7 +1775,7 @@
       if (!prompt || !prompt.trim()) return;
 
       pkSetAiBusy(true);
-      pkShowAiNote('<strong>Applying your edit&hellip;</strong> usually takes 10&ndash;30 seconds.', false);
+      pkShowAiLoading('Applying your edit&hellip;');
       try {
         const image = await pkCallEditImage(fileInput.files[0], prompt.trim());
         const newFile = await pkDataUrlToFile(image, 'edited');
