@@ -316,6 +316,45 @@ theme compute new tier labels that have no matching variants, and the fallback a
 - Add product photos to `letterman-jackets`; add hero banner image to back-to-school page via theme editor.
 - Create the 4 service pages in admin (assign templates page.service-*).
 
+### AI image tools (August 2026)
+
+`quote-backend/server.js` calls OpenAI's `gpt-image-1` for two things, both gated on
+`OPENAI_API_KEY` (unset as of 2026-08-28 — nothing here works live until it's set in Railway,
+which the user must do directly; secrets never get typed into chat or committed).
+
+- **`POST /generate`** — text-to-image (`images/generations`), pre-existing (found already
+  built this session, not documented anywhere before now). Wraps the prompt with fixed
+  "bold vector-style patch artwork" styling, rate-limited per-IP and globally (daily counters,
+  in-memory — resets on redeploy). Powers `sections/ai-image-generator.liquid`, a standalone
+  prompt-box page (history in `localStorage`, download + "order as a patch" links to 15
+  products) — already fully wired, just waiting on the key like everything else here.
+- **`POST /edit-image`** (2026-08-28) — image edit (`images/edits`), built this session.
+  Takes a multipart `image` + `prompt`, forwards to OpenAI, returns
+  `{ok, image: "data:image/png;base64,..."}`. Shares the `/generate` rate limiter rather than
+  its own budget. OpenAI has no dedicated background-removal product — this uses the same
+  edit endpoint with a fixed "remove the background, make it transparent, keep the subject
+  as-is" prompt, on explicit user decision (one provider, one key, over adding a
+  purpose-built bg-removal service).
+  - Wired into `sections/main-product-patch-kraze.liquid`'s `.pk-ai-toolbar` (Remove
+    Background toggle + Edit with AI button), previously two honest stubs that only said
+    "isn't connected yet" — never faked success. Both now call `/edit-image` for real, swap
+    the result into the actual `#file-input` via a synthetic `change` event (reuses the
+    existing preview/artwork-measurement/pricing pipeline instead of duplicating it), and
+    show a plain-language error inline if the call fails rather than failing silently.
+    Remove Background caches its result (`bgRemovedFile`) so toggling off then back on
+    doesn't re-spend a request, and reverts to the pre-edit `originalFile` when toggled off.
+    Both reset on a genuine new upload or `resetUpload()`.
+  - New section setting `backend_url` (same default Railway URL as `quote-form.liquid`).
+  - **Removed the `.pk-ai-toolbar { display: none !important; }` rule** that had hidden the
+    toolbar since it was first built — the CSS comment above it literally said "delete this
+    rule once wired up," which this now is. Verified live: toolbar shows/hides correctly per
+    the pre-existing `isImage` check (was already there, previously overridden by the
+    `!important`), and a real call against the (currently keyless) backend fails gracefully
+    with "Image editing is not configured yet" rather than an uncaught JS error.
+  - A key pasted directly into chat this session was treated as compromised on arrival (same
+    handling as the Resend key incident earlier in this project) — not used, user asked to
+    revoke and generate a fresh one directly in Railway.
+
 ## Conventions
 
 - Sections are self-contained: `{% schema %}` first, then `<style>`, then markup/JS. Plain CSS classes, no external deps.
