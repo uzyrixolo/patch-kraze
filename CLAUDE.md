@@ -111,6 +111,36 @@ different sheet layout. Six more sit on older 16-size or 6-size grids.
   - the workbook has no sheet/section for it, so its prices were never guessed at. Backup:
   `backups/pvc-workbook-price-update-backup-2026-08-27.json`.
 
+- **2026-08-27: 3D Embroidered Patches (`3d-embroidered-patches`) migrated to the 10-tier
+  grid.** On explicit request ("update the woven and 3D size sheets too"), followed by three
+  rounds of scope confirmation, the product's 16 sizes (1"-12") were moved from the old
+  7-tier grid to the workbook's 10 tiers (adds `11-25`, `301-400`, `401-500`; renames the
+  rest). Sizes 1"-9" use the sheet's own numbers; **sizes 10"-12" have no sheet coverage** and
+  were linearly extrapolated per-tier from the sheet's 6"-9" trend (R² 0.948-1.000 across all
+  10 tiers) — user explicitly chose extrapolation over leaving those sizes on old prices,
+  since the metafield's `quantityTiers[].prices[]` is one shared axis across all sizes and
+  can't mix tier structures. 112 variants renamed+repriced, 48 created new, metafield
+  replaced in one pass; final state verified both via a fresh API re-read (160/160 variants
+  match the metafield exactly) and live PDP checks across old/new/extrapolated tiers and
+  sizes. Backup: `backups/3d-embroidered-workbook-backup-2026-08-27.json`.
+  - **Two flagged, not fixed, issues**: (1) the sheet itself inverts in the `11-25` tier —
+    2.0"→2.5" drops $6.99→$4.40, 5.0"→6.0" drops $7.60→$7.50 — "follow the sheet" was
+    explicit, so this was applied as-is rather than silently corrected like the 2026-08-18
+    embroidery regrade. (2) that $4.40 cell × 11 pcs = $48.40, **under the $69.90 cart
+    minimum** — that quantity/size combination is currently unbuyable. Needs a decision.
+  - **Near-miss caught by live verification, not by the write itself**: the 48 new variants
+    were meant to be created in two chunks (sizes 1"-4.5" then 5"-12"), but only the first
+    chunk actually ran before this was picked back up — the product was live for a period
+    with sizes 5"-12" missing their `11-25`/`301-400`/`401-500` variants entirely, so those
+    size/qty combinations would have silently fallen back to a same-size variant at the wrong
+    price (the exact failure mode this file already warns about for metafield-before-variant
+    ordering — turns out a partial variant-create can produce the identical symptom). Caught
+    by testing an actual under-covered combo (11" @ 350 pcs) on the live page instead of only
+    re-reading the API. Lesson: after any multi-chunk variant create, verify the *live PDP*
+    resolves a real variant (not a fallback) for a cell in every chunk, not just a metafield
+    diff — a metafield/API re-read alone would not have caught this, since the metafield was
+    already correct.
+
 Tooling: `scripts/apply_workbook_pricing.py` (applies a sheet to given handles, `--dry-run`
 supported; reads `SHOPIFY_ADMIN_TOKEN` from env, never logs it), `scripts/plan_workbook_offline.py`
 (classifies every product against the sheets offline), `scripts/dryrun_report.py` (per-cell
