@@ -277,6 +277,15 @@
   }
   .pk-cswatch-item.selected .pk-cswatch-check { display: flex; }
   .pk-cswatch-label { font-size: 0.68rem; color: #4b5563; text-align: center; line-height: 1.15; }
+  .pk-match-artwork-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; background: #10b981; color: #fff;
+    border: none; border-radius: 999px; padding: 0.55rem 1.1rem; font-size: 0.85rem; font-weight: 700;
+    cursor: pointer; margin-bottom: 0.85rem; font-family: inherit;
+  }
+  .pk-match-artwork-btn:hover { background: #059669; }
+  .pk-artwork-colors { display: flex; flex-wrap: wrap; gap: 1rem 0.6rem; margin-bottom: 0.5rem; }
+  .pk-artwork-colors-empty { font-size: 0.8rem; color: #9ca3af; margin-bottom: 0.85rem; }
+  .pk-cswatch-subheading { font-size: 0.72rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 0.6rem; }
   /* Responsive Adjustments */
   @media (max-width: 768px) {
     .product-page-main { padding: 0 0 4rem 0; }
@@ -772,6 +781,12 @@
           -%}
           <div class="control-group">
             <label class="control-label">Patch Background Color:</label>
+            <button type="button" class="pk-match-artwork-btn" onclick="matchMyArtwork('bg-color-input', 'bg-artwork-colors')">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v10m-12-12v18m0 0H5a2 2 0 0 1-2-2V9m6 12h10a2 2 0 0 0 2-2V9"/></svg>
+              Match My Artwork
+            </button>
+            <div class="pk-artwork-colors" id="bg-artwork-colors"></div>
+            <div class="pk-cswatch-subheading">Standard Colors</div>
             <div class="pk-cswatch-grid">
               {%- for c in std_colors -%}
                 {%- assign parts = c | split: "|" -%}
@@ -790,6 +805,12 @@
 
           <div class="control-group">
             <label class="control-label">Border Thread Color:</label>
+            <button type="button" class="pk-match-artwork-btn" onclick="matchMyArtwork('thread-color-input', 'thread-artwork-colors')">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v10m-12-12v18m0 0H5a2 2 0 0 1-2-2V9m6 12h10a2 2 0 0 0 2-2V9"/></svg>
+              Match My Artwork
+            </button>
+            <div class="pk-artwork-colors" id="thread-artwork-colors"></div>
+            <div class="pk-cswatch-subheading">Standard Colors</div>
             <div class="pk-cswatch-grid">
               {%- for c in std_colors -%}
                 {%- assign parts = c | split: "|" -%}
@@ -2556,6 +2577,50 @@
        el.classList.add('selected');
        const input = document.getElementById(hiddenInputId);
        if(input) { input.value = colorName; input.dataset.touched = '1'; }
+    }
+    function extractDominantColors(img, count) {
+       const size = 80;
+       const canvas = document.createElement('canvas');
+       canvas.width = size; canvas.height = size;
+       const ctx = canvas.getContext('2d');
+       ctx.drawImage(img, 0, 0, size, size);
+       const data = ctx.getImageData(0, 0, size, size).data;
+       const buckets = {};
+       for (let i = 0; i < data.length; i += 4) {
+         const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
+         if (a < 200) continue; // skip transparent pixels
+         const lum = (r * 299 + g * 587 + b * 114) / 1000;
+         if (lum > 246) continue; // skip near-white backing/canvas
+         const key = [Math.round(r / 32) * 32, Math.round(g / 32) * 32, Math.round(b / 32) * 32].join(',');
+         buckets[key] = (buckets[key] || 0) + 1;
+       }
+       return Object.entries(buckets)
+         .sort((a, b) => b[1] - a[1])
+         .slice(0, count)
+         .map(([key]) => '#' + key.split(',').map(v => Math.min(255, Number(v)).toString(16).padStart(2, '0')).join(''));
+    }
+    window.matchMyArtwork = function(hiddenInputId, containerId) {
+       const container = document.getElementById(containerId);
+       const img = document.getElementById('pk-preview-img');
+       if (!container) return;
+       if (!img || !img.src) {
+         container.innerHTML = '<div class="pk-artwork-colors-empty">Upload your design above first, then match colors from it here.</div>';
+         return;
+       }
+       const run = function() {
+         let colors = [];
+         try { colors = extractDominantColors(img, 4); } catch (e) { colors = []; }
+         if (!colors.length) {
+           container.innerHTML = '<div class="pk-artwork-colors-empty">Could not read colors from this image.</div>';
+           return;
+         }
+         container.innerHTML = colors.map(function(hex) {
+           return '<button type="button" class="pk-cswatch-item" onclick="selectColorSwatch(this, \'' + hiddenInputId + '\', \'' + hex + '\')">' +
+             '<span class="pk-cswatch-dot" style="background:' + hex + ';"><span class="pk-cswatch-check">&#10003;</span></span>' +
+             '<span class="pk-cswatch-label">' + hex + '</span></button>';
+         }).join('');
+       };
+       if (img.complete && img.naturalWidth) { run(); } else { img.addEventListener('load', run, { once: true }); }
     }
     window.openCustomColorPicker = function(triggerEl, hiddenInputId, dotId) {
        let picker = document.getElementById(hiddenInputId + '-native');
