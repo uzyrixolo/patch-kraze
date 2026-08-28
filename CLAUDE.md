@@ -289,17 +289,22 @@ different sheet layout. Six more sit on older 16-size or 6-size grids.
     "follow the sheet" per standing practice**: `500-999` tier drops 4.0" ($0.88) → 4.5"
     ($0.85); `1000+` tier drops 2.0" ($0.75) → 2.5" ($0.70). Same recurring pattern as every
     other sheet in this project (3D's 5"→6", Woven's small-size dips, etc.).
-  - **Not fixed, and explicitly out of scope for this update - a much bigger problem than
-    the usual one or two floor-violating cells**: checked every tier's minimum-quantity cell
-    against $69.90 at the *new* prices, same as always, but this time the violations are wide:
-    `10` tier fails at 10/20 sizes (up to 6.0" - $6.60 x 10 = $66.00), `11-25` fails at 11/20
-    (up to 7.0"), `26-50` fails at 8/20 (up to 4.5"), `51-100` fails at 4/20 (up to 2.5"). Two
-    of those four tiers (`10`, `26-50`) are completely unchanged by this update, meaning this
-    is a **pre-existing gap already live today**, not something introduced here. Given the
-    scale (nearly half a tier's sizes in some cases), a real fix means substantially
-    reworking the small-size pricing, not a couple of cells raised to a floor price like past
-    fixes on 3D/Woven/PVC - that's a decision for the user, not something to bolt onto a
-    "follow the sheet" price update. Flagged, not touched.
+  - **Wide floor-violation finding, initially left out of scope, then partially fixed same
+    day on explicit follow-up request ("fix the 51-100 and 11-25 floor cells too")**: checked
+    every tier's minimum-quantity cell against $69.90 at the *new* prices, same as always, and
+    the violations were wide: `10` tier failed at 10/20 sizes (up to 6.0" - $6.60 x 10 =
+    $66.00), `11-25` at 11/20 (up to 7.0"), `26-50` at 8/20 (up to 4.5"), `51-100` at 4/20 (up
+    to 2.5"). `11-25` and `51-100` are now fixed: `11-25` sizes 1.0"-7.0" (all 11 failing
+    sizes) flattened to **$6.36** (11 x $6.36 = $69.96, the same floor-clearing value used on
+    3D/Woven for this exact qty=11 constraint), `51-100` sizes 1.0"-2.5" (all 4 failing sizes)
+    flattened to **$1.38** (51 x $1.38 = $70.38 - a fresh computation, this project's first
+    qty=51 floor fix). Both flattenings are monotonic with their unchanged neighbors (7.0" and
+    8.0" both land at ≥ their neighbors). **`10` and `26-50` remain untouched** - not part of
+    this request, still a pre-existing gap predating this whole price update. Verified live:
+    1.0"/2.0"/7.0" @ 11-25 and 1.0"-2.5" @ 51-100 all resolve to the fixed prices on both
+    products; unchanged neighbors (8.0" @ 11-25 = $6.60, 3.0"+ @ 51-100 unchanged) spot-checked
+    to confirm the flattening didn't overreach. Backup:
+    `backups/sublimation-1125-51100-floor-fix-backup-2026-08-28.json`.
   - Backup: `backups/sublimation-pricing-update-backup-2026-08-28.json`.
 
 Tooling: `scripts/apply_workbook_pricing.py` (applies a sheet to given handles, `--dry-run`
