@@ -1,0 +1,54 @@
+{
+  "description": "Pre-change snapshot before raising sublimation-patches-for-hats and full-color-printed-patches' 10 tier (sizes 1.0-6.0) to $6.99 and 26-50 tier (sizes 1.0-4.5) to $2.69, to clear the $69.90 cart minimum at each tier's minimum quantity (10 and 26 pcs respectively). Completes the floor-fix sweep started with 11-25/51-100 earlier the same day. User-requested.",
+  "date": "2026-08-28",
+  "sublimation-patches-for-hats": {
+    "product_id": "gid://shopify/Product/7820591136852",
+    "10_before": [
+      {"id":"gid://shopify/ProductVariant/47493728403540","title":"1.0 inch - 10","price":"4.19"},
+      {"id":"gid://shopify/ProductVariant/47493728436308","title":"1.5 inch - 10","price":"4.19"},
+      {"id":"gid://shopify/ProductVariant/47493728469076","title":"2.0 inch - 10","price":"4.19"},
+      {"id":"gid://shopify/ProductVariant/47493728501844","title":"2.5 inch - 10","price":"4.19"},
+      {"id":"gid://shopify/ProductVariant/47493728534612","title":"3.0 inch - 10","price":"4.79"},
+      {"id":"gid://shopify/ProductVariant/47493728567380","title":"3.5 inch - 10","price":"4.79"},
+      {"id":"gid://shopify/ProductVariant/47493728600148","title":"4.0 inch - 10","price":"4.79"},
+      {"id":"gid://shopify/ProductVariant/47493728632916","title":"4.5 inch - 10","price":"5.39"},
+      {"id":"gid://shopify/ProductVariant/47493728665684","title":"5.0 inch - 10","price":"6.00"},
+      {"id":"gid://shopify/ProductVariant/47493728698452","title":"6.0 inch - 10","price":"6.60"}
+    ],
+    "26-50_before": [
+      {"id":"gid://shopify/ProductVariant/47493740167252","title":"1.0 inch - 26-50","price":"2.25"},
+      {"id":"gid://shopify/ProductVariant/47493740298324","title":"1.5 inch - 26-50","price":"2.25"},
+      {"id":"gid://shopify/ProductVariant/47493740429396","title":"2.0 inch - 26-50","price":"2.25"},
+      {"id":"gid://shopify/ProductVariant/47493740560468","title":"2.5 inch - 26-50","price":"2.25"},
+      {"id":"gid://shopify/ProductVariant/47493740691540","title":"3.0 inch - 26-50","price":"2.25"},
+      {"id":"gid://shopify/ProductVariant/47493740822612","title":"3.5 inch - 26-50","price":"2.28"},
+      {"id":"gid://shopify/ProductVariant/47493740953684","title":"4.0 inch - 26-50","price":"2.28"},
+      {"id":"gid://shopify/ProductVariant/47493741084756","title":"4.5 inch - 26-50","price":"2.40"}
+    ]
+  },
+  "full-color-printed-patches": {
+    "product_id": "gid://shopify/Product/7820592087124",
+    "10_before": [
+      {"id":"gid://shopify/ProductVariant/47493727486036","title":"1 inch - 10","price":"4.19"},
+      {"id":"gid://shopify/ProductVariant/47493727518804","title":"1.5 inch - 10","price":"4.19"},
+      {"id":"gid://shopify/ProductVariant/47493727551572","title":"2 inch - 10","price":"4.19"},
+      {"id":"gid://shopify/ProductVariant/47493727584340","title":"2.5 inch - 10","price":"4.19"},
+      {"id":"gid://shopify/ProductVariant/47493727617108","title":"3 inch - 10","price":"4.79"},
+      {"id":"gid://shopify/ProductVariant/47493727649876","title":"3.5 inch - 10","price":"4.79"},
+      {"id":"gid://shopify/ProductVariant/47493727682644","title":"4 inch - 10","price":"4.79"},
+      {"id":"gid://shopify/ProductVariant/47493727715412","title":"4.5 inch - 10","price":"5.39"},
+      {"id":"gid://shopify/ProductVariant/47493727748180","title":"5 inch - 10","price":"6.00"},
+      {"id":"gid://shopify/ProductVariant/47493727780948","title":"6 inch - 10","price":"6.60"}
+    ],
+    "26-50_before": [
+      {"id":"gid://shopify/ProductVariant/47493737119828","title":"1 inch - 26-50","price":"2.25"},
+      {"id":"gid://shopify/ProductVariant/47493737152596","title":"1.5 inch - 26-50","price":"2.25"},
+      {"id":"gid://shopify/ProductVariant/47493737185364","title":"2 inch - 26-50","price":"2.25"},
+      {"id":"gid://shopify/ProductVariant/47493737218132","title":"2.5 inch - 26-50","price":"2.25"},
+      {"id":"gid://shopify/ProductVariant/47493737250900","title":"3 inch - 26-50","price":"2.25"},
+      {"id":"gid://shopify/ProductVariant/47493737283668","title":"3.5 inch - 26-50","price":"2.28"},
+      {"id":"gid://shopify/ProductVariant/47493737316436","title":"4 inch - 26-50","price":"2.28"},
+      {"id":"gid://shopify/ProductVariant/47493737349204","title":"4.5 inch - 26-50","price":"2.40"}
+    ]
+  }
+}

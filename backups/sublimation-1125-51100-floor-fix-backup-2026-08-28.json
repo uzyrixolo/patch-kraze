@@ -1,0 +1,48 @@
+{
+  "description": "Pre-change snapshot before raising sublimation-patches-for-hats and full-color-printed-patches' 11-25 tier (sizes 1.0-7.0) to $6.36 and 51-100 tier (sizes 1.0-2.5) to $1.38, to clear the $69.90 cart minimum at each tier's minimum quantity (11 and 51 pcs respectively). User-requested follow-up to the 2026-08-28 sublimation price update.",
+  "date": "2026-08-28",
+  "sublimation-patches-for-hats": {
+    "product_id": "gid://shopify/Product/7820591136852",
+    "11-25_before": [
+      {"id":"gid://shopify/ProductVariant/47493740134484","title":"1.0 inch - 11-25","price":"3.50"},
+      {"id":"gid://shopify/ProductVariant/47493740265556","title":"1.5 inch - 11-25","price":"3.50"},
+      {"id":"gid://shopify/ProductVariant/47493740396628","title":"2.0 inch - 11-25","price":"3.50"},
+      {"id":"gid://shopify/ProductVariant/47493740527700","title":"2.5 inch - 11-25","price":"3.70"},
+      {"id":"gid://shopify/ProductVariant/47493740658772","title":"3.0 inch - 11-25","price":"3.80"},
+      {"id":"gid://shopify/ProductVariant/47493740789844","title":"3.5 inch - 11-25","price":"4.00"},
+      {"id":"gid://shopify/ProductVariant/47493740920916","title":"4.0 inch - 11-25","price":"4.10"},
+      {"id":"gid://shopify/ProductVariant/47493741051988","title":"4.5 inch - 11-25","price":"4.20"},
+      {"id":"gid://shopify/ProductVariant/47493741183060","title":"5.0 inch - 11-25","price":"4.32"},
+      {"id":"gid://shopify/ProductVariant/47493741314132","title":"6.0 inch - 11-25","price":"4.38"},
+      {"id":"gid://shopify/ProductVariant/47493741445204","title":"7.0 inch - 11-25","price":"5.40"}
+    ],
+    "51-100_before": [
+      {"id":"gid://shopify/ProductVariant/47493740200020","title":"1.0 inch - 51-100","price":"1.20"},
+      {"id":"gid://shopify/ProductVariant/47493740331092","title":"1.5 inch - 51-100","price":"1.20"},
+      {"id":"gid://shopify/ProductVariant/47493740462164","title":"2.0 inch - 51-100","price":"1.20"},
+      {"id":"gid://shopify/ProductVariant/47493740593236","title":"2.5 inch - 51-100","price":"1.32"}
+    ]
+  },
+  "full-color-printed-patches": {
+    "product_id": "gid://shopify/Product/7820592087124",
+    "11-25_before": [
+      {"id":"gid://shopify/ProductVariant/47493736464468","title":"1 inch - 11-25","price":"3.50"},
+      {"id":"gid://shopify/ProductVariant/47493736497236","title":"1.5 inch - 11-25","price":"3.50"},
+      {"id":"gid://shopify/ProductVariant/47493736530004","title":"2 inch - 11-25","price":"3.50"},
+      {"id":"gid://shopify/ProductVariant/47493736562772","title":"2.5 inch - 11-25","price":"3.70"},
+      {"id":"gid://shopify/ProductVariant/47493736595540","title":"3 inch - 11-25","price":"3.80"},
+      {"id":"gid://shopify/ProductVariant/47493736628308","title":"3.5 inch - 11-25","price":"4.00"},
+      {"id":"gid://shopify/ProductVariant/47493736661076","title":"4 inch - 11-25","price":"4.10"},
+      {"id":"gid://shopify/ProductVariant/47493736693844","title":"4.5 inch - 11-25","price":"4.20"},
+      {"id":"gid://shopify/ProductVariant/47493736726612","title":"5 inch - 11-25","price":"4.32"},
+      {"id":"gid://shopify/ProductVariant/47493736759380","title":"6 inch - 11-25","price":"4.38"},
+      {"id":"gid://shopify/ProductVariant/47493736792148","title":"7 inch - 11-25","price":"5.40"}
+    ],
+    "51-100_before": [
+      {"id":"gid://shopify/ProductVariant/47493737775188","title":"1 inch - 51-100","price":"1.20"},
+      {"id":"gid://shopify/ProductVariant/47493737807956","title":"1.5 inch - 51-100","price":"1.20"},
+      {"id":"gid://shopify/ProductVariant/47493737840724","title":"2 inch - 51-100","price":"1.20"},
+      {"id":"gid://shopify/ProductVariant/47493737873492","title":"2.5 inch - 51-100","price":"1.32"}
+    ]
+  }
+}

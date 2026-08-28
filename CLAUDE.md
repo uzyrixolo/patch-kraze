@@ -272,6 +272,48 @@ different sheet layout. Six more sit on older 16-size or 6-size grids.
     table throughout, so this specific inversion is gone; the sheet's own smaller dips
     (documented project-wide, e.g. 3D's 5"→6" dip) were not hunted down separately here.
 
+- **2026-08-28: sublimation family repriced from `Sublmation updated pricing.xlsx`
+  (Downloads, not the repo).** Applies to `sublimation-patches-for-hats` and
+  `full-color-printed-patches` - identical grid, identical sheet, same as every prior
+  sublimation update. Price-only: the sheet's 20 sizes x 8 tiers matches the live structure
+  exactly, so no renames or new variants, just 42 of 160 cells per product actually differing
+  (84 total) - the `10` and `26-50` tiers are byte-identical to what's already live, and every
+  tier's large-size half (roughly 5"+) was already correct too. Verified: fresh API re-read
+  (160/160 variants match the metafield on both products) plus live PDP checks including both
+  flagged dip cells below.
+  - **Small sizes (roughly 1"-4") rise steeply** - e.g. 1" at the `1000+` tier goes
+    $0.15 → $0.75 (+400%), 1" at `500-999` goes $0.16 → $0.70 (+338%). Applied as given, same
+    as every previous "follow the sheet" migration; flagged here since the magnitude is larger
+    than usual.
+  - **Two dips are the sheet's own numbers, not a transcription error - left as-is,
+    "follow the sheet" per standing practice**: `500-999` tier drops 4.0" ($0.88) → 4.5"
+    ($0.85); `1000+` tier drops 2.0" ($0.75) → 2.5" ($0.70). Same recurring pattern as every
+    other sheet in this project (3D's 5"→6", Woven's small-size dips, etc.).
+  - **Wide floor-violation finding, fixed across all four tiers over three same-day
+    follow-up requests.** Checked every tier's minimum-quantity cell against $69.90 at the
+    *new* prices, same as always, and the violations were wide: `10` tier failed at 10/20
+    sizes (up to 6.0" - $6.60 x 10 = $66.00), `11-25` at 11/20 (up to 7.0"), `26-50` at 8/20
+    (up to 4.5"), `51-100` at 4/20 (up to 2.5"). Fixed in two passes:
+    - **Pass 1 ("fix the 51-100 and 11-25 floor cells too"):** `11-25` sizes 1.0"-7.0" (all
+      11 failing sizes) flattened to **$6.36** (11 x $6.36 = $69.96, the same floor-clearing
+      value used on 3D/Woven for this exact qty=11 constraint); `51-100` sizes 1.0"-2.5" (all
+      4 failing sizes) flattened to **$1.38** (51 x $1.38 = $70.38, this project's first
+      qty=51 floor fix).
+    - **Pass 2 ("fix the 10 and 26-50 floor cells too"):** `10` tier sizes 1.0"-6.0" (all 10
+      failing sizes) flattened to **$6.99** (10 x $6.99 = $69.90, exactly at the floor - the
+      same base value already used as the "10" tier price elsewhere in this project, e.g.
+      3D Embroidered's smallest sizes); `26-50` sizes 1.0"-4.5" (all 8 failing sizes)
+      flattened to **$2.69** (26 x $2.69 = $69.94).
+    - All four flattenings are monotonic with their unchanged neighbors (7.0"/8.0" for
+      `11-25`, 3.0"+ for `51-100`, 7.0"+ for `10`, 5.0"+ for `26-50` all land at or above the
+      new flattened value). **Every tier now clears $69.90 at every size, on both products.**
+      Verified live across both passes: fixed cells resolve to the new prices; unchanged
+      neighbors (8.0" @ 11-25 = $6.60, 3.0"+ @ 51-100, 7.0" @ 10 = $7.20, 5.0" @ 26-50 =
+      $2.70) spot-checked to confirm no flattening overreached its boundary.
+  - Backups: `backups/sublimation-pricing-update-backup-2026-08-28.json` (original price
+    update), `backups/sublimation-1125-51100-floor-fix-backup-2026-08-28.json` (pass 1),
+    `backups/sublimation-10-2650-floor-fix-backup-2026-08-28.json` (pass 2).
+
 Tooling: `scripts/apply_workbook_pricing.py` (applies a sheet to given handles, `--dry-run`
 supported; reads `SHOPIFY_ADMIN_TOKEN` from env, never logs it), `scripts/plan_workbook_offline.py`
 (classifies every product against the sheets offline), `scripts/dryrun_report.py` (per-cell
