@@ -756,6 +756,7 @@
           </div>
 
           {% unless product.handle == 'dtf-transfers' or product.handle contains 'sticker' %}
+          <div class="control-group pk-color-card">
           <label class="control-label">Select Shape:</label>
           <div class="shape-grid">
              <div class="shape-card selected" onclick="selectShape(this, 'Circle')">
@@ -780,6 +781,7 @@
              </div>
           </div>
           <input type="hidden" name="properties[Shape]" id="shape-input" value="Circle">
+          </div>
 
           {%- liquid
             assign std_colors = "White|#FFFFFF,Black|#000000,Cream|#F3E9D2,Gray|#9CA3AF,Charcoal|#36454F,Brown|#6F4E37,Red|#DC2626,Maroon|#7F1D1D,Orange|#EA580C,Gold|#D4AF37,Yellow|#FACC15,Kelly Green|#4CBB17,Green|#16A34A,Forest Green|#228B22,Teal|#0D9488,Sky Blue|#38BDF8,Royal Blue|#2563EB,Navy|#1E3A8A" | split: ","
