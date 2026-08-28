@@ -272,6 +272,36 @@ different sheet layout. Six more sit on older 16-size or 6-size grids.
     table throughout, so this specific inversion is gone; the sheet's own smaller dips
     (documented project-wide, e.g. 3D's 5"→6" dip) were not hunted down separately here.
 
+- **2026-08-28: sublimation family repriced from `Sublmation updated pricing.xlsx`
+  (Downloads, not the repo).** Applies to `sublimation-patches-for-hats` and
+  `full-color-printed-patches` - identical grid, identical sheet, same as every prior
+  sublimation update. Price-only: the sheet's 20 sizes x 8 tiers matches the live structure
+  exactly, so no renames or new variants, just 42 of 160 cells per product actually differing
+  (84 total) - the `10` and `26-50` tiers are byte-identical to what's already live, and every
+  tier's large-size half (roughly 5"+) was already correct too. Verified: fresh API re-read
+  (160/160 variants match the metafield on both products) plus live PDP checks including both
+  flagged dip cells below.
+  - **Small sizes (roughly 1"-4") rise steeply** - e.g. 1" at the `1000+` tier goes
+    $0.15 → $0.75 (+400%), 1" at `500-999` goes $0.16 → $0.70 (+338%). Applied as given, same
+    as every previous "follow the sheet" migration; flagged here since the magnitude is larger
+    than usual.
+  - **Two dips are the sheet's own numbers, not a transcription error - left as-is,
+    "follow the sheet" per standing practice**: `500-999` tier drops 4.0" ($0.88) → 4.5"
+    ($0.85); `1000+` tier drops 2.0" ($0.75) → 2.5" ($0.70). Same recurring pattern as every
+    other sheet in this project (3D's 5"→6", Woven's small-size dips, etc.).
+  - **Not fixed, and explicitly out of scope for this update - a much bigger problem than
+    the usual one or two floor-violating cells**: checked every tier's minimum-quantity cell
+    against $69.90 at the *new* prices, same as always, but this time the violations are wide:
+    `10` tier fails at 10/20 sizes (up to 6.0" - $6.60 x 10 = $66.00), `11-25` fails at 11/20
+    (up to 7.0"), `26-50` fails at 8/20 (up to 4.5"), `51-100` fails at 4/20 (up to 2.5"). Two
+    of those four tiers (`10`, `26-50`) are completely unchanged by this update, meaning this
+    is a **pre-existing gap already live today**, not something introduced here. Given the
+    scale (nearly half a tier's sizes in some cases), a real fix means substantially
+    reworking the small-size pricing, not a couple of cells raised to a floor price like past
+    fixes on 3D/Woven/PVC - that's a decision for the user, not something to bolt onto a
+    "follow the sheet" price update. Flagged, not touched.
+  - Backup: `backups/sublimation-pricing-update-backup-2026-08-28.json`.
+
 Tooling: `scripts/apply_workbook_pricing.py` (applies a sheet to given handles, `--dry-run`
 supported; reads `SHOPIFY_ADMIN_TOKEN` from env, never logs it), `scripts/plan_workbook_offline.py`
 (classifies every product against the sheets offline), `scripts/dryrun_report.py` (per-cell
