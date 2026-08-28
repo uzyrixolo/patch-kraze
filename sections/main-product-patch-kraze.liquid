@@ -339,31 +339,35 @@
 
   .shape-card {
     border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
-    padding: 0.75rem 0.25rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
     text-align: center;
     cursor: pointer;
     transition: all 0.2s;
     background: #fff;
   }
-  .shape-card:hover { border-color: #10b981; background-color: #f0fdf4; }
-  .shape-card.selected {
-    border-color: #10b981;
-    background-color: #ecfdf5;
-    box-shadow: 0 0 0 1px #10b981 inset;
-    font-weight: 600; color: #064e3b;
-  }
+  .shape-card:hover { border-color: #10b981; }
+  .shape-card.selected { border-color: #10b981; box-shadow: 0 0 0 2px #10b981; }
   .shape-image {
     width: 100%;
-    height: 60px;
+    height: 85px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+  .shape-card span {
+    display: block;
+    background: #111827;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.55rem 0.25rem;
   }
   @media (min-width: 640px) {
     .shape-grid { grid-template-columns: repeat(5, 1fr); }
-    .shape-image { height: 70px; }
+    .shape-image { height: 100px; }
   }
 
   /* Backing Styles */
@@ -755,24 +759,24 @@
           <label class="control-label">Select Shape:</label>
           <div class="shape-grid">
              <div class="shape-card selected" onclick="selectShape(this, 'Circle')">
-               <div class="shape-image" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgc3Ryb2tlPSIjMTEyMzI3IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9IiNmZmYiIC8+PC9zdmc+');"></div>
+               <div class="shape-image" style="background-image:url('https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Circle.webp?v=1787951311');"></div>
                <span>Circle</span>
              </div>
              <div class="shape-card" onclick="selectShape(this, 'Square')">
-               <div class="shape-image" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIxNSIgeT0iMTUiIHdpZHRoPSI3MCIgaGVpZ2h0PSI3MCIgcng9IjgiIHN0cm9rZT0iIzExMjMyNyIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSIjZmZmIiAvPjwvc3ZnPg==');"></div>
+               <div class="shape-image" style="background-image:url('https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Square.webp?v=1787951310');"></div>
                <span>Square</span>
              </div>
              <div class="shape-card" onclick="selectShape(this, 'Rectangle')">
-               <div class="shape-image" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSIxMCIgeT0iMzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgcng9IjYiIHN0cm9rZT0iIzExMjMyNyIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSIjZmZmIiAvPjwvc3ZnPg==');"></div>
+               <div class="shape-image" style="background-image:url('https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Rectangle.webp?v=1787951311');"></div>
                <span>Rectangle</span>
              </div>
              <div class="shape-card" onclick="selectShape(this, 'Oval')">
-               <div class="shape-image" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZWxsaXBzZSBjeD0iNTAiIGN5PSI1MCIgcng9IjQwIiByeT0iMjUiIHN0cm9rZT0iIzExMjMyNyIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSIjZmZmIiAvPjwvc3ZnPg==');"></div>
+               <div class="shape-image" style="background-image:url('https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Oval.webp?v=1787951311');"></div>
                <span>Oval</span>
              </div>
              <div class="shape-card" onclick="selectShape(this, 'Custom')">
-               <div class="shape-image" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNDAgMTUgTjYwIDE1IEw4MCA0MCBMNTAgODUgTDIwIDQwIFoiIHN0cm9rZT0iIzExMjMyNyIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSIjZmZmIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvc3ZnPg==');"></div>
-               <span>Custom</span>
+               <div class="shape-image" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNDAgMTUgTDYwIDE1IEw4MCA0MCBMNTAgODUgTDIwIDQwIFoiIHN0cm9rZT0iIzExMjMyNyIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSIjZmZmIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvc3ZnPg==');"></div>
+               <span>Custom Shape</span>
              </div>
           </div>
           <input type="hidden" name="properties[Shape]" id="shape-input" value="Circle">
