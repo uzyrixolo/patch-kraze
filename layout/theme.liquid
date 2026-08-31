@@ -42,6 +42,18 @@
       body, h1, h2, h3, h4, h5, h6, p, span, a, div, input, button {
         font-family: 'Inter', sans-serif !important;
       }
+      /* Judge.me's star rating renders via its own icon fonts (JudgemeStar /
+         JudgemeIcons) on plain <span> elements - the blanket rule above was
+         forcing Inter onto them too, so the star glyphs never painted even
+         though the numeric rating was correct. `revert` doesn't restore a
+         third-party author stylesheet's own rule, so the icon font is named
+         explicitly here instead. */
+      .jm-star-rating__font-icon, .jm-star-rating__font-icon *,
+      .jdgm-star, .jdgm-star *,
+      [class*="jdgm-"][class*="icon"], [class*="jdgm-"][class*="icon"] *,
+      [class*="jm-"][class*="icon"], [class*="jm-"][class*="icon"] * {
+        font-family: JudgemeStar, JudgemeIcons, monospace !important;
+      }
     </style>
 
     {{ content_for_header }}
