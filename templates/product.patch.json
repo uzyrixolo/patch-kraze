@@ -11,15 +11,6 @@
   "sections": {
     "main": {
       "type": "main-product-patch-kraze",
-      "blocks": {
-        "judge_me_reviews_preview_badge_kbzp6f": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_preview_badge_kbzp6f"
-      ],
       "settings": {
         "backend_url": "https://patch-kraze-quote-production.up.railway.app"
       }
