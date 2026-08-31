@@ -131,7 +131,12 @@
 
   /* NAV DESKTOP */
   .pk-nav { background: #fff; border-bottom: 1px solid #e5e7eb; position: relative; z-index: 40; }
-  .pk-header { position: sticky; top: 0; z-index: 1100; background: #fff; }
+  /* position:fixed instead of sticky - sticky silently fails to pin here
+     because Shopify's base theme sets `overflow-y: auto` directly on <html>,
+     a known engine quirk where sticky elements don't stick to that specific
+     scrolling box. Fixed sidesteps it; pkSyncHeaderOffset() below reserves
+     the equivalent space so page content doesn't slide under the header. */
+  .pk-header { position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 1100; background: #fff; }
   
   /* Mobile Responsive Header */
   @media (max-width: 1023px) {
@@ -700,6 +705,18 @@
   document.querySelector('.pk-nav').addEventListener('mouseleave', hideMegaMenu);
 
   renderDesktopNav();
+
+  // Header is position:fixed (see .pk-header comment), so it no longer
+  // reserves its own space in normal flow - push the page down by its
+  // real rendered height instead, kept in sync as that height changes
+  // (viewport resize, top-bar wrapping to two lines on narrow screens, etc).
+  function pkSyncHeaderOffset() {
+    const header = document.querySelector('.pk-header');
+    if (header) document.body.style.paddingTop = header.offsetHeight + 'px';
+  }
+  pkSyncHeaderOffset();
+  window.addEventListener('resize', pkSyncHeaderOffset);
+  window.addEventListener('load', pkSyncHeaderOffset);
 
   // ------------------------------------
   // MOBILE LOGIC
