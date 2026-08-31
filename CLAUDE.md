@@ -361,8 +361,11 @@ theme compute new tier labels that have no matching variants, and the fallback a
 ### AI image tools (August 2026)
 
 `quote-backend/server.js` calls OpenAI's `gpt-image-1` for two things, both gated on
-`OPENAI_API_KEY` (unset as of 2026-08-28 — nothing here works live until it's set in Railway,
-which the user must do directly; secrets never get typed into chat or committed).
+`OPENAI_API_KEY`. Was unset as of 2026-08-28 (nothing worked live); **confirmed set and working
+live as of 2026-08-29** — a real `POST /edit-image` call against the Railway backend returned a
+genuine OpenAI-edited image (C2PA content-credentials metadata present, confirming it's not a
+mock). The key itself is never typed into chat or committed - the user set it directly in
+Railway.
 
 - **`POST /generate`** — text-to-image (`images/generations`), pre-existing (found already
   built this session, not documented anywhere before now). Wraps the prompt with fixed
