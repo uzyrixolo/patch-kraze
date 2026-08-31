@@ -62,6 +62,28 @@
   .pk-bg-white-link:hover { background-color: #f9fafb; }
   .pk-link-underline { position: absolute; bottom: -4px; left: 0; right: 0; height: 4px; background-color: #fff; z-index: 10; }
 
+  /* Condensed header on scroll (desktop only) - top bar + main header (logo,
+     search, phone, sign-in, cart) hide once the page scrolls, leaving just
+     the nav row; that row gains its own compact search/account/cart icons
+     so those stay reachable. */
+  @media (min-width: 1024px) {
+    .pk-header--scrolled .pk-top-bar,
+    .pk-header--scrolled .pk-main-header {
+      display: none;
+    }
+  }
+  .pk-nav-row { display: flex; align-items: center; justify-content: space-between; }
+  .pk-nav-compact-icons { display: none; align-items: center; gap: 0.5rem; flex-shrink: 0; margin-left: 1rem; }
+  .pk-header--scrolled .pk-nav-compact-icons { display: flex; }
+  .pk-nav-icon-btn {
+    background: transparent; border: none; cursor: pointer; display: flex; align-items: center;
+    color: #111827; text-decoration: none; position: relative; padding: 0.35rem;
+  }
+  .pk-nav-icon-btn svg { width: 1.3rem; height: 1.3rem; }
+  .pk-nav-icon-btn cart-icon { position: relative; display: block; }
+  .pk-nav-icon-btn .cart-bubble { position: absolute; top: -4px; right: -4px; }
+  .pk-nav-icon-btn .cart-bubble__background { background-color: #10b981 !important; }
+
   /* MAIN HEADER */
   .pk-main-header { border-bottom: 1px solid #e5e7eb; padding: 1rem 0; }
   .pk-logo { height: 2.75rem; width: auto; object-fit: contain; }
@@ -377,10 +399,26 @@
 
   <!-- NAVIGATION (DESKTOP) -->
   <nav class="pk-nav pk-hidden lg:pk-block">
-    <div class="pk-container">
+    <div class="pk-container pk-nav-row">
       <ul class="pk-nav-list" id="desktop-nav-list">
          <!-- Populated via JS -->
       </ul>
+      <div class="pk-nav-compact-icons">
+        <button type="button" class="pk-nav-icon-btn" onclick="document.querySelector('#search-modal dialog')?.showModal()" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="{{ routes.account_url }}" class="pk-nav-icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <button type="button" class="pk-nav-icon-btn" onclick="document.querySelector('cart-drawer-component').open()" aria-label="Open cart">
+          <cart-icon class="header-actions__cart-icon">
+            <span class="svg-wrapper" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 3h2l2.4 12.2a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L21 8H6"/></svg>
+            </span>
+            {% render 'cart-bubble', limit: 100, live_region: true %}
+          </cart-icon>
+        </button>
+      </div>
       <div id="mega-menu-container" class="pk-mega-menu">
          <div class="pk-container">
             <div class="pk-mega-grid" id="mega-menu-content">
@@ -717,6 +755,26 @@
   pkSyncHeaderOffset();
   window.addEventListener('resize', pkSyncHeaderOffset);
   window.addEventListener('load', pkSyncHeaderOffset);
+
+  // Condensed header on scroll: hide the top bar + main header past a small
+  // threshold (so it doesn't flicker on a 1px scroll), re-measuring the
+  // reserved offset each time since hiding those rows shrinks the header.
+  (function () {
+    const headerEl = document.querySelector('.pk-header');
+    let ticking = false;
+    function apply() {
+      const scrolled = window.scrollY > 12;
+      headerEl.classList.toggle('pk-header--scrolled', scrolled);
+      pkSyncHeaderOffset();
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(apply);
+        ticking = true;
+      }
+    }, { passive: true });
+  })();
 
   // ------------------------------------
   // MOBILE LOGIC
