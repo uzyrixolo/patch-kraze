@@ -95,17 +95,37 @@
     .pk-rotate__live { transition: none; }
   }
 
+  /* Sign-in card + cart button */
+  .pk-signin-card {
+    display: flex; align-items: center; gap: 0.55rem; background: #10b981; border-radius: 999px;
+    padding: 0.3rem 1rem 0.3rem 0.3rem; text-decoration: none; flex-shrink: 0;
+  }
+  .pk-signin-card:hover { background: #059669; }
+  .pk-signin-card__icon {
+    width: 1.9rem; height: 1.9rem; border-radius: 50%; background: rgba(255,255,255,0.25); color: #fff;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .pk-signin-card__icon svg { width: 1.05rem; height: 1.05rem; }
+  .pk-signin-card__text { display: flex; flex-direction: column; line-height: 1.15; }
+  .pk-signin-card__label { font-size: 0.58rem; font-weight: 700; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.03em; }
+  .pk-signin-card__value { font-size: 0.85rem; font-weight: 700; color: #fff; }
+  .pk-cart-btn { background: transparent; border: none; cursor: pointer; display: flex; align-items: center; padding: 0; color: #111827; }
+  .pk-cart-btn svg { width: 1.5rem; height: 1.5rem; }
+
   /* Cart Icon Alignment */
-  .pk-action-item cart-icon {
+  .pk-action-item cart-icon,
+  .pk-cart-btn cart-icon {
     display: block;
     position: relative;
   }
-  .pk-action-item .cart-bubble {
+  .pk-action-item .cart-bubble,
+  .pk-cart-btn .cart-bubble {
     position: absolute;
     top: -8px;
     right: -8px;
   }
-  .pk-action-item .cart-bubble__background {
+  .pk-action-item .cart-bubble__background,
+  .pk-cart-btn .cart-bubble__background {
     background-color: #10b981 !important;
   }
 
@@ -275,13 +295,23 @@
           </div>
           <span class="pk-action-sub">{{ pk_phone }}</span>
         </a>
-        <a href="{{ routes.account_url }}" class="pk-action-item" style="text-decoration:none;">
-          <span class="pk-action-title">Hello, sign in</span>
-          <span class="pk-action-sub">Account & Reorder</span>
+        <a href="{{ routes.account_url }}" class="pk-signin-card">
+          <span class="pk-signin-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
+          <span class="pk-signin-card__text">
+            <span class="pk-signin-card__label">Members Area</span>
+            <span class="pk-signin-card__value">Sign In</span>
+          </span>
         </a>
-        
-        <button class="pk-action-item" onclick="document.querySelector('cart-drawer-component').open()" style="background:transparent; border:none; cursor:pointer;">
-           {% render 'cart-icon-component' %}
+
+        <button class="pk-cart-btn" onclick="document.querySelector('cart-drawer-component').open()" aria-label="Open cart">
+          <cart-icon class="header-actions__cart-icon" data-testid="cart-icon">
+            <span class="svg-wrapper" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 3h2l2.4 12.2a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L21 8H6"/></svg>
+            </span>
+            {% render 'cart-bubble', limit: 100, live_region: true %}
+          </cart-icon>
         </button>
       </div>
     </div>
