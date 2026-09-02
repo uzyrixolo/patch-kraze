@@ -54,6 +54,14 @@
       [class*="jm-"][class*="icon"], [class*="jm-"][class*="icon"] * {
         font-family: JudgemeStar, JudgemeIcons, monospace !important;
       }
+      /* Native product-card blocks derive their border color from
+         --color-border-rgb on a color-scheme wrapper class, but that class
+         renders empty here ("color-" with nothing appended) - the
+         rgb(var(--color-border-rgb) / 0.12) formula then falls back to solid
+         black instead of a light gray. Set the border color directly. */
+      .product-grid__card.border-style {
+        --border-color: #e5e7eb !important;
+      }
     </style>
 
     {{ content_for_header }}
