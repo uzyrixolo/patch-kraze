@@ -196,7 +196,7 @@
         "max_products": 6,
         "columns": 4,
         "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
+        "mobile_card_size": "23cqw",
         "columns_gap": 8,
         "rows_gap": 24,
         "icons_style": "arrow",
