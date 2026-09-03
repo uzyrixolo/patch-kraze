@@ -90,7 +90,7 @@
   
   .pk-search-trigger { 
     display: flex; align-items: center; gap: 0.75rem; 
-    max-width: 20rem; flex: 1; margin: 0 2rem; height: 2.75rem;
+    max-width: 20rem; flex: 1; margin: 0 1.5rem; height: 2.75rem;
     padding: 0 1.25rem; border: 1px solid #e5e7eb; border-radius: 0.375rem; 
     font-size: 0.875rem; background: #fff; color: #6b7280; cursor: pointer;
     transition: border-color 0.2s, box-shadow 0.2s;
@@ -99,7 +99,7 @@
   .pk-search-trigger span { flex: 1; text-align: left; }
   .pk-search-btn { position: absolute; right: 0; top: 0; height: 100%; width: 2.75rem; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #6b7280; }
 
-  .pk-actions { display: flex; gap: 1.5rem; align-items: center; }
+  .pk-actions { display: flex; gap: 1.5rem; align-items: center; margin-left: auto; }
   .pk-action-item { display: flex; flex-direction: column; align-items: flex-end; font-size: 0.875rem; line-height: 1.25; position: relative; }
   .pk-action-title { font-weight: 600; color: #111827; white-space: nowrap; }
   .pk-action-sub { font-size: 0.75rem; color: #4b5563; }
@@ -283,11 +283,11 @@
 
   <!-- MAIN HEADER (DESKTOP) -->
   <div class="pk-main-header pk-hidden lg:pk-block">
-    <div class="pk-container pk-flex pk-items-center pk-justify-between">
+    <div class="pk-container pk-flex pk-items-center">
       <a href="/">
         <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo_horizontal_low_9ea09d1a-6c9e-4f1b-8b6a-58cbadcfdf50.png?v=1787003036" alt="Patch Kraze" width="160" height="64" class="pk-logo">
       </a>
-      
+
       <!-- Desktop Search Button - Opens Modal -->
       <button class="pk-search-trigger" onclick="document.querySelector('#search-modal dialog')?.showModal()">
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
