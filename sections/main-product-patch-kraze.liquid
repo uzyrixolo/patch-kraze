@@ -195,25 +195,29 @@
   .pk-edit-ai-btn:hover { border-color: #a78bfa; background: #faf5ff; }
   .pk-edit-ai-btn svg { width: 0.9rem; height: 0.9rem; color: #7c3aed; }
   .pk-ai-prompt-box {
-    display: flex; align-items: center; gap: 0.4rem; margin-top: 0.6rem;
-    padding: 0.4rem; border: 1px solid #ddd6fe; border-radius: 0.5rem; background: #faf5ff;
+    display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.6rem;
+    padding: 0.9rem; border: 1px solid #ddd6fe; border-radius: 0.65rem; background: #faf5ff;
     animation: pk-ai-prompt-in 0.15s ease-out;
   }
   @keyframes pk-ai-prompt-in {
     from { opacity: 0; transform: translateY(-4px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  .pk-ai-prompt-box__label { font-size: 0.8rem; font-weight: 700; color: #5b21b6; }
   .pk-ai-prompt-box__input {
-    flex: 1; min-width: 0; border: 1px solid #ddd6fe; border-radius: 0.4rem;
-    padding: 0.5rem 0.7rem; font-size: 0.85rem; font-family: inherit; background: #fff; color: #111827;
+    width: 100%; resize: vertical; min-height: 4.5rem; box-sizing: border-box;
+    border: 1px solid #ddd6fe; border-radius: 0.5rem;
+    padding: 0.6rem 0.75rem; font-size: 0.85rem; font-family: inherit; line-height: 1.4;
+    background: #fff; color: #111827;
   }
   .pk-ai-prompt-box__input:focus { outline: none; border-color: #a78bfa; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12); }
+  .pk-ai-prompt-box__actions { display: flex; justify-content: flex-end; gap: 0.5rem; }
   .pk-ai-prompt-box__submit, .pk-ai-prompt-box__cancel {
-    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
-    width: 2.1rem; height: 2.1rem; border-radius: 0.4rem; border: none; cursor: pointer;
-    transition: background 0.15s;
+    display: inline-flex; align-items: center; gap: 0.35rem; justify-content: center;
+    border-radius: 0.4rem; border: none; cursor: pointer; font-size: 0.82rem; font-weight: 600;
+    padding: 0.5rem 0.9rem; font-family: inherit; transition: background 0.15s;
   }
-  .pk-ai-prompt-box__submit svg, .pk-ai-prompt-box__cancel svg { width: 1rem; height: 1rem; }
+  .pk-ai-prompt-box__submit svg { width: 0.85rem; height: 0.85rem; }
   .pk-ai-prompt-box__submit { background: #7c3aed; color: #fff; }
   .pk-ai-prompt-box__submit:hover { background: #6d28d9; }
   .pk-ai-prompt-box__cancel { background: none; color: #6b7280; }
@@ -660,19 +664,21 @@
               </button>
             </div>
             <div class="pk-ai-prompt-box" id="pk-ai-prompt-box" style="display:none;">
-              <input
-                type="text"
+              <label class="pk-ai-prompt-box__label" for="pk-ai-prompt-input">What would you like to change?</label>
+              <textarea
                 id="pk-ai-prompt-input"
                 class="pk-ai-prompt-box__input"
-                placeholder="Describe what you'd like changed&hellip; e.g. &ldquo;make the sky purple&rdquo;"
-                onkeydown="if(event.key==='Enter'){event.preventDefault();pkSubmitAiEdit();}if(event.key==='Escape'){pkToggleAiPromptBox(false);}"
-              >
-              <button type="button" class="pk-ai-prompt-box__submit" onclick="pkSubmitAiEdit()" aria-label="Submit AI edit">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </button>
-              <button type="button" class="pk-ai-prompt-box__cancel" onclick="pkToggleAiPromptBox(false)" aria-label="Cancel AI edit">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-              </button>
+                rows="3"
+                placeholder="e.g. &ldquo;make the sky purple&rdquo; or &ldquo;remove the text at the bottom&rdquo;"
+                onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();pkSubmitAiEdit();}if(event.key==='Escape'){pkToggleAiPromptBox(false);}"
+              ></textarea>
+              <div class="pk-ai-prompt-box__actions">
+                <button type="button" class="pk-ai-prompt-box__cancel" onclick="pkToggleAiPromptBox(false)">Cancel</button>
+                <button type="button" class="pk-ai-prompt-box__submit" onclick="pkSubmitAiEdit()">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.2L20 10l-5.8 1.8L12 18l-2.2-6.2L4 10l5.8-1.8L12 2z"/></svg>
+                  Submit
+                </button>
+              </div>
             </div>
             <div class="pk-ai-note" id="pk-ai-note"></div>
 
