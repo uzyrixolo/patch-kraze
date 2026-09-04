@@ -483,6 +483,7 @@
   {% assign leather_patches = all_products['leather-patches'] %}
   {% assign faux_leather = all_products['faux-leather-patches'] %}
   {% assign glow_pvc = all_products['glow-in-the-dark-pvc-rubber-patches'] %}
+  {% assign glow_embroidery = all_products['glow-in-the-dark-embroidery-patches'] %}
   
   {% assign gold_flex = all_products['gold-flex-patches'] %}
   {% assign silver_flex = all_products['silver-flex-patches'] %}
@@ -530,8 +531,8 @@
       },
       {
         title: "Glow In The Dark",
-        image: "{{ glow_pvc.featured_image | img_url: '800x' }}",
-        href: "/products/glow-in-the-dark-pvc-rubber-patches",
+        image: "{{ glow_embroidery.featured_image | img_url: '800x' }}",
+        href: "/products/glow-in-the-dark-embroidery-patches",
         minQty: 10
       }
     ],
