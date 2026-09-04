@@ -32,7 +32,7 @@
         </svg>
       </div>
       <div class="pk-coming-soon__badge"><span class="pk-coming-soon__dot"></span>Coming Soon</div>
-      <h1 class="pk-coming-soon__title">PU UV 3D Patches</h1>
+      <h1 class="pk-coming-soon__title" id="pk-coming-soon-title">PU UV 3D Patches</h1>
       <p class="pk-coming-soon__text">
         We're putting the finishing touches on this new patch style. Pop your
         email in below and we'll let you know the second it's ready to order.
@@ -221,13 +221,24 @@
 
 <script>
   (function () {
-    if (window.location.pathname.replace(/\/$/, '').toLowerCase() !== '/products/pu-uv-3d-patches') return;
+    // Products whose nav link is already live but the product itself isn't
+    // created yet - shows this page instead of the generic 404.
+    var COMING_SOON_PAGES = {
+      '/products/pu-uv-3d-patches': { title: 'PU UV 3D Patches', tag: 'pu-uv-3d-waitlist' },
+      '/products/glow-in-the-dark-embroidered-patches': { title: 'Glow In The Dark Embroidered Patches', tag: 'glow-embroidered-waitlist' }
+    };
+
+    var path = window.location.pathname.replace(/\/$/, '').toLowerCase();
+    var page = COMING_SOON_PAGES[path];
+    if (!page) return;
 
     var defaultBlock = document.getElementById('pk-404-default');
     var comingSoon = document.getElementById('pk-coming-soon');
+    var titleEl = document.getElementById('pk-coming-soon-title');
     if (defaultBlock) defaultBlock.style.display = 'none';
     if (comingSoon) comingSoon.style.display = 'block';
-    document.title = 'PU UV 3D Patches — Coming Soon';
+    if (titleEl) titleEl.textContent = page.title;
+    document.title = page.title + ' — Coming Soon';
 
     var form = document.getElementById('pk-notify-form');
     var emailInput = document.getElementById('pk-notify-email');
@@ -252,7 +263,7 @@
         fd.append('form_type', 'customer');
         fd.append('utf8', '✓');
         fd.append('contact[email]', email);
-        fd.append('contact[tags]', 'pu-uv-3d-waitlist');
+        fd.append('contact[tags]', page.tag);
         navigator.sendBeacon('/contact', fd);
       } catch (err) { /* non-blocking */ }
 
