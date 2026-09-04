@@ -26,13 +26,42 @@
     </div>
 
     <div id="pk-coming-soon" class="pk-coming-soon" style="display: none;">
-      <div class="pk-coming-soon__badge">Coming Soon</div>
+      <div class="pk-coming-soon__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l2.6 5.9 6.4.7-4.8 4.4 1.3 6.3L12 16.5l-5.5 2.8 1.3-6.3-4.8-4.4 6.4-.7z"></path>
+        </svg>
+      </div>
+      <div class="pk-coming-soon__badge"><span class="pk-coming-soon__dot"></span>Coming Soon</div>
       <h1 class="pk-coming-soon__title">PU UV 3D Patches</h1>
       <p class="pk-coming-soon__text">
-        We're putting the finishing touches on this new patch style. It'll be
-        available to order here very soon &mdash; check back shortly!
+        We're putting the finishing touches on this new patch style. Pop your
+        email in below and we'll let you know the second it's ready to order.
       </p>
-      <a href="/collections/all" class="button pk-coming-soon__button">Shop all patches</a>
+
+      <form id="pk-notify-form" class="pk-notify-form" novalidate>
+        <input
+          type="email"
+          id="pk-notify-email"
+          class="pk-notify-form__input"
+          placeholder="you@email.com"
+          required
+        >
+        <button type="submit" class="pk-notify-form__button">Notify Me</button>
+      </form>
+      <p id="pk-notify-message" class="pk-notify-message" role="status"></p>
+
+      <div class="pk-coming-soon__divider"><span>or explore what's live now</span></div>
+
+      <div class="pk-explore-chips">
+        <a href="/products/embroidered-patches" class="pk-explore-chip">Embroidery</a>
+        <a href="/products/pvc-rubber-patches" class="pk-explore-chip">PVC Rubber</a>
+        <a href="/products/chenille-patches" class="pk-explore-chip">Chenille</a>
+        <a href="/products/leather-patches" class="pk-explore-chip">Leather</a>
+        <a href="/products/custom-vinyl-stickers" class="pk-explore-chip">Stickers</a>
+        <a href="/products/dtf-transfers" class="pk-explore-chip">DTF Transfers</a>
+      </div>
+
+      <a href="/collections/all" class="pk-coming-soon__link">Shop all patches &rarr;</a>
     </div>
   </div>
 </div>
@@ -44,8 +73,26 @@
     padding: 4rem 1.5rem;
     text-align: center;
   }
+  .pk-coming-soon__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1.25rem;
+    border-radius: 999px;
+    background: #ecfdf5;
+    color: #059669;
+    animation: pk-float 2.6s ease-in-out infinite;
+  }
+  @keyframes pk-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(6deg); }
+  }
   .pk-coming-soon__badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     margin-bottom: 1rem;
     padding: 0.35rem 0.9rem;
     border-radius: 999px;
@@ -56,27 +103,162 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
+  .pk-coming-soon__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: #059669;
+    animation: pk-pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pk-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(1.6); }
+  }
   .pk-coming-soon__title {
     margin: 0 0 0.75rem;
     font-size: 2rem;
     line-height: 1.2;
   }
   .pk-coming-soon__text {
-    margin: 0 0 1.75rem;
+    margin: 0 auto 1.75rem;
+    max-width: 28rem;
     color: #6b7280;
     line-height: 1.6;
   }
+  .pk-notify-form {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 26rem;
+    margin: 0 auto;
+  }
+  .pk-notify-form__input {
+    flex: 1;
+    height: 2.75rem;
+    padding: 0 1.1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .pk-notify-form__input:focus {
+    border-color: #059669;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
+  }
+  .pk-notify-form__button {
+    flex-shrink: 0;
+    height: 2.75rem;
+    padding: 0 1.4rem;
+    border: none;
+    border-radius: 999px;
+    background: #059669;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .pk-notify-form__button:hover { background: #047857; }
+  .pk-notify-form__button:active { transform: scale(0.97); }
+  .pk-notify-form__button:disabled { opacity: 0.6; cursor: default; }
+  .pk-notify-message {
+    min-height: 1.4rem;
+    margin: 0.75rem 0 0;
+    font-size: 0.85rem;
+  }
+  .pk-notify-message--success { color: #059669; }
+  .pk-notify-message--error { color: #dc2626; }
+  .pk-coming-soon__divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 2.25rem 0 1.25rem;
+    color: #9ca3af;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .pk-coming-soon__divider::before,
+  .pk-coming-soon__divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+  }
+  .pk-explore-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 1.75rem;
+  }
+  .pk-explore-chip {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    color: #111827;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s, transform 0.1s;
+  }
+  .pk-explore-chip:hover {
+    border-color: #059669;
+    background: #ecfdf5;
+    transform: translateY(-1px);
+  }
+  .pk-coming-soon__link {
+    display: inline-block;
+    color: #059669;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .pk-coming-soon__link:hover { text-decoration: underline; }
 </style>
 
 <script>
   (function () {
-    if (window.location.pathname.replace(/\/$/, '').toLowerCase() === '/products/pu-uv-3d-patches') {
-      var defaultBlock = document.getElementById('pk-404-default');
-      var comingSoon = document.getElementById('pk-coming-soon');
-      if (defaultBlock) defaultBlock.style.display = 'none';
-      if (comingSoon) comingSoon.style.display = 'block';
-      document.title = 'PU UV 3D Patches — Coming Soon';
-    }
+    if (window.location.pathname.replace(/\/$/, '').toLowerCase() !== '/products/pu-uv-3d-patches') return;
+
+    var defaultBlock = document.getElementById('pk-404-default');
+    var comingSoon = document.getElementById('pk-coming-soon');
+    if (defaultBlock) defaultBlock.style.display = 'none';
+    if (comingSoon) comingSoon.style.display = 'block';
+    document.title = 'PU UV 3D Patches — Coming Soon';
+
+    var form = document.getElementById('pk-notify-form');
+    var emailInput = document.getElementById('pk-notify-email');
+    var message = document.getElementById('pk-notify-message');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = emailInput.value.trim();
+      if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+        message.textContent = 'Please enter a valid email address.';
+        message.className = 'pk-notify-message pk-notify-message--error';
+        return;
+      }
+
+      var btn = form.querySelector('button');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      try {
+        var fd = new FormData();
+        fd.append('form_type', 'customer');
+        fd.append('utf8', '✓');
+        fd.append('contact[email]', email);
+        fd.append('contact[tags]', 'pu-uv-3d-waitlist');
+        navigator.sendBeacon('/contact', fd);
+      } catch (err) { /* non-blocking */ }
+
+      setTimeout(function () {
+        form.style.display = 'none';
+        message.textContent = "You're on the list! We'll email you the moment it launches.";
+        message.className = 'pk-notify-message pk-notify-message--success';
+      }, 400);
+    });
   })();
 </script>
 
