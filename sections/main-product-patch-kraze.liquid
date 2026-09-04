@@ -194,6 +194,30 @@
   }
   .pk-edit-ai-btn:hover { border-color: #a78bfa; background: #faf5ff; }
   .pk-edit-ai-btn svg { width: 0.9rem; height: 0.9rem; color: #7c3aed; }
+  .pk-ai-prompt-box {
+    display: flex; align-items: center; gap: 0.4rem; margin-top: 0.6rem;
+    padding: 0.4rem; border: 1px solid #ddd6fe; border-radius: 0.5rem; background: #faf5ff;
+    animation: pk-ai-prompt-in 0.15s ease-out;
+  }
+  @keyframes pk-ai-prompt-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .pk-ai-prompt-box__input {
+    flex: 1; min-width: 0; border: 1px solid #ddd6fe; border-radius: 0.4rem;
+    padding: 0.5rem 0.7rem; font-size: 0.85rem; font-family: inherit; background: #fff; color: #111827;
+  }
+  .pk-ai-prompt-box__input:focus { outline: none; border-color: #a78bfa; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12); }
+  .pk-ai-prompt-box__submit, .pk-ai-prompt-box__cancel {
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 2.1rem; height: 2.1rem; border-radius: 0.4rem; border: none; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .pk-ai-prompt-box__submit svg, .pk-ai-prompt-box__cancel svg { width: 1rem; height: 1rem; }
+  .pk-ai-prompt-box__submit { background: #7c3aed; color: #fff; }
+  .pk-ai-prompt-box__submit:hover { background: #6d28d9; }
+  .pk-ai-prompt-box__cancel { background: none; color: #6b7280; }
+  .pk-ai-prompt-box__cancel:hover { background: #ede9fe; color: #111827; }
   .pk-ai-note {
     display: none; align-items: flex-start; gap: 0.5rem; margin-top: 0.6rem;
     background: #f3e8ff; border: 1px solid #ddd6fe; border-radius: 0.5rem;
@@ -630,9 +654,24 @@
                 Crop
                 <span class="pk-toggle on" id="pk-toggle-crop" role="switch" aria-checked="true" tabindex="0" onclick="pkToggleCrop()" onkeydown="if(event.key===' '||event.key==='Enter'){event.preventDefault();pkToggleCrop();}"><span class="pk-toggle-knob"></span></span>
               </label>
-              <button type="button" class="pk-edit-ai-btn" onclick="pkEditWithAI()">
+              <button type="button" class="pk-edit-ai-btn" id="pk-edit-ai-btn" onclick="pkToggleAiPromptBox()">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.2L20 10l-5.8 1.8L12 18l-2.2-6.2L4 10l5.8-1.8L12 2z"/></svg>
                 Edit with AI
+              </button>
+            </div>
+            <div class="pk-ai-prompt-box" id="pk-ai-prompt-box" style="display:none;">
+              <input
+                type="text"
+                id="pk-ai-prompt-input"
+                class="pk-ai-prompt-box__input"
+                placeholder="Describe what you'd like changed&hellip; e.g. &ldquo;make the sky purple&rdquo;"
+                onkeydown="if(event.key==='Enter'){event.preventDefault();pkSubmitAiEdit();}if(event.key==='Escape'){pkToggleAiPromptBox(false);}"
+              >
+              <button type="button" class="pk-ai-prompt-box__submit" onclick="pkSubmitAiEdit()" aria-label="Submit AI edit">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+              <button type="button" class="pk-ai-prompt-box__cancel" onclick="pkToggleAiPromptBox(false)" aria-label="Cancel AI edit">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
               </button>
             </div>
             <div class="pk-ai-note" id="pk-ai-note"></div>
@@ -1849,19 +1888,39 @@
       }
     };
 
-    window.pkEditWithAI = async function() {
+    // "Edit with AI" opens an inline prompt box in place of the button
+    // instead of a blocking window.prompt() dialog.
+    window.pkToggleAiPromptBox = function(force) {
       if (!fileInput.files || !fileInput.files[0]) return;
-      if (!AI_BACKEND_URL) {
+      const box = document.getElementById('pk-ai-prompt-box');
+      const input = document.getElementById('pk-ai-prompt-input');
+      if (!box) return;
+      const show = typeof force === 'boolean' ? force : box.style.display === 'none';
+
+      if (show && !AI_BACKEND_URL) {
         pkShowAiNote('<strong>AI editing isn&rsquo;t configured yet.</strong> Tell us what you&rsquo;d like changed in a note below and our designers will make the edit by hand.', true);
         return;
       }
-      const prompt = window.prompt('Describe what you’d like changed about this design:');
-      if (!prompt || !prompt.trim()) return;
 
+      box.style.display = show ? 'flex' : 'none';
+      if (show && input) {
+        input.focus();
+      } else if (input) {
+        input.value = '';
+      }
+    };
+
+    window.pkSubmitAiEdit = async function() {
+      if (!fileInput.files || !fileInput.files[0]) return;
+      const input = document.getElementById('pk-ai-prompt-input');
+      const prompt = input ? input.value.trim() : '';
+      if (!prompt) { if (input) input.focus(); return; }
+
+      pkToggleAiPromptBox(false);
       pkSetAiBusy(true);
       pkShowAiLoading('Applying your edit&hellip;');
       try {
-        const image = await pkCallEditImage(fileInput.files[0], prompt.trim());
+        const image = await pkCallEditImage(fileInput.files[0], prompt);
         const newFile = await pkDataUrlToFile(image, 'edited');
         pkHideAiNote();
         pkSwapInFile(newFile);
