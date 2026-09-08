@@ -32,7 +32,8 @@
         "jackets"
       ],
       "settings": {
-        "heading": "Patch Kraze Blanks",
+        "heading": "Patch Kraze",
+        "heading_highlight": "Blanks",
         "subheading": "Blank hats and jackets, ready for your custom patches.",
         "limit": 48
       }
