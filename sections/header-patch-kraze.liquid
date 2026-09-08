@@ -97,6 +97,9 @@
   }
   .pk-search-trigger:hover { border-color: #10b981; }
   .pk-search-trigger span { flex: 1; text-align: left; }
+  .pk-search-cursor { flex: 0 0 auto !important; margin-left: 1px; animation: pk-cursor-blink 1s step-end infinite; }
+  @keyframes pk-cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .pk-search-cursor { display: none; } }
   .pk-search-btn { position: absolute; right: 0; top: 0; height: 100%; width: 2.75rem; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #6b7280; }
 
   .pk-actions { display: flex; gap: 1.5rem; align-items: center; margin-left: auto; }
@@ -291,7 +294,7 @@
       <!-- Desktop Search Button - Opens Modal -->
       <button class="pk-search-trigger" onclick="document.querySelector('#search-modal dialog')?.showModal()">
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <span>Search Patch Styles</span>
+        <span><span id="pk-search-typewriter" data-full-text="Search Patch Styles"></span><span class="pk-search-cursor" aria-hidden="true">|</span></span>
       </button>
 
       <div class="pk-actions">
@@ -857,5 +860,47 @@
       renderMobileNav();
     }, 50);
   });
+
+  // Search bar "placeholder": types the text in, holds, erases it, holds,
+  // and loops. Skipped for reduced-motion - the full text is shown instead.
+  (function () {
+    const el = document.getElementById('pk-search-typewriter');
+    if (!el) return;
+    const text = el.getAttribute('data-full-text') || '';
+    if (!text) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = text;
+      return;
+    }
+
+    const TYPE_MS = 90;
+    const ERASE_MS = 45;
+    const HOLD_FULL_MS = 1800;
+    const HOLD_EMPTY_MS = 500;
+    let i = 0;
+
+    function typeStep() {
+      i++;
+      el.textContent = text.slice(0, i);
+      if (i < text.length) {
+        setTimeout(typeStep, TYPE_MS);
+      } else {
+        setTimeout(eraseStep, HOLD_FULL_MS);
+      }
+    }
+
+    function eraseStep() {
+      i--;
+      el.textContent = text.slice(0, i);
+      if (i > 0) {
+        setTimeout(eraseStep, ERASE_MS);
+      } else {
+        setTimeout(typeStep, HOLD_EMPTY_MS);
+      }
+    }
+
+    typeStep();
+  })();
 
 </script>
