@@ -55,7 +55,8 @@
     font-size: 0.75rem; font-weight: 700; line-height: 1.1; font-style: italic; letter-spacing: 0.025em; text-decoration: none; transition: background 0.2s;
   }
   .pk-brand-link:hover { background-color: #111827; }
-  .pk-brand-link + .pk-brand-link { border-left: 1px solid rgba(255, 255, 255, 0.2); }
+  .pk-brand-link + .pk-brand-link,
+  .pk-patches-hover + .pk-brand-link { border-left: 1px solid rgba(255, 255, 255, 0.2); }
   .pk-text-cyan { color: #22d3ee; }
   .pk-text-pink { color: #f472b6; }
   .pk-bg-white-link { background-color: #fff; color: #111827; position: relative; }
@@ -181,6 +182,44 @@
   .pk-nav-quote-cta:hover { background: #059669; color: #fff; }
   .pk-chevron { width: 0.75rem; height: 0.75rem; margin-left: 0.25rem; }
 
+  /* PATCHES TAB HOVER PANEL (top bar) */
+  .pk-patches-hover { position: relative; height: 100%; }
+  .pk-patches-dropdown {
+    position: absolute; top: 100%; left: 0; z-index: 60;
+    width: 720px; max-width: 92vw; background: #fff; color: #111827;
+    border-radius: 0 0 0.85rem 0.85rem; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    padding: 1.5rem; display: flex; flex-direction: column; gap: 1.1rem;
+    font-style: normal; letter-spacing: normal;
+    opacity: 0; visibility: hidden; transform: translateY(-6px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+  }
+  .pk-patches-hover:hover .pk-patches-dropdown,
+  .pk-patches-hover:focus-within .pk-patches-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .pk-patches-dropdown__top { display: flex; gap: 1.5rem; align-items: flex-start; }
+  .pk-patches-dropdown__left { flex: 0 0 170px; }
+  .pk-patches-dropdown__left h3 { margin: 0 0 0.5rem; font-size: 1.05rem; font-weight: 800; line-height: 1.3; color: #111827; }
+  .pk-patches-dropdown__left p { margin: 0; font-size: 0.8rem; color: #6b7280; line-height: 1.5; }
+  .pk-patches-dropdown__grid { display: flex; gap: 0.7rem; flex: 1; }
+  .pk-patches-dropdown__item { display: flex; flex-direction: column; align-items: center; gap: 0.55rem; text-decoration: none; width: 88px; flex-shrink: 0; }
+  .pk-patches-dropdown__img { width: 88px; height: 88px; border-radius: 0.6rem; background: #f3f4f6; border: 1px solid #e5e7eb; overflow: hidden; }
+  .pk-patches-dropdown__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pk-patches-dropdown__btn {
+    display: inline-flex; align-items: center; gap: 0.25rem; background: #10b981; color: #fff;
+    font-size: 0.7rem; font-weight: 700; padding: 0.4rem 0.55rem; border-radius: 999px;
+    white-space: nowrap; transition: background 0.15s;
+  }
+  .pk-patches-dropdown__item:hover .pk-patches-dropdown__btn { background: #059669; }
+  .pk-patches-dropdown__footer {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    border-top: 1px solid #e5e7eb; padding-top: 0.9rem; font-size: 0.75rem; font-weight: 600; color: #6b7280;
+  }
+  .pk-patches-dropdown__footer span.pk-dot { color: #d1d5db; margin: 0 0.35rem; }
+  .pk-patches-dropdown__cta {
+    background: #111827; color: #fff; font-weight: 700; font-size: 0.8rem; padding: 0.6rem 1.1rem;
+    border-radius: 0.5rem; text-decoration: none; white-space: nowrap; transition: background 0.15s;
+  }
+  .pk-patches-dropdown__cta:hover { background: #1f2937; }
+
   /* MEGA MENU */
   .pk-mega-menu {
     position: absolute; top: 100%; left: 0; width: fit-content; background: #fff; border: 1px solid #e5e7eb;
@@ -261,6 +300,12 @@
   elsif request.path contains 'ready-made-patches'
     assign top_active = 'readymade'
   endif
+
+  assign pk_ptab_emb = all_products['embroidered-patches']
+  assign pk_ptab_full_color = all_products['full-color-printed-patches']
+  assign pk_ptab_pvc = all_products['pvc-rubber-patches']
+  assign pk_ptab_leather = all_products['leather-patches']
+  assign pk_ptab_chenille = all_products['chenille-patches']
 -%}
 <div class="pk-header">
 
@@ -274,7 +319,43 @@
      </div>
     <div class="pk-container lg:pk-flex pk-items-center pk-justify-between" style="height: 100%;">
       <div class="pk-hidden lg:pk-flex" style="height: 100%;">
-        <a href="/" class="pk-brand-link {% if top_active == 'patches' %}pk-bg-white-link{% else %}pk-text-cyan{% endif %}"><span>PATCH KRAZE</span><span>PATCHES</span>{% if top_active == 'patches' %}<span class="pk-link-underline"></span>{% endif %}</a>
+        <div class="pk-patches-hover">
+          <a href="/" class="pk-brand-link {% if top_active == 'patches' %}pk-bg-white-link{% else %}pk-text-cyan{% endif %}"><span>PATCH KRAZE</span><span>PATCHES</span>{% if top_active == 'patches' %}<span class="pk-link-underline"></span>{% endif %}</a>
+          <div class="pk-patches-dropdown">
+            <div class="pk-patches-dropdown__top">
+              <div class="pk-patches-dropdown__left">
+                <h3>5+ Custom Patch Styles</h3>
+                <p>Embroidered, PVC, chenille, leather &amp; more — 10 piece minimums, free shipping over $100.</p>
+              </div>
+              <div class="pk-patches-dropdown__grid">
+                <a class="pk-patches-dropdown__item" href="/products/embroidered-patches">
+                  <span class="pk-patches-dropdown__img">{% if pk_ptab_emb %}<img src="{{ pk_ptab_emb.featured_image | img_url: '200x' }}" alt="Embroidered" loading="lazy">{% endif %}</span>
+                  <span class="pk-patches-dropdown__btn">Embroidered &rarr;</span>
+                </a>
+                <a class="pk-patches-dropdown__item" href="/products/full-color-printed-patches">
+                  <span class="pk-patches-dropdown__img">{% if pk_ptab_full_color %}<img src="{{ pk_ptab_full_color.featured_image | img_url: '200x' }}" alt="Full Color" loading="lazy">{% endif %}</span>
+                  <span class="pk-patches-dropdown__btn">Full Color &rarr;</span>
+                </a>
+                <a class="pk-patches-dropdown__item" href="/products/pvc-rubber-patches">
+                  <span class="pk-patches-dropdown__img">{% if pk_ptab_pvc %}<img src="{{ pk_ptab_pvc.featured_image | img_url: '200x' }}" alt="PVC Rubber" loading="lazy">{% endif %}</span>
+                  <span class="pk-patches-dropdown__btn">PVC Rubber &rarr;</span>
+                </a>
+                <a class="pk-patches-dropdown__item" href="/products/leather-patches">
+                  <span class="pk-patches-dropdown__img">{% if pk_ptab_leather %}<img src="{{ pk_ptab_leather.featured_image | img_url: '200x' }}" alt="Leather" loading="lazy">{% endif %}</span>
+                  <span class="pk-patches-dropdown__btn">Leather &rarr;</span>
+                </a>
+                <a class="pk-patches-dropdown__item" href="/products/chenille-patches">
+                  <span class="pk-patches-dropdown__img">{% if pk_ptab_chenille %}<img src="{{ pk_ptab_chenille.featured_image | img_url: '200x' }}" alt="Chenille" loading="lazy">{% endif %}</span>
+                  <span class="pk-patches-dropdown__btn">Chenille &rarr;</span>
+                </a>
+              </div>
+            </div>
+            <div class="pk-patches-dropdown__footer">
+              <span>5-DAY RUSH SHIPPING AVAILABLE<span class="pk-dot">&middot;</span>10pc Minimums<span class="pk-dot">&middot;</span>No Setup Fees</span>
+              <a href="/" class="pk-patches-dropdown__cta">Shop All Patches &rarr;</a>
+            </div>
+          </div>
+        </div>
         <a href="/collections/patch-kraze-blanks" class="pk-brand-link {% if top_active == 'blanks' %}pk-bg-white-link{% else %}pk-text-cyan{% endif %}"><span>PATCH KRAZE</span><span>BLANKS</span>{% if top_active == 'blanks' %}<span class="pk-link-underline"></span>{% endif %}</a>
         <a href="/collections/ready-made-patches" class="pk-brand-link {% if top_active == 'readymade' %}pk-bg-white-link{% else %}pk-text-pink{% endif %}"><span>READY MADE</span><span>PATCHES</span>{% if top_active == 'readymade' %}<span class="pk-link-underline"></span>{% endif %}</a>
       </div>
