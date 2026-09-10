@@ -17,10 +17,17 @@
   .fvv-sub { margin: 0 auto; max-width: 36rem; color: #6b7280; font-size: 1rem; line-height: 1.6; }
 
   .fvv-player {
-    position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: 80vh; margin: 0 auto;
+    position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; max-height: 80vh; margin: 0 auto;
     background: #111827; border-radius: 1.25rem; overflow: hidden;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
   }
+  /* A portrait video (taller than wide) gets its own cap on WIDTH instead of
+     stretching to the section's full width - letting width:100% + a fixed
+     16:9-ish aspect-ratio drive a portrait clip squeezes it into a wide
+     landscape box (a thin sliver of video with huge letterbox bars), which
+     is the "cluttered/cramped" look this is fixing. JS sets this class once
+     the real video dimensions are known. */
+  .fvv-player.fvv-portrait { width: auto; max-width: min(100%, 420px); }
   .fvv-video { width: 100%; height: 100%; object-fit: contain; display: block; background: #111827; }
 
   .fvv-play-btn {
@@ -115,6 +122,7 @@
     function matchAspect() {
       if (video.videoWidth && video.videoHeight) {
         player.style.aspectRatio = video.videoWidth + ' / ' + video.videoHeight;
+        player.classList.toggle('fvv-portrait', video.videoHeight > video.videoWidth);
       }
     }
     if (video.readyState >= 1) {
