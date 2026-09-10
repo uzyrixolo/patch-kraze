@@ -21,10 +21,11 @@
     background: #111827; border-radius: 1.25rem; overflow: hidden;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
   }
-  /* Stays full width regardless of the video's own shape - object-fit:contain
-     on .fvv-video below letterboxes a portrait clip inside this wide box
-     instead of cropping it, so nothing needs to narrow the box itself. */
-  .fvv-video { width: 100%; height: 100%; object-fit: contain; display: block; background: #111827; }
+  /* Stays full width regardless of the video's own shape. object-fit:cover
+     fills the box edge-to-edge (no black bars on the sides) by cropping the
+     top/bottom of a portrait clip instead of letterboxing it - the explicit
+     tradeoff requested over pillarboxed black bars. */
+  .fvv-video { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; background: #111827; }
 
   .fvv-play-btn {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
