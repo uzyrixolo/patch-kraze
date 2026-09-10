@@ -488,6 +488,16 @@
       "type": "credibility-patch-kraze",
       "settings": {}
     },
+    "factory_visit_video": {
+      "type": "factory-visit-video",
+      "settings": {
+        "eyebrow": "Behind The Scenes",
+        "heading": "Patch Kraze Factory Visit",
+        "subheading": "Take a look inside where your custom patches are made.",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
     "cta": {
       "type": "cta-patch-kraze",
       "disabled": true,
@@ -786,6 +796,7 @@
     "shop_all_patches",
     "shop_popular_products",
     "credibility",
+    "factory_visit_video",
     "cta",
     "ordering_process",
     "why_buy",

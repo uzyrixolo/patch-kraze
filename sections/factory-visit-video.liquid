@@ -1,0 +1,139 @@
+{% comment %}
+  Interactive factory-visit video: a poster with a big play button overlay,
+  not an autoplaying/muted background video - the whole point is that it
+  plays with real sound, which browsers only allow after a genuine click.
+{% endcomment %}
+
+<style>
+  .fvv-section { background: #fff; }
+  .fvv-container { max-width: 1000px; margin: 0 auto; padding: 0 1rem; }
+  .fvv-head { text-align: center; margin-bottom: 2rem; }
+  .fvv-eyebrow {
+    display: inline-block; margin-bottom: 0.6rem; padding: 0.3rem 0.85rem;
+    border-radius: 999px; background: #ecfdf5; color: #059669;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .fvv-heading { margin: 0 0 0.6rem; font-size: 2rem; font-weight: 800; color: #111827; line-height: 1.2; }
+  .fvv-sub { margin: 0 auto; max-width: 36rem; color: #6b7280; font-size: 1rem; line-height: 1.6; }
+
+  .fvv-player {
+    position: relative; width: 100%; aspect-ratio: 16 / 9; margin: 0 auto;
+    background: #111827; border-radius: 1.25rem; overflow: hidden;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+  }
+  .fvv-video { width: 100%; height: 100%; object-fit: cover; display: block; background: #111827; }
+
+  .fvv-play-btn {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 5.5rem; height: 5.5rem; border-radius: 50%; border: none; cursor: pointer;
+    background: #10b981; color: #fff; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .fvv-play-btn:hover { background: #059669; transform: translate(-50%, -50%) scale(1.06); }
+  .fvv-play-icon { width: 0; height: 0; margin-left: 6px; border-style: solid; border-width: 14px 0 14px 22px; border-color: transparent transparent transparent #fff; }
+
+  .fvv-sound-badge {
+    position: absolute; top: 1rem; left: 1rem; display: inline-flex; align-items: center; gap: 0.35rem;
+    background: rgba(17, 24, 39, 0.65); color: #fff; font-size: 0.72rem; font-weight: 700;
+    padding: 0.35rem 0.7rem; border-radius: 999px; backdrop-filter: blur(2px);
+  }
+
+  .fvv-player.fvv-playing .fvv-play-btn,
+  .fvv-player.fvv-playing .fvv-sound-badge { display: none; }
+
+  .fvv-empty {
+    display: flex; align-items: center; justify-content: center; height: 100%;
+    color: #9ca3af; font-size: 0.95rem; text-align: center; padding: 2rem;
+  }
+
+  @media (max-width: 749px) {
+    .fvv-heading { font-size: 1.5rem; }
+    .fvv-play-btn { width: 4.25rem; height: 4.25rem; }
+    .fvv-play-icon { border-width: 11px 0 11px 17px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fvv-play-btn { transition: none; }
+  }
+</style>
+
+<div class="fvv-section" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;">
+  <div class="fvv-container">
+    <div class="fvv-head">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="fvv-eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="fvv-heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="fvv-sub">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="fvv-player" id="FvvPlayer-{{ section.id }}">
+      {%- if section.settings.video != blank -%}
+        {%- liquid
+          assign poster_image = section.settings.poster | default: section.settings.video.preview_image
+        -%}
+        <video
+          id="FvvVideo-{{ section.id }}"
+          class="fvv-video"
+          playsinline
+          preload="metadata"
+          controls
+          {% if poster_image != blank %}poster="{{ poster_image | image_url: width: 1200 }}"{% endif %}
+        >
+          {%- for source in section.settings.video.sources -%}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {%- endfor -%}
+        </video>
+        <button type="button" class="fvv-play-btn" id="FvvPlayBtn-{{ section.id }}" aria-label="Play the factory visit video with sound">
+          <span class="fvv-play-icon"></span>
+        </button>
+        <span class="fvv-sound-badge">&#128266; Sound on</span>
+      {%- else -%}
+        <div class="fvv-empty">Add a video in the theme editor to show the factory visit.</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var player = document.getElementById('FvvPlayer-{{ section.id }}');
+    var video = document.getElementById('FvvVideo-{{ section.id }}');
+    var playBtn = document.getElementById('FvvPlayBtn-{{ section.id }}');
+    if (!player || !video || !playBtn) return;
+
+    video.muted = false;
+
+    playBtn.addEventListener('click', function () {
+      video.play().catch(function () { /* ignore - user can use native controls */ });
+    });
+    video.addEventListener('play', function () { player.classList.add('fvv-playing'); });
+    video.addEventListener('pause', function () { player.classList.remove('fvv-playing'); });
+    video.addEventListener('ended', function () { player.classList.remove('fvv-playing'); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Factory Visit Video",
+  "class": "section-factory-visit-video",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Behind The Scenes" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Patch Kraze Factory Visit" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Take a look inside where your custom patches are made." },
+    { "type": "video", "id": "video", "label": "Video", "info": "Upload the factory visit video. Plays with sound once clicked - browsers block autoplaying sound." },
+    { "type": "image_picker", "id": "poster", "label": "Custom thumbnail (optional)", "info": "Defaults to a frame from the video itself." },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "default": 56, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "default": 56, "unit": "px" }
+  ],
+  "presets": [
+    {
+      "name": "Factory Visit Video"
+    }
+  ]
+}
+{% endschema %}
