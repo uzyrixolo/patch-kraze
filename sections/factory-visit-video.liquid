@@ -5,21 +5,38 @@
 {% endcomment %}
 
 <style>
-  .fvv-section { background: #fff; }
+  .fvv-section { background: radial-gradient(ellipse 80% 100% at 50% 0%, #ecfdf5 0%, #ffffff 60%); }
   .fvv-container { max-width: 1000px; margin: 0 auto; padding: 0 1rem; }
-  .fvv-head { text-align: center; margin-bottom: 2rem; }
+  .fvv-head { text-align: center; margin-bottom: 1.75rem; }
   .fvv-eyebrow {
     display: inline-block; margin-bottom: 0.6rem; padding: 0.3rem 0.85rem;
     border-radius: 999px; background: #ecfdf5; color: #059669;
     font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
   }
-  .fvv-heading { margin: 0 0 0.6rem; font-size: 2rem; font-weight: 800; color: #111827; line-height: 1.2; }
+  .fvv-heading { margin: 0 0 0.6rem; font-size: 2.25rem; font-weight: 800; color: #111827; line-height: 1.2; }
+  .fvv-heading-highlight { color: #059669; }
   .fvv-sub { margin: 0 auto; max-width: 36rem; color: #6b7280; font-size: 1rem; line-height: 1.6; }
 
+  .fvv-trust-row {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem;
+    margin: 1.25rem 0 0;
+  }
+  .fvv-trust-chip {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 999px;
+    padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 600; color: #374151;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .fvv-player-wrap {
+    position: relative; max-width: 100%; margin: 2rem auto 0; padding: 3px;
+    border-radius: 1.4rem;
+    background: linear-gradient(135deg, #10b981, #059669 45%, #6ee7b7 100%);
+    box-shadow: 0 25px 50px rgba(16, 185, 129, 0.2);
+  }
   .fvv-player {
     position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; max-height: 80vh; margin: 0 auto;
-    background: #111827; border-radius: 1.25rem; overflow: hidden;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+    background: #111827; border-radius: 1.2rem; overflow: hidden;
   }
   /* Stays full width regardless of the video's own shape. object-fit:cover
      fills the box edge-to-edge (no black bars on the sides) by cropping the
@@ -36,6 +53,19 @@
   .fvv-play-btn:hover { background: #059669; transform: translate(-50%, -50%) scale(1.06); }
   .fvv-play-icon { width: 0; height: 0; margin-left: 6px; border-style: solid; border-width: 14px 0 14px 22px; border-color: transparent transparent transparent #fff; }
 
+  /* Two expanding rings pulsing outward - a "click me" cue rather than a
+     static button, since a plain still play button is easy to skim past. */
+  .fvv-play-btn::before, .fvv-play-btn::after {
+    content: ''; position: absolute; inset: 0; border-radius: 50%;
+    border: 2px solid rgba(16, 185, 129, 0.85); animation: fvv-pulse 2.4s ease-out infinite;
+    pointer-events: none;
+  }
+  .fvv-play-btn::after { animation-delay: 1.2s; }
+  @keyframes fvv-pulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(1.9); opacity: 0; }
+  }
+
   .fvv-sound-badge {
     position: absolute; top: 1rem; left: 1rem; display: inline-flex; align-items: center; gap: 0.35rem;
     background: rgba(17, 24, 39, 0.65); color: #fff; font-size: 0.72rem; font-weight: 700;
@@ -51,13 +81,15 @@
   }
 
   @media (max-width: 749px) {
-    .fvv-heading { font-size: 1.5rem; }
+    .fvv-heading { font-size: 1.6rem; }
     .fvv-play-btn { width: 4.25rem; height: 4.25rem; }
     .fvv-play-icon { border-width: 11px 0 11px 17px; }
+    .fvv-trust-chip { font-size: 0.75rem; padding: 0.35rem 0.7rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .fvv-play-btn { transition: none; }
+    .fvv-play-btn::before, .fvv-play-btn::after { animation: none; display: none; }
   }
 </style>
 
@@ -68,13 +100,24 @@
         <span class="fvv-eyebrow">{{ section.settings.eyebrow }}</span>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <h2 class="fvv-heading">{{ section.settings.heading }}</h2>
+        <h2 class="fvv-heading">
+          {{- section.settings.heading -}}
+          {%- if section.settings.heading_highlight != blank -%}
+            <span class="fvv-heading-highlight"> {{ section.settings.heading_highlight }}</span>
+          {%- endif -%}
+        </h2>
       {%- endif -%}
       {%- if section.settings.subheading != blank -%}
         <p class="fvv-sub">{{ section.settings.subheading }}</p>
       {%- endif -%}
+      <div class="fvv-trust-row">
+        <span class="fvv-trust-chip">&#127981; Real Factory Floor</span>
+        <span class="fvv-trust-chip">&#128230; Every Patch Ships From Here</span>
+        <span class="fvv-trust-chip">&#127909; Unedited Footage</span>
+      </div>
     </div>
 
+    <div class="fvv-player-wrap">
     <div class="fvv-player" id="FvvPlayer-{{ section.id }}">
       {%- if section.settings.video != blank -%}
         {%- liquid
@@ -99,6 +142,7 @@
       {%- else -%}
         <div class="fvv-empty">Add a video in the theme editor to show the factory visit.</div>
       {%- endif -%}
+    </div>
     </div>
   </div>
 </div>
@@ -142,7 +186,8 @@
   "class": "section-factory-visit-video",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Behind The Scenes" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Patch Kraze Factory Visit" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Patch Kraze" },
+    { "type": "text", "id": "heading_highlight", "label": "Heading — highlighted part (optional)", "default": "Factory Visit", "info": "Appended after Heading, rendered in the site's accent color." },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Take a look inside where your custom patches are made." },
     { "type": "video", "id": "video", "label": "Video", "info": "Upload the factory visit video. Plays with sound once clicked - browsers block autoplaying sound." },
     { "type": "image_picker", "id": "poster", "label": "Custom thumbnail (optional)", "info": "Defaults to a frame from the video itself." },
