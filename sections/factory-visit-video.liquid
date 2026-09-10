@@ -17,11 +17,11 @@
   .fvv-sub { margin: 0 auto; max-width: 36rem; color: #6b7280; font-size: 1rem; line-height: 1.6; }
 
   .fvv-player {
-    position: relative; width: 100%; aspect-ratio: 16 / 9; margin: 0 auto;
+    position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: 80vh; margin: 0 auto;
     background: #111827; border-radius: 1.25rem; overflow: hidden;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
   }
-  .fvv-video { width: 100%; height: 100%; object-fit: cover; display: block; background: #111827; }
+  .fvv-video { width: 100%; height: 100%; object-fit: contain; display: block; background: #111827; }
 
   .fvv-play-btn {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -107,6 +107,21 @@
     if (!player || !video || !playBtn) return;
 
     video.muted = false;
+
+    // Match the box to the real video's own shape (landscape or portrait)
+    // instead of forcing a fixed 16:9 - a vertical phone video inside a
+    // 16:9 box either gets cropped (cover) or sits cramped with huge empty
+    // bars (contain), both of which read as "the video looks squeezed".
+    function matchAspect() {
+      if (video.videoWidth && video.videoHeight) {
+        player.style.aspectRatio = video.videoWidth + ' / ' + video.videoHeight;
+      }
+    }
+    if (video.readyState >= 1) {
+      matchAspect();
+    } else {
+      video.addEventListener('loadedmetadata', matchAspect, { once: true });
+    }
 
     playBtn.addEventListener('click', function () {
       video.play().catch(function () { /* ignore - user can use native controls */ });
