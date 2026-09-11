@@ -22,8 +22,8 @@
         "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
         "disabled": false,
         "settings": {
-          "greeting_message": "",
-          "button_color": "#000000",
+          "greeting_message": "👋 Hey! Need help with a custom patch order? We usually reply within a few minutes!",
+          "button_color": "#10b981",
           "button_icon": "chat_bubble",
           "button_text": "chat_with_us",
           "button_horizontal_position": "bottom_right",
