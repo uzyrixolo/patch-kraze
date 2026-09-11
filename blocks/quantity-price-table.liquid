@@ -79,15 +79,17 @@
     .qpt__label { color: #10b981; font-weight: 700; margin-bottom: 0.5rem; display: block; font-size: 0.9rem; text-transform: uppercase; }
     .qpt__card { border: 1px solid #e5e7eb; border-radius: 0.5rem; overflow: hidden; background: #fff; }
     .qpt__head,
-    .qpt__row { display: flex; justify-content: space-between; gap: 0.5rem; padding: 0.75rem 1rem; font-size: 0.9rem; }
+    .qpt__row { display: flex; justify-content: space-between; gap: 0.5rem; padding: 0.75rem 1rem; font-size: 0.9rem; text-align: center; }
     .qpt__head { background: #f9fafb; border-bottom: 1px solid #e5e7eb; font-weight: 600; color: #111827; }
     .qpt__row { border-bottom: 1px solid #f3f4f6; color: #4b5563; }
     .qpt__row:last-child { border-bottom: none; }
     .qpt__row[data-active='true'] { background-color: #ecfdf5; color: #065f46; font-weight: 600; }
+    .qpt__head span:first-child,
+    .qpt__row span:first-child { flex: 0 0 34%; text-align: center; }
     .qpt__head span:nth-child(2),
     .qpt__row span:nth-child(2) { flex: 0 0 33%; text-align: center; }
     .qpt__head span:nth-child(3),
-    .qpt__row span:nth-child(3) { flex: 0 0 25%; text-align: right; }
+    .qpt__row span:nth-child(3) { flex: 0 0 33%; text-align: center; }
     .qpt__total { display: flex; justify-content: space-between; gap: 1rem; margin: 0.75rem 0 0; font-size: 0.95rem; color: #111827; }
     .qpt__total-value { font-weight: 700; }
     .qpt__note { margin: 0.35rem 0 0; font-size: 0.8rem; color: #059669; }
