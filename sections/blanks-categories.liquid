@@ -59,7 +59,28 @@
 
   /* Card rail: scrolls sideways on small screens rather than wrapping to a
      second row, which is what the reference layout does. */
-  .bkc__rail { display: flex; gap: 0.55rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 2rem; scrollbar-width: thin; }
+  .bkc__rail-wrap { position: relative; margin-bottom: 2rem; }
+  /* Native scrollbar hidden - replaced by the arrow buttons + fade edges
+     below, which read as a deliberate carousel control instead of a plain
+     drag-bar. */
+  .bkc__rail { display: flex; gap: 0.55rem; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth; }
+  .bkc__rail::-webkit-scrollbar { display: none; }
+  .bkc__rail-fade {
+    position: absolute; top: 0; bottom: 0; width: 2.5rem; pointer-events: none;
+    opacity: 0; transition: opacity 0.15s ease;
+  }
+  .bkc__rail-fade--left { left: 0; background: linear-gradient(to right, #fff, transparent); }
+  .bkc__rail-fade--right { right: 0; background: linear-gradient(to left, #fff, transparent); }
+  .bkc__rail-fade.is-visible { opacity: 1; }
+  .bkc__rail-nav {
+    position: absolute; top: 0; bottom: 0.5rem; z-index: 2;
+    width: 1.9rem; display: flex; align-items: center; justify-content: center;
+    border: none; padding: 0; cursor: pointer; color: #111827;
+    background: linear-gradient(to right, #fff 55%, transparent);
+  }
+  .bkc__rail-nav--next { right: 0; background: linear-gradient(to left, #fff 55%, transparent); }
+  .bkc__rail-nav svg { width: 1rem; height: 1rem; }
+  .bkc__rail-nav[hidden] { display: none; }
   .bkc__card { display: flex; align-items: center; gap: 0.5rem; flex: 0 0 auto; padding: 0.4rem 0.75rem 0.4rem 0.4rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 0.65rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04); cursor: pointer; font-family: inherit; font-size: 0.82rem; font-weight: 600; color: #111827; transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s; }
   .bkc__card:hover { border-color: #10b981; transform: translateY(-1px); }
   .bkc__card[aria-selected='true'] { border-color: #10b981; box-shadow: 0 0 0 1px #10b981; }
@@ -322,7 +343,11 @@
     </div>
   {%- endif -%}
 
-  <div class="bkc__rail" role="tablist" aria-label="{{ section.settings.heading | default: 'Categories' | escape }}">
+  <div class="bkc__rail-wrap" data-bkc-rail-wrap>
+    <button type="button" class="bkc__rail-nav bkc__rail-nav--prev" data-bkc-rail-prev aria-label="Scroll categories left" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="bkc__rail" role="tablist" aria-label="{{ section.settings.heading | default: 'Categories' | escape }}" data-bkc-rail>
     {%- for block in section.blocks -%}
       {%- liquid
         assign cat = block.settings.collection
@@ -349,6 +374,12 @@
         <svg class="bkc__card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     {%- endfor -%}
+    </div>
+    <button type="button" class="bkc__rail-nav bkc__rail-nav--next" data-bkc-rail-next aria-label="Scroll categories right">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="bkc__rail-fade bkc__rail-fade--left" data-bkc-rail-fade-left></div>
+    <div class="bkc__rail-fade bkc__rail-fade--right" data-bkc-rail-fade-right></div>
   </div>
 
   {%- for block in section.blocks -%}
@@ -925,6 +956,41 @@
         select(next, true);
       });
     });
+
+    // Category rail: arrow buttons + fade edges instead of a plain
+    // drag-scrollbar, hidden/shown based on how much is left to scroll.
+    (function () {
+      var wrap = root.querySelector('[data-bkc-rail-wrap]');
+      var rail = root.querySelector('[data-bkc-rail]');
+      var prevBtn = root.querySelector('[data-bkc-rail-prev]');
+      var nextBtn = root.querySelector('[data-bkc-rail-next]');
+      var fadeLeft = root.querySelector('[data-bkc-rail-fade-left]');
+      var fadeRight = root.querySelector('[data-bkc-rail-fade-right]');
+      if (!wrap || !rail || !prevBtn || !nextBtn) return;
+
+      function update() {
+        var atStart = rail.scrollLeft <= 4;
+        var atEnd = rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 4;
+        var scrollable = rail.scrollWidth > rail.clientWidth + 4;
+
+        prevBtn.hidden = !scrollable || atStart;
+        nextBtn.hidden = !scrollable || atEnd;
+        if (fadeLeft) fadeLeft.classList.toggle('is-visible', scrollable && !atStart);
+        if (fadeRight) fadeRight.classList.toggle('is-visible', scrollable && !atEnd);
+      }
+
+      function scrollByCards(dir) {
+        var card = rail.querySelector('.bkc__card');
+        var step = card ? card.getBoundingClientRect().width * 2 : 200;
+        rail.scrollBy({ left: dir * step, behavior: 'smooth' });
+      }
+
+      prevBtn.addEventListener('click', function () { scrollByCards(-1); });
+      nextBtn.addEventListener('click', function () { scrollByCards(1); });
+      rail.addEventListener('scroll', update);
+      window.addEventListener('resize', update);
+      update();
+    })();
 
     // Hovering a colour shows that colour's photo without leaving the grid.
     root.addEventListener('mouseover', swapOn);
