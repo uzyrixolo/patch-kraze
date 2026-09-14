@@ -37,6 +37,34 @@
             "collection": "religious-patches",
             "label": "Religious Patches"
           }
+        },
+        "school": {
+          "type": "category",
+          "settings": {
+            "collection": "school-patches",
+            "label": "School Patches"
+          }
+        },
+        "sport_teams": {
+          "type": "category",
+          "settings": {
+            "collection": "sport-teams-patches",
+            "label": "Sport Teams Patches"
+          }
+        },
+        "state_names": {
+          "type": "category",
+          "settings": {
+            "collection": "state-names-patches",
+            "label": "State Names Patches"
+          }
+        },
+        "city_names": {
+          "type": "category",
+          "settings": {
+            "collection": "city-names-patches",
+            "label": "City Names Patches"
+          }
         }
       },
       "block_order": [
@@ -44,7 +72,11 @@
         "flag",
         "meme",
         "anime",
-        "religious"
+        "religious",
+        "school",
+        "sport_teams",
+        "state_names",
+        "city_names"
       ],
       "settings": {
         "heading": "Ready Made",
