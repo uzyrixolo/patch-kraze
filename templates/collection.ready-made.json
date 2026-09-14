@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "categories": {
+      "type": "blanks-categories",
+      "blocks": {
+        "flag": {
+          "type": "category",
+          "settings": {
+            "collection": "flag-patches",
+            "label": "Flag Patches"
+          }
+        },
+        "meme": {
+          "type": "category",
+          "settings": {
+            "collection": "meme-patches",
+            "label": "Meme Patches"
+          }
+        },
+        "anime": {
+          "type": "category",
+          "settings": {
+            "collection": "anime-patches",
+            "label": "Anime Patches"
+          }
+        },
+        "religious": {
+          "type": "category",
+          "settings": {
+            "collection": "religious-patches",
+            "label": "Religious Patches"
+          }
+        }
+      },
+      "block_order": [
+        "flag",
+        "meme",
+        "anime",
+        "religious"
+      ],
+      "settings": {
+        "heading": "Ready Made",
+        "heading_highlight": "Patches",
+        "subheading": "Pre-designed patches, ready to ship — no custom order needed.",
+        "limit": 48
+      }
+    }
+  },
+  "order": [
+    "categories"
+  ]
+}
