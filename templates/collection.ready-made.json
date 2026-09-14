@@ -3,6 +3,13 @@
     "categories": {
       "type": "blanks-categories",
       "blocks": {
+        "all": {
+          "type": "category",
+          "settings": {
+            "collection": "ready-made-patches",
+            "label": "All Patches"
+          }
+        },
         "flag": {
           "type": "category",
           "settings": {
@@ -33,6 +40,7 @@
         }
       },
       "block_order": [
+        "all",
         "flag",
         "meme",
         "anime",
@@ -42,7 +50,7 @@
         "heading": "Ready Made",
         "heading_highlight": "Patches",
         "subheading": "Pre-designed patches, ready to ship — no custom order needed.",
-        "limit": 48
+        "limit": 100
       }
     }
   },
