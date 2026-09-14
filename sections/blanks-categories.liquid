@@ -181,11 +181,14 @@
     position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
     width: 1.9rem; height: 1.9rem; border-radius: 50%; border: none; padding: 0;
     display: flex; align-items: center; justify-content: center; cursor: pointer;
-    background: rgba(255, 255, 255, 0.92); color: #111827;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+    /* Dark, not white - these sit on top of catalogue photos that are
+       themselves mostly white/light background, so a white-on-white button
+       disappeared entirely. */
+    background: rgba(17, 24, 39, 0.75); color: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
     opacity: 0; transition: opacity 0.15s ease, background 0.15s ease;
   }
-  .bkc__img-nav:hover { background: #fff; }
+  .bkc__img-nav:hover { background: rgba(17, 24, 39, 0.92); }
   .bkc__img-nav svg { width: 0.85rem; height: 0.85rem; }
   .bkc__img-nav--prev { left: 0.4rem; }
   .bkc__img-nav--next { right: 0.4rem; }
