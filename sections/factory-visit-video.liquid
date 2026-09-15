@@ -11,11 +11,11 @@
   .fvv-eyebrow {
     display: inline-block; margin-bottom: 0.6rem; padding: 0.3rem 0.85rem;
     border-radius: 999px; background: #ecfdf5; color: #059669;
-    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    font-size: var(--pk-fs-label); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
   }
-  .fvv-heading { margin: 0 0 0.6rem; font-size: 2.25rem; font-weight: 800; color: #111827; line-height: 1.2; }
+  .fvv-heading { margin: 0 0 0.6rem; font-size: var(--pk-fs-heading); font-weight: 800; color: #111827; line-height: 1.2; }
   .fvv-heading-highlight { color: #059669; }
-  .fvv-sub { margin: 0 auto; max-width: 36rem; color: #6b7280; font-size: 1rem; line-height: 1.6; }
+  .fvv-sub { margin: 0 auto; max-width: 36rem; color: #6b7280; font-size: var(--pk-fs-body); line-height: 1.6; }
 
   .fvv-trust-row {
     display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem;
@@ -24,7 +24,7 @@
   .fvv-trust-chip {
     display: inline-flex; align-items: center; gap: 0.4rem;
     background: #fff; border: 1px solid #e5e7eb; border-radius: 999px;
-    padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 600; color: #374151;
+    padding: 0.4rem 0.9rem; font-size: var(--pk-fs-label); font-weight: 600; color: #374151;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   }
 
@@ -68,7 +68,7 @@
 
   .fvv-sound-badge {
     position: absolute; top: 1rem; left: 1rem; display: inline-flex; align-items: center; gap: 0.35rem;
-    background: rgba(17, 24, 39, 0.65); color: #fff; font-size: 0.72rem; font-weight: 700;
+    background: rgba(17, 24, 39, 0.65); color: #fff; font-size: var(--pk-fs-label); font-weight: 700;
     padding: 0.35rem 0.7rem; border-radius: 999px; backdrop-filter: blur(2px);
   }
 
@@ -77,14 +77,14 @@
 
   .fvv-empty {
     display: flex; align-items: center; justify-content: center; height: 100%;
-    color: #9ca3af; font-size: 0.95rem; text-align: center; padding: 2rem;
+    color: #9ca3af; font-size: var(--pk-fs-body); text-align: center; padding: 2rem;
   }
 
   @media (max-width: 749px) {
-    .fvv-heading { font-size: 1.6rem; }
+    .fvv-heading { font-size: var(--pk-fs-heading-mobile); }
     .fvv-play-btn { width: 4.25rem; height: 4.25rem; }
     .fvv-play-icon { border-width: 11px 0 11px 17px; }
-    .fvv-trust-chip { font-size: 0.75rem; padding: 0.35rem 0.7rem; }
+    .fvv-trust-chip { font-size: var(--pk-fs-label); padding: 0.35rem 0.7rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -82,7 +82,7 @@
 <div class="w-full bg-white py-10" style="padding-top: 2.5rem; padding-bottom: 2.5rem; background-color: #fff;">
   <div class="max-w-6xl mx-auto px-4" style="max-width: 72rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem;">
     <div class="mb-16" style="margin-bottom: 4rem;">
-      <h2 class="text-3xl font-bold text-foreground mb-2" style="font-size: 1.875rem; line-height: 2.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #111827;">
+      <h2 class="text-3xl font-bold text-foreground mb-2" style="font-size: var(--pk-fs-heading); line-height: 1.2; font-weight: 700; margin-bottom: 0.5rem; color: #111827;">
         {{ section.settings.heading }}
       </h2>
       <p class="text-gray-600" style="color: #4b5563;">
@@ -156,16 +156,16 @@
   }
 
   .step-title {
-    font-size: 1.125rem; /* text-lg */
+    font-size: var(--pk-fs-subheading);
     font-weight: 700;
     color: #111827;
     margin-bottom: 0.75rem;
     text-align: center;
   }
-  
+
   .step-desc {
     color: #4b5563; /* text-gray-600 */
-    font-size: 0.875rem; /* text-sm */
+    font-size: var(--pk-fs-label);
     text-align: center;
     line-height: 1.5;
   }

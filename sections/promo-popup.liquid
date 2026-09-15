@@ -195,23 +195,23 @@
     {% if pos == 'left' %}flex: 1; display: flex; flex-direction: column; justify-content: center;{% endif %}
   }
   #promo-popup-{{ section.id }} .promo-popup-eyebrow {
-    display: inline-block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em;
+    display: inline-block; font-size: var(--pk-fs-label); font-weight: 800; letter-spacing: 0.1em;
     color: {{ section.settings.accent_color }}; margin-bottom: 0.5rem;
   }
   #promo-popup-{{ section.id }} .promo-popup-heading {
-    font-size: 1.5rem; font-weight: 800; line-height: 1.2; color: #111827; margin: 0 0 0.5rem;
+    font-size: var(--pk-fs-heading-sm); font-weight: 800; line-height: 1.2; color: #111827; margin: 0 0 0.5rem;
   }
-  #promo-popup-{{ section.id }} .promo-popup-body { font-size: 0.95rem; color: #4b5563; margin-bottom: 1.25rem; }
+  #promo-popup-{{ section.id }} .promo-popup-body { font-size: var(--pk-fs-body); color: #4b5563; margin-bottom: 1.25rem; }
   #promo-popup-{{ section.id }} .promo-popup-body p { margin: 0; }
   #promo-popup-{{ section.id }} .promo-popup-btn {
     display: inline-block; background: {{ section.settings.accent_color }}; color: #fff;
-    padding: 0.85rem 1.75rem; border-radius: 0.6rem; font-weight: 700; font-size: 1rem;
+    padding: 0.85rem 1.75rem; border-radius: 0.6rem; font-weight: 700; font-size: var(--pk-fs-body);
     text-decoration: none; transition: filter .15s;
   }
   #promo-popup-{{ section.id }} .promo-popup-btn:hover { filter: brightness(0.93); }
   #promo-popup-{{ section.id }} .promo-popup-dismiss {
     display: block; margin-top: 0.85rem; background: none; border: none; cursor: pointer;
-    font-size: 0.8rem; color: #9ca3af; text-decoration: underline; width: 100%;
+    font-size: var(--pk-fs-label); color: #9ca3af; text-decoration: underline; width: 100%;
   }
   @media (max-width: 640px) {
     {% unless section.settings.show_on_mobile %}
@@ -219,7 +219,6 @@
     {% endunless %}
     #promo-popup-{{ section.id }} .promo-popup-box { {% if pos == 'left' %}flex-direction: column;{% endif %} max-width: 380px; }
     #promo-popup-{{ section.id }} .promo-popup-media { flex: none; }
-    #promo-popup-{{ section.id }} .promo-popup-heading { font-size: 1.25rem; }
   }
 </style>
 
