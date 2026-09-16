@@ -197,20 +197,25 @@
   }
 
   /* Prev/next arrows for cycling a card's own photos, same reveal-on-hover
-     pattern as Quick Buy - always visible on touch devices below. */
+     pattern as Quick Buy - always visible on touch devices below. Sat at
+     top-center vertically until now, which cut straight through the middle
+     of any wide banner-shaped patch (letterman/chenille patches especially)
+     instead of landing on blank canvas - moved to the top corners, which
+     stay clear of a centered subject far more reliably than the vertical
+     midline does. */
   .bkc__img-nav {
-    position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
-    width: 1.9rem; height: 1.9rem; border-radius: 50%; border: none; padding: 0;
+    position: absolute; top: 0.5rem; z-index: 2;
+    width: 1.6rem; height: 1.6rem; border-radius: 50%; border: none; padding: 0;
     display: flex; align-items: center; justify-content: center; cursor: pointer;
     /* Dark, not white - these sit on top of catalogue photos that are
        themselves mostly white/light background, so a white-on-white button
        disappeared entirely. */
-    background: rgba(17, 24, 39, 0.75); color: #fff;
+    background: rgba(17, 24, 39, 0.72); color: #fff;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-    opacity: 0; transition: opacity 0.15s ease, background 0.15s ease;
+    opacity: 0; transition: opacity 0.15s ease, background 0.15s ease, transform 0.15s ease;
   }
-  .bkc__img-nav:hover { background: rgba(17, 24, 39, 0.92); }
-  .bkc__img-nav svg { width: 0.85rem; height: 0.85rem; }
+  .bkc__img-nav:hover { background: rgba(17, 24, 39, 0.92); transform: scale(1.1); }
+  .bkc__img-nav svg { width: 0.72rem; height: 0.72rem; }
   .bkc__img-nav--prev { left: 0.4rem; }
   .bkc__img-nav--next { right: 0.4rem; }
   .bkc__product:hover .bkc__img-nav,
@@ -218,6 +223,28 @@
   @media (max-width: 899px) {
     .bkc__img-nav { opacity: 1; }
   }
+
+  /* Dot indicators: a standard, unambiguous "there's a gallery here, you're
+     on photo 2 of 4" affordance, sitting low in the box (clear of both the
+     centered artwork above and the Quick Buy bar it overlays at the very
+     bottom) - click any dot to jump straight to that photo. */
+  .bkc__img-dots {
+    position: absolute; left: 0; right: 0; bottom: 2.5rem; z-index: 2;
+    display: flex; justify-content: center; align-items: center; gap: 0.3rem;
+    opacity: 0; transition: opacity 0.15s ease;
+  }
+  .bkc__product:hover .bkc__img-dots,
+  .bkc__product:focus-within .bkc__img-dots { opacity: 1; }
+  @media (max-width: 899px) {
+    .bkc__img-dots { opacity: 1; }
+  }
+  .bkc__img-dot {
+    width: 0.4rem; height: 0.4rem; border-radius: 50%; border: none; padding: 0;
+    background: rgba(17, 24, 39, 0.28); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+    cursor: pointer; transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .bkc__img-dot:hover { background: rgba(17, 24, 39, 0.55); }
+  .bkc__img-dot.is-active { background: #111827; transform: scale(1.25); }
   /* Colour rail. Sized through the theme's own swatch variables so both native
      swatches and the name-derived chips land the same size. */
   .bkc__chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; margin: 0.75rem 0 0; }
@@ -817,6 +844,16 @@
                       <button type="button" class="bkc__img-nav bkc__img-nav--next" data-bkc-img-next aria-label="Show next image of {{ product.title | escape }}">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
                       </button>
+                      <div class="bkc__img-dots" data-bkc-img-dots>
+                        {%- for image in product.images -%}
+                          <button
+                            type="button"
+                            class="bkc__img-dot{% if forloop.first %} is-active{% endif %}"
+                            data-bkc-img-dot="{{ forloop.index0 }}"
+                            aria-label="Show image {{ forloop.index }} of {{ product.title | escape }}"
+                          ></button>
+                        {%- endfor -%}
+                      </div>
                       <script type="application/json" data-bkc-img-list>[{%- for image in product.images -%}{{ image | image_url: width: 500 | json }}{% unless forloop.last %},{% endunless %}{%- endfor -%}]</script>
                     {%- endif -%}
                     <button
@@ -1030,18 +1067,13 @@
       photo.setAttribute('src', photo.dataset.bkcOriginal);
     }
 
-    // Prev/next arrows cycle through a card's own product.images, independent
-    // of the colour-hover swap above (which only ever shows/restores one
-    // photo temporarily). A click here is a real, sticky choice.
-    root.addEventListener('click', function (event) {
-      var btn = event.target.closest && event.target.closest('[data-bkc-img-prev], [data-bkc-img-next]');
-      if (!btn) return;
-      event.preventDefault();
-      event.stopPropagation();
-
-      var wrap = btn.closest('.bkc__product-img');
-      var photo = wrap ? wrap.querySelector('.bkc__product-photo') : null;
-      var listEl = wrap ? wrap.querySelector('[data-bkc-img-list]') : null;
+    // Prev/next arrows and dot indicators cycle through a card's own
+    // product.images, independent of the colour-hover swap above (which only
+    // ever shows/restores one photo temporarily). A click here is a real,
+    // sticky choice.
+    function setCardImage(wrap, index) {
+      var photo = wrap.querySelector('.bkc__product-photo');
+      var listEl = wrap.querySelector('[data-bkc-img-list]');
       if (!photo || !listEl) return;
 
       var images;
@@ -1052,13 +1084,35 @@
       }
       if (!images || !images.length) return;
 
-      var index = parseInt(photo.getAttribute('data-bkc-img-index') || '0', 10);
-      var dir = btn.hasAttribute('data-bkc-img-next') ? 1 : -1;
-      index = (index + dir + images.length) % images.length;
-
+      index = ((index % images.length) + images.length) % images.length;
       photo.setAttribute('data-bkc-img-index', index);
       photo.removeAttribute('srcset');
       photo.setAttribute('src', images[index]);
+
+      var dots = wrap.querySelectorAll('[data-bkc-img-dot]');
+      for (var i = 0; i < dots.length; i++) {
+        dots[i].classList.toggle('is-active', i === index);
+      }
+    }
+
+    root.addEventListener('click', function (event) {
+      var navBtn = event.target.closest && event.target.closest('[data-bkc-img-prev], [data-bkc-img-next]');
+      var dotBtn = event.target.closest && event.target.closest('[data-bkc-img-dot]');
+      if (!navBtn && !dotBtn) return;
+      event.preventDefault();
+      event.stopPropagation();
+
+      var wrap = (navBtn || dotBtn).closest('.bkc__product-img');
+      if (!wrap) return;
+
+      if (navBtn) {
+        var photo = wrap.querySelector('.bkc__product-photo');
+        var currentIndex = photo ? parseInt(photo.getAttribute('data-bkc-img-index') || '0', 10) : 0;
+        var dir = navBtn.hasAttribute('data-bkc-img-next') ? 1 : -1;
+        setCardImage(wrap, currentIndex + dir);
+      } else {
+        setCardImage(wrap, parseInt(dotBtn.getAttribute('data-bkc-img-dot'), 10));
+      }
     });
 
     // ---- Quick Buy: fetch the product's variant data on demand and let the
