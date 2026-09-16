@@ -12,6 +12,13 @@
     "categories": {
       "type": "blanks-categories",
       "blocks": {
+        "category_YJWp9N": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "label": "Fashion Patches"
+          }
+        },
         "all": {
           "type": "category",
           "settings": {
@@ -77,6 +84,7 @@
         }
       },
       "block_order": [
+        "category_YJWp9N",
         "all",
         "flag",
         "meme",
