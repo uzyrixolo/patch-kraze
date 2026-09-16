@@ -19,6 +19,13 @@
             "label": "All Patches"
           }
         },
+        "category_4aEapK": {
+          "type": "category",
+          "settings": {
+            "collection": "fashion-patches",
+            "label": "Fashion Patches"
+          }
+        },
         "flag": {
           "type": "category",
           "settings": {
@@ -78,6 +85,7 @@
       },
       "block_order": [
         "all",
+        "category_4aEapK",
         "flag",
         "meme",
         "religious",
