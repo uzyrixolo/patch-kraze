@@ -44,10 +44,10 @@
   .patch-shelves__track { display: grid; grid-template-columns: repeat(var(--ps-cols, 4), 1fr); gap: 1.25rem; }
   .patch-shelves__item { display: flex; }
   .patch-shelves__tile { display: flex; flex-direction: column; width: 100%; text-decoration: none; }
-  .patch-shelves__media { position: relative; border-radius: 0.9rem; overflow: hidden; background: #f3f4f6; aspect-ratio: 1 / 1.05; }
+  .patch-shelves__media { position: relative; border-radius: var(--pk-radius-md); overflow: hidden; background: #f3f4f6; aspect-ratio: 1 / 1.05; }
   .patch-shelves__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
   .patch-shelves__tile:hover .patch-shelves__img { transform: scale(1.04); }
-  .patch-shelves__moq { position: absolute; top: 0.7rem; right: 0.7rem; background: #10b981; color: #fff; font-size: var(--pk-fs-label); font-weight: 700; padding: 0.3rem 0.7rem; border-radius: 999px; z-index: 2; }
+  .patch-shelves__moq { position: absolute; top: 0.7rem; right: 0.7rem; background: #10b981; color: #fff; font-size: var(--pk-fs-label); font-weight: 700; padding: 0.3rem 0.7rem; border-radius: var(--pk-radius-pill); z-index: 2; }
   .patch-shelves__scrim { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(17,24,39,0.06), inset 0 -34px 44px -18px rgba(17,24,39,0.18); pointer-events: none; z-index: 1; }
   .patch-shelves__info { padding: 0.8rem 0.15rem 0; display: flex; flex-direction: column; flex: 1; }
   .patch-shelves__title { font-weight: 700; font-size: var(--pk-fs-body); line-height: 1.3; color: #111827; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -57,8 +57,10 @@
   .patch-shelves__rating { display: inline-flex; align-items: center; gap: 0.25rem; font-size: var(--pk-fs-label); color: #374151; }
   .patch-shelves__star { color: #f59e0b; }
   .patch-shelves__count { color: #9ca3af; }
-  .patch-shelves__btn { display: block; width: 100%; text-align: center; background: #111827; color: #fff; font-size: var(--pk-fs-label); font-weight: 700; padding: 0.65rem 1.1rem; border-radius: 0.5rem; transition: background 0.15s; box-sizing: border-box; }
-  .patch-shelves__tile:hover .patch-shelves__btn { background: #10b981; }
+  .patch-shelves__btn { display: block; width: 100%; text-align: center; font-size: var(--pk-fs-label); font-weight: 700; padding: 0.65rem 1.1rem; border-radius: var(--pk-radius-sm); box-sizing: border-box; }
+  /* Whole-card hover swaps this to brand green (not the standard Dark-CTA
+     hover darken) - a deliberate "this tile is active" cue, kept as-is. */
+  .patch-shelves__tile:hover .patch-shelves__btn { background: var(--pk-btn-primary-bg); }
   @media (max-width: 899px) {
     .patch-shelves__track { grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
     .patch-shelves__heading { font-size: var(--pk-fs-heading-mobile); }
@@ -111,7 +113,7 @@
                       </span>
                     {%- endif -%}
                   </div>
-                  <span class="patch-shelves__btn">Customize</span>
+                  <span class="patch-shelves__btn pk-btn-dark">Customize</span>
                 </div>
               </a>
             </div>

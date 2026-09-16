@@ -42,7 +42,7 @@
   .patches-hero__glow { position: absolute; top: -40%; right: -10%; width: 60%; height: 180%; background: radial-gradient(closest-side, rgba(16,185,129,0.18), transparent 70%); pointer-events: none; }
   .patches-hero__inner { max-width: 1200px; margin: 0 auto; padding: 3.5rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; position: relative; }
   {% comment %} Stars-and-stripes eyebrow. The gradient rides the border via a padding-box/border-box pair so the pill interior stays flat black. {% endcomment %}
-  .patches-hero__eyebrow { display: inline-flex; align-items: center; justify-content: center; gap: 0.7rem; min-width: 21rem; max-width: 100%; margin: 0 0 1rem; padding: 0.6rem 1.5rem; border: 1px solid transparent; border-radius: 999px; background: linear-gradient(#111318, #111318) padding-box, linear-gradient(90deg, #b22234, #ffffff 50%, #5b7fd4) border-box; font-size: var(--pk-fs-body); font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; }
+  .patches-hero__eyebrow { display: inline-flex; align-items: center; justify-content: center; gap: 0.7rem; min-width: 21rem; max-width: 100%; margin: 0 0 1rem; padding: 0.6rem 1.5rem; border: 1px solid transparent; border-radius: var(--pk-radius-pill); background: linear-gradient(#111318, #111318) padding-box, linear-gradient(90deg, #b22234, #ffffff 50%, #5b7fd4) border-box; font-size: var(--pk-fs-body); font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; }
   .patches-hero__flag { width: 1.8rem; height: 1.2rem; flex-shrink: 0; border-radius: 2px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.5); display: block; }
   {% comment %} The ghost copy reserves the final width so the pill does not jitter while the letters land. {% endcomment %}
   .patches-hero__eyebrow-type { position: relative; display: inline-block; }
@@ -62,32 +62,28 @@
   .patches-hero__prop { display: flex; align-items: center; gap: 0.5rem; font-size: var(--pk-fs-body); color: #e5e7eb; }
   .patches-hero__prop-icon { width: 1.15rem; height: 1.15rem; color: #10b981; flex-shrink: 0; }
   .patches-hero__buttons { display: flex; flex-wrap: wrap; gap: 0.9rem; }
-  .patches-hero__btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 1.5rem; border-radius: 0.6rem; font-weight: 700; font-size: var(--pk-fs-body); text-decoration: none; transition: transform 0.15s, background 0.15s; }
+  .patches-hero__btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 1.5rem; border-radius: var(--pk-radius-sm); font-weight: 700; font-size: var(--pk-fs-body); text-decoration: none; transition: transform 0.15s, background-color 0.15s; }
   .patches-hero__btn:hover { transform: translateY(-1px); }
-  .patches-hero__btn--primary { background: #10b981; color: #fff; }
-  .patches-hero__btn--primary:hover { background: #059669; }
-  .patches-hero__btn--secondary { background: #1f2937; color: #fff; border: 1px solid #374151; }
-  .patches-hero__btn--secondary:hover { background: #111827; }
   .patches-hero__btn-arrow { width: 1.1rem; height: 1.1rem; }
   .patches-hero__right { position: relative; min-height: 320px; display: flex; align-items: center; justify-content: center; }
-  .patches-hero__img { max-width: 100%; max-height: 420px; object-fit: contain; border-radius: 0.75rem; }
+  .patches-hero__img { max-width: 100%; max-height: 420px; object-fit: contain; border-radius: var(--pk-radius-lg); }
   {% comment %} Square frame regardless of the source clip's own ratio. The clip itself renders
      uncropped (object-fit: contain) so burned-in captions never get cut off — a cover crop was
      slicing through the caption text at the top/bottom of the portrait clip. The empty sides are
      filled by a blurred copy of the same frame rather than left as bare black bars. {% endcomment %}
-  .patches-hero__video-frame { position: relative; width: 100%; max-width: var(--hero-video-height, 420px); aspect-ratio: 1 / 1; border-radius: 0.75rem; overflow: hidden; background: #0a0a0a; }
+  .patches-hero__video-frame { position: relative; width: 100%; max-width: var(--hero-video-height, 420px); aspect-ratio: 1 / 1; border-radius: var(--pk-radius-lg); overflow: hidden; background: #0a0a0a; }
   .patches-hero__video-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(18px) brightness(0.55); transform: scale(1.15); }
   .patches-hero__video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: contain; }
-  .patches-hero__embed { position: relative; width: 100%; max-width: 560px; aspect-ratio: 16 / 9; border-radius: 0.75rem; overflow: hidden; background: #0a0a0a; }
+  .patches-hero__embed { position: relative; width: 100%; max-width: 560px; aspect-ratio: 16 / 9; border-radius: var(--pk-radius-lg); overflow: hidden; background: #0a0a0a; }
   .patches-hero__embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .patches-hero__card { position: absolute; top: 0; left: 0; background: #fff; color: #111827; border-radius: 0.6rem; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35); z-index: 2; }
+  .patches-hero__card { position: absolute; top: 0; left: 0; background: #fff; color: #111827; border-radius: var(--pk-radius-md); overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35); z-index: 2; }
   .patches-hero__card-stats { display: flex; }
   .patches-hero__card-stat { padding: 0.8rem 1.1rem; }
   .patches-hero__card-stat + .patches-hero__card-stat { border-left: 1px solid #e5e7eb; }
   .patches-hero__card-value { font-weight: 800; font-size: var(--pk-fs-body); }
   .patches-hero__card-label { font-size: var(--pk-fs-label); color: #6b7280; }
   .patches-hero__card-banner { background: #10b981; color: #fff; text-align: center; font-size: var(--pk-fs-label); font-weight: 700; padding: 0.45rem 0.75rem; font-style: italic; }
-  .patches-hero__badge { position: absolute; top: -1.25rem; right: 8%; z-index: 3; background: #dc2626; color: #fff; font-weight: 800; font-style: italic; font-size: var(--pk-fs-label); line-height: 1.15; text-align: center; padding: 1rem 0.8rem; border-radius: 999px; transform: rotate(12deg); box-shadow: 0 6px 18px rgba(220,38,38,0.45); }
+  .patches-hero__badge { position: absolute; top: -1.25rem; right: 8%; z-index: 3; background: #dc2626; color: #fff; font-weight: 800; font-style: italic; font-size: var(--pk-fs-label); line-height: 1.15; text-align: center; padding: 1rem 0.8rem; border-radius: var(--pk-radius-pill); transform: rotate(12deg); box-shadow: 0 6px 18px rgba(220,38,38,0.45); }
   @media (max-width: 899px) {
     .patches-hero__inner { grid-template-columns: 1fr; padding: 2.5rem 1.25rem; }
     .patches-hero__title { font-size: var(--pk-fs-hero-mobile); }
@@ -154,11 +150,11 @@
         {% endfor %}
       </div>
       <div class="patches-hero__buttons">
-        <a class="patches-hero__btn patches-hero__btn--primary" href="{{ section.settings.btn_primary_link | default: '/products/embroidered-patches' }}">
+        <a class="patches-hero__btn pk-btn-primary" href="{{ section.settings.btn_primary_link | default: '/products/embroidered-patches' }}">
           {{ section.settings.btn_primary_label }}
           <svg class="patches-hero__btn-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h10"/><path d="M11 6l4 4-4 4"/></svg>
         </a>
-        <a class="patches-hero__btn patches-hero__btn--secondary" href="{{ section.settings.btn_secondary_link | default: '/pages/quote' }}">
+        <a class="patches-hero__btn pk-btn-outline" href="{{ section.settings.btn_secondary_link | default: '/pages/quote' }}">
           {{ section.settings.btn_secondary_label }}
           <svg class="patches-hero__btn-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h10"/><path d="M11 6l4 4-4 4"/></svg>
         </a>

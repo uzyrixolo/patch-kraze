@@ -53,7 +53,85 @@
         --pk-fs-body: 1rem;            /* body copy */
         --pk-fs-label: 0.875rem;       /* labels, eyebrows, badges, meta */
         --pk-fs-tiny: 0.65rem;         /* smallest utility text */
+
+        /* Patch Kraze homepage corner-radius scale - consolidates ~13 ad-hoc
+           border-radius values (0.25rem to 1.4rem, plus 999px/9999px used
+           interchangeably for the same "fully round" intent) down to this
+           shared set. Perfect circles (50%, on icon buttons/dots/close
+           buttons) are left alone - that's already a consistent, distinct
+           convention, not a real inconsistency. */
+        --pk-radius-sm: 0.5rem;    /* buttons, chips, small thumbnails, inputs */
+        --pk-radius-md: 0.75rem;   /* content cards */
+        --pk-radius-lg: 1.25rem;   /* prominent containers: hero media, mega-menu, popups */
+        --pk-radius-pill: 999px;   /* pills, eyebrows, badges, search bar, selected controls */
+
+        /* Patch Kraze homepage button system - consolidates ~25 ad-hoc
+           button treatments down to a shared set of colors/transitions so
+           every button on the page draws from one source of truth. Existing
+           class names, markup and JS hooks are untouched everywhere this is
+           used - only the CSS values feeding each button's look change. */
+        --pk-btn-primary-bg: #10b981;
+        --pk-btn-primary-bg-hover: #059669;
+        --pk-btn-primary-fg: #ffffff;
+        --pk-btn-dark-bg: #111827;
+        --pk-btn-dark-bg-hover: #1f2937;
+        --pk-btn-dark-fg: #ffffff;
+        --pk-btn-outline-bg: #1f2937;
+        --pk-btn-outline-bg-hover: #111827;
+        --pk-btn-outline-border: #374151;
+        --pk-btn-outline-fg: #ffffff;
+        --pk-btn-text-fg: #6b7280;
+        --pk-btn-text-fg-hover: #111827;
+        --pk-btn-icon-fg: #111827;
+        --pk-btn-icon-bg-hover: rgba(17, 24, 39, 0.06);
+        --pk-btn-transition: 0.15s ease;
       }
+      /* Utility/Icon button recipe - reusable base for any icon-only control
+         (nav icons, carousel arrows, dialog close buttons). Components opt
+         in by adding this class alongside their own; component-specific
+         rules still set width/height/position since those vary by context. */
+      .pk-btn-icon {
+        display: inline-flex; align-items: center; justify-content: center;
+        background: transparent; border: none; color: var(--pk-btn-icon-fg);
+        cursor: pointer; transition: background-color var(--pk-btn-transition), color var(--pk-btn-transition);
+      }
+      .pk-btn-icon:hover { background: var(--pk-btn-icon-bg-hover); }
+      .pk-btn-icon:focus-visible, .pk-btn-text:focus-visible, .pk-btn-primary:focus-visible,
+      .pk-btn-dark:focus-visible, .pk-btn-outline:focus-visible {
+        outline: 2px solid #111827; outline-offset: 2px;
+      }
+      /* Text/Link CTA recipe - plain-text actions (view-all links, dismiss
+         buttons, disclosure toggles). No fill, no border. */
+      .pk-btn-text {
+        background: none; border: none; color: var(--pk-btn-text-fg);
+        cursor: pointer; transition: color var(--pk-btn-transition);
+      }
+      .pk-btn-text:hover { color: var(--pk-btn-text-fg-hover); }
+      /* Primary CTA recipe - the main "buy/act now" action, filled brand
+         green. Component classes keep their own padding/radius/font-size
+         (those vary by context) and only inherit color from here. */
+      .pk-btn-primary {
+        background: var(--pk-btn-primary-bg); color: var(--pk-btn-primary-fg);
+        transition: background-color var(--pk-btn-transition);
+      }
+      .pk-btn-primary:hover { background: var(--pk-btn-primary-bg-hover); }
+      /* Dark CTA recipe - a strong but not primary action, filled
+         near-black with no border. */
+      .pk-btn-dark {
+        background: var(--pk-btn-dark-bg); color: var(--pk-btn-dark-fg);
+        transition: background-color var(--pk-btn-transition);
+      }
+      .pk-btn-dark:hover { background: var(--pk-btn-dark-bg-hover); }
+      /* Secondary/Outline CTA recipe - the alternate choice next to a
+         Primary CTA (e.g. hero's "Get a Free Quote" beside "Shop Custom
+         Patches"). Same dark family as the Dark CTA but with a visible
+         border, which is what distinguished it in the existing design. */
+      .pk-btn-outline {
+        background: var(--pk-btn-outline-bg); color: var(--pk-btn-outline-fg);
+        border: 1px solid var(--pk-btn-outline-border);
+        transition: background-color var(--pk-btn-transition);
+      }
+      .pk-btn-outline:hover { background: var(--pk-btn-outline-bg-hover); }
       body, h1, h2, h3, h4, h5, h6, p, span, a, div, input, button {
         font-family: 'Inter', sans-serif !important;
       }
