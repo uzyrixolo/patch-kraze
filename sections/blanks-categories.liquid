@@ -254,6 +254,15 @@
     .bkc__filters--open .bkc__filters-body { display: block; }
   }
 
+  /* Phone widths: the stacked filters panel above narrows this grid's own
+     container well below its viewport width, so auto-fill's minmax(150px, 1fr)
+     only has room for one column here even though two would fit fine. Force
+     2 columns explicitly rather than shrinking the min further, which would
+     just make the cards themselves cramped. */
+  @media (max-width: 640px) {
+    .bkc__grid { grid-template-columns: repeat(2, 1fr); gap: 1rem 0.75rem; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .bkc__card, .bkc__product-img img, .bkc__filters-toggle svg { transition: none; }
   }
