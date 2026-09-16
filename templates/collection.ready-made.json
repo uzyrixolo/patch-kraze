@@ -70,6 +70,7 @@
         },
         "anime": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "collection": "anime-patches",
             "label": "Anime Patches"
@@ -77,6 +78,7 @@
         },
         "school": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "collection": "school-patches",
             "label": "School Patches"
