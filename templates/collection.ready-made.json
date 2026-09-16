@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "categories": {
@@ -7,7 +16,7 @@
           "type": "category",
           "settings": {
             "collection": "ready-made-patches",
-            "label": "All Patches"
+            "label": "Fashion Patches"
           }
         },
         "flag": {
@@ -82,7 +91,11 @@
         "heading": "Ready Made",
         "heading_highlight": "Patches",
         "subheading": "Pre-designed patches, ready to ship — no custom order needed.",
-        "limit": 100
+        "limit": 100,
+        "show_swatches": true,
+        "swatch_limit": 6,
+        "filter_swatch_limit": 24,
+        "enable_filters": true
       }
     }
   },
