@@ -70,10 +70,9 @@
         },
         "anime": {
           "type": "category",
-          "disabled": true,
           "settings": {
-            "collection": "anime-patches",
-            "label": "Anime Patches"
+            "collection": "flag-patches-copy",
+            "label": "Other Patches"
           }
         },
         "school": {
