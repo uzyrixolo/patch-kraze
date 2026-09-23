@@ -39,20 +39,21 @@
         --font-body--family: 'Inter', sans-serif !important;
         --font-heading--family: 'Inter', sans-serif !important;
 
-        /* Patch Kraze homepage type scale - consolidates ~30 ad-hoc
-           font-size values (scattered one-off rem numbers per section)
-           down to this shared set. Every step only ever equals or exceeds
-           the largest value it replaces, so nothing on the page renders
-           smaller than before - only more consistent. */
-        --pk-fs-hero: 2.6rem;          /* hero heading, desktop */
-        --pk-fs-hero-mobile: 1.9rem;   /* hero heading, mobile */
-        --pk-fs-heading: 2.25rem;      /* section headings (h2), desktop */
-        --pk-fs-heading-mobile: 1.875rem;/* section headings (h2), mobile */
-        --pk-fs-heading-sm: 1.5rem;    /* card/feature titles, rail labels, popup heading */
-        --pk-fs-subheading: 1.125rem;  /* subheadings / section intro text */
-        --pk-fs-body: 1rem;            /* body copy */
-        --pk-fs-label: 0.875rem;       /* labels, eyebrows, badges, meta */
-        --pk-fs-tiny: 0.65rem;         /* smallest utility text */
+        /* Patch Kraze homepage type scale. Every homepage section (except
+           the header and customer-gallery, deliberately kept on their own
+           sizes) reads its font sizes from these tokens, and every token
+           sits on one fixed scale: 12 / 14 / 16 / 20 / 24 / 32 / 40px.
+           Icon glyphs (emoji icons, close "x") are not text hierarchy and
+           keep their own sizes. */
+        --pk-fs-hero: 2.5rem;          /* 40px - hero heading, desktop */
+        --pk-fs-hero-mobile: 2rem;     /* 32px - hero heading, mobile */
+        --pk-fs-heading: 2rem;         /* 32px - section headings (h2), desktop */
+        --pk-fs-heading-mobile: 2rem;  /* 32px - section headings (h2), mobile */
+        --pk-fs-heading-sm: 1.5rem;    /* 24px - card/feature titles, rail labels, popup heading */
+        --pk-fs-subheading: 1.25rem;   /* 20px - subheadings, section intro text, item titles */
+        --pk-fs-body: 1rem;            /* 16px - body copy, buttons, nav links */
+        --pk-fs-label: 0.875rem;       /* 14px - labels, eyebrows, badges, captions, meta */
+        --pk-fs-tiny: 0.75rem;         /* 12px - smallest utility text */
 
         /* Patch Kraze homepage corner-radius scale - consolidates ~13 ad-hoc
            border-radius values (0.25rem to 1.4rem, plus 999px/9999px used
