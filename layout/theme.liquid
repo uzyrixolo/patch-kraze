@@ -55,6 +55,26 @@
         --pk-fs-label: 0.875rem;       /* 14px - labels, eyebrows, badges, captions, meta */
         --pk-fs-tiny: 0.75rem;         /* 12px - smallest utility text */
 
+        /* Patch Kraze homepage text colors. Same header/customer-gallery
+           exclusion as the type scale. Every value on a light surface
+           meets WCAG AA (4.5:1) on white. Merchant-picked colors (section
+           settings like accent_color/highlight_color) and icon colors are
+           not part of this set. */
+        --pk-text-primary: #111827;     /* headings, titles, key text */
+        --pk-text-secondary: #4b5563;   /* descriptions, body paragraphs, chips (7.6:1) */
+        --pk-text-muted: #6b7280;       /* meta, captions, counts, "no thanks" links (4.8:1) */
+        --pk-text-link: var(--pk-text-primary);
+        --pk-text-link-hover: var(--pk-text-brand);
+        --pk-text-brand: #047857;       /* green text on light surfaces: prices, highlights, eyebrows (5.5:1) */
+        --pk-text-inverse: #ffffff;     /* text on dark or colored backgrounds */
+        --pk-text-inverse-secondary: #d1d5db; /* supporting text on dark backgrounds */
+        --pk-text-inverse-muted: #9ca3af;     /* links/meta on dark backgrounds */
+        --pk-text-brand-inverse: #10b981;     /* brand green on dark backgrounds */
+        --pk-text-success: #047857;
+        --pk-text-warning: #b45309;
+        --pk-text-danger: #b91c1c;
+        --pk-text-rating: #f59e0b;      /* rating stars (decorative glyph) */
+
         /* Patch Kraze homepage corner-radius scale - consolidates ~13 ad-hoc
            border-radius values (0.25rem to 1.4rem, plus 999px/9999px used
            interchangeably for the same "fully round" intent) down to this

@@ -172,11 +172,11 @@
   #promo-popup-{{ section.id }} .promo-popup-close {
     position: absolute; top: 0.6rem; right: 0.6rem; z-index: 2;
     width: 2rem; height: 2rem; border-radius: 50%; border: none; cursor: pointer;
-    background: rgba(255,255,255,0.9); color: #374151; font-size: 1.35rem; line-height: 1;
+    background: rgba(255,255,255,0.9); color: var(--pk-text-secondary); font-size: 1.35rem; line-height: 1;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 1px 4px rgba(0,0,0,0.15);
   }
-  #promo-popup-{{ section.id }} .promo-popup-close:hover { background: #fff; color: #111827; }
+  #promo-popup-{{ section.id }} .promo-popup-close:hover { background: #fff; color: var(--pk-text-primary); }
   #promo-popup-{{ section.id }} .promo-popup-media {
     display: block; {% if pos == 'left' %}flex: 0 0 45%;{% endif %}
   }
@@ -199,19 +199,19 @@
     color: {{ section.settings.accent_color }}; margin-bottom: 0.5rem;
   }
   #promo-popup-{{ section.id }} .promo-popup-heading {
-    font-size: var(--pk-fs-heading-sm); font-weight: 800; line-height: 1.2; color: #111827; margin: 0 0 0.5rem;
+    font-size: var(--pk-fs-heading-sm); font-weight: 800; line-height: 1.2; color: var(--pk-text-primary); margin: 0 0 0.5rem;
   }
-  #promo-popup-{{ section.id }} .promo-popup-body { font-size: var(--pk-fs-body); color: #4b5563; margin-bottom: 1.25rem; }
+  #promo-popup-{{ section.id }} .promo-popup-body { font-size: var(--pk-fs-body); color: var(--pk-text-secondary); margin-bottom: 1.25rem; }
   #promo-popup-{{ section.id }} .promo-popup-body p { margin: 0; }
   #promo-popup-{{ section.id }} .promo-popup-btn {
-    display: inline-block; background: {{ section.settings.accent_color }}; color: #fff;
+    display: inline-block; background: {{ section.settings.accent_color }}; color: var(--pk-text-inverse);
     padding: 0.85rem 1.75rem; border-radius: var(--pk-radius-sm); font-weight: 700; font-size: var(--pk-fs-body);
     text-decoration: none; transition: filter .15s;
   }
   #promo-popup-{{ section.id }} .promo-popup-btn:hover { filter: brightness(0.93); }
   #promo-popup-{{ section.id }} .promo-popup-dismiss {
     display: block; margin-top: 0.85rem; background: none; border: none; cursor: pointer;
-    font-size: var(--pk-fs-label); color: #9ca3af; text-decoration: underline; width: 100%;
+    font-size: var(--pk-fs-label); color: var(--pk-text-muted); text-decoration: underline; width: 100%;
   }
   @media (max-width: 640px) {
     {% unless section.settings.show_on_mobile %}
