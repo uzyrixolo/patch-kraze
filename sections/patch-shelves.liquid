@@ -135,16 +135,12 @@
             endcase
           endif
         endfor
-        if best_count > 0
-          assign default_tab = 'best'
-        else
-          assign default_tab = 'all'
-        endif
       -%}
       {%- if section.settings.show_tabs -%}
-        <div class="patch-shelves__tabs" role="tablist" aria-label="{{ section.settings.heading | default: 'Patch types' | escape }}" data-ps-tabs data-ps-default="{{ default_tab }}">
+        <div class="patch-shelves__tabs" role="tablist" aria-label="{{ section.settings.heading | default: 'Patch types' | escape }}" data-ps-tabs data-ps-default="all">
+          <button type="button" class="patch-shelves__tab" role="tab" aria-selected="true" aria-controls="ps-track-{{ section.id }}" data-ps-filter="all">{{ section.settings.all_tab_label }} <span class="patch-shelves__tab-count">{{ total_count }}</span></button>
           {%- if best_count > 0 -%}
-            <button type="button" class="patch-shelves__tab" role="tab" aria-selected="true" aria-controls="ps-track-{{ section.id }}" data-ps-filter="best">{{ section.settings.best_tab_label }} <span class="patch-shelves__tab-count">{{ best_count }}</span></button>
+            <button type="button" class="patch-shelves__tab" role="tab" aria-selected="false" aria-controls="ps-track-{{ section.id }}" data-ps-filter="best">{{ section.settings.best_tab_label }} <span class="patch-shelves__tab-count">{{ best_count }}</span></button>
           {%- endif -%}
           {%- if emb_count > 0 -%}
             <button type="button" class="patch-shelves__tab" role="tab" aria-selected="false" aria-controls="ps-track-{{ section.id }}" data-ps-filter="embroidered">Embroidered &amp; Woven <span class="patch-shelves__tab-count">{{ emb_count }}</span></button>
@@ -158,7 +154,6 @@
           {%- if leather_count > 0 -%}
             <button type="button" class="patch-shelves__tab" role="tab" aria-selected="false" aria-controls="ps-track-{{ section.id }}" data-ps-filter="leather">Leather <span class="patch-shelves__tab-count">{{ leather_count }}</span></button>
           {%- endif -%}
-          <button type="button" class="patch-shelves__tab" role="tab" aria-selected="{% if best_count > 0 %}false{% else %}true{% endif %}" aria-controls="ps-track-{{ section.id }}" data-ps-filter="all">{{ section.settings.all_tab_label }} <span class="patch-shelves__tab-count">{{ total_count }}</span></button>
         </div>
       {%- else -%}
       <div class="patch-shelves__rail-head">
