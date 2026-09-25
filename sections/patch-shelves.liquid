@@ -1,6 +1,12 @@
 {% comment %}
   Ninja-style product card rail ("Best sellers"). Blocks pick products; the
   card auto-pulls image and from-price, with optional rating/review count.
+
+  Optional category tabs ("Show category tabs"): each card is tagged with a
+  group (matching the header mega-menu categories) and/or Best seller, and
+  the tab row filters the grid client-side. Every card is always rendered in
+  the HTML - without JS all cards simply show - and the "All" tab lists the
+  full set, so no product is ever unreachable.
 {% endcomment %}
 
 {% schema %}
@@ -13,7 +19,11 @@
     { "type": "url", "id": "view_all_link", "label": "View-all link" },
     { "type": "text", "id": "rail_label", "label": "Rail label", "default": "Best sellers" },
     { "type": "text", "id": "rail_sub", "label": "Rail subtext", "default": "Our most-ordered styles" },
-    { "type": "text", "id": "moq_text", "label": "Badge text", "default": "10 pc min" }
+    { "type": "text", "id": "moq_text", "label": "Badge text", "default": "10 pc min" },
+    { "type": "header", "content": "Category tabs" },
+    { "type": "checkbox", "id": "show_tabs", "label": "Show category tabs", "info": "Filters cards by each card's Group / Best seller setting. The rail label and subtext are replaced by the tab row.", "default": false },
+    { "type": "text", "id": "best_tab_label", "label": "Best sellers tab label", "default": "Best Sellers" },
+    { "type": "text", "id": "all_tab_label", "label": "All tab label", "default": "All Types" }
   ],
   "blocks": [
     {
@@ -23,7 +33,18 @@
         { "type": "product", "id": "product", "label": "Product" },
         { "type": "image_picker", "id": "image", "label": "Image override (optional)" },
         { "type": "text", "id": "rating", "label": "Star rating (e.g. 4.8, blank to hide)", "default": "4.8" },
-        { "type": "text", "id": "review_count", "label": "Review count (blank to hide)" }
+        { "type": "text", "id": "review_count", "label": "Review count (blank to hide)" },
+        {
+          "type": "select", "id": "group", "label": "Group (category tabs)", "default": "",
+          "options": [
+            { "value": "", "label": "None" },
+            { "value": "embroidered", "label": "Embroidered & Woven" },
+            { "value": "printed", "label": "Printed & Flex" },
+            { "value": "pvc", "label": "PVC & Rubber" },
+            { "value": "leather", "label": "Leather" }
+          ]
+        },
+        { "type": "checkbox", "id": "best_seller", "label": "Best seller", "default": false }
       ]
     }
   ],
@@ -61,9 +82,20 @@
   /* Whole-card hover swaps this to brand green (not the standard Dark-CTA
      hover darken) - a deliberate "this tile is active" cue, kept as-is. */
   .patch-shelves__tile:hover .patch-shelves__btn { background: var(--pk-btn-primary-bg); }
+  .patch-shelves__tabs { display: flex; gap: 0.5rem; margin: 0 0 1.25rem; padding: 0.15rem; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .patch-shelves__tabs::-webkit-scrollbar { display: none; }
+  .patch-shelves__tab { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1rem; border: 1px solid #d1d5db; border-radius: var(--pk-radius-pill); background: #fff; color: var(--pk-text-primary); font: inherit; font-size: var(--pk-fs-label); font-weight: 600; cursor: pointer; white-space: nowrap; transition: border-color var(--pk-btn-transition), background-color var(--pk-btn-transition), color var(--pk-btn-transition); }
+  .patch-shelves__tab:hover { border-color: var(--pk-text-primary); }
+  .patch-shelves__tab:focus-visible { outline: 2px solid var(--pk-btn-primary-bg); outline-offset: 2px; }
+  .patch-shelves__tab[aria-selected="true"] { background: var(--pk-btn-dark-bg); border-color: var(--pk-btn-dark-bg); color: var(--pk-btn-dark-fg); }
+  .patch-shelves__tab-count { font-weight: 500; color: var(--pk-text-muted); }
+  .patch-shelves__tab[aria-selected="true"] .patch-shelves__tab-count { color: var(--pk-text-inverse-secondary); }
+  .patch-shelves__item[hidden] { display: none; }
   @media (max-width: 899px) {
     .patch-shelves__track { grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
     .patch-shelves__heading { font-size: var(--pk-fs-heading-mobile); }
+    /* Tab row bleeds to the screen edge so it reads as swipeable. */
+    .patch-shelves__tabs { margin-left: -1.5rem; margin-right: -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
   }
 </style>
 
@@ -78,17 +110,69 @@
     </div>
     {%- endif -%}
     <div class="patch-shelves__rail">
+      {%- liquid
+        assign total_count = 0
+        assign best_count = 0
+        assign emb_count = 0
+        assign printed_count = 0
+        assign pvc_count = 0
+        assign leather_count = 0
+        for block in section.blocks
+          if block.settings.product != blank
+            assign total_count = total_count | plus: 1
+            if block.settings.best_seller
+              assign best_count = best_count | plus: 1
+            endif
+            case block.settings.group
+              when 'embroidered'
+                assign emb_count = emb_count | plus: 1
+              when 'printed'
+                assign printed_count = printed_count | plus: 1
+              when 'pvc'
+                assign pvc_count = pvc_count | plus: 1
+              when 'leather'
+                assign leather_count = leather_count | plus: 1
+            endcase
+          endif
+        endfor
+        if best_count > 0
+          assign default_tab = 'best'
+        else
+          assign default_tab = 'all'
+        endif
+      -%}
+      {%- if section.settings.show_tabs -%}
+        <div class="patch-shelves__tabs" role="tablist" aria-label="{{ section.settings.heading | default: 'Patch types' | escape }}" data-ps-tabs data-ps-default="{{ default_tab }}">
+          {%- if best_count > 0 -%}
+            <button type="button" class="patch-shelves__tab" role="tab" aria-selected="true" aria-controls="ps-track-{{ section.id }}" data-ps-filter="best">{{ section.settings.best_tab_label }} <span class="patch-shelves__tab-count">{{ best_count }}</span></button>
+          {%- endif -%}
+          {%- if emb_count > 0 -%}
+            <button type="button" class="patch-shelves__tab" role="tab" aria-selected="false" aria-controls="ps-track-{{ section.id }}" data-ps-filter="embroidered">Embroidered &amp; Woven <span class="patch-shelves__tab-count">{{ emb_count }}</span></button>
+          {%- endif -%}
+          {%- if printed_count > 0 -%}
+            <button type="button" class="patch-shelves__tab" role="tab" aria-selected="false" aria-controls="ps-track-{{ section.id }}" data-ps-filter="printed">Printed &amp; Flex <span class="patch-shelves__tab-count">{{ printed_count }}</span></button>
+          {%- endif -%}
+          {%- if pvc_count > 0 -%}
+            <button type="button" class="patch-shelves__tab" role="tab" aria-selected="false" aria-controls="ps-track-{{ section.id }}" data-ps-filter="pvc">PVC &amp; Rubber <span class="patch-shelves__tab-count">{{ pvc_count }}</span></button>
+          {%- endif -%}
+          {%- if leather_count > 0 -%}
+            <button type="button" class="patch-shelves__tab" role="tab" aria-selected="false" aria-controls="ps-track-{{ section.id }}" data-ps-filter="leather">Leather <span class="patch-shelves__tab-count">{{ leather_count }}</span></button>
+          {%- endif -%}
+          <button type="button" class="patch-shelves__tab" role="tab" aria-selected="{% if best_count > 0 %}false{% else %}true{% endif %}" aria-controls="ps-track-{{ section.id }}" data-ps-filter="all">{{ section.settings.all_tab_label }} <span class="patch-shelves__tab-count">{{ total_count }}</span></button>
+        </div>
+      {%- else -%}
       <div class="patch-shelves__rail-head">
         <h3 class="patch-shelves__rail-label">{{ section.settings.rail_label }}</h3>
         {%- if section.settings.rail_sub != blank -%}
           <p class="patch-shelves__rail-sub">{{ section.settings.rail_sub }}</p>
         {%- endif -%}
       </div>
-      <div class="patch-shelves__track">
+      {%- endif -%}
+      <div class="patch-shelves__track" id="ps-track-{{ section.id }}"{% if section.settings.show_tabs %} role="tabpanel"{% endif %}>
         {%- for block in section.blocks -%}
           {%- assign product = block.settings.product -%}
           {%- if product != blank -%}
-            <div class="patch-shelves__item" {{ block.shopify_attributes }}>
+            <div class="patch-shelves__item" data-ps-group="{{ block.settings.group }}" data-ps-best="{% if block.settings.best_seller %}1{% endif %}" {{ block.shopify_attributes }}>
               <a class="patch-shelves__tile" href="{{ product.url }}">
                 <div class="patch-shelves__media">
                   {%- assign card_image = block.settings.image | default: product.featured_image -%}
@@ -123,3 +207,35 @@
     </div>
   </div>
 </section>
+
+{%- if section.settings.show_tabs -%}
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+    var tabs = root.querySelectorAll('[data-ps-filter]');
+    var items = root.querySelectorAll('.patch-shelves__item');
+    function apply(filter) {
+      tabs.forEach(function (t) { t.setAttribute('aria-selected', t.dataset.psFilter === filter ? 'true' : 'false'); });
+      items.forEach(function (it) {
+        var show = filter === 'all' ||
+          (filter === 'best' ? it.dataset.psBest === '1' : it.dataset.psGroup === filter);
+        it.hidden = !show;
+      });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { apply(t.dataset.psFilter); });
+    });
+    var list = root.querySelector('[data-ps-tabs]');
+    list.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var arr = Array.prototype.slice.call(tabs);
+      var i = arr.indexOf(document.activeElement);
+      if (i < 0) return;
+      var next = arr[(i + (e.key === 'ArrowRight' ? 1 : arr.length - 1)) % arr.length];
+      next.focus(); next.click(); e.preventDefault();
+    });
+    apply(list.dataset.psDefault);
+  })();
+</script>
+{%- endif -%}

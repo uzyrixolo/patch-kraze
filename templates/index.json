@@ -70,7 +70,9 @@
           "settings": {
             "product": "embroidered-patches",
             "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "embroidered",
+            "best_seller": true
           }
         },
         "card_2": {
@@ -78,7 +80,9 @@
           "settings": {
             "product": "full-color-printed-patches",
             "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "printed",
+            "best_seller": true
           }
         },
         "card_3": {
@@ -86,7 +90,9 @@
           "settings": {
             "product": "pvc-patches",
             "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "pvc",
+            "best_seller": true
           }
         },
         "card_4": {
@@ -94,131 +100,139 @@
           "settings": {
             "product": "leather-patches",
             "rating": "4.8",
-            "review_count": ""
-          }
-        }
-      },
-      "block_order": [
-        "card_1",
-        "card_2",
-        "card_3",
-        "card_4"
-      ],
-      "settings": {
-        "heading": "Shop All Patch Types",
-        "columns": 4,
-        "view_all_label": "View all types",
-        "view_all_link": "",
-        "rail_label": "Best sellers",
-        "rail_sub": "Our most-ordered styles",
-        "moq_text": "10 pc min"
-      }
-    },
-    "patch_shelves_more": {
-      "type": "patch-shelves",
-      "blocks": {
-        "card_1": {
-          "type": "product_card",
-          "settings": {
-            "product": "3d-embroidered-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_2": {
-          "type": "product_card",
-          "settings": {
-            "product": "faux-leather-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_3": {
-          "type": "product_card",
-          "settings": {
-            "product": "woven-patches",
-            "rating": "4.8",
-            "review_count": ""
-          }
-        },
-        "card_4": {
-          "type": "product_card",
-          "settings": {
-            "product": "metallic-flex-patches",
-            "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "leather",
+            "best_seller": true
           }
         },
         "card_5": {
           "type": "product_card",
           "settings": {
-            "product": "full-color-flex-patches",
+            "product": "3d-embroidered-patches",
             "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "embroidered",
+            "best_seller": false
           }
         },
         "card_6": {
           "type": "product_card",
           "settings": {
-            "product": "silver-flex-patches",
+            "product": "faux-leather-patches",
             "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "leather",
+            "best_seller": false
           }
         },
         "card_7": {
           "type": "product_card",
           "settings": {
-            "product": "chenille-patches",
+            "product": "woven-patches",
             "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "embroidered",
+            "best_seller": false
           }
         },
         "card_8": {
           "type": "product_card",
           "settings": {
-            "product": "silicone-patches",
+            "product": "metallic-flex-patches",
             "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "printed",
+            "best_seller": false
           }
         },
         "card_9": {
           "type": "product_card",
           "settings": {
-            "product": "name-patches",
+            "product": "full-color-flex-patches",
             "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "printed",
+            "best_seller": false
           }
         },
         "card_10": {
           "type": "product_card",
           "settings": {
-            "product": "dtf-transfers",
+            "product": "silver-flex-patches",
             "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "printed",
+            "best_seller": false
           }
         },
         "card_11": {
           "type": "product_card",
           "settings": {
-            "product": "gold-flex-patches",
+            "product": "chenille-patches",
             "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "embroidered",
+            "best_seller": false
           }
         },
         "card_12": {
           "type": "product_card",
           "settings": {
-            "product": "tackle-twill-letters",
+            "product": "silicone-patches",
             "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "pvc",
+            "best_seller": false
           }
         },
         "card_13": {
           "type": "product_card",
           "settings": {
+            "product": "name-patches",
+            "rating": "4.8",
+            "review_count": "",
+            "group": "embroidered",
+            "best_seller": false
+          }
+        },
+        "card_14": {
+          "type": "product_card",
+          "settings": {
+            "product": "dtf-transfers",
+            "rating": "4.8",
+            "review_count": "",
+            "group": "printed",
+            "best_seller": false
+          }
+        },
+        "card_15": {
+          "type": "product_card",
+          "settings": {
+            "product": "gold-flex-patches",
+            "rating": "4.8",
+            "review_count": "",
+            "group": "printed",
+            "best_seller": false
+          }
+        },
+        "card_16": {
+          "type": "product_card",
+          "settings": {
+            "product": "tackle-twill-letters",
+            "rating": "4.8",
+            "review_count": "",
+            "group": "embroidered",
+            "best_seller": false
+          }
+        },
+        "card_17": {
+          "type": "product_card",
+          "settings": {
             "product": "custom-keychains",
             "rating": "4.8",
-            "review_count": ""
+            "review_count": "",
+            "group": "pvc",
+            "best_seller": false
           }
         }
       },
@@ -235,16 +249,23 @@
         "card_10",
         "card_11",
         "card_12",
-        "card_13"
+        "card_13",
+        "card_14",
+        "card_15",
+        "card_16",
+        "card_17"
       ],
       "settings": {
-        "heading": "",
-        "columns": 5,
-        "view_all_label": "",
+        "heading": "Shop All Patch Types",
+        "columns": 4,
+        "view_all_label": "View all types",
         "view_all_link": "",
-        "rail_label": "Explore more patch styles",
-        "rail_sub": "Faux leather, chenille, silicone, woven, flex & more",
-        "moq_text": "10 pc min"
+        "rail_label": "Best sellers",
+        "rail_sub": "Our most-ordered styles",
+        "moq_text": "10 pc min",
+        "show_tabs": true,
+        "best_tab_label": "Best Sellers",
+        "all_tab_label": "All Types"
       }
     },
     "shop_all_patches": {
@@ -794,7 +815,6 @@
     "patches_hero",
     "customer_gallery",
     "patch_shelves",
-    "patch_shelves_more",
     "shop_all_patches",
     "shop_popular_products",
     "credibility",
