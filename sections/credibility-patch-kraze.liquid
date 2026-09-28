@@ -32,36 +32,52 @@
   }
   .credibility-logos {
     display: flex;
+    width: max-content;
+    animation: credibility-scroll 40s linear infinite;
+  }
+  .credibility-logos__set {
+    display: flex;
     align-items: center;
     gap: 3rem;
-    width: max-content;
     padding-right: 3rem; /* keeps gap even at the loop seam */
-    animation: credibility-scroll 40s linear infinite;
   }
   .credibility-logos-marquee:hover .credibility-logos { animation-play-state: paused; }
   @keyframes credibility-scroll {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+  /* Each brand is a monochrome lockup: mark (Simple Icons SVG from
+     assets/brand-*.svg) + name. Brands with no available mark render the
+     name alone in the same style. One shared opacity keeps every logo the
+     same gray (~4.7:1 on white) and the hover still brings it to full ink. */
   .brand-logo {
-    height: 2.5rem; /* h-10 */
-    width: auto;
-    object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.6;
-    transition: filter 0.3s ease, opacity 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 2.5rem;
     flex-shrink: 0;
+    opacity: 0.55;
+    transition: opacity 0.3s ease;
   }
-  .brand-logo:hover {
-    filter: grayscale(0%);
-    opacity: 1;
+  .brand-logo:hover { opacity: 1; }
+  .brand-logo__mark { height: 1.75rem; width: 1.75rem; display: block; }
+  .brand-logo__name {
+    font-size: var(--pk-fs-subheading);
+    font-weight: 700;
+    color: var(--pk-text-primary);
+    white-space: nowrap;
+    letter-spacing: -0.01em;
   }
   @media (max-width: 640px) {
-    .credibility-logos { gap: 2rem; padding-right: 2rem; }
-    .brand-logo { height: 2rem; }
+    .credibility-logos__set { gap: 2rem; padding-right: 2rem; }
+    .brand-logo { height: 2rem; gap: 0.4rem; }
+    .brand-logo__mark { height: 1.5rem; width: 1.5rem; }
+    .brand-logo__name { font-size: var(--pk-fs-body); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .credibility-logos { animation: none; flex-wrap: wrap; justify-content: center; width: auto; }
+    .credibility-logos { animation: none; width: auto; justify-content: center; }
+    .credibility-logos__set { flex-wrap: wrap; justify-content: center; row-gap: 1rem; padding-right: 0; }
+    .credibility-logos__set[aria-hidden="true"] { display: none; }
   }
 
   /* Headline */
@@ -120,28 +136,28 @@
   <div class="credibility-container">
     
     <!-- Brand Logos: infinite marquee (logo set rendered twice for a seamless loop) -->
+    {%- comment -%}
+      handle:Name pairs. A handle with a matching assets/brand-<handle>.svg
+      gets its mark; amazon/pepsi/linkedin have no mark available (removed
+      from Simple Icons at the brands' request), so they show the name only.
+    {%- endcomment -%}
+    {%- assign brand_list = 'apple:Apple|google:Google|amazon:Amazon|nike:Nike|pepsi:Pepsi|spotify:Spotify|tesla:Tesla|north-face:The North Face|linkedin:LinkedIn|mcdonalds:McDonald’s|honda:Honda|kfc:KFC|shopify:Shopify|adidas:Adidas|tiktok:TikTok|youtube:YouTube' | split: '|' -%}
+    {%- assign no_mark = 'amazon,pepsi,linkedin' | split: ',' -%}
     {%- capture brand_logos -%}
-      <img src="https://masterscustompatches.com/images/brands/apple.png" alt="Apple" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/google.png" alt="Google" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/amazon.png" alt="Amazon" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/nike.png" alt="Nike" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/pepsi.png" alt="Pepsi" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/spotify.png" alt="Spotify" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/tesla.png" alt="Tesla" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/north-face.png" alt="The North Face" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/linkedin.png" alt="LinkedIn" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/mcdonalds.png" alt="McDonald's" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/honda.png" alt="Honda" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/kfc.png" alt="KFC" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/shopify.png" alt="Shopify" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/adidas.png" alt="Adidas" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/tiktok.png" alt="TikTok" class="brand-logo" loading="lazy">
-      <img src="https://masterscustompatches.com/images/brands/youtube.png" alt="YouTube" class="brand-logo" loading="lazy">
+      {%- for pair in brand_list -%}
+        {%- assign parts = pair | split: ':' -%}
+        <span class="brand-logo" role="listitem">
+          {%- unless no_mark contains parts[0] -%}
+            <img class="brand-logo__mark" src="{{ 'brand-' | append: parts[0] | append: '.svg' | asset_url }}" alt="" width="28" height="28" decoding="async">
+          {%- endunless -%}
+          <span class="brand-logo__name">{{ parts[1] }}</span>
+        </span>
+      {%- endfor -%}
     {%- endcapture -%}
     <div class="credibility-logos-marquee">
       <div class="credibility-logos">
-        {{ brand_logos }}
-        {{ brand_logos }}
+        <div class="credibility-logos__set" role="list" aria-label="Brands that trust Patch Kraze">{{ brand_logos }}</div>
+        <div class="credibility-logos__set" aria-hidden="true">{{ brand_logos }}</div>
       </div>
     </div>
 

@@ -19,6 +19,7 @@
       "type": "color",
       "id": "highlight_color",
       "label": "Highlight Color",
+      "info": "No longer applied - the whole heading uses the standard heading color so it matches the other homepage section headings.",
       "default": "#eb1d25"
     },
     {
@@ -113,7 +114,8 @@
     <h2 class="vc-pk-heading">
       {%- if section.settings.heading_prefix != blank -%}<span>{{ section.settings.heading_prefix }}</span>{%- endif -%}
       {%- if section.settings.heading_highlight != blank -%}
-        <span class="vc-pk-highlight" style="color:{{ section.settings.highlight_color }};">{{ section.settings.heading_highlight }}</span>
+        {%- if section.settings.heading_prefix != blank -%}{{ ' ' }}{%- endif -%}
+        <span class="vc-pk-highlight">{{ section.settings.heading_highlight }}</span>
       {%- endif -%}
     </h2>
   {%- endif -%}
@@ -168,7 +170,6 @@
     padding: 0 1rem;
   }
   .vc-pk-{{ uid }} .vc-pk-heading span { display: inline; }
-  .vc-pk-{{ uid }} .vc-pk-highlight { font-weight: 700; }
   @media (min-width: 768px) {
     .vc-pk-{{ uid }} .vc-pk-heading { font-size: var(--pk-fs-heading); }
   }
