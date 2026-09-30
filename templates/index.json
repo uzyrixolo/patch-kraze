@@ -804,7 +804,7 @@
         "delay": 5,
         "frequency": "session",
         "show_on_mobile": true,
-        "accent_color": "#10b981",
+        "accent_color": "#a855f7",
         "overlay_opacity": 60,
         "corner_radius": 16
       }

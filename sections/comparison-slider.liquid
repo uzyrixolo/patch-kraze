@@ -62,7 +62,7 @@
       "type": "color",
       "id": "label_color",
       "label": "Label Background Color",
-      "default": "#10b981"
+      "default": "#a855f7"
     }
   ],
   "presets": [
@@ -126,10 +126,10 @@
 
         <!-- Labels -->
         {%- if section.settings.before_label != blank -%}
-          <div class="label-badge label-left" style="background-color: {{ section.settings.label_color | default: '#10b981' }};">{{ section.settings.before_label }}</div>
+          <div class="label-badge label-left" style="background-color: {{ section.settings.label_color | default: '#a855f7' }};">{{ section.settings.before_label }}</div>
         {%- endif -%}
         {%- if section.settings.after_label != blank -%}
-          <div class="label-badge label-right" style="background-color: {{ section.settings.label_color | default: '#10b981' }};">{{ section.settings.after_label }}</div>
+          <div class="label-badge label-right" style="background-color: {{ section.settings.label_color | default: '#a855f7' }};">{{ section.settings.after_label }}</div>
         {%- endif -%}
 
       </div>

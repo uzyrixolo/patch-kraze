@@ -78,7 +78,7 @@
 
   .thumbnails-row { display: flex; gap: 0.75rem; overflow-x: auto; padding-bottom: 0.5rem; max-width: 100%; }
   .thumbnail-btn { flex-shrink: 0; width: 5.5rem; height: 5.5rem; border-radius: 0.75rem; overflow: hidden; border: 2px solid transparent; cursor: pointer; opacity: 0.8; transition: all 0.2s; background: #f3f4f6; padding:0; position: relative; }
-  .thumbnail-btn.active { border-color: #10b981; opacity: 1; box-shadow: 0 0 0 2px #d1fae5; }
+  .thumbnail-btn.active { border-color: #a855f7; opacity: 1; box-shadow: 0 0 0 2px #f3e8ff; }
   .thumbnail-btn img { width: 100%; height: 100%; object-fit: cover; }
   .thumbnail-play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.6); color: #fff; border-radius: 50%; width: 1.5rem; height: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; pointer-events: none; }
 
@@ -97,7 +97,7 @@
   .thermal-tape { font-weight: 600; font-size: 0.95rem; color: #111827; display: flex; align-items: center; gap: 0.5rem; }
 
   .feature-bar { display: flex; height: 2rem; align-items: center; gap: 1rem; font-size: 0.85rem; color: #374151; margin-top: 0.5rem; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; padding: 1.5rem 0; width: 100%; }
-  .feature-green { color: #059669; font-weight: 600; }
+  .feature-green { color: #9333ea; font-weight: 600; }
 
   /* UPLOAD SECTION (Green Box) */
   .upload-box-wrapper {
@@ -107,17 +107,17 @@
     border-radius: 1.5rem;
     padding: 1.5rem 1.5rem;
     text-align: center;
-    background-color: #ecfdf5; /* Light mint bg */
+    background-color: #faf5ff; /* Light mint bg */
     cursor: pointer;
     position: relative;
     transition: all 0.2s;
   }
-  .upload-box-wrapper:hover { background-color: #d1fae5; border-color: #10b981; }
+  .upload-box-wrapper:hover { background-color: #f3e8ff; border-color: #a855f7; }
   .native-file-input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 50; }
 
   .upload-cloud-icon {
     width: 3rem; height: 3rem;
-    background: #34d399; /* Green cloud */
+    background: #c084fc; /* Green cloud */
     color: white; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     margin: 0 auto 1rem;
@@ -128,7 +128,7 @@
   .upload-subtitle { color: #4b5563; margin-bottom: 1rem; font-size: 0.9rem; }
 
   .btn-green-browse {
-    background-color: #10b981; color: white; border: none; padding: 0.75rem 2rem; border-radius: 0.5rem; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3); transition: background 0.2s;
+    background-color: #a855f7; color: white; border: none; padding: 0.75rem 2rem; border-radius: 0.5rem; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3); transition: background 0.2s;
   }
 
   /* CUSTOMIZE SECTION */
@@ -188,7 +188,7 @@
     position: relative; width: 2.25rem; height: 1.25rem; border-radius: 999px; background: #d1d5db;
     transition: background 0.15s; flex-shrink: 0;
   }
-  .pk-toggle.on { background: #10b981; }
+  .pk-toggle.on { background: #a855f7; }
   .pk-toggle-knob {
     position: absolute; top: 0.15rem; left: 0.15rem; width: 0.95rem; height: 0.95rem;
     background: #fff; border-radius: 50%; transition: transform 0.15s; box-shadow: 0 1px 2px rgba(0,0,0,0.2);
@@ -266,9 +266,9 @@
   .pricing-header span:last-child, .pricing-row__cols span:last-child { text-align: right; }
   .pricing-row { display: flex; flex-direction: column; gap: 0.3rem; padding: 0.6rem 0.85rem; border-bottom: 1px solid #f3f4f6; font-size: 0.85rem; color: #4b5563; }
   .pricing-row:last-child { border-bottom: none; }
-  .pricing-row.active { background-color: #ecfdf5; color: #065f46; font-weight: 600; }
+  .pricing-row.active { background-color: #faf5ff; color: #065f46; font-weight: 600; }
   .pricing-row__cols { display: grid; grid-template-columns: 1fr 1fr 1fr; }
-  .pricing-row__msg { display: none; font-size: 0.78rem; font-weight: 600; color: #065f46; background: #d1fae5; border-radius: 0.375rem; padding: 0.4rem 0.6rem; }
+  .pricing-row__msg { display: none; font-size: 0.78rem; font-weight: 600; color: #065f46; background: #f3e8ff; border-radius: 0.375rem; padding: 0.4rem 0.6rem; }
   .pricing-row__msg.show { display: block; }
   .pricing-row__msg b { font-weight: 800; }
 
@@ -285,13 +285,13 @@
   .pk-notes-accordion__chevron { width: 1.1rem; height: 1.1rem; margin-left: auto; color: #6b7280; transition: transform 0.15s; flex-shrink: 0; }
   .pk-notes-accordion__header[aria-expanded="true"] .pk-notes-accordion__chevron { transform: rotate(180deg); }
   #design-notes-container { padding: 0 1rem 1rem; }
-  .buy-more-label { color: #10b981; font-weight: 700; margin-bottom: 0.5rem; display: block; font-size: 0.9rem; text-transform: uppercase; }
+  .buy-more-label { color: #a855f7; font-weight: 700; margin-bottom: 0.5rem; display: block; font-size: 0.9rem; text-transform: uppercase; }
 
   /* Controls */
   .control-group { margin-bottom: 1.5rem; }
   .control-label { display: block; font-weight: 700; margin-bottom: 0.75rem; color: #111827; font-size: 0.95rem; }
   .text-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem; background: #fff; }
-  .text-input:focus { border-color: #10b981; outline: none; ring: 2px solid #d1fae5; }
+  .text-input:focus { border-color: #a855f7; outline: none; ring: 2px solid #f3e8ff; }
   .pk-color-field { display: flex; align-items: center; gap: 0.6rem; }
   .pk-color-swatch {
     width: 2.75rem; height: 2.5rem; padding: 0.15rem; border: 1px solid #d1d5db; border-radius: 0.5rem;
@@ -303,21 +303,21 @@
   .pk-cswatch-grid { display: flex; flex-wrap: wrap; gap: 1rem 0.6rem; margin-top: 0.25rem; }
   .pk-cswatch-item { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; width: 3.4rem; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; }
   .pk-cswatch-dot { position: relative; width: 2.15rem; height: 2.15rem; border-radius: 0.4rem; border: 1px solid rgba(17, 24, 39, 0.15); }
-  .pk-cswatch-item.selected .pk-cswatch-dot { outline: 2px solid #10b981; outline-offset: 2px; }
-  .pk-cswatch-custom { background: conic-gradient(from 180deg, #f87171, #fbbf24, #34d399, #60a5fa, #a78bfa, #f87171); }
+  .pk-cswatch-item.selected .pk-cswatch-dot { outline: 2px solid #a855f7; outline-offset: 2px; }
+  .pk-cswatch-custom { background: conic-gradient(from 180deg, #f87171, #fbbf24, #c084fc, #60a5fa, #a78bfa, #f87171); }
   .pk-cswatch-check {
     display: none; position: absolute; top: -0.4rem; right: -0.4rem; width: 1.05rem; height: 1.05rem;
-    border-radius: 50%; background: #10b981; color: #fff; font-size: 0.6rem; line-height: 1;
+    border-radius: 50%; background: #a855f7; color: #fff; font-size: 0.6rem; line-height: 1;
     align-items: center; justify-content: center; border: 2px solid #fff;
   }
   .pk-cswatch-item.selected .pk-cswatch-check { display: flex; }
   .pk-cswatch-label { font-size: 0.68rem; color: #4b5563; text-align: center; line-height: 1.15; }
   .pk-match-artwork-btn {
-    display: inline-flex; align-items: center; gap: 0.5rem; background: #10b981; color: #fff;
+    display: inline-flex; align-items: center; gap: 0.5rem; background: #a855f7; color: #fff;
     border: none; border-radius: 999px; padding: 0.55rem 1.1rem; font-size: 0.85rem; font-weight: 700;
     cursor: pointer; margin-bottom: 0.85rem; font-family: inherit;
   }
-  .pk-match-artwork-btn:hover { background: #059669; }
+  .pk-match-artwork-btn:hover { background: #9333ea; }
   .pk-artwork-colors { display: flex; flex-wrap: wrap; gap: 1rem 0.6rem; margin-bottom: 0.5rem; }
   .pk-artwork-colors-empty { font-size: 0.8rem; color: #9ca3af; margin-bottom: 0.85rem; }
   .pk-cswatch-subheading { font-size: 0.72rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 0.6rem; }
@@ -381,8 +381,8 @@
     transition: all 0.2s;
     background: #fff;
   }
-  .shape-card:hover { border-color: #10b981; }
-  .shape-card.selected { border-color: #10b981; box-shadow: 0 0 0 2px #10b981; }
+  .shape-card:hover { border-color: #a855f7; }
+  .shape-card.selected { border-color: #a855f7; box-shadow: 0 0 0 2px #a855f7; }
   .shape-image {
     width: 100%;
     height: 85px;
@@ -416,10 +416,10 @@
     background: #fff;
     padding-bottom: 0.75rem;
   }
-  .backing-card:hover { border-color: #10b981; }
+  .backing-card:hover { border-color: #a855f7; }
   .backing-card.selected {
-    border-color: #10b981;
-    box-shadow: 0 0 0 2px #10b981 inset;
+    border-color: #a855f7;
+    box-shadow: 0 0 0 2px #a855f7 inset;
     font-weight: 700; color: #064e3b;
   }
   .backing-preview {
@@ -457,7 +457,7 @@
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .stepper-control:focus-within { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
+  .stepper-control:focus-within { border-color: #a855f7; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
   .stepper-btn {
     width: 3.5rem; height: 100%; border: none; background: #f9fafb;
     cursor: pointer; font-size: 1.25rem; color: #6b7280;
@@ -476,7 +476,7 @@
   .size-display-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 1.5rem; margin-bottom: 1.5rem; font-size: 1.1rem; font-weight: 700; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 1.5rem; }
   .size-formula { color: #6b7280; font-weight: 600; }
   .size-formula:empty { display: none; }
-  .size-value-green { color: #10b981; margin-left: 0.25rem; }
+  .size-value-green { color: #a855f7; margin-left: 0.25rem; }
 
   .tooltip-container { position: relative; display: inline-flex; cursor: pointer; }
   .info-icon { width: 1.25rem; height: 1.25rem; color: #1f2937; background: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
@@ -494,7 +494,7 @@
   /* Checkout Button */
   .checkout-btn {
     width: 100%;
-    background-color: #10b981;
+    background-color: #a855f7;
     color: white;
     border: none;
     padding: 1rem;
@@ -509,7 +509,7 @@
     margin-top: 1rem;
   }
   .checkout-btn:hover {
-    background-color: #059669;
+    background-color: #9333ea;
     transform: translateY(-2px);
     box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.5);
   }
@@ -627,7 +627,7 @@
           </div>
           <div class="upload-title">Upload your file(s) to get started</div>
           <button type="button" class="btn-green-browse">Browse</button>
-          <div style="margin-top:0.5rem; font-size:0.8rem; color:#6b7280;">or <a href="#" onclick="skipUpload(); return false;" style="color:#10b981; font-weight:600; text-decoration:underline;">skip & get a quote without a design</a></div>
+          <div style="margin-top:0.5rem; font-size:0.8rem; color:#6b7280;">or <a href="#" onclick="skipUpload(); return false;" style="color:#a855f7; font-weight:600; text-decoration:underline;">skip & get a quote without a design</a></div>
         </div>
 
         <!-- STAGE 2: CUSTOMIZE -->
@@ -690,7 +690,7 @@
             <div class="pk-ai-note" id="pk-ai-note"></div>
 
             <div style="text-align:center; margin-top:0.6rem;">
-              <a href="#" style="font-size:0.8rem; color:#059669; font-weight:600; text-decoration:underline;" onclick="resetUpload(); return false;">Upload a different file</a>
+              <a href="#" style="font-size:0.8rem; color:#9333ea; font-weight:600; text-decoration:underline;" onclick="resetUpload(); return false;">Upload a different file</a>
             </div>
           </div>
 
@@ -711,7 +711,7 @@
           <div style="margin-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 1.5rem;">
              <div class="flex justify-between items-center mb-2">
                 <span id="size-selector-label" style="font-weight: 700; font-size: 1rem;">Select Your Patch Size:</span>
-                <button type="button" onclick="openSizeGuide()" style="background:none; border:none; cursor:pointer; color: #10b981; font-size: 0.9rem; text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
+                <button type="button" onclick="openSizeGuide()" style="background:none; border:none; cursor:pointer; color: #a855f7; font-size: 0.9rem; text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
                   <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
                   <span id="size-guide-label">Patch Size Guide</span>
                 </button>
@@ -760,8 +760,8 @@
                <span>Size Guide</span>
              </button>
              <style>
-               .pk-size-chart-trigger { display: flex; align-items: center; justify-content: center; gap: 0.35rem; width: 100%; margin-top: 0.75rem; padding: 0.55rem; background: none; border: 1px dashed #d1d5db; border-radius: 0.5rem; color: #059669; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
-               .pk-size-chart-trigger:hover, .pk-size-chart-trigger:focus-visible { background: #ecfdf5; border-color: #a7f3d0; }
+               .pk-size-chart-trigger { display: flex; align-items: center; justify-content: center; gap: 0.35rem; width: 100%; margin-top: 0.75rem; padding: 0.55rem; background: none; border: 1px dashed #d1d5db; border-radius: 0.5rem; color: #9333ea; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+               .pk-size-chart-trigger:hover, .pk-size-chart-trigger:focus-visible { background: #faf5ff; border-color: #e9d5ff; }
                .pk-size-chart-trigger span { text-decoration: underline; text-underline-offset: 2px; }
              </style>
           </div>
@@ -775,7 +775,7 @@
           </div>
 
           <div id="artwork-dpi-warning" style="display:none; align-items:flex-start; gap:0.5rem; background:#fef3c7; border:1px solid #fcd34d; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:0.75rem; font-size:0.875rem; color:#92400e; line-height:1.4;"></div>
-          <div id="artwork-size-note" style="display:none; align-items:flex-start; gap:0.5rem; background:#ecfdf5; border:1px solid #a7f3d0; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:0.75rem; font-size:0.875rem; color:#065f46; line-height:1.4;">
+          <div id="artwork-size-note" style="display:none; align-items:flex-start; gap:0.5rem; background:#faf5ff; border:1px solid #e9d5ff; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:0.75rem; font-size:0.875rem; color:#065f46; line-height:1.4;">
             <span style="flex-shrink:0; font-size:1rem; line-height:1;">📐</span>
             <span><strong id="artwork-size-text">Sized to your artwork.</strong> <span id="artwork-size-detail"></span>
               <a href="#" id="artwork-size-unlock" style="color:#047857; font-weight:600; text-decoration:underline;">Set width &amp; height separately</a></span>
@@ -960,12 +960,12 @@
           <div style="margin-top:1.5rem; margin-bottom:1.5rem; padding:1rem; background:#f9fafb; border-radius:0.75rem; border:1px solid #e5e7eb;">
             <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; font-size:0.95rem; line-height:1.5; color:#374151;">
               <input type="checkbox" name="properties[Mockup Request]" id="mockup-request-checkbox" style="width:1.2rem; height:1.2rem; margin-top:0.15rem; flex-shrink:0;">
-              <span>Would you like to see a mockup before production? <strong style="color:#10b981;">Please note:</strong> It takes 24-48 hours.</span>
+              <span>Would you like to see a mockup before production? <strong style="color:#a855f7;">Please note:</strong> It takes 24-48 hours.</span>
             </label>
           </div>
 
           <div style="text-align:center; margin-bottom:1.5rem;">
-            <a href="/pages/quote" style="color:#10b981; font-weight:600; font-size:1rem; text-decoration:underline;">
+            <a href="/pages/quote" style="color:#a855f7; font-weight:600; font-size:1rem; text-decoration:underline;">
               Still confused? Get a free quote!
             </a>
           </div>
@@ -998,7 +998,7 @@
                 <option value="Design mockup">I want a design mockup (24-48 hrs)</option>
                 <option value="Quote + mockup" selected>Both — quote and mockup</option>
               </select>
-              <div id="qm-file-note" style="font-size:0.8rem; color:#059669; display:none;">✓ Your uploaded design file will be included</div>
+              <div id="qm-file-note" style="font-size:0.8rem; color:#9333ea; display:none;">✓ Your uploaded design file will be included</div>
               <div id="qm-error" style="font-size:0.85rem; color:#ef4444; display:none;"></div>
               <button type="button" id="qm-submit" class="checkout-btn" style="margin-top:0.25rem;" onclick="submitQuoteModal()">Send My Request</button>
             </div>
@@ -1018,15 +1018,15 @@
           margin-top: 0.75rem;
           padding: 0.9rem 1rem;
           background: #fff;
-          color: #10b981;
-          border: 2px solid #10b981;
+          color: #a855f7;
+          border: 2px solid #a855f7;
           border-radius: 0.75rem;
           font-weight: 700;
           font-size: 1rem;
           cursor: pointer;
           transition: background 0.15s, color 0.15s;
         }
-        .mockup-quote-btn:hover { background: #ecfdf5; }
+        .mockup-quote-btn:hover { background: #faf5ff; }
         .quote-modal-overlay {
           display: none;
           position: fixed;
