@@ -1,117 +1,132 @@
+{% comment %}
+  "Key facts" panel on the homepage: a short heading and up to four facts,
+  each a large figure with a label and one line of explanation.
+
+  Facts are blocks. A fact's figure is either typed ("10", "3") or, when a
+  product is picked, that product's lowest price read live from the store, so
+  a price never has to be typed here and cannot go out of date.
+
+  Only put things in this panel that the store can show to be true: an order
+  minimum, a size range, a number of options, a live price. No rankings
+  ("#1"), no "best", no customer counts.
+{% endcomment %}
+
 {% schema %}
 {
-  "name": "Credibility (Patch Kraze)",
+  "name": "Key Facts (Patch Kraze)",
   "class": "section-credibility-patch-kraze",
-  "settings": [],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small label above the heading", "default": "Why order here", "info": "Leave empty to hide." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Made to Your Spec, Priced Up Front" },
+    { "type": "textarea", "id": "subheading", "label": "Text under the heading", "default": "You choose the size, shape and backing, and the price is on the page before you order." },
+    {
+      "type": "select", "id": "tone", "label": "Panel color", "default": "purple",
+      "options": [
+        { "value": "purple", "label": "Purple with white text" },
+        { "value": "dark", "label": "Near-black with white text" },
+        { "value": "light", "label": "Light lavender with dark text" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Fact",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Figure", "default": "3", "info": "Keep it to a few characters: a number, a size, a price." },
+        { "type": "product", "id": "product", "label": "Or show a product's lowest price", "info": "When a product is picked, its lowest per-piece price is shown instead of the figure above and stays up to date by itself." },
+        { "type": "text", "id": "label", "label": "Label", "default": "ways to attach" },
+        { "type": "textarea", "id": "text", "label": "One line of explanation" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
   "presets": [
     {
-      "name": "Credibility (Patch Kraze)"
+      "name": "Key Facts (Patch Kraze)",
+      "blocks": [
+        { "type": "fact", "settings": { "value": "16\"", "label": "largest patch size", "text": "Embroidered patches run from 1 to 16 inches, in any shape." } },
+        { "type": "fact", "settings": { "value": "3", "label": "ways to attach", "text": "Iron-on, Velcro or peel-off adhesive backing." } },
+        { "type": "fact", "settings": { "value": "24–48h", "label": "to see a free mockup", "text": "Tick the mockup box when you order and approve it before production." } }
+      ]
     }
   ]
 }
 {% endschema %}
 
 <style>
-  .credibility-section {
-    width: 100%;
-    background-color: #fff;
-    padding: 2.5rem 0 5rem;
-  }
-  .credibility-container {
-    max-width: 1152px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-  
-  /* Headline */
-  .credibility-header {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-  .credibility-title {
-    font-size: var(--pk-fs-heading);
-    font-weight: 700;
-    color: var(--pk-text-primary);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-  .credibility-subtitle {
-    font-size: var(--pk-fs-subheading);
-    color: var(--pk-text-secondary);
-    max-width: 48rem;
-    margin: 0 auto;
-  }
+  .pk-cr { background: #fff; padding: 3.5rem 0; }
+  .pk-cr__inner { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
-  /* Features */
-  .credibility-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  @media (min-width: 768px) {
-    .credibility-grid { grid-template-columns: repeat(3, 1fr); }
-  }
+  /* One panel in one of three tones; everything inside reads its colors from
+     the tone's variables. */
+  .pk-cr--purple { --cr-bg: linear-gradient(135deg, #4c1d95 0%, #7e22ce 55%, #9333ea 100%); --cr-fg: #fff; --cr-soft: #ede9fe; --cr-accent: #e9d5ff; --cr-tile: rgba(255, 255, 255, 0.1); --cr-line: rgba(255, 255, 255, 0.22); --cr-glow: rgba(255, 255, 255, 0.16); }
+  .pk-cr--dark { --cr-bg: #111827; --cr-fg: #fff; --cr-soft: #d1d5db; --cr-accent: #d8b4fe; --cr-tile: rgba(255, 255, 255, 0.06); --cr-line: rgba(255, 255, 255, 0.14); --cr-glow: rgba(168, 85, 247, 0.35); }
+  .pk-cr--light { --cr-bg: #f3e8ff; --cr-fg: #111827; --cr-soft: #4b5563; --cr-accent: #7e22ce; --cr-tile: #fff; --cr-line: #e9d5ff; --cr-glow: rgba(255, 255, 255, 0.7); }
 
-  .credibility-feature {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .feature-icon {
-    font-size: 3rem; /* 5xl */
-    margin-bottom: 1.5rem;
-  }
-  .feature-title {
-    font-size: var(--pk-fs-heading-sm);
-    font-weight: 700;
-    color: var(--pk-text-primary);
-    margin-bottom: 0.75rem;
-  }
-  .feature-desc {
-    color: var(--pk-text-secondary);
-    font-size: var(--pk-fs-label);
-    line-height: 1.625;
+  .pk-cr__panel { position: relative; overflow: hidden; padding: 2.75rem 2.5rem; border-radius: var(--pk-radius-lg); background: var(--cr-bg); color: var(--cr-fg); }
+  .pk-cr__panel::after { content: ""; position: absolute; right: -7rem; top: -9rem; width: 24rem; height: 24rem; border-radius: 50%; background: radial-gradient(circle, var(--cr-glow) 0%, rgba(255, 255, 255, 0) 70%); pointer-events: none; }
+  .pk-cr__intro, .pk-cr__facts { position: relative; z-index: 1; }
+  .pk-cr__eyebrow { margin: 0 0 0.6rem; font-size: var(--pk-fs-label); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cr-accent); }
+  .pk-cr__heading { margin: 0 0 0.7rem; max-width: 40rem; font-size: var(--pk-fs-heading); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; color: var(--cr-fg); }
+  .pk-cr__sub { margin: 0; max-width: 38rem; font-size: var(--pk-fs-body); line-height: 1.55; color: var(--cr-soft); }
+
+  .pk-cr__facts { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1rem; }
+  .pk-cr__fact { min-width: 0; padding: 1.3rem 1.25rem 1.35rem; border-radius: var(--pk-radius-md); background: var(--cr-tile); border: 1px solid var(--cr-line); }
+  .pk-cr__value { margin: 0; font-size: 2.75rem; font-weight: 800; line-height: 1; letter-spacing: -0.02em; color: var(--cr-fg); }
+  .pk-cr__label { margin: 0.6rem 0 0.35rem; font-size: var(--pk-fs-body); font-weight: 700; line-height: 1.3; color: var(--cr-fg); }
+  .pk-cr__text { margin: 0; font-size: var(--pk-fs-label); line-height: 1.5; color: var(--cr-soft); }
+
+  @media (max-width: 749px) {
+    .pk-cr { padding: 2.25rem 0; }
+    .pk-cr__inner { padding: 0 1rem; }
+    .pk-cr__panel { padding: 1.75rem 1.25rem 1.5rem; }
+    .pk-cr__heading { font-size: var(--pk-fs-heading-sm); }
+    /* Facts become one row that is swiped sideways, bleeding to the panel's
+       edges so the next card shows there is more. */
+    .pk-cr__facts { display: flex; gap: 0.75rem; margin: 1.5rem -1.25rem 0; padding: 0 1.25rem 0.25rem; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding: 0 1.25rem; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .pk-cr__facts::-webkit-scrollbar { display: none; }
+    .pk-cr__fact { flex: 0 0 70%; max-width: 16rem; scroll-snap-align: start; }
+    .pk-cr__value { font-size: 2.4rem; }
   }
 </style>
 
-<div class="credibility-section">
-  <div class="credibility-container">
-    
-    <!-- Headline and Subtitle -->
-    <div class="credibility-header">
-      <h2 class="credibility-title">
-        #1 Site In The USA To Order Personalized Embroidery Patches
-      </h2>
-      <p class="credibility-subtitle">
-        Out of so many reasons, let's focus on the top three ones why we are the best team to customize embroidered patches for you.
-      </p>
-    </div>
-
-    <!-- Features Grid -->
-    <div class="credibility-grid">
-      
-      <!-- Feature 1 -->
-      <div class="credibility-feature">
-        <div class="feature-icon">⭐</div>
-        <h3 class="feature-title">Durable by Design</h3>
-        <p class="feature-desc">Each patch is finished with materials chosen to survive the wash, the weather, and everyday wear without fading or fraying.</p>
+<section class="pk-cr pk-cr--{{ section.settings.tone | default: 'purple' }}">
+  <div class="pk-cr__inner">
+    <div class="pk-cr__panel">
+      <div class="pk-cr__intro">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="pk-cr__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="pk-cr__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="pk-cr__sub">{{ section.settings.subheading }}</p>
+        {%- endif -%}
       </div>
 
-      <!-- Feature 2 -->
-      <div class="credibility-feature">
-        <div class="feature-icon">💡</div>
-        <h3 class="feature-title">All Shapes & Sizes</h3>
-        <p class="feature-desc">From classic circles and squares to unique shapes, we can create crests in virtually any size to match your vision.</p>
-      </div>
-
-      <!-- Feature 3 -->
-      <div class="credibility-feature">
-        <div class="feature-icon">%</div>
-        <h3 class="feature-title">Cost-Effective Prices</h3>
-        <p class="feature-desc">You can order our cool Velcro patches at your desired rates. Yes, our prices will never fall out of your budget.</p>
-      </div>
-
+      {%- if section.blocks.size > 0 -%}
+        <ul class="pk-cr__facts">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign fact_value = block.settings.value
+              if block.settings.product != blank
+                assign fact_value = block.settings.product.price_min | money
+              endif
+            -%}
+            <li class="pk-cr__fact" {{ block.shopify_attributes }}>
+              <p class="pk-cr__value">{{ fact_value }}</p>
+              {%- if block.settings.label != blank -%}
+                <h3 class="pk-cr__label">{{ block.settings.label }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="pk-cr__text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
     </div>
   </div>
-</div>
+</section>

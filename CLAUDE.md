@@ -528,6 +528,24 @@ credibility -> factory video -> `ordering_process` -> why-buy -> FAQ -> blog -> 
   swiped row or a two-per-row grid.
   - The price is `product.price_min`, read live - it is not typed anywhere in the section.
     The two points are typed per card: plain facts about the style, in our own words.
+- **`sections/credibility-patch-kraze.liquid`** ("Key Facts" in the editor) - one colored
+  panel (purple, near-black or light) with a heading and up to four fact blocks: a large
+  figure, a label and one line. A fact with a product picked shows that product's
+  `price_min` live instead of a typed figure. On phones the facts are a swiped row.
+  - Facts here must be checkable against the store. The panel deliberately states no
+    minimum order: as of 2026-10-01 the product page enforces 10 pieces (`productMinQty`),
+    the smallest quantity tier is 10 on embroidered, printed, PVC, 3D, woven, chenille,
+    silicone and name patches but 25 on leather, faux leather, flex, DTF, twill letters and
+    keychains, and the hero line was changed in the theme editor to "as few as 5 pieces".
+    Which of those is the real minimum is the owner's call; do not restate one elsewhere
+    until it is settled.
+- **`templates/index.json` is also edited in the Shopify theme editor**, and Shopify commits
+  those edits to `main` ("Update from Shopify for theme patch-kraze/main"). Always
+  `git fetch` and pull before changing this file, and never overwrite it from an older copy:
+  the hero's background images and text were set that way.
+  - Shipping, checked the same day through `/cart/shipping_rates.json`: orders under $100
+    are charged ($6.90 economy), orders over $100 get free standard shipping. Any copy about
+    shipping should say "free over $100", not "every order ships free".
 - **`sections/ordering-process-patch-kraze.liquid`** - heading and two links on the left, the
   steps as a numbered list down a line on the right. No pictures. Step text should describe
   what this store actually does (the mockup is the optional checkbox on the product page,

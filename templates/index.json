@@ -634,7 +634,53 @@
     },
     "credibility": {
       "type": "credibility-patch-kraze",
-      "settings": {}
+      "blocks": {
+        "fact_size": {
+          "type": "fact",
+          "settings": {
+            "value": "16\"",
+            "label": "largest patch size",
+            "text": "Embroidered patches run from 1 to 16 inches, in any shape."
+          }
+        },
+        "fact_backing": {
+          "type": "fact",
+          "settings": {
+            "value": "3",
+            "label": "ways to attach",
+            "text": "Iron-on, Velcro or peel-off adhesive backing."
+          }
+        },
+        "fact_mockup": {
+          "type": "fact",
+          "settings": {
+            "value": "24–48h",
+            "label": "to see a free mockup",
+            "text": "Tick the mockup box when you order and approve it before production."
+          }
+        },
+        "fact_price": {
+          "type": "fact",
+          "settings": {
+            "value": "",
+            "product": "embroidered-patches",
+            "label": "lowest price per piece",
+            "text": "For embroidered patches at the largest quantity. Every price break is on the product page."
+          }
+        }
+      },
+      "block_order": [
+        "fact_size",
+        "fact_backing",
+        "fact_mockup",
+        "fact_price"
+      ],
+      "settings": {
+        "eyebrow": "Why order here",
+        "heading": "Made to Your Spec, Priced Up Front",
+        "subheading": "You choose the size, shape and backing, and the price is on the page before you order.",
+        "tone": "purple"
+      }
     },
     "factory_visit_video": {
       "type": "factory-visit-video",
