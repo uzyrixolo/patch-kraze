@@ -80,7 +80,7 @@
         "title_phrases": "Custom Patches, Embroidered Patches, PVC Patches, Woven Patches, Leather Patches, Chenille Patches, Custom Stickers, DTF Transfers",
         "title_rest": "Made Your Way",
         "title_typing": true,
-        "point_1": "Order as few as 10 pieces",
+        "point_1": "Order as few as 5 pieces",
         "point_2": "Embroidered, PVC, woven, leather, printed and more",
         "point_3": "Send your art and see a free mockup in 24–48 hours",
         "btn_primary_label": "Start Your Order",
@@ -90,8 +90,11 @@
         "note": "Quotes come back within 24 hours.",
         "extra_link_label": "Or sketch an idea with our AI patch designer",
         "extra_link": "",
-        "bg_tint": 85,
-        "bg_text": "dark"
+        "panel_bg": "linear-gradient(180deg, rgba(241, 232, 255, 1), rgba(250, 245, 255, 1) 58%, rgba(255, 255, 255, 1) 100%)",
+        "bg_image": "shopify://shop_images/WhatsApp_Image_2026-10-01_at_10.31.22_AM.jpg",
+        "bg_image_mobile": "shopify://shop_images/WhatsApp_Image_2026-10-01_at_10.33.45_AM.jpg",
+        "bg_tint": 80,
+        "bg_text": "light"
       }
     },
     "type_showcase": {
@@ -101,56 +104,63 @@
           "type": "tab",
           "settings": {
             "label": "Embroidered",
-            "more_label": "See sizes and pricing",
-            "product": "embroidered-patches"
+            "product": "embroidered-patches",
+            "collection": "",
+            "more_label": "See sizes and pricing"
           }
         },
         "tab_printed": {
           "type": "tab",
           "settings": {
             "label": "Printed",
-            "more_label": "See sizes and pricing",
-            "product": "full-color-printed-patches"
+            "product": "full-color-printed-patches",
+            "collection": "",
+            "more_label": "See sizes and pricing"
           }
         },
         "tab_pvc": {
           "type": "tab",
           "settings": {
             "label": "PVC",
-            "more_label": "See sizes and pricing",
-            "product": "pvc-rubber-patches"
+            "product": "pvc-rubber-patches",
+            "collection": "",
+            "more_label": "See sizes and pricing"
           }
         },
         "tab_woven": {
           "type": "tab",
           "settings": {
             "label": "Woven",
-            "more_label": "See sizes and pricing",
-            "product": "woven-patches"
+            "product": "woven-patches",
+            "collection": "",
+            "more_label": "See sizes and pricing"
           }
         },
         "tab_leather": {
           "type": "tab",
           "settings": {
             "label": "Leather",
-            "more_label": "See sizes and pricing",
-            "product": "leather-patches"
+            "product": "leather-patches",
+            "collection": "",
+            "more_label": "See sizes and pricing"
           }
         },
         "tab_chenille": {
           "type": "tab",
           "settings": {
             "label": "Chenille",
-            "more_label": "See sizes and pricing",
-            "product": "chenille-patches"
+            "product": "chenille-patches",
+            "collection": "",
+            "more_label": "See sizes and pricing"
           }
         },
         "tab_readymade": {
           "type": "tab",
           "settings": {
             "label": "Ready-made",
-            "more_label": "See all ready-made patches",
-            "collection": "ready-made-patches"
+            "product": "",
+            "collection": "ready-made-patches",
+            "more_label": "See all ready-made patches"
           }
         }
       },
@@ -369,8 +379,8 @@
       "settings": {
         "heading": "Browse Every Patch Style",
         "columns": 4,
-        "mobile_layout": "swipe",
         "background": "#f7f4fc",
+        "mobile_layout": "swipe",
         "view_all_label": "See the Full Lineup",
         "view_all_link": "",
         "rail_label": "Customer Favorites",
