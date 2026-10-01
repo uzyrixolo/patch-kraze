@@ -43,8 +43,69 @@
       }
     },
     "product_faq": {
-      "type": "product-faq-patch-kraze",
-      "settings": {}
+      "type": "faq-patch-kraze",
+      "blocks": {
+        "q_included": {
+          "type": "question",
+          "settings": {
+            "question": "What is included in the deal?",
+            "answer": "<p>25 custom embroidered patches in any size up to 4 inches, your choice of backing, and a free digital mockup before production.</p>",
+            "patch_only": false
+          }
+        },
+        "q_file": {
+          "type": "question",
+          "settings": {
+            "question": "What file should I upload?",
+            "answer": "<p>A PNG, JPG or PDF of your design. A clear, large file gives the best result.</p>",
+            "patch_only": false
+          }
+        },
+        "q_mockup": {
+          "type": "question",
+          "settings": {
+            "question": "Will I see a mockup first?",
+            "answer": "<p>Yes. Choose the standard option for a mockup in 24–48 hours, with production after you approve it, or the fast option for a priority mockup and delivery within 7 days.</p>",
+            "patch_only": false
+          }
+        },
+        "q_backing": {
+          "type": "question",
+          "settings": {
+            "question": "Which backings can I choose?",
+            "answer": "<p>Iron-on, Velcro (hook and loop, both sides included) or peel-off adhesive.</p>",
+            "patch_only": false
+          }
+        },
+        "q_other": {
+          "type": "question",
+          "settings": {
+            "question": "What if I need a different quantity or size?",
+            "answer": "<p>Order from the regular product pages, where you set any size and quantity, or <a href=\"/pages/quote\">ask for a quote</a>.</p>",
+            "patch_only": false
+          }
+        }
+      },
+      "block_order": [
+        "q_included",
+        "q_file",
+        "q_mockup",
+        "q_backing",
+        "q_other"
+      ],
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "About This Deal",
+        "intro": "What you get and how it works.",
+        "card_title": "Didn't find your answer?",
+        "card_text": "Send us your artwork or your question and we'll reply within 24 hours.",
+        "btn_label": "Get a quote",
+        "btn_link": "",
+        "phone": "909-931-6231",
+        "background": "#ffffff",
+        "bg_tint": 30,
+        "text_tone": "dark"
+      }
     }
   },
   "order": [

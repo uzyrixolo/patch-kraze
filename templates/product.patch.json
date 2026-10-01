@@ -240,8 +240,87 @@
       }
     },
     "product_faq": {
-      "type": "product-faq-patch-kraze",
-      "settings": {}
+      "type": "faq-patch-kraze",
+      "blocks": {
+        "q_file": {
+          "type": "question",
+          "settings": {
+            "question": "What file should I upload?",
+            "answer": "<p>A PNG, JPG or PDF. If a picture has a background you don't want, the clean-up tools that appear after you upload can erase it.</p>",
+            "patch_only": false
+          }
+        },
+        "q_price": {
+          "type": "question",
+          "settings": {
+            "question": "How is the price for [product] worked out?",
+            "answer": "<p>From the size and quantity you enter above. The table under the quantity box lists every price break.</p>",
+            "patch_only": false
+          }
+        },
+        "q_size": {
+          "type": "question",
+          "settings": {
+            "question": "Can I order a size between the steps?",
+            "answer": "<p>Yes. Pick the nearest size and put the exact one in a note under your artwork. We make it to that size at no extra cost.</p>",
+            "patch_only": false
+          }
+        },
+        "q_mockup": {
+          "type": "question",
+          "settings": {
+            "question": "Will I see a mockup before production?",
+            "answer": "<p>If you tick the mockup box before adding to cart, we send a digital mockup in 24–48 hours and start production once you approve it.</p>",
+            "patch_only": false
+          }
+        },
+        "q_backing": {
+          "type": "question",
+          "settings": {
+            "question": "What is the difference between the backings?",
+            "answer": "<p>Iron-on bonds to fabric with heat. Velcro comes with both the hook and the loop side and adds $0.25 per piece. Adhesive is peel-and-stick.</p>",
+            "patch_only": true
+          }
+        },
+        "q_minimum": {
+          "type": "question",
+          "settings": {
+            "question": "What is the minimum order for [product]?",
+            "answer": "<p>It is shown under the quantity box above. Your cart also needs to reach $69.90 before you can check out.</p>",
+            "patch_only": false
+          }
+        },
+        "q_delivery": {
+          "type": "question",
+          "settings": {
+            "question": "How long until my order arrives?",
+            "answer": "<p>You choose at checkout: Express (7–8 days), Economy (11–12 days) or Standard (13–15 days, free on orders over $100).</p>",
+            "patch_only": false
+          }
+        }
+      },
+      "block_order": [
+        "q_file",
+        "q_price",
+        "q_size",
+        "q_mockup",
+        "q_backing",
+        "q_minimum",
+        "q_delivery"
+      ],
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "Ordering [product]",
+        "intro": "Short answers about files, pricing, mockups and delivery.",
+        "card_title": "Didn't find your answer?",
+        "card_text": "Send us your artwork or your question and we'll reply within 24 hours.",
+        "btn_label": "Get a quote",
+        "btn_link": "",
+        "phone": "909-931-6231",
+        "background": "#ffffff",
+        "bg_tint": 30,
+        "text_tone": "dark"
+      }
     },
     "17702139471f5cd28e": {
       "type": "_blocks",

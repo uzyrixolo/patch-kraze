@@ -552,6 +552,29 @@ credibility -> factory video -> `ordering_process` -> why-buy -> FAQ -> blog -> 
   - Shipping, checked the same day through `/cart/shipping_rates.json`: orders under $100
     are charged ($6.90 economy), orders over $100 get free standard shipping. Any copy about
     shipping should say "free over $100", not "every order ships free".
+- **`sections/faq-patch-kraze.liquid`** - the one FAQ section, used on the homepage and (as
+  `product_faq`) in `templates/product.patch.json` and `templates/product.patch-deal.json`;
+  the old `product-faq-patch-kraze` section is gone. Heading and a help card (quote button,
+  phone) on the left, an accordion on the right. Questions are blocks with a rich-text
+  answer. On a product page `[product]` in a heading, question or answer becomes the
+  product's title, and a block marked "patch products only" is skipped for stickers and DTF.
+  - The questions must be our own. The previous sets were the competitor's questions word
+    for word and in the same order (nine on the homepage, six on product pages), even after
+    the answers had been reworded - compare the questions, not just the answers.
+  - Answers state what checkout does as of 2026-10-01: cart minimum $69.90
+    (`snippets/cart-summary.liquid`), Velcro +$0.25 per piece, mockup in 24-48 hours via the
+    checkbox, and three shipping options, Express (7-8 days), Economy (11-12 days) and
+    Standard (13-15 days, free over $100). Re-check `/cart/shipping_rates.json` before
+    editing delivery wording.
+  - Unresolved, the owner's call: the site gives three different production times ("rush
+    from 5 business days" in the hero and strip, "10-12 business days" in the What You Get
+    section, and the checkout's day ranges above). The FAQ only quotes checkout.
+- **Section backgrounds**: `style-grid` and the FAQ take a color or gradient
+  (`color_background`), an optional image with a separate mobile image, a tint and a
+  "heading color" (dark or white). The image layer is `snippets/pk-section-bg.liquid`
+  (renders nothing without an image; its CSS is in the snippet's `{% stylesheet %}`); the
+  section must be `position: relative` with its content at `z-index: 1`. Use the same
+  snippet when another section needs a background image.
 - **`sections/ordering-process-patch-kraze.liquid`** - heading and two links on the left, the
   steps as a numbered list down a line on the right. No pictures. Step text should describe
   what this store actually does (the mockup is the optional checkbox on the product page,

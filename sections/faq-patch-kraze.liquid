@@ -1,193 +1,217 @@
+{% comment %}
+  Questions and answers, used on the homepage and on the patch product pages.
+  Left: heading, a line of text and a small help card (phone and quote link).
+  Right: the questions as an accordion.
+
+  Each question is a block. On a product page, [product] typed in a question
+  or an answer is replaced with that product's name, and a question marked
+  "patch products only" is left out on sticker and transfer pages.
+
+  Answers should describe what this store does today: the mockup checkbox and
+  its 24-48 hour turnaround, the backing choices and their prices, the
+  shipping options offered at checkout, the cart minimum. Check them against
+  the product page and checkout before changing them, and write the questions
+  in our own words.
+
+  Background: a color or gradient, or a picture with its own mobile version
+  and a tint. "Heading color" switches the left column to white for a dark
+  background; the accordion always stays dark-on-white.
+{% endcomment %}
+
 {% schema %}
 {
   "name": "FAQ (Patch Kraze)",
   "class": "section-faq-patch-kraze",
-  "settings": [],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small label above the heading", "default": "Questions", "info": "Leave empty to hide." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Good to Know Before You Order" },
+    { "type": "textarea", "id": "intro", "label": "Text under the heading", "default": "Short answers on ordering, artwork, pricing and delivery." },
+    { "type": "header", "content": "Help card" },
+    { "type": "text", "id": "card_title", "label": "Title", "default": "Didn't find your answer?", "info": "Leave the title empty to hide the whole card." },
+    { "type": "textarea", "id": "card_text", "label": "Text", "default": "Send us your artwork or your question and we'll reply within 24 hours." },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "Get a quote" },
+    { "type": "url", "id": "btn_link", "label": "Button link", "info": "Defaults to /pages/quote." },
+    { "type": "text", "id": "phone", "label": "Phone number", "default": "909-931-6231", "info": "Shown as a tap-to-call link. Leave empty to hide." },
+    { "type": "header", "content": "Background" },
+    { "type": "color_background", "id": "background", "label": "Background (color or gradient)", "default": "#ffffff", "info": "Hidden by a background image when one is set below." },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image", "info": "Optional. Fills the whole section and is cropped to fit." },
+    { "type": "image_picker", "id": "bg_image_mobile", "label": "Background image, mobile", "info": "Optional. Used on screens under 750px; falls back to the image above." },
+    { "type": "range", "id": "bg_tint", "label": "Tint over the image", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 30, "info": "Light tint behind a dark heading, dark tint behind a white one. 0 turns it off." },
+    {
+      "type": "select", "id": "text_tone", "label": "Heading color", "default": "dark",
+      "options": [
+        { "value": "dark", "label": "Dark (for light backgrounds)" },
+        { "value": "light", "label": "White (for dark backgrounds)" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How do I place an order?", "info": "On product pages, [product] is replaced with the product's name." },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Open the patch style you want, upload your artwork, set the size and quantity, and pick the finishing options.</p>" },
+        { "type": "checkbox", "id": "patch_only", "label": "Patch products only", "default": false, "info": "On product pages, leave this question out for stickers and DTF transfers." }
+      ]
+    }
+  ],
+  "max_blocks": 16,
   "presets": [
     {
-      "name": "FAQ (Patch Kraze)"
+      "name": "FAQ (Patch Kraze)",
+      "blocks": [
+        { "type": "question", "settings": { "question": "How do I place an order?", "answer": "<p>Open the patch style you want, upload your artwork, set the size and quantity, and pick the finishing options. The price updates as you go, and you check out like any online order.</p>" } },
+        { "type": "question", "settings": { "question": "Will I see my patch before it is made?", "answer": "<p>Yes, when you ask for it. Tick the mockup box on the product page and we send a digital mockup in 24–48 hours. Production starts after you approve it.</p>" } },
+        { "type": "question", "settings": { "question": "How is the price worked out?", "answer": "<p>By style, size and quantity. Every product page shows the price per piece as you change the size and quantity, plus the full table of quantity price breaks.</p>" } }
+      ]
     }
   ]
 }
 {% endschema %}
 
 <style>
-  .faq-section {
-    width: 100%;
-    background-color: #f9fafb; /* gray-50 */
-    padding: 5rem 1rem;
+  .pk-faq { position: relative; background: var(--faq-bg, #fff); padding: 3.5rem 0; }
+  .pk-faq__inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 3.5rem; align-items: start; }
+
+  /* The left column stays in view while a long list of questions scrolls past. */
+  .pk-faq__intro { position: sticky; top: 6.5rem; }
+  .pk-faq__eyebrow { margin: 0 0 0.6rem; font-size: var(--pk-fs-label); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pk-text-brand); }
+  .pk-faq__heading { margin: 0 0 0.85rem; font-size: var(--pk-fs-heading); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; color: var(--pk-text-primary); }
+  .pk-faq__text { margin: 0; max-width: 26rem; font-size: var(--pk-fs-body); line-height: 1.55; color: var(--pk-text-secondary); }
+  .pk-faq--light .pk-faq__heading { color: #fff; }
+  .pk-faq--light .pk-faq__text { color: #e5e7eb; }
+  .pk-faq--light .pk-faq__eyebrow { color: #e9d5ff; }
+
+  .pk-faq__card { margin-top: 1.6rem; max-width: 26rem; padding: 1.25rem 1.3rem 1.35rem; border-radius: var(--pk-radius-md); background: #faf5ff; border: 1px solid #e9d5ff; }
+  .pk-faq__card-title { margin: 0 0 0.3rem; font-size: var(--pk-fs-body); font-weight: 700; color: var(--pk-text-primary); }
+  .pk-faq__card-text { margin: 0; font-size: var(--pk-fs-label); line-height: 1.5; color: var(--pk-text-secondary); }
+  .pk-faq__card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.1rem; margin-top: 0.95rem; }
+  .pk-faq__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 2.6rem; padding: 0 1.2rem; border-radius: var(--pk-radius-sm); font-size: var(--pk-fs-label); font-weight: 700; text-decoration: none; }
+  .pk-faq__phone { font-size: var(--pk-fs-label); font-weight: 700; color: var(--pk-text-primary); text-decoration: none; white-space: nowrap; }
+  .pk-faq__phone:hover { color: var(--pk-text-brand); }
+
+  /* Accordion: one white panel, questions divided by a line, a round
+     plus sign that turns into a minus when its answer is open. */
+  .pk-faq__list { padding: 0.35rem 1.5rem; background: #fff; border: 1px solid #e5e7eb; border-radius: var(--pk-radius-lg); box-shadow: 0 14px 34px -24px rgba(17, 24, 39, 0.3); }
+  .pk-faq__item { border-bottom: 1px solid #e5e7eb; }
+  .pk-faq__item:last-child { border-bottom: none; }
+  .pk-faq__q { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.15rem 0; cursor: pointer; list-style: none; font-size: 1.05rem; font-weight: 700; line-height: 1.35; color: var(--pk-text-primary); }
+  .pk-faq__q::-webkit-details-marker { display: none; }
+  .pk-faq__q:hover, .pk-faq__item[open] > .pk-faq__q { color: var(--pk-text-brand); }
+  .pk-faq__q:focus-visible { outline: 2px solid var(--pk-btn-primary-bg); outline-offset: 2px; border-radius: 0.25rem; }
+  .pk-faq__icon { position: relative; flex-shrink: 0; width: 1.75rem; height: 1.75rem; border-radius: 50%; background: #f3e8ff; }
+  .pk-faq__icon::before, .pk-faq__icon::after { content: ""; position: absolute; left: 50%; top: 50%; width: 0.7rem; height: 2px; border-radius: 2px; background: #7e22ce; transform: translate(-50%, -50%); transition: transform 0.2s ease; }
+  .pk-faq__icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .pk-faq__item[open] .pk-faq__icon::after { transform: translate(-50%, -50%) rotate(0deg); }
+  .pk-faq__a { padding: 0 2.75rem 1.25rem 0; font-size: var(--pk-fs-body); line-height: 1.6; color: var(--pk-text-secondary); }
+  .pk-faq__a p { margin: 0 0 0.6rem; }
+  .pk-faq__a p:last-child { margin-bottom: 0; }
+  .pk-faq__a a { color: var(--pk-text-brand); font-weight: 600; text-underline-offset: 2px; }
+  .pk-faq__a ul, .pk-faq__a ol { margin: 0 0 0.6rem; padding-left: 1.2rem; }
+
+  @media (max-width: 899px) {
+    .pk-faq { padding: 2.5rem 0; }
+    .pk-faq__inner { grid-template-columns: 1fr; gap: 1.75rem; }
+    .pk-faq__intro { position: static; }
+    .pk-faq__heading { font-size: var(--pk-fs-heading-sm); }
+    .pk-faq__text, .pk-faq__card { max-width: none; }
   }
-  .faq-container {
-    max-width: 800px; /* max-w-3xl */
-    margin: 0 auto;
-    padding: 0 1rem;
+  @media (max-width: 479px) {
+    .pk-faq__inner { padding: 0 1rem; }
+    .pk-faq__list { padding: 0.25rem 1.1rem; }
+    .pk-faq__q { font-size: 1rem; padding: 1rem 0; }
+    .pk-faq__a { padding-right: 0.5rem; font-size: 0.95rem; }
   }
-  
-  .faq-heading {
-    text-align: center;
-    font-size: var(--pk-fs-heading);
-    font-weight: 700;
-    color: var(--pk-text-primary);
-    margin-bottom: 3rem;
-  }
-  
-  .faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .faq-item {
-    border: 1px solid #e5e7eb; /* gray-200 */
-    border-radius: var(--pk-radius-md);
-    background-color: #fff;
-    overflow: hidden;
-  }
-  
-  .faq-summary {
-    width: 100%;
-    padding: 1.25rem;
-    text-align: left;
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    font-size: var(--pk-fs-subheading);
-    color: var(--pk-text-primary);
-  }
-  .faq-summary:hover {
-    background-color: #f9fafb;
-  }
-  
-  /* Built-in simple accordion logic using Details/Summary if preferred, 
-     or just CSS display toggling if we write JS. 
-     Here we use <details> for native behavior */
-  
-  details[open] .faq-icon {
-    transform: rotate(180deg);
-  }
-  
-  .faq-icon {
-    transition: transform 0.2s;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .faq-content {
-    padding: 0 1.25rem 1.25rem;
-    color: var(--pk-text-secondary);
-    line-height: 1.6;
+  @media (prefers-reduced-motion: reduce) {
+    .pk-faq__icon::before, .pk-faq__icon::after { transition: none; }
   }
 </style>
 
-<div class="faq-section">
-  <div class="faq-container">
-    <h2 class="faq-heading">Frequently Asked Questions</h2>
-    
-    <div class="faq-list">
-      
-      <!-- FAQ 1 -->
-      <details class="faq-item">
-        <summary class="faq-summary">
-          What are custom patches?
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </summary>
-        <div class="faq-content">
-          <p>Custom patches are personalized embroidered or printed designs created to your specifications. They can be applied to clothing, bags, uniforms, and more through various backing options like iron-on, sew-on, or adhesive backing.</p>
-        </div>
-      </details>
+{%- liquid
+  assign faq_product = product.title | default: 'custom patches'
+  assign faq_is_patch = true
+  if product
+    if product.handle == 'dtf-transfers' or product.handle contains 'sticker'
+      assign faq_is_patch = false
+    endif
+  endif
+  assign faq_btn_link = section.settings.btn_link | default: '/pages/quote'
+  assign faq_tel = section.settings.phone | remove: '-' | remove: ' ' | remove: '(' | remove: ')' | remove: '.'
 
-      <!-- FAQ 2 -->
-      <details class="faq-item">
-        <summary class="faq-summary">
-          How does pricing work?
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </summary>
-        <div class="faq-content">
-          <p>Our pricing is based on patch type, size, quantity, and complexity of design — the more you order, the lower your per-patch price. Get a custom quote by uploading your design.</p>
-        </div>
-      </details>
+  assign faq_count = 0
+  for block in section.blocks
+    if block.settings.patch_only and faq_is_patch == false
+      continue
+    endif
+    assign faq_count = faq_count | plus: 1
+  endfor
+-%}
 
-      <!-- FAQ 3 -->
-      <details class="faq-item">
-        <summary class="faq-summary">
-          What backing options are available?
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </summary>
-        <div class="faq-content">
-          <p>We offer multiple backing options including heat press (iron-on), sew-on, peel-and-stick, and Velcro backing. Choose the option that best suits your application needs.</p>
-        </div>
-      </details>
+{%- if faq_count > 0 -%}
+<section class="pk-faq{% if section.settings.text_tone == 'light' %} pk-faq--light{% endif %}" style="--faq-bg: {{ section.settings.background | default: '#ffffff' }};">
+  {%- render 'pk-section-bg', image: section.settings.bg_image, image_mobile: section.settings.bg_image_mobile, tint: section.settings.bg_tint, tone: section.settings.text_tone -%}
+  <div class="pk-faq__inner">
+    <div class="pk-faq__intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pk-faq__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pk-faq__heading">{{ section.settings.heading | replace: '[product]', faq_product }}</h2>
+      {%- endif -%}
+      {%- if section.settings.intro != blank -%}
+        <p class="pk-faq__text">{{ section.settings.intro | replace: '[product]', faq_product }}</p>
+      {%- endif -%}
 
-      <!-- FAQ 4 -->
-      <details class="faq-item">
-        <summary class="faq-summary">
-          How do I order patches?
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </summary>
-        <div class="faq-content">
-          <p>Simply upload your design, select your patch type and size, choose your backing option, and place your order. We'll send you a virtual proof for approval before production begins.</p>
+      {%- if section.settings.card_title != blank -%}
+        <div class="pk-faq__card">
+          <p class="pk-faq__card-title">{{ section.settings.card_title }}</p>
+          {%- if section.settings.card_text != blank -%}
+            <p class="pk-faq__card-text">{{ section.settings.card_text }}</p>
+          {%- endif -%}
+          {%- if section.settings.btn_label != blank or section.settings.phone != blank -%}
+            <div class="pk-faq__card-actions">
+              {%- if section.settings.btn_label != blank -%}
+                <a class="pk-faq__btn pk-btn-primary" href="{{ faq_btn_link }}">{{ section.settings.btn_label }}</a>
+              {%- endif -%}
+              {%- if section.settings.phone != blank -%}
+                <a class="pk-faq__phone" href="tel:+1{{ faq_tel }}">Call {{ section.settings.phone }}</a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
         </div>
-      </details>
-      
-      <!-- FAQ 5 -->
-      <details class="faq-item">
-        <summary class="faq-summary">
-          Can I create my own design?
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </summary>
-        <div class="faq-content">
-          <p>We accept unlimited colors and design complexity. You can upload simple or highly detailed artwork, and our design team will work with you to ensure the best results.</p>
-        </div>
-      </details>
+      {%- endif -%}
+    </div>
 
-      <!-- FAQ 6 -->
-      <details class="faq-item">
-        <summary class="faq-summary">
-          Are patches washable?
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </summary>
-        <div class="faq-content">
-          <p>Yes — our patches are built to hold up through regular washing and wear, keeping their color and shape over repeated wash cycles.</p>
-        </div>
-      </details>
-
-      <!-- FAQ 7 -->
-      <details class="faq-item">
-        <summary class="faq-summary">
-          Is there a minimum order quantity?
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </summary>
-        <div class="faq-content">
-          <p>Every patch type has a 10-piece minimum, and most styles qualify for our rush production option at that same low minimum.</p>
-        </div>
-      </details>
-
-      <!-- FAQ 8 -->
-      <details class="faq-item">
-        <summary class="faq-summary">
-          How fast can I get my order?
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </summary>
-        <div class="faq-content">
-          <p>Standard production takes 5-7 business days after you approve your proof. Select patch types qualify for rush production in as little as 5 business days if you're working against a deadline.</p>
-        </div>
-      </details>
-
-      <!-- FAQ 9 -->
-      <details class="faq-item">
-        <summary class="faq-summary">
-          Do you offer a sample pack?
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </summary>
-        <div class="faq-content">
-          <p>Yes! We offer sample packs so you can see the quality of our work before committing to a larger order. Contact our team for sample pack options and pricing.</p>
-        </div>
-      </details>
-
+    <div class="pk-faq__list">
+      {%- assign faq_shown = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.settings.patch_only and faq_is_patch == false -%}
+          {%- continue -%}
+        {%- endif -%}
+        {%- assign faq_shown = faq_shown | plus: 1 -%}
+        <details class="pk-faq__item" name="pk-faq-{{ section.id }}"{% if faq_shown == 1 %} open{% endif %} {{ block.shopify_attributes }}>
+          <summary class="pk-faq__q">
+            <span>{{ block.settings.question | replace: '[product]', faq_product }}</span>
+            <span class="pk-faq__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="pk-faq__a">{{ block.settings.answer | replace: '[product]', faq_product }}</div>
+        </details>
+      {%- endfor -%}
     </div>
   </div>
-</div>
+</section>
+
+{%- if request.design_mode -%}
+<script>
+  // Theme editor only: open the question that was just selected in the sidebar.
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+    root.addEventListener('shopify:block:select', function (event) {
+      if (event.target && event.target.tagName === 'DETAILS') event.target.open = true;
+    });
+  })();
+</script>
+{%- endif -%}
+{%- endif -%}

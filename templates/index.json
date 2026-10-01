@@ -753,7 +753,113 @@
     },
     "faq": {
       "type": "faq-patch-kraze",
-      "settings": {}
+      "blocks": {
+        "q_order": {
+          "type": "question",
+          "settings": {
+            "question": "How do I place an order?",
+            "answer": "<p>Open the patch style you want, upload your artwork, set the size and quantity, and pick the finishing options. The price updates as you go, and you check out like any online order.</p>",
+            "patch_only": false
+          }
+        },
+        "q_artwork": {
+          "type": "question",
+          "settings": {
+            "question": "What if my artwork isn't ready?",
+            "answer": "<p>Upload whatever you have, even a sketch or a photo, and say what you want in the note box. You can also try the <a href=\"/pages/ai-image-generator\">AI patch designer</a>, or <a href=\"/pages/quote\">send a quote request</a> and we'll reply within 24 hours.</p>",
+            "patch_only": false
+          }
+        },
+        "q_mockup": {
+          "type": "question",
+          "settings": {
+            "question": "Will I see my patch before it is made?",
+            "answer": "<p>Yes, when you ask for it. Tick the mockup box on the product page and we send a digital mockup in 24–48 hours. Production starts after you approve it.</p>",
+            "patch_only": false
+          }
+        },
+        "q_price": {
+          "type": "question",
+          "settings": {
+            "question": "How is the price worked out?",
+            "answer": "<p>By style, size and quantity. Every product page shows the price per piece as you change the size and quantity, plus the full table of quantity price breaks.</p>",
+            "patch_only": false
+          }
+        },
+        "q_minimum": {
+          "type": "question",
+          "settings": {
+            "question": "What is the smallest order I can place?",
+            "answer": "<p>Each product page shows its minimum quantity under the quantity box. Your cart also needs to reach $69.90 before you can check out.</p>",
+            "patch_only": false
+          }
+        },
+        "q_backing": {
+          "type": "question",
+          "settings": {
+            "question": "Which backings can I choose?",
+            "answer": "<p>Iron-on, Velcro (hook and loop, both sides included, $0.25 extra per piece) or peel-off adhesive.</p>",
+            "patch_only": false
+          }
+        },
+        "q_shapes": {
+          "type": "question",
+          "settings": {
+            "question": "What shapes and sizes can you make?",
+            "answer": "<p>Circle, square, rectangle, oval, or an outline that follows your design. Size limits depend on the style and are shown on each product page; embroidered patches go from 1 to 16 inches.</p>",
+            "patch_only": false
+          }
+        },
+        "q_delivery": {
+          "type": "question",
+          "settings": {
+            "question": "How long does delivery take, and what does shipping cost?",
+            "answer": "<p>You pick the speed at checkout. The current options are Express (7–8 days), Economy (11–12 days) and Standard (13–15 days). Standard shipping is free on orders over $100; the other rates are shown at checkout.</p>",
+            "patch_only": false
+          }
+        },
+        "q_problem": {
+          "type": "question",
+          "settings": {
+            "question": "What if something is wrong with my order?",
+            "answer": "<p>Tell us. If your order arrives wrong or damaged, we will fix it.</p>",
+            "patch_only": false
+          }
+        },
+        "q_other": {
+          "type": "question",
+          "settings": {
+            "question": "Do you make stickers and DTF transfers too?",
+            "answer": "<p>Yes. Vinyl, holographic and UV transparent stickers and DTF transfers each have their own product page and are ordered the same way.</p>",
+            "patch_only": false
+          }
+        }
+      },
+      "block_order": [
+        "q_order",
+        "q_artwork",
+        "q_mockup",
+        "q_price",
+        "q_minimum",
+        "q_backing",
+        "q_shapes",
+        "q_delivery",
+        "q_problem",
+        "q_other"
+      ],
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "Good to Know Before You Order",
+        "intro": "Short answers on ordering, artwork, pricing and delivery.",
+        "card_title": "Didn't find your answer?",
+        "card_text": "Send us your artwork or your question and we'll reply within 24 hours.",
+        "btn_label": "Get a quote",
+        "btn_link": "",
+        "phone": "909-931-6231",
+        "background": "#ffffff",
+        "bg_tint": 30,
+        "text_tone": "dark"
+      }
     },
     "featured_blog_posts_xihL69": {
       "type": "featured-blog-posts",
