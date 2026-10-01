@@ -23,12 +23,6 @@
         },
         "faq": {
             "type": "faq-patch-kraze"
-        },
-        "explore_products": {
-            "type": "explore-products-patch-kraze"
-        },
-        "testimonials": {
-            "type": "testimonials-patch-kraze"
         }
     },
     "order": [
@@ -39,8 +33,6 @@
         "cta",
         "ordering_process",
         "why_buy",
-        "faq",
-        "explore_products",
-        "testimonials"
+        "faq"
     ]
 }

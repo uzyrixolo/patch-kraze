@@ -243,10 +243,6 @@
       "type": "product-faq-patch-kraze",
       "settings": {}
     },
-    "testimonials": {
-      "type": "testimonials-patch-kraze",
-      "settings": {}
-    },
     "17702139471f5cd28e": {
       "type": "_blocks",
       "settings": {
@@ -331,7 +327,6 @@
     "comparison_slider",
     "product_faq",
     "17873477237276b08f",
-    "17702139471f5cd28e",
-    "testimonials"
+    "17702139471f5cd28e"
   ]
 }

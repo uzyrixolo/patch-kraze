@@ -69,8 +69,6 @@
           "type": "product_card",
           "settings": {
             "product": "embroidered-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "embroidered",
             "best_seller": true
           }
@@ -79,8 +77,6 @@
           "type": "product_card",
           "settings": {
             "product": "full-color-printed-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "printed",
             "best_seller": true
           }
@@ -89,8 +85,6 @@
           "type": "product_card",
           "settings": {
             "product": "pvc-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "pvc",
             "best_seller": true
           }
@@ -99,8 +93,6 @@
           "type": "product_card",
           "settings": {
             "product": "leather-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "leather",
             "best_seller": true
           }
@@ -109,8 +101,6 @@
           "type": "product_card",
           "settings": {
             "product": "3d-embroidered-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "embroidered",
             "best_seller": false
           }
@@ -119,8 +109,6 @@
           "type": "product_card",
           "settings": {
             "product": "faux-leather-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "leather",
             "best_seller": false
           }
@@ -129,8 +117,6 @@
           "type": "product_card",
           "settings": {
             "product": "woven-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "embroidered",
             "best_seller": false
           }
@@ -139,8 +125,6 @@
           "type": "product_card",
           "settings": {
             "product": "metallic-flex-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "printed",
             "best_seller": false
           }
@@ -149,8 +133,6 @@
           "type": "product_card",
           "settings": {
             "product": "full-color-flex-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "printed",
             "best_seller": false
           }
@@ -159,8 +141,6 @@
           "type": "product_card",
           "settings": {
             "product": "silver-flex-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "printed",
             "best_seller": false
           }
@@ -169,8 +149,6 @@
           "type": "product_card",
           "settings": {
             "product": "chenille-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "embroidered",
             "best_seller": false
           }
@@ -179,8 +157,6 @@
           "type": "product_card",
           "settings": {
             "product": "silicone-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "pvc",
             "best_seller": false
           }
@@ -189,8 +165,6 @@
           "type": "product_card",
           "settings": {
             "product": "name-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "embroidered",
             "best_seller": false
           }
@@ -199,8 +173,6 @@
           "type": "product_card",
           "settings": {
             "product": "dtf-transfers",
-            "rating": "4.8",
-            "review_count": "",
             "group": "printed",
             "best_seller": false
           }
@@ -209,8 +181,6 @@
           "type": "product_card",
           "settings": {
             "product": "gold-flex-patches",
-            "rating": "4.8",
-            "review_count": "",
             "group": "printed",
             "best_seller": false
           }
@@ -219,8 +189,6 @@
           "type": "product_card",
           "settings": {
             "product": "tackle-twill-letters",
-            "rating": "4.8",
-            "review_count": "",
             "group": "embroidered",
             "best_seller": false
           }
@@ -229,8 +197,6 @@
           "type": "product_card",
           "settings": {
             "product": "custom-keychains",
-            "rating": "4.8",
-            "review_count": "",
             "group": "pvc",
             "best_seller": false
           }
@@ -262,7 +228,7 @@
         "view_all_link": "",
         "rail_label": "Customer Favorites",
         "rail_sub": "The styles our customers reorder most",
-        "moq_text": "10 pc min",
+        "moq_text": "From 10 pcs",
         "show_tabs": true,
         "best_tab_label": "Most Popular",
         "all_tab_label": "Everything"
@@ -581,11 +547,6 @@
       "type": "faq-patch-kraze",
       "settings": {}
     },
-    "explore_products": {
-      "type": "explore-products-patch-kraze",
-      "disabled": true,
-      "settings": {}
-    },
     "featured_blog_posts_xihL69": {
       "type": "featured-blog-posts",
       "blocks": {
@@ -823,7 +784,6 @@
     "ordering_process",
     "why_buy",
     "faq",
-    "explore_products",
     "featured_blog_posts_xihL69",
     "video_carousel_patch_kraze_HQHGpj",
     "promo_popup"

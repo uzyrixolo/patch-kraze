@@ -45,17 +45,12 @@
     "product_faq": {
       "type": "product-faq-patch-kraze",
       "settings": {}
-    },
-    "testimonials": {
-      "type": "testimonials-patch-kraze",
-      "settings": {}
     }
   },
   "order": [
     "main",
     "product_details",
     "comparison_slider",
-    "product_faq",
-    "testimonials"
+    "product_faq"
   ]
 }

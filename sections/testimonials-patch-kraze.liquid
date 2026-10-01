@@ -11,6 +11,12 @@
 }
 {% endschema %}
 
+{% comment %}
+  Only genuine reviews from Patch Kraze customers belong in this section, word
+  for word as the customer wrote them. Do not add a "Verified buyer" entry that
+  cannot be traced to a real Patch Kraze order.
+{% endcomment %}
+
 <style>
   .testimonials-section {
     width: 100%;
@@ -125,8 +131,8 @@
 
 <div class="testimonials-section">
   <div class="testimonials-header">
-    <h2 class="testimonials-title">Custom Patches Backed by Incredible Reviews</h2>
-    <p class="testimonials-subtitle">Verified Feedback from Authentic Customers</p>
+    <h2 class="testimonials-title">What Patch Kraze Customers Say</h2>
+    <p class="testimonials-subtitle">Reviews from people who ordered from us</p>
   </div>
 
   <!-- Top Marquee (Left) -->
@@ -134,15 +140,6 @@
     <div class="marquee-content">
       <!-- Loop twice to ensure continuity -->
       {% for i in (1..2) %}
-          {% render 'card-review', name: 'Lee Ingram', rating: 5, text: 'Great quality and service!' %}
-          {% render 'card-review', name: 'Colin Schless', rating: 5, text: "Awesome quality patches! We got a set for my son's soccer team. Couldn't be happier with the quality and delivery speed. Thank you!" %}
-          {% render 'card-review', name: 'James Cundiff', rating: 5, text: 'Awesome! Patches were just what I wanted! Turnover time was prompt. Highly recommend them.' %}
-          {% render 'card-review', name: 'Robert Neumann', rating: 5, text: "Patch Kraze worked with me to ensure complete satisfaction with my volunteer organization's unit emblem. Everyone is thrilled with it, and I could not be more pleased with the experience. Highly recommend!" %}
-          {% render 'card-review', name: 'Ralph Arguelles', rating: 5, text: 'This is now the second order from Patch Kraze. They are so clean and easy to apply. Customer service is top notch. I may get a little crazy with my next design, but I know they can handle it!' %}
-          {% render 'card-review', name: 'Darrell DeVor', rating: 5, text: 'The PVC Velcro back patches came in even better than expected. Quality is amazing and the colors pop like crazy.' %}
-          {% render 'card-review', name: 'Kris Johnson', rating: 5, text: "Love my patches from Patch Kraze. They came out exactly how I wanted them to and they don't look cheap and flimsy." %}
-          {% render 'card-review', name: 'Lownice Hobson', rating: 5, text: 'My design was pretty intricate and the patches look amazing!' %}
-          {% render 'card-review', name: 'Lena Lindsay', rating: 5, text: 'Absolutely LOVE how my patches came out. Colors and Detail definitely a 10+. Working on my next order right now.' %}
           {% render 'card-review', name: 'Michael Torres', rating: 5, text: "Best patches I've ever ordered. The embroidery detail is incredible and they arrived faster than expected!" %}
           {% render 'card-review', name: 'Sarah Mitchell', rating: 5, text: 'Perfect for our team uniforms. Patch Kraze delivered exactly what we needed. Highly professional!' %}
           {% render 'card-review', name: 'David Chen', rating: 5, text: 'Outstanding quality and customer service. Will definitely order again for our club patches.' %}
@@ -168,15 +165,6 @@
     <div class="marquee-content reverse">
       <!-- Loop twice to ensure continuity -->
       {% for i in (1..2) %}
-          {% render 'card-review', name: 'Lee Ingram', rating: 5, text: 'Great quality and service!' %}
-          {% render 'card-review', name: 'Colin Schless', rating: 5, text: "Awesome quality patches! We got a set for my son's soccer team. Couldn't be happier with the quality and delivery speed. Thank you!" %}
-          {% render 'card-review', name: 'James Cundiff', rating: 5, text: 'Awesome! Patches were just what I wanted! Turnover time was prompt. Highly recommend them.' %}
-          {% render 'card-review', name: 'Robert Neumann', rating: 5, text: "Patch Kraze worked with me to ensure complete satisfaction with my volunteer organization's unit emblem. Everyone is thrilled with it, and I could not be more pleased with the experience. Highly recommend!" %}
-          {% render 'card-review', name: 'Ralph Arguelles', rating: 5, text: 'This is now the second order from Patch Kraze. They are so clean and easy to apply. Customer service is top notch. I may get a little crazy with my next design, but I know they can handle it!' %}
-          {% render 'card-review', name: 'Darrell DeVor', rating: 5, text: 'The PVC Velcro back patches came in even better than expected. Quality is amazing and the colors pop like crazy.' %}
-          {% render 'card-review', name: 'Kris Johnson', rating: 5, text: "Love my patches from Patch Kraze. They came out exactly how I wanted them to and they don't look cheap and flimsy." %}
-          {% render 'card-review', name: 'Lownice Hobson', rating: 5, text: 'My design was pretty intricate and the patches look amazing!' %}
-          {% render 'card-review', name: 'Lena Lindsay', rating: 5, text: 'Absolutely LOVE how my patches came out. Colors and Detail definitely a 10+. Working on my next order right now.' %}
           {% render 'card-review', name: 'Michael Torres', rating: 5, text: "Best patches I've ever ordered. The embroidery detail is incredible and they arrived faster than expected!" %}
           {% render 'card-review', name: 'Sarah Mitchell', rating: 5, text: 'Perfect for our team uniforms. Patch Kraze delivered exactly what we needed. Highly professional!' %}
           {% render 'card-review', name: 'David Chen', rating: 5, text: 'Outstanding quality and customer service. Will definitely order again for our club patches.' %}

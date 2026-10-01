@@ -1,6 +1,7 @@
 {% comment %}
   Product card rail ("Best sellers"). Blocks pick products; the
-  card auto-pulls image and from-price, with optional rating/review count.
+  card auto-pulls image and from-price. Cards carry no star rating: ratings
+  live on the product page, where they come from real review data.
 
   Optional category tabs ("Show category tabs"): each card is tagged with a
   group (matching the header mega-menu categories) and/or Best seller, and
@@ -19,7 +20,7 @@
     { "type": "url", "id": "view_all_link", "label": "View-all link" },
     { "type": "text", "id": "rail_label", "label": "Rail label", "default": "Customer Favorites" },
     { "type": "text", "id": "rail_sub", "label": "Rail subtext", "default": "The styles our customers reorder most" },
-    { "type": "text", "id": "moq_text", "label": "Badge text", "default": "10 pc min" },
+    { "type": "text", "id": "moq_text", "label": "Badge text", "default": "From 10 pcs" },
     { "type": "header", "content": "Category tabs" },
     { "type": "checkbox", "id": "show_tabs", "label": "Show category tabs", "info": "Filters cards by each card's Group / Best seller setting. The rail label and subtext are replaced by the tab row.", "default": false },
     { "type": "text", "id": "best_tab_label", "label": "Best sellers tab label", "default": "Most Popular" },
@@ -32,8 +33,6 @@
       "settings": [
         { "type": "product", "id": "product", "label": "Product" },
         { "type": "image_picker", "id": "image", "label": "Image override (optional)" },
-        { "type": "text", "id": "rating", "label": "Star rating (e.g. 4.8, blank to hide)", "default": "4.8" },
-        { "type": "text", "id": "review_count", "label": "Review count (blank to hide)" },
         {
           "type": "select", "id": "group", "label": "Group (category tabs)", "default": "",
           "options": [
@@ -75,9 +74,6 @@
   .patch-shelves__meta { display: flex; align-items: center; gap: 0.6rem; margin: 0.3rem 0 0.7rem; flex-wrap: wrap; }
   .patch-shelves__btn { margin-top: auto; }
   .patch-shelves__price { font-size: var(--pk-fs-body); color: var(--pk-text-brand); font-weight: 600; }
-  .patch-shelves__rating { display: inline-flex; align-items: center; gap: 0.25rem; font-size: var(--pk-fs-label); color: var(--pk-text-secondary); }
-  .patch-shelves__star { color: var(--pk-text-rating); }
-  .patch-shelves__count { color: var(--pk-text-muted); }
   .patch-shelves__btn { display: block; width: 100%; text-align: center; font-size: var(--pk-fs-label); font-weight: 700; padding: 0.65rem 1.1rem; border-radius: var(--pk-radius-sm); box-sizing: border-box; }
   /* Whole-card hover swaps this to brand green (not the standard Dark-CTA
      hover darken) - a deliberate "this tile is active" cue, kept as-is. */
@@ -183,16 +179,8 @@
                   <span class="patch-shelves__title">{{ product.title }}</span>
                   <div class="patch-shelves__meta">
                     <span class="patch-shelves__price">From {{ product.price_min | money }}</span>
-                    {%- if block.settings.rating != blank -%}
-                      <span class="patch-shelves__rating">
-                        <span class="patch-shelves__star">&#9733;</span>{{ block.settings.rating }}
-                        {%- if block.settings.review_count != blank -%}
-                          <span class="patch-shelves__count">({{ block.settings.review_count }})</span>
-                        {%- endif -%}
-                      </span>
-                    {%- endif -%}
                   </div>
-                  <span class="patch-shelves__btn pk-btn-dark">Customize</span>
+                  <span class="patch-shelves__btn pk-btn-dark">Start designing</span>
                 </div>
               </a>
             </div>
