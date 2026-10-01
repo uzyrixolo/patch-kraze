@@ -62,8 +62,8 @@
         "bg": "#fafafa"
       }
     },
-    "patch_shelves": {
-      "type": "patch-shelves",
+    "style_grid": {
+      "type": "style-grid",
       "blocks": {
         "card_1": {
           "type": "product_card",
@@ -223,12 +223,11 @@
       ],
       "settings": {
         "heading": "Browse Every Patch Style",
-        "columns": 4,
+        "columns": 6,
         "view_all_label": "See the Full Lineup",
         "view_all_link": "",
         "rail_label": "Customer Favorites",
         "rail_sub": "The styles our customers reorder most",
-        "moq_text": "From 10 pcs",
         "show_tabs": true,
         "best_tab_label": "Most Popular",
         "all_tab_label": "Everything"
@@ -775,7 +774,7 @@
     "video_section_patch_kraze_DwW7mE",
     "patches_hero",
     "customer_gallery",
-    "patch_shelves",
+    "style_grid",
     "shop_all_patches",
     "shop_popular_products",
     "credibility",

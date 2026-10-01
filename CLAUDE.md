@@ -470,6 +470,15 @@ cart, quote button). On phones the menu collapses into a drawer that slides in f
   (e.g. `/pages/quote`) render on a dark canvas. It happens with the previous header too and
   does not happen on the live theme.
 
+## Homepage style grid
+
+`sections/style-grid.liquid` ("Browse Every Patch Style") lists the product styles as round
+photo tiles with the name and starting price underneath; the whole tile is the link. Blocks
+pick the product, an optional image override, a group and a "most popular" flag, and the tab
+row filters tiles client-side by those two (`data-sg-group`, `data-sg-best`). It replaced the
+older `patch-shelves` section in October 2026; `templates/index.json` references it as
+`style_grid`.
+
 ## Homepage photo strip
 
 `sections/customer-gallery.liquid` has no tiles configured, so it shows catalog photos from the
