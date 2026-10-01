@@ -407,7 +407,8 @@ Railway.
 ## Product page layout (October 2026)
 
 The order block in `main-product-patch-kraze.liquid` is a set of numbered steps (`.pk-step`,
-numbered by a CSS counter so stickers and DTF, which skip a step, still count 1-2-3-4):
+numbered by a CSS counter so stickers and DTF, which skip a step, still count 1-2-3-4; each
+step opens with a tinted band, `.pk-step__head`, holding a round number and the step's name):
 **Your artwork** (upload button, preview, clean-up tools, notes) -> **dimensions** ->
 **Quantity** (input, summary card, price-break table) -> **Finishing** (patch products only:
 cut shape, colors, backing, leather color) -> **Place your order**.

@@ -108,16 +108,19 @@
   .pk-facts svg { width: 0.9rem; height: 0.9rem; color: #9333ea; flex-shrink: 0; }
 
   /* Numbered steps. CSS counters keep the numbering right when a product type
-     skips the finishing step (stickers, DTF transfers). */
+     skips the finishing step (stickers, DTF transfers). Each step opens with a
+     tinted band holding a round number and the step's name, so the start of a
+     step is the most visible thing in the order column; the band also does
+     the job of the divider line between steps. */
   #product-form-pk { counter-reset: pkstep; }
-  .pk-step { counter-increment: pkstep; border-top: 1px solid #e5e7eb; padding-top: 1.5rem; margin-top: 1.5rem; }
-  .pk-step--first { border-top: none; padding-top: 0; margin-top: 0.25rem; }
-  .pk-step__head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.6rem; margin-bottom: 1rem; }
-  .pk-step__num { width: 1.75rem; height: 1.75rem; border-radius: 0.5rem; background: #111827; color: #fff; font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pk-step { counter-increment: pkstep; margin-top: 2.25rem; }
+  .pk-step--first { margin-top: 0.5rem; }
+  .pk-step__head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin-bottom: 1.15rem; padding: 0.7rem 1rem 0.7rem 0.7rem; background: #f3e8ff; border-radius: 0.85rem; }
+  .pk-step__num { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: #9333ea; color: #fff; font-size: 1.1rem; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 6px 14px -6px rgba(126, 34, 206, 0.75); }
   .pk-step__num::before { content: counter(pkstep); }
-  .pk-step__title { font-size: 1.1rem; font-weight: 700; color: #111827; margin: 0; line-height: 1.2; }
+  .pk-step__title { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.01em; color: #111827; margin: 0; line-height: 1.2; }
   .pk-step__aside { margin-left: auto; display: flex; flex-wrap: wrap; gap: 0.25rem 0.9rem; }
-  .pk-step__sub { font-size: 0.9rem; color: #6b7280; margin: -0.4rem 0 1.25rem; line-height: 1.5; }
+  .pk-step__sub { font-size: 0.9rem; color: #6b7280; margin: -0.35rem 0 1.25rem; line-height: 1.5; }
   .pk-linkbtn { background: none; border: none; padding: 0; cursor: pointer; color: #9333ea; font: inherit; font-size: 0.85rem; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
   .pk-linkbtn:hover { color: #7e22ce; }
   .pk-field-label { display: block; font-size: 0.85rem; font-weight: 700; color: #111827; margin-bottom: 0.4rem; }
@@ -327,7 +330,12 @@
     .pricing-header, .pricing-row { font-size: 0.8rem; padding: 0.75rem 0.5rem; min-width: unset; }
     .nav-arrow { width: 2.5rem; height: 2.5rem; }
     .pk-upload { min-height: 3.25rem; font-size: 1rem; }
-    .pk-step__aside { margin-left: 0; flex-basis: 100%; }
+    .pk-step { margin-top: 2rem; }
+    .pk-step__head { padding: 0.6rem 0.85rem 0.6rem 0.6rem; }
+    .pk-step__num { width: 2rem; height: 2rem; font-size: 1rem; }
+    .pk-step__title { font-size: 1.15rem; }
+    /* The size links drop under the title, lined up with it. */
+    .pk-step__aside { margin-left: 2.8rem; flex-basis: 100%; }
     .checkout-btn { font-size: 1rem; letter-spacing: 0.03em; }
     .stepper-control { height: 2.75rem; }
     .stepper-btn { width: 2.75rem; height: 2.75rem; }
