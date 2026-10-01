@@ -256,16 +256,16 @@
         "card_17"
       ],
       "settings": {
-        "heading": "Shop All Patch Types",
+        "heading": "Browse Every Patch Style",
         "columns": 4,
-        "view_all_label": "View all types",
+        "view_all_label": "See the Full Lineup",
         "view_all_link": "",
-        "rail_label": "Best sellers",
-        "rail_sub": "Our most-ordered styles",
+        "rail_label": "Customer Favorites",
+        "rail_sub": "The styles our customers reorder most",
         "moq_text": "10 pc min",
         "show_tabs": true,
-        "best_tab_label": "Best Sellers",
-        "all_tab_label": "All Types"
+        "best_tab_label": "Most Popular",
+        "all_tab_label": "Everything"
       }
     },
     "shop_all_patches": {
@@ -497,7 +497,7 @@
       ],
       "disabled": true,
       "settings": {
-        "heading": "Shop All Patch Types"
+        "heading": "Browse Every Patch Style"
       }
     },
     "shop_popular_products": {
