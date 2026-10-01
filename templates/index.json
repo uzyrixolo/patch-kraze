@@ -30,11 +30,11 @@
         "eyebrow_text": "Based in USA",
         "eyebrow_animate": true,
         "eyebrow_speed": 110,
-        "title": "Premium Custom Patches with Low 10-Piece Minimums",
-        "subtitle": "Premium custom patches for any design — embroidered, woven, PVC, leather and more. Low minimums, fast turnaround.",
-        "prop_1": "Free Fast Shipping",
-        "prop_2": "100% Satisfaction",
-        "prop_3": "No Setup Fees",
+        "title": "Custom Patches Made Your Way, Starting at 10 Pieces",
+        "subtitle": "Embroidered, PVC, leather, woven and more — send us your design and we'll turn it into a patch, with small-batch orders welcome and quick turnaround.",
+        "prop_1": "Ships Fast, Ships Free",
+        "prop_2": "Satisfaction Guaranteed",
+        "prop_3": "Zero Setup Fees",
         "btn_primary_label": "Shop Custom Patches",
         "btn_primary_link": "",
         "btn_secondary_label": "Get a Free Quote",
@@ -533,32 +533,32 @@
           "type": "process_step",
           "settings": {
             "image": "shopify://shop_images/4-step.jpg",
-            "title": "Upload Your Designs & Place Order Online",
-            "description": "Use designs with unlimited colors, simple or high detail artwork. Upload any design you want and we’ll turn it into high quality custom patches."
+            "title": "Send Us Your Design",
+            "description": "Any file, any color count, any level of detail — upload it and place your order online in minutes."
           }
         },
         "process_step_w7Qh9j": {
           "type": "process_step",
           "settings": {
             "image": "shopify://shop_images/1-step.jpg",
-            "title": "Approve Your Patch Artwork Proofs",
-            "description": "If selected during checkout, we will send you a virtual proof for approval before we can begin production. We offer free proof approvals on patch orders of $300 or more."
+            "title": "Review & Approve Your Proof",
+            "description": "Opt in at checkout and we'll send a digital proof for your sign-off before production starts — free on orders of $300 or more."
           }
         },
         "process_step_9mALJD": {
           "type": "process_step",
           "settings": {
             "image": "shopify://shop_images/3-step.jpg",
-            "title": "We Create & Ship Your Custom Patch Order",
-            "description": "We make ordering custom patches easy. We can create the most detailed, highest quality, full color custom patches you can find."
+            "title": "We Produce and Ship It",
+            "description": "Our team gets to work turning your proof into finished patches, then ships your order out."
           }
         },
         "process_step_Lte4kd": {
           "type": "process_step",
           "settings": {
             "image": "shopify://shop_images/2-step.jpg",
-            "title": "Heatpress when Ready. Keep Extras in Storage Forever",
-            "description": "Press your custom made patches with a heat press, while using our required pressing instructions for ultimate durability."
+            "title": "Apply Whenever You're Ready",
+            "description": "Heat press, sew, or stick them on whenever you need them — and hold onto extras for future use."
           }
         }
       },
@@ -569,8 +569,8 @@
         "process_step_Lte4kd"
       ],
       "settings": {
-        "heading": "The Patch Kraze Ordering Process",
-        "subheading": "Simplifying the Process with Satisfaction Guaranteed"
+        "heading": "How Your Order Comes Together",
+        "subheading": "From upload to delivery, here's what happens at each step"
       }
     },
     "why_buy": {
