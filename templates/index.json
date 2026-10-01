@@ -193,7 +193,7 @@
             "point_1": "Classic stitched-thread texture",
             "point_2": "Merrowed or thin-stitched edge",
             "group": "embroidered",
-            "best_seller": false
+            "best_seller": true
           }
         },
         "card_2": {
@@ -203,7 +203,7 @@
             "point_1": "Dye-sublimated, any number of colors",
             "point_2": "Handles photos, shading and small text",
             "group": "printed",
-            "best_seller": false
+            "best_seller": true
           }
         },
         "card_3": {
@@ -213,7 +213,7 @@
             "point_1": "Flexible molded PVC with raised detail",
             "point_2": "Waterproof, made for gear and bags",
             "group": "pvc",
-            "best_seller": false
+            "best_seller": true
           }
         },
         "card_4": {
@@ -223,7 +223,7 @@
             "point_1": "Real leather, laser-engraved",
             "point_2": "A natural match for hats and jackets",
             "group": "leather",
-            "best_seller": false
+            "best_seller": true
           }
         },
         "card_5": {
@@ -394,7 +394,7 @@
         "link_label": "Get a quote",
         "link_url": "",
         "show_tabs": true,
-        "best_tab_label": "Most Popular",
+        "best_tab_label": "Top Picks",
         "all_tab_label": "Everything"
       }
     },
