@@ -40,6 +40,7 @@
         { "value": "inside", "label": "Inside the panel" }
       ]
     },
+    { "type": "range", "id": "image_width", "label": "Image width", "min": 30, "max": 50, "step": 5, "unit": "%", "default": 50, "info": "The picture's share of the row on desktop. At 50% the picture and the panel are the same width." },
     {
       "type": "select", "id": "image_fit", "label": "Image fit", "default": "cover",
       "options": [
@@ -92,13 +93,17 @@
      panel's text, either beside the colored box (--split, on the wrapper) or
      inside it (--media, on the panel). Either way the facts drop to two
      columns to make room. */
-  .pk-cr__inner--split { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr); gap: 1.5rem; align-items: stretch; }
-  .pk-cr__panel--media { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: 2rem; align-items: stretch; }
+  .pk-cr__inner--split { display: grid; grid-template-columns: minmax(0, var(--cr-panel-fr, 1fr)) minmax(0, var(--cr-image-fr, 1fr)); gap: 1.5rem; align-items: stretch; }
+  .pk-cr__panel--media { display: grid; grid-template-columns: minmax(0, var(--cr-panel-fr, 1fr)) minmax(0, var(--cr-image-fr, 1fr)); gap: 2rem; align-items: stretch; }
   .pk-cr__main { min-width: 0; }
   .pk-cr__media { min-height: 16rem; border-radius: var(--pk-radius-md); overflow: hidden; }
   .pk-cr__media--outside { border-radius: var(--pk-radius-lg); }
-  @media (min-width: 900px) {
+  /* Beside a picture the panel is about half as wide, so its padding and
+     figures tighten up and the facts sit two to a row. */
+  @media (min-width: 1024px) {
+    .pk-cr--image .pk-cr__panel { padding: 2.25rem 2rem; }
     .pk-cr--image .pk-cr__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pk-cr--image .pk-cr__value { font-size: clamp(2rem, 3vw, 2.75rem); }
   }
   .pk-cr__media img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
   .pk-cr__media--contain img { object-fit: contain; }
@@ -112,7 +117,11 @@
   .pk-cr__label { margin: 0.6rem 0 0.35rem; font-size: var(--pk-fs-body); font-weight: 700; line-height: 1.3; color: var(--cr-fg); }
   .pk-cr__text { margin: 0; font-size: var(--pk-fs-label); line-height: 1.5; color: var(--cr-soft); }
 
-  @media (max-width: 899px) {
+  /* Tablets: two facts per row, so four facts make a tidy two-by-two. */
+  @media (min-width: 750px) and (max-width: 1023px) {
+    .pk-cr__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 1023px) {
     .pk-cr__inner--split { grid-template-columns: 1fr; gap: 1rem; }
     .pk-cr__panel--media { grid-template-columns: 1fr; gap: 1.5rem; }
     .pk-cr__media { min-height: 0; aspect-ratio: 16 / 10; }
@@ -137,6 +146,8 @@
     assign cr_has_image = true
   endif
   assign cr_image_position = section.settings.image_position | default: 'outside'
+  assign cr_image_share = section.settings.image_width | default: 50
+  assign cr_panel_share = 100 | minus: cr_image_share
 -%}
 {%- capture cr_media -%}
   {%- if cr_has_image -%}
@@ -154,7 +165,7 @@
   {%- endif -%}
 {%- endcapture -%}
 
-<section class="pk-cr pk-cr--{{ section.settings.tone | default: 'purple' }}{% if cr_has_image %} pk-cr--image{% endif %}">
+<section class="pk-cr pk-cr--{{ section.settings.tone | default: 'purple' }}{% if cr_has_image %} pk-cr--image{% endif %}"{% if cr_has_image %} style="--cr-panel-fr: {{ cr_panel_share }}fr; --cr-image-fr: {{ cr_image_share }}fr;"{% endif %}>
   <div class="pk-cr__inner{% if cr_has_image and cr_image_position == 'outside' %} pk-cr__inner--split{% endif %}">
     <div class="pk-cr__panel{% if cr_has_image and cr_image_position == 'inside' %} pk-cr__panel--media{% endif %}">
       <div class="pk-cr__main">
