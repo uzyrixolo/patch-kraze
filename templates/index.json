@@ -27,7 +27,7 @@
     "patches_hero": {
       "type": "patches-hero",
       "settings": {
-        "eyebrow_text": "Made in USA",
+        "eyebrow_text": "Based in USA",
         "eyebrow_animate": true,
         "eyebrow_speed": 110,
         "title": "Premium Custom Patches with Low 10-Piece Minimums",
@@ -45,7 +45,7 @@
         "stat_2_value": "10 Piece",
         "stat_2_label": "Minimum Order",
         "stat_banner": "Ships as Fast as 5 Business Days!",
-        "hero_video": "shopify://files/videos/WhatsApp Video 2026-08-05 at 2.14.31 AM.mp4",
+        "hero_video": "",
         "hero_video_url": "",
         "video_autoplay": true,
         "video_controls": false,
