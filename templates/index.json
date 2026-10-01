@@ -379,12 +379,15 @@
       "settings": {
         "heading": "Browse Every Patch Style",
         "columns": 4,
-        "background": "#f7f4fc",
         "mobile_layout": "swipe",
         "view_all_label": "See the Full Lineup",
         "view_all_link": "",
         "rail_label": "Customer Favorites",
         "rail_sub": "The styles our customers reorder most",
+        "background": "#f7f4fc",
+        "bg_image": "shopify://shop_images/Neon_Los_Angeles_Graffiti_Patch_Mural.png",
+        "bg_tint": 80,
+        "text_tone": "light",
         "price_prefix": "From",
         "price_suffix": "each in bulk",
         "btn_label": "Customize",
@@ -639,6 +642,7 @@
           "type": "fact",
           "settings": {
             "value": "16\"",
+            "product": "",
             "label": "largest patch size",
             "text": "Embroidered patches run from 1 to 16 inches, in any shape."
           }
@@ -647,6 +651,7 @@
           "type": "fact",
           "settings": {
             "value": "3",
+            "product": "",
             "label": "ways to attach",
             "text": "Iron-on, Velcro or peel-off adhesive backing."
           }
@@ -655,6 +660,7 @@
           "type": "fact",
           "settings": {
             "value": "24–48h",
+            "product": "",
             "label": "to see a free mockup",
             "text": "Tick the mockup box when you order and approve it before production."
           }
