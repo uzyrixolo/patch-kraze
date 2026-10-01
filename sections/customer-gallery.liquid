@@ -1,15 +1,18 @@
 {% comment %}
-  Auto-scrolling customer photo marquee with optional review lightbox.
-  Add tiles as blocks (photo + optional review). With no blocks, falls back to
-  product photos from the configured collection so the strip is never empty.
+  Auto-scrolling photo marquee with a lightbox.
+  With no blocks it shows product photos from the fallback collection
+  (ready-made patches by default) - those are catalog photos, so the heading
+  must not describe them as customer photos, and they carry no stars.
+  Tiles added as blocks are for genuine customer photos; stars and a name show
+  only on a tile that has review text, and that review must be a real one.
 {% endcomment %}
 
 {% schema %}
 {
   "name": "Customer Gallery",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Patches Our Customers Are Showing Off" },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "A look at real orders from real customers — tap any photo for a closer look." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready-Made Designs", "info": "Describe what the photos really are. Only call them customer photos once real customer tiles have been added below." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Patches you can order exactly as shown — tap one for a closer look." },
     { "type": "range", "id": "scroll_speed", "label": "Scroll duration (seconds, lower = faster)", "min": 20, "max": 180, "step": 5, "default": 90 },
     { "type": "collection", "id": "fallback_collection", "label": "Fallback collection (used when no tiles added)" },
     { "type": "color", "id": "bg", "label": "Background", "default": "#fafafa" }
@@ -93,10 +96,9 @@
             data-headline="{{ product.title | escape }}"
             data-text=""
             data-author=""
-            data-rating="5"
+            data-rating=""
             data-link="{{ product.url }}">
           <img src="{{ product.featured_image | img_url: '400x400', crop: 'center' }}" loading="lazy" alt="{{ product.title | escape }}">
-          <span class="pk-cgallery__badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg></span>
         </li>
       {%- endif -%}
     {%- endfor -%}
@@ -136,11 +138,12 @@
     document.querySelectorAll('.pk-cgallery__tile').forEach(tile => {
       tile.addEventListener('click', function() {
         document.getElementById('pk-cg-lb-img').src = this.dataset.img;
-        const rating = parseInt(this.dataset.rating) || 5;
-        document.getElementById('pk-cg-lb-stars').textContent = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+        // Stars only accompany an actual review; a bare photo gets none.
+        const rating = this.dataset.text ? parseInt(this.dataset.rating) : 0;
+        document.getElementById('pk-cg-lb-stars').textContent = rating ? '★'.repeat(rating) + '☆'.repeat(5 - rating) : '';
         document.getElementById('pk-cg-lb-headline').textContent = this.dataset.headline || '';
         document.getElementById('pk-cg-lb-text').textContent = this.dataset.text || '';
-        document.getElementById('pk-cg-lb-author').textContent = this.dataset.author ? this.dataset.author + ' — Verified Buyer' : '';
+        document.getElementById('pk-cg-lb-author').textContent = this.dataset.author || '';
         const link = document.getElementById('pk-cg-lb-link');
         if (this.dataset.link) { link.href = this.dataset.link; link.style.display = 'inline-block'; }
         else { link.style.display = 'none'; }

@@ -55,8 +55,8 @@
     "customer_gallery": {
       "type": "customer-gallery",
       "settings": {
-        "heading": "Patches Our Customers Are Showing Off",
-        "subheading": "A look at real orders from real customers — tap any photo for a closer look.",
+        "heading": "Ready-Made Designs",
+        "subheading": "Patches you can order exactly as shown — tap one for a closer look.",
         "scroll_speed": 90,
         "fallback_collection": "",
         "bg": "#fafafa"
