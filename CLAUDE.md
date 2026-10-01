@@ -505,10 +505,15 @@ credibility -> factory video -> `ordering_process` -> why-buy -> FAQ -> blog -> 
     first phrase is in the HTML and a visually hidden copy carries the full heading, so it
     reads correctly without JS, with reduced motion, and to screen readers. The typed line
     never wraps, so keep phrases short enough for one line on a phone.
-  - **Background image**: `bg_image` (desktop) and `bg_image_mobile` (screens under 750px),
-    either or both. When one is set it fills the panel behind the text, the photo on the
-    right is dropped, and a wash (`bg_tint`, `bg_text` dark/light) keeps the copy readable.
-    On phones a strip under the copy is left clear for the picture (`--hh-clear`).
+  - **Background** is set in the theme editor (Home page -> Home Hero -> Background). The
+    panel behind the copy takes a color or gradient (`panel_bg`, a `color_background`
+    setting) or an image: `bg_image` (desktop) and `bg_image_mobile` (screens under 750px),
+    either or both. When an image is set it fills the panel, the photo on the right is
+    dropped, and a wash (`bg_tint`) keeps the copy readable; on phones a strip under the copy
+    is left clear for the picture (`--hh-clear`). `bg_text` switches the copy to white for
+    dark backgrounds, with or without an image. The assurance row always sits on white.
+  - Shopify rejects a section whose select option label is longer than 50 characters - the
+    file silently fails to upload. `shopify theme dev` shows the error; a push would not.
   - Under 750px the assurance row is a carousel: one item per view in a scroll-snap row (so
     swiping is native), dots underneath, auto-advance every 3.5s that pauses on touch, when
     the tab is hidden, and under reduced motion.

@@ -10,9 +10,13 @@
   "Rotating first line"; the second line stays put. The first phrase is in the
   HTML, so the heading reads correctly with scripts off or reduced motion on.
 
-  Background image (optional): set a desktop image, a mobile image, or both.
-  When one is set it fills the panel behind the text and the photo on the
-  right is dropped. Screens under 750px use the mobile image.
+  Background: the panel behind the copy takes a color or gradient
+  ("Background color or gradient"), or an image: set a desktop image, a
+  mobile image, or both. When an image is set it fills the panel behind the
+  text and the photo on the right is dropped; screens under 750px use the
+  mobile image. "Text color" switches the copy to white for dark backgrounds.
+  The assurance row always sits on white underneath, so it stays readable
+  whatever the panel is set to.
 
   Every line here is a statement about what Patch Kraze offers. Change the
   wording freely, but do not add a number, a rating or a guarantee that the
@@ -41,15 +45,17 @@
     { "type": "url", "id": "extra_link", "label": "Extra link", "info": "Defaults to /pages/ai-image-generator. Clear the label to hide the link." },
     { "type": "header", "content": "Photo" },
     { "type": "image_picker", "id": "image", "label": "Photo (right side)", "info": "Used when no background image is set. Leave empty to use the Full Color Printed Patches product photo." },
-    { "type": "header", "content": "Background image (optional)" },
+    { "type": "header", "content": "Background" },
+    { "type": "color_background", "id": "panel_bg", "label": "Background color or gradient", "default": "linear-gradient(180deg, #f1e8ff 0%, #faf5ff 58%, #ffffff 100%)", "info": "The panel behind the text. Hidden by a background image when one is set below." },
     { "type": "image_picker", "id": "bg_image", "label": "Background image, desktop", "info": "Full-width banner, about 2400 x 900 px. Keep the subject on the right: the text sits on the left. Replaces the photo on the right." },
     { "type": "image_picker", "id": "bg_image_mobile", "label": "Background image, mobile", "info": "Used on screens under 750px. About 1000 x 1500 px with the subject in the lower half: the text sits at the top. Falls back to the desktop image." },
-    { "type": "range", "id": "bg_tint", "label": "Tint behind the text", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 85, "info": "A soft wash on the text side so the words stay readable. 0 turns it off." },
+    { "type": "range", "id": "bg_tint", "label": "Tint behind the text (images only)", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 85, "info": "A soft wash on the text side of a background image so the words stay readable. 0 turns it off." },
     {
-      "type": "select", "id": "bg_text", "label": "Text over the image", "default": "dark",
+      "type": "select", "id": "bg_text", "label": "Text color", "default": "dark",
+      "info": "On a background image the tint follows this: light behind dark text, dark behind white text.",
       "options": [
-        { "value": "dark", "label": "Dark text, light tint (for light images)" },
-        { "value": "light", "label": "White text, dark tint (for dark images)" }
+        { "value": "dark", "label": "Dark text (for light backgrounds)" },
+        { "value": "light", "label": "White text (for dark backgrounds)" }
       ]
     }
   ],
@@ -91,10 +97,12 @@
 {% endschema %}
 
 <style>
-  .pk-hh { background: linear-gradient(180deg, #f1e8ff 0%, #faf5ff 58%, #ffffff 100%); }
-  .pk-hh__stage { position: relative; }
+  /* The stage (copy and photo) carries the panel background; the assurance
+     row under it stays on white. */
+  .pk-hh { background: #fff; }
+  .pk-hh__stage { position: relative; background: var(--hh-panel, linear-gradient(180deg, #f1e8ff 0%, #faf5ff 58%, #ffffff 100%)); }
   .pk-hh__inner { position: relative; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-  .pk-hh__main { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 3rem; align-items: center; padding-top: 2.75rem; }
+  .pk-hh__main { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 3rem; align-items: center; padding: 2.75rem 0 2.5rem; }
 
   .pk-hh__eyebrow { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0 0 0.7rem; font-size: var(--pk-fs-label); font-weight: 700; color: #7e22ce; }
   .pk-hh__eyebrow svg { width: 1rem; height: 1rem; flex-shrink: 0; }
@@ -126,7 +134,7 @@
   .pk-hh__bg { position: absolute; inset: 0; display: block; overflow: hidden; }
   .pk-hh__bg img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: right center; }
   .pk-hh__tint { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(var(--hh-tint-rgb), var(--hh-tint)) 0%, rgba(var(--hh-tint-rgb), var(--hh-tint)) 42%, rgba(var(--hh-tint-rgb), 0) 76%); }
-  .pk-hh--bg { --hh-tint-rgb: 250, 245, 255; background: #fff; }
+  .pk-hh--bg { --hh-tint-rgb: 250, 245, 255; }
   .pk-hh--bg .pk-hh__main { grid-template-columns: minmax(0, 36rem); min-height: 22rem; padding-bottom: 2.75rem; }
   .pk-hh--bg.pk-hh--light { --hh-tint-rgb: 17, 24, 39; }
   .pk-hh--light .pk-hh__title, .pk-hh--light .pk-hh__points li { color: #fff; }
@@ -134,8 +142,8 @@
   .pk-hh--light .pk-hh__points li::before { background: #d8b4fe; }
   .pk-hh--light .pk-hh__note { color: #e5e7eb; }
 
-  .pk-hh__assure { list-style: none; margin: 2.5rem 0 0; padding: 1.15rem 0 1.6rem; border-top: 1px solid #e9d5ff; display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 1rem 1.5rem; }
-  .pk-hh--bg .pk-hh__assure { margin-top: 0; border-top: none; padding-top: 1.4rem; }
+  .pk-hh__assure { list-style: none; margin: 0; padding: 1.15rem 0 1.6rem; border-top: 1px solid #e9d5ff; display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 1rem 1.5rem; }
+  .pk-hh--bg .pk-hh__assure { border-top: none; padding-top: 1.4rem; }
   .pk-hh__assure li { display: flex; align-items: center; gap: 0.7rem; min-width: 0; }
   .pk-hh__assure svg { width: 1.9rem; height: 1.9rem; flex-shrink: 0; color: #7e22ce; }
   .pk-hh__assure strong { display: block; font-size: var(--pk-fs-label); font-weight: 700; line-height: 1.25; color: #111827; }
@@ -143,8 +151,7 @@
   .pk-hh__dots { display: none; }
 
   @media (max-width: 899px) {
-    .pk-hh__main { grid-template-columns: 1fr; gap: 1.75rem; padding-top: 1.75rem; }
-    .pk-hh__assure { margin-top: 1.75rem; }
+    .pk-hh__main { grid-template-columns: 1fr; gap: 1.75rem; padding: 1.75rem 0; }
   }
   @media (max-width: 749px) {
     /* Phones: the copy sits at the top over an even wash, and a strip is left
@@ -212,7 +219,7 @@
   assign tint = section.settings.bg_tint | divided_by: 100.0
 -%}
 
-<section class="pk-hh{% if has_bg %} pk-hh--bg pk-hh--{{ section.settings.bg_text }}{% endif %}"{% if has_bg %} style="--hh-tint: {{ tint }};"{% endif %}>
+<section class="pk-hh{% if has_bg %} pk-hh--bg{% endif %}{% if section.settings.bg_text == 'light' %} pk-hh--light{% endif %}" style="{% if section.settings.panel_bg != blank %}--hh-panel: {{ section.settings.panel_bg }};{% endif %}{% if has_bg %} --hh-tint: {{ tint }};{% endif %}">
   <div class="pk-hh__stage">
     {%- if has_bg -%}
       <picture class="pk-hh__bg">
