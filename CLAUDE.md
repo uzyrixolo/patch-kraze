@@ -538,7 +538,9 @@ videos.
 - **`sections/credibility-patch-kraze.liquid`** ("Key Facts" in the editor) - one colored
   panel (purple, near-black or light) with a heading and up to four fact blocks: a large
   figure, a label and one line. A fact with a product picked shows that product's
-  `price_min` live instead of a typed figure. On phones the facts are a swiped row.
+  `price_min` live instead of a typed figure. On phones the facts are a swiped row. An
+  optional `image` (with `image_fit` crop or contain) sits on the right of the panel; the
+  facts then form two columns beside it, and on phones the picture goes under the facts.
   - Facts here must be checkable against the store. The panel deliberately states no
     minimum order: as of 2026-10-01 the product page enforces 10 pieces (`productMinQty`),
     the smallest quantity tier is 10 on embroidered, printed, PVC, 3D, woven, chenille,

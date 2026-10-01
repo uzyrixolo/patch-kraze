@@ -6,6 +6,9 @@
   product is picked, that product's lowest price read live from the store, so
   a price never has to be typed here and cannot go out of date.
 
+  An optional picture sits on the right of the panel on desktop (the facts
+  then form two columns beside it) and under the facts on phones.
+
   Only put things in this panel that the store can show to be true: an order
   minimum, a size range, a number of options, a live price. No rankings
   ("#1"), no "best", no customer counts.
@@ -25,6 +28,15 @@
         { "value": "purple", "label": "Purple with white text" },
         { "value": "dark", "label": "Near-black with white text" },
         { "value": "light", "label": "Light lavender with dark text" }
+      ]
+    },
+    { "type": "header", "content": "Image (right side)" },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Optional. Shown on the right of the panel on desktop and under the facts on phones. A square or upright picture works best." },
+    {
+      "type": "select", "id": "image_fit", "label": "Image fit", "default": "cover",
+      "options": [
+        { "value": "cover", "label": "Fill the space (crops the edges)" },
+        { "value": "contain", "label": "Show the whole image" }
       ]
     }
   ],
@@ -66,7 +78,16 @@
 
   .pk-cr__panel { position: relative; overflow: hidden; padding: 2.75rem 2.5rem; border-radius: var(--pk-radius-lg); background: var(--cr-bg); color: var(--cr-fg); }
   .pk-cr__panel::after { content: ""; position: absolute; right: -7rem; top: -9rem; width: 24rem; height: 24rem; border-radius: 50%; background: radial-gradient(circle, var(--cr-glow) 0%, rgba(255, 255, 255, 0) 70%); pointer-events: none; }
-  .pk-cr__intro, .pk-cr__facts { position: relative; z-index: 1; }
+  .pk-cr__intro, .pk-cr__facts, .pk-cr__main, .pk-cr__media { position: relative; z-index: 1; }
+
+  /* With a picture: text and facts on the left, the picture on the right,
+     stretched to the height of the left column. */
+  .pk-cr__panel--media { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: 2rem; align-items: stretch; }
+  .pk-cr__main { min-width: 0; }
+  .pk-cr__panel--media .pk-cr__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pk-cr__media { min-height: 16rem; border-radius: var(--pk-radius-md); overflow: hidden; }
+  .pk-cr__media img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+  .pk-cr__media--contain img { object-fit: contain; }
   .pk-cr__eyebrow { margin: 0 0 0.6rem; font-size: var(--pk-fs-label); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cr-accent); }
   .pk-cr__heading { margin: 0 0 0.7rem; max-width: 40rem; font-size: var(--pk-fs-heading); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; color: var(--cr-fg); }
   .pk-cr__sub { margin: 0; max-width: 38rem; font-size: var(--pk-fs-body); line-height: 1.55; color: var(--cr-soft); }
@@ -77,6 +98,10 @@
   .pk-cr__label { margin: 0.6rem 0 0.35rem; font-size: var(--pk-fs-body); font-weight: 700; line-height: 1.3; color: var(--cr-fg); }
   .pk-cr__text { margin: 0; font-size: var(--pk-fs-label); line-height: 1.5; color: var(--cr-soft); }
 
+  @media (max-width: 899px) {
+    .pk-cr__panel--media { grid-template-columns: 1fr; gap: 1.5rem; }
+    .pk-cr__media { min-height: 0; aspect-ratio: 16 / 10; }
+  }
   @media (max-width: 749px) {
     .pk-cr { padding: 2.25rem 0; }
     .pk-cr__inner { padding: 0 1rem; }
@@ -93,7 +118,8 @@
 
 <section class="pk-cr pk-cr--{{ section.settings.tone | default: 'purple' }}">
   <div class="pk-cr__inner">
-    <div class="pk-cr__panel">
+    <div class="pk-cr__panel{% if section.settings.image != blank %} pk-cr__panel--media{% endif %}">
+      <div class="pk-cr__main">
       <div class="pk-cr__intro">
         {%- if section.settings.eyebrow != blank -%}
           <p class="pk-cr__eyebrow">{{ section.settings.eyebrow }}</p>
@@ -126,6 +152,21 @@
             </li>
           {%- endfor -%}
         </ul>
+      {%- endif -%}
+      </div>
+
+      {%- if section.settings.image != blank -%}
+        <div class="pk-cr__media pk-cr__media--{{ section.settings.image_fit | default: 'cover' }}">
+          <img
+            src="{{ section.settings.image | image_url: width: 900 }}"
+            srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+            sizes="(max-width: 899px) 90vw, 380px"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            loading="lazy"
+          >
+        </div>
       {%- endif -%}
     </div>
   </div>
