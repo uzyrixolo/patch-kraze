@@ -444,6 +444,39 @@ Above the steps: title, rating row, description, a live price card (`#header-pri
   `MissingRefError ... cart-quantity-selector-component` in the console (the drawer section
   HTML is swapped in with `innerHTML`). The item is added and the drawer opens.
 
+## Header (October 2026)
+
+`sections/header-patch-kraze.liquid` is two rows: a slim announcement/utility strip
+(announcement, ready-made and blanks links, phone) and one bar (logo, menu, search / account /
+cart, quote button). On phones the menu collapses into a drawer that slides in from the right.
+
+- **Menu links are defined once**, near the top of the file, as `pk_grp_*` strings of
+  `Label|/url` pairs, and rendered twice (desktop panel and drawer). Add or reorder a link
+  there; a label cannot contain a comma or a pipe.
+- The menu is static HTML with real `<a>` links - nothing is built by script, and the header
+  no longer makes any `all_products` lookups (it used to sit at the 20-handle limit).
+- Panels open on hover via CSS and pin on click/tap/Enter (`data-open`); only one is pinned at
+  a time. Handlers are delegated from `document` because the cart re-renders this section.
+- The header is `position: fixed`. The script pads `body` by the header's full height, measured
+  with the strip visible, so nothing shifts when the strip hides on scroll
+  (`.pk-header--scrolled`). Sticky product galleries use `top: 5.5rem` to clear the bar.
+- Still referenced by id/name from inline handlers: `mobile-drawer`, `mobile-overlay`,
+  `toggleMobileMenu()`, `#search-modal dialog`, `cart-drawer-component`, `#global-cart-drawer`.
+- Section settings: announcement (desktop and a shorter mobile line, which is also used below
+  1200px), phone and its lead-in text, and three optional link overrides.
+- The drawer footer has 5rem of bottom padding on purpose: the chat bubble is pinned to the
+  bottom-right above everything.
+- Preview quirk: in `shopify theme dev`, pages whose sections have no background of their own
+  (e.g. `/pages/quote`) render on a dark canvas. It happens with the previous header too and
+  does not happen on the live theme.
+
+## Homepage photo strip
+
+`sections/customer-gallery.liquid` has no tiles configured, so it shows catalog photos from the
+`ready-made-patches` collection. Its heading therefore says "Ready-Made Designs", and catalog
+tiles carry no stars. Only switch the wording to customer photos after real customer tiles
+(photo plus the customer's own review) have been added as blocks.
+
 ## Conventions
 
 - All copy, images and page structure must be original to Patch Kraze. Do not paste text,
