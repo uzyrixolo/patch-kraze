@@ -12,7 +12,20 @@
     { "type": "header", "content": "Links" },
     { "type": "url", "id": "url_readymade", "label": "Ready-made patches link", "info": "Defaults to /collections/ready-made-patches." },
     { "type": "url", "id": "url_blanks", "label": "Blank hats link", "info": "Defaults to /collections/patch-kraze-blanks." },
-    { "type": "url", "id": "url_quote", "label": "Quote button link", "info": "Defaults to /pages/quote." }
+    { "type": "url", "id": "url_quote", "label": "Quote button link", "info": "Defaults to /pages/quote." },
+    { "type": "header", "content": "Colors and background" },
+    { "type": "color_background", "id": "bar_bg", "label": "Header background (color or gradient)", "default": "#ffffff", "info": "The bar holding the logo and menu." },
+    { "type": "image_picker", "id": "bar_image", "label": "Header background image", "info": "Optional. Fills the bar behind the logo and menu and is cropped to fit, so use a wide, short image: about 2400 x 200 px." },
+    { "type": "range", "id": "bar_tint", "label": "Tint over the image", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 40, "info": "Keeps the menu readable on a busy picture. Dark tint behind white text, light tint behind dark text. 0 turns it off." },
+    {
+      "type": "select", "id": "bar_text", "label": "Header text and icons", "default": "dark",
+      "options": [
+        { "value": "dark", "label": "Dark (for light backgrounds)" },
+        { "value": "light", "label": "White (for dark backgrounds)" }
+      ]
+    },
+    { "type": "color_background", "id": "strip_bg", "label": "Announcement strip background", "default": "#f5f3ff" },
+    { "type": "color", "id": "strip_text", "label": "Announcement strip text", "default": "#4c1d95" }
   ],
   "blocks": [
     {
@@ -51,6 +64,10 @@
   lists below are the fallback used when a group has no blocks, and the source
   for the Services links (pages, with a Files image name as a third part).
   Labels must not contain a comma or a pipe.
+
+  Colors: the bar's background (color or gradient, optional image, tint over
+  the image), whether its text and icons are dark or white, and the strip's
+  background and text color are all section settings ("Colors and background").
 {% endcomment %}
 
 {%- liquid
@@ -83,7 +100,7 @@
   .pk-wrap { max-width: 1440px; margin: 0 auto; padding: 0 1.25rem; }
 
   /* ANNOUNCEMENT / UTILITY STRIP - drops away once the page is scrolled */
-  .pk-strip { background: #f5f3ff; border-bottom: 1px solid #ede9fe; color: #4c1d95; font-size: 0.78rem; }
+  .pk-strip { background: var(--pk-strip-bg, #f5f3ff); border-bottom: 1px solid rgba(17, 24, 39, 0.06); color: var(--pk-strip-fg, #4c1d95); font-size: 0.78rem; }
   .pk-strip__row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2.25rem; }
   .pk-strip__msg { margin: 0; font-weight: 500; }
   .pk-strip__msg--mobile { display: none; }
@@ -101,8 +118,18 @@
     .pk-strip__msg--mobile { display: block; }
   }
 
-  /* MAIN BAR */
-  .pk-bar { background: #fff; border-bottom: 1px solid #e5e7eb; }
+  /* MAIN BAR. Its background is set in the theme editor (Header > Colors and
+     background): a color or gradient, an optional image over it, and a tint
+     over the image. The three are stacked as background layers. */
+  .pk-bar { background: linear-gradient(var(--pk-bar-tint, transparent), var(--pk-bar-tint, transparent)), var(--pk-bar-img, none) center / cover no-repeat, var(--pk-bar-bg, #fff); border-bottom: 1px solid #e5e7eb; }
+  /* White text and icons, for a dark bar. Scoped to the bar so the drop-down
+     panels, the drawer and the search box keep their own dark-on-white. */
+  .pk-header--light .pk-bar { --pk-btn-icon-fg: #fff; --pk-btn-icon-bg-hover: rgba(255, 255, 255, 0.16); border-bottom-color: rgba(255, 255, 255, 0.16); }
+  .pk-header--light .pk-bar .pk-menu__link { color: #fff; }
+  .pk-header--light .pk-bar .pk-menu__link::after { background: #fff; }
+  .pk-header--light .pk-bar .pk-menu__link:focus-visible { outline-color: #fff; }
+  .pk-header--light .pk-bar .pk-quote-btn { background: #fff; color: #111827; }
+  .pk-header--light .pk-bar .pk-quote-btn:hover { background: #f3f4f6; }
   .pk-bar__row { position: relative; display: flex; align-items: stretch; gap: 1.5rem; min-height: 4.25rem; }
   .pk-bar__logo { display: flex; align-items: center; flex-shrink: 0; }
   .pk-bar__logo img { height: 2.75rem; width: auto; display: block; object-fit: contain; }
@@ -210,7 +237,30 @@
   }
 </style>
 
-<div class="pk-header" id="pk-header">
+{%- liquid
+  assign pk_bar_tint = 'transparent'
+  if section.settings.bar_image != blank and section.settings.bar_tint > 0
+    assign pk_bar_tint_alpha = section.settings.bar_tint | divided_by: 100.0
+    if section.settings.bar_text == 'light'
+      assign pk_bar_tint = 'rgba(17, 24, 39, ' | append: pk_bar_tint_alpha | append: ')'
+    else
+      assign pk_bar_tint = 'rgba(255, 255, 255, ' | append: pk_bar_tint_alpha | append: ')'
+    endif
+  endif
+-%}
+{%- style -%}
+  #pk-header {
+    --pk-bar-bg: {{ section.settings.bar_bg | default: '#ffffff' }};
+    --pk-bar-tint: {{ pk_bar_tint }};
+    {%- if section.settings.bar_image != blank %}
+    --pk-bar-img: url('{{ section.settings.bar_image | image_url: width: 2400 }}');
+    {%- endif %}
+    --pk-strip-bg: {{ section.settings.strip_bg | default: '#f5f3ff' }};
+    --pk-strip-fg: {{ section.settings.strip_text | default: '#4c1d95' }};
+  }
+{%- endstyle -%}
+
+<div class="pk-header{% if section.settings.bar_text == 'light' %} pk-header--light{% endif %}" id="pk-header">
 
   <!-- ANNOUNCEMENT / UTILITY STRIP -->
   <div class="pk-strip">

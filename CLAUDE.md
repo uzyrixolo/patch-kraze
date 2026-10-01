@@ -486,7 +486,13 @@ cart, quote button). On phones the menu collapses into a drawer that slides in f
 - Still referenced by id/name from inline handlers: `mobile-drawer`, `mobile-overlay`,
   `toggleMobileMenu()`, `#search-modal dialog`, `cart-drawer-component`, `#global-cart-drawer`.
 - Section settings: announcement (desktop and a shorter mobile line, which is also used below
-  1200px), phone and its lead-in text, and three optional link overrides.
+  1200px), phone and its lead-in text, three optional link overrides, and "Colors and
+  background": the bar's background (`bar_bg` color or gradient, optional `bar_image`, a
+  `bar_tint` over the image), `bar_text` (dark or white text and icons), and the strip's
+  background and text color. They reach the CSS as custom properties set on `#pk-header` in
+  a `{% style %}` block; white mode is the `pk-header--light` class and is scoped to
+  `.pk-bar`, so the drop-down panels, the drawer and the search box stay dark-on-white.
+  Saved values live in `sections/header-group.json`, which the theme editor also writes.
 - The drawer footer has 5rem of bottom padding on purpose: the chat bubble is pinned to the
   bottom-right above everything.
 - Preview quirk: in `shopify theme dev`, pages whose sections have no background of their own
