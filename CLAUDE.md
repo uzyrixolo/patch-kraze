@@ -502,7 +502,8 @@ cart, quote button). On phones the menu collapses into a drawer that slides in f
 ## Homepage sections (October 2026)
 
 Order in `templates/index.json`: `home_hero` -> `type_showcase` -> `style_grid` ->
-credibility -> factory video -> `ordering_process` -> why-buy -> FAQ -> blog -> videos.
+credibility -> factory video -> `ordering_process` -> why-buy -> FAQ -> `blog_highlights` ->
+videos.
 
 - **`sections/home-hero.liquid`** - light panel: eyebrow, heading, three points, two buttons,
   one photo on the right, and a row of "assurance" blocks underneath.
@@ -569,7 +570,11 @@ credibility -> factory video -> `ordering_process` -> why-buy -> FAQ -> blog -> 
   - Unresolved, the owner's call: the site gives three different production times ("rush
     from 5 business days" in the hero and strip, "10-12 business days" in the What You Get
     section, and the checkout's day ranges above). The FAQ only quotes checkout.
-- **Section backgrounds**: `style-grid` and the FAQ take a color or gradient
+- **`sections/blog-highlights.liquid`** - latest posts from one blog as cards (picture cropped
+  to one shape, date, title, a few lines, read link; the whole card is the link), with a
+  link to the blog. It replaced the base theme's `featured-blog-posts` on the homepage, whose
+  pictures kept their own shapes and so never lined up. Swiped row or stacked list on phones.
+- **Section backgrounds**: `style-grid`, `blog-highlights` and the FAQ take a color or gradient
   (`color_background`), an optional image with a separate mobile image, a tint and a
   "heading color" (dark or white). The image layer is `snippets/pk-section-bg.liquid`
   (renders nothing without an image; its CSS is in the snippet's `{% stylesheet %}`); the
