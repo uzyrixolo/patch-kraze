@@ -3,420 +3,300 @@
   "name": "Header Patch Kraze",
   "class": "section-header",
   "settings": [
-    {
-       "type": "header",
-       "content": "Top Bar Links"
-    },
-    { "type": "url", "id": "url_transfers", "label": "Transfers URL" },
-    { "type": "url", "id": "url_blanks", "label": "Blanks URL" },
-    { "type": "url", "id": "url_patches", "label": "Patches URL" },
-    { "type": "url", "id": "url_printhouse", "label": "Printhouse URL" },
-    { "type": "url", "id": "url_pod", "label": "POD URL" },
-    {
-       "type": "header",
-       "content": "Header contact"
-    },
-    { "type": "text", "id": "contact_phone", "label": "Phone number", "default": "909-931-6231", "info": "Shown under the rotating label and used for the tap-to-call link." },
-    { "type": "text", "id": "contact_label_1", "label": "Rotating label 1", "default": "Live Chat 24/7" },
-    { "type": "text", "id": "contact_label_2", "label": "Rotating label 2", "default": "Talk to Patch Kraze", "info": "Leave empty to show label 1 only, with no rotation." }
+    { "type": "header", "content": "Announcement strip" },
+    { "type": "text", "id": "announcement", "label": "Announcement (desktop)", "default": "Rush production in as little as 5 business days • 10 piece order minimum • Free shipping on orders over $100" },
+    { "type": "text", "id": "announcement_mobile", "label": "Announcement (mobile)", "default": "Free shipping over $100 • 10 piece minimum", "info": "Shorter line for phones. Leave empty to reuse the desktop text." },
+    { "type": "header", "content": "Contact" },
+    { "type": "text", "id": "contact_phone", "label": "Phone number", "default": "909-931-6231", "info": "Shown in the strip above the header and in the mobile menu; used for the tap-to-call link." },
+    { "type": "text", "id": "contact_label", "label": "Text before the phone number", "default": "Questions? Call" },
+    { "type": "header", "content": "Links" },
+    { "type": "url", "id": "url_readymade", "label": "Ready-made patches link", "info": "Defaults to /collections/ready-made-patches." },
+    { "type": "url", "id": "url_blanks", "label": "Blank hats link", "info": "Defaults to /collections/patch-kraze-blanks." },
+    { "type": "url", "id": "url_quote", "label": "Quote button link", "info": "Defaults to /pages/quote." }
   ]
 }
 {% endschema %}
 
+{% comment %}
+  Two rows: a slim announcement/utility strip, then one bar holding the logo,
+  the menu and the search/account/cart tools. Product types live in grouped
+  text panels under "Patches", "Stickers" and "Services"; phones get the same
+  groups in a slide-in drawer. All menu markup is static HTML (real links), so
+  it survives the cart's section re-renders without being rebuilt by script.
+
+  The menu groups are defined once, below, as "Label|/url" lists and rendered
+  twice (desktop panel + drawer). Labels must not contain a comma or a pipe.
+{% endcomment %}
+
+{%- liquid
+  assign pk_phone = section.settings.contact_phone | default: '909-931-6231'
+  assign pk_tel = pk_phone | remove: '-' | remove: ' ' | remove: '(' | remove: ')' | remove: '.'
+  assign pk_url_readymade = section.settings.url_readymade | default: '/collections/ready-made-patches'
+  assign pk_url_blanks = section.settings.url_blanks | default: '/collections/patch-kraze-blanks'
+  assign pk_url_quote = section.settings.url_quote | default: '/pages/quote'
+  assign pk_announcement_mobile = section.settings.announcement_mobile | default: section.settings.announcement
+  assign pk_logo = 'https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo_horizontal_low_9ea09d1a-6c9e-4f1b-8b6a-58cbadcfdf50.png?v=1787003036'
+
+  assign pk_grp_stitched = 'Embroidered|/products/embroidered-patches,3D embroidered|/products/3d-embroidered-patches,Name patches|/products/name-patches,Chenille|/products/chenille-patches,Tackle twill letters|/products/tackle-twill-letters,Woven|/products/woven-patches,Glow-in-the-dark embroidered|/products/glow-in-the-dark-embroidery-patches' | split: ','
+  assign pk_grp_printed = 'Full color printed|/products/full-color-printed-patches,Full color flex|/products/full-color-flex-patches,Gold flex|/products/gold-flex-patches,Silver flex|/products/silver-flex-patches,TPU UV 3D|/products/pu-uv-3d-patches' | split: ','
+  assign pk_grp_molded = 'PVC rubber|/products/pvc-rubber-patches,3D PVC|/products/3d-pvc-patches,Glow-in-the-dark PVC|/products/glow-in-the-dark-pvc-rubber-patches,Silicone|/products/silicone-patches,PVC keychains|/products/custom-keychains' | split: ','
+  assign pk_grp_leather = 'Genuine leather|/products/leather-patches,Faux leather|/products/faux-leather-patches' | split: ','
+  assign pk_grp_stickers = 'Vinyl stickers|/products/custom-vinyl-stickers,Holographic stickers|/products/holographic-stickers,UV transparent stickers|/products/uv-transparent-stickers' | split: ','
+  assign pk_grp_services = 'Direct embroidery|/pages/direct-embroidery,Screen printing|/pages/screen-printing,Heat press service|/pages/heat-press-service,Tees with DTF prints|/pages/tees-with-dtf-prints' | split: ','
+-%}
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  
+
   .pk-header * { box-sizing: border-box; }
-  .pk-header { font-family: 'Inter', sans-serif !important; background: #fff; line-height: 1.5; color: #111827; }
-
-  /* Utilities */
-  .pk-container { max-width: 1440px; margin: 0 auto; padding: 0 0.5rem; }
-  .pk-flex { display: flex; }
-  .pk-items-center { align-items: center; }
-  .pk-justify-between { justify-content: space-between; }
-  .pk-hidden { display: none; }
-  .pk-block { display: block; }
-  @media (min-width: 1024px) {
-    .lg\:pk-flex { display: flex; }
-    .lg\:pk-hidden { display: none !important; }
-    .lg\:pk-block { display: block; }
-    .desktop\:hidden { display: none !important; }
-  }
-
-  /* TOP BAR */
-  .pk-top-bar { background-color: #000; color: #fff; border-bottom: 4px solid #a855f7; height: 48px; position: relative; z-index: 50; }
-  @media (max-width: 1023px) {
-    .pk-top-bar { height: auto; }
-    .pk-top-bar .pk-mobile-brand-tabs { height: 40px; border-bottom: 1px solid #1f2937; }
-    .pk-top-bar .pk-mobile-brand-tabs .pk-brand-link { font-size: 0.65rem; }
-  }
-  .pk-brand-link { 
-    display: flex; flex-direction: column; justify-content: center; height: 100%; padding: 0 0.75rem; 
-    font-size: 0.75rem; font-weight: 700; line-height: 1.1; font-style: italic; letter-spacing: 0.025em; text-decoration: none; transition: background 0.2s;
-  }
-  .pk-brand-link:hover { background-color: #111827; }
-  .pk-brand-link + .pk-brand-link,
-  .pk-patches-hover + .pk-brand-link { border-left: 1px solid rgba(255, 255, 255, 0.2); }
-  .pk-text-cyan { color: #22d3ee; }
-  .pk-text-pink { color: #f472b6; }
-  .pk-bg-white-link { background-color: #fff; color: #111827; position: relative; }
-  .pk-bg-white-link:hover { background-color: #f9fafb; }
-  .pk-link-underline { position: absolute; bottom: -4px; left: 0; right: 0; height: 4px; background-color: #fff; z-index: 10; }
-
-  /* Condensed header on scroll (desktop only) - top bar + main header (logo,
-     search, phone, sign-in, cart) hide once the page scrolls, leaving just
-     the nav row; that row gains its own compact search/account/cart icons
-     so those stay reachable. */
-  @media (min-width: 1024px) {
-    .pk-header--scrolled .pk-top-bar,
-    .pk-header--scrolled .pk-main-header {
-      display: none;
-    }
-  }
-  .pk-nav-row { display: flex; align-items: center; justify-content: space-between; }
-  .pk-nav-compact-icons { display: none; align-items: center; gap: 0.5rem; flex-shrink: 0; margin-left: 1rem; }
-  .pk-header--scrolled .pk-nav-compact-icons { display: flex; }
-  .pk-nav-icon-btn {
-    text-decoration: none; position: relative; padding: 0.35rem;
-  }
-  .pk-nav-icon-btn svg { width: 1.3rem; height: 1.3rem; }
-  .pk-nav-icon-btn cart-icon { position: relative; display: block; }
-  .pk-nav-icon-btn .cart-bubble { position: absolute; top: -4px; right: -4px; }
-  .pk-nav-icon-btn .cart-bubble__background { background-color: #a855f7 !important; }
-
-  /* MAIN HEADER */
-  .pk-main-header { border-bottom: 1px solid #e5e7eb; padding: 1rem 0; }
-  .pk-logo { height: 2.75rem; width: auto; object-fit: contain; }
-  
-  .pk-search-trigger { 
-    display: flex; align-items: center; gap: 0.75rem; 
-    max-width: 26rem; flex: 1; margin: 0 1.5rem; height: 2.75rem;
-    padding: 0 1.25rem; border: 1px solid #e5e7eb; border-radius: var(--pk-radius-pill);
-    font-size: 0.875rem; background: #fff; color: #6b7280; cursor: pointer;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  .pk-search-trigger:hover { border-color: #a855f7; }
-  .pk-search-trigger span { flex: 1; text-align: left; }
-  .pk-search-cursor { flex: 0 0 auto !important; margin-left: 1px; animation: pk-cursor-blink 1s step-end infinite; }
-  @keyframes pk-cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-  @media (prefers-reduced-motion: reduce) { .pk-search-cursor { display: none; } }
-  .pk-search-btn { position: absolute; right: 0; top: 0; height: 100%; width: 2.75rem; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #6b7280; }
-
-  .pk-actions { display: flex; gap: 1.5rem; align-items: center; margin-left: auto; }
-  .pk-action-item { display: flex; flex-direction: column; align-items: flex-end; font-size: 0.875rem; line-height: 1.25; position: relative; }
-  .pk-action-title { font-weight: 600; color: #111827; white-space: nowrap; }
-  .pk-action-sub { font-size: 0.75rem; color: #4b5563; }
-  .pk-live-chat { display: flex; align-items: center; gap: 0.5rem; }
-  .pk-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background-color: #a855f7; } /* Green dot */
-  .pk-call { text-decoration: none; color: inherit; }
-  /* Both labels sit in one grid cell, so the cell is as wide as the longer of the
-     two and the header never reflows as they swap. */
-  .pk-rotate { display: inline-grid; }
-  .pk-rotate > * { grid-area: 1 / 1; white-space: nowrap; }
-  .pk-rotate__ghost { visibility: hidden; }
-  .pk-rotate__live { transition: opacity 0.3s ease; }
-  .pk-rotate__live[data-fading='true'] { opacity: 0; }
-  @media (prefers-reduced-motion: reduce) {
-    .pk-rotate__live { transition: none; }
-  }
-
-  /* Sign-in card + cart button */
-  .pk-signin-card {
-    display: flex; align-items: center; gap: 0.55rem; border-radius: var(--pk-radius-pill);
-    padding: 0.3rem 1rem 0.3rem 0.3rem; text-decoration: none; flex-shrink: 0;
-  }
-  .pk-signin-card__icon {
-    width: 1.9rem; height: 1.9rem; border-radius: 50%; background: rgba(255,255,255,0.25); color: #fff;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .pk-signin-card__icon svg { width: 1.05rem; height: 1.05rem; }
-  .pk-signin-card__text { display: flex; flex-direction: column; line-height: 1.15; }
-  .pk-signin-card__label { font-size: 0.58rem; font-weight: 700; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.03em; }
-  .pk-signin-card__value { font-size: 0.85rem; font-weight: 700; color: #fff; }
-  .pk-cart-btn { padding: 0; }
-  .pk-cart-btn svg { width: 1.5rem; height: 1.5rem; }
-
-  /* Cart Icon Alignment */
-  .pk-action-item cart-icon,
-  .pk-cart-btn cart-icon {
-    display: block;
-    position: relative;
-  }
-  .pk-action-item .cart-bubble,
-  .pk-cart-btn .cart-bubble {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-  }
-  .pk-action-item .cart-bubble__background,
-  .pk-cart-btn .cart-bubble__background {
-    background-color: #a855f7 !important;
-  }
-
-  /* NAV DESKTOP */
-  .pk-nav { background: #fff; border-bottom: 1px solid #e5e7eb; position: relative; z-index: 40; }
   /* position:fixed instead of sticky - sticky silently fails to pin here
      because Shopify's base theme sets `overflow-y: auto` directly on <html>,
      a known engine quirk where sticky elements don't stick to that specific
-     scrolling box. Fixed sidesteps it; pkSyncHeaderOffset() below reserves
-     the equivalent space so page content doesn't slide under the header. */
-  .pk-header { position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 1100; background: #fff; }
-  
-  /* Mobile Responsive Header */
+     scrolling box. Fixed sidesteps it; the script at the bottom reserves the
+     equivalent space so page content doesn't slide under the header. */
+  .pk-header { position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 1100; background: #fff; font-family: 'Inter', sans-serif !important; line-height: 1.5; color: #111827; }
+  .pk-wrap { max-width: 1440px; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* ANNOUNCEMENT / UTILITY STRIP - drops away once the page is scrolled */
+  .pk-strip { background: #f5f3ff; border-bottom: 1px solid #ede9fe; color: #4c1d95; font-size: 0.78rem; }
+  .pk-strip__row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2.25rem; }
+  .pk-strip__msg { margin: 0; font-weight: 500; }
+  .pk-strip__msg--mobile { display: none; }
+  .pk-strip__links { display: flex; align-items: center; gap: 1.25rem; white-space: nowrap; }
+  .pk-strip__links a { color: inherit; text-decoration: none; font-weight: 600; }
+  .pk-strip__links a:hover { text-decoration: underline; }
+  .pk-strip__phone { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 500 !important; }
+  .pk-strip__phone strong { font-weight: 700; }
+  .pk-strip__phone svg { width: 0.85rem; height: 0.85rem; }
+  .pk-header--scrolled .pk-strip { display: none; }
+  /* Below 1200px the long announcement would wrap next to the links, so the
+     short line is used from there down. */
+  @media (max-width: 1199px) {
+    .pk-strip__msg--desktop { display: none; }
+    .pk-strip__msg--mobile { display: block; }
+  }
+
+  /* MAIN BAR */
+  .pk-bar { background: #fff; border-bottom: 1px solid #e5e7eb; }
+  .pk-bar__row { position: relative; display: flex; align-items: stretch; gap: 1.5rem; min-height: 4.25rem; }
+  .pk-bar__logo { display: flex; align-items: center; flex-shrink: 0; }
+  .pk-bar__logo img { height: 2.75rem; width: auto; display: block; object-fit: contain; }
+
+  .pk-menu { display: flex; align-items: stretch; gap: 0.15rem; }
+  .pk-menu__item { display: flex; align-items: stretch; }
+  .pk-menu__item--compact { position: relative; }
+  .pk-menu__link {
+    position: relative; display: inline-flex; align-items: center; gap: 0.3rem; padding: 0 0.85rem;
+    background: none; border: none; cursor: pointer; font: inherit; font-size: 0.95rem; font-weight: 600;
+    color: #111827; text-decoration: none; white-space: nowrap;
+  }
+  .pk-menu__link::after {
+    content: ""; position: absolute; left: 0.85rem; right: 0.85rem; bottom: 0; height: 3px;
+    background: #9333ea; border-radius: 3px 3px 0 0; transform: scaleX(0); transition: transform 0.15s ease;
+  }
+  .pk-menu__item:hover > .pk-menu__link::after,
+  .pk-menu__item[data-open] > .pk-menu__link::after { transform: scaleX(1); }
+  .pk-menu__link:focus-visible { outline: 2px solid #9333ea; outline-offset: -3px; border-radius: 0.4rem; }
+  .pk-menu__chev { width: 0.8rem; height: 0.8rem; transition: transform 0.15s ease; }
+  .pk-menu__item[data-open] .pk-menu__chev { transform: rotate(180deg); }
+
+  /* DROPDOWN PANELS - text links in named groups */
+  .pk-panel {
+    position: absolute; top: 100%; left: 0; z-index: 50; background: #fff;
+    border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 24px 40px -12px rgba(17, 24, 39, 0.18); padding: 1.5rem;
+    opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0.15s;
+  }
+  .pk-panel--wide { right: 0; display: grid; grid-template-columns: 1.3fr 1fr 1.15fr 0.8fr 1.2fr; gap: 2rem; }
+  .pk-panel--list { min-width: 15rem; padding: 0.9rem 1rem; }
+  @media (hover: hover) {
+    .pk-menu__item:hover > .pk-panel { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  }
+  .pk-menu__item[data-open] > .pk-panel { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  .pk-panel__head { margin: 0 0 0.6rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #7e22ce; }
+  .pk-panel__links { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.1rem; }
+  .pk-panel__links a { display: block; margin: 0 -0.6rem; padding: 0.4rem 0.6rem; border-radius: 0.5rem; color: #111827; text-decoration: none; font-size: 0.92rem; font-weight: 500; }
+  .pk-panel__links a:hover, .pk-panel__links a:focus-visible { background: #f5f3ff; color: #6b21a8; outline: none; }
+  .pk-panel__aside { align-self: start; display: flex; flex-direction: column; gap: 0.6rem; background: #111827; color: #fff; border-radius: 0.9rem; padding: 1.25rem; }
+  .pk-panel__aside-title { margin: 0; font-size: 1rem; font-weight: 700; line-height: 1.3; }
+  .pk-panel__aside-text { margin: 0; font-size: 0.85rem; line-height: 1.5; color: #d1d5db; }
+  .pk-panel__aside-btn { align-self: flex-start; margin-top: 0.25rem; display: inline-flex; align-items: center; height: 2.4rem; padding: 0 1rem; border-radius: 0.6rem; font-size: 0.85rem; font-weight: 700; text-decoration: none; }
+
+  /* TOOLS: search, account, cart, quote button, menu button */
+  .pk-tools { display: flex; align-items: center; gap: 0.25rem; flex-shrink: 0; margin-left: auto; }
+  .pk-tool { position: relative; width: 2.5rem; height: 2.5rem; display: inline-flex; align-items: center; justify-content: center; border-radius: 0.6rem; padding: 0; text-decoration: none; }
+  .pk-tool svg { width: 1.35rem; height: 1.35rem; }
+  .pk-tool cart-icon { display: block; position: relative; }
+  .pk-tool .cart-bubble { position: absolute; top: -8px; right: -8px; }
+  .pk-tool .cart-bubble__background { background-color: #9333ea !important; }
+  .pk-tool--menu { display: none; }
+  .pk-quote-btn { display: inline-flex; align-items: center; justify-content: center; height: 2.5rem; padding: 0 1.1rem; margin-left: 0.5rem; border-radius: 0.6rem; font-size: 0.9rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+
+  /* PHONES AND TABLETS */
   @media (max-width: 1023px) {
-    .pk-main-header { display: none !important; }
-    .pk-nav { display: none !important; }
-    .pk-mobile-header { display: grid !important; }
-  }
-  
-  @media (max-width: 768px) {
-    .pk-search-trigger { max-width: 100%; margin: 0 0.5rem; }
-  }
-  .pk-nav-list { display: flex; height: 3rem; align-items: center; gap: 0.25rem; font-size: 0.875rem; font-weight: 500; list-style: none; margin: 0; padding: 0; }
-  .pk-nav-item { height: 100%; display: flex; align-items: center; }
-  .pk-nav-btn { background: transparent; border: none; padding: 0 0.55rem; height: 100%; display: flex; align-items: center; cursor: pointer; color: #111827; transition: color 0.15s; font-size: 0.8125rem; font-weight: 500;font-family:inherit;}
-  .pk-nav-btn:hover { color: #06b6d4; }
-  /* color:#fff is repeated (not just inherited from .pk-btn-primary) because
-     this element also carries .pk-nav-btn, whose own color rules would
-     otherwise win on source order and turn the pill's text dark/cyan. */
-  .pk-nav-quote-cta, .pk-nav-quote-cta:hover { color: #fff; }
-  .pk-nav-quote-cta { border-radius: var(--pk-radius-pill); height: 2.1rem; align-self: center; margin-left: 0.35rem; padding: 0 1rem; font-weight: 700; }
-  .pk-chevron { width: 0.75rem; height: 0.75rem; margin-left: 0.25rem; }
-
-  /* PATCHES TAB HOVER PANEL (top bar) */
-  .pk-patches-hover { position: relative; height: 100%; }
-  .pk-patches-dropdown {
-    position: absolute; top: 100%; left: 0; z-index: 60;
-    width: 860px; max-width: 92vw; background: #fff; color: #111827;
-    border-radius: 0 0 var(--pk-radius-lg) var(--pk-radius-lg); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    padding: 1.5rem; display: flex; flex-direction: column; gap: 1.1rem;
-    font-style: normal; letter-spacing: normal;
-    opacity: 0; visibility: hidden; transform: translateY(-6px);
-    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
-  }
-  .pk-patches-hover:hover .pk-patches-dropdown,
-  .pk-patches-hover:focus-within .pk-patches-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
-  .pk-patches-dropdown__top { display: flex; gap: 1.5rem; align-items: flex-start; }
-  .pk-patches-dropdown__left { flex: 0 0 170px; }
-  .pk-patches-dropdown__left h3 { margin: 0 0 0.5rem; font-size: 1.05rem; font-weight: 800; line-height: 1.3; color: #111827; }
-  .pk-patches-dropdown__left p { margin: 0; font-size: 0.8rem; color: #6b7280; line-height: 1.5; }
-  .pk-patches-dropdown__grid { display: flex; gap: 1rem; flex: 1; justify-content: space-between; }
-  .pk-patches-dropdown__item { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; text-decoration: none; width: 108px; flex-shrink: 0; }
-  .pk-patches-dropdown__img { width: 108px; height: 108px; border-radius: var(--pk-radius-sm); background: #f3f4f6; border: 1px solid #e5e7eb; overflow: hidden; }
-  .pk-patches-dropdown__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .pk-patches-dropdown__btn {
-    display: inline-flex; align-items: center; gap: 0.25rem;
-    font-size: 0.7rem; font-weight: 700; padding: 0.4rem 0.55rem; border-radius: var(--pk-radius-pill);
-    white-space: nowrap;
-  }
-  .pk-patches-dropdown__item:hover .pk-patches-dropdown__btn { background: var(--pk-btn-primary-bg-hover); }
-  .pk-patches-dropdown__footer {
-    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    border-top: 1px solid #e5e7eb; padding-top: 0.9rem; font-size: 0.75rem; font-weight: 600; color: #6b7280;
-  }
-  .pk-patches-dropdown__footer span.pk-dot { color: #d1d5db; margin: 0 0.35rem; }
-  .pk-patches-dropdown__cta {
-    font-weight: 700; font-size: 0.8rem; padding: 0.6rem 1.1rem;
-    border-radius: var(--pk-radius-sm); text-decoration: none; white-space: nowrap;
+    .pk-wrap { padding: 0 0.9rem; }
+    .pk-strip { font-size: 0.72rem; }
+    .pk-strip__row { justify-content: center; text-align: center; min-height: 1.9rem; padding-top: 0.25rem; padding-bottom: 0.25rem; }
+    .pk-strip__links { display: none; }
+    .pk-bar__row { min-height: 3.5rem; gap: 0.5rem; }
+    .pk-bar__logo img { height: 2.25rem; }
+    .pk-menu, .pk-tool--account, .pk-bar .pk-quote-btn { display: none; }
+    .pk-tool--menu { display: inline-flex; }
   }
 
-  /* MEGA MENU */
-  .pk-mega-menu {
-    position: absolute; top: 100%; left: 0; width: fit-content; background: #fff; border: 1px solid #e5e7eb;
-    border-radius: var(--pk-radius-lg); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); z-index: 50; padding: 2rem 0; display: none;
-  }
-  .pk-mega-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 200px)); justify-content: start; gap: 1.5rem; }
-  .pk-mega-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; group: hover; }
-  .pk-mega-img-box { position: relative; width: 100%; max-width: 200px; aspect-ratio: 1; background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: var(--pk-radius-md); overflow: hidden; margin-bottom: 0.75rem; }
-  .pk-mega-img { width: 100%; height: 100%; object-fit: cover; transition: scale 0.2s; }
-  .pk-mega-badge {
-    position: absolute; top: 0.4rem; left: 0.4rem; z-index: 1; background: #a855f7; color: #fff;
-    font-size: 0.625rem; font-weight: 700; letter-spacing: 0.02em; padding: 0.15rem 0.5rem;
-    border-radius: var(--pk-radius-pill); line-height: 1.4;
-  }
-  .pk-mega-item:hover .pk-mega-img { transform: scale(1.05); }
-  .pk-mega-title { font-size: 0.75rem; font-weight: 600; color: #1f2937; text-align: center; }
-  .pk-mega-item:hover .pk-mega-title { color: #06b6d4; }
-
-  /* MOBILE NAV */
-  {% comment %} Equal 1fr rails either side of an auto centre column keep the logo on the
-     viewport centre line, whatever the icon row weighs — space-between put it 46px left. {% endcomment %}
-  .pk-mobile-header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0.5rem 0.75rem; border-bottom: 1px solid #e5e7eb; }
-  .pk-mobile-header > .pk-icon-btn:first-child { justify-self: start; }
-  .pk-mobile-logo { height: 2.5rem; width: auto; }
-  .pk-mobile-icons { display: flex; gap: 0.375rem; align-items: center; justify-self: end; }
-  /* Rides on .pk-icon-btn so it inherits the search/cart icon colour and padding. */
-  .pk-mobile-phone { display: inline-flex; align-items: center; text-decoration: none; }
-  .pk-icon-btn { padding: 0.5rem; position: relative; }
-  
-  /* Mobile Cart Icon */
-  .pk-icon-btn cart-icon {
-    display: block;
-    position: relative;
-  }
-  .pk-icon-btn .cart-bubble {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-  }
-  .pk-icon-btn .cart-bubble__background {
-    background-color: #a855f7 !important;
-  }
-  
-  .pk-mobile-drawer {
-    position: fixed; top: 0; left: 0; height: 100%; width: 85%; max-width: 320px; background: #fff; z-index: 60;
-    transform: translateX(-100%); transition: transform 0.3s ease-in-out;
-    display: flex; flex-direction: column;
-  }
-  .pk-mobile-drawer.open { transform: translateX(0); }
-  .pk-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 55; display: none; }
+  /* SLIDE-IN MENU (phones and tablets) */
+  .pk-overlay { position: fixed; inset: 0; background: rgba(17, 24, 39, 0.5); z-index: 55; display: none; }
   .pk-overlay.open { display: block; }
-  
-  .pk-drawer-header { padding: 1rem; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: #f9fafb; }
-  .pk-drawer-content { overflow-y: auto; flex: 1; }
-  
-  .pk-drawer-brands { padding: 1rem; background: #111827; border-bottom: 1px solid #1f2937; display: none; }
-  @media screen and (min-width: 750px) { .pk-drawer-brands { display: block; } }
-  .pk-drawer-brands-title { font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
-  .pk-brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-  .pk-mobile-brand-btn { 
-    display: block; text-align: center; padding: 0.5rem; font-size: 0.75rem; font-weight: 700; border-radius: var(--pk-radius-sm); text-decoration: none;
+  .pk-drawer {
+    position: fixed; top: 0; right: 0; height: 100%; width: 88%; max-width: 22rem; background: #fff; z-index: 60;
+    display: flex; flex-direction: column; transform: translateX(100%); visibility: hidden;
+    transition: transform 0.28s ease, visibility 0s linear 0.28s;
   }
+  .pk-drawer.open { transform: translateX(0); visibility: visible; transition-delay: 0s; }
+  .pk-drawer__head { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0.75rem 0.75rem 1.1rem; border-bottom: 1px solid #e5e7eb; }
+  .pk-drawer__title { font-size: 1rem; font-weight: 700; }
+  .pk-drawer__body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .pk-drawer__group > summary,
+  .pk-drawer__link { display: flex; align-items: center; justify-content: space-between; padding: 0.95rem 1.1rem; border-bottom: 1px solid #f3f4f6; font-size: 1rem; font-weight: 700; color: #111827; text-decoration: none; cursor: pointer; }
+  .pk-drawer__group > summary { list-style: none; }
+  .pk-drawer__group > summary::-webkit-details-marker { display: none; }
+  .pk-drawer__group > summary svg { width: 1rem; height: 1rem; transition: transform 0.15s ease; }
+  .pk-drawer__group[open] > summary svg { transform: rotate(180deg); }
+  .pk-drawer__sub { background: #faf5ff; padding: 0.5rem 1.1rem 0.9rem; border-bottom: 1px solid #f3f4f6; }
+  .pk-drawer__label { margin: 0.75rem 0 0.25rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #7e22ce; }
+  .pk-drawer__sub a { display: block; padding: 0.5rem 0; color: #1f2937; text-decoration: none; font-size: 0.95rem; }
+  /* Bottom padding keeps the footer clear of the chat bubble, which is pinned
+     to the bottom-right corner above everything else on the page. */
+  .pk-drawer__foot { padding: 1rem 1.1rem 5rem; border-top: 1px solid #e5e7eb; display: grid; gap: 0.75rem; }
+  .pk-drawer__foot .pk-quote-btn { margin-left: 0; height: 2.75rem; }
+  .pk-drawer__foot-links { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.9rem; }
+  .pk-drawer__foot-links a { color: #374151; text-decoration: none; font-weight: 600; }
 
-  .pk-accordion-btn { 
-    width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; 
-    text-align: left; background: #fff; border: none; border-bottom: 1px solid #f3f4f6; font-weight: 500; color: #111827;
+  @media (prefers-reduced-motion: reduce) {
+    .pk-panel, .pk-drawer, .pk-menu__link::after, .pk-menu__chev { transition: none; }
   }
-  .pk-accordion-content { background: #f9fafb; display: none; }
-  .pk-accordion-content.open { display: block; }
-  .pk-sub-link { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem; text-decoration: none; color: #374151; font-size: 0.875rem; }
-  .pk-sub-thumb { width: 2.5rem; height: 2.5rem; background: #e5e7eb; border-radius: var(--pk-radius-sm); object-fit: cover; }
 </style>
 
-{%- liquid
-  assign top_active = 'patches'
-  if request.path contains 'patch-kraze-blanks'
-    assign top_active = 'blanks'
-  elsif request.path contains 'ready-made-patches'
-    assign top_active = 'readymade'
-  endif
+<div class="pk-header" id="pk-header">
 
-  assign pk_ptab_emb = all_products['embroidered-patches']
-  assign pk_ptab_full_color = all_products['full-color-printed-patches']
-  assign pk_ptab_pvc = all_products['pvc-rubber-patches']
-  assign pk_ptab_leather = all_products['leather-patches']
-  assign pk_ptab_chenille = all_products['chenille-patches']
--%}
-<div class="pk-header">
-
-  <!-- TOP BAR -->
-  <div class="pk-top-bar">
-    <!-- Mobile Top Bar Tabs -->
-     <div class="lg:pk-hidden pk-flex pk-items-center pk-mobile-brand-tabs" style="overflow-x: auto;">
-        <a href="/" class="pk-brand-link {% if top_active == 'patches' %}pk-bg-white-link{% else %}pk-text-cyan{% endif %}" style="min-width: 90px; text-align: center;"><span>PATCH KRAZE</span><span>PATCHES</span></a>
-        <a href="/collections/patch-kraze-blanks" class="pk-brand-link {% if top_active == 'blanks' %}pk-bg-white-link{% else %}pk-text-cyan{% endif %}" style="min-width: 90px; text-align: center;"><span>PATCH KRAZE</span><span>BLANKS</span></a>
-        <a href="/collections/ready-made-patches" class="pk-brand-link {% if top_active == 'readymade' %}pk-bg-white-link{% else %}pk-text-pink{% endif %}" style="min-width: 90px; text-align: center;"><span>READY MADE</span><span>PATCHES</span></a>
-     </div>
-    <div class="pk-container lg:pk-flex pk-items-center pk-justify-between" style="height: 100%;">
-      <div class="pk-hidden lg:pk-flex" style="height: 100%;">
-        <div class="pk-patches-hover">
-          <a href="/" class="pk-brand-link {% if top_active == 'patches' %}pk-bg-white-link{% else %}pk-text-cyan{% endif %}"><span>PATCH KRAZE</span><span>PATCHES</span>{% if top_active == 'patches' %}<span class="pk-link-underline"></span>{% endif %}</a>
-          <div class="pk-patches-dropdown">
-            <div class="pk-patches-dropdown__top">
-              <div class="pk-patches-dropdown__left">
-                <h3>5+ Custom Patch Styles</h3>
-                <p>Embroidered, PVC, chenille, leather &amp; more — 10 piece minimums, free shipping over $100.</p>
-              </div>
-              <div class="pk-patches-dropdown__grid">
-                <a class="pk-patches-dropdown__item" href="/products/embroidered-patches">
-                  <span class="pk-patches-dropdown__img">{% if pk_ptab_emb %}<img src="{{ pk_ptab_emb.featured_image | img_url: '200x' }}" alt="Embroidered" loading="lazy">{% endif %}</span>
-                  <span class="pk-patches-dropdown__btn pk-btn-primary">Embroidered &rarr;</span>
-                </a>
-                <a class="pk-patches-dropdown__item" href="/products/full-color-printed-patches">
-                  <span class="pk-patches-dropdown__img">{% if pk_ptab_full_color %}<img src="{{ pk_ptab_full_color.featured_image | img_url: '200x' }}" alt="Full Color" loading="lazy">{% endif %}</span>
-                  <span class="pk-patches-dropdown__btn pk-btn-primary">Full Color &rarr;</span>
-                </a>
-                <a class="pk-patches-dropdown__item" href="/products/pvc-rubber-patches">
-                  <span class="pk-patches-dropdown__img">{% if pk_ptab_pvc %}<img src="{{ pk_ptab_pvc.featured_image | img_url: '200x' }}" alt="PVC Rubber" loading="lazy">{% endif %}</span>
-                  <span class="pk-patches-dropdown__btn pk-btn-primary">PVC Rubber &rarr;</span>
-                </a>
-                <a class="pk-patches-dropdown__item" href="/products/leather-patches">
-                  <span class="pk-patches-dropdown__img">{% if pk_ptab_leather %}<img src="{{ pk_ptab_leather.featured_image | img_url: '200x' }}" alt="Leather" loading="lazy">{% endif %}</span>
-                  <span class="pk-patches-dropdown__btn pk-btn-primary">Leather &rarr;</span>
-                </a>
-                <a class="pk-patches-dropdown__item" href="/products/chenille-patches">
-                  <span class="pk-patches-dropdown__img">{% if pk_ptab_chenille %}<img src="{{ pk_ptab_chenille.featured_image | img_url: '200x' }}" alt="Chenille" loading="lazy">{% endif %}</span>
-                  <span class="pk-patches-dropdown__btn pk-btn-primary">Chenille &rarr;</span>
-                </a>
-              </div>
-            </div>
-            <div class="pk-patches-dropdown__footer">
-              <span>5-DAY RUSH SHIPPING AVAILABLE<span class="pk-dot">&middot;</span>10pc Minimums<span class="pk-dot">&middot;</span>No Setup Fees</span>
-              <a href="/" class="pk-patches-dropdown__cta pk-btn-dark">Shop All Patches &rarr;</a>
-            </div>
-          </div>
-        </div>
-        <a href="/collections/patch-kraze-blanks" class="pk-brand-link {% if top_active == 'blanks' %}pk-bg-white-link{% else %}pk-text-cyan{% endif %}"><span>PATCH KRAZE</span><span>BLANKS</span>{% if top_active == 'blanks' %}<span class="pk-link-underline"></span>{% endif %}</a>
-        <a href="/collections/ready-made-patches" class="pk-brand-link {% if top_active == 'readymade' %}pk-bg-white-link{% else %}pk-text-pink{% endif %}"><span>READY MADE</span><span>PATCHES</span>{% if top_active == 'readymade' %}<span class="pk-link-underline"></span>{% endif %}</a>
-      </div>
-      <div style="font-size: 0.75rem; font-weight: 500; text-align: center; flex: 1; padding: 6px 8px;">
-        Rush production in as little as 5 business days &bull; 10 piece order minimum &bull; Free shipping on orders over $100
+  <!-- ANNOUNCEMENT / UTILITY STRIP -->
+  <div class="pk-strip">
+    <div class="pk-wrap pk-strip__row">
+      <p class="pk-strip__msg pk-strip__msg--desktop">{{ section.settings.announcement }}</p>
+      <p class="pk-strip__msg pk-strip__msg--mobile">{{ pk_announcement_mobile }}</p>
+      <div class="pk-strip__links">
+        <a href="{{ pk_url_readymade }}">Ready-made patches</a>
+        <a href="{{ pk_url_blanks }}">Blank hats</a>
+        <a href="tel:+1{{ pk_tel }}" class="pk-strip__phone" aria-label="Call Patch Kraze at {{ pk_phone }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          {{ section.settings.contact_label }} <strong>{{ pk_phone }}</strong>
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- MAIN HEADER (DESKTOP) -->
-  <div class="pk-main-header pk-hidden lg:pk-block">
-    <div class="pk-container pk-flex pk-items-center">
-      <a href="/">
-        <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo_horizontal_low_9ea09d1a-6c9e-4f1b-8b6a-58cbadcfdf50.png?v=1787003036" alt="Patch Kraze" width="160" height="64" class="pk-logo">
+  <!-- MAIN BAR -->
+  <div class="pk-bar">
+    <div class="pk-wrap pk-bar__row">
+      <a class="pk-bar__logo" href="{{ routes.root_url }}" aria-label="Patch Kraze home">
+        <img src="{{ pk_logo }}" alt="Patch Kraze" width="160" height="64">
       </a>
 
-      <!-- Desktop Search Button - Opens Modal -->
-      <button class="pk-search-trigger" onclick="document.querySelector('#search-modal dialog')?.showModal()">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <span><span id="pk-search-typewriter" data-full-text="Search Patch Styles"></span><span class="pk-search-cursor" aria-hidden="true">|</span></span>
-      </button>
-
-      <div class="pk-actions">
-        {%- liquid
-          assign pk_phone = section.settings.contact_phone | default: '909-931-6231'
-          assign pk_tel = pk_phone | remove: '-' | remove: ' ' | remove: '(' | remove: ')' | remove: '.'
-          assign pk_label_1 = section.settings.contact_label_1 | default: 'Live Chat 24/7'
-          assign pk_label_2 = section.settings.contact_label_2
-        -%}
-        <a
-          href="tel:+1{{ pk_tel }}"
-          class="pk-action-item pk-call"
-          aria-label="Call Patch Kraze at {{ pk_phone }}"
-        >
-          <div class="pk-live-chat">
-             <span class="pk-dot"></span>
-             <span class="pk-action-title" style="color:#9333ea;">
-               {%- if pk_label_2 != blank -%}
-                 <span class="pk-rotate">
-                   <span class="pk-rotate__ghost" aria-hidden="true">{{ pk_label_1 }}</span>
-                   <span class="pk-rotate__ghost" aria-hidden="true">{{ pk_label_2 }}</span>
-                   <span class="pk-rotate__live" data-pk-rotate="{{ section.id }}" aria-hidden="true">{{ pk_label_1 }}</span>
-                 </span>
-               {%- else -%}
-                 {{ pk_label_1 }}
-               {%- endif -%}
-             </span>
+      <nav class="pk-menu" aria-label="Main">
+        <div class="pk-menu__item" data-pk-menu>
+          <button type="button" class="pk-menu__link" aria-expanded="false" aria-controls="pk-panel-patches">
+            Patches
+            <svg class="pk-menu__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="pk-panel pk-panel--wide" id="pk-panel-patches">
+            <div>
+              <p class="pk-panel__head">Embroidered &amp; woven</p>
+              <ul class="pk-panel__links">
+                {%- for entry in pk_grp_stitched -%}
+                  {%- assign pair = entry | split: '|' -%}
+                  <li><a href="{{ pair[1] }}">{{ pair[0] }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+            <div>
+              <p class="pk-panel__head">Printed &amp; flex</p>
+              <ul class="pk-panel__links">
+                {%- for entry in pk_grp_printed -%}
+                  {%- assign pair = entry | split: '|' -%}
+                  <li><a href="{{ pair[1] }}">{{ pair[0] }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+            <div>
+              <p class="pk-panel__head">PVC, rubber &amp; silicone</p>
+              <ul class="pk-panel__links">
+                {%- for entry in pk_grp_molded -%}
+                  {%- assign pair = entry | split: '|' -%}
+                  <li><a href="{{ pair[1] }}">{{ pair[0] }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+            <div>
+              <p class="pk-panel__head">Leather</p>
+              <ul class="pk-panel__links">
+                {%- for entry in pk_grp_leather -%}
+                  {%- assign pair = entry | split: '|' -%}
+                  <li><a href="{{ pair[1] }}">{{ pair[0] }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+            <div class="pk-panel__aside">
+              <p class="pk-panel__aside-title">Not sure which style suits your design?</p>
+              <p class="pk-panel__aside-text">Send us the artwork and we'll point you to the right patch, with a price.</p>
+              <a class="pk-panel__aside-btn pk-btn-primary" href="{{ pk_url_quote }}">Get a free quote</a>
+            </div>
           </div>
-          <span class="pk-action-sub">{{ pk_phone }}</span>
-        </a>
-        <a href="{{ routes.account_url }}" class="pk-signin-card pk-btn-primary">
-          <span class="pk-signin-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </span>
-          <span class="pk-signin-card__text">
-            <span class="pk-signin-card__label">Account &amp; Reorder</span>
-            <span class="pk-signin-card__value">Hello, sign in</span>
-          </span>
-        </a>
+        </div>
 
-        <button class="pk-cart-btn pk-btn-icon" onclick="document.querySelector('cart-drawer-component').open()" aria-label="Open cart">
+        <div class="pk-menu__item pk-menu__item--compact" data-pk-menu>
+          <button type="button" class="pk-menu__link" aria-expanded="false" aria-controls="pk-panel-stickers">
+            Stickers
+            <svg class="pk-menu__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="pk-panel pk-panel--list" id="pk-panel-stickers">
+            <ul class="pk-panel__links">
+              {%- for entry in pk_grp_stickers -%}
+                {%- assign pair = entry | split: '|' -%}
+                <li><a href="{{ pair[1] }}">{{ pair[0] }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+
+        <div class="pk-menu__item">
+          <a class="pk-menu__link" href="/products/dtf-transfers">DTF transfers</a>
+        </div>
+
+        <div class="pk-menu__item pk-menu__item--compact" data-pk-menu>
+          <button type="button" class="pk-menu__link" aria-expanded="false" aria-controls="pk-panel-services">
+            Services
+            <svg class="pk-menu__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="pk-panel pk-panel--list" id="pk-panel-services">
+            <ul class="pk-panel__links">
+              {%- for entry in pk_grp_services -%}
+                {%- assign pair = entry | split: '|' -%}
+                <li><a href="{{ pair[1] }}">{{ pair[0] }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="pk-tools">
+        <button type="button" class="pk-tool pk-btn-icon" onclick="document.querySelector('#search-modal dialog')?.showModal()" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="{{ routes.account_url }}" class="pk-tool pk-tool--account pk-btn-icon" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <button type="button" class="pk-tool pk-btn-icon" onclick="document.querySelector('cart-drawer-component').open()" aria-label="Open cart">
           <cart-icon class="header-actions__cart-icon" data-testid="cart-icon">
             <span class="svg-wrapper" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 3h2l2.4 12.2a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L21 8H6"/></svg>
@@ -424,116 +304,79 @@
             {% render 'cart-bubble', limit: 100, live_region: true %}
           </cart-icon>
         </button>
+        <a class="pk-quote-btn pk-btn-dark" href="{{ pk_url_quote }}">Get a quote</a>
+        <button type="button" class="pk-tool pk-tool--menu pk-btn-icon" onclick="toggleMobileMenu(true)" aria-label="Open menu" aria-controls="mobile-drawer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
       </div>
     </div>
   </div>
-
-  <!-- Cart Drawer Component -->
-
-
-  <!-- MOBILE HEADER -->
-  <div class="pk-mobile-header lg:pk-hidden desktop:hidden">
-    <button class="pk-icon-btn pk-btn-icon" onclick="toggleMobileMenu(true)">
-      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-    </button>
-    <a href="/">
-      <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo_horizontal_low_9ea09d1a-6c9e-4f1b-8b6a-58cbadcfdf50.png?v=1787003036" width="100" height="40" class="pk-mobile-logo">
-    </a>
-    <div class="pk-mobile-icons lg:pk-hidden desktop:hidden">
-       <a href="tel:+1{{ pk_tel }}" class="pk-icon-btn pk-btn-icon pk-mobile-phone" aria-label="Call Patch Kraze at {{ pk_phone }}">
-         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-       </a>
-       <button class="pk-icon-btn pk-btn-icon" onclick="document.querySelector('#search-modal dialog')?.showModal()"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
-       <button class="pk-icon-btn pk-btn-icon" onclick="document.querySelector('cart-drawer-component').open()">
-          {% render 'cart-icon-component' %}
-       </button>
-    </div>
-  </div>
-
-  {%- if pk_label_2 != blank -%}
-    <script>
-      (function () {
-        var nodes = document.querySelectorAll('[data-pk-rotate="{{ section.id }}"]');
-        if (!nodes.length) return;
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-        var labels = [{{ pk_label_1 | json }}, {{ pk_label_2 | json }}];
-        var HOLD = 2600;
-        var FADE = 320;
-        var i = 0;
-
-        window.setInterval(function () {
-          nodes.forEach(function (node) {
-            node.setAttribute('data-fading', 'true');
-          });
-          window.setTimeout(function () {
-            i = (i + 1) % labels.length;
-            nodes.forEach(function (node) {
-              node.textContent = labels[i];
-              node.removeAttribute('data-fading');
-            });
-          }, FADE);
-        }, HOLD);
-      })();
-    </script>
-  {%- endif -%}
 
   <!-- HORIZON SEARCH MODAL (with predictive search) -->
   {% render 'search-modal' %}
 
-  <!-- NAVIGATION (DESKTOP) -->
-  <nav class="pk-nav pk-hidden lg:pk-block">
-    <div class="pk-container pk-nav-row">
-      <ul class="pk-nav-list" id="desktop-nav-list">
-         <!-- Populated via JS -->
-      </ul>
-      <div class="pk-nav-compact-icons">
-        <button type="button" class="pk-nav-icon-btn pk-btn-icon" onclick="document.querySelector('#search-modal dialog')?.showModal()" aria-label="Search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        </button>
-        <a href="{{ routes.account_url }}" class="pk-nav-icon-btn pk-btn-icon" aria-label="Account">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </a>
-        <button type="button" class="pk-nav-icon-btn pk-btn-icon" onclick="document.querySelector('cart-drawer-component').open()" aria-label="Open cart">
-          <cart-icon class="header-actions__cart-icon">
-            <span class="svg-wrapper" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 3h2l2.4 12.2a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L21 8H6"/></svg>
-            </span>
-            {% render 'cart-bubble', limit: 100, live_region: true %}
-          </cart-icon>
-        </button>
-      </div>
-      <div id="mega-menu-container" class="pk-mega-menu">
-         <div class="pk-container">
-            <div class="pk-mega-grid" id="mega-menu-content">
-               <!-- Content -->
-            </div>
-         </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- MOBILE DRAWER -->
+  <!-- SLIDE-IN MENU -->
   <div class="pk-overlay" id="mobile-overlay" onclick="toggleMobileMenu(false)"></div>
-  <div class="pk-mobile-drawer" id="mobile-drawer">
-    <div class="pk-drawer-header">
-      <img src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo_horizontal_low_9ea09d1a-6c9e-4f1b-8b6a-58cbadcfdf50.png?v=1787003036" alt="Patch Kraze" width="100" height="40" style="height:2rem; width:auto; object-fit:contain;">
-      <button class="pk-icon-btn pk-btn-icon" onclick="toggleMobileMenu(false)">
-         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  <div class="pk-drawer" id="mobile-drawer" aria-label="Menu">
+    <div class="pk-drawer__head">
+      <span class="pk-drawer__title">Menu</span>
+      <button type="button" class="pk-tool pk-btn-icon" onclick="toggleMobileMenu(false)" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
     </div>
-    <div class="pk-drawer-content">
-      <div class="pk-drawer-brands">
-         <div class="pk-drawer-brands-title">Our Brands</div>
-         <div class="pk-brand-grid">
-            <a href="{{ section.settings.url_transfers | default: '/products/dtf-transfers' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">TRANSFERS</a>
-            <a href="{{ section.settings.url_blanks | default: '/collections/blanks' }}" class="pk-mobile-brand-btn" style="background:#fff; color:#111827;">BLANKS</a>
-            <a href="{{ section.settings.url_patches | default: '/products/embroidered-patches' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">PATCHES</a>
-            <a href="{{ section.settings.url_printhouse | default: '/pages/printhouse' }}" class="pk-mobile-brand-btn" style="background:#1f2937; color:#22d3ee;">PRINTHOUSE</a>
-         </div>
-      </div>
-      <div id="mobile-nav-list">
-         <!-- Populated via JS -->
+    <div class="pk-drawer__body">
+      <details class="pk-drawer__group" open>
+        <summary>Patches <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <div class="pk-drawer__sub">
+          <p class="pk-drawer__label">Embroidered &amp; woven</p>
+          {%- for entry in pk_grp_stitched -%}
+            {%- assign pair = entry | split: '|' -%}
+            <a href="{{ pair[1] }}">{{ pair[0] }}</a>
+          {%- endfor -%}
+          <p class="pk-drawer__label">Printed &amp; flex</p>
+          {%- for entry in pk_grp_printed -%}
+            {%- assign pair = entry | split: '|' -%}
+            <a href="{{ pair[1] }}">{{ pair[0] }}</a>
+          {%- endfor -%}
+          <p class="pk-drawer__label">PVC, rubber &amp; silicone</p>
+          {%- for entry in pk_grp_molded -%}
+            {%- assign pair = entry | split: '|' -%}
+            <a href="{{ pair[1] }}">{{ pair[0] }}</a>
+          {%- endfor -%}
+          <p class="pk-drawer__label">Leather</p>
+          {%- for entry in pk_grp_leather -%}
+            {%- assign pair = entry | split: '|' -%}
+            <a href="{{ pair[1] }}">{{ pair[0] }}</a>
+          {%- endfor -%}
+        </div>
+      </details>
+      <details class="pk-drawer__group">
+        <summary>Stickers <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <div class="pk-drawer__sub">
+          {%- for entry in pk_grp_stickers -%}
+            {%- assign pair = entry | split: '|' -%}
+            <a href="{{ pair[1] }}">{{ pair[0] }}</a>
+          {%- endfor -%}
+        </div>
+      </details>
+      <a class="pk-drawer__link" href="/products/dtf-transfers">DTF transfers</a>
+      <details class="pk-drawer__group">
+        <summary>Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <div class="pk-drawer__sub">
+          {%- for entry in pk_grp_services -%}
+            {%- assign pair = entry | split: '|' -%}
+            <a href="{{ pair[1] }}">{{ pair[0] }}</a>
+          {%- endfor -%}
+        </div>
+      </details>
+      <a class="pk-drawer__link" href="{{ pk_url_readymade }}">Ready-made patches</a>
+      <a class="pk-drawer__link" href="{{ pk_url_blanks }}">Blank hats</a>
+    </div>
+    <div class="pk-drawer__foot">
+      <a class="pk-quote-btn pk-btn-dark" href="{{ pk_url_quote }}">Get a quote</a>
+      <div class="pk-drawer__foot-links">
+        <a href="tel:+1{{ pk_tel }}">Call {{ pk_phone }}</a>
+        <a href="{{ routes.account_url }}">Account</a>
       </div>
     </div>
   </div>
@@ -549,439 +392,88 @@
 </div>
 
 <script>
-  // ------------------------------------
-  // DATA CONFIGURATION - Dynamic from Shopify Products
-  // ------------------------------------
-  
-  {% comment %}
-    Fetch product and collection images dynamically from Shopify
-  {% endcomment %}
-  {% assign embroidered_patches = all_products['embroidered-patches'] %}
-  {% assign patches_3d = all_products['3d-embroidered-patches'] %}
-  {% assign name_patches = all_products['name-patches'] %}
-  {% assign chenille_patches = all_products['chenille-patches'] %}
-  {% assign tackle_twill = all_products['tackle-twill-letters'] %}
-  {% assign pvc_rubber = all_products['pvc-rubber-patches'] %}
-  {% assign pvc_3d = all_products['3d-pvc-patches'] %}
-  {% assign keychains = all_products['custom-keychains'] %}
-  {% assign leather_patches = all_products['leather-patches'] %}
-  {% assign faux_leather = all_products['faux-leather-patches'] %}
-  {% assign glow_pvc = all_products['glow-in-the-dark-pvc-rubber-patches'] %}
-  {% assign glow_embroidery = all_products['glow-in-the-dark-embroidery-patches'] %}
-  
-  {% assign gold_flex = all_products['gold-flex-patches'] %}
-  {% assign silver_flex = all_products['silver-flex-patches'] %}
-  {% assign full_color_flex = all_products['full-color-flex-patches'] %}
-  {% assign matte_black = all_products['silver-flex-patches'] %}
-  {% assign matte_white = all_products['gold-flex-patches'] %}
-  {% assign vinyl_stickers = all_products['custom-vinyl-stickers'] %}
-  {% assign bumper_stickers = all_products['holographic-stickers'] %}
-  {% assign uv_stickers = all_products['uv-transparent-stickers'] %}
-  {% assign dtf_transfers = all_products['dtf-transfers'] %}
-  {% assign full_color_printed = all_products['full-color-printed-patches'] %}
-  {% assign ready_made_collection = collections['ready-made-patches'] %}
-  
-  const MEGA_MENUS = {
-    embroidery: [
-      {
-        title: "Standard Embroidery",
-        image: "{{ embroidered_patches.featured_image | img_url: '800x' }}",
-        href: "/products/embroidered-patches",
-        minQty: 10
-      },
-      {
-        title: "3D Embroidery",
-        image: "{{ patches_3d.featured_image | img_url: '800x' }}",
-        href: "/products/3d-embroidered-patches",
-        minQty: 10
-      },
-      {
-        title: "Custom Name Patches",
-        image: "{{ name_patches.featured_image | img_url: '800x' }}",
-        href: "/products/name-patches",
-        minQty: 10
-      },
-      {
-        title: "Chenille",
-        image: "{{ chenille_patches.featured_image | img_url: '800x' }}",
-        href: "/products/chenille-patches",
-        minQty: 10
-      },
-      {
-        title: "Custom Tackle Twill Letters",
-        image: "{{ tackle_twill.featured_image | img_url: '800x' }}",
-        href: "/products/tackle-twill-letters",
-        minQty: 10
-      },
-      {
-        title: "Glow In The Dark",
-        image: "{{ glow_embroidery.featured_image | img_url: '800x' }}",
-        href: "/products/glow-in-the-dark-embroidery-patches",
-        minQty: 10
-      }
-    ],
-    pvcRubber: [
-      {
-        title: "Standard PVC Rubber",
-        image: "{{ pvc_rubber.featured_image | img_url: '800x' }}",
-        href: "/products/pvc-rubber-patches",
-        minQty: 10
-      },
-      {
-        title: "3D PVC Patches",
-        image: "{{ pvc_3d.featured_image | img_url: '800x' }}",
-        href: "/products/3d-pvc-patches",
-        minQty: 10
-      },
-      {
-        title: "Custom Keychains",
-        image: "{{ keychains.featured_image | img_url: '800x' }}",
-        href: "/products/custom-keychains"
-      },
-      {
-        title: "Glow In The Dark",
-        image: "{{ glow_pvc.featured_image | img_url: '800x' }}",
-        href: "/products/glow-in-the-dark-pvc-rubber-patches",
-        minQty: 10
-      }
-    ],
-    leather: [
-      {
-        title: "Genuine Leather",
-        image: "{{ leather_patches.featured_image | img_url: '800x' }}",
-        href: "/products/leather-patches",
-        minQty: 10
-      },
-      {
-        title: "Faux Leather",
-        image: "{{ faux_leather.featured_image | img_url: '800x' }}",
-        href: "/products/faux-leather-patches",
-        minQty: 10
-      }
-    ],
-    TPUFLEXPatches: [
-
-      {
-        title: "TPU GOLD Flex",
-        image: "{{ gold_flex.featured_image | img_url: '800x' }}",
-        href: "/products/gold-flex-patches",
-        minQty: 10
-      },
-
-      {
-        title: "TPU Silver Flex",
-        image: "{{ silver_flex.featured_image | img_url: '800x' }}",
-        href: "/products/silver-flex-patches",
-        minQty: 10
-      },
-      {
-        title: "Full Color Flex",
-        image: "{{ full_color_flex.featured_image | img_url: '800x' }}",
-        href: "/products/full-color-flex-patches",
-        minQty: 10
-      }
-    ],
-    stickers: [
-      {
-        title: "Custom Vinyl Stickers",
-        image: "{{ vinyl_stickers.featured_image | img_url: '800x' }}",
-        href: "/products/custom-vinyl-stickers",
-        minQty: 25
-      },
-      {
-        title: "Holographic Stickers",
-        image: "{{ bumper_stickers.featured_image | img_url: '800x' }}",
-        href: "/products/holographic-stickers",
-        minQty: 25
-      },
-      {
-        title: "UV Transparent Stickers",
-        image: "{{ uv_stickers.featured_image | img_url: '800x' }}",
-        href: "/products/uv-transparent-stickers",
-        minQty: 25
-      }
-    ],
-    dtf: [
-      {
-        title: "DTF Transfers",
-        image: "{{ dtf_transfers.featured_image | img_url: '800x' }}",
-        href: "/products/dtf-transfers"
-      }
-    ],
-    fullColor: [
-      {
-        title: "Full Color Printed Patches",
-        image: "{{ full_color_printed.featured_image | img_url: '800x' }}",
-        href: "/products/full-color-printed-patches",
-        minQty: 10
-      }
-    ],
-    readymade: [
-      {
-        title: "Ready Made Patches",
-        image: "{% if ready_made_collection.products.first %}{{ ready_made_collection.products.first.featured_image | img_url: '800x' }}{% endif %}",
-        href: "/collections/ready-made-patches"
-      }
-    ],
-    services: [
-      {
-        title: "Direct Embroidery",
-        image: "{{ images['services_4.webp'] | image_url: width: 800 }}",
-        href: "/pages/direct-embroidery"
-      },
-      {
-        title: "Screen Printing",
-        image: "{{ images['services_5.webp'] | image_url: width: 800 }}",
-        href: "/pages/screen-printing"
-      },
-      {
-        title: "Heat Press Service",
-        image: "{{ images['services_1.webp'] | image_url: width: 800 }}",
-        href: "/pages/heat-press-service"
-      },
-      {
-        title: "Tees with DTF Prints",
-        image: "{{ images['services_2.webp'] | image_url: width: 800 }}",
-        href: "/pages/tees-with-dtf-prints"
-      }
-    ]
-  };
-
-
-
-  const NAV_ITEMS = [
-    { label: "Embroidery", key: "embroidery", hasDropdown: true },
-    { label: "Woven", key: "woven", hasDropdown: false, href: "/products/woven-patches" },
-    { label: "Printed Patches", key: "fullColor", hasDropdown: true },
-    { label: "TPU FLEX Patches", key: "TPUFLEXPatches", hasDropdown: true },
-    { label: "DTF Transfers", key: "dtf", hasDropdown: true },
-    { label: "Stickers", key: "stickers", hasDropdown: true },
-    { label: "PVC Rubber", key: "pvcRubber", hasDropdown: true },
-    { label: "TPU UV 3D Patches", key: "puUv3d", hasDropdown: false, href: "/products/pu-uv-3d-patches" },
-    { label: "Silicone", key: "silicone", hasDropdown: false, href: "/products/silicone-patches" },
-    { label: "Leather", key: "leather", hasDropdown: true },
-    // { label: "Rhinestones", key: "rhinestones", hasDropdown: false, href: "/products/rhinestone-transfers" },
-    { label: "Services", key: "services", hasDropdown: true },
-    { label: "Get a Quote", key: "getquote", hasDropdown: false, href: "/pages/quote", highlight: true },
-    // { label: "Support", key: "support", hasDropdown: true, href: "/pages/contact" }
-  ];
-
-  // ------------------------------------
-  // DESKTOP LOGIC
-  // ------------------------------------
-  const desktopList = document.getElementById('desktop-nav-list');
-  const megaMenuContainer = document.getElementById('mega-menu-container');
-  const megaMenuContent = document.getElementById('mega-menu-content');
-  let currentOpenMenu = null;
-
-  function renderDesktopNav() {
-    desktopList.innerHTML = ''; // Clear existing
-    NAV_ITEMS.forEach(item => {
-       const li = document.createElement('li');
-       li.className = 'pk-nav-item';
-       
-       const btn = document.createElement('button');
-       btn.className = 'pk-nav-btn' + (item.highlight ? ' pk-nav-quote-cta pk-btn-primary' : '');
-       btn.innerHTML = `<span>${item.label}</span>`;
-       if (item.hasDropdown) {
-         btn.innerHTML += `<svg class="pk-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>`;
-       } else {
-         // Direct link for items without dropdowns
-         btn.onclick = () => { window.location.href = item.href ? item.href : `/collections/all`; };
-       }
-       
-       // Hover Events
-       li.addEventListener('mouseenter', () => {
-         if (item.hasDropdown && MEGA_MENUS[item.key]) {
-           showMegaMenu(item.key, li);
-         } else {
-           hideMegaMenu();
-         }
-       });
-
-       li.appendChild(btn);
-       desktopList.appendChild(li);
-    });
-  }
-
-  function showMegaMenu(key, triggerEl) {
-    currentOpenMenu = key;
-    const items = MEGA_MENUS[key] || [];
-    const cols = Math.max(1, Math.min(items.length, 5));
-    megaMenuContent.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 200px))`;
-    megaMenuContent.innerHTML = items.map(subItem => `
-      <a href="${subItem.href}" class="pk-mega-item">
-        <div class="pk-mega-img-box">
-          ${subItem.minQty ? `<span class="pk-mega-badge">${subItem.minQty} PC MIN</span>` : ''}
-          <img src="${subItem.image}" class="pk-mega-img">
-        </div>
-        <div class="pk-mega-title">${subItem.title}</div>
-      </a>
-    `).join('');
-    megaMenuContainer.style.display = 'block';
-
-    // Align the panel under its trigger, clamped so it never overflows the nav's right edge.
-    if (triggerEl) {
-      const navRect = document.querySelector('.pk-nav').getBoundingClientRect();
-      const triggerRect = triggerEl.getBoundingClientRect();
-      const panelWidth = megaMenuContainer.getBoundingClientRect().width;
-      let left = triggerRect.left - navRect.left;
-      left = Math.min(left, navRect.width - panelWidth);
-      left = Math.max(left, 0);
-      megaMenuContainer.style.left = left + 'px';
-    }
-  }
-
-  function hideMegaMenu() {
-    currentOpenMenu = null;
-    megaMenuContainer.style.display = 'none';
-  }
-  
-  // Close menu when mouse leaves the nav bar entirely
-  document.querySelector('.pk-nav').addEventListener('mouseleave', hideMegaMenu);
-
-  renderDesktopNav();
-
-  // Header is position:fixed (see .pk-header comment), so it no longer
-  // reserves its own space in normal flow - push the page down by its
-  // real rendered height instead, kept in sync as that height changes
-  // (viewport resize, top-bar wrapping to two lines on narrow screens, etc).
-  function pkSyncHeaderOffset() {
-    const header = document.querySelector('.pk-header');
-    if (header) document.body.style.paddingTop = header.offsetHeight + 'px';
-  }
-  pkSyncHeaderOffset();
-  window.addEventListener('resize', pkSyncHeaderOffset);
-  window.addEventListener('load', pkSyncHeaderOffset);
-
-  // Condensed header on scroll: hide the top bar + main header past a small
-  // threshold (so it doesn't flicker on a 1px scroll), re-measuring the
-  // reserved offset each time since hiding those rows shrinks the header.
   (function () {
-    const headerEl = document.querySelector('.pk-header');
-    let ticking = false;
-    function apply() {
-      const scrolled = window.scrollY > 12;
-      headerEl.classList.toggle('pk-header--scrolled', scrolled);
-      pkSyncHeaderOffset();
+    var header = document.getElementById('pk-header');
+    if (!header) return;
+
+    // The header is position:fixed (see the .pk-header comment), so it reserves
+    // no space of its own. Pad the page by the header's full height - measured
+    // with the strip showing, even if the page is currently scrolled - so
+    // nothing shifts when the strip drops away on scroll.
+    function syncOffset() {
+      var condensed = header.classList.contains('pk-header--scrolled');
+      if (condensed) header.classList.remove('pk-header--scrolled');
+      document.body.style.paddingTop = header.offsetHeight + 'px';
+      if (condensed) header.classList.add('pk-header--scrolled');
+    }
+    syncOffset();
+    window.addEventListener('resize', syncOffset);
+    window.addEventListener('load', syncOffset);
+
+    // Past a small threshold (so a 1px scroll doesn't flicker it) the strip hides.
+    var ticking = false;
+    function applyScrollState() {
+      header.classList.toggle('pk-header--scrolled', window.scrollY > 12);
       ticking = false;
     }
     window.addEventListener('scroll', function () {
-      if (!ticking) {
-        window.requestAnimationFrame(apply);
-        ticking = true;
-      }
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(applyScrollState);
     }, { passive: true });
-  })();
+    applyScrollState();
 
-  // ------------------------------------
-  // MOBILE LOGIC
-  // ------------------------------------
-  const mobileList = document.getElementById('mobile-nav-list');
-  const mobileDrawer = document.getElementById('mobile-drawer');
-  const mobileOverlay = document.getElementById('mobile-overlay');
-
-  window.toggleMobileMenu = function(open) {
-    if (open) {
-      mobileDrawer.classList.add('open');
-      mobileOverlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    } else {
-      mobileDrawer.classList.remove('open');
-      mobileOverlay.classList.remove('open');
-      document.body.style.overflow = '';
+    // Dropdown panels open on hover through CSS; a click, tap, or Enter/Space
+    // pins one open (the only way in on touch screens and for keyboards). Only
+    // one panel is ever pinned, and a pinned panel closes as soon as the
+    // pointer or keyboard focus moves to anything else in the header menu.
+    // Delegated from document so the handlers still work after the cart
+    // re-renders this section's markup.
+    function closeMenus(except) {
+      header.querySelectorAll('[data-pk-menu][data-open]').forEach(function (item) {
+        if (item === except) return;
+        item.removeAttribute('data-open');
+        var btn = item.querySelector('.pk-menu__link');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      });
     }
-  }
-
-  function renderMobileNav() {
-    mobileList.innerHTML = ''; // Clear existing
-    NAV_ITEMS.forEach(item => {
-      const container = document.createElement('div');
-      
-      const btn = document.createElement('button');
-      btn.className = 'pk-accordion-btn';
-      btn.innerHTML = `<span>${item.label}</span>`;
-      
-      if (item.hasDropdown) {
-        btn.innerHTML += `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>`;
-        
-        const content = document.createElement('div');
-        content.className = 'pk-accordion-content';
-        const subItems = MEGA_MENUS[item.key] || [];
-        content.innerHTML = subItems.map(sub => `
-           <a href="${sub.href}" class="pk-sub-link">
-             <img src="${sub.image}" class="pk-sub-thumb">
-             <span>${sub.title}</span>
-           </a>
-        `).join('');
-
-        btn.onclick = () => {
-          content.classList.toggle('open');
-          btn.querySelector('svg').style.transform = content.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0)';
-        };
-        
-        container.appendChild(btn);
-        container.appendChild(content);
-      } else {
-        // No dropdown, just a link
-        btn.onclick = () => { window.location.href = item.href ? item.href : `/collections/all`; };
-        container.appendChild(btn);
+    function menuItemOf(node) {
+      return node instanceof Element ? node.closest('#pk-header .pk-menu__item') : null;
+    }
+    document.addEventListener('click', function (event) {
+      var target = event.target instanceof Element ? event.target : null;
+      var trigger = target ? target.closest('#pk-header [data-pk-menu] > .pk-menu__link') : null;
+      if (trigger) {
+        var item = trigger.parentElement;
+        var open = !item.hasAttribute('data-open');
+        closeMenus(item);
+        item.toggleAttribute('data-open', open);
+        trigger.setAttribute('aria-expanded', String(open));
+        return;
       }
-      mobileList.appendChild(container);
+      if (!target || !target.closest('#pk-header [data-pk-menu]')) closeMenus();
     });
-  }
+    document.addEventListener('mouseover', function (event) {
+      var item = menuItemOf(event.target);
+      if (item) closeMenus(item);
+    });
+    document.addEventListener('focusin', function (event) {
+      closeMenus(menuItemOf(event.target));
+    });
 
-  renderDesktopNav();
-  renderMobileNav();
+    var drawer = document.getElementById('mobile-drawer');
+    var overlay = document.getElementById('mobile-overlay');
+    window.toggleMobileMenu = function (open) {
+      if (!drawer || !overlay) return;
+      drawer.classList.toggle('open', !!open);
+      overlay.classList.toggle('open', !!open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
 
-  // Re-render nav after cart updates (morphSection may wipe JS-rendered content)
-  document.addEventListener('cart:update', function() {
-    setTimeout(() => {
-      renderDesktopNav();
-      renderMobileNav();
-    }, 50);
-  });
-
-  // Search bar "placeholder": types the text in, holds, erases it, holds,
-  // and loops. Skipped for reduced-motion - the full text is shown instead.
-  (function () {
-    const el = document.getElementById('pk-search-typewriter');
-    if (!el) return;
-    const text = el.getAttribute('data-full-text') || '';
-    if (!text) return;
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      el.textContent = text;
-      return;
-    }
-
-    const TYPE_MS = 90;
-    const ERASE_MS = 45;
-    const HOLD_FULL_MS = 1800;
-    const HOLD_EMPTY_MS = 500;
-    let i = 0;
-
-    function typeStep() {
-      i++;
-      el.textContent = text.slice(0, i);
-      if (i < text.length) {
-        setTimeout(typeStep, TYPE_MS);
-      } else {
-        setTimeout(eraseStep, HOLD_FULL_MS);
-      }
-    }
-
-    function eraseStep() {
-      i--;
-      el.textContent = text.slice(0, i);
-      if (i > 0) {
-        setTimeout(eraseStep, ERASE_MS);
-      } else {
-        setTimeout(typeStep, HOLD_EMPTY_MS);
-      }
-    }
-
-    typeStep();
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      closeMenus();
+      if (drawer && drawer.classList.contains('open')) window.toggleMobileMenu(false);
+    });
   })();
-
 </script>

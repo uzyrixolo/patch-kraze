@@ -13,13 +13,7 @@
   "sections": {
     "header": {
       "type": "header-patch-kraze",
-      "settings": {
-        "url_transfers": "",
-        "url_blanks": "",
-        "url_patches": "",
-        "url_printhouse": "",
-        "url_pod": ""
-      }
+      "settings": {}
     }
   },
   "order": [
