@@ -1,0 +1,52 @@
+{%- doc -%}
+  Links for one group of the header menu, each with a small thumbnail.
+
+  Product links come from the header section's "menu_product" blocks whose
+  group matches; the thumbnail is the product's own featured photo, so it
+  follows the product if its photo changes. When no block matches, the
+  `fallback` list is used instead: "Label|/url" or "Label|/url|file-name"
+  entries, the optional third part naming an image in Files.
+
+  @param {object} blocks - section.blocks of the header section
+  @param {string} group - group key to render
+  @param {object} [fallback] - array of "Label|/url[|file-name]" strings
+  @param {string} [variant] - 'panel' wraps each link in <li>; anything else does not
+{%- enddoc -%}
+
+{%- assign rendered = 0 -%}
+{%- for block in blocks -%}
+  {%- if block.type != 'menu_product' or block.settings.group != group or block.settings.product == blank -%}
+    {%- continue -%}
+  {%- endif -%}
+  {%- assign item = block.settings.product -%}
+  {%- assign rendered = rendered | plus: 1 -%}
+  {%- if variant == 'panel' -%}<li {{ block.shopify_attributes }}>{%- endif -%}
+    <a href="{{ item.url }}">
+      {%- if item.featured_image -%}
+        <img class="pk-thumb" src="{{ item.featured_image | image_url: width: 96, height: 96, crop: 'center' }}" width="48" height="48" alt="" loading="lazy" decoding="async">
+      {%- else -%}
+        <span class="pk-thumb" aria-hidden="true"></span>
+      {%- endif -%}
+      <span>{{ block.settings.label | default: item.title }}</span>
+    </a>
+  {%- if variant == 'panel' -%}</li>{%- endif -%}
+{%- endfor -%}
+
+{%- if rendered == 0 -%}
+  {%- for entry in fallback -%}
+    {%- assign pair = entry | split: '|' -%}
+    {%- if variant == 'panel' -%}<li>{%- endif -%}
+      <a href="{{ pair[1] }}">
+        {%- if pair[2] != blank -%}
+          {%- assign file_image = images[pair[2]] -%}
+          {%- if file_image -%}
+            <img class="pk-thumb" src="{{ file_image | image_url: width: 96, height: 96, crop: 'center' }}" width="48" height="48" alt="" loading="lazy" decoding="async">
+          {%- else -%}
+            <span class="pk-thumb" aria-hidden="true"></span>
+          {%- endif -%}
+        {%- endif -%}
+        <span>{{ pair[0] }}</span>
+      </a>
+    {%- if variant == 'panel' -%}</li>{%- endif -%}
+  {%- endfor -%}
+{%- endif -%}

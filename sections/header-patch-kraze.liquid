@@ -13,7 +13,28 @@
     { "type": "url", "id": "url_readymade", "label": "Ready-made patches link", "info": "Defaults to /collections/ready-made-patches." },
     { "type": "url", "id": "url_blanks", "label": "Blank hats link", "info": "Defaults to /collections/patch-kraze-blanks." },
     { "type": "url", "id": "url_quote", "label": "Quote button link", "info": "Defaults to /pages/quote." }
-  ]
+  ],
+  "blocks": [
+    {
+      "type": "menu_product",
+      "name": "Menu product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "The link goes to this product and shows its main photo." },
+        { "type": "text", "id": "label", "label": "Label", "info": "Leave empty to use the product title." },
+        {
+          "type": "select", "id": "group", "label": "Menu group", "default": "stitched",
+          "options": [
+            { "value": "stitched", "label": "Patches: Embroidered & woven" },
+            { "value": "printed", "label": "Patches: Printed & flex" },
+            { "value": "molded", "label": "Patches: PVC, rubber & silicone" },
+            { "value": "leather", "label": "Patches: Leather" },
+            { "value": "stickers", "label": "Stickers" }
+          ]
+        }
+      ]
+    }
+  ],
+  "max_blocks": 40
 }
 {% endschema %}
 
@@ -24,8 +45,12 @@
   groups in a slide-in drawer. All menu markup is static HTML (real links), so
   it survives the cart's section re-renders without being rebuilt by script.
 
-  The menu groups are defined once, below, as "Label|/url" lists and rendered
-  twice (desktop panel + drawer). Labels must not contain a comma or a pipe.
+  Product links are "Menu product" blocks (product + label + group), so each
+  link can show the product's own photo as a thumbnail; snippets/pk-menu-links
+  renders a group for the desktop panel and again for the drawer. The "Label|/url"
+  lists below are the fallback used when a group has no blocks, and the source
+  for the Services links (pages, with a Files image name as a third part).
+  Labels must not contain a comma or a pipe.
 {% endcomment %}
 
 {%- liquid
@@ -42,7 +67,7 @@
   assign pk_grp_molded = 'PVC rubber|/products/pvc-rubber-patches,3D PVC|/products/3d-pvc-patches,Glow-in-the-dark PVC|/products/glow-in-the-dark-pvc-rubber-patches,Silicone|/products/silicone-patches,PVC keychains|/products/custom-keychains' | split: ','
   assign pk_grp_leather = 'Genuine leather|/products/leather-patches,Faux leather|/products/faux-leather-patches' | split: ','
   assign pk_grp_stickers = 'Vinyl stickers|/products/custom-vinyl-stickers,Holographic stickers|/products/holographic-stickers,UV transparent stickers|/products/uv-transparent-stickers' | split: ','
-  assign pk_grp_services = 'Direct embroidery|/pages/direct-embroidery,Screen printing|/pages/screen-printing,Heat press service|/pages/heat-press-service,Tees with DTF prints|/pages/tees-with-dtf-prints' | split: ','
+  assign pk_grp_services = 'Direct embroidery|/pages/direct-embroidery|services_4.webp,Screen printing|/pages/screen-printing|services_5.webp,Heat press service|/pages/heat-press-service|services_1.webp,Tees with DTF prints|/pages/tees-with-dtf-prints|services_2.webp' | split: ','
 -%}
 
 <style>
@@ -97,7 +122,8 @@
   .pk-menu__item:hover > .pk-menu__link::after,
   .pk-menu__item[data-open] > .pk-menu__link::after { transform: scaleX(1); }
   .pk-menu__link:focus-visible { outline: 2px solid #9333ea; outline-offset: -3px; border-radius: 0.4rem; }
-  .pk-menu__chev { width: 0.8rem; height: 0.8rem; transition: transform 0.15s ease; }
+  .pk-menu__chev { display: inline-flex; width: 0.8rem; height: 0.8rem; transition: transform 0.15s ease; }
+  .pk-menu__chev svg, .pk-drawer__chev svg { display: block; width: 100%; height: 100%; }
   .pk-menu__item[data-open] .pk-menu__chev { transform: rotate(180deg); }
 
   /* DROPDOWN PANELS - text links in named groups */
@@ -109,14 +135,15 @@
     transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0.15s;
   }
   .pk-panel--wide { right: 0; display: grid; grid-template-columns: 1.3fr 1fr 1.15fr 0.8fr 1.2fr; gap: 2rem; }
-  .pk-panel--list { min-width: 15rem; padding: 0.9rem 1rem; }
+  .pk-panel--list { min-width: 17rem; padding: 0.9rem 1rem; }
   @media (hover: hover) {
     .pk-menu__item:hover > .pk-panel { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
   }
   .pk-menu__item[data-open] > .pk-panel { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
   .pk-panel__head { margin: 0 0 0.6rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #7e22ce; }
   .pk-panel__links { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.1rem; }
-  .pk-panel__links a { display: block; margin: 0 -0.6rem; padding: 0.4rem 0.6rem; border-radius: 0.5rem; color: #111827; text-decoration: none; font-size: 0.92rem; font-weight: 500; }
+  .pk-panel__links a { display: flex; align-items: center; gap: 0.65rem; margin: 0 -0.6rem; padding: 0.35rem 0.6rem; border-radius: 0.5rem; color: #111827; text-decoration: none; font-size: 0.92rem; font-weight: 500; line-height: 1.25; }
+  .pk-thumb { flex-shrink: 0; display: block; width: 2.5rem; height: 2.5rem; border-radius: 0.5rem; object-fit: cover; background: #f3f4f6; box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.08); }
   .pk-panel__links a:hover, .pk-panel__links a:focus-visible { background: #f5f3ff; color: #6b21a8; outline: none; }
   .pk-panel__aside { align-self: start; display: flex; flex-direction: column; gap: 0.6rem; background: #111827; color: #fff; border-radius: 0.9rem; padding: 1.25rem; }
   .pk-panel__aside-title { margin: 0; font-size: 1rem; font-weight: 700; line-height: 1.3; }
@@ -126,7 +153,12 @@
   /* TOOLS: search, account, cart, quote button, menu button */
   .pk-tools { display: flex; align-items: center; gap: 0.25rem; flex-shrink: 0; margin-left: auto; }
   .pk-tool { position: relative; width: 2.5rem; height: 2.5rem; display: inline-flex; align-items: center; justify-content: center; border-radius: 0.6rem; padding: 0; text-decoration: none; }
-  .pk-tool svg { width: 1.35rem; height: 1.35rem; }
+  /* Icons are the base theme's own files (assets/icon-*.svg). Search, account
+     and cart are drawn on a 20-unit grid, menu and close on a 14-unit one, so
+     the two sets take different sizes to end up with the same line weight. */
+  .pk-tool .svg-wrapper, .pk-tool .svg-wrapper > svg { width: 1.6rem; height: 1.6rem; }
+  .pk-tool--menu .svg-wrapper, .pk-tool--menu .svg-wrapper > svg,
+  .pk-tool--close .svg-wrapper, .pk-tool--close .svg-wrapper > svg { width: 1.15rem; height: 1.15rem; }
   .pk-tool cart-icon { display: block; position: relative; }
   .pk-tool .cart-bubble { position: absolute; top: -8px; right: -8px; }
   .pk-tool .cart-bubble__background { background-color: #9333ea !important; }
@@ -161,11 +193,11 @@
   .pk-drawer__link { display: flex; align-items: center; justify-content: space-between; padding: 0.95rem 1.1rem; border-bottom: 1px solid #f3f4f6; font-size: 1rem; font-weight: 700; color: #111827; text-decoration: none; cursor: pointer; }
   .pk-drawer__group > summary { list-style: none; }
   .pk-drawer__group > summary::-webkit-details-marker { display: none; }
-  .pk-drawer__group > summary svg { width: 1rem; height: 1rem; transition: transform 0.15s ease; }
-  .pk-drawer__group[open] > summary svg { transform: rotate(180deg); }
+  .pk-drawer__chev { display: inline-flex; width: 0.9rem; height: 0.9rem; transition: transform 0.15s ease; }
+  .pk-drawer__group[open] > summary .pk-drawer__chev { transform: rotate(180deg); }
   .pk-drawer__sub { background: #faf5ff; padding: 0.5rem 1.1rem 0.9rem; border-bottom: 1px solid #f3f4f6; }
   .pk-drawer__label { margin: 0.75rem 0 0.25rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #7e22ce; }
-  .pk-drawer__sub a { display: block; padding: 0.5rem 0; color: #1f2937; text-decoration: none; font-size: 0.95rem; }
+  .pk-drawer__sub a { display: flex; align-items: center; gap: 0.7rem; padding: 0.4rem 0; color: #1f2937; text-decoration: none; font-size: 0.95rem; }
   /* Bottom padding keeps the footer clear of the chat bubble, which is pinned
      to the bottom-right corner above everything else on the page. */
   .pk-drawer__foot { padding: 1rem 1.1rem 5rem; border-top: 1px solid #e5e7eb; display: grid; gap: 0.75rem; }
@@ -174,7 +206,7 @@
   .pk-drawer__foot-links a { color: #374151; text-decoration: none; font-weight: 600; }
 
   @media (prefers-reduced-motion: reduce) {
-    .pk-panel, .pk-drawer, .pk-menu__link::after, .pk-menu__chev { transition: none; }
+    .pk-panel, .pk-drawer, .pk-menu__link::after, .pk-menu__chev, .pk-drawer__chev { transition: none; }
   }
 </style>
 
@@ -207,43 +239,31 @@
         <div class="pk-menu__item" data-pk-menu>
           <button type="button" class="pk-menu__link" aria-expanded="false" aria-controls="pk-panel-patches">
             Patches
-            <svg class="pk-menu__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            <span class="pk-menu__chev" aria-hidden="true">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
           </button>
           <div class="pk-panel pk-panel--wide" id="pk-panel-patches">
             <div>
               <p class="pk-panel__head">Embroidered &amp; woven</p>
               <ul class="pk-panel__links">
-                {%- for entry in pk_grp_stitched -%}
-                  {%- assign pair = entry | split: '|' -%}
-                  <li><a href="{{ pair[1] }}">{{ pair[0] }}</a></li>
-                {%- endfor -%}
+                {%- render 'pk-menu-links', blocks: section.blocks, group: 'stitched', fallback: pk_grp_stitched, variant: 'panel' -%}
               </ul>
             </div>
             <div>
               <p class="pk-panel__head">Printed &amp; flex</p>
               <ul class="pk-panel__links">
-                {%- for entry in pk_grp_printed -%}
-                  {%- assign pair = entry | split: '|' -%}
-                  <li><a href="{{ pair[1] }}">{{ pair[0] }}</a></li>
-                {%- endfor -%}
+                {%- render 'pk-menu-links', blocks: section.blocks, group: 'printed', fallback: pk_grp_printed, variant: 'panel' -%}
               </ul>
             </div>
             <div>
               <p class="pk-panel__head">PVC, rubber &amp; silicone</p>
               <ul class="pk-panel__links">
-                {%- for entry in pk_grp_molded -%}
-                  {%- assign pair = entry | split: '|' -%}
-                  <li><a href="{{ pair[1] }}">{{ pair[0] }}</a></li>
-                {%- endfor -%}
+                {%- render 'pk-menu-links', blocks: section.blocks, group: 'molded', fallback: pk_grp_molded, variant: 'panel' -%}
               </ul>
             </div>
             <div>
               <p class="pk-panel__head">Leather</p>
               <ul class="pk-panel__links">
-                {%- for entry in pk_grp_leather -%}
-                  {%- assign pair = entry | split: '|' -%}
-                  <li><a href="{{ pair[1] }}">{{ pair[0] }}</a></li>
-                {%- endfor -%}
+                {%- render 'pk-menu-links', blocks: section.blocks, group: 'leather', fallback: pk_grp_leather, variant: 'panel' -%}
               </ul>
             </div>
             <div class="pk-panel__aside">
@@ -257,14 +277,11 @@
         <div class="pk-menu__item pk-menu__item--compact" data-pk-menu>
           <button type="button" class="pk-menu__link" aria-expanded="false" aria-controls="pk-panel-stickers">
             Stickers
-            <svg class="pk-menu__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            <span class="pk-menu__chev" aria-hidden="true">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
           </button>
           <div class="pk-panel pk-panel--list" id="pk-panel-stickers">
             <ul class="pk-panel__links">
-              {%- for entry in pk_grp_stickers -%}
-                {%- assign pair = entry | split: '|' -%}
-                <li><a href="{{ pair[1] }}">{{ pair[0] }}</a></li>
-              {%- endfor -%}
+              {%- render 'pk-menu-links', blocks: section.blocks, group: 'stickers', fallback: pk_grp_stickers, variant: 'panel' -%}
             </ul>
           </div>
         </div>
@@ -276,14 +293,11 @@
         <div class="pk-menu__item pk-menu__item--compact" data-pk-menu>
           <button type="button" class="pk-menu__link" aria-expanded="false" aria-controls="pk-panel-services">
             Services
-            <svg class="pk-menu__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            <span class="pk-menu__chev" aria-hidden="true">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
           </button>
           <div class="pk-panel pk-panel--list" id="pk-panel-services">
             <ul class="pk-panel__links">
-              {%- for entry in pk_grp_services -%}
-                {%- assign pair = entry | split: '|' -%}
-                <li><a href="{{ pair[1] }}">{{ pair[0] }}</a></li>
-              {%- endfor -%}
+              {%- render 'pk-menu-links', blocks: section.blocks, group: 'services', fallback: pk_grp_services, variant: 'panel' -%}
             </ul>
           </div>
         </div>
@@ -291,22 +305,20 @@
 
       <div class="pk-tools">
         <button type="button" class="pk-tool pk-btn-icon" onclick="document.querySelector('#search-modal dialog')?.showModal()" aria-label="Search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <span class="svg-wrapper" aria-hidden="true">{{- 'icon-search.svg' | inline_asset_content -}}</span>
         </button>
         <a href="{{ routes.account_url }}" class="pk-tool pk-tool--account pk-btn-icon" aria-label="Account">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="svg-wrapper" aria-hidden="true">{{- 'icon-account.svg' | inline_asset_content -}}</span>
         </a>
         <button type="button" class="pk-tool pk-btn-icon" onclick="document.querySelector('cart-drawer-component').open()" aria-label="Open cart">
           <cart-icon class="header-actions__cart-icon" data-testid="cart-icon">
-            <span class="svg-wrapper" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 3h2l2.4 12.2a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L21 8H6"/></svg>
-            </span>
+            <span class="svg-wrapper" aria-hidden="true">{{- 'icon-cart.svg' | inline_asset_content -}}</span>
             {% render 'cart-bubble', limit: 100, live_region: true %}
           </cart-icon>
         </button>
         <a class="pk-quote-btn pk-btn-dark" href="{{ pk_url_quote }}">Get a quote</a>
         <button type="button" class="pk-tool pk-tool--menu pk-btn-icon" onclick="toggleMobileMenu(true)" aria-label="Open menu" aria-controls="mobile-drawer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          <span class="svg-wrapper" aria-hidden="true">{{- 'icon-menu.svg' | inline_asset_content -}}</span>
         </button>
       </div>
     </div>
@@ -320,53 +332,35 @@
   <div class="pk-drawer" id="mobile-drawer" aria-label="Menu">
     <div class="pk-drawer__head">
       <span class="pk-drawer__title">Menu</span>
-      <button type="button" class="pk-tool pk-btn-icon" onclick="toggleMobileMenu(false)" aria-label="Close menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      <button type="button" class="pk-tool pk-tool--close pk-btn-icon" onclick="toggleMobileMenu(false)" aria-label="Close menu">
+        <span class="svg-wrapper" aria-hidden="true">{{- 'icon-close.svg' | inline_asset_content -}}</span>
       </button>
     </div>
     <div class="pk-drawer__body">
       <details class="pk-drawer__group" open>
-        <summary>Patches <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <summary>Patches <span class="pk-drawer__chev" aria-hidden="true">{{- 'icon-caret.svg' | inline_asset_content -}}</span></summary>
         <div class="pk-drawer__sub">
           <p class="pk-drawer__label">Embroidered &amp; woven</p>
-          {%- for entry in pk_grp_stitched -%}
-            {%- assign pair = entry | split: '|' -%}
-            <a href="{{ pair[1] }}">{{ pair[0] }}</a>
-          {%- endfor -%}
+          {%- render 'pk-menu-links', blocks: section.blocks, group: 'stitched', fallback: pk_grp_stitched, variant: 'drawer' -%}
           <p class="pk-drawer__label">Printed &amp; flex</p>
-          {%- for entry in pk_grp_printed -%}
-            {%- assign pair = entry | split: '|' -%}
-            <a href="{{ pair[1] }}">{{ pair[0] }}</a>
-          {%- endfor -%}
+          {%- render 'pk-menu-links', blocks: section.blocks, group: 'printed', fallback: pk_grp_printed, variant: 'drawer' -%}
           <p class="pk-drawer__label">PVC, rubber &amp; silicone</p>
-          {%- for entry in pk_grp_molded -%}
-            {%- assign pair = entry | split: '|' -%}
-            <a href="{{ pair[1] }}">{{ pair[0] }}</a>
-          {%- endfor -%}
+          {%- render 'pk-menu-links', blocks: section.blocks, group: 'molded', fallback: pk_grp_molded, variant: 'drawer' -%}
           <p class="pk-drawer__label">Leather</p>
-          {%- for entry in pk_grp_leather -%}
-            {%- assign pair = entry | split: '|' -%}
-            <a href="{{ pair[1] }}">{{ pair[0] }}</a>
-          {%- endfor -%}
+          {%- render 'pk-menu-links', blocks: section.blocks, group: 'leather', fallback: pk_grp_leather, variant: 'drawer' -%}
         </div>
       </details>
       <details class="pk-drawer__group">
-        <summary>Stickers <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <summary>Stickers <span class="pk-drawer__chev" aria-hidden="true">{{- 'icon-caret.svg' | inline_asset_content -}}</span></summary>
         <div class="pk-drawer__sub">
-          {%- for entry in pk_grp_stickers -%}
-            {%- assign pair = entry | split: '|' -%}
-            <a href="{{ pair[1] }}">{{ pair[0] }}</a>
-          {%- endfor -%}
+          {%- render 'pk-menu-links', blocks: section.blocks, group: 'stickers', fallback: pk_grp_stickers, variant: 'drawer' -%}
         </div>
       </details>
       <a class="pk-drawer__link" href="/products/dtf-transfers">DTF transfers</a>
       <details class="pk-drawer__group">
-        <summary>Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <summary>Services <span class="pk-drawer__chev" aria-hidden="true">{{- 'icon-caret.svg' | inline_asset_content -}}</span></summary>
         <div class="pk-drawer__sub">
-          {%- for entry in pk_grp_services -%}
-            {%- assign pair = entry | split: '|' -%}
-            <a href="{{ pair[1] }}">{{ pair[0] }}</a>
-          {%- endfor -%}
+          {%- render 'pk-menu-links', blocks: section.blocks, group: 'services', fallback: pk_grp_services, variant: 'drawer' -%}
         </div>
       </details>
       <a class="pk-drawer__link" href="{{ pk_url_readymade }}">Ready-made patches</a>

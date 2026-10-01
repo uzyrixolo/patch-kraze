@@ -13,6 +13,208 @@
   "sections": {
     "header": {
       "type": "header-patch-kraze",
+        "blocks": {
+          "menu_embroidered_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "embroidered-patches",
+              "label": "Embroidered",
+              "group": "stitched"
+            }
+          },
+          "menu_3d_embroidered_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "3d-embroidered-patches",
+              "label": "3D embroidered",
+              "group": "stitched"
+            }
+          },
+          "menu_name_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "name-patches",
+              "label": "Name patches",
+              "group": "stitched"
+            }
+          },
+          "menu_chenille_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "chenille-patches",
+              "label": "Chenille",
+              "group": "stitched"
+            }
+          },
+          "menu_tackle_twill_letters": {
+            "type": "menu_product",
+            "settings": {
+              "product": "tackle-twill-letters",
+              "label": "Tackle twill letters",
+              "group": "stitched"
+            }
+          },
+          "menu_woven_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "woven-patches",
+              "label": "Woven",
+              "group": "stitched"
+            }
+          },
+          "menu_glow_in_the_dark_embroidery_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "glow-in-the-dark-embroidery-patches",
+              "label": "Glow-in-the-dark embroidered",
+              "group": "stitched"
+            }
+          },
+          "menu_full_color_printed_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "full-color-printed-patches",
+              "label": "Full color printed",
+              "group": "printed"
+            }
+          },
+          "menu_full_color_flex_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "full-color-flex-patches",
+              "label": "Full color flex",
+              "group": "printed"
+            }
+          },
+          "menu_gold_flex_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "gold-flex-patches",
+              "label": "Gold flex",
+              "group": "printed"
+            }
+          },
+          "menu_silver_flex_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "silver-flex-patches",
+              "label": "Silver flex",
+              "group": "printed"
+            }
+          },
+          "menu_pu_uv_3d_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "pu-uv-3d-patches",
+              "label": "TPU UV 3D",
+              "group": "printed"
+            }
+          },
+          "menu_pvc_rubber_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "pvc-rubber-patches",
+              "label": "PVC rubber",
+              "group": "molded"
+            }
+          },
+          "menu_3d_pvc_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "3d-pvc-patches",
+              "label": "3D PVC",
+              "group": "molded"
+            }
+          },
+          "menu_glow_in_the_dark_pvc_rubber_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "glow-in-the-dark-pvc-rubber-patches",
+              "label": "Glow-in-the-dark PVC",
+              "group": "molded"
+            }
+          },
+          "menu_silicone_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "silicone-patches",
+              "label": "Silicone",
+              "group": "molded"
+            }
+          },
+          "menu_custom_keychains": {
+            "type": "menu_product",
+            "settings": {
+              "product": "custom-keychains",
+              "label": "PVC keychains",
+              "group": "molded"
+            }
+          },
+          "menu_leather_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "leather-patches",
+              "label": "Genuine leather",
+              "group": "leather"
+            }
+          },
+          "menu_faux_leather_patches": {
+            "type": "menu_product",
+            "settings": {
+              "product": "faux-leather-patches",
+              "label": "Faux leather",
+              "group": "leather"
+            }
+          },
+          "menu_custom_vinyl_stickers": {
+            "type": "menu_product",
+            "settings": {
+              "product": "custom-vinyl-stickers",
+              "label": "Vinyl stickers",
+              "group": "stickers"
+            }
+          },
+          "menu_holographic_stickers": {
+            "type": "menu_product",
+            "settings": {
+              "product": "holographic-stickers",
+              "label": "Holographic stickers",
+              "group": "stickers"
+            }
+          },
+          "menu_uv_transparent_stickers": {
+            "type": "menu_product",
+            "settings": {
+              "product": "uv-transparent-stickers",
+              "label": "UV transparent stickers",
+              "group": "stickers"
+            }
+          }
+        },
+        "block_order": [
+          "menu_embroidered_patches",
+          "menu_3d_embroidered_patches",
+          "menu_name_patches",
+          "menu_chenille_patches",
+          "menu_tackle_twill_letters",
+          "menu_woven_patches",
+          "menu_glow_in_the_dark_embroidery_patches",
+          "menu_full_color_printed_patches",
+          "menu_full_color_flex_patches",
+          "menu_gold_flex_patches",
+          "menu_silver_flex_patches",
+          "menu_pu_uv_3d_patches",
+          "menu_pvc_rubber_patches",
+          "menu_3d_pvc_patches",
+          "menu_glow_in_the_dark_pvc_rubber_patches",
+          "menu_silicone_patches",
+          "menu_custom_keychains",
+          "menu_leather_patches",
+          "menu_faux_leather_patches",
+          "menu_custom_vinyl_stickers",
+          "menu_holographic_stickers",
+          "menu_uv_transparent_stickers"
+        ],
       "settings": {}
     }
   },
