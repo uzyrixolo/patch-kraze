@@ -685,7 +685,9 @@
         "eyebrow": "Why order here",
         "heading": "Made to Your Spec, Priced Up Front",
         "subheading": "You choose the size, shape and backing, and the price is on the page before you order.",
-        "tone": "purple"
+        "tone": "purple",
+        "image": "shopify://shop_images/West_Coast_Americana_Patchwork_Mural_1.png",
+        "image_fit": "cover"
       }
     },
     "factory_visit_video": {
