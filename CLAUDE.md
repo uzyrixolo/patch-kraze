@@ -7,11 +7,15 @@ Shopify theme for **patchkraze.com** (store: `patchkraze.myshopify.com`, admin: 
 - This repo is **git-connected to the LIVE Shopify theme** (`patch-kraze/main`, theme id `140182224980`). **Every push to `main` auto-deploys to the live storefront within ~1 minute.** There is no staging branch — treat pushes as production deploys.
 - The Shopify GitHub integration only syncs theme directories (`assets, blocks, config, layout, locales, sections, snippets, templates`). Non-theme folders (`backups/`, `quote-backend/`) are ignored by the sync — safe to keep in the repo.
 - Direct theme-file writes to the live theme via Admin API are blocked by tooling policy; git push IS the deploy path.
+- **The GitHub repo (`uzyrixolo/patch-kraze`) is public.** Never commit a secret, and assume commit messages and this file are world-readable.
+- **Preview before deploying anything that touches the order flow.** The Shopify CLI on this machine is signed in to the store, so a private development theme is one command away (nothing goes live, and it does not count against the 20-theme limit, which the store is at):
+  `shopify theme dev --store patchkraze.myshopify.com --port 9292 --ignore "assets/patch-images/**/*" --ignore "templates/product.horizon.json"`
+  The two `--ignore` flags are required: the CLI refuses the nested `assets/patch-images/` folders (Shopify assets cannot live in subfolders) and `templates/product.horizon.json` (references a block type that is not in `blocks/`), and shows an upload-error page instead of the store until both are skipped. `.claude/launch.json` (git-ignored) holds this as the `shopify-theme-dev` launch config.
 - Note: this working copy previously had a stale `.git/index.lock` blocking commits. If git commands fail, `rm .git/index.lock` first. If local is behind origin, `git pull` (recent work was pushed from a separate clone).
 
 ## Pricing architecture (the heart of this theme)
 
-`sections/main-product-patch-kraze.liquid` (~1750 lines) is the custom product page for all patch/sticker/DTF products. Inside its main script:
+`sections/main-product-patch-kraze.liquid` (~2,800 lines) is the custom product page for all patch/sticker/DTF products. Inside its main script:
 
 - **`PRODUCT_CONFIGS`** — per-handle size limits/defaults (min/max/default inches, step).
 - **`METAFIELD_MATRIX`** — pricing grid injected from the **`custom.prices` product metafield** (JSON type, namespace `custom`, key `prices`, on ~58 products). Grid shape: `{ sizeBrackets: [...], quantityTiers: [{min, max, prices: [...]}] }`. Sticker products have a formula-shaped value (`type: 'stickers'`) which is **inert** — see below.
@@ -342,7 +346,7 @@ theme compute new tier labels that have no matching variants, and the fallback a
 - **`quote-backend/`** — Node/Express service (deploy target: Railway, root directory `quote-backend`). Per quote: uploads design file to Shopify Files (staged upload), upserts customer tagged `quote-request`, creates a `quote_request` **metaobject** (definition auto-created on boot; view in admin under Content → Metaobjects).
 - **Auth (Shopify 2026 model):** no static `shpat_` tokens. Backend exchanges `SHOPIFY_CLIENT_ID` + `SHOPIFY_CLIENT_SECRET` for short-lived Admin tokens via client-credentials grant (`POST /admin/oauth/access_token`), auto-refreshing. Requires the app installed on the store with scopes: `read/write_files, read/write_customers, read/write_metaobjects`.
 - The Shopify app: "Quote Backend" in the Partners dashboard (org 2626091, app id 402895667201), custom distribution to patchkraze.
-- `quote-backend/setup_railway.py` — one-shot Railway provisioning script (creates project/service from this repo, sets root dir, env vars, domain). Contains a Railway account token; prompts for Shopify client credentials.
+- `quote-backend/setup_railway.py` — one-shot Railway provisioning script (creates project/service from this repo, sets root dir, env vars, domain). Reads `RAILWAY_TOKEN` from the environment (it used to be hardcoded in the file — see the public-repo note under Deployment); prompts for Shopify client credentials.
 
 ### Current status (July 2026): LIVE and working
 
@@ -400,8 +404,51 @@ Railway.
     handling as the Resend key incident earlier in this project) — not used, user asked to
     revoke and generate a fresh one directly in Railway.
 
+## Product page layout (October 2026)
+
+The order block in `main-product-patch-kraze.liquid` is a set of numbered steps (`.pk-step`,
+numbered by a CSS counter so stickers and DTF, which skip a step, still count 1-2-3-4):
+**Your artwork** (upload button, preview, clean-up tools, notes) -> **dimensions** ->
+**Quantity** (input, summary card, price-break table) -> **Finishing** (patch products only:
+cut shape, background color, border color, backing, leather color) -> **Place your order**.
+Above the steps: title, rating row, description, a live price card (`#header-price` /
+`#header-qty`) and three fact chips.
+
+- **The pricing/variant script was not changed by the relayout** and still finds everything by
+  id: `file-input`, `upload-stage`, `pk-artwork-panel`, `width-input`, `height-input`,
+  `qty-input`, `qty-error`, `qty-min-label`, `unit-price-display`, `total-price-display`,
+  `total-velcro-note`, `real-variant-id`, `price-tier-N` / `discount-tier-N` / `tier-msg-N`,
+  `shape-input`, `bg-color-input`, `thread-color-input`, `backing-input`. Keep those ids if the
+  markup moves again.
+- **Line-item properties** an order now carries: `Design File`, `Design Notes`, `Width`,
+  `Height`, `Shape`, `Background Color`, `Border Color`, `Backing`, `Leather Color`,
+  `Mockup Request`. Backing values are `Iron-On`, `Velcro (hook & loop, both sides included)`
+  and `Adhesive (peel-off)` on both the patch template and the deal template; the Velcro
+  surcharge logic only checks that the value contains `Velcro`. Orders placed before
+  2026-10-01 use the older names (`Patch Background Color`, `Border Thread Color`,
+  `Heat Applied (Most Popular)`, `Peel & Stick`).
+- **Ratings come from real review data or are not shown.** The rating row reads the
+  `reviews.rating` / `reviews.rating_count` product metafields (written by Judge.me) and is
+  omitted for a product with no reviews. Homepage cards show no rating. Do not hardcode a
+  rating, a review count, a testimonial, or a customer logo anywhere in the theme.
+- `pk_noun` (patch / sticker / transfer) is set in Liquid at the top of the info column and
+  drives the size labels; the pricing-formula tooltip only renders for patches, since
+  stickers and DTF are not priced on the width/height average.
+- The AI tools are labelled "Trim empty edges", "Erase the background" and "Describe a
+  change" (ids unchanged: `pk-toggle-crop`, `pk-toggle-removebg`, `pk-edit-ai-btn`).
+- Verified 2026-10-01 on a development theme and then live: displayed price equals the
+  matched variant's price across size/quantity changes on patch, sticker, DTF and leather
+  products; below-minimum quantity is blocked; add-to-cart writes the properties above and
+  the Velcro companion line; desktop and 375px layouts have no overflow.
+- Known and untouched: after add-to-cart, re-rendering the cart drawer logs
+  `MissingRefError ... cart-quantity-selector-component` in the console (the drawer section
+  HTML is swapped in with `innerHTML`). The item is added and the drawer opens.
+
 ## Conventions
 
+- All copy, images and page structure must be original to Patch Kraze. Do not paste text,
+  reviews, images or layouts from another company's site, and do not treat renaming a file as
+  making it ours.
 - Sections are self-contained: `{% schema %}` first, then `<style>`, then markup/JS. Plain CSS classes, no external deps.
 - Theme is OS 2.0 (JSON templates). Default product template is `product-information` (Horizon); patch products use the custom section via their template.
 - When changing prices: update BOTH variant prices and `custom.prices` metafields, and respect the $70 floor rule.

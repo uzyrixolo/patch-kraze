@@ -4,3 +4,10 @@ config/settings_data.json
 .DS_Store
 .shopify
 node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# Local agent/dev-server config
+.claude/

@@ -2,7 +2,7 @@
 """
 One-shot Railway setup for the Patch Kraze quote backend.
 
-Run:  python3 /Users/zolo/patch-kraze/quote-backend/setup_railway.py
+Run:  RAILWAY_TOKEN=... python3 quote-backend/setup_railway.py
 
 Creates the Railway project + service from the GitHub repo, sets the root
 directory to quote-backend/, adds env vars (prompts for your Shopify shpat_
@@ -10,11 +10,12 @@ token so it never leaves your machine), and generates the public domain.
 """
 
 import json
+import os
 import sys
 import urllib.request
 import getpass
 
-RAILWAY_TOKEN = "e082fae0-42c8-40ad-813a-ff4544aedcaa"
+RAILWAY_TOKEN = os.environ.get("RAILWAY_TOKEN", "")
 API = "https://backboard.railway.com/graphql/v2"
 REPO = "uzyrixolo/patch-kraze"
 
@@ -36,6 +37,9 @@ def gql(query, variables=None):
 
 
 def main():
+    if not RAILWAY_TOKEN:
+        sys.exit("Set RAILWAY_TOKEN in your environment first (Railway dashboard > Account > Tokens).")
+
     # 0. Auth check
     me = gql("query { me { name email } }")["me"]
     print(f"[ok] Authenticated as {me.get('name') or me.get('email')}")
