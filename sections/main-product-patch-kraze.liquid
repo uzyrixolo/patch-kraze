@@ -258,7 +258,13 @@
   .pricing-row__msg b { font-weight: 800; }
 
   /* Art-team instructions: always-visible field under the artwork */
-  .pk-notes { margin-top: 1.1rem; }
+  .pk-notes { margin-top: 0.9rem; }
+  .pk-notes > summary { display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; list-style: none; font-size: 0.9rem; font-weight: 600; color: #7e22ce; }
+  .pk-notes > summary::-webkit-details-marker { display: none; }
+  .pk-notes > summary::before { content: "+"; display: grid; place-items: center; width: 1.15rem; height: 1.15rem; border-radius: 50%; background: #f3e8ff; font-size: 0.95rem; line-height: 1; }
+  .pk-notes[open] > summary::before { content: "\2013"; }
+  .pk-notes[open] > summary { margin-bottom: 0.55rem; }
+  .pk-notes > summary:focus-visible { outline: 2px solid #a855f7; outline-offset: 3px; border-radius: 0.25rem; }
   .pk-notes textarea { resize: vertical; min-height: 3.25rem; font-size: 0.95rem; font-family: inherit; line-height: 1.4; }
   .pk-tier-heading { font-size: 0.85rem; font-weight: 700; color: #111827; margin: 1.25rem 0 0.5rem; }
 
@@ -267,35 +273,39 @@
   .control-label { display: block; font-weight: 700; margin-bottom: 0.75rem; color: #111827; font-size: 0.95rem; }
   .text-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem; background: #fff; }
   .text-input:focus { border-color: #a855f7; outline: none; ring: 2px solid #f3e8ff; }
-  .pk-color-field { display: flex; align-items: center; gap: 0.6rem; }
-  .pk-color-swatch {
-    width: 2.75rem; height: 2.5rem; padding: 0.15rem; border: 1px solid #d1d5db; border-radius: 0.5rem;
-    background: #fff; cursor: pointer; flex-shrink: 0;
+  /* Colors: background and border side by side. Each is a swatch that opens
+     the browser's color picker next to a box for typing a color instead. */
+  .pk-colors__optional { margin-left: 0.4rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #6b7280; }
+  .pk-colors__hint { margin: -0.35rem 0 0.95rem; font-size: 0.85rem; line-height: 1.45; color: #6b7280; }
+  .pk-colors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; margin-bottom: 1rem; }
+  .pk-colors__row { display: flex; align-items: stretch; gap: 0.5rem; }
+  .pk-colors__chip {
+    position: relative; flex-shrink: 0; width: 2.75rem; border-radius: 0.5rem; overflow: hidden; cursor: pointer;
+    border: 1px solid rgba(17, 24, 39, 0.18);
+    background: conic-gradient(from 180deg, #f87171, #fbbf24, #34d399, #60a5fa, #a78bfa, #f87171);
   }
-  .pk-color-swatch::-webkit-color-swatch-wrapper { padding: 0; }
-  .pk-color-swatch::-webkit-color-swatch { border: none; border-radius: 0.3rem; }
-  .pk-color-hex { font-size: 0.9rem; font-family: ui-monospace, monospace; color: #6b7280; }
-  .pk-cswatch-grid { display: flex; flex-wrap: wrap; gap: 1rem 0.6rem; margin-top: 0.25rem; }
-  .pk-cswatch-item { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; width: 3.4rem; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; }
-  .pk-cswatch-dot { position: relative; width: 2.15rem; height: 2.15rem; border-radius: 0.4rem; border: 1px solid rgba(17, 24, 39, 0.15); }
-  .pk-cswatch-item.selected .pk-cswatch-dot { outline: 2px solid #a855f7; outline-offset: 2px; }
-  .pk-cswatch-custom { background: conic-gradient(from 180deg, #f87171, #fbbf24, #34d399, #60a5fa, #a78bfa, #f87171); }
-  .pk-cswatch-check {
-    display: none; position: absolute; top: -0.4rem; right: -0.4rem; width: 1.05rem; height: 1.05rem;
-    border-radius: 50%; background: #a855f7; color: #fff; font-size: 0.6rem; line-height: 1;
-    align-items: center; justify-content: center; border: 2px solid #fff;
+  .pk-colors__chip:focus-within { outline: 2px solid #a855f7; outline-offset: 2px; }
+  .pk-colors__native { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; opacity: 0; cursor: pointer; }
+  .pk-colors__text {
+    flex: 1; min-width: 0; height: 2.75rem; padding: 0 0.75rem; border: 1px solid #d1d5db; border-radius: 0.5rem;
+    background: #fff; font-family: inherit; font-size: 1rem; color: #111827;
   }
-  .pk-cswatch-item.selected .pk-cswatch-check { display: flex; }
-  .pk-cswatch-label { font-size: 0.68rem; color: #4b5563; text-align: center; line-height: 1.15; }
+  .pk-colors__text:focus { border-color: #a855f7; outline: 2px solid #f3e8ff; outline-offset: 0; }
+  .pk-colors__text::placeholder { color: #9ca3af; }
+  .pk-colors__suggests { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.6rem; }
+  .pk-colors__suggests[hidden] { display: none; }
+  .pk-colors__suggest { width: 1.7rem; height: 1.7rem; padding: 0; border-radius: 50%; border: 1px solid rgba(17, 24, 39, 0.18); cursor: pointer; }
+  .pk-colors__suggest.selected { outline: 2px solid #a855f7; outline-offset: 2px; }
+  .pk-colors__note { margin: 0.6rem 0 0; font-size: 0.8rem; line-height: 1.45; color: #6b7280; }
   .pk-match-artwork-btn {
-    display: inline-flex; align-items: center; gap: 0.5rem; background: #a855f7; color: #fff;
-    border: none; border-radius: 999px; padding: 0.55rem 1.1rem; font-size: 0.85rem; font-weight: 700;
-    cursor: pointer; margin-bottom: 0.85rem; font-family: inherit;
+    display: inline-flex; align-items: center; gap: 0.5rem; background: #fff; color: #7e22ce;
+    border: 1.5px solid #c084fc; border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 700;
+    cursor: pointer; font-family: inherit;
   }
-  .pk-match-artwork-btn:hover { background: #9333ea; }
-  .pk-artwork-colors { display: flex; flex-wrap: wrap; gap: 1rem 0.6rem; margin-bottom: 0.5rem; }
-  .pk-artwork-colors-empty { font-size: 0.8rem; color: #9ca3af; margin-bottom: 0.85rem; }
-  .pk-cswatch-subheading { font-size: 0.72rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 0.6rem; }
+  .pk-match-artwork-btn:hover { background: #faf5ff; border-color: #9333ea; }
+  @media (max-width: 520px) {
+    .pk-colors { grid-template-columns: 1fr; }
+  }
   .pk-color-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06); padding: 1.25rem 1.25rem 1.5rem; }
   /* Responsive Adjustments */
   @media (max-width: 768px) {
@@ -462,6 +472,9 @@
 
   /* Tooltip Styles */
   .size-display-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 0.9rem 0 1rem; font-size: 0.9rem; font-weight: 600; color: #374151; }
+  /* Stickers and transfers: the row would only repeat the width and height above it. */
+  .size-display-row--echo { display: none; }
+  .pk-size-hint { margin: 0.9rem 0 0; font-size: 0.82rem; line-height: 1.5; color: #6b7280; }
   .size-formula { color: #6b7280; font-weight: 500; }
   .size-formula:empty { display: none; }
   .pk-size-value { color: #7e22ce; font-weight: 800; }
@@ -604,9 +617,14 @@
         </a>
       {%- endif -%}
 
-      {%- assign pk_lede = product.description | strip_html | strip -%}
+      {%- comment -%} Opening sentence of the product description only, to keep the top of the page short. {%- endcomment -%}
+      {%- liquid
+        assign pk_lede = product.description | strip_html | newline_to_br | strip_newlines | replace: '<br />', ' ' | strip
+        assign pk_lede = pk_lede | split: '. ' | first | split: '! ' | first | split: '? ' | first | strip | truncate: 220
+        assign pk_lede_end = pk_lede | slice: -1
+      -%}
       {%- if pk_lede != blank -%}
-        <p class="pk-lede">{{ pk_lede | truncate: 500 }}</p>
+        <p class="pk-lede">{{ pk_lede }}{% unless pk_lede_end == '.' or pk_lede_end == '!' or pk_lede_end == '?' %}.{% endunless %}</p>
       {%- endif -%}
 
       <div class="pk-price-card">
@@ -614,7 +632,7 @@
           <span class="pk-price-card__label">Your price</span>
           <span class="pk-price-card__value"><span id="header-price">{{ product.price | money }}</span><span class="pk-price-card__unit">/ piece</span></span>
         </div>
-        <div class="pk-price-card__note">Worked out for <strong><span id="header-qty">100</span> pieces</strong> at the size set below. It updates as you change either one.</div>
+        <div class="pk-price-card__note">at <strong><span id="header-qty">100</span> pieces</strong>. Changes with your size and quantity.</div>
       </div>
 
       <ul class="pk-facts">
@@ -648,7 +666,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4m0 0l-4 4m4-4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
               <span>Upload your artwork</span>
             </div>
-            <div class="pk-upload__hint">PNG, JPG or PDF &mdash; dragging a file onto the button works too. No artwork yet? <a href="#" onclick="openQuoteModal(); return false;">Ask for a quote or mockup first</a>.</div>
+            <div class="pk-upload__hint">PNG, JPG or PDF. No artwork yet? <a href="#" onclick="openQuoteModal(); return false;">Ask for a quote or mockup</a>.</div>
           </div>
 
           <div class="pk-artwork-panel" id="pk-artwork-panel">
@@ -701,10 +719,10 @@
             <div class="pk-ai-note" id="pk-ai-note"></div>
           </div>
 
-          <div class="pk-notes">
-            <label class="pk-field-label" for="design-notes-input">Anything our art team should know? <span class="pk-optional">Optional</span></label>
-            <textarea name="properties[Design Notes]" id="design-notes-input" class="text-input" rows="2" placeholder="Example: make the outline navy and leave the lettering white."></textarea>
-          </div>
+          <details class="pk-notes">
+            <summary>Add a note for our art team <span class="pk-optional">Optional</span></summary>
+            <textarea name="properties[Design Notes]" id="design-notes-input" class="text-input" rows="2" aria-label="Note for our art team" placeholder="Example: make the outline navy and leave the lettering white."></textarea>
+          </details>
         </div>
 
         <div id="customize-stage" class="customize-ui">
@@ -740,7 +758,7 @@
               </div>
             </div>
 
-            <div class="size-display-row">
+            <div class="size-display-row{% unless pk_noun == 'patch' %} size-display-row--echo{% endunless %}">
               <span id="size-display-label">{% if pk_noun == 'patch' %}Priced as{% else %}{{ pk_noun | capitalize }} size{% endif %}</span>
               <span id="size-formula-display" class="size-formula"></span>
               <span id="calculated-size-display" class="pk-size-value">2"</span>
@@ -758,10 +776,7 @@
               <span><strong id="artwork-size-text">Sized to your artwork.</strong> <span id="artwork-size-detail"></span>
                 <a href="#" id="artwork-size-unlock" style="color:#7e22ce; font-weight:600; text-decoration:underline;">Set width &amp; height separately</a></span>
             </div>
-            <div id="size-custom-note" style="display:flex; align-items:flex-start; gap:0.5rem; background:#fef3c7; border:1px solid #fcd34d; border-radius:0.5rem; padding:0.75rem 1rem; font-size:0.875rem; color:#92400e; line-height:1.4;">
-              <span style="flex-shrink:0; font-size:1rem; line-height:1;">💡</span>
-              <span><strong>Need a size like 3.75" or 2.25"?</strong> Our size selector steps in 0.5" increments. If your design falls between sizes (e.g.&nbsp;0.25" or 0.75" values), please pick the closest size and add your exact dimensions in the notes box under your artwork — we'll match it for you at no extra cost.</span>
-            </div>
+            <p class="pk-size-hint" id="size-custom-note">Between sizes? Pick the nearest one and tell us the exact size in a note under your artwork. We'll make it to that size at no extra cost.</p>
           </div>
 
           <!-- STEP 3: QUANTITY -->
@@ -833,55 +848,43 @@
           <input type="hidden" name="properties[Shape]" id="shape-input" value="Circle">
           </div>
 
-          {%- liquid
-            assign std_colors = "White|#FFFFFF,Black|#000000,Cream|#F3E9D2,Gray|#9CA3AF,Charcoal|#36454F,Brown|#6F4E37,Red|#DC2626,Maroon|#7F1D1D,Orange|#EA580C,Gold|#D4AF37,Yellow|#FACC15,Kelly Green|#4CBB17,Green|#16A34A,Forest Green|#228B22,Teal|#0D9488,Sky Blue|#38BDF8,Royal Blue|#2563EB,Navy|#1E3A8A" | split: ","
-          -%}
+          {%- comment -%}
+            Colors: the patch background and the border, side by side. Both are
+            optional free text (a color name, a hex code or a Pantone number).
+            The swatch opens the browser's color picker and writes a hex code
+            into the box; so do the colors read from the uploaded artwork. An
+            empty box is left off the order and we follow the artwork.
+          {%- endcomment -%}
           <div class="control-group pk-color-card">
-            <label class="control-label">Background color</label>
-            <button type="button" class="pk-match-artwork-btn" onclick="matchMyArtwork('bg-color-input', 'bg-artwork-colors')">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v10m-12-12v18m0 0H5a2 2 0 0 1-2-2V9m6 12h10a2 2 0 0 0 2-2V9"/></svg>
-              Match My Artwork
-            </button>
-            <div class="pk-artwork-colors" id="bg-artwork-colors"></div>
-            <div class="pk-cswatch-subheading">Standard Colors</div>
-            <div class="pk-cswatch-grid">
-              {%- for c in std_colors -%}
-                {%- assign parts = c | split: "|" -%}
-                <button type="button" class="pk-cswatch-item" onclick="selectColorSwatch(this, 'bg-color-input', '{{ parts[0] }}')">
-                  <span class="pk-cswatch-dot" style="background:{{ parts[1] }};"><span class="pk-cswatch-check">&#10003;</span></span>
-                  <span class="pk-cswatch-label">{{ parts[0] }}</span>
-                </button>
-              {%- endfor -%}
-              <button type="button" class="pk-cswatch-item" onclick="openCustomColorPicker(this, 'bg-color-input', 'bg-color-custom-dot')">
-                <span class="pk-cswatch-dot pk-cswatch-custom" id="bg-color-custom-dot"><span class="pk-cswatch-check">&#10003;</span></span>
-                <span class="pk-cswatch-label">Custom</span>
-              </button>
+            <div class="control-label">Colors <span class="pk-colors__optional">Optional</span></div>
+            <p class="pk-colors__hint">Type a color name, a hex code or a Pantone number. Leave a box empty and we'll follow your artwork.</p>
+            <div class="pk-colors">
+              <div class="pk-colors__field" data-color-field>
+                <label class="pk-field-label" for="bg-color-input">Background</label>
+                <div class="pk-colors__row">
+                  <label class="pk-colors__chip" title="Open the color picker">
+                    <input type="color" class="pk-colors__native" value="#7e22ce" aria-label="Pick a background color">
+                  </label>
+                  <input type="text" id="bg-color-input" name="properties[Background Color]" class="pk-colors__text" maxlength="40" autocomplete="off" placeholder="e.g. navy or #1E3A8A">
+                </div>
+                <div class="pk-colors__suggests" hidden></div>
+              </div>
+              <div class="pk-colors__field" data-color-field>
+                <label class="pk-field-label" for="thread-color-input">Border</label>
+                <div class="pk-colors__row">
+                  <label class="pk-colors__chip" title="Open the color picker">
+                    <input type="color" class="pk-colors__native" value="#7e22ce" aria-label="Pick a border color">
+                  </label>
+                  <input type="text" id="thread-color-input" name="properties[Border Color]" class="pk-colors__text" maxlength="40" autocomplete="off" placeholder="e.g. black or #000000">
+                </div>
+                <div class="pk-colors__suggests" hidden></div>
+              </div>
             </div>
-            <input type="hidden" id="bg-color-input" name="properties[Background Color]" class="pk-color-swatch" value="">
-          </div>
-
-          <div class="control-group pk-color-card">
-            <label class="control-label">Border color</label>
-            <button type="button" class="pk-match-artwork-btn" onclick="matchMyArtwork('thread-color-input', 'thread-artwork-colors')">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v10m-12-12v18m0 0H5a2 2 0 0 1-2-2V9m6 12h10a2 2 0 0 0 2-2V9"/></svg>
-              Match My Artwork
+            <button type="button" class="pk-match-artwork-btn" onclick="matchMyArtwork()">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l4 4"/><path d="M5 19l1-4 8.5-8.5a2.1 2.1 0 0 1 3 3L9 18l-4 1z"/></svg>
+              Suggest colors from my artwork
             </button>
-            <div class="pk-artwork-colors" id="thread-artwork-colors"></div>
-            <div class="pk-cswatch-subheading">Standard Colors</div>
-            <div class="pk-cswatch-grid">
-              {%- for c in std_colors -%}
-                {%- assign parts = c | split: "|" -%}
-                <button type="button" class="pk-cswatch-item" onclick="selectColorSwatch(this, 'thread-color-input', '{{ parts[0] }}')">
-                  <span class="pk-cswatch-dot" style="background:{{ parts[1] }};"><span class="pk-cswatch-check">&#10003;</span></span>
-                  <span class="pk-cswatch-label">{{ parts[0] }}</span>
-                </button>
-              {%- endfor -%}
-              <button type="button" class="pk-cswatch-item" onclick="openCustomColorPicker(this, 'thread-color-input', 'thread-color-custom-dot')">
-                <span class="pk-cswatch-dot pk-cswatch-custom" id="thread-color-custom-dot"><span class="pk-cswatch-check">&#10003;</span></span>
-                <span class="pk-cswatch-label">Custom</span>
-              </button>
-            </div>
-            <input type="hidden" id="thread-color-input" name="properties[Border Color]" class="pk-color-swatch" value="">
+            <p class="pk-colors__note" id="pk-colors-note" hidden></p>
           </div>
 
           <label class="control-label">Backing: <span id="backing-label-extra" style="font-weight:400; color:#6b7280;">Iron-On</span></label>
@@ -1111,10 +1114,10 @@
             'Page: ' + window.location.href,
           ];
           if (shape) infoParts.push('Shape: ' + shape);
-          const bgColor = document.getElementById('bg-color-input');
-          if (bgColor && bgColor.dataset.touched === '1') infoParts.push('Background color: ' + bgColor.value);
-          const threadColor = document.getElementById('thread-color-input');
-          if (threadColor && threadColor.dataset.touched === '1') infoParts.push('Border color: ' + threadColor.value);
+          const bgColor = val('bg-color-input').trim();
+          if (bgColor) infoParts.push('Background color: ' + bgColor);
+          const threadColor = val('thread-color-input').trim();
+          if (threadColor) infoParts.push('Border color: ' + threadColor);
           if (notesEl && notesEl.value) infoParts.push('Design notes: ' + notesEl.value);
 
           const fd = new FormData();
@@ -1176,14 +1179,13 @@
         return false;
       }
 
-      // Native color inputs always carry a value (default #000000) - disable
-      // the ones the customer never touched so FormData skips them instead of
-      // silently attaching "chose black" to every single order.
-      const untouchedColorInputs = Array.from(form.querySelectorAll('.pk-color-swatch'))
-        .filter(el => el.dataset.touched !== '1');
-      untouchedColorInputs.forEach(el => { el.disabled = true; });
+      // The two color boxes are optional. An empty one is disabled for the
+      // moment FormData is read, so the order carries no blank color line.
+      const emptyColorInputs = Array.from(form.querySelectorAll('.pk-colors__text'))
+        .filter(el => !el.value.trim());
+      emptyColorInputs.forEach(el => { el.disabled = true; });
       const formData = new FormData(form);
-      untouchedColorInputs.forEach(el => { el.disabled = false; });
+      emptyColorInputs.forEach(el => { el.disabled = false; });
       const originalText = btn.innerText;
 
       // Add sections parameter for cart drawer rendering
@@ -1694,6 +1696,7 @@
            originalFile = file;
            bgRemovedFile = null;
            setToggleState('pk-toggle-removebg', false);
+           clearColorSuggestions();
          }
          isApplyingAiEdit = false;
 
@@ -1747,6 +1750,7 @@
       originalFile = null;
       bgRemovedFile = null;
       setToggleState('pk-toggle-removebg', false);
+      clearColorSuggestions();
       const sizeNote = document.getElementById('artwork-size-note');
       if (sizeNote) sizeNote.style.display = 'none';
       const dpiWarn = document.getElementById('artwork-dpi-warning');
@@ -2630,13 +2634,54 @@
        const input = document.getElementById('shape-input');
        if(input) input.value = val;
     }
-    window.selectColorSwatch = function(el, hiddenInputId, colorName) {
-       const grid = el.closest('.pk-cswatch-grid');
-       if(grid) grid.querySelectorAll('.pk-cswatch-item').forEach(c => c.classList.remove('selected'));
-       el.classList.add('selected');
-       const input = document.getElementById(hiddenInputId);
-       if(input) { input.value = colorName; input.dataset.touched = '1'; }
+    // Colors: background and border each hold free text - a color name, a hex
+    // code or a Pantone number. The swatch beside the box opens the browser's
+    // color picker and writes its hex code into the box; colors read from the
+    // uploaded artwork do the same.
+    function paintColorField(field) {
+       const text = field.querySelector('.pk-colors__text');
+       const chip = field.querySelector('.pk-colors__chip');
+       const value = text ? text.value.trim() : '';
+       // Only a value the browser recognises as a color is shown on the swatch;
+       // anything else ("PMS 186 C") leaves the swatch on its default.
+       const known = !!value && !!window.CSS && CSS.supports('color', value);
+       if (chip) chip.style.background = known ? value : '';
+       field.querySelectorAll('.pk-colors__suggest').forEach(function(dot) {
+         dot.classList.toggle('selected', dot.dataset.hex === value.toUpperCase());
+       });
     }
+    function setColorField(field, hex) {
+       const text = field.querySelector('.pk-colors__text');
+       if (text) text.value = hex.toUpperCase();
+       paintColorField(field);
+    }
+    function clearColorSuggestions() {
+       document.querySelectorAll('.pk-colors__suggests').forEach(function(box) {
+         box.innerHTML = '';
+         box.hidden = true;
+       });
+       const note = document.getElementById('pk-colors-note');
+       if (note) note.hidden = true;
+    }
+    document.querySelectorAll('[data-color-field]').forEach(function(field) {
+       const text = field.querySelector('.pk-colors__text');
+       const picker = field.querySelector('.pk-colors__native');
+       if (text) {
+         text.addEventListener('input', function() { paintColorField(field); });
+         // Enter in a text box would otherwise submit the whole order form.
+         text.addEventListener('keydown', function(event) {
+           if (event.key === 'Enter') { event.preventDefault(); text.blur(); }
+         });
+       }
+       if (picker) {
+         picker.addEventListener('input', function() { setColorField(field, picker.value); });
+         picker.addEventListener('change', function() { setColorField(field, picker.value); });
+       }
+       field.addEventListener('click', function(event) {
+         const dot = event.target.closest('.pk-colors__suggest');
+         if (dot) setColorField(field, dot.dataset.hex);
+       });
+    });
     function extractDominantColors(img, count) {
        const size = 80;
        const canvas = document.createElement('canvas');
@@ -2658,46 +2703,43 @@
          .slice(0, count)
          .map(([key]) => '#' + key.split(',').map(v => Math.min(255, Number(v)).toString(16).padStart(2, '0')).join(''));
     }
-    window.matchMyArtwork = function(hiddenInputId, containerId) {
-       const container = document.getElementById(containerId);
+    window.matchMyArtwork = function() {
+       const note = document.getElementById('pk-colors-note');
+       const say = function(message) {
+         if (!note) return;
+         note.textContent = message;
+         note.hidden = !message;
+       };
        const img = document.getElementById('pk-preview-img');
-       if (!container) return;
-       if (!img || !img.src) {
-         container.innerHTML = '<div class="pk-artwork-colors-empty">Upload your design above first, then match colors from it here.</div>';
+       if (!img || !img.getAttribute('src')) {
+         say('Upload your design in step 1 first, then we can read colors from it.');
          return;
        }
        const run = function() {
          let colors = [];
-         try { colors = extractDominantColors(img, 4); } catch (e) { colors = []; }
+         try { colors = extractDominantColors(img, 5); } catch (e) { colors = []; }
          if (!colors.length) {
-           container.innerHTML = '<div class="pk-artwork-colors-empty">Could not read colors from this image.</div>';
+           say('We could not read colors from this file. Type them in instead.');
            return;
          }
-         container.innerHTML = colors.map(function(hex) {
-           return '<button type="button" class="pk-cswatch-item" onclick="selectColorSwatch(this, \'' + hiddenInputId + '\', \'' + hex + '\')">' +
-             '<span class="pk-cswatch-dot" style="background:' + hex + ';"><span class="pk-cswatch-check">&#10003;</span></span>' +
-             '<span class="pk-cswatch-label">' + hex + '</span></button>';
-         }).join('');
+         say('Tap a color to use it for the background or the border.');
+         document.querySelectorAll('[data-color-field]').forEach(function(field) {
+           const box = field.querySelector('.pk-colors__suggests');
+           if (!box) return;
+           box.innerHTML = colors.map(function(hex) {
+             const upper = hex.toUpperCase();
+             return '<button type="button" class="pk-colors__suggest" data-hex="' + upper + '" style="background:' + upper + ';" title="' + upper + '" aria-label="Use ' + upper + '"></button>';
+           }).join('');
+           box.hidden = false;
+           paintColorField(field);
+         });
        };
-       if (img.complete && img.naturalWidth) { run(); } else { img.addEventListener('load', run, { once: true }); }
-    }
-    window.openCustomColorPicker = function(triggerEl, hiddenInputId, dotId) {
-       let picker = document.getElementById(hiddenInputId + '-native');
-       if(!picker) {
-         picker = document.createElement('input');
-         picker.type = 'color';
-         picker.id = hiddenInputId + '-native';
-         picker.style.position = 'fixed';
-         picker.style.opacity = '0';
-         picker.style.pointerEvents = 'none';
-         document.body.appendChild(picker);
+       if (img.complete) {
+         // A PDF upload has no picture to sample.
+         if (img.naturalWidth) { run(); } else { say('We can only read colors from a picture (PNG or JPG). Type them in instead.'); }
+       } else {
+         img.addEventListener('load', run, { once: true });
        }
-       picker.oninput = function() {
-         window.selectColorSwatch(triggerEl, hiddenInputId, picker.value);
-         const dot = document.getElementById(dotId);
-         if(dot) dot.style.background = picker.value;
-       };
-       picker.click();
     }
     window.selectBacking = function(el, val) {
        const grid = el.closest('.backing-grid');
