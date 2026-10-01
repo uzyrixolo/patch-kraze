@@ -193,7 +193,7 @@
             "point_1": "Classic stitched-thread texture",
             "point_2": "Merrowed or thin-stitched edge",
             "group": "embroidered",
-            "best_seller": true
+            "best_seller": false
           }
         },
         "card_2": {
@@ -203,7 +203,7 @@
             "point_1": "Dye-sublimated, any number of colors",
             "point_2": "Handles photos, shading and small text",
             "group": "printed",
-            "best_seller": true
+            "best_seller": false
           }
         },
         "card_3": {
@@ -213,7 +213,7 @@
             "point_1": "Flexible molded PVC with raised detail",
             "point_2": "Waterproof, made for gear and bags",
             "group": "pvc",
-            "best_seller": true
+            "best_seller": false
           }
         },
         "card_4": {
@@ -223,7 +223,7 @@
             "point_1": "Real leather, laser-engraved",
             "point_2": "A natural match for hats and jackets",
             "group": "leather",
-            "best_seller": true
+            "best_seller": false
           }
         },
         "card_5": {
@@ -359,22 +359,22 @@
       },
       "block_order": [
         "card_1",
-        "card_2",
-        "card_3",
-        "card_4",
         "card_5",
-        "card_6",
-        "card_7",
-        "card_8",
-        "card_9",
-        "card_10",
         "card_11",
-        "card_12",
+        "card_7",
         "card_13",
-        "card_14",
-        "card_15",
         "card_16",
-        "card_17"
+        "card_2",
+        "card_14",
+        "card_9",
+        "card_8",
+        "card_15",
+        "card_10",
+        "card_3",
+        "card_12",
+        "card_17",
+        "card_4",
+        "card_6"
       ],
       "settings": {
         "heading": "Browse Every Patch Style",
@@ -390,7 +390,7 @@
         "text_tone": "light",
         "price_prefix": "From",
         "price_suffix": "each in bulk",
-        "btn_label": "Customize",
+        "btn_label": "Start Your Order",
         "link_label": "Get a quote",
         "link_url": "",
         "show_tabs": true,
