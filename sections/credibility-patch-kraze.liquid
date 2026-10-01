@@ -6,8 +6,9 @@
   product is picked, that product's lowest price read live from the store, so
   a price never has to be typed here and cannot go out of date.
 
-  An optional picture sits on the right of the panel on desktop (the facts
-  then form two columns beside it) and under the facts on phones.
+  An optional picture sits on the right on desktop, either beside the colored
+  panel (outside the box, the default) or inside it; the facts then form two
+  columns. On phones the picture goes under the facts.
 
   Only put things in this panel that the store can show to be true: an order
   minimum, a size range, a number of options, a live price. No rankings
@@ -31,7 +32,14 @@
       ]
     },
     { "type": "header", "content": "Image (right side)" },
-    { "type": "image_picker", "id": "image", "label": "Image", "info": "Optional. Shown on the right of the panel on desktop and under the facts on phones. A square or upright picture works best." },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Optional. Shown on the right on desktop and under the facts on phones. An upright or square picture works best." },
+    {
+      "type": "select", "id": "image_position", "label": "Image position", "default": "outside",
+      "options": [
+        { "value": "outside", "label": "Beside the panel (outside the box)" },
+        { "value": "inside", "label": "Inside the panel" }
+      ]
+    },
     {
       "type": "select", "id": "image_fit", "label": "Image fit", "default": "cover",
       "options": [
@@ -80,12 +88,18 @@
   .pk-cr__panel::after { content: ""; position: absolute; right: -7rem; top: -9rem; width: 24rem; height: 24rem; border-radius: 50%; background: radial-gradient(circle, var(--cr-glow) 0%, rgba(255, 255, 255, 0) 70%); pointer-events: none; }
   .pk-cr__intro, .pk-cr__facts, .pk-cr__main, .pk-cr__media { position: relative; z-index: 1; }
 
-  /* With a picture: text and facts on the left, the picture on the right,
-     stretched to the height of the left column. */
+  /* With a picture: it sits on the right, stretched to the height of the
+     panel's text, either beside the colored box (--split, on the wrapper) or
+     inside it (--media, on the panel). Either way the facts drop to two
+     columns to make room. */
+  .pk-cr__inner--split { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr); gap: 1.5rem; align-items: stretch; }
   .pk-cr__panel--media { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: 2rem; align-items: stretch; }
   .pk-cr__main { min-width: 0; }
-  .pk-cr__panel--media .pk-cr__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pk-cr__media { min-height: 16rem; border-radius: var(--pk-radius-md); overflow: hidden; }
+  .pk-cr__media--outside { border-radius: var(--pk-radius-lg); }
+  @media (min-width: 900px) {
+    .pk-cr--image .pk-cr__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
   .pk-cr__media img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
   .pk-cr__media--contain img { object-fit: contain; }
   .pk-cr__eyebrow { margin: 0 0 0.6rem; font-size: var(--pk-fs-label); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cr-accent); }
@@ -99,6 +113,7 @@
   .pk-cr__text { margin: 0; font-size: var(--pk-fs-label); line-height: 1.5; color: var(--cr-soft); }
 
   @media (max-width: 899px) {
+    .pk-cr__inner--split { grid-template-columns: 1fr; gap: 1rem; }
     .pk-cr__panel--media { grid-template-columns: 1fr; gap: 1.5rem; }
     .pk-cr__media { min-height: 0; aspect-ratio: 16 / 10; }
   }
@@ -116,9 +131,32 @@
   }
 </style>
 
-<section class="pk-cr pk-cr--{{ section.settings.tone | default: 'purple' }}">
-  <div class="pk-cr__inner">
-    <div class="pk-cr__panel{% if section.settings.image != blank %} pk-cr__panel--media{% endif %}">
+{%- liquid
+  assign cr_has_image = false
+  if section.settings.image != blank
+    assign cr_has_image = true
+  endif
+  assign cr_image_position = section.settings.image_position | default: 'outside'
+-%}
+{%- capture cr_media -%}
+  {%- if cr_has_image -%}
+    <div class="pk-cr__media pk-cr__media--{{ cr_image_position }} pk-cr__media--{{ section.settings.image_fit | default: 'cover' }}">
+      <img
+        src="{{ section.settings.image | image_url: width: 900 }}"
+        srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+        sizes="(max-width: 899px) 90vw, 400px"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+        alt="{{ section.settings.image.alt | escape }}"
+        loading="lazy"
+      >
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+<section class="pk-cr pk-cr--{{ section.settings.tone | default: 'purple' }}{% if cr_has_image %} pk-cr--image{% endif %}">
+  <div class="pk-cr__inner{% if cr_has_image and cr_image_position == 'outside' %} pk-cr__inner--split{% endif %}">
+    <div class="pk-cr__panel{% if cr_has_image and cr_image_position == 'inside' %} pk-cr__panel--media{% endif %}">
       <div class="pk-cr__main">
       <div class="pk-cr__intro">
         {%- if section.settings.eyebrow != blank -%}
@@ -155,19 +193,8 @@
       {%- endif -%}
       </div>
 
-      {%- if section.settings.image != blank -%}
-        <div class="pk-cr__media pk-cr__media--{{ section.settings.image_fit | default: 'cover' }}">
-          <img
-            src="{{ section.settings.image | image_url: width: 900 }}"
-            srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
-            sizes="(max-width: 899px) 90vw, 380px"
-            width="{{ section.settings.image.width }}"
-            height="{{ section.settings.image.height }}"
-            alt="{{ section.settings.image.alt | escape }}"
-            loading="lazy"
-          >
-        </div>
-      {%- endif -%}
+      {%- if cr_image_position == 'inside' -%}{{ cr_media }}{%- endif -%}
     </div>
+    {%- if cr_image_position == 'outside' -%}{{ cr_media }}{%- endif -%}
   </div>
 </section>
