@@ -1,6 +1,6 @@
 {%- doc -%}
-  "Size Guide" popup: shows the size chart image. Separate from size-guide-modal.liquid
-  (the older "Patch Size Guide" link + table) on purpose — this is a distinct trigger with
+  "Size chart" popup: shows the size chart image. Separate from size-guide-modal.liquid
+  (the "Sizes by placement" link + table) on purpose — this is a distinct trigger with
   its own id/functions (openSizeChart / closeSizeChart) so it does not touch that one.
 {%- enddoc -%}
 
@@ -40,8 +40,8 @@
 
 <div id="size-chart-modal" class="pk-chart-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="size-chart-modal-title" hidden>
   <div class="pk-chart-modal-content">
-    <button type="button" class="pk-chart-close-btn" onclick="closeSizeChart()" aria-label="Close size guide">&times;</button>
-    <h3 id="size-chart-modal-title" class="pk-chart-modal-title">Size Guide</h3>
+    <button type="button" class="pk-chart-close-btn" onclick="closeSizeChart()" aria-label="Close size chart">&times;</button>
+    <h3 id="size-chart-modal-title" class="pk-chart-modal-title">Size chart</h3>
     <img
       class="pk-size-chart-img"
       src="https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Size_Chart.webp?v=1786571864"

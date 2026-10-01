@@ -134,10 +134,10 @@
   .pkdeal-stars { color: #f59e0b; letter-spacing: 0.1em; }
 
   .pkdeal-price-row { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
-  .pkdeal-price { font-size: 2.5rem; font-weight: 800; color: #064e3b; line-height: 1; }
+  .pkdeal-price { font-size: 2.5rem; font-weight: 800; color: #581c87; line-height: 1; }
   .pkdeal-compare { font-size: 1.25rem; color: #9ca3af; text-decoration: line-through; }
   .pkdeal-save {
-    background: #faf5ff; color: #047857; border: 1px solid #a855f7;
+    background: #faf5ff; color: #7e22ce; border: 1px solid #a855f7;
     font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 999px;
   }
   .pkdeal-price-sub { font-size: 0.9rem; color: #6b7280; margin-bottom: 1.25rem; }
@@ -147,12 +147,12 @@
     padding: 1rem 1.25rem; margin-bottom: 1.5rem;
   }
   .pkdeal-included ul { margin: 0; padding-left: 1.1rem; }
-  .pkdeal-included li { font-size: 0.92rem; color: #065f46; margin-bottom: 0.35rem; }
+  .pkdeal-included li { font-size: 0.92rem; color: #6b21a8; margin-bottom: 0.35rem; }
   .pkdeal-included li:last-child { margin-bottom: 0; }
 
   /* Upload */
   .pkdeal-upload {
-    position: relative; border: 2px dashed #a855f7; background: #f0fdf4; border-radius: 1rem;
+    position: relative; border: 2px dashed #a855f7; background: #faf5ff; border-radius: 1rem;
     padding: 1.75rem 1.25rem; text-align: center; cursor: pointer; transition: background .2s, border-color .2s;
     margin-bottom: 1.5rem;
   }
@@ -160,7 +160,7 @@
   .pkdeal-upload input[type="file"] {
     position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;
   }
-  .pkdeal-upload-title { font-size: 1.15rem; font-weight: 700; color: #064e3b; margin-bottom: 0.35rem; }
+  .pkdeal-upload-title { font-size: 1.15rem; font-weight: 700; color: #581c87; margin-bottom: 0.35rem; }
   .pkdeal-upload-sub { font-size: 0.85rem; color: #4b5563; }
   .pkdeal-browse {
     margin-top: 0.85rem; background: #a855f7; color: #fff; border: none; border-radius: 0.5rem;
@@ -172,7 +172,7 @@
   }
   .pkdeal-file-ok.show { display: flex; }
   .pkdeal-file-thumb { width: 3.5rem; height: 3.5rem; border-radius: 0.5rem; object-fit: cover; background: #fff; flex-shrink: 0; }
-  .pkdeal-change { text-decoration: underline; font-size: 0.75rem; cursor: pointer; color: #047857; }
+  .pkdeal-change { text-decoration: underline; font-size: 0.75rem; cursor: pointer; color: #7e22ce; }
 
   /* Option groups */
   .pkdeal-group { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; }
@@ -213,7 +213,7 @@
     display: flex; align-items: center; justify-content: space-between;
     background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.75rem; padding: 0.9rem 1.1rem;
   }
-  .pkdeal-qty-num { font-size: 1.35rem; font-weight: 800; color: #064e3b; }
+  .pkdeal-qty-num { font-size: 1.35rem; font-weight: 800; color: #581c87; }
   .pkdeal-qty-note { font-size: 0.8rem; color: #6b7280; }
 
   .pkdeal-notes-toggle { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; font-size: 0.92rem; color: #374151; }
@@ -273,10 +273,16 @@
 
       <h1 class="pkdeal-title">{{ product.title }}</h1>
 
-      <div class="pkdeal-reviews">
-        <span class="pkdeal-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        <span>16 Reviews</span>
-      </div>
+      {%- liquid
+        assign pk_rating = product.metafields.reviews.rating.value
+        assign pk_rating_count = product.metafields.reviews.rating_count.value | default: 0 | plus: 0
+      -%}
+      {%- if pk_rating != blank and pk_rating_count > 0 -%}
+        <div class="pkdeal-reviews">
+          <span class="pkdeal-stars" aria-hidden="true">&#9733;</span>
+          <span><strong>{{ pk_rating.rating | round: 1 }}</strong> &middot; {{ pk_rating_count }} {{ pk_rating_count | pluralize: 'review', 'reviews' }}</span>
+        </div>
+      {%- endif -%}
 
       <div class="pkdeal-price-row">
         <span class="pkdeal-price">{{ variant.price | money }}</span>
@@ -332,7 +338,7 @@
         <div class="pkdeal-file-ok" id="pkdeal-file-ok">
           <img class="pkdeal-file-thumb" id="pkdeal-file-thumb" alt="" width="56" height="56" hidden>
           <div style="flex:1; min-width:0;">
-            <div style="font-weight:700; color:#064e3b;">File uploaded</div>
+            <div style="font-weight:700; color:#581c87;">File uploaded</div>
             <div id="pkdeal-file-name" style="font-size:0.85rem; color:#9333ea; overflow-wrap:anywhere;"></div>
             <div class="pkdeal-change" id="pkdeal-file-change">Change</div>
           </div>
@@ -367,22 +373,22 @@
         <div class="pkdeal-group">
           <div class="pkdeal-group-title">Backing Type</div>
           <div class="pkdeal-cards" id="pkdeal-backing-cards">
-            <div class="pkdeal-card selected" data-value="Heat Applied (Most Popular)">
-              <div class="pkdeal-card-label">Heat Applied</div>
-              <div class="pkdeal-card-note">Most popular &mdash; iron or heat press onto fabric</div>
+            <div class="pkdeal-card selected" data-value="Iron-On">
+              <div class="pkdeal-card-label">Iron-On</div>
+              <div class="pkdeal-card-note">Bonds with a heat press or household iron</div>
             </div>
-            <div class="pkdeal-card" data-value="Velcro (Both Sides of Velcro Included)">
+            <div class="pkdeal-card" data-value="Velcro (hook &amp; loop, both sides included)">
               <div class="pkdeal-card-label">Velcro (both sides included)</div>
               <div class="pkdeal-card-note">
                 Removable hook &amp; loop backing{% if section.settings.charge_velcro %} &mdash; adds $0.25 per patch{% endif %}
               </div>
             </div>
-            <div class="pkdeal-card" data-value="Peel &amp; Stick">
-              <div class="pkdeal-card-label">Peel &amp; Stick</div>
-              <div class="pkdeal-card-note">Self-adhesive, best for temporary use</div>
+            <div class="pkdeal-card" data-value="Adhesive (peel-off)">
+              <div class="pkdeal-card-label">Adhesive</div>
+              <div class="pkdeal-card-note">Peel-off sticky backing for short-term wear</div>
             </div>
           </div>
-          <input type="hidden" name="properties[Backing]" id="pkdeal-backing" value="Heat Applied (Most Popular)">
+          <input type="hidden" name="properties[Backing]" id="pkdeal-backing" value="Iron-On">
         </div>
 
         <!-- TURNAROUND -->

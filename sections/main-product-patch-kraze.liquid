@@ -86,71 +86,71 @@
   .product-info { display: flex; flex-direction: column; gap: 1rem; }
   .product-title { font-size: 2.25rem; font-weight: 700; color: #111827; margin: 0; line-height: 1.1; letter-spacing: -0.025em; }
 
-  .reviews-row { display: flex; align-items: center; gap: 0.5rem; font-weight: 500; font-size: 0.95rem; color: #374151; }
-  .stars { color: #fbbf24; letter-spacing: 1px; }
+  /* Rating: real review data only (reviews.rating metafields); the row is not
+     rendered at all for a product with no reviews. */
+  .pk-rating-row { display: inline-flex; align-items: center; gap: 0.4rem; width: fit-content; font-size: 0.9rem; color: #374151; text-decoration: none; }
+  .pk-rating-row__star { color: #f59e0b; }
+  .pk-rating-row__score { font-weight: 700; color: #111827; }
+  .pk-rating-row__count { color: #6b7280; }
+  .pk-rating-row:hover .pk-rating-row__count { text-decoration: underline; }
 
-  .price-block { font-size: 1.25rem; font-weight: 500; color: #374151; }
-  .price-value { font-weight: 800; color: #111827; }
+  .pk-lede { font-size: 0.95rem; line-height: 1.6; color: #4b5563; margin: 0; }
 
-  /* Description & Details */
-  .description-text { font-size: 0.75rem; line-height: 1.6; color: #4b5563; }
-  .thermal-tape { font-weight: 600; font-size: 0.95rem; color: #111827; display: flex; align-items: center; gap: 0.5rem; }
+  /* Live price card */
+  .pk-price-card { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 0.9rem; padding: 0.9rem 1.1rem; }
+  .pk-price-card__label { display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #7e22ce; margin-bottom: 0.15rem; }
+  .pk-price-card__value { font-size: 1.9rem; font-weight: 800; color: #111827; line-height: 1.1; }
+  .pk-price-card__unit { font-size: 0.95rem; font-weight: 500; color: #6b7280; margin-left: 0.3rem; }
+  .pk-price-card__note { flex: 1 1 14rem; font-size: 0.85rem; color: #4b5563; line-height: 1.45; }
 
-  .feature-bar { display: flex; height: 2rem; align-items: center; gap: 1rem; font-size: 0.85rem; color: #374151; margin-top: 0.5rem; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; padding: 1.5rem 0; width: 100%; }
-  .feature-green { color: #9333ea; font-weight: 600; }
+  .pk-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; }
+  .pk-facts li { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600; color: #374151; background: #f3f4f6; border-radius: 999px; padding: 0.35rem 0.75rem; }
+  .pk-facts svg { width: 0.9rem; height: 0.9rem; color: #9333ea; flex-shrink: 0; }
 
-  /* UPLOAD SECTION (Green Box) */
-  .upload-box-wrapper {
-    margin-top: 0rem;
-    margin-bottom: 1.5rem;
-    border: 2px dashed #c084fc; /* Perfect Green */
-    border-radius: 1.5rem;
-    padding: 1.5rem 1.5rem;
-    text-align: center;
-    background-color: #faf5ff; /* Light mint bg */
-    cursor: pointer;
-    position: relative;
-    transition: all 0.2s;
-  }
-  .upload-box-wrapper:hover { background-color: #f3e8ff; border-color: #a855f7; }
+  /* Numbered steps. CSS counters keep the numbering right when a product type
+     skips the finishing step (stickers, DTF transfers). */
+  #product-form-pk { counter-reset: pkstep; }
+  .pk-step { counter-increment: pkstep; border-top: 1px solid #e5e7eb; padding-top: 1.5rem; margin-top: 1.5rem; }
+  .pk-step--first { border-top: none; padding-top: 0; margin-top: 0.25rem; }
+  .pk-step__head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.6rem; margin-bottom: 1rem; }
+  .pk-step__num { width: 1.75rem; height: 1.75rem; border-radius: 0.5rem; background: #111827; color: #fff; font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pk-step__num::before { content: counter(pkstep); }
+  .pk-step__title { font-size: 1.1rem; font-weight: 700; color: #111827; margin: 0; line-height: 1.2; }
+  .pk-step__aside { margin-left: auto; display: flex; flex-wrap: wrap; gap: 0.25rem 0.9rem; }
+  .pk-step__sub { font-size: 0.9rem; color: #6b7280; margin: -0.4rem 0 1.25rem; line-height: 1.5; }
+  .pk-linkbtn { background: none; border: none; padding: 0; cursor: pointer; color: #9333ea; font: inherit; font-size: 0.85rem; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+  .pk-linkbtn:hover { color: #7e22ce; }
+  .pk-field-label { display: block; font-size: 0.85rem; font-weight: 700; color: #111827; margin-bottom: 0.4rem; }
+  .pk-optional { font-weight: 500; color: #9ca3af; margin-left: 0.25rem; }
+
+  /* Step 1: artwork. One full-width button; the native file input sits on top
+     of it, so a click opens the picker and a dropped file is accepted too. */
+  .pk-upload { position: relative; display: flex; align-items: center; justify-content: center; gap: 0.6rem; width: 100%; min-height: 3.5rem; padding: 0.9rem 1.25rem; border-radius: 0.9rem; background: #111827; color: #fff; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: background 0.2s, box-shadow 0.2s; }
+  .pk-upload:hover, .pk-upload:focus-within { background: #1f2937; box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.25); }
+  .pk-upload svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
   .native-file-input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 50; }
-
-  .upload-cloud-icon {
-    width: 3rem; height: 3rem;
-    background: #c084fc; /* Green cloud */
-    color: white; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 1rem;
-    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
-  }
-
-  .upload-title { font-size: 1.25rem; font-weight: 700; color: #064e3b; margin-bottom: 0.5rem; }
-  .upload-subtitle { color: #4b5563; margin-bottom: 1rem; font-size: 0.9rem; }
-
-  .btn-green-browse {
-    background-color: #a855f7; color: white; border: none; padding: 0.75rem 2rem; border-radius: 0.5rem; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3); transition: background 0.2s;
-  }
+  .pk-upload__hint { margin-top: 0.6rem; font-size: 0.82rem; color: #6b7280; line-height: 1.5; }
+  .pk-upload__hint a { color: #9333ea; font-weight: 600; text-decoration: underline; }
 
   /* CUSTOMIZE SECTION */
-  .customize-ui { display: block; margin-top: 1rem; }
-  .customize-ui.active { display: block; animation: slideUp 0.4s ease-out; }
-  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .customize-ui { display: block; }
 
   .file-success-bar { display: none; }
   .file-thumb { display: none; }
 
-  /* Artwork panel - big proportional preview + AI tool row, styled after the
-     patch-industry "classic mode" upload UI (checkerboard = transparency). */
-  .pk-artwork-panel { display: none; margin-bottom: 1.5rem; }
+  /* Artwork panel: the uploaded design drawn at the proportions of the size
+     chosen in the next step, with the clean-up tools listed underneath. The
+     checkerboard shows through wherever the artwork is transparent. */
+  .pk-artwork-panel { display: none; }
   .pk-artwork-panel.active { display: block; }
-  .pk-preview-label { text-align: center; font-size: 0.9rem; color: #374151; margin-bottom: 0.75rem; }
+  .pk-preview-label { font-size: 0.85rem; color: #4b5563; margin-bottom: 0.6rem; }
   .pk-preview-stage {
     display: flex; align-items: center; justify-content: center;
-    background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.75rem; padding: 1.25rem;
+    background: #f3f4f6; border-radius: 0.9rem; padding: 1.25rem;
   }
   .pk-preview-frame-lg {
     position: relative; max-width: 100%; max-height: 320px; min-width: 64px; min-height: 64px;
-    outline: 2px dashed #9ca3af; outline-offset: 2px;
+    border-radius: 0.35rem; box-shadow: 0 6px 18px rgba(17, 24, 39, 0.18);
     background-color: #fff;
     background-image:
       linear-gradient(45deg, #e5e7eb 25%, transparent 25%, transparent 75%, #e5e7eb 75%),
@@ -159,31 +159,23 @@
     display: flex; align-items: center; justify-content: center; overflow: hidden;
   }
   .pk-preview-frame-lg img { width: 100%; height: 100%; object-fit: contain; display: block; }
-  .pk-preview-icon {
-    position: absolute; width: 2rem; height: 2rem; top: 0.5rem;
-    background: rgba(255,255,255,0.95); border: 1px solid #e5e7eb; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08); transition: transform 0.15s, background 0.15s; z-index: 2;
-  }
-  .pk-preview-icon:hover { background: #fff; transform: scale(1.08); }
-  .pk-preview-icon svg { width: 1rem; height: 1rem; }
-  .pk-preview-zoom { left: 0.5rem; }
-  .pk-preview-trash { right: 0.5rem; color: #ef4444; }
-  .pk-preview-dims { text-align: center; font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem; }
-  .pk-preview-filename { text-align: center; font-size: 0.75rem; color: #9ca3af; margin-top: 0.15rem; word-break: break-all; }
+  .pk-preview-meta { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 1rem; margin-top: 0.6rem; }
+  .pk-preview-dims { font-size: 0.8rem; font-weight: 600; color: #374151; }
+  .pk-preview-filename { font-size: 0.75rem; color: #9ca3af; word-break: break-all; }
+  .pk-preview-actions { display: flex; flex-wrap: wrap; gap: 0.25rem 1.1rem; margin-top: 0.4rem; }
 
   .pk-ai-toolbar {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 0.85rem;
-    margin-top: 0.85rem; padding: 0.6rem 0.85rem;
-    border: 1px solid #e5e7eb; border-radius: 0.5rem; background: #fff;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem 1.1rem;
+    margin-top: 0.9rem; padding: 0.8rem 0.95rem;
+    border-radius: 0.75rem; background: #faf5ff;
   }
+  .pk-ai-toolbar__title { flex: 1 0 100%; display: flex; align-items: center; gap: 0.45rem; font-size: 0.8rem; font-weight: 700; color: #111827; }
   .pk-ai-badge {
-    display: inline-flex; align-items: center; gap: 0.3rem;
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase;
-    color: #7c3aed; background: #f3e8ff; border-radius: 999px; padding: 0.25rem 0.6rem;
+    display: inline-flex; align-items: center;
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.04em;
+    color: #fff; background: #7c3aed; border-radius: 0.3rem; padding: 0.1rem 0.35rem;
   }
-  .pk-ai-badge svg { width: 0.75rem; height: 0.75rem; }
-  .pk-toggle-field { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: #111827; font-weight: 600; cursor: pointer; user-select: none; }
+  .pk-toggle-field { display: flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; color: #111827; font-weight: 600; cursor: pointer; user-select: none; }
   .pk-toggle {
     position: relative; width: 2.25rem; height: 1.25rem; border-radius: 999px; background: #d1d5db;
     transition: background 0.15s; flex-shrink: 0;
@@ -244,19 +236,12 @@
   @keyframes pk-ai-spin { to { transform: rotate(360deg); } }
   @media (max-width: 480px) { .pk-edit-ai-btn { margin-left: 0; } }
 
-  /* Size-selector on top, pricing table stacked full-width underneath - at
-     every viewport width. A side-by-side split was tried, but this grid
-     sits nested inside .product-container's own 0.8fr/1.2fr column, so the
-     pricing side kept getting squeezed narrow enough to wrap/overflow no
-     matter where the two-column breakpoint was set. Full-width avoids that
-     entirely and matches the clean stacked look this already had on mobile. */
-  .pk-customize-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
-  .pk-customize-grid__left, .pk-customize-grid__right { min-width: 0; }
-
-  /* Pricing Table */
-  .pricing-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  /* Pricing table: stacked full-width under the quantity row at every viewport
+     width. It sits inside .product-container's own 0.8fr/1.2fr column, where a
+     side-by-side split squeezes it narrow enough to wrap or overflow. */
+  .pricing-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
   /* Grid, not flex - flex's justify-content: space-between sizes each row to
-     its own content, so Qty/Price/Discount drift out of line with each
+     its own content, so the three columns drift out of line with each
      other row to row depending on how long that row's text happens to be.
      A shared grid-template-columns keeps every row's columns the same width
      as the header's, so values always land in a straight line. */
@@ -266,26 +251,16 @@
   .pricing-header span:last-child, .pricing-row__cols span:last-child { text-align: right; }
   .pricing-row { display: flex; flex-direction: column; gap: 0.3rem; padding: 0.6rem 0.85rem; border-bottom: 1px solid #f3f4f6; font-size: 0.85rem; color: #4b5563; }
   .pricing-row:last-child { border-bottom: none; }
-  .pricing-row.active { background-color: #faf5ff; color: #065f46; font-weight: 600; }
+  .pricing-row.active { background-color: #faf5ff; color: #6b21a8; font-weight: 600; }
   .pricing-row__cols { display: grid; grid-template-columns: 1fr 1fr 1fr; }
-  .pricing-row__msg { display: none; font-size: 0.78rem; font-weight: 600; color: #065f46; background: #f3e8ff; border-radius: 0.375rem; padding: 0.4rem 0.6rem; }
+  .pricing-row__msg { display: none; font-size: 0.78rem; font-weight: 600; color: #6b21a8; background: #f3e8ff; border-radius: 0.375rem; padding: 0.4rem 0.6rem; }
   .pricing-row__msg.show { display: block; }
   .pricing-row__msg b { font-weight: 800; }
 
-  /* "Add a note for our designers" accordion */
-  .pk-notes-accordion { border: 1px solid #e5e7eb; border-radius: 0.5rem; margin-bottom: 1.5rem; overflow: hidden; }
-  .pk-notes-accordion__header {
-    width: 100%; display: flex; align-items: center; gap: 0.6rem; padding: 0.85rem 1rem;
-    background: #fff; border: none; cursor: pointer; text-align: left; font: inherit;
-  }
-  .pk-notes-accordion__icon { flex-shrink: 0; width: 1.1rem; height: 1.1rem; color: #6b7280; }
-  .pk-notes-accordion__icon svg { width: 100%; height: 100%; }
-  .pk-notes-accordion__label { font-weight: 700; color: #111827; font-size: 0.95rem; }
-  .pk-notes-accordion__hint { color: #6b7280; font-size: 0.85rem; }
-  .pk-notes-accordion__chevron { width: 1.1rem; height: 1.1rem; margin-left: auto; color: #6b7280; transition: transform 0.15s; flex-shrink: 0; }
-  .pk-notes-accordion__header[aria-expanded="true"] .pk-notes-accordion__chevron { transform: rotate(180deg); }
-  #design-notes-container { padding: 0 1rem 1rem; }
-  .buy-more-label { color: #a855f7; font-weight: 700; margin-bottom: 0.5rem; display: block; font-size: 0.9rem; text-transform: uppercase; }
+  /* Art-team instructions: always-visible field under the artwork */
+  .pk-notes { margin-top: 1.1rem; }
+  .pk-notes textarea { resize: vertical; min-height: 3.25rem; font-size: 0.95rem; font-family: inherit; line-height: 1.4; }
+  .pk-tier-heading { font-size: 0.85rem; font-weight: 700; color: #111827; margin: 1.25rem 0 0.5rem; }
 
   /* Controls */
   .control-group { margin-bottom: 1.5rem; }
@@ -304,7 +279,7 @@
   .pk-cswatch-item { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; width: 3.4rem; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; }
   .pk-cswatch-dot { position: relative; width: 2.15rem; height: 2.15rem; border-radius: 0.4rem; border: 1px solid rgba(17, 24, 39, 0.15); }
   .pk-cswatch-item.selected .pk-cswatch-dot { outline: 2px solid #a855f7; outline-offset: 2px; }
-  .pk-cswatch-custom { background: conic-gradient(from 180deg, #f87171, #fbbf24, #c084fc, #60a5fa, #a78bfa, #f87171); }
+  .pk-cswatch-custom { background: conic-gradient(from 180deg, #f87171, #fbbf24, #34d399, #60a5fa, #a78bfa, #f87171); }
   .pk-cswatch-check {
     display: none; position: absolute; top: -0.4rem; right: -0.4rem; width: 1.05rem; height: 1.05rem;
     border-radius: 50%; background: #a855f7; color: #fff; font-size: 0.6rem; line-height: 1;
@@ -336,15 +311,13 @@
     .nav-arrow.next { right: 0.5rem; }
     .product-info { padding: 0 1rem; }
     .product-title { font-size: 1.75rem; }
-    .feature-bar { flex-wrap: wrap; height: auto; padding: 1rem 0; gap: 0.5rem; justify-content: center; text-align: center; font-size: 0.8rem; }
-    .row-2, .row-3 { grid-template-columns: 1fr; }
+    .pk-price-card__value { font-size: 1.6rem; }
+    .row-2 { grid-template-columns: 1fr; }
     .backing-grid { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
     .pricing-header, .pricing-row { font-size: 0.8rem; padding: 0.75rem 0.5rem; min-width: unset; }
     .nav-arrow { width: 2.5rem; height: 2.5rem; }
-    .upload-box-wrapper { padding: 1.25rem 1rem; }
-    .upload-cloud-icon { width: 2.5rem; height: 2.5rem; margin-bottom: 0.75rem; }
-    .upload-title { font-size: 1.1rem; }
-    .btn-green-browse { padding: 0.625rem 1.5rem; font-size: 0.9rem; }
+    .pk-upload { min-height: 3.25rem; font-size: 1rem; }
+    .pk-step__aside { margin-left: 0; flex-basis: 100%; }
     .checkout-btn { font-size: 1rem; letter-spacing: 0.03em; }
     .stepper-control { height: 2.75rem; }
     .stepper-btn { width: 2.75rem; height: 2.75rem; }
@@ -363,11 +336,26 @@
   /* Rest of desktop styles ... */
   .backing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
   .row-2 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-  .row-3 { display: grid; grid-template-columns: 1fr; gap: 1rem; align-items: start; }
   @media (min-width: 640px) {
     .row-2 { grid-template-columns: 1fr 1fr; }
-    .row-3 { grid-template-columns: 1fr 1fr 1fr; align-items: end; }
   }
+
+  /* Step 2: width x height, side by side at every viewport width */
+  .pk-dims { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: 0.75rem; }
+  .pk-dims__x { font-size: 1.25rem; color: #9ca3af; padding-bottom: 0.95rem; }
+
+  /* Step 3: quantity on the left, running price summary on the right */
+  .pk-qty-row { display: grid; grid-template-columns: 1fr; gap: 1rem; align-items: start; }
+  @media (min-width: 640px) {
+    .pk-qty-row { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); }
+  }
+  .pk-qty-min { font-size: 0.78rem; color: #6b7280; margin-top: 0.35rem; }
+  .pk-qty-error { display: none; font-size: 0.78rem; font-weight: 700; color: #dc2626; margin-top: 0.35rem; }
+  .pk-summary { background: #111827; color: #fff; border-radius: 0.9rem; padding: 1rem 1.1rem; }
+  .pk-summary__line { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; font-size: 0.9rem; color: #d1d5db; }
+  .pk-summary__line + .pk-summary__line { margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid rgba(255, 255, 255, 0.14); }
+  .pk-summary__unit { font-size: 1.05rem; font-weight: 700; color: #fff; }
+  .pk-summary__note { font-size: 0.78rem; color: #d8b4fe; margin-top: 0.5rem; }
 
   /* Shape Grid Responsive */
   .shape-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 2rem; }
@@ -420,7 +408,7 @@
   .backing-card.selected {
     border-color: #a855f7;
     box-shadow: 0 0 0 2px #a855f7 inset;
-    font-weight: 700; color: #064e3b;
+    font-weight: 700; color: #581c87;
   }
   .backing-preview {
     width: 100%;
@@ -449,7 +437,7 @@
   .pricing-card { overflow-x: auto; }
 
   /* Stepper Input Styles */
-  .dimension-group h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; color: #111827; }
+  .dimension-group { min-width: 0; }
   .stepper-control {
     display: flex; align-items: center;
     border: 1px solid #d1d5db; border-radius: 0.5rem;
@@ -457,7 +445,7 @@
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .stepper-control:focus-within { border-color: #a855f7; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
+  .stepper-control:focus-within { border-color: #a855f7; box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.12); }
   .stepper-btn {
     width: 3.5rem; height: 100%; border: none; background: #f9fafb;
     cursor: pointer; font-size: 1.25rem; color: #6b7280;
@@ -473,10 +461,10 @@
   .stepper-input::-webkit-outer-spin-button, .stepper-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
   /* Tooltip Styles */
-  .size-display-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 1.5rem; margin-bottom: 1.5rem; font-size: 1.1rem; font-weight: 700; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 1.5rem; }
-  .size-formula { color: #6b7280; font-weight: 600; }
+  .size-display-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 0.9rem 0 1rem; font-size: 0.9rem; font-weight: 600; color: #374151; }
+  .size-formula { color: #6b7280; font-weight: 500; }
   .size-formula:empty { display: none; }
-  .size-value-green { color: #a855f7; margin-left: 0.25rem; }
+  .pk-size-value { color: #7e22ce; font-weight: 800; }
 
   .tooltip-container { position: relative; display: inline-flex; cursor: pointer; }
   .info-icon { width: 1.25rem; height: 1.25rem; color: #1f2937; background: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
@@ -488,8 +476,9 @@
   }
   .tooltip-container:hover .tooltip-text { visibility: visible; opacity: 1; }
 
-  .qty-box-large { border: 1px solid #d1d5db; border-radius: 0.375rem; height: 3.5rem; width: 100%; text-align: center; font-size: 1.25rem; font-weight: 700; }
-  .total-price-large { font-size: 2rem; font-weight: 800; color: #111827; line-height: 1; margin:0; }
+  .qty-box-large { border: 1px solid #d1d5db; border-radius: 0.5rem; height: 3.5rem; width: 100%; text-align: center; font-size: 1.25rem; font-weight: 700; }
+  .qty-box-large:focus { border-color: #a855f7; outline: none; box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.12); }
+  .total-price-large { font-size: 1.75rem; font-weight: 800; color: #fff; line-height: 1; margin:0; }
 
   /* Checkout Button */
   .checkout-btn {
@@ -503,7 +492,7 @@
     border-radius: 0.75rem;
     cursor: pointer;
     transition: all 0.2s;
-    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 6px -1px rgba(147, 51, 234, 0.4);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-top: 1rem;
@@ -511,7 +500,7 @@
   .checkout-btn:hover {
     background-color: #9333ea;
     transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.5);
+    box-shadow: 0 10px 15px -3px rgba(147, 51, 234, 0.5);
   }
   .checkout-btn:active {
     transform: translateY(0);
@@ -593,19 +582,46 @@
 
     <!-- Info -->
     <div class="product-info">
+      {%- liquid
+        assign pk_noun = 'patch'
+        if product.handle contains 'sticker'
+          assign pk_noun = 'sticker'
+        elsif product.handle == 'dtf-transfers'
+          assign pk_noun = 'transfer'
+        endif
+      -%}
       <h1 class="product-title">{{ product.title }}</h1>
-      <div class="reviews-row"><span class="stars">★★★★★</span><span>16 Reviews</span></div>
 
-      <div class="price-block">
-        <span class="price-value" id="header-price">{{ product.price | money }}</span> each at <span id="header-qty">100</span> pieces.
+      {%- liquid
+        assign pk_rating = product.metafields.reviews.rating.value
+        assign pk_rating_count = product.metafields.reviews.rating_count.value | default: 0 | plus: 0
+      -%}
+      {%- if pk_rating != blank and pk_rating_count > 0 -%}
+        <a class="pk-rating-row" href="#judgeme_product_reviews" aria-label="Rated {{ pk_rating.rating | round: 1 }} out of {{ pk_rating.scale_max | round }}, {{ pk_rating_count }} {{ pk_rating_count | pluralize: 'review', 'reviews' }}">
+          <span class="pk-rating-row__star" aria-hidden="true">★</span>
+          <span class="pk-rating-row__score">{{ pk_rating.rating | round: 1 }}</span>
+          <span class="pk-rating-row__count">{{ pk_rating_count }} {{ pk_rating_count | pluralize: 'review', 'reviews' }}</span>
+        </a>
+      {%- endif -%}
+
+      {%- assign pk_lede = product.description | strip_html | strip -%}
+      {%- if pk_lede != blank -%}
+        <p class="pk-lede">{{ pk_lede | truncate: 500 }}</p>
+      {%- endif -%}
+
+      <div class="pk-price-card">
+        <div>
+          <span class="pk-price-card__label">Your price</span>
+          <span class="pk-price-card__value"><span id="header-price">{{ product.price | money }}</span><span class="pk-price-card__unit">/ piece</span></span>
+        </div>
+        <div class="pk-price-card__note">Worked out for <strong><span id="header-qty">100</span> pieces</strong> at the size set below. It updates as you change either one.</div>
       </div>
 
-      <div class="description-text">
-        {{ product.description | strip_html | truncate: 500 }}
-      </div>
-      <div class="feature-bar">
-        <span class="feature-green">10 Minimum Quantity</span> | <span>Ships Fast</span> | <span>No Setup Fees</span>
-      </div>
+      <ul class="pk-facts">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg><span id="pk-min-fact">Order from 10 pieces</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Setup included</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Quick turnaround</li>
+      </ul>
       <div class="product-app-blocks">
         {% for block in section.blocks %}
           {% case block.type %}
@@ -619,55 +635,50 @@
         <!-- HIDDEN VARIANT ID INPUT -->
         <input type="hidden" name="id" id="real-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
 
-        <!-- STAGE 1: UPLOAD -->
-        <div id="upload-stage" class="upload-box-wrapper">
-          <input type="file" name="properties[Design File]" id="file-input" class="native-file-input" accept="image/*,.pdf">
-          <div class="upload-cloud-icon">
-             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+        <!-- STEP 1: ARTWORK -->
+        <div class="pk-step pk-step--first">
+          <div class="pk-step__head">
+            <span class="pk-step__num" aria-hidden="true"></span>
+            <h2 class="pk-step__title">Your artwork</h2>
           </div>
-          <div class="upload-title">Upload your file(s) to get started</div>
-          <button type="button" class="btn-green-browse">Browse</button>
-          <div style="margin-top:0.5rem; font-size:0.8rem; color:#6b7280;">or <a href="#" onclick="skipUpload(); return false;" style="color:#a855f7; font-weight:600; text-decoration:underline;">skip & get a quote without a design</a></div>
-        </div>
 
-        <!-- STAGE 2: CUSTOMIZE -->
-        <div id="customize-stage" class="customize-ui">
-
-          <div class="pk-customize-grid">
-          <div class="pk-customize-grid__left">
+          <div id="upload-stage">
+            <div class="pk-upload">
+              <input type="file" name="properties[Design File]" id="file-input" class="native-file-input" accept="image/*,.pdf" aria-label="Upload your artwork">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4m0 0l-4 4m4-4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+              <span>Upload your artwork</span>
+            </div>
+            <div class="pk-upload__hint">PNG, JPG or PDF &mdash; dragging a file onto the button works too. No artwork yet? <a href="#" onclick="openQuoteModal(); return false;">Ask for a quote or mockup first</a>.</div>
+          </div>
 
           <div class="pk-artwork-panel" id="pk-artwork-panel">
-            <div class="pk-preview-label"><strong>Preview:</strong> the image will print as shown below.</div>
+            <div class="pk-preview-label">Your design, drawn at the proportions of the size you set in the next step.</div>
             <div class="pk-preview-stage">
               <div class="pk-preview-frame-lg" id="pk-preview-frame">
-                <button type="button" class="pk-preview-icon pk-preview-zoom" onclick="zoomArtwork()" aria-label="Zoom design preview">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
-                </button>
-                <button type="button" class="pk-preview-icon pk-preview-trash" onclick="resetUpload()" aria-label="Remove uploaded design">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0l-1 14a2 2 0 01-2 2H7a2 2 0 01-2-2L4 6h16z"/></svg>
-                </button>
                 <img id="pk-preview-img" src="" alt="Your uploaded design">
               </div>
             </div>
-            <div class="pk-preview-dims" id="pk-preview-dims"></div>
-            <div class="pk-preview-filename" id="filename-display"></div>
+            <div class="pk-preview-meta">
+              <span class="pk-preview-dims" id="pk-preview-dims"></span>
+              <span class="pk-preview-filename" id="filename-display"></span>
+            </div>
+            <div class="pk-preview-actions">
+              <button type="button" class="pk-linkbtn" onclick="zoomArtwork()">View larger</button>
+              <button type="button" class="pk-linkbtn" onclick="resetUpload()">Use a different file</button>
+            </div>
 
             <div class="pk-ai-toolbar">
-              <span class="pk-ai-badge">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.2L20 10l-5.8 1.8L12 18l-2.2-6.2L4 10l5.8-1.8L12 2z"/></svg>
-                Powered by AI
-              </span>
+              <div class="pk-ai-toolbar__title">Clean-up tools</div>
               <label class="pk-toggle-field">
-                Remove Background
-                <span class="pk-toggle" id="pk-toggle-removebg" role="switch" aria-checked="false" tabindex="0" onclick="pkToggleRemoveBg()" onkeydown="if(event.key===' '||event.key==='Enter'){event.preventDefault();pkToggleRemoveBg();}"><span class="pk-toggle-knob"></span></span>
+                <span class="pk-toggle on" id="pk-toggle-crop" role="switch" aria-checked="true" aria-label="Trim empty edges" tabindex="0" onclick="pkToggleCrop()" onkeydown="if(event.key===' '||event.key==='Enter'){event.preventDefault();pkToggleCrop();}"><span class="pk-toggle-knob"></span></span>
+                Trim empty edges
               </label>
               <label class="pk-toggle-field">
-                Crop
-                <span class="pk-toggle on" id="pk-toggle-crop" role="switch" aria-checked="true" tabindex="0" onclick="pkToggleCrop()" onkeydown="if(event.key===' '||event.key==='Enter'){event.preventDefault();pkToggleCrop();}"><span class="pk-toggle-knob"></span></span>
+                <span class="pk-toggle" id="pk-toggle-removebg" role="switch" aria-checked="false" aria-label="Erase the background" tabindex="0" onclick="pkToggleRemoveBg()" onkeydown="if(event.key===' '||event.key==='Enter'){event.preventDefault();pkToggleRemoveBg();}"><span class="pk-toggle-knob"></span></span>
+                Erase the background <span class="pk-ai-badge">AI</span>
               </label>
               <button type="button" class="pk-edit-ai-btn" id="pk-edit-ai-btn" onclick="pkToggleAiPromptBox()">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.2L20 10l-5.8 1.8L12 18l-2.2-6.2L4 10l5.8-1.8L12 2z"/></svg>
-                Edit with AI
+                Describe a change <span class="pk-ai-badge">AI</span>
               </button>
             </div>
             <div class="pk-ai-prompt-box" id="pk-ai-prompt-box" style="display:none;">
@@ -688,128 +699,115 @@
               </div>
             </div>
             <div class="pk-ai-note" id="pk-ai-note"></div>
+          </div>
 
-            <div style="text-align:center; margin-top:0.6rem;">
-              <a href="#" style="font-size:0.8rem; color:#9333ea; font-weight:600; text-decoration:underline;" onclick="resetUpload(); return false;">Upload a different file</a>
+          <div class="pk-notes">
+            <label class="pk-field-label" for="design-notes-input">Anything our art team should know? <span class="pk-optional">Optional</span></label>
+            <textarea name="properties[Design Notes]" id="design-notes-input" class="text-input" rows="2" placeholder="Example: make the outline navy and leave the lettering white."></textarea>
+          </div>
+        </div>
+
+        <div id="customize-stage" class="customize-ui">
+
+          <!-- STEP 2: SIZE -->
+          <div class="pk-step">
+            <div class="pk-step__head">
+              <span class="pk-step__num" aria-hidden="true"></span>
+              <h2 class="pk-step__title" id="size-selector-label">{{ pk_noun | capitalize }} dimensions</h2>
+              <div class="pk-step__aside">
+                <button type="button" class="pk-linkbtn" onclick="openSizeGuide()"><span id="size-guide-label">Sizes by placement</span></button>
+                <button type="button" class="pk-linkbtn" onclick="openSizeChart()" aria-haspopup="dialog" aria-controls="size-chart-modal">Size chart</button>
+              </div>
+            </div>
+
+            <div class="pk-dims">
+              <div class="dimension-group">
+                <label class="pk-field-label" for="width-input">Width <span class="pk-optional">in.</span></label>
+                <div class="stepper-control">
+                  <button type="button" class="stepper-btn" onclick="stepSize('width', -0.5)" aria-label="Decrease width">–</button>
+                  <input type="number" name="properties[Width]" id="width-input" class="stepper-input" value="2.00" step="0.5" min="1.0" max="13.0" readonly>
+                  <button type="button" class="stepper-btn" onclick="stepSize('width', 0.5)" aria-label="Increase width">+</button>
+                </div>
+              </div>
+              <span class="pk-dims__x" aria-hidden="true">&times;</span>
+              <div class="dimension-group">
+                <label class="pk-field-label" for="height-input">Height <span class="pk-optional">in.</span></label>
+                <div class="stepper-control">
+                  <button type="button" class="stepper-btn" onclick="stepSize('height', -0.5)" aria-label="Decrease height">–</button>
+                  <input type="number" name="properties[Height]" id="height-input" class="stepper-input" value="2.00" step="0.5" min="1.0" max="13.0" readonly>
+                  <button type="button" class="stepper-btn" onclick="stepSize('height', 0.5)" aria-label="Increase height">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="size-display-row">
+              <span id="size-display-label">{% if pk_noun == 'patch' %}Priced as{% else %}{{ pk_noun | capitalize }} size{% endif %}</span>
+              <span id="size-formula-display" class="size-formula"></span>
+              <span id="calculated-size-display" class="pk-size-value">2"</span>
+              {%- if pk_noun == 'patch' %}
+              <div class="tooltip-container" id="size-tooltip">
+                <div class="info-icon">i</div>
+                <span class="tooltip-text">Pricing uses the average of your width and height. Your patch is still made at the exact width and height you enter.</span>
+              </div>
+              {%- endif %}
+            </div>
+
+            <div id="artwork-dpi-warning" style="display:none; align-items:flex-start; gap:0.5rem; background:#fef3c7; border:1px solid #fcd34d; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:0.75rem; font-size:0.875rem; color:#92400e; line-height:1.4;"></div>
+            <div id="artwork-size-note" style="display:none; align-items:flex-start; gap:0.5rem; background:#faf5ff; border:1px solid #e9d5ff; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:0.75rem; font-size:0.875rem; color:#6b21a8; line-height:1.4;">
+              <span style="flex-shrink:0; font-size:1rem; line-height:1;">📐</span>
+              <span><strong id="artwork-size-text">Sized to your artwork.</strong> <span id="artwork-size-detail"></span>
+                <a href="#" id="artwork-size-unlock" style="color:#7e22ce; font-weight:600; text-decoration:underline;">Set width &amp; height separately</a></span>
+            </div>
+            <div id="size-custom-note" style="display:flex; align-items:flex-start; gap:0.5rem; background:#fef3c7; border:1px solid #fcd34d; border-radius:0.5rem; padding:0.75rem 1rem; font-size:0.875rem; color:#92400e; line-height:1.4;">
+              <span style="flex-shrink:0; font-size:1rem; line-height:1;">💡</span>
+              <span><strong>Need a size like 3.75" or 2.25"?</strong> Our size selector steps in 0.5" increments. If your design falls between sizes (e.g.&nbsp;0.25" or 0.75" values), please pick the closest size and add your exact dimensions in the notes box under your artwork — we'll match it for you at no extra cost.</span>
             </div>
           </div>
 
-          <div class="pk-notes-accordion">
-            <button type="button" class="pk-notes-accordion__header" id="design-notes-toggle" aria-expanded="false" aria-controls="design-notes-container" onclick="pkToggleNotes()">
-              <span class="pk-notes-accordion__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-              </span>
-              <span class="pk-notes-accordion__label">Add a note for our designers</span>
-              <span class="pk-notes-accordion__hint">&middot; Free, optional</span>
-              <svg class="pk-notes-accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div id="design-notes-container" style="display:none;">
-               <textarea name="properties[Design Notes]" id="design-notes-input" class="text-input" rows="4" placeholder="i.e. Keep the white inside of the text. Change the border of the logo to blue."></textarea>
+          <!-- STEP 3: QUANTITY -->
+          <div class="pk-step">
+            <div class="pk-step__head">
+              <span class="pk-step__num" aria-hidden="true"></span>
+              <h2 class="pk-step__title">Quantity</h2>
             </div>
-          </div>
 
-          <div style="margin-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 1.5rem;">
-             <div class="flex justify-between items-center mb-2">
-                <span id="size-selector-label" style="font-weight: 700; font-size: 1rem;">Select Your Patch Size:</span>
-                <button type="button" onclick="openSizeGuide()" style="background:none; border:none; cursor:pointer; color: #a855f7; font-size: 0.9rem; text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
-                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
-                  <span id="size-guide-label">Patch Size Guide</span>
-                </button>
-             </div>
-
-             <div class="row-3">
-               <div class="dimension-group">
-                 <h4>Width (inches)</h4>
-                 <div class="stepper-control">
-                   <button type="button" class="stepper-btn" onclick="stepSize('width', -0.5)">–</button>
-                   <input type="number" name="properties[Width]" id="width-input" class="stepper-input" value="2.00" step="0.5" min="1.0" max="13.0" readonly>
-                   <button type="button" class="stepper-btn" onclick="stepSize('width', 0.5)">+</button>
-                 </div>
-               </div>
-               <div class="dimension-group">
-                 <h4>Height (inches)</h4>
-                 <div class="stepper-control">
-                   <button type="button" class="stepper-btn" onclick="stepSize('height', -0.5)">–</button>
-                   <input type="number" name="properties[Height]" id="height-input" class="stepper-input" value="2.00" step="0.5" min="1.0" max="13.0" readonly>
-                   <button type="button" class="stepper-btn" onclick="stepSize('height', 0.5)">+</button>
-                 </div>
-               </div>
-               <div class="control-group" style="margin-bottom:0;">
-                  <label class="control-label">Price</label>
-                  <div style="font-size: 1.5rem; font-weight: 700; color: #111827;" id="unit-price-display">$1.59 <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span></div>
-               </div>
-             </div>
-
-             <div class="row-2" style="margin-top: 1rem;">
-               <div class="control-group" style="margin-bottom:0;">
-                  <label class="control-label">Qty</label>
-                  <input type="number" name="quantity" id="qty-input" class="qty-box-large" value="100" min="1">
-                  <div id="qty-error" style="text-align: center; font-size: 0.75rem; font-weight: 700; margin-top: 0.25rem; color: #ef4444; display: none;">10 Piece Minimum Required</div>
-                  <div style="text-align: center; font-size: 0.75rem; font-weight: 700; margin-top: 0.25rem;">10 Piece Min</div>
-               </div>
-               <div class="control-group" style="margin-bottom:0;">
-                  <label class="control-label">Total</label>
-                  <div class="total-price-large" id="total-price-display">$159.00</div>
-                  <div id="total-velcro-note" style="display:none; font-size:0.8rem; color:#6b7280; margin-top:0.25rem;">Includes Velcro backing (+$0.25/pc)</div>
-                  <div id="velcro-surcharge-notice" style="display:none; text-align:center; font-size:0.75rem; color:#dc2626; margin-top:0.25rem; font-weight:600;">+$0.25/pc Velcro surcharge</div>
-               </div>
-             </div>
-
-             <button type="button" class="pk-size-chart-trigger" onclick="openSizeChart()" aria-haspopup="dialog" aria-controls="size-chart-modal">
-               <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
-               <span>Size Guide</span>
-             </button>
-             <style>
-               .pk-size-chart-trigger { display: flex; align-items: center; justify-content: center; gap: 0.35rem; width: 100%; margin-top: 0.75rem; padding: 0.55rem; background: none; border: 1px dashed #d1d5db; border-radius: 0.5rem; color: #9333ea; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
-               .pk-size-chart-trigger:hover, .pk-size-chart-trigger:focus-visible { background: #faf5ff; border-color: #e9d5ff; }
-               .pk-size-chart-trigger span { text-decoration: underline; text-underline-offset: 2px; }
-             </style>
-          </div>
-
-          <div class="size-display-row">
-            <span id="size-display-label">Patch Size</span> <span style="margin: 0 0.5rem;">-</span> <span id="size-formula-display" class="size-formula"></span> <span id="calculated-size-display" class="size-value-green">2"</span>
-            <div class="tooltip-container" id="size-tooltip">
-               <div class="info-icon">i</div>
-               <span class="tooltip-text">Patch size is calculated by adding Length + Width and dividing by 2.</span>
+            <div class="pk-qty-row">
+              <div>
+                <label class="pk-field-label" for="qty-input">Number of pieces</label>
+                <input type="number" name="quantity" id="qty-input" class="qty-box-large" value="100" min="1" inputmode="numeric">
+                <div class="pk-qty-min" id="qty-min-label">Minimum order: 10</div>
+                <div class="pk-qty-error" id="qty-error">Please order at least 10 pieces.</div>
+              </div>
+              <div class="pk-summary">
+                <div class="pk-summary__line"><span>Per piece</span><span class="pk-summary__unit" id="unit-price-display">$1.59</span></div>
+                <div class="pk-summary__line"><span>Order total</span><span class="total-price-large" id="total-price-display">$159.00</span></div>
+                <div class="pk-summary__note" id="total-velcro-note" style="display:none;">Total includes Velcro backing at $0.25 per piece.</div>
+              </div>
             </div>
-          </div>
 
-          <div id="artwork-dpi-warning" style="display:none; align-items:flex-start; gap:0.5rem; background:#fef3c7; border:1px solid #fcd34d; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:0.75rem; font-size:0.875rem; color:#92400e; line-height:1.4;"></div>
-          <div id="artwork-size-note" style="display:none; align-items:flex-start; gap:0.5rem; background:#faf5ff; border:1px solid #e9d5ff; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:0.75rem; font-size:0.875rem; color:#065f46; line-height:1.4;">
-            <span style="flex-shrink:0; font-size:1rem; line-height:1;">📐</span>
-            <span><strong id="artwork-size-text">Sized to your artwork.</strong> <span id="artwork-size-detail"></span>
-              <a href="#" id="artwork-size-unlock" style="color:#047857; font-weight:600; text-decoration:underline;">Set width &amp; height separately</a></span>
-          </div>
-          <div id="size-custom-note" style="display:flex; align-items:flex-start; gap:0.5rem; background:#fef3c7; border:1px solid #fcd34d; border-radius:0.5rem; padding:0.75rem 1rem; margin-bottom:1.25rem; font-size:0.875rem; color:#92400e; line-height:1.4;">
-            <span style="flex-shrink:0; font-size:1rem; line-height:1;">💡</span>
-            <span><strong>Need a size like 3.75" or 2.25"?</strong> Our size selector steps in 0.5" increments. If your design falls between sizes (e.g.&nbsp;0.25" or 0.75" values), please pick the closest size and add your exact dimensions in the <strong>Design Notes</strong> box below — we'll match it for you at no extra cost.</span>
-          </div>
-
-          </div>
-
-          <div class="pk-customize-grid__right">
-          <div class="buy-more-label">Buy More. Save More.</div>
-          <div class="pricing-card">
-            <div class="pricing-header"><span>Qty</span><span>Price</span><span>Discount</span></div>
-            <div class="pricing-row" data-min="10" data-max="49"><div class="pricing-row__cols"><span>10-49 pcs</span><span id="price-tier-1">Calculating...</span><span id="discount-tier-1">Base</span></div><div class="pricing-row__msg" id="tier-msg-1"></div></div>
-            <div class="pricing-row" data-min="50" data-max="99"><div class="pricing-row__cols"><span>50-99 pcs</span><span id="price-tier-2">Calculating...</span><span id="discount-tier-2">...</span></div><div class="pricing-row__msg" id="tier-msg-2"></div></div>
-            <div class="pricing-row" data-min="100" data-max="199"><div class="pricing-row__cols"><span>100-199 pcs</span><span id="price-tier-3">Calculating...</span><span id="discount-tier-3">...</span></div><div class="pricing-row__msg" id="tier-msg-3"></div></div>
-            <div class="pricing-row" data-min="200" data-max="499"><div class="pricing-row__cols"><span>200-499 pcs</span><span id="price-tier-4">Calculating...</span><span id="discount-tier-4">...</span></div><div class="pricing-row__msg" id="tier-msg-4"></div></div>
-            <div class="pricing-row" data-min="500" data-max="999"><div class="pricing-row__cols"><span>500-999 pcs</span><span id="price-tier-5">Calculating...</span><span id="discount-tier-5">...</span></div><div class="pricing-row__msg" id="tier-msg-5"></div></div>
-            <div class="pricing-row" data-min="1000" data-max="999999"><div class="pricing-row__cols"><span>1000+ pcs</span><span id="price-tier-6">Calculating...</span><span id="discount-tier-6">...</span></div><div class="pricing-row__msg" id="tier-msg-6"></div></div>
-          </div>
-
-          </div>
-          </div>
-
-          <div class="control-group">
-            <h3 class="control-label" style="font-size:1.5rem; margin-top:2rem;">Select Your Options Below</h3>
-            <p style="color:#6b7280; margin-bottom:1.5rem;">These do not affect your final price.</p>
+            <div class="pk-tier-heading">Price breaks by quantity</div>
+            <div class="pricing-card">
+              <div class="pricing-header"><span>Pieces</span><span>Each</span><span>Savings</span></div>
+              <div class="pricing-row" data-min="10" data-max="49"><div class="pricing-row__cols"><span>10-49 pcs</span><span id="price-tier-1">Calculating...</span><span id="discount-tier-1">Base</span></div><div class="pricing-row__msg" id="tier-msg-1"></div></div>
+              <div class="pricing-row" data-min="50" data-max="99"><div class="pricing-row__cols"><span>50-99 pcs</span><span id="price-tier-2">Calculating...</span><span id="discount-tier-2">...</span></div><div class="pricing-row__msg" id="tier-msg-2"></div></div>
+              <div class="pricing-row" data-min="100" data-max="199"><div class="pricing-row__cols"><span>100-199 pcs</span><span id="price-tier-3">Calculating...</span><span id="discount-tier-3">...</span></div><div class="pricing-row__msg" id="tier-msg-3"></div></div>
+              <div class="pricing-row" data-min="200" data-max="499"><div class="pricing-row__cols"><span>200-499 pcs</span><span id="price-tier-4">Calculating...</span><span id="discount-tier-4">...</span></div><div class="pricing-row__msg" id="tier-msg-4"></div></div>
+              <div class="pricing-row" data-min="500" data-max="999"><div class="pricing-row__cols"><span>500-999 pcs</span><span id="price-tier-5">Calculating...</span><span id="discount-tier-5">...</span></div><div class="pricing-row__msg" id="tier-msg-5"></div></div>
+              <div class="pricing-row" data-min="1000" data-max="999999"><div class="pricing-row__cols"><span>1000+ pcs</span><span id="price-tier-6">Calculating...</span><span id="discount-tier-6">...</span></div><div class="pricing-row__msg" id="tier-msg-6"></div></div>
+            </div>
           </div>
 
           {% unless product.handle == 'dtf-transfers' or product.handle contains 'sticker' %}
+          <!-- STEP 4: FINISHING (patch products only) -->
+          <div class="pk-step">
+            <div class="pk-step__head">
+              <span class="pk-step__num" aria-hidden="true"></span>
+              <h2 class="pk-step__title">Finishing</h2>
+            </div>
+            <p class="pk-step__sub">All of these are included in your price. The one exception is Velcro backing, which adds $0.25 per piece.</p>
+
           <div class="control-group pk-color-card">
-          <label class="control-label">Select Shape:</label>
+          <label class="control-label">Cut shape</label>
           <div class="shape-grid">
              <div class="shape-card selected" onclick="selectShape(this, 'Circle')">
                <div class="shape-image" style="background-image:url('https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Circle.webp?v=1787951311');"></div>
@@ -829,17 +827,17 @@
              </div>
              <div class="shape-card" onclick="selectShape(this, 'Custom')">
                <div class="shape-image" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNDAgMTUgTDYwIDE1IEw4MCA0MCBMNTAgODUgTDIwIDQwIFoiIHN0cm9rZT0iIzExMjMyNyIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSIjZmZmIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvc3ZnPg==');"></div>
-               <span>Custom Shape</span>
+               <span>Follow My Design</span>
              </div>
           </div>
           <input type="hidden" name="properties[Shape]" id="shape-input" value="Circle">
           </div>
 
           {%- liquid
-            assign std_colors = "White|#FFFFFF,Black|#000000,Cream|#F3E9D2,Gray|#9CA3AF,Charcoal|#36454F,Brown|#6F4E37,Red|#DC2626,Maroon|#7F1D1D,Orange|#EA580C,Gold|#D4AF37,Yellow|#FACC15,Kelly Green|#4CBB17,Green|#9333ea,Forest Green|#228B22,Teal|#0D9488,Sky Blue|#38BDF8,Royal Blue|#2563EB,Navy|#1E3A8A" | split: ","
+            assign std_colors = "White|#FFFFFF,Black|#000000,Cream|#F3E9D2,Gray|#9CA3AF,Charcoal|#36454F,Brown|#6F4E37,Red|#DC2626,Maroon|#7F1D1D,Orange|#EA580C,Gold|#D4AF37,Yellow|#FACC15,Kelly Green|#4CBB17,Green|#16A34A,Forest Green|#228B22,Teal|#0D9488,Sky Blue|#38BDF8,Royal Blue|#2563EB,Navy|#1E3A8A" | split: ","
           -%}
           <div class="control-group pk-color-card">
-            <label class="control-label">Patch Background Color:</label>
+            <label class="control-label">Background color</label>
             <button type="button" class="pk-match-artwork-btn" onclick="matchMyArtwork('bg-color-input', 'bg-artwork-colors')">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v10m-12-12v18m0 0H5a2 2 0 0 1-2-2V9m6 12h10a2 2 0 0 0 2-2V9"/></svg>
               Match My Artwork
@@ -859,11 +857,11 @@
                 <span class="pk-cswatch-label">Custom</span>
               </button>
             </div>
-            <input type="hidden" id="bg-color-input" name="properties[Patch Background Color]" class="pk-color-swatch" value="">
+            <input type="hidden" id="bg-color-input" name="properties[Background Color]" class="pk-color-swatch" value="">
           </div>
 
           <div class="control-group pk-color-card">
-            <label class="control-label">Border Thread Color:</label>
+            <label class="control-label">Border color</label>
             <button type="button" class="pk-match-artwork-btn" onclick="matchMyArtwork('thread-color-input', 'thread-artwork-colors')">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v10m-12-12v18m0 0H5a2 2 0 0 1-2-2V9m6 12h10a2 2 0 0 0 2-2V9"/></svg>
               Match My Artwork
@@ -883,33 +881,33 @@
                 <span class="pk-cswatch-label">Custom</span>
               </button>
             </div>
-            <input type="hidden" id="thread-color-input" name="properties[Border Thread Color]" class="pk-color-swatch" value="">
+            <input type="hidden" id="thread-color-input" name="properties[Border Color]" class="pk-color-swatch" value="">
           </div>
 
-          <label class="control-label">Select Your Backing: <span id="backing-label-extra" style="font-weight:400; color:#6b7280;">Heat Applied (Most Popular)</span></label>
+          <label class="control-label">Backing: <span id="backing-label-extra" style="font-weight:400; color:#6b7280;">Iron-On</span></label>
           <div class="backing-grid">
-            <div class="backing-card selected" onclick="selectBacking(this, 'Heat Applied (Most Popular)')">
+            <div class="backing-card selected" onclick="selectBacking(this, 'Iron-On')">
               <div class="backing-preview" style="background-image:url('https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Heat_Applied.jpg?v=1770207494'); background-size:cover; background-position:center;"></div>
-              <div>Heat Applied</div>
+              <div>Iron-On</div>
             </div>
-            <div class="backing-card" onclick="selectBacking(this, 'Velcro (Both Sides of Velcro Included)')">
+            <div class="backing-card" onclick="selectBacking(this, 'Velcro (hook &amp; loop, both sides included)')">
               <div class="backing-preview" style="background-image:url('https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Velcro.jpg?v=1770207494'); background-size:cover; background-position:center;">
                 <span class="backing-price-badge">+$0.25/pc</span>
               </div>
               <div>Velcro</div>
             </div>
-            <div class="backing-card" onclick="selectBacking(this, 'Peel & Stick')">
+            <div class="backing-card" onclick="selectBacking(this, 'Adhesive (peel-off)')">
               <div class="backing-preview" style="background-image:url('https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Peel_Stick.jpg?v=1770207494'); background-size:cover; background-position:center;"></div>
-              <div>Peel & Stick</div>
+              <div>Adhesive</div>
             </div>
           </div>
-          <div id="backing-description" style="margin-bottom:2rem; font-size:0.9rem; color:#4b5563; line-height:1.5;">
-            Our most popular method allows you to quickly and conveniently use a heat press or even a home iron if the right pressure and heat are applied.
+          <div id="backing-description" style="margin-bottom:0.5rem; font-size:0.9rem; color:#4b5563; line-height:1.5;">
+            Bonds to fabric with heat. A heat press gives the most even result; a household iron also works if you press firmly.
           </div>
-          <input type="hidden" name="properties[Backing]" id="backing-input" value="Heat Applied (Most Popular)">
+          <input type="hidden" name="properties[Backing]" id="backing-input" value="Iron-On">
 
           {% if product.handle == 'faux-leather-patches' %}
-          <label class="control-label" style="margin-top:1.5rem;">Select Leather Color: <span id="leather-color-label-extra" style="font-weight:400; color:#6b7280;">Faux Black</span></label>
+          <label class="control-label" style="margin-top:1.5rem;">Leather color: <span id="leather-color-label-extra" style="font-weight:400; color:#6b7280;">Faux Black</span></label>
           <div class="backing-grid">
             <div class="backing-card selected" onclick="selectLeatherColor(this, 'Faux Black')">
               <div class="backing-preview" style="background-image:url('https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Foux_black.jpg?v=1778792496'); background-size:cover; background-position:center;"></div>
@@ -932,7 +930,7 @@
           {% endif %}
 
           {% if product.handle == 'leather-patches' or product.handle == 'genuine-leather-patches' %}
-          <label class="control-label" style="margin-top:1.5rem;">Select Leather Color: <span id="leather-color-label-extra" style="font-weight:400; color:#6b7280;">Genuine Caramel/Brown</span></label>
+          <label class="control-label" style="margin-top:1.5rem;">Leather color: <span id="leather-color-label-extra" style="font-weight:400; color:#6b7280;">Genuine Caramel/Brown</span></label>
           <div class="backing-grid">
             <div class="backing-card selected" onclick="selectLeatherColor(this, 'Genuine Caramel/Brown')">
               <div class="backing-preview" style="background-image:url('https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Geniune_caramellbrown.jpg?v=1778792496'); background-size:cover; background-position:center;"></div>
@@ -953,28 +951,35 @@
           </div>
           <input type="hidden" name="properties[Leather Color]" id="leather-color-input" value="Genuine Caramel/Brown">
           {% endif %}
+          </div>
           {% endunless %}
 
+          <!-- LAST STEP: ORDER -->
+          <div class="pk-step">
+            <div class="pk-step__head">
+              <span class="pk-step__num" aria-hidden="true"></span>
+              <h2 class="pk-step__title">Place your order</h2>
+            </div>
 
+            <div style="margin-bottom:1rem; padding:1rem; background:#f9fafb; border-radius:0.75rem; border:1px solid #e5e7eb;">
+              <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; font-size:0.95rem; line-height:1.5; color:#374151;">
+                <input type="checkbox" name="properties[Mockup Request]" id="mockup-request-checkbox" style="width:1.2rem; height:1.2rem; margin-top:0.15rem; flex-shrink:0;">
+                <span>Would you like to see a mockup before production? <strong style="color:#a855f7;">Please note:</strong> It takes 24-48 hours.</span>
+              </label>
+            </div>
 
-          <div style="margin-top:1.5rem; margin-bottom:1.5rem; padding:1rem; background:#f9fafb; border-radius:0.75rem; border:1px solid #e5e7eb;">
-            <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; font-size:0.95rem; line-height:1.5; color:#374151;">
-              <input type="checkbox" name="properties[Mockup Request]" id="mockup-request-checkbox" style="width:1.2rem; height:1.2rem; margin-top:0.15rem; flex-shrink:0;">
-              <span>Would you like to see a mockup before production? <strong style="color:#a855f7;">Please note:</strong> It takes 24-48 hours.</span>
-            </label>
+            <button type="submit" name="add" class="checkout-btn" style="margin-top:0;">Add to Cart</button>
+
+            <button type="button" id="mockup-quote-btn" class="mockup-quote-btn" onclick="openQuoteModal()">
+              Not ready to order? Get Mockup / Quote First
+            </button>
+
+            <div style="text-align:center; margin-top:1rem;">
+              <a href="/pages/quote" style="color:#a855f7; font-weight:600; font-size:0.95rem; text-decoration:underline;">
+                Still confused? Get a free quote!
+              </a>
+            </div>
           </div>
-
-          <div style="text-align:center; margin-bottom:1.5rem;">
-            <a href="/pages/quote" style="color:#a855f7; font-weight:600; font-size:1rem; text-decoration:underline;">
-              Still confused? Get a free quote!
-            </a>
-          </div>
-
-          <button type="submit" name="add" class="checkout-btn">Add to Cart</button>
-
-          <button type="button" id="mockup-quote-btn" class="mockup-quote-btn" onclick="openQuoteModal()">
-            Not ready to order? Get Mockup / Quote First
-          </button>
 
         </div>
       </form>
@@ -1106,10 +1111,10 @@
             'Page: ' + window.location.href,
           ];
           if (shape) infoParts.push('Shape: ' + shape);
-          const bgColor = document.querySelector('input[name="properties[Patch Background Color]"]');
+          const bgColor = document.getElementById('bg-color-input');
           if (bgColor && bgColor.dataset.touched === '1') infoParts.push('Background color: ' + bgColor.value);
-          const threadColor = document.querySelector('input[name="properties[Border Thread Color]"]');
-          if (threadColor && threadColor.dataset.touched === '1') infoParts.push('Border thread color: ' + threadColor.value);
+          const threadColor = document.getElementById('thread-color-input');
+          if (threadColor && threadColor.dataset.touched === '1') infoParts.push('Border color: ' + threadColor.value);
           if (notesEl && notesEl.value) infoParts.push('Design notes: ' + notesEl.value);
 
           const fd = new FormData();
@@ -1612,22 +1617,20 @@
     };
     const productMinQty = minQtyLabels[PRODUCT_HANDLE] || 10;
 
-    // Update feature bar if different from default HTML
-    const featureBar = document.querySelector('.feature-bar .feature-green');
-    if(featureBar && productMinQty !== 10) {
-      featureBar.innerText = `${productMinQty} Minimum Quantity`;
+    // Update the minimum-order wording if different from the default HTML
+    const minFact = document.getElementById('pk-min-fact');
+    if(minFact && productMinQty !== 10) {
+      minFact.innerText = `Order from ${productMinQty} pieces`;
     }
 
-    // Update qty error message if different from default HTML
     const qtyError = document.getElementById('qty-error');
     if(qtyError && productMinQty !== 10) {
-      qtyError.innerText = `${productMinQty} Piece Minimum Required`;
+      qtyError.innerText = `Please order at least ${productMinQty} pieces.`;
     }
 
-    // Update qty min label if different from default HTML
-    const qtyMinLabel = qtyInput ? qtyInput.parentElement.querySelector('div:last-child') : null;
+    const qtyMinLabel = document.getElementById('qty-min-label');
     if(qtyMinLabel && productMinQty !== 10) {
-      qtyMinLabel.innerText = `${productMinQty} Piece Min`;
+      qtyMinLabel.innerText = `Minimum order: ${productMinQty}`;
     }
 
     // Sync qty input min attribute and bump value if below minimum.
@@ -1728,12 +1731,6 @@
          if(artworkPanel) artworkPanel.classList.add('active');
       }
     });
-
-    window.skipUpload = function() {
-      if(uploadStage) uploadStage.style.display = 'none';
-      const artworkPanel = document.getElementById('pk-artwork-panel');
-      if(artworkPanel) artworkPanel.classList.remove('active');
-    }
 
     window.resetUpload = function() {
       if(fileInput) fileInput.value = '';
@@ -1946,15 +1943,6 @@
       }
     };
 
-    window.pkToggleNotes = function() {
-      const btn = document.getElementById('design-notes-toggle');
-      const container = document.getElementById('design-notes-container');
-      if (!btn || !container) return;
-      const open = btn.getAttribute('aria-expanded') !== 'true';
-      btn.setAttribute('aria-expanded', String(open));
-      container.style.display = open ? 'block' : 'none';
-    };
-
     const widthInput = document.getElementById('width-input');
     const heightInput = document.getElementById('height-input');
     const unitPriceDisplay = document.getElementById('unit-price-display');
@@ -2097,7 +2085,7 @@
       frame.style.height = Math.round(px * (h / longest)) + 'px';
       if (dims) {
         const f = (n) => n.toFixed(2).replace(/\.00$/, '');
-        dims.textContent = f(w) + '" \u00d7 ' + f(h) + '" \u2014 actual patch shape';
+        dims.textContent = f(w) + '" \u00d7 ' + f(h) + '" \u00b7 shown in proportion';
       }
     }
 
@@ -2219,21 +2207,11 @@
     // Check if this is a sticker product
     const IS_STICKER = PRODUCT_HANDLE.includes('sticker');
 
-    // Update labels for stickers on page load
+    // Sticker/transfer wording for the size labels is rendered in Liquid.
     if (IS_STICKER) {
-      const sizeSelectorLabel = document.getElementById('size-selector-label');
-      const sizeGuideLabel = document.getElementById('size-guide-label');
-
       // Hide the 6th pricing tier row (stickers only have 5 tiers)
       const tier6 = document.querySelector('.pricing-row[data-min="1000"]');
       if (tier6) tier6.style.display = 'none';
-      const sizeDisplayLabel = document.getElementById('size-display-label');
-      const sizeTooltip = document.getElementById('size-tooltip');
-
-      if (sizeSelectorLabel) sizeSelectorLabel.innerText = 'Select Your Sticker Size:';
-      if (sizeGuideLabel) sizeGuideLabel.innerText = 'Sticker Size Guide';
-      if (sizeDisplayLabel) sizeDisplayLabel.innerText = 'Sticker Size';
-      if (sizeTooltip) sizeTooltip.style.display = 'none'; // Hide tooltip for stickers
     }
 
     // Sticker style brackets (based on square inches: width * height)
@@ -2289,7 +2267,7 @@
       if (isActive && nextRow && nextPctOff > 0) {
         const need = parseInt(nextRow.dataset.min, 10) - qty;
         if (need > 0) {
-          msgEl.innerHTML = `Add <b>${need}</b> of this design to reach ${nextPctOff}% in savings.`;
+          msgEl.innerHTML = `Order <b>${need}</b> more to unlock ${nextPctOff}% off the base price.`;
           msgEl.classList.add('show');
           return;
         }
@@ -2404,7 +2382,7 @@
 
           // UPDATE MAIN UI
           if(unitPriceDisplay) {
-            unitPriceDisplay.innerHTML = '$' + unitPrice.toFixed(2) + ' <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span>';
+            unitPriceDisplay.textContent = '$' + unitPrice.toFixed(2);
           }
           if(totalDisplay) {
             totalDisplay.innerText = '$' + total.toFixed(2).replace(/\.00$/, '');
@@ -2572,7 +2550,7 @@
       if(headerPrice) headerPrice.innerText = '$' + unitPrice.toFixed(2);
       const headerQty = document.getElementById('header-qty');
       if(headerQty) headerQty.innerText = qty;
-      if(unitPriceDisplay) unitPriceDisplay.innerHTML = '$' + unitPrice.toFixed(2) + ' <span style="font-size: 0.9rem; color: #6b7280; font-weight: 400;">ea.</span>';
+      if(unitPriceDisplay) unitPriceDisplay.textContent = '$' + unitPrice.toFixed(2);
       // The velcro surcharge is charged as a companion line item in the cart;
       // reflect it in the displayed total so the page and the cart agree.
       const backingSel = document.getElementById('backing-input');
@@ -2732,29 +2710,25 @@
        const input = document.getElementById('backing-input');
        if(input) input.value = val;
 
-       // Show/hide velcro surcharge notice
-       const surchargeNotice = document.getElementById('velcro-surcharge-notice');
-       if(surchargeNotice) {
-         surchargeNotice.style.display = val.includes('Velcro') ? 'block' : 'none';
-       }
-
-       // Update label
+       // Short name next to the "Backing:" label, and the matching description.
+       // Keyed by the first word of the stored value so the stored wording can
+       // carry extra detail without breaking the lookup.
+       const backingKey = val.split(' ')[0];
        const labelMap = {
-         'Heat Applied': 'Heat Applied (Most Popular)',
+         'Iron-On': 'Iron-On',
          'Velcro': 'Velcro',
-         'Peel & Stick': 'Peel & Stick'
+         'Adhesive': 'Adhesive'
        };
        const labelExtra = document.getElementById('backing-label-extra');
-       if(labelExtra) labelExtra.innerText = labelMap[val] || val;
+       if(labelExtra) labelExtra.innerText = labelMap[backingKey] || val;
 
-       // Update description
        const descMap = {
-         'Heat Applied': 'Our most popular method allows you to quickly and conveniently use a heat press or even a home iron if the right pressure and heat are applied.',
-         'Velcro': 'Ideal for uniforms and tactical gear. Allows for easy removal and reattachment. Additional $0.25 per patch will be added for Velcro backing.',
-         'Peel & Stick': 'Perfect for temporary use or hard-to-iron surfaces. Just peel off the back and stick it on!'
+         'Iron-On': 'Bonds to fabric with heat. A heat press gives the most even result; a household iron also works if you press firmly.',
+         'Velcro': 'Hook-and-loop backing with both sides included, so the patch can come off and go back on. Common on uniforms, bags and tactical gear. Adds $0.25 per piece.',
+         'Adhesive': 'A peel-off sticky backing for short-term wear or surfaces that cannot take heat. Remove the liner and press the patch on.'
        };
        const desc = document.getElementById('backing-description');
-       if(desc) desc.innerText = descMap[val] || '';
+       if(desc) desc.innerText = descMap[backingKey] || '';
 
        // Backing choice changes the displayed total (velcro surcharge)
        if (typeof updatePriceAndVariant === 'function') updatePriceAndVariant();
