@@ -1,0 +1,203 @@
+{% comment %}
+  Tabbed photo box: one tab per product style, with a side card holding two
+  calls to action.
+
+  A tab takes either a product or a collection:
+  - product: tiles are that product's own photos, all linking to the product.
+    Photos whose file name contains one of the "skip" keywords are left out,
+    which keeps size charts and infographics out of the row.
+  - collection: tiles are the first products in the collection, each with its
+    name underneath and each linking to its own page.
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Type Showcase",
+  "settings": [
+    { "type": "text", "id": "skip_keywords", "label": "Skip product photos whose file name contains", "default": "detailImage,Gemini_Generated,ChatGPT,_info", "info": "Comma-separated. Used to keep charts and infographics out of the photo row." },
+    { "type": "header", "content": "Side card" },
+    { "type": "text", "id": "card_title", "label": "Title", "default": "Compare the finishes" },
+    { "type": "textarea", "id": "card_text", "label": "Text", "default": "Flip through the tabs to see how stitched, printed, molded and leather patches differ." },
+    { "type": "text", "id": "card_btn_1_label", "label": "First button label", "default": "Get a Free Quote" },
+    { "type": "url", "id": "card_btn_1_link", "label": "First button link", "info": "Defaults to /pages/quote." },
+    { "type": "text", "id": "card_btn_2_label", "label": "Second button label", "default": "See Every Style" },
+    { "type": "url", "id": "card_btn_2_link", "label": "Second button link", "info": "Defaults to the style grid on this page (#styles)." }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Tab label", "default": "Embroidered" },
+        { "type": "product", "id": "product", "label": "Product (shows its photos)" },
+        { "type": "collection", "id": "collection", "label": "Collection (shows its products)", "info": "Used only when no product is chosen." },
+        { "type": "text", "id": "more_label", "label": "Link under the photos", "default": "See sizes and pricing" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [{ "name": "Type Showcase" }]
+}
+{% endschema %}
+
+<style>
+  .pk-ts { background: #fff; padding: 0.5rem 0 3rem; }
+  .pk-ts__inner { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .pk-ts__box { display: grid; grid-template-columns: minmax(0, 1fr) 17rem; background: #fff; border: 1px solid #e5e7eb; border-radius: var(--pk-radius-lg); box-shadow: 0 14px 34px -20px rgba(17, 24, 39, 0.28); overflow: hidden; }
+  .pk-ts__main { min-width: 0; padding: 0.35rem 1.5rem 1.5rem; }
+
+  .pk-ts__tabs { display: flex; gap: 1.6rem; border-bottom: 1px solid #e5e7eb; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .pk-ts__tabs::-webkit-scrollbar { display: none; }
+  .pk-ts__tab { flex: 0 0 auto; margin-bottom: -1px; padding: 0.95rem 0.1rem; background: none; border: none; border-bottom: 2px solid transparent; font: inherit; font-size: var(--pk-fs-body); font-weight: 600; color: #4b5563; cursor: pointer; white-space: nowrap; transition: color var(--pk-btn-transition), border-color var(--pk-btn-transition); }
+  .pk-ts__tab:hover { color: #111827; }
+  .pk-ts__tab:focus-visible { outline: 2px solid var(--pk-btn-primary-bg); outline-offset: -2px; }
+  .pk-ts__tab[aria-selected="true"] { color: #7e22ce; border-bottom-color: #9333ea; }
+
+  /* The base theme's layered-slideshow section styles every [role="tabpanel"]
+     on the site (width, height, stacking). Undo that here. */
+  .pk-ts__panel[role="tabpanel"] { width: auto; height: auto; min-width: 0; min-height: 0; z-index: auto; border-radius: 0; }
+  .pk-ts__panel[hidden] { display: none; }
+  .pk-ts__row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.9rem; margin-top: 1.25rem; }
+  .pk-ts__tile { display: block; min-width: 0; text-decoration: none; color: inherit; }
+  .pk-ts__tile img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--pk-radius-md); background: #f3f4f6; transition: transform 0.25s ease; }
+  .pk-ts__tile:hover img { transform: scale(1.03); }
+  .pk-ts__cap { display: block; margin-top: 0.5rem; font-size: var(--pk-fs-label); color: #374151; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pk-ts__more { display: inline-block; margin-top: 1.1rem; font-size: var(--pk-fs-label); font-weight: 700; color: #7e22ce; text-decoration: none; }
+  .pk-ts__more:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .pk-ts__side { display: flex; flex-direction: column; justify-content: center; gap: 0.75rem; padding: 1.75rem 1.5rem; background: #faf5ff; border-left: 1px solid #e9d5ff; }
+  .pk-ts__side-title { margin: 0; font-size: var(--pk-fs-subheading); font-weight: 800; line-height: 1.25; color: #111827; }
+  .pk-ts__side-text { margin: 0 0 0.35rem; font-size: var(--pk-fs-label); line-height: 1.5; color: #4b5563; }
+  .pk-ts__side-btn { display: flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: 0 1rem; border-radius: var(--pk-radius-sm); font-size: var(--pk-fs-label); font-weight: 700; text-decoration: none; text-align: center; }
+  .pk-ts__side-btn--line { background: #fff; color: #7e22ce; border: 1.5px solid #c084fc; transition: background var(--pk-btn-transition), border-color var(--pk-btn-transition); }
+  .pk-ts__side-btn--line:hover { background: #f5f3ff; border-color: #9333ea; }
+
+  @media (max-width: 899px) {
+    .pk-ts__box { grid-template-columns: 1fr; }
+    .pk-ts__main { padding: 0.25rem 1rem 1.25rem; }
+    .pk-ts__tabs { gap: 1.25rem; margin: 0 -1rem; padding: 0 1rem; }
+    /* The photo row scrolls sideways on small screens instead of shrinking. */
+    .pk-ts__row { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 42%; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; margin-left: -1rem; margin-right: -1rem; padding: 0 1rem; }
+    .pk-ts__row::-webkit-scrollbar { display: none; }
+    .pk-ts__tile { scroll-snap-align: start; }
+    .pk-ts__side { border-left: none; border-top: 1px solid #e9d5ff; padding: 1.25rem 1rem 1.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pk-ts__tile img { transition: none; }
+  }
+</style>
+
+{%- liquid
+  assign skip_list = section.settings.skip_keywords | split: ','
+  assign btn_1_link = section.settings.card_btn_1_link | default: '/pages/quote'
+  assign btn_2_link = section.settings.card_btn_2_link | default: '#styles'
+-%}
+
+{%- if section.blocks.size > 0 -%}
+<section class="pk-ts">
+  <div class="pk-ts__inner">
+    <div class="pk-ts__box">
+      <div class="pk-ts__main">
+        <div class="pk-ts__tabs" role="tablist" aria-label="Patch styles" data-ts-tabs>
+          {%- for block in section.blocks -%}
+            <button type="button" class="pk-ts__tab" role="tab" id="ts-tab-{{ block.id }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="ts-panel-{{ block.id }}" data-ts-tab {{ block.shopify_attributes }}>{{ block.settings.label }}</button>
+          {%- endfor -%}
+        </div>
+
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign tab_product = block.settings.product
+            assign tab_collection = block.settings.collection
+          -%}
+          <div class="pk-ts__panel" role="tabpanel" id="ts-panel-{{ block.id }}" aria-labelledby="ts-tab-{{ block.id }}"{% unless forloop.first %} hidden{% endunless %}>
+            {%- if tab_product != blank -%}
+              <div class="pk-ts__row">
+                {%- assign shown = 0 -%}
+                {%- for image in tab_product.images -%}
+                  {%- if shown >= 5 -%}{%- break -%}{%- endif -%}
+                  {%- assign skip_image = false -%}
+                  {%- for keyword in skip_list -%}
+                    {%- assign keyword_clean = keyword | strip -%}
+                    {%- if keyword_clean != blank and image.src contains keyword_clean -%}
+                      {%- assign skip_image = true -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if skip_image -%}{%- continue -%}{%- endif -%}
+                  {%- assign shown = shown | plus: 1 -%}
+                  <a class="pk-ts__tile" href="{{ tab_product.url }}" aria-label="{{ tab_product.title | escape }}, photo {{ shown }}">
+                    <img src="{{ image | image_url: width: 360, height: 360, crop: 'center' }}" width="360" height="360" loading="lazy" alt="">
+                  </a>
+                {%- endfor -%}
+              </div>
+              {%- if block.settings.more_label != blank -%}
+                <a class="pk-ts__more" href="{{ tab_product.url }}">{{ block.settings.more_label }} &rarr;</a>
+              {%- endif -%}
+            {%- elsif tab_collection != blank -%}
+              <div class="pk-ts__row">
+                {%- for item in tab_collection.products limit: 5 -%}
+                  {%- if item.featured_image -%}
+                    <a class="pk-ts__tile" href="{{ item.url }}">
+                      <img src="{{ item.featured_image | image_url: width: 360, height: 360, crop: 'center' }}" width="360" height="360" loading="lazy" alt="">
+                      <span class="pk-ts__cap">{{ item.title }}</span>
+                    </a>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+              {%- if block.settings.more_label != blank -%}
+                <a class="pk-ts__more" href="{{ tab_collection.url }}">{{ block.settings.more_label }} &rarr;</a>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <aside class="pk-ts__side">
+        {%- if section.settings.card_title != blank -%}
+          <h2 class="pk-ts__side-title">{{ section.settings.card_title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.card_text != blank -%}
+          <p class="pk-ts__side-text">{{ section.settings.card_text }}</p>
+        {%- endif -%}
+        {%- if section.settings.card_btn_1_label != blank -%}
+          <a class="pk-ts__side-btn pk-btn-dark" href="{{ btn_1_link }}">{{ section.settings.card_btn_1_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.card_btn_2_label != blank -%}
+          <a class="pk-ts__side-btn pk-ts__side-btn--line" href="{{ btn_2_link }}">{{ section.settings.card_btn_2_label }}</a>
+        {%- endif -%}
+      </aside>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    if (!root) return;
+    var list = root.querySelector('[data-ts-tabs]');
+    if (!list) return;
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('[data-ts-tab]'));
+
+    function select(tab) {
+      tabs.forEach(function (other) {
+        var active = other === tab;
+        other.setAttribute('aria-selected', active ? 'true' : 'false');
+        var panel = document.getElementById(other.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !active;
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () { select(tab); });
+    });
+    list.addEventListener('keydown', function (event) {
+      if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+      var i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      var next = tabs[(i + (event.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      next.focus();
+      select(next);
+      event.preventDefault();
+    });
+  })();
+</script>
+{%- endif -%}

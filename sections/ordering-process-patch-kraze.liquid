@@ -1,172 +1,132 @@
+{% comment %}
+  "How ordering works" block. Left: heading, a line of text and two links.
+  Right: the steps as a numbered list running down a single line.
+
+  Steps are blocks (a title and a sentence or two). The numbers come from a
+  CSS counter, so reordering or removing a step in the theme editor renumbers
+  the rest. There are no pictures in this section by design.
+
+  Keep each step to what actually happens on this store: the product page
+  takes the upload and shows the price, the mockup is the optional checkbox on
+  that page, and the backing choices are the ones offered there.
+{% endcomment %}
+
 {% schema %}
 {
   "name": "Ordering Process PK",
   "class": "section-ordering-process",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "How Your Order Comes Together"
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "From upload to delivery, here's what happens at each step"
-    }
+    { "type": "text", "id": "eyebrow", "label": "Small label above the heading", "default": "How it works", "info": "Leave empty to hide." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "From Your Artwork to Finished Patches" },
+    { "type": "textarea", "id": "subheading", "label": "Text under the heading", "default": "Four steps. You see the price up front and can approve a mockup before anything is made." },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "Start Your Order", "info": "Leave empty to hide." },
+    { "type": "url", "id": "btn_link", "label": "Button link", "info": "Defaults to the style grid on the home page (/#styles)." },
+    { "type": "text", "id": "link_label", "label": "Text link label", "default": "Ask for a quote first", "info": "Leave empty to hide." },
+    { "type": "url", "id": "link_url", "label": "Text link", "info": "Defaults to /pages/quote." }
   ],
   "blocks": [
     {
       "type": "process_step",
-      "name": "Process Step",
+      "name": "Step",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Step Title"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Description",
-          "default": "Step description goes here."
-        }
+        { "type": "text", "id": "title", "label": "Title", "default": "Step title" },
+        { "type": "textarea", "id": "description", "label": "Text", "default": "What happens at this step." }
       ]
     }
   ],
+  "max_blocks": 6,
   "presets": [
     {
       "name": "Ordering Process PK",
       "blocks": [
-        {
-          "type": "process_step",
-          "settings": {
-            "title": "Send Us Your Design",
-            "description": "Any file, any color count, any level of detail — upload it and place your order online in minutes."
-          }
-        },
-        {
-          "type": "process_step",
-          "settings": {
-            "title": "Review & Approve Your Proof",
-            "description": "Opt in at checkout and we'll send a digital proof for your sign-off before anything goes into production."
-          }
-        },
-        {
-          "type": "process_step",
-          "settings": {
-            "title": "We Produce and Ship It",
-            "description": "Our team gets to work turning your proof into finished patches, then ships your order out."
-          }
-        },
-        {
-          "type": "process_step",
-          "settings": {
-            "title": "Apply Whenever You're Ready",
-            "description": "Heat press, sew, or stick them on whenever you need them — and hold onto extras for future use."
-          }
-        }
+        { "type": "process_step", "settings": { "title": "Send your artwork", "description": "Upload a logo, drawing or photo on any product page. Pick a size and a quantity and the price updates as you go." } },
+        { "type": "process_step", "settings": { "title": "Approve your mockup", "description": "Tick the mockup box when you order and we email a digital mockup within 24–48 hours. Production starts once you approve it." } },
+        { "type": "process_step", "settings": { "title": "We make and ship them", "description": "Your approved design goes into production and ships to your door. Orders over $100 ship free." } },
+        { "type": "process_step", "settings": { "title": "Put them to work", "description": "Iron on, sew on, stick on or attach with Velcro, depending on the backing you chose." } }
       ]
     }
   ]
 }
 {% endschema %}
 
-<div class="w-full bg-white py-10" style="padding-top: 2.5rem; padding-bottom: 2.5rem; background-color: #fff;">
-  <div class="max-w-6xl mx-auto px-4" style="max-width: 72rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem;">
-    <div class="mb-16" style="margin-bottom: 4rem;">
-      <h2 class="text-3xl font-bold text-foreground mb-2" style="font-size: var(--pk-fs-heading); line-height: 1.2; font-weight: 700; margin-bottom: 0.5rem; color: var(--pk-text-primary);">
-        {{ section.settings.heading }}
-      </h2>
-      <p class="text-gray-600" style="color: var(--pk-text-secondary);">
-        {{ section.settings.subheading }}
-      </p>
-    </div>
-
-    <div class="process-grid">
-      {% for block in section.blocks %}
-        <div class="process-step" {{ block.shopify_attributes }}>
-          <div class="mb-6 flex justify-center" style="margin-bottom: 1.5rem; display: flex; justify-content: center;">
-            <div class="image-container group">
-              {% if block.settings.image != blank %}
-                {{ block.settings.image | image_url: width: 400 | image_tag: class: 'step-image', loading: 'lazy' }}
-              {% else %}
-                <img src="https://placehold.co/240x240?text={{ forloop.index }}" class="step-image" alt="{{ block.settings.title }}">
-              {% endif %}
-            </div>
-          </div>
-
-          <h3 class="step-title">{{ block.settings.title }}</h3>
-          <p class="step-desc">{{ block.settings.description }}</p>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-
 <style>
-  .process-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  @media (min-width: 768px) {
-    .process-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (min-width: 1024px) {
-    .process-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-  
-  .process-step {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .image-container {
-    width: 15rem; /* 60 */
-    height: 15rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    /* group hover effect logic needs parent class, handling simple scaling here */
-    overflow: hidden;
-  }
-  
-  .step-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: transform 0.3s;
-  }
-  
-  .image-container:hover .step-image {
-    transform: scale(1.1);
-  }
+  .pk-op { background: #fff; padding: 3.5rem 0; }
+  .pk-op__inner { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 3.5rem; align-items: center; }
+  .pk-op__eyebrow { margin: 0 0 0.6rem; font-size: var(--pk-fs-label); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pk-text-brand); }
+  .pk-op__heading { margin: 0 0 0.85rem; font-size: var(--pk-fs-heading); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; color: var(--pk-text-primary); }
+  .pk-op__sub { margin: 0 0 1.6rem; max-width: 26rem; font-size: var(--pk-fs-body); line-height: 1.55; color: var(--pk-text-secondary); }
+  .pk-op__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; }
+  .pk-op__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0 1.5rem; border-radius: var(--pk-radius-sm); font-size: var(--pk-fs-body); font-weight: 700; text-decoration: none; }
+  .pk-op__link { font-size: var(--pk-fs-body); font-weight: 600; color: var(--pk-text-primary); text-decoration: none; }
+  .pk-op__link:hover { color: var(--pk-text-brand); }
 
-  .step-title {
-    font-size: var(--pk-fs-subheading);
-    font-weight: 700;
-    color: var(--pk-text-primary);
-    margin-bottom: 0.75rem;
-    text-align: center;
-  }
+  /* Steps: a number in a ring, joined to the next one by a line. The line is
+     drawn from each step down to the one below, so the last step has none. */
+  .pk-op__steps { list-style: none; margin: 0; padding: 2rem 2rem 2rem 1.75rem; counter-reset: pk-op; background: #faf5ff; border: 1px solid #e9d5ff; border-radius: var(--pk-radius-lg); }
+  .pk-op__step { position: relative; counter-increment: pk-op; padding: 0 0 1.75rem 4rem; }
+  .pk-op__step:last-child { padding-bottom: 0; }
+  .pk-op__step::before { content: counter(pk-op); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: #fff; border: 2px solid #c084fc; font-size: 1.05rem; font-weight: 800; color: var(--pk-text-brand); }
+  .pk-op__step::after { content: ""; position: absolute; left: calc(1.375rem - 1px); top: 3.1rem; bottom: 0.35rem; width: 2px; border-radius: 2px; background: #d8b4fe; }
+  .pk-op__step:last-child::after { display: none; }
+  .pk-op__title { margin: 0 0 0.3rem; padding-top: 0.45rem; font-size: var(--pk-fs-subheading); font-weight: 700; line-height: 1.3; color: var(--pk-text-primary); }
+  .pk-op__text { margin: 0; max-width: 34rem; font-size: var(--pk-fs-body); line-height: 1.55; color: var(--pk-text-secondary); }
 
-  .step-desc {
-    color: var(--pk-text-secondary);
-    font-size: var(--pk-fs-label);
-    text-align: center;
-    line-height: 1.5;
+  @media (max-width: 899px) {
+    .pk-op { padding: 2.5rem 0; }
+    .pk-op__inner { grid-template-columns: 1fr; gap: 1.75rem; }
+    .pk-op__heading { font-size: var(--pk-fs-heading-sm); }
+    .pk-op__sub { max-width: none; margin-bottom: 1.25rem; }
+  }
+  @media (max-width: 479px) {
+    .pk-op__steps { padding: 1.4rem 1.15rem 1.4rem 1rem; }
+    .pk-op__step { padding-left: 3.4rem; }
+    .pk-op__step::before { width: 2.4rem; height: 2.4rem; font-size: 0.95rem; }
+    .pk-op__step::after { left: calc(1.2rem - 1px); top: 2.75rem; }
+    .pk-op__title { padding-top: 0.3rem; font-size: 1.1rem; }
+    .pk-op__btn { flex: 1 1 100%; }
   }
 </style>
+
+{%- liquid
+  assign op_btn_link = section.settings.btn_link | default: '/#styles'
+  assign op_link_url = section.settings.link_url | default: '/pages/quote'
+-%}
+
+<section class="pk-op">
+  <div class="pk-op__inner">
+    <div class="pk-op__intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pk-op__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pk-op__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="pk-op__sub">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+      {%- if section.settings.btn_label != blank or section.settings.link_label != blank -%}
+        <div class="pk-op__actions">
+          {%- if section.settings.btn_label != blank -%}
+            <a class="pk-op__btn pk-btn-primary" href="{{ op_btn_link }}">{{ section.settings.btn_label }}</a>
+          {%- endif -%}
+          {%- if section.settings.link_label != blank -%}
+            <a class="pk-op__link" href="{{ op_link_url }}">{{ section.settings.link_label }} &rarr;</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <ol class="pk-op__steps">
+        {%- for block in section.blocks -%}
+          <li class="pk-op__step" {{ block.shopify_attributes }}>
+            <h3 class="pk-op__title">{{ block.settings.title }}</h3>
+            {%- if block.settings.description != blank -%}
+              <p class="pk-op__text">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ol>
+    {%- endif -%}
+  </div>
+</section>

@@ -24,42 +24,153 @@
         "padding_bottom": 0
       }
     },
-    "patches_hero": {
-      "type": "patches-hero",
+    "home_hero": {
+      "type": "home-hero",
+      "blocks": {
+        "assure_shipping": {
+          "type": "assurance",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free shipping",
+            "text": "On orders over $100"
+          }
+        },
+        "assure_setup": {
+          "type": "assurance",
+          "settings": {
+            "icon": "fee",
+            "title": "No setup fees",
+            "text": "Artwork setup is included"
+          }
+        },
+        "assure_mockup": {
+          "type": "assurance",
+          "settings": {
+            "icon": "proof",
+            "title": "Mockup before production",
+            "text": "Free, in 24–48 hours"
+          }
+        },
+        "assure_remake": {
+          "type": "assurance",
+          "settings": {
+            "icon": "remake",
+            "title": "Defects remade",
+            "text": "If we get it wrong, we redo it"
+          }
+        },
+        "assure_support": {
+          "type": "assurance",
+          "settings": {
+            "icon": "support",
+            "title": "Based in the USA",
+            "text": "Live chat and phone support"
+          }
+        }
+      },
+      "block_order": [
+        "assure_shipping",
+        "assure_setup",
+        "assure_mockup",
+        "assure_remake",
+        "assure_support"
+      ],
       "settings": {
-        "eyebrow_text": "Based in USA",
-        "eyebrow_animate": true,
-        "eyebrow_speed": 110,
-        "title": "Custom Patches Made Your Way, Starting at 10 Pieces",
-        "subtitle": "Embroidered, PVC, leather, woven and more — send us your design and we'll turn it into a patch, with small-batch orders welcome and quick turnaround.",
-        "prop_1": "Ships Fast, Ships Free",
-        "prop_2": "Satisfaction Guaranteed",
-        "prop_3": "Zero Setup Fees",
-        "btn_primary_label": "Shop Custom Patches",
+        "eyebrow": "Rush production from 5 business days",
+        "title_phrases": "Custom Patches, Embroidered Patches, PVC Patches, Woven Patches, Leather Patches, Chenille Patches, Custom Stickers, DTF Transfers",
+        "title_rest": "Made Your Way",
+        "title_typing": true,
+        "point_1": "Order as few as 10 pieces",
+        "point_2": "Embroidered, PVC, woven, leather, printed and more",
+        "point_3": "Send your art and see a free mockup in 24–48 hours",
+        "btn_primary_label": "Start Your Order",
         "btn_primary_link": "",
         "btn_secondary_label": "Get a Free Quote",
         "btn_secondary_link": "",
-        "badge_text": "NEW! 10 PIECE MINIMUM",
-        "stat_1_value": "17 Styles",
-        "stat_1_label": "Stitched, Printed & Molded",
-        "stat_2_value": "10 Piece",
-        "stat_2_label": "Minimum Order",
-        "stat_banner": "Rush Production From 5 Business Days",
-        "hero_video": "",
-        "hero_video_url": "",
-        "video_autoplay": true,
-        "video_controls": false,
-        "video_max_height": 420
+        "note": "Quotes come back within 24 hours.",
+        "extra_link_label": "Or sketch an idea with our AI patch designer",
+        "extra_link": "",
+        "bg_tint": 85,
+        "bg_text": "dark"
       }
     },
-    "customer_gallery": {
-      "type": "customer-gallery",
+    "type_showcase": {
+      "type": "type-showcase",
+      "blocks": {
+        "tab_embroidered": {
+          "type": "tab",
+          "settings": {
+            "label": "Embroidered",
+            "more_label": "See sizes and pricing",
+            "product": "embroidered-patches"
+          }
+        },
+        "tab_printed": {
+          "type": "tab",
+          "settings": {
+            "label": "Printed",
+            "more_label": "See sizes and pricing",
+            "product": "full-color-printed-patches"
+          }
+        },
+        "tab_pvc": {
+          "type": "tab",
+          "settings": {
+            "label": "PVC",
+            "more_label": "See sizes and pricing",
+            "product": "pvc-rubber-patches"
+          }
+        },
+        "tab_woven": {
+          "type": "tab",
+          "settings": {
+            "label": "Woven",
+            "more_label": "See sizes and pricing",
+            "product": "woven-patches"
+          }
+        },
+        "tab_leather": {
+          "type": "tab",
+          "settings": {
+            "label": "Leather",
+            "more_label": "See sizes and pricing",
+            "product": "leather-patches"
+          }
+        },
+        "tab_chenille": {
+          "type": "tab",
+          "settings": {
+            "label": "Chenille",
+            "more_label": "See sizes and pricing",
+            "product": "chenille-patches"
+          }
+        },
+        "tab_readymade": {
+          "type": "tab",
+          "settings": {
+            "label": "Ready-made",
+            "more_label": "See all ready-made patches",
+            "collection": "ready-made-patches"
+          }
+        }
+      },
+      "block_order": [
+        "tab_embroidered",
+        "tab_printed",
+        "tab_pvc",
+        "tab_woven",
+        "tab_leather",
+        "tab_chenille",
+        "tab_readymade"
+      ],
       "settings": {
-        "heading": "Ready-Made Designs",
-        "subheading": "Patches you can order exactly as shown — tap one for a closer look.",
-        "scroll_speed": 90,
-        "fallback_collection": "",
-        "bg": "#fafafa"
+        "skip_keywords": "detailImage,Gemini_Generated,ChatGPT,_info",
+        "card_title": "Compare the finishes",
+        "card_text": "Flip through the tabs to see how stitched, printed, molded and leather patches differ.",
+        "card_btn_1_label": "Get a Free Quote",
+        "card_btn_1_link": "",
+        "card_btn_2_label": "See Every Style",
+        "card_btn_2_link": ""
       }
     },
     "style_grid": {
@@ -69,6 +180,8 @@
           "type": "product_card",
           "settings": {
             "product": "embroidered-patches",
+            "point_1": "Classic stitched-thread texture",
+            "point_2": "Merrowed or thin-stitched edge",
             "group": "embroidered",
             "best_seller": true
           }
@@ -77,6 +190,8 @@
           "type": "product_card",
           "settings": {
             "product": "full-color-printed-patches",
+            "point_1": "Dye-sublimated, any number of colors",
+            "point_2": "Handles photos, shading and small text",
             "group": "printed",
             "best_seller": true
           }
@@ -85,6 +200,8 @@
           "type": "product_card",
           "settings": {
             "product": "pvc-patches",
+            "point_1": "Flexible molded PVC with raised detail",
+            "point_2": "Waterproof, made for gear and bags",
             "group": "pvc",
             "best_seller": true
           }
@@ -93,6 +210,8 @@
           "type": "product_card",
           "settings": {
             "product": "leather-patches",
+            "point_1": "Real leather, laser-engraved",
+            "point_2": "A natural match for hats and jackets",
             "group": "leather",
             "best_seller": true
           }
@@ -101,6 +220,8 @@
           "type": "product_card",
           "settings": {
             "product": "3d-embroidered-patches",
+            "point_1": "Padded stitching with real height",
+            "point_2": "Makes letters and logos stand out",
             "group": "embroidered",
             "best_seller": false
           }
@@ -109,6 +230,8 @@
           "type": "product_card",
           "settings": {
             "product": "faux-leather-patches",
+            "point_1": "Leather look, laser-engraved",
+            "point_2": "Several colors, safe to machine wash",
             "group": "leather",
             "best_seller": false
           }
@@ -117,6 +240,8 @@
           "type": "product_card",
           "settings": {
             "product": "woven-patches",
+            "point_1": "Tightly woven, smooth to the touch",
+            "point_2": "Keeps small lettering crisp",
             "group": "embroidered",
             "best_seller": false
           }
@@ -125,6 +250,8 @@
           "type": "product_card",
           "settings": {
             "product": "metallic-flex-patches",
+            "point_1": "Raised finish with a metal look",
+            "point_2": "Cut to your shape with clean edges",
             "group": "printed",
             "best_seller": false
           }
@@ -133,6 +260,8 @@
           "type": "product_card",
           "settings": {
             "product": "full-color-flex-patches",
+            "point_1": "Flexible patch printed in full color",
+            "point_2": "For logos with many colors",
             "group": "printed",
             "best_seller": false
           }
@@ -141,6 +270,8 @@
           "type": "product_card",
           "settings": {
             "product": "silver-flex-patches",
+            "point_1": "Reflective silver surface",
+            "point_2": "Light, flexible, with raised detail",
             "group": "printed",
             "best_seller": false
           }
@@ -149,6 +280,8 @@
           "type": "product_card",
           "settings": {
             "product": "chenille-patches",
+            "point_1": "Soft, fuzzy yarn on a felt base",
+            "point_2": "The varsity-letter look for jackets",
             "group": "embroidered",
             "best_seller": false
           }
@@ -157,6 +290,8 @@
           "type": "product_card",
           "settings": {
             "product": "silicone-patches",
+            "point_1": "Raised 3D silicone detail",
+            "point_2": "A clean, modern finish on apparel",
             "group": "pvc",
             "best_seller": false
           }
@@ -165,6 +300,8 @@
           "type": "product_card",
           "settings": {
             "product": "name-patches",
+            "point_1": "Embroidered names and titles",
+            "point_2": "For uniforms, workwear and teams",
             "group": "embroidered",
             "best_seller": false
           }
@@ -173,6 +310,8 @@
           "type": "product_card",
           "settings": {
             "product": "dtf-transfers",
+            "point_1": "Full-color prints on transfer film",
+            "point_2": "Heat-press onto most fabrics",
             "group": "printed",
             "best_seller": false
           }
@@ -181,6 +320,8 @@
           "type": "product_card",
           "settings": {
             "product": "gold-flex-patches",
+            "point_1": "Reflective gold surface",
+            "point_2": "Light, flexible, with raised detail",
             "group": "printed",
             "best_seller": false
           }
@@ -189,6 +330,8 @@
           "type": "product_card",
           "settings": {
             "product": "tackle-twill-letters",
+            "point_1": "Layered twill with stitched edges",
+            "point_2": "Letters and numbers for jackets",
             "group": "embroidered",
             "best_seller": false
           }
@@ -197,6 +340,8 @@
           "type": "product_card",
           "settings": {
             "product": "custom-keychains",
+            "point_1": "Molded PVC in your own shape",
+            "point_2": "Handy for giveaways and merch",
             "group": "pvc",
             "best_seller": false
           }
@@ -223,11 +368,18 @@
       ],
       "settings": {
         "heading": "Browse Every Patch Style",
-        "columns": 6,
+        "columns": 4,
+        "mobile_layout": "swipe",
+        "background": "#f7f4fc",
         "view_all_label": "See the Full Lineup",
         "view_all_link": "",
         "rail_label": "Customer Favorites",
         "rail_sub": "The styles our customers reorder most",
+        "price_prefix": "From",
+        "price_suffix": "each in bulk",
+        "btn_label": "Customize",
+        "link_label": "Get a quote",
+        "link_url": "",
         "show_tabs": true,
         "best_tab_label": "Most Popular",
         "all_tab_label": "Everything"
@@ -497,33 +649,29 @@
         "process_step_k9tmYt": {
           "type": "process_step",
           "settings": {
-            "image": "shopify://shop_images/4-step.jpg",
-            "title": "Send Us Your Design",
-            "description": "Any file, any color count, any level of detail — upload it and place your order online in minutes."
+            "title": "Send your artwork",
+            "description": "Upload a logo, drawing or photo on any product page. Pick a size and a quantity and the price updates as you go."
           }
         },
         "process_step_w7Qh9j": {
           "type": "process_step",
           "settings": {
-            "image": "shopify://shop_images/1-step.jpg",
-            "title": "Review & Approve Your Proof",
-            "description": "Opt in at checkout and we'll send a digital proof for your sign-off before production starts — free on orders of $300 or more."
+            "title": "Approve your mockup",
+            "description": "Tick the mockup box when you order and we email a digital mockup within 24–48 hours. Production starts once you approve it."
           }
         },
         "process_step_9mALJD": {
           "type": "process_step",
           "settings": {
-            "image": "shopify://shop_images/3-step.jpg",
-            "title": "We Produce and Ship It",
-            "description": "Our team gets to work turning your proof into finished patches, then ships your order out."
+            "title": "We make and ship them",
+            "description": "Your approved design goes into production and ships to your door. Orders over $100 ship free."
           }
         },
         "process_step_Lte4kd": {
           "type": "process_step",
           "settings": {
-            "image": "shopify://shop_images/2-step.jpg",
-            "title": "Apply Whenever You're Ready",
-            "description": "Heat press, sew, or stick them on whenever you need them — and hold onto extras for future use."
+            "title": "Put them to work",
+            "description": "Iron on, sew on, stick on or attach with Velcro, depending on the backing you chose."
           }
         }
       },
@@ -534,8 +682,13 @@
         "process_step_Lte4kd"
       ],
       "settings": {
-        "heading": "How Your Order Comes Together",
-        "subheading": "From upload to delivery, here's what happens at each step"
+        "eyebrow": "How it works",
+        "heading": "From Your Artwork to Finished Patches",
+        "subheading": "Four steps. You see the price up front and can approve a mockup before anything is made.",
+        "btn_label": "Start Your Order",
+        "btn_link": "",
+        "link_label": "Ask for a quote first",
+        "link_url": ""
       }
     },
     "why_buy": {
@@ -772,8 +925,8 @@
   },
   "order": [
     "video_section_patch_kraze_DwW7mE",
-    "patches_hero",
-    "customer_gallery",
+    "home_hero",
+    "type_showcase",
     "style_grid",
     "shop_all_patches",
     "shop_popular_products",

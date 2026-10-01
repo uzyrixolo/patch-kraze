@@ -1,0 +1,438 @@
+{% comment %}
+  Homepage hero. A light panel: eyebrow, heading, three short points and two
+  buttons on the left, one photo on the right, and a row of assurances along
+  the bottom. Assurance items are blocks, so they can be reworded, reordered
+  or removed in the theme editor. On phones the row becomes a carousel that
+  shows one assurance at a time: it moves on by itself, and can be swiped or
+  stepped through with the dots underneath.
+
+  Heading: the first line types itself out and cycles through the phrases in
+  "Rotating first line"; the second line stays put. The first phrase is in the
+  HTML, so the heading reads correctly with scripts off or reduced motion on.
+
+  Background image (optional): set a desktop image, a mobile image, or both.
+  When one is set it fills the panel behind the text and the photo on the
+  right is dropped. Screens under 750px use the mobile image.
+
+  Every line here is a statement about what Patch Kraze offers. Change the
+  wording freely, but do not add a number, a rating or a guarantee that the
+  business cannot back up, and only upload photos that are Patch Kraze's own.
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Home Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (above the heading)", "default": "Rush production from 5 business days", "info": "Leave empty to hide it." },
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "title_phrases", "label": "Rotating first line", "default": "Custom Patches, Embroidered Patches, PVC Patches, Woven Patches, Leather Patches, Chenille Patches, Custom Stickers, DTF Transfers", "info": "Comma-separated. The first phrase shows first. Keep each one under about 20 characters so it fits on one line on phones." },
+    { "type": "text", "id": "title_rest", "label": "Second line", "default": "Made Your Way" },
+    { "type": "checkbox", "id": "title_typing", "label": "Type the first line and cycle through the phrases", "default": true, "info": "Off: only the first phrase is shown." },
+    { "type": "header", "content": "Points and buttons" },
+    { "type": "text", "id": "point_1", "label": "Point 1", "default": "Order as few as 10 pieces" },
+    { "type": "text", "id": "point_2", "label": "Point 2", "default": "Embroidered, PVC, woven, leather, printed and more" },
+    { "type": "text", "id": "point_3", "label": "Point 3", "default": "Send your art and see a free mockup in 24–48 hours" },
+    { "type": "text", "id": "btn_primary_label", "label": "Primary button label", "default": "Start Your Order" },
+    { "type": "url", "id": "btn_primary_link", "label": "Primary button link", "info": "Defaults to the style grid further down this page (#styles)." },
+    { "type": "text", "id": "btn_secondary_label", "label": "Secondary button label", "default": "Get a Free Quote" },
+    { "type": "url", "id": "btn_secondary_link", "label": "Secondary button link", "info": "Defaults to /pages/quote." },
+    { "type": "text", "id": "note", "label": "Small line under the buttons", "default": "Quotes come back within 24 hours." },
+    { "type": "text", "id": "extra_link_label", "label": "Extra link label (after the small line)", "default": "Or sketch an idea with our AI patch designer" },
+    { "type": "url", "id": "extra_link", "label": "Extra link", "info": "Defaults to /pages/ai-image-generator. Clear the label to hide the link." },
+    { "type": "header", "content": "Photo" },
+    { "type": "image_picker", "id": "image", "label": "Photo (right side)", "info": "Used when no background image is set. Leave empty to use the Full Color Printed Patches product photo." },
+    { "type": "header", "content": "Background image (optional)" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image, desktop", "info": "Full-width banner, about 2400 x 900 px. Keep the subject on the right: the text sits on the left. Replaces the photo on the right." },
+    { "type": "image_picker", "id": "bg_image_mobile", "label": "Background image, mobile", "info": "Used on screens under 750px. About 1000 x 1500 px with the subject in the lower half: the text sits at the top. Falls back to the desktop image." },
+    { "type": "range", "id": "bg_tint", "label": "Tint behind the text", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 85, "info": "A soft wash on the text side so the words stay readable. 0 turns it off." },
+    {
+      "type": "select", "id": "bg_text", "label": "Text over the image", "default": "dark",
+      "options": [
+        { "value": "dark", "label": "Dark text, light tint (for light images)" },
+        { "value": "light", "label": "White text, dark tint (for dark images)" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "assurance",
+      "name": "Assurance",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "shipping",
+          "options": [
+            { "value": "shipping", "label": "Truck" },
+            { "value": "fee", "label": "Price tag" },
+            { "value": "proof", "label": "Checked page" },
+            { "value": "remake", "label": "Circular arrows" },
+            { "value": "support", "label": "Speech bubble" },
+            { "value": "clock", "label": "Clock" }
+          ]
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Free shipping" },
+        { "type": "text", "id": "text", "label": "Text", "default": "On orders over $100" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Home Hero",
+      "blocks": [
+        { "type": "assurance", "settings": { "icon": "shipping", "title": "Free shipping", "text": "On orders over $100" } },
+        { "type": "assurance", "settings": { "icon": "fee", "title": "No setup fees", "text": "Artwork setup is included" } },
+        { "type": "assurance", "settings": { "icon": "proof", "title": "Mockup before production", "text": "Free, in 24–48 hours" } },
+        { "type": "assurance", "settings": { "icon": "remake", "title": "Defects remade", "text": "If we get it wrong, we redo it" } },
+        { "type": "assurance", "settings": { "icon": "support", "title": "Based in the USA", "text": "Live chat and phone support" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .pk-hh { background: linear-gradient(180deg, #f1e8ff 0%, #faf5ff 58%, #ffffff 100%); }
+  .pk-hh__stage { position: relative; }
+  .pk-hh__inner { position: relative; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .pk-hh__main { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 3rem; align-items: center; padding-top: 2.75rem; }
+
+  .pk-hh__eyebrow { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0 0 0.7rem; font-size: var(--pk-fs-label); font-weight: 700; color: #7e22ce; }
+  .pk-hh__eyebrow svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+
+  /* Heading: the typed line never wraps, so the phrases swapping in and out
+     cannot push the second line or anything below it around. */
+  .pk-hh__title { margin: 0 0 1.1rem; font-size: clamp(1.75rem, 3.6vw + 0.5rem, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; color: #111827; }
+  .pk-hh__sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  .pk-hh__type { display: block; min-height: 1.1em; white-space: nowrap; overflow-x: clip; color: #7e22ce; }
+  .pk-hh__caret { display: inline-block; width: 0.06em; height: 0.82em; margin-left: 0.06em; background: currentColor; vertical-align: -0.04em; animation: pk-hh-blink 1s step-end infinite; }
+  .pk-hh__rest { display: block; }
+  @keyframes pk-hh-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  .pk-hh__points { list-style: none; margin: 0 0 1.6rem; padding: 0; display: grid; gap: 0.5rem; }
+  .pk-hh__points li { display: flex; align-items: baseline; gap: 0.6rem; font-size: var(--pk-fs-body); line-height: 1.45; color: #374151; }
+  .pk-hh__points li::before { content: ""; flex-shrink: 0; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: #a855f7; transform: translateY(-0.12rem); }
+
+  .pk-hh__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .pk-hh__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0 1.5rem; border-radius: var(--pk-radius-sm); font-size: var(--pk-fs-body); font-weight: 700; text-decoration: none; }
+  .pk-hh__btn--line { background: #fff; color: #7e22ce; border: 1.5px solid #c084fc; transition: background var(--pk-btn-transition), border-color var(--pk-btn-transition); }
+  .pk-hh__btn--line:hover { background: #faf5ff; border-color: #9333ea; }
+  .pk-hh__note { margin: 0.95rem 0 0; font-size: var(--pk-fs-label); line-height: 1.5; color: #6b7280; }
+  .pk-hh__note a { color: #7e22ce; font-weight: 600; text-underline-offset: 2px; }
+
+  .pk-hh__photo { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--pk-radius-lg); box-shadow: 0 28px 50px -24px rgba(88, 28, 135, 0.4); background: #ede9fe; }
+
+  /* Background-image mode: the image fills the stage, a wash on the text side
+     keeps the copy readable, and the copy takes a single column. */
+  .pk-hh__bg { position: absolute; inset: 0; display: block; overflow: hidden; }
+  .pk-hh__bg img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: right center; }
+  .pk-hh__tint { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(var(--hh-tint-rgb), var(--hh-tint)) 0%, rgba(var(--hh-tint-rgb), var(--hh-tint)) 42%, rgba(var(--hh-tint-rgb), 0) 76%); }
+  .pk-hh--bg { --hh-tint-rgb: 250, 245, 255; background: #fff; }
+  .pk-hh--bg .pk-hh__main { grid-template-columns: minmax(0, 36rem); min-height: 22rem; padding-bottom: 2.75rem; }
+  .pk-hh--bg.pk-hh--light { --hh-tint-rgb: 17, 24, 39; }
+  .pk-hh--light .pk-hh__title, .pk-hh--light .pk-hh__points li { color: #fff; }
+  .pk-hh--light .pk-hh__type, .pk-hh--light .pk-hh__eyebrow, .pk-hh--light .pk-hh__note a { color: #d8b4fe; }
+  .pk-hh--light .pk-hh__points li::before { background: #d8b4fe; }
+  .pk-hh--light .pk-hh__note { color: #e5e7eb; }
+
+  .pk-hh__assure { list-style: none; margin: 2.5rem 0 0; padding: 1.15rem 0 1.6rem; border-top: 1px solid #e9d5ff; display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 1rem 1.5rem; }
+  .pk-hh--bg .pk-hh__assure { margin-top: 0; border-top: none; padding-top: 1.4rem; }
+  .pk-hh__assure li { display: flex; align-items: center; gap: 0.7rem; min-width: 0; }
+  .pk-hh__assure svg { width: 1.9rem; height: 1.9rem; flex-shrink: 0; color: #7e22ce; }
+  .pk-hh__assure strong { display: block; font-size: var(--pk-fs-label); font-weight: 700; line-height: 1.25; color: #111827; }
+  .pk-hh__assure span { display: block; font-size: var(--pk-fs-label); line-height: 1.3; color: #6b7280; }
+  .pk-hh__dots { display: none; }
+
+  @media (max-width: 899px) {
+    .pk-hh__main { grid-template-columns: 1fr; gap: 1.75rem; padding-top: 1.75rem; }
+    .pk-hh__assure { margin-top: 1.75rem; }
+  }
+  @media (max-width: 749px) {
+    /* Phones: the copy sits at the top over an even wash, and a strip is left
+       clear underneath (--hh-clear) where the picture shows through. The wash
+       stays solid down to that strip and fades out inside it. */
+    .pk-hh--bg { --hh-clear: 62vw; }
+    .pk-hh__bg img { object-position: center bottom; }
+    .pk-hh__tint { background: linear-gradient(180deg, rgba(var(--hh-tint-rgb), var(--hh-tint)) 0, rgba(var(--hh-tint-rgb), var(--hh-tint)) calc(100% - var(--hh-clear)), rgba(var(--hh-tint-rgb), 0) calc(100% - var(--hh-clear) * 0.45)); }
+    .pk-hh--bg .pk-hh__main { min-height: 0; padding-bottom: var(--hh-clear); }
+
+    /* Assurances: one per view in a sideways scroller, so swiping works
+       natively; the script only adds the auto-advance and the dots. */
+    .pk-hh__assure { display: flex; gap: 0; padding: 1rem 0 0.4rem; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .pk-hh__assure::-webkit-scrollbar { display: none; }
+    .pk-hh__assure li { flex: 0 0 100%; justify-content: center; scroll-snap-align: center; }
+    .pk-hh__dots { display: flex; justify-content: center; padding-bottom: 0.9rem; }
+    .pk-hh__dot { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; padding: 0; border: none; background: none; cursor: pointer; }
+    .pk-hh__dot::before { content: ""; width: 0.4rem; height: 0.4rem; border-radius: 999px; background: #d8b4fe; transition: width 0.2s ease, background-color 0.2s ease; }
+    .pk-hh__dot[aria-current="true"]::before { width: 1.1rem; background: #9333ea; }
+  }
+  @media (max-width: 479px) {
+    .pk-hh__btn { flex: 1 1 100%; }
+    .pk-hh__assure svg { width: 1.75rem; height: 1.75rem; }
+  }
+  @media (max-width: 359px) {
+    /* Narrowest phones: keep the longest typed phrase on one line. */
+    .pk-hh__title { font-size: 1.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pk-hh__caret { display: none; }
+    .pk-hh__dot::before { transition: none; }
+  }
+</style>
+
+{%- liquid
+  assign bg_desktop = section.settings.bg_image
+  assign bg_mobile = section.settings.bg_image_mobile
+  assign has_bg = false
+  if bg_desktop != blank or bg_mobile != blank
+    assign has_bg = true
+    if bg_desktop == blank
+      assign bg_desktop = bg_mobile
+    endif
+    if bg_mobile == blank
+      assign bg_mobile = bg_desktop
+    endif
+  endif
+
+  assign hero_photo = section.settings.image
+  assign hero_alt = section.settings.image.alt | default: 'Custom patches made by Patch Kraze'
+  unless has_bg
+    unless hero_photo
+      assign fallback_product = all_products['full-color-printed-patches']
+      assign hero_photo = fallback_product.featured_image
+      assign hero_alt = 'A selection of custom patches'
+    endunless
+  endunless
+
+  assign primary_link = section.settings.btn_primary_link | default: '#styles'
+  assign secondary_link = section.settings.btn_secondary_link | default: '/pages/quote'
+  assign extra_link = section.settings.extra_link | default: '/pages/ai-image-generator'
+
+  assign phrase_list = section.settings.title_phrases | split: ','
+  assign first_phrase = phrase_list.first | strip
+  assign tint = section.settings.bg_tint | divided_by: 100.0
+-%}
+
+<section class="pk-hh{% if has_bg %} pk-hh--bg pk-hh--{{ section.settings.bg_text }}{% endif %}"{% if has_bg %} style="--hh-tint: {{ tint }};"{% endif %}>
+  <div class="pk-hh__stage">
+    {%- if has_bg -%}
+      <picture class="pk-hh__bg">
+        <source
+          media="(max-width: 749px)"
+          srcset="{{ bg_mobile | image_url: width: 750 }} 750w, {{ bg_mobile | image_url: width: 1100 }} 1100w"
+          sizes="100vw"
+        >
+        <img
+          src="{{ bg_desktop | image_url: width: 2000 }}"
+          srcset="{{ bg_desktop | image_url: width: 1400 }} 1400w, {{ bg_desktop | image_url: width: 2000 }} 2000w, {{ bg_desktop | image_url: width: 2800 }} 2800w"
+          sizes="100vw"
+          width="{{ bg_desktop.width }}"
+          height="{{ bg_desktop.height }}"
+          alt="{{ bg_desktop.alt | escape }}"
+          loading="eager"
+          fetchpriority="high"
+        >
+      </picture>
+      <div class="pk-hh__tint"></div>
+    {%- endif -%}
+
+    <div class="pk-hh__inner">
+      <div class="pk-hh__main">
+        <div class="pk-hh__copy">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="pk-hh__eyebrow">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+              {{ section.settings.eyebrow }}
+            </p>
+          {%- endif -%}
+
+          <h1 class="pk-hh__title">
+            <span class="pk-hh__sr">{{ first_phrase }} {{ section.settings.title_rest }}</span>
+            <span aria-hidden="true">
+              {%- if first_phrase != blank -%}
+                <span class="pk-hh__type">
+                  <span data-hh-type{% if section.settings.title_typing and phrase_list.size > 1 %} data-hh-phrases="{{ section.settings.title_phrases | escape }}"{% endif %}>{{ first_phrase }}</span>
+                  {%- if section.settings.title_typing and phrase_list.size > 1 -%}<span class="pk-hh__caret"></span>{%- endif -%}
+                </span>
+              {%- endif -%}
+              {%- if section.settings.title_rest != blank -%}
+                <span class="pk-hh__rest">{{ section.settings.title_rest }}</span>
+              {%- endif -%}
+            </span>
+          </h1>
+
+          <ul class="pk-hh__points">
+            {%- if section.settings.point_1 != blank -%}<li>{{ section.settings.point_1 }}</li>{%- endif -%}
+            {%- if section.settings.point_2 != blank -%}<li>{{ section.settings.point_2 }}</li>{%- endif -%}
+            {%- if section.settings.point_3 != blank -%}<li>{{ section.settings.point_3 }}</li>{%- endif -%}
+          </ul>
+          <div class="pk-hh__actions">
+            {%- if section.settings.btn_primary_label != blank -%}
+              <a class="pk-hh__btn pk-btn-primary" href="{{ primary_link }}">{{ section.settings.btn_primary_label }}</a>
+            {%- endif -%}
+            {%- if section.settings.btn_secondary_label != blank -%}
+              <a class="pk-hh__btn pk-hh__btn--line" href="{{ secondary_link }}">{{ section.settings.btn_secondary_label }}</a>
+            {%- endif -%}
+          </div>
+          {%- if section.settings.note != blank or section.settings.extra_link_label != blank -%}
+            <p class="pk-hh__note">
+              {{ section.settings.note }}
+              {%- if section.settings.extra_link_label != blank %}
+                <a href="{{ extra_link }}">{{ section.settings.extra_link_label }}</a>
+              {%- endif -%}
+            </p>
+          {%- endif -%}
+        </div>
+
+        {%- if has_bg == false and hero_photo -%}
+          <div class="pk-hh__media">
+            <img
+              class="pk-hh__photo"
+              src="{{ hero_photo | image_url: width: 1100 }}"
+              srcset="{{ hero_photo | image_url: width: 600 }} 600w, {{ hero_photo | image_url: width: 1100 }} 1100w"
+              sizes="(max-width: 899px) 92vw, 540px"
+              width="1100"
+              height="825"
+              alt="{{ hero_alt | escape }}"
+              loading="eager"
+              fetchpriority="high"
+            >
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="pk-hh__inner">
+      <ul class="pk-hh__assure" data-hh-assure>
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>
+            {%- case block.settings.icon -%}
+              {%- when 'fee' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>
+              {%- when 'proof' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14.5l2 2 4-4.5"/></svg>
+              {%- when 'remake' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4v6h-6"/><path d="M3 20v-6h6"/><path d="M19.4 10A8 8 0 0 0 5.3 7.3L3 10"/><path d="M4.6 14a8 8 0 0 0 14.1 2.7L21 14"/></svg>
+              {%- when 'support' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.5-4.9A8 8 0 1 1 21 12z"/><path d="M9 11h6M9 14h4"/></svg>
+              {%- when 'clock' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h12v10H2z"/><path d="M14 9h4l4 4v3h-8z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg>
+            {%- endcase -%}
+            <div>
+              <strong>{{ block.settings.title }}</strong>
+              {%- if block.settings.text != blank -%}<span>{{ block.settings.text }}</span>{%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if section.blocks.size > 1 -%}
+        <div class="pk-hh__dots">
+          {%- for block in section.blocks -%}
+            <button type="button" class="pk-hh__dot" data-hh-dot aria-label="Show {{ block.settings.title | escape }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{%- if section.settings.title_typing and phrase_list.size > 1 -%}
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    var el = root ? root.querySelector('[data-hh-phrases]') : null;
+    if (!el) return;
+    // Reduced motion: leave the first phrase in place and do nothing.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var phrases = el.getAttribute('data-hh-phrases').split(',')
+      .map(function (p) { return p.trim(); })
+      .filter(Boolean);
+    if (phrases.length < 2) return;
+
+    var TYPE_MS = 85, ERASE_MS = 40, HOLD_MS = 1900, GAP_MS = 350;
+    var index = 0;
+    var shown = phrases[0].length;
+
+    function erase() {
+      shown--;
+      el.textContent = phrases[index].slice(0, shown);
+      if (shown > 0) { setTimeout(erase, ERASE_MS); return; }
+      index = (index + 1) % phrases.length;
+      setTimeout(type, GAP_MS);
+    }
+    function type() {
+      shown++;
+      el.textContent = phrases[index].slice(0, shown);
+      setTimeout(shown < phrases[index].length ? type : erase, shown < phrases[index].length ? TYPE_MS : HOLD_MS);
+    }
+    setTimeout(erase, HOLD_MS);
+  })();
+</script>
+{%- endif -%}
+
+{%- if section.blocks.size > 1 -%}
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    var track = root ? root.querySelector('[data-hh-assure]') : null;
+    if (!track) return;
+    var dots = Array.prototype.slice.call(root.querySelectorAll('[data-hh-dot]'));
+    var count = track.children.length;
+    // The row is only a carousel at phone width; above that it is a plain grid.
+    var phone = window.matchMedia('(max-width: 749px)');
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var STEP_MS = 3500, RESUME_MS = 8000;
+    var timer = null, resume = null;
+
+    function current() {
+      return track.clientWidth ? Math.round(track.scrollLeft / track.clientWidth) : 0;
+    }
+    function mark() {
+      var active = current();
+      dots.forEach(function (dot, i) { dot.setAttribute('aria-current', i === active ? 'true' : 'false'); });
+    }
+    function go(i, instant) {
+      track.scrollTo({ left: i * track.clientWidth, behavior: instant || calm.matches ? 'auto' : 'smooth' });
+    }
+    function stop() { clearInterval(timer); timer = null; }
+    function start() {
+      stop();
+      clearTimeout(resume);
+      if (!phone.matches || calm.matches || document.hidden) return;
+      timer = setInterval(function () { go((current() + 1) % count); }, STEP_MS);
+    }
+    // Any touch hands control to the visitor; the rotation picks up again later.
+    function pause() {
+      stop();
+      clearTimeout(resume);
+      resume = setTimeout(start, RESUME_MS);
+    }
+
+    track.addEventListener('scroll', mark, { passive: true });
+    track.addEventListener('touchstart', pause, { passive: true });
+    track.addEventListener('pointerdown', pause);
+    dots.forEach(function (dot, i) {
+      dot.addEventListener('click', function () { pause(); go(i); });
+    });
+    phone.addEventListener('change', function () { go(0, true); mark(); start(); });
+    document.addEventListener('visibilitychange', start);
+
+    // Theme editor: bring the selected assurance into view and hold it there.
+    root.addEventListener('shopify:block:select', function (event) {
+      var i = Array.prototype.indexOf.call(track.children, event.target);
+      if (i < 0) return;
+      stop();
+      clearTimeout(resume);
+      go(i);
+    });
+    root.addEventListener('shopify:block:deselect', start);
+
+    mark();
+    start();
+  })();
+</script>
+{%- endif -%}
