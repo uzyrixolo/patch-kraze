@@ -1,0 +1,68 @@
+{%- doc -%}
+  Optional background picture for a section, with a tint over it. Renders
+  nothing when no image is given, so a section can always include it.
+
+  The section that renders this must be `position: relative`, and must lift
+  its own content above this layer (`position: relative; z-index: 1`).
+
+  @param {object} [image] - picture for desktop
+  @param {object} [image_mobile] - picture for screens under 750px; each one falls back to the other
+  @param {number} [tint] - 0 to 100, strength of the tint over the picture
+  @param {string} [tone] - 'light' means the section's text is white, so the tint is dark; anything else gives a light tint
+{%- enddoc -%}
+
+{%- liquid
+  assign pk_bg_desktop = image
+  assign pk_bg_mobile = image_mobile
+  if pk_bg_desktop == blank
+    assign pk_bg_desktop = pk_bg_mobile
+  endif
+  if pk_bg_mobile == blank
+    assign pk_bg_mobile = pk_bg_desktop
+  endif
+  assign pk_bg_tint = tint | default: 0 | plus: 0
+-%}
+
+{%- if pk_bg_desktop != blank -%}
+  <picture class="pk-section-bg" aria-hidden="true">
+    <source
+      media="(max-width: 749px)"
+      srcset="{{ pk_bg_mobile | image_url: width: 750 }} 750w, {{ pk_bg_mobile | image_url: width: 1100 }} 1100w"
+      sizes="100vw"
+    >
+    <img
+      src="{{ pk_bg_desktop | image_url: width: 2000 }}"
+      srcset="{{ pk_bg_desktop | image_url: width: 1400 }} 1400w, {{ pk_bg_desktop | image_url: width: 2000 }} 2000w, {{ pk_bg_desktop | image_url: width: 2800 }} 2800w"
+      sizes="100vw"
+      width="{{ pk_bg_desktop.width }}"
+      height="{{ pk_bg_desktop.height }}"
+      alt=""
+      loading="lazy"
+    >
+  </picture>
+  {%- if pk_bg_tint > 0 -%}
+    <div class="pk-section-bg__tint" style="background: rgba({% if tone == 'light' %}17, 24, 39{% else %}255, 255, 255{% endif %}, {{ pk_bg_tint | divided_by: 100.0 }});"></div>
+  {%- endif -%}
+{%- endif -%}
+
+{% stylesheet %}
+  .pk-section-bg,
+  .pk-section-bg__tint {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .pk-section-bg {
+    display: block;
+    overflow: hidden;
+  }
+
+  .pk-section-bg img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+{% endstylesheet %}
