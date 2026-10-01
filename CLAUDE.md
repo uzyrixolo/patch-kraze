@@ -410,9 +410,22 @@ The order block in `main-product-patch-kraze.liquid` is a set of numbered steps 
 numbered by a CSS counter so stickers and DTF, which skip a step, still count 1-2-3-4):
 **Your artwork** (upload button, preview, clean-up tools, notes) -> **dimensions** ->
 **Quantity** (input, summary card, price-break table) -> **Finishing** (patch products only:
-cut shape, background color, border color, backing, leather color) -> **Place your order**.
-Above the steps: title, rating row, description, a live price card (`#header-price` /
-`#header-qty`) and three fact chips.
+cut shape, colors, backing, leather color) -> **Place your order**.
+Above the steps: title, rating row, the opening sentence of the description, a live price card
+(`#header-price` / `#header-qty`) and three fact chips.
+
+- **The top of the page is kept short on purpose.** Only the first sentence of
+  `product.description` is printed (nothing else on this template prints the description), the
+  notes box is folded into `<details class="pk-notes">`, the size tip is one line
+  (`#size-custom-note`), and the "size" row under the steppers is hidden for stickers and
+  transfers (`.size-display-row--echo`), where it would only repeat width x height.
+- **Colors are one card with two optional text boxes**, Background (`bg-color-input`) and
+  Border (`thread-color-input`). Each takes free text (a color name, a hex code, a Pantone
+  number). The swatch beside a box opens the browser's color picker and writes a hex code into
+  the box; "Suggest colors from my artwork" reads up to five colors off the uploaded picture
+  and offers them under both boxes. There is no fixed palette of named swatches any more.
+  An empty box is disabled while `FormData` is read at add-to-cart, so the order carries no
+  blank color line; Enter inside a box is swallowed so it cannot submit the form.
 
 - **The pricing/variant script was not changed by the relayout** and still finds everything by
   id: `file-input`, `upload-stage`, `pk-artwork-panel`, `width-input`, `height-input`,
@@ -450,11 +463,20 @@ Above the steps: title, rating row, description, a live price card (`#header-pri
 (announcement, ready-made and blanks links, phone) and one bar (logo, menu, search / account /
 cart, quote button). On phones the menu collapses into a drawer that slides in from the right.
 
-- **Menu links are defined once**, near the top of the file, as `pk_grp_*` strings of
-  `Label|/url` pairs, and rendered twice (desktop panel and drawer). Add or reorder a link
-  there; a label cannot contain a comma or a pipe.
-- The menu is static HTML with real `<a>` links - nothing is built by script, and the header
-  no longer makes any `all_products` lookups (it used to sit at the 20-handle limit).
+- **Product links in the menu are section blocks** (`menu_product`: product picker, optional
+  label, menu group), stored in `sections/header-group.json` and rendered by
+  `snippets/pk-menu-links.liquid` for both the desktop panels and the drawer. Each link shows
+  the product's own featured photo as a small thumbnail, so it follows the product. Add,
+  remove or reorder links in the theme editor (Header -> Menu product). Product pickers are
+  used instead of `all_products[...]` because that lookup stops at 20 handles per page.
+- If a group has no blocks, the snippet falls back to the `pk_grp_*` strings near the top of
+  the section (`Label|/url` or `Label|/url|file-name-in-Files`). The Services group always
+  uses that list, since its links are pages, not products.
+- The menu is static HTML with real `<a>` links - nothing is built by script.
+- **Icons are the base theme's own files** (`assets/icon-search.svg`, `icon-account.svg`,
+  `icon-cart.svg`, `icon-menu.svg`, `icon-close.svg`, `icon-caret.svg`), inlined with
+  `inline_asset_content`. They take their line weight from the theme's `--icon-stroke-width`.
+  The phone glyph in the strip is the one hand-drawn exception (the base set has none).
 - Panels open on hover via CSS and pin on click/tap/Enter (`data-open`); only one is pinned at
   a time. Handlers are delegated from `document` because the cart re-renders this section.
 - The header is `position: fixed`. The script pads `body` by the header's full height, measured
@@ -470,21 +492,44 @@ cart, quote button). On phones the menu collapses into a drawer that slides in f
   (e.g. `/pages/quote`) render on a dark canvas. It happens with the previous header too and
   does not happen on the live theme.
 
-## Homepage style grid
+## Homepage sections (October 2026)
 
-`sections/style-grid.liquid` ("Browse Every Patch Style") lists the product styles as round
-photo tiles with the name and starting price underneath; the whole tile is the link. Blocks
-pick the product, an optional image override, a group and a "most popular" flag, and the tab
-row filters tiles client-side by those two (`data-sg-group`, `data-sg-best`). It replaced the
-older `patch-shelves` section in October 2026; `templates/index.json` references it as
-`style_grid`.
+Order in `templates/index.json`: `home_hero` -> `type_showcase` -> `style_grid` ->
+credibility -> factory video -> `ordering_process` -> why-buy -> FAQ -> blog -> videos.
 
-## Homepage photo strip
-
-`sections/customer-gallery.liquid` has no tiles configured, so it shows catalog photos from the
-`ready-made-patches` collection. Its heading therefore says "Ready-Made Designs", and catalog
-tiles carry no stars. Only switch the wording to customer photos after real customer tiles
-(photo plus the customer's own review) have been added as blocks.
+- **`sections/home-hero.liquid`** - light panel: eyebrow, heading, three points, two buttons,
+  one photo on the right, and a row of "assurance" blocks underneath.
+  - The heading's first line types itself out and cycles through the comma-separated phrases
+    in "Rotating first line" (`title_phrases`); the second line (`title_rest`) is fixed. The
+    first phrase is in the HTML and a visually hidden copy carries the full heading, so it
+    reads correctly without JS, with reduced motion, and to screen readers. The typed line
+    never wraps, so keep phrases short enough for one line on a phone.
+  - **Background image**: `bg_image` (desktop) and `bg_image_mobile` (screens under 750px),
+    either or both. When one is set it fills the panel behind the text, the photo on the
+    right is dropped, and a wash (`bg_tint`, `bg_text` dark/light) keeps the copy readable.
+    On phones a strip under the copy is left clear for the picture (`--hh-clear`).
+  - Under 750px the assurance row is a carousel: one item per view in a scroll-snap row (so
+    swiping is native), dots underneath, auto-advance every 3.5s that pauses on touch, when
+    the tab is hidden, and under reduced motion.
+- **`sections/type-showcase.liquid`** - tabbed photo box with a side card. A tab takes a
+  product (shows up to five of its photos, skipping file names that contain a "skip" keyword
+  such as charts) or a collection (shows its first five products).
+- **`sections/style-grid.liquid`** ("Browse Every Patch Style") - product cards on a light
+  tinted background, four per row on desktop: photo, name, lowest per-piece price, two short
+  points, a button to the product and a text link to the quote form. Blocks pick the product,
+  an optional image, the two points, a group and a "most popular" flag; the tab row filters
+  cards client-side (`data-sg-group`, `data-sg-best`). On phones "Layout on phones" chooses a
+  swiped row or a two-per-row grid.
+  - The price is `product.price_min`, read live - it is not typed anywhere in the section.
+    The two points are typed per card: plain facts about the style, in our own words.
+- **`sections/ordering-process-patch-kraze.liquid`** - heading and two links on the left, the
+  steps as a numbered list down a line on the right. No pictures. Step text should describe
+  what this store actually does (the mockup is the optional checkbox on the product page,
+  in 24-48 hours; nothing here charges for a proof).
+- **Gotcha: the base theme styles every `[role="tabpanel"]` on the site.**
+  `sections/layered-slideshow.liquid` ships unscoped rules (width 100% under 750px, height,
+  z-index). `style-grid` and `type-showcase` each carry a reset for their own panel; any new
+  tabbed section needs the same.
 
 ## Conventions
 
