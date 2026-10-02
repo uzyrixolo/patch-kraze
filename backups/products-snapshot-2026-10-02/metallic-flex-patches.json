@@ -1,0 +1,780 @@
+{
+ "saved_at_utc": "2026-10-02T20:20:03Z",
+ "source": "live storefront (patchkraze.com), product still published",
+ "handle": "metallic-flex-patches",
+ "product": {
+  "id": 7820589695060,
+  "title": "Metallic Flex Patches",
+  "body_html": "<p>Flexible patches with a raised metallic finish, cut to the outline of your design. Upload your artwork, choose a size and quantity, and see the price before you order.</p>",
+  "vendor": "Patch Kraze",
+  "product_type": "Metallic Flex",
+  "created_at": "2025-11-03T11:01:04-05:00",
+  "handle": "metallic-flex-patches",
+  "updated_at": "2026-10-02T16:19:59-04:00",
+  "published_at": "2025-11-03T11:01:04-05:00",
+  "template_suffix": "patch",
+  "published_scope": "global",
+  "tags": "patches, Standard Patches",
+  "variants": [
+   {
+    "id": 42635834490964,
+    "product_id": 7820589695060,
+    "title": "1.5\"",
+    "price": "7.41",
+    "sku": "00840400587196",
+    "position": 1,
+    "compare_at_price": "",
+    "fulfillment_service": "manual",
+    "inventory_management": null,
+    "option1": "1.5\"",
+    "option2": null,
+    "option3": null,
+    "created_at": "2025-11-03T11:01:04-05:00",
+    "updated_at": "2026-10-02T16:19:59-04:00",
+    "taxable": true,
+    "barcode": null,
+    "grams": 0,
+    "image_id": null,
+    "weight": 0.0,
+    "weight_unit": "lb",
+    "requires_shipping": true,
+    "quantity_rule": {
+     "min": 1,
+     "max": null,
+     "increment": 1
+    },
+    "price_currency": "USD",
+    "compare_at_price_currency": "",
+    "quantity_price_breaks": []
+   },
+   {
+    "id": 42635834523732,
+    "product_id": 7820589695060,
+    "title": "2\"",
+    "price": "8.00",
+    "sku": "00840400587202",
+    "position": 2,
+    "compare_at_price": "",
+    "fulfillment_service": "manual",
+    "inventory_management": null,
+    "option1": "2\"",
+    "option2": null,
+    "option3": null,
+    "created_at": "2025-11-03T11:01:04-05:00",
+    "updated_at": "2026-10-02T16:19:59-04:00",
+    "taxable": true,
+    "barcode": null,
+    "grams": 0,
+    "image_id": null,
+    "weight": 0.0,
+    "weight_unit": "lb",
+    "requires_shipping": true,
+    "quantity_rule": {
+     "min": 1,
+     "max": null,
+     "increment": 1
+    },
+    "price_currency": "USD",
+    "compare_at_price_currency": "",
+    "quantity_price_breaks": []
+   },
+   {
+    "id": 42635834556500,
+    "product_id": 7820589695060,
+    "title": "2.5\"",
+    "price": "8.59",
+    "sku": "00840400587219",
+    "position": 3,
+    "compare_at_price": "",
+    "fulfillment_service": "manual",
+    "inventory_management": null,
+    "option1": "2.5\"",
+    "option2": null,
+    "option3": null,
+    "created_at": "2025-11-03T11:01:04-05:00",
+    "updated_at": "2026-10-02T16:19:59-04:00",
+    "taxable": true,
+    "barcode": null,
+    "grams": 0,
+    "image_id": null,
+    "weight": 0.0,
+    "weight_unit": "lb",
+    "requires_shipping": true,
+    "quantity_rule": {
+     "min": 1,
+     "max": null,
+     "increment": 1
+    },
+    "price_currency": "USD",
+    "compare_at_price_currency": "",
+    "quantity_price_breaks": []
+   },
+   {
+    "id": 42635834589268,
+    "product_id": 7820589695060,
+    "title": "3\"",
+    "price": "9.18",
+    "sku": "00840400587226",
+    "position": 4,
+    "compare_at_price": "",
+    "fulfillment_service": "manual",
+    "inventory_management": null,
+    "option1": "3\"",
+    "option2": null,
+    "option3": null,
+    "created_at": "2025-11-03T11:01:04-05:00",
+    "updated_at": "2026-10-02T16:19:59-04:00",
+    "taxable": true,
+    "barcode": null,
+    "grams": 0,
+    "image_id": null,
+    "weight": 0.0,
+    "weight_unit": "lb",
+    "requires_shipping": true,
+    "quantity_rule": {
+     "min": 1,
+     "max": null,
+     "increment": 1
+    },
+    "price_currency": "USD",
+    "compare_at_price_currency": "",
+    "quantity_price_breaks": []
+   },
+   {
+    "id": 42635834622036,
+    "product_id": 7820589695060,
+    "title": "3.5\"",
+    "price": "9.77",
+    "sku": "00840400587233",
+    "position": 5,
+    "compare_at_price": "",
+    "fulfillment_service": "manual",
+    "inventory_management": null,
+    "option1": "3.5\"",
+    "option2": null,
+    "option3": null,
+    "created_at": "2025-11-03T11:01:04-05:00",
+    "updated_at": "2026-10-02T16:19:59-04:00",
+    "taxable": true,
+    "barcode": null,
+    "grams": 0,
+    "image_id": null,
+    "weight": 0.0,
+    "weight_unit": "lb",
+    "requires_shipping": true,
+    "quantity_rule": {
+     "min": 1,
+     "max": null,
+     "increment": 1
+    },
+    "price_currency": "USD",
+    "compare_at_price_currency": "",
+    "quantity_price_breaks": []
+   },
+   {
+    "id": 42635834654804,
+    "product_id": 7820589695060,
+    "title": "4\"",
+    "price": "10.95",
+    "sku": "00840400587240",
+    "position": 6,
+    "compare_at_price": "",
+    "fulfillment_service": "manual",
+    "inventory_management": null,
+    "option1": "4\"",
+    "option2": null,
+    "option3": null,
+    "created_at": "2025-11-03T11:01:04-05:00",
+    "updated_at": "2026-10-02T16:19:59-04:00",
+    "taxable": true,
+    "barcode": null,
+    "grams": 0,
+    "image_id": null,
+    "weight": 0.0,
+    "weight_unit": "lb",
+    "requires_shipping": true,
+    "quantity_rule": {
+     "min": 1,
+     "max": null,
+     "increment": 1
+    },
+    "price_currency": "USD",
+    "compare_at_price_currency": "",
+    "quantity_price_breaks": []
+   }
+  ],
+  "options": [
+   {
+    "id": 9999045525588,
+    "product_id": 7820589695060,
+    "name": "Patch Width (inches)",
+    "position": 1,
+    "values": [
+     "1.5\"",
+     "2\"",
+     "2.5\"",
+     "3\"",
+     "3.5\"",
+     "4\""
+    ]
+   }
+  ],
+  "images": [
+   {
+    "id": 38991855353940,
+    "product_id": 7820589695060,
+    "position": 1,
+    "created_at": "2026-03-24T19:13:40-04:00",
+    "updated_at": "2026-03-24T20:25:30-04:00",
+    "alt": null,
+    "width": 1200,
+    "height": 1200,
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Furia.jpg?v=1774398330",
+    "variant_ids": []
+   },
+   {
+    "id": 38991855124564,
+    "product_id": 7820589695060,
+    "position": 2,
+    "created_at": "2026-03-24T19:13:40-04:00",
+    "updated_at": "2026-04-03T17:57:13-04:00",
+    "alt": null,
+    "width": 940,
+    "height": 940,
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/sangre_color.jpg?v=1775253433",
+    "variant_ids": []
+   },
+   {
+    "id": 38991855222868,
+    "product_id": 7820589695060,
+    "position": 3,
+    "created_at": "2026-03-24T19:13:40-04:00",
+    "updated_at": "2026-04-03T17:57:13-04:00",
+    "alt": null,
+    "width": 1200,
+    "height": 1200,
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Synergy.jpg?v=1775253433",
+    "variant_ids": []
+   },
+   {
+    "id": 38991855255636,
+    "product_id": 7820589695060,
+    "position": 4,
+    "created_at": "2026-03-24T19:13:40-04:00",
+    "updated_at": "2026-04-08T19:38:08-04:00",
+    "alt": null,
+    "width": 654,
+    "height": 654,
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/50.jpg?v=1775691488",
+    "variant_ids": []
+   },
+   {
+    "id": 40238747385940,
+    "product_id": 7820589695060,
+    "position": 5,
+    "created_at": "2026-04-22T18:33:11-04:00",
+    "updated_at": "2026-04-22T18:33:13-04:00",
+    "alt": null,
+    "width": 1024,
+    "height": 1024,
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_keggmrkeggmrkegg.png?v=1776897193",
+    "variant_ids": []
+   },
+   {
+    "id": 38991855386708,
+    "product_id": 7820589695060,
+    "position": 6,
+    "created_at": "2026-03-24T19:13:40-04:00",
+    "updated_at": "2026-04-03T17:57:13-04:00",
+    "alt": null,
+    "width": 1200,
+    "height": 1200,
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Tactical.jpg?v=1775253433",
+    "variant_ids": []
+   },
+   {
+    "id": 38991854829652,
+    "product_id": 7820589695060,
+    "position": 7,
+    "created_at": "2026-03-24T19:13:39-04:00",
+    "updated_at": "2026-04-03T17:57:13-04:00",
+    "alt": null,
+    "width": 1200,
+    "height": 1200,
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Iconic_Gold.jpg?v=1775253433",
+    "variant_ids": []
+   },
+   {
+    "id": 38991855157332,
+    "product_id": 7820589695060,
+    "position": 8,
+    "created_at": "2026-03-24T19:13:40-04:00",
+    "updated_at": "2026-04-03T17:57:13-04:00",
+    "alt": null,
+    "width": 1200,
+    "height": 1200,
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Sangre.jpg?v=1775253433",
+    "variant_ids": []
+   }
+  ],
+  "image": {
+   "id": 38991855353940,
+   "product_id": 7820589695060,
+   "position": 1,
+   "created_at": "2026-03-24T19:13:40-04:00",
+   "updated_at": "2026-03-24T20:25:30-04:00",
+   "alt": null,
+   "width": 1200,
+   "height": 1200,
+   "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Furia.jpg?v=1774398330",
+   "variant_ids": []
+  }
+ },
+ "storefront_product": {
+  "id": 7820589695060,
+  "title": "Metallic Flex Patches",
+  "handle": "metallic-flex-patches",
+  "description": "<p>Flexible patches with a raised metallic finish, cut to the outline of your design. Upload your artwork, choose a size and quantity, and see the price before you order.</p>",
+  "published_at": "2025-11-03T11:01:04-05:00",
+  "created_at": "2025-11-03T11:01:04-05:00",
+  "vendor": "Patch Kraze",
+  "type": "Metallic Flex",
+  "tags": [
+   "patches",
+   "Standard Patches"
+  ],
+  "price": 741,
+  "price_min": 741,
+  "price_max": 1095,
+  "available": true,
+  "price_varies": true,
+  "compare_at_price": null,
+  "compare_at_price_min": 0,
+  "compare_at_price_max": 0,
+  "compare_at_price_varies": false,
+  "variants": [
+   {
+    "id": 42635834490964,
+    "title": "1.5\"",
+    "option1": "1.5\"",
+    "option2": null,
+    "option3": null,
+    "sku": "00840400587196",
+    "requires_shipping": true,
+    "taxable": true,
+    "featured_image": null,
+    "available": true,
+    "name": "Metallic Flex Patches - 1.5\"",
+    "public_title": "1.5\"",
+    "options": [
+     "1.5\""
+    ],
+    "price": 741,
+    "weight": 0,
+    "compare_at_price": null,
+    "inventory_management": null,
+    "barcode": null,
+    "quantity_rule": {
+     "min": 1,
+     "max": null,
+     "increment": 1
+    },
+    "quantity_price_breaks": [],
+    "requires_selling_plan": false,
+    "selling_plan_allocations": []
+   },
+   {
+    "id": 42635834523732,
+    "title": "2\"",
+    "option1": "2\"",
+    "option2": null,
+    "option3": null,
+    "sku": "00840400587202",
+    "requires_shipping": true,
+    "taxable": true,
+    "featured_image": null,
+    "available": true,
+    "name": "Metallic Flex Patches - 2\"",
+    "public_title": "2\"",
+    "options": [
+     "2\""
+    ],
+    "price": 800,
+    "weight": 0,
+    "compare_at_price": null,
+    "inventory_management": null,
+    "barcode": null,
+    "quantity_rule": {
+     "min": 1,
+     "max": null,
+     "increment": 1
+    },
+    "quantity_price_breaks": [],
+    "requires_selling_plan": false,
+    "selling_plan_allocations": []
+   },
+   {
+    "id": 42635834556500,
+    "title": "2.5\"",
+    "option1": "2.5\"",
+    "option2": null,
+    "option3": null,
+    "sku": "00840400587219",
+    "requires_shipping": true,
+    "taxable": true,
+    "featured_image": null,
+    "available": true,
+    "name": "Metallic Flex Patches - 2.5\"",
+    "public_title": "2.5\"",
+    "options": [
+     "2.5\""
+    ],
+    "price": 859,
+    "weight": 0,
+    "compare_at_price": null,
+    "inventory_management": null,
+    "barcode": null,
+    "quantity_rule": {
+     "min": 1,
+     "max": null,
+     "increment": 1
+    },
+    "quantity_price_breaks": [],
+    "requires_selling_plan": false,
+    "selling_plan_allocations": []
+   },
+   {
+    "id": 42635834589268,
+    "title": "3\"",
+    "option1": "3\"",
+    "option2": null,
+    "option3": null,
+    "sku": "00840400587226",
+    "requires_shipping": true,
+    "taxable": true,
+    "featured_image": null,
+    "available": true,
+    "name": "Metallic Flex Patches - 3\"",
+    "public_title": "3\"",
+    "options": [
+     "3\""
+    ],
+    "price": 918,
+    "weight": 0,
+    "compare_at_price": null,
+    "inventory_management": null,
+    "barcode": null,
+    "quantity_rule": {
+     "min": 1,
+     "max": null,
+     "increment": 1
+    },
+    "quantity_price_breaks": [],
+    "requires_selling_plan": false,
+    "selling_plan_allocations": []
+   },
+   {
+    "id": 42635834622036,
+    "title": "3.5\"",
+    "option1": "3.5\"",
+    "option2": null,
+    "option3": null,
+    "sku": "00840400587233",
+    "requires_shipping": true,
+    "taxable": true,
+    "featured_image": null,
+    "available": true,
+    "name": "Metallic Flex Patches - 3.5\"",
+    "public_title": "3.5\"",
+    "options": [
+     "3.5\""
+    ],
+    "price": 977,
+    "weight": 0,
+    "compare_at_price": null,
+    "inventory_management": null,
+    "barcode": null,
+    "quantity_rule": {
+     "min": 1,
+     "max": null,
+     "increment": 1
+    },
+    "quantity_price_breaks": [],
+    "requires_selling_plan": false,
+    "selling_plan_allocations": []
+   },
+   {
+    "id": 42635834654804,
+    "title": "4\"",
+    "option1": "4\"",
+    "option2": null,
+    "option3": null,
+    "sku": "00840400587240",
+    "requires_shipping": true,
+    "taxable": true,
+    "featured_image": null,
+    "available": true,
+    "name": "Metallic Flex Patches - 4\"",
+    "public_title": "4\"",
+    "options": [
+     "4\""
+    ],
+    "price": 1095,
+    "weight": 0,
+    "compare_at_price": null,
+    "inventory_management": null,
+    "barcode": null,
+    "quantity_rule": {
+     "min": 1,
+     "max": null,
+     "increment": 1
+    },
+    "quantity_price_breaks": [],
+    "requires_selling_plan": false,
+    "selling_plan_allocations": []
+   }
+  ],
+  "images": [
+   "//cdn.shopify.com/s/files/1/0661/2965/7940/files/Furia.jpg?v=1774398330",
+   "//cdn.shopify.com/s/files/1/0661/2965/7940/files/sangre_color.jpg?v=1775253433",
+   "//cdn.shopify.com/s/files/1/0661/2965/7940/files/Synergy.jpg?v=1775253433",
+   "//cdn.shopify.com/s/files/1/0661/2965/7940/files/50.jpg?v=1775691488",
+   "//cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_keggmrkeggmrkegg.png?v=1776897193",
+   "//cdn.shopify.com/s/files/1/0661/2965/7940/files/Tactical.jpg?v=1775253433",
+   "//cdn.shopify.com/s/files/1/0661/2965/7940/files/Iconic_Gold.jpg?v=1775253433",
+   "//cdn.shopify.com/s/files/1/0661/2965/7940/files/Sangre.jpg?v=1775253433"
+  ],
+  "featured_image": "//cdn.shopify.com/s/files/1/0661/2965/7940/files/Furia.jpg?v=1774398330",
+  "options": [
+   {
+    "name": "Patch Width (inches)",
+    "position": 1,
+    "values": [
+     "1.5\"",
+     "2\"",
+     "2.5\"",
+     "3\"",
+     "3.5\"",
+     "4\""
+    ]
+   }
+  ],
+  "url": "/products/metallic-flex-patches",
+  "media": [
+   {
+    "alt": null,
+    "id": 30668329517140,
+    "position": 1,
+    "preview_image": {
+     "aspect_ratio": 1.0,
+     "height": 1200,
+     "width": 1200,
+     "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Furia.jpg?v=1774398330"
+    },
+    "aspect_ratio": 1.0,
+    "height": 1200,
+    "media_type": "image",
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Furia.jpg?v=1774398330",
+    "width": 1200
+   },
+   {
+    "alt": null,
+    "id": 30668329287764,
+    "position": 2,
+    "preview_image": {
+     "aspect_ratio": 1.0,
+     "height": 940,
+     "width": 940,
+     "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/sangre_color.jpg?v=1775253433"
+    },
+    "aspect_ratio": 1.0,
+    "height": 940,
+    "media_type": "image",
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/sangre_color.jpg?v=1775253433",
+    "width": 940
+   },
+   {
+    "alt": null,
+    "id": 30668329386068,
+    "position": 3,
+    "preview_image": {
+     "aspect_ratio": 1.0,
+     "height": 1200,
+     "width": 1200,
+     "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Synergy.jpg?v=1775253433"
+    },
+    "aspect_ratio": 1.0,
+    "height": 1200,
+    "media_type": "image",
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Synergy.jpg?v=1775253433",
+    "width": 1200
+   },
+   {
+    "alt": null,
+    "id": 30668329418836,
+    "position": 4,
+    "preview_image": {
+     "aspect_ratio": 1.0,
+     "height": 654,
+     "width": 654,
+     "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/50.jpg?v=1775691488"
+    },
+    "aspect_ratio": 1.0,
+    "height": 654,
+    "media_type": "image",
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/50.jpg?v=1775691488",
+    "width": 654
+   },
+   {
+    "alt": null,
+    "id": 31855245099092,
+    "position": 5,
+    "preview_image": {
+     "aspect_ratio": 1.0,
+     "height": 1024,
+     "width": 1024,
+     "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_keggmrkeggmrkegg.png?v=1776897193"
+    },
+    "aspect_ratio": 1.0,
+    "height": 1024,
+    "media_type": "image",
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_keggmrkeggmrkegg.png?v=1776897193",
+    "width": 1024
+   },
+   {
+    "alt": null,
+    "id": 30668329549908,
+    "position": 6,
+    "preview_image": {
+     "aspect_ratio": 1.0,
+     "height": 1200,
+     "width": 1200,
+     "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Tactical.jpg?v=1775253433"
+    },
+    "aspect_ratio": 1.0,
+    "height": 1200,
+    "media_type": "image",
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Tactical.jpg?v=1775253433",
+    "width": 1200
+   },
+   {
+    "alt": null,
+    "id": 30668328960084,
+    "position": 7,
+    "preview_image": {
+     "aspect_ratio": 1.0,
+     "height": 1200,
+     "width": 1200,
+     "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Iconic_Gold.jpg?v=1775253433"
+    },
+    "aspect_ratio": 1.0,
+    "height": 1200,
+    "media_type": "image",
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Iconic_Gold.jpg?v=1775253433",
+    "width": 1200
+   },
+   {
+    "alt": null,
+    "id": 30668329320532,
+    "position": 8,
+    "preview_image": {
+     "aspect_ratio": 1.0,
+     "height": 1200,
+     "width": 1200,
+     "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Sangre.jpg?v=1775253433"
+    },
+    "aspect_ratio": 1.0,
+    "height": 1200,
+    "media_type": "image",
+    "src": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Sangre.jpg?v=1775253433",
+    "width": 1200
+   }
+  ],
+  "requires_selling_plan": false,
+  "selling_plan_groups": []
+ },
+ "price_grid_custom_prices_metafield": {
+  "sizeBrackets": [
+   1.5,
+   2.0,
+   2.5,
+   3.0,
+   3.5,
+   4.0
+  ],
+  "quantityTiers": [
+   {
+    "min": 25,
+    "max": 49,
+    "prices": [
+     7.41,
+     8.0,
+     8.59,
+     9.18,
+     9.77,
+     10.95
+    ]
+   },
+   {
+    "min": 50,
+    "max": 99,
+    "prices": [
+     7.41,
+     8.0,
+     8.59,
+     9.18,
+     9.77,
+     10.95
+    ]
+   },
+   {
+    "min": 100,
+    "max": 199,
+    "prices": [
+     7.41,
+     8.0,
+     8.59,
+     9.18,
+     9.77,
+     10.95
+    ]
+   },
+   {
+    "min": 200,
+    "max": 499,
+    "prices": [
+     7.41,
+     8.0,
+     8.59,
+     9.18,
+     9.77,
+     10.95
+    ]
+   },
+   {
+    "min": 500,
+    "max": 999,
+    "prices": [
+     7.41,
+     8.0,
+     8.59,
+     9.18,
+     9.77,
+     10.95
+    ]
+   },
+   {
+    "min": 1000,
+    "max": 999999,
+    "prices": [
+     7.41,
+     8.0,
+     8.59,
+     9.18,
+     9.77,
+     10.95
+    ]
+   }
+  ]
+ }
+}
