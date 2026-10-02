@@ -189,6 +189,13 @@
               if block.settings.product != blank
                 assign fact_value = block.settings.product.price_min | money
               endif
+              comment
+                A fact that shows a product's price has no figure once that
+                product is unavailable: leave the whole fact out.
+              endcomment
+              if fact_value == blank
+                continue
+              endif
             -%}
             <li class="pk-cr__fact" {{ block.shopify_attributes }}>
               <p class="pk-cr__value">{{ fact_value }}</p>

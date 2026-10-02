@@ -502,7 +502,20 @@
   .bts-final-ctas { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 </style>
 
-{%- assign order_link = section.settings.order_button_link | default: '/products/embroidered-patches' -%}
+{%- liquid
+  comment
+    The order button goes to the style grid on the home page unless a link is
+    set. A link to a product that is no longer available would be a dead
+    link, so that falls back to the style grid too.
+  endcomment
+  assign order_link = section.settings.order_button_link | default: '/#styles'
+  if order_link contains '/products/'
+    assign order_handle = order_link | split: '/products/' | last | split: '?' | first | split: '#' | first
+    unless all_products[order_handle].handle == order_handle
+      assign order_link = '/#styles'
+    endunless
+  endif
+-%}
 {%- assign quote_link = section.settings.quote_button_link | default: '/pages/quote' -%}
 
 <div class="bts-hero">
@@ -528,9 +541,20 @@
           {{ section.settings.hero_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: section.settings.heading }}
         </div>
       {%- elsif hero_product.featured_image != blank -%}
-        <div class="bts-hero-image">
-          {{ hero_product.featured_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: section.settings.heading }}
-        </div>
+        {%- comment -%} The first of the product's photos that may be shown. {%- endcomment -%}
+        {%- assign hero_product_image = nil -%}
+        {%- for image in hero_product.images -%}
+          {%- capture hero_image_ok -%}{%- render 'pk-image-ok', src: image.src -%}{%- endcapture -%}
+          {%- assign hero_image_ok = hero_image_ok | strip -%}
+          {%- if hero_image_ok != blank -%}{%- assign hero_product_image = image -%}{%- break -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if hero_product_image -%}
+          <div class="bts-hero-image">
+            {{ hero_product_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: section.settings.heading }}
+          </div>
+        {%- else -%}
+          <div class="bts-hero-placeholder">🎒🧵⭐</div>
+        {%- endif -%}
       {%- else -%}
         <div class="bts-hero-placeholder">🎒🧵⭐</div>
       {%- endif -%}
@@ -560,13 +584,46 @@
           still points at a product page would be a dead link: leave it out.
         {%- endcomment -%}
         {%- if block.settings.product == blank and block.settings.link contains '/products/' -%}{%- continue -%}{%- endif -%}
-        {%- assign card_link = block.settings.link | default: card_product.url | default: quote_link -%}
+        {%- liquid
+          comment
+            A typed link to a product page is checked the same way: if that
+            product is gone, the card links to its own product instead, and is
+            left out when it has none.
+          endcomment
+          assign card_typed_link = block.settings.link
+          if card_typed_link contains '/products/'
+            assign card_link_handle = card_typed_link | split: '/products/' | last | split: '?' | first | split: '#' | first
+            unless all_products[card_link_handle].handle == card_link_handle
+              assign card_typed_link = ''
+            endunless
+          endif
+          assign card_link = card_typed_link | default: card_product.url
+          if card_link == blank and block.settings.link contains '/products/'
+            continue
+          endif
+          assign card_link = card_link | default: quote_link
+
+          comment
+            The first of the product's photos that may be shown.
+          endcomment
+          assign card_product_image = nil
+          for image in card_product.images
+            capture card_image_ok
+              render 'pk-image-ok', src: image.src
+            endcapture
+            assign card_image_ok = card_image_ok | strip
+            if card_image_ok != blank
+              assign card_product_image = image
+              break
+            endif
+          endfor
+        -%}
         <a href="{{ card_link }}" class="bts-category-card" {{ block.shopify_attributes }}>
           <div class="bts-category-media">
             {%- if block.settings.image != blank -%}
               {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.title }}
-            {%- elsif card_product.featured_image != blank -%}
-              {{ card_product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.title }}
+            {%- elsif card_product_image -%}
+              {{ card_product_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.title }}
             {%- else -%}
               <span>{{ block.settings.emoji }}</span>
             {%- endif -%}
