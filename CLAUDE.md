@@ -11,6 +11,11 @@ Shopify theme for **patchkraze.com** (store: `patchkraze.myshopify.com`, admin: 
 - **Preview before deploying anything that touches the order flow.** The Shopify CLI on this machine is signed in to the store, so a private development theme is one command away (nothing goes live, and it does not count against the 20-theme limit, which the store is at):
   `shopify theme dev --store patchkraze.myshopify.com --port 9292 --ignore "assets/patch-images/**/*" --ignore "templates/product.horizon.json"`
   The two `--ignore` flags are required: the CLI refuses the nested `assets/patch-images/` folders (Shopify assets cannot live in subfolders) and `templates/product.horizon.json` (references a block type that is not in `blocks/`), and shows an upload-error page instead of the store until both are skipped. `.claude/launch.json` (git-ignored) holds this as the `shopify-theme-dev` launch config.
+- **Leave a few minutes between pushes, and check the live page after each one.** On
+  2026-10-02 two pushes two minutes apart both showed as synced, but the first one's section
+  file never reached the live theme while the second push's files did. Re-sending the file in
+  a new commit fixed it within a minute. A page fetched with a throwaway query string
+  (`?cb=123`) shows what the live theme serves.
 - Note: this working copy previously had a stale `.git/index.lock` blocking commits. If git commands fail, `rm .git/index.lock` first. If local is behind origin, `git pull` (recent work was pushed from a separate clone).
 
 ## Pricing architecture (the heart of this theme)
