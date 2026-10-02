@@ -174,8 +174,11 @@
    "copied_from": "leather-patches-for-hats"
   },
   "metallic-flex-patches": {
-   "new_handle": null,
-   "note": "Shopify refuses to duplicate a product under suspension and no other listing has the same variants."
+   "new_handle": "custom-metallic-flex-patches",
+   "new_id": 10320478109780,
+   "copied_from": null,
+   "note": "Shopify refuses to duplicate a product under suspension and no other listing has the same variants, so this one was rebuilt from the saved data: same option name, the six variants at the same prices, the same price grid and the same photos. Its variants carry no SKU."
   }
- }
+ },
+ "replacement_listings_checked": "2 October 2026, about 20:30 UTC, on the live pages: every price cell equals its variant, each new listing has exactly the variants and prices of the listing it replaces, and the page shows the price that is charged."
 }
