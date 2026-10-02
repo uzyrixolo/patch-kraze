@@ -125,6 +125,7 @@
           "settings": {
             "label": "PVC",
             "product": "pvc-rubber-patches",
+            "backup_handle": "",
             "collection": "",
             "more_label": "See sizes and pricing"
           }
@@ -134,6 +135,7 @@
           "settings": {
             "label": "Woven",
             "product": "woven-patches",
+            "backup_handle": "",
             "collection": "",
             "more_label": "See sizes and pricing"
           }
@@ -163,6 +165,7 @@
           "settings": {
             "label": "Ready-made",
             "product": "",
+            "backup_handle": "",
             "collection": "ready-made-patches",
             "more_label": "See all ready-made patches"
           }
@@ -193,7 +196,7 @@
         "card_1": {
           "type": "product_card",
           "settings": {
-            "product": "custom-embroidered-patches",
+            "product": "embroidered-patches",
             "backup_handle": "embroidered-patches",
             "point_1": "Classic stitched-thread texture",
             "point_2": "Merrowed or thin-stitched edge",
@@ -201,97 +204,14 @@
             "best_seller": true
           }
         },
-        "card_2": {
-          "type": "product_card",
-          "settings": {
-            "product": "custom-full-color-printed-patches",
-            "backup_handle": "full-color-printed-patches",
-            "point_1": "Dye-sublimated, any number of colors",
-            "point_2": "Handles photos, shading and small text",
-            "group": "printed",
-            "best_seller": true
-          }
-        },
-        "card_3": {
-          "type": "product_card",
-          "settings": {
-            "product": "pvc-patches",
-            "point_1": "Flexible molded PVC with raised detail",
-            "point_2": "Waterproof, made for gear and bags",
-            "group": "pvc",
-            "best_seller": true
-          }
-        },
-        "card_4": {
-          "type": "product_card",
-          "settings": {
-            "product": "custom-leather-patches",
-            "backup_handle": "leather-patches",
-            "point_1": "Real leather, laser-engraved",
-            "point_2": "A natural match for hats and jackets",
-            "group": "leather",
-            "best_seller": true
-          }
-        },
         "card_5": {
           "type": "product_card",
           "settings": {
             "product": "3d-embroidered-patches",
+            "backup_handle": "",
             "point_1": "Padded stitching with real height",
             "point_2": "Makes letters and logos stand out",
             "group": "embroidered",
-            "best_seller": false
-          }
-        },
-        "card_6": {
-          "type": "product_card",
-          "settings": {
-            "product": "custom-faux-leather-patches",
-            "backup_handle": "faux-leather-patches",
-            "point_1": "Leather look, laser-engraved",
-            "point_2": "Several colors, safe to machine wash",
-            "group": "leather",
-            "best_seller": false
-          }
-        },
-        "card_7": {
-          "type": "product_card",
-          "settings": {
-            "product": "woven-patches",
-            "point_1": "Tightly woven, smooth to the touch",
-            "point_2": "Keeps small lettering crisp",
-            "group": "embroidered",
-            "best_seller": false
-          }
-        },
-        "card_8": {
-          "type": "product_card",
-          "settings": {
-            "product": "custom-metallic-flex-patches",
-            "backup_handle": "metallic-flex-patches",
-            "point_1": "Raised finish with a metal look",
-            "point_2": "Cut to your shape with clean edges",
-            "group": "printed",
-            "best_seller": false
-          }
-        },
-        "card_9": {
-          "type": "product_card",
-          "settings": {
-            "product": "full-color-flex-patches",
-            "point_1": "Flexible patch printed in full color",
-            "point_2": "For logos with many colors",
-            "group": "printed",
-            "best_seller": false
-          }
-        },
-        "card_10": {
-          "type": "product_card",
-          "settings": {
-            "product": "silver-flex-patches",
-            "point_1": "Reflective silver surface",
-            "point_2": "Light, flexible, with raised detail",
-            "group": "printed",
             "best_seller": false
           }
         },
@@ -306,13 +226,14 @@
             "best_seller": false
           }
         },
-        "card_12": {
+        "card_7": {
           "type": "product_card",
           "settings": {
-            "product": "silicone-patches",
-            "point_1": "Raised 3D silicone detail",
-            "point_2": "A clean, modern finish on apparel",
-            "group": "pvc",
+            "product": "woven-patches",
+            "backup_handle": "",
+            "point_1": "Tightly woven, smooth to the touch",
+            "point_2": "Keeps small lettering crisp",
+            "group": "embroidered",
             "best_seller": false
           }
         },
@@ -320,18 +241,64 @@
           "type": "product_card",
           "settings": {
             "product": "name-patches",
+            "backup_handle": "",
             "point_1": "Embroidered names and titles",
             "point_2": "For uniforms, workwear and teams",
             "group": "embroidered",
             "best_seller": false
           }
         },
+        "card_16": {
+          "type": "product_card",
+          "settings": {
+            "product": "tackle-twill-letters",
+            "backup_handle": "",
+            "point_1": "Layered twill with stitched edges",
+            "point_2": "Letters and numbers for jackets",
+            "group": "embroidered",
+            "best_seller": false
+          }
+        },
+        "card_2": {
+          "type": "product_card",
+          "settings": {
+            "product": "custom-full-color-printed-patches",
+            "backup_handle": "full-color-printed-patches",
+            "point_1": "Dye-sublimated, any number of colors",
+            "point_2": "Handles photos, shading and small text",
+            "group": "printed",
+            "best_seller": true
+          }
+        },
         "card_14": {
           "type": "product_card",
           "settings": {
             "product": "dtf-transfers",
+            "backup_handle": "",
             "point_1": "Full-color prints on transfer film",
             "point_2": "Heat-press onto most fabrics",
+            "group": "printed",
+            "best_seller": false
+          }
+        },
+        "card_9": {
+          "type": "product_card",
+          "settings": {
+            "product": "full-color-flex-patches",
+            "backup_handle": "",
+            "point_1": "Flexible patch printed in full color",
+            "point_2": "For logos with many colors",
+            "group": "printed",
+            "best_seller": false
+          }
+        },
+        "card_8": {
+          "type": "product_card",
+          "settings": {
+            "product": "custom-metallic-flex-patches",
+            "backup_handle": "metallic-flex-patches",
+            "point_1": "Raised finish with a metal look",
+            "point_2": "Cut to your shape with clean edges",
             "group": "printed",
             "best_seller": false
           }
@@ -340,19 +307,43 @@
           "type": "product_card",
           "settings": {
             "product": "gold-flex-patches",
+            "backup_handle": "",
             "point_1": "Reflective gold surface",
             "point_2": "Light, flexible, with raised detail",
             "group": "printed",
             "best_seller": false
           }
         },
-        "card_16": {
+        "card_10": {
           "type": "product_card",
           "settings": {
-            "product": "tackle-twill-letters",
-            "point_1": "Layered twill with stitched edges",
-            "point_2": "Letters and numbers for jackets",
-            "group": "embroidered",
+            "product": "silver-flex-patches",
+            "backup_handle": "",
+            "point_1": "Reflective silver surface",
+            "point_2": "Light, flexible, with raised detail",
+            "group": "printed",
+            "best_seller": false
+          }
+        },
+        "card_3": {
+          "type": "product_card",
+          "settings": {
+            "product": "pvc-patches",
+            "backup_handle": "",
+            "point_1": "Flexible molded PVC with raised detail",
+            "point_2": "Waterproof, made for gear and bags",
+            "group": "pvc",
+            "best_seller": true
+          }
+        },
+        "card_12": {
+          "type": "product_card",
+          "settings": {
+            "product": "silicone-patches",
+            "backup_handle": "",
+            "point_1": "Raised 3D silicone detail",
+            "point_2": "A clean, modern finish on apparel",
+            "group": "pvc",
             "best_seller": false
           }
         },
@@ -360,9 +351,32 @@
           "type": "product_card",
           "settings": {
             "product": "custom-keychains",
+            "backup_handle": "",
             "point_1": "Molded PVC in your own shape",
             "point_2": "Handy for giveaways and merch",
             "group": "pvc",
+            "best_seller": false
+          }
+        },
+        "card_4": {
+          "type": "product_card",
+          "settings": {
+            "product": "custom-leather-patches",
+            "backup_handle": "leather-patches",
+            "point_1": "Real leather, laser-engraved",
+            "point_2": "A natural match for hats and jackets",
+            "group": "leather",
+            "best_seller": true
+          }
+        },
+        "card_6": {
+          "type": "product_card",
+          "settings": {
+            "product": "custom-faux-leather-patches",
+            "backup_handle": "faux-leather-patches",
+            "point_1": "Leather look, laser-engraved",
+            "point_2": "Several colors, safe to machine wash",
+            "group": "leather",
             "best_seller": false
           }
         }
@@ -653,6 +667,7 @@
           "settings": {
             "value": "16\"",
             "product": "",
+            "backup_handle": "",
             "label": "largest patch size",
             "text": "Embroidered patches run from 1 to 16 inches, in any shape."
           }
@@ -662,6 +677,7 @@
           "settings": {
             "value": "3",
             "product": "",
+            "backup_handle": "",
             "label": "ways to attach",
             "text": "Iron-on, Velcro or peel-off adhesive backing."
           }
@@ -671,6 +687,7 @@
           "settings": {
             "value": "24–48h",
             "product": "",
+            "backup_handle": "",
             "label": "to see a free mockup",
             "text": "Tick the mockup box when you order and approve it before production."
           }
@@ -698,6 +715,8 @@
         "subheading": "You choose the size, shape and backing, and the price is on the page before you order.",
         "tone": "purple",
         "image": "shopify://shop_images/West_Coast_Americana_Patchwork_Mural_1.png",
+        "image_position": "outside",
+        "image_width": 50,
         "image_fit": "cover"
       }
     },
@@ -853,7 +872,14 @@
         "ship_small",
         "ship_fast"
       ],
-      "settings": {}
+      "settings": {
+        "eyebrow": "Pricing",
+        "heading": "What Your Price Includes",
+        "text": "The price on a product page is per piece. This is what it covers, and what is added on top.",
+        "included_title": "Included",
+        "extra_title": "Costs extra",
+        "background": "#f7f4fc"
+      }
     },
     "faq": {
       "type": "faq-patch-kraze",
