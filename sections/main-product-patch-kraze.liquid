@@ -655,7 +655,7 @@
         <p class="pk-lede">{{ pk_lede }}{% unless pk_lede_end == '.' or pk_lede_end == '!' or pk_lede_end == '?' %}.{% endunless %}</p>
       {%- endif -%}
 
-      {%- comment -%} What the product is and what it suits, written per kind of product in snippets/pk-product-copy. {%- endcomment -%}
+      {%- comment -%} One line on what the product is and one on what it suits, written per kind of product in snippets/pk-product-copy. {%- endcomment -%}
       {%- if section.settings.show_intro -%}
         {%- capture pk_copy -%}{%- render 'pk-product-copy', product: product -%}{%- endcapture -%}
         {%- liquid
