@@ -506,8 +506,19 @@ Above the steps: title, rating row, the opening sentence of the description, a l
 ## Header (October 2026)
 
 `sections/header-patch-kraze.liquid` is two rows: a slim announcement/utility strip
-(announcement, ready-made and blanks links, phone) and one bar (logo, menu, search / account /
-cart, quote button). On phones the menu collapses into a drawer that slides in from the right.
+(announcement, ready-made and blanks links, phone) and one bar with the logo in the middle:
+menu on the left, search / account / cart and the quote button on the right. On phones the
+menu button is on the left, search and cart on the right, and the menu is a drawer that
+slides in from the left.
+
+- The bar is a three-column grid (`.pk-bar__row`); the two outer columns share the leftover
+  space, which is what centres the logo. On phones the tools wrapper is `display: contents`
+  so its buttons can sit in their own columns either side of the logo.
+- Scrolling down slides the whole header out of view and scrolling back up returns it
+  (`pk-header--hidden`, toggled by the scroll handler; it stays put while a menu panel or the
+  drawer is open, under the pointer, or holding keyboard focus). It moves with `top`, not a
+  transform: a transform on the header would re-anchor the drawer and its overlay, which are
+  fixed-position children of it.
 
 - **Product links in the menu are section blocks** (`menu_product`: product picker, optional
   label, menu group), stored in `sections/header-group.json` and rendered by
@@ -638,6 +649,10 @@ credibility -> factory video -> `ordering_process` -> `price_includes` -> FAQ ->
   address: over $100, Standard (13-15 days) is free, Economy (11-12 days) $6.90, Express (7-8
   days) $45; under $100 there is no free option.
 - The video row's heading is "Our Patches On Video". It makes no claim about customer numbers.
+- **Footer page links are printed only while the page exists** (`pages[handle].handle ==
+  handle`, and `shop.shipping_policy` for that policy), so the footer cannot link to "not
+  found". Create the page and its link returns. "FAQ" goes to `/pages/faq` if that page
+  exists and otherwise to the questions on the home page (`#faq`, the id on the FAQ section).
 - **An alternate template is public at `?view=<suffix>`.** `templates/index.context.json` was
   an old copy of the home page and kept serving the old sections, old headline included, at
   `/?view=context` long after `index.json` had been rebuilt. It and the `hero-banner` section
@@ -667,8 +682,15 @@ credibility -> factory video -> `ordering_process` -> `price_includes` -> FAQ ->
 - **Replacement listings are named `custom-<old handle>`.** The footer and the AI designer page
   link embroidered to `custom-embroidered-patches` once `embroidered-patches` is gone, and
   the back-to-school page tries `custom-<handle>` for any typed product link or hero product
-  that has disappeared. A new listing without a `PRODUCT_CONFIGS` entry uses the embroidered
-  size limits, so a replacement for another patch type also needs its own entry there.
+  that has disappeared.
+- **`pk_handle` is the handle a product page behaves as.** `main-product-patch-kraze` sets it
+  at the top of its markup: the listing's own handle, or, for the replacement listings named
+  in `pk_replacements`, that handle without `custom-`. `PRODUCT_HANDLE` in the script and the
+  leather color pickers use it, so a replacement gets the same size limits and options as the
+  listing it replaces. The list is explicit because ordinary listings also start with
+  `custom-` (`custom-stickers`, `custom-keychains`); add a new replacement's handle to it.
+- Shopify refuses to duplicate a product that is under suspension. Replacements were copied
+  from other listings on the same price grid (see `backups/products-snapshot-2026-10-02/`).
 - `all_products` only answers for 20 different handles per page. The footer uses up to 8 and
   the back-to-school page about 9 more, so do not add lookups there without counting.
 - **`snippets/pk-image-ok.liquid` decides whether a product image may be shown.** It holds a

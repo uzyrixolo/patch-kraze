@@ -78,7 +78,7 @@
     gap: 3rem;
   }
   @media (min-width: 768px) {
-    .footer-row-2 { grid-template-columns: repeat(3, 1fr); }
+    .footer-row-2 { grid-template-columns: repeat(var(--footer-row-2-cols, 3), 1fr); }
   }
 
   .footer-bottom {
@@ -200,18 +200,32 @@
     </div>
 
     <!-- Row 2 -->
-    <div class="footer-row-2">
-      
+    {%- comment -%}
+      A link to a page is printed only while that page exists in the admin
+      (Online Store > Pages), so the footer never links to "not found". Create
+      a page with one of these handles and its link comes back by itself. A
+      column with no links left is dropped and the row closes up.
+    {%- endcomment -%}
+    {%- capture footer_how_links -%}
+      {%- assign footer_how_pages = 'heatpress-for-garments|Heatpress For Garments,heatpress-for-hats|Heatpress For Hats,iron-for-garments|Iron For Garments,peel-and-stick|Peel and Stick' | split: ',' -%}
+      {%- for footer_entry in footer_how_pages -%}
+        {%- assign footer_pair = footer_entry | split: '|' -%}
+        {%- assign footer_page = pages[footer_pair[0]] -%}
+        {%- if footer_page.handle == footer_pair[0] -%}<li class="footer-nav-item"><a href="{{ footer_page.url }}" class="footer-nav-link">{{ footer_pair[1] }}</a></li>{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- assign footer_how_links = footer_how_links | strip -%}
+    <div class="footer-row-2"{% if footer_how_links == blank %} style="--footer-row-2-cols: 2;"{% endif %}>
+
+      {%- if footer_how_links != blank -%}
       <!-- Instructions -->
       <div>
-        <h3 class="footer-col-title">Pressing Instructions By Method</h3>
+        <h3 class="footer-col-title">How To Apply Your Patches</h3>
         <ul class="footer-nav-list">
-          <li class="footer-nav-item"><a href="/pages/heatpress-for-garments" class="footer-nav-link">Heatpress For Garments</a></li>
-          <li class="footer-nav-item"><a href="/pages/heatpress-for-hats" class="footer-nav-link">Heatpress For Hats</a></li>
-          <li class="footer-nav-item"><a href="/pages/iron-for-garments" class="footer-nav-link">Iron For Garments</a></li>
-          <li class="footer-nav-item"><a href="/pages/peel-and-stick" class="footer-nav-link">Peel and Stick</a></li>
+          {{ footer_how_links }}
         </ul>
       </div>
+      {%- endif -%}
 
       <!-- Customer Care -->
       <div>
@@ -219,9 +233,10 @@
         <ul class="footer-nav-list">
           <li class="footer-nav-item"><a href="{{ routes.account_url }}" class="footer-nav-link">My Account</a></li>
           <li class="footer-nav-item"><a href="/pages/contact" class="footer-nav-link">Contact Us</a></li>
-          <li class="footer-nav-item"><a href="/pages/order-issues" class="footer-nav-link">Order Issue Form</a></li>
-          <li class="footer-nav-item"><a href="/pages/satisfaction-guarantee" class="footer-nav-link">Satisfaction Guarantee</a></li>
-          <li class="footer-nav-item"><a href="/pages/faq" class="footer-nav-link">FAQ</a></li>
+          {%- if pages['order-issues'].handle == 'order-issues' -%}<li class="footer-nav-item"><a href="/pages/order-issues" class="footer-nav-link">Order Issue Form</a></li>{%- endif -%}
+          {%- if pages['satisfaction-guarantee'].handle == 'satisfaction-guarantee' -%}<li class="footer-nav-item"><a href="/pages/satisfaction-guarantee" class="footer-nav-link">Satisfaction Guarantee</a></li>{%- endif -%}
+          {%- comment -%} Without a FAQ page, the link goes to the questions on the home page. {%- endcomment -%}
+          <li class="footer-nav-item"><a href="{% if pages['faq'].handle == 'faq' %}/pages/faq{% else %}{{ routes.root_url }}#faq{% endif %}" class="footer-nav-link">FAQ</a></li>
         </ul>
       </div>
 
@@ -229,7 +244,7 @@
       <div>
         <h3 class="footer-col-title">Store Info</h3>
         <ul class="footer-nav-list">
-          <li class="footer-nav-item"><a href="/policies/shipping-policy" class="footer-nav-link">Shipping Policy</a></li>
+          {%- if shop.shipping_policy != blank -%}<li class="footer-nav-item"><a href="{{ shop.shipping_policy.url }}" class="footer-nav-link">Shipping Policy</a></li>{%- endif -%}
           <li class="footer-nav-item"><a href="/policies/refund-policy" class="footer-nav-link">Refund Policy</a></li>
           <li class="footer-nav-item"><a href="/policies/privacy-policy" class="footer-nav-link">Privacy Policy</a></li>
           <li class="footer-nav-item"><a href="/policies/terms-of-service" class="footer-nav-link">Terms of Service</a></li>

@@ -516,6 +516,21 @@
   }
 </style>
 
+{%- liquid
+  comment
+    A replacement listing is named "custom-" plus the handle of the listing it
+    replaces, and behaves exactly like it: same size limits, same options on
+    the order form. pk_handle is the handle the page behaves as; the listing's
+    own handle is still product.handle. Only the listings named here are
+    treated this way, because plenty of ordinary listings also start with
+    "custom-" (custom-stickers, custom-keychains and so on).
+  endcomment
+  assign pk_handle = product.handle
+  assign pk_replacements = 'custom-embroidered-patches,custom-full-color-printed-patches,custom-chenille-patches,custom-leather-patches,custom-faux-leather-patches,custom-metallic-flex-patches' | split: ','
+  if pk_replacements contains product.handle
+    assign pk_handle = product.handle | remove_first: 'custom-'
+  endif
+-%}
 <div class="product-page-main">
   <div class="product-container">
 
@@ -957,7 +972,7 @@
           </div>
           <input type="hidden" name="properties[Backing]" id="backing-input" value="Iron-On">
 
-          {% if product.handle == 'faux-leather-patches' %}
+          {% if pk_handle == 'faux-leather-patches' %}
           <label class="control-label" style="margin-top:1.5rem;">Leather color: <span id="leather-color-label-extra" style="font-weight:400; color:#6b7280;">Faux Black</span></label>
           <div class="backing-grid">
             <div class="backing-card selected" onclick="selectLeatherColor(this, 'Faux Black')">
@@ -980,7 +995,7 @@
           <input type="hidden" name="properties[Leather Color]" id="leather-color-input" value="Faux Black">
           {% endif %}
 
-          {% if product.handle == 'leather-patches' or product.handle == 'genuine-leather-patches' %}
+          {% if pk_handle == 'leather-patches' or pk_handle == 'genuine-leather-patches' %}
           <label class="control-label" style="margin-top:1.5rem;">Leather color: <span id="leather-color-label-extra" style="font-weight:400; color:#6b7280;">Genuine Caramel/Brown</span></label>
           <div class="backing-grid">
             <div class="backing-card selected" onclick="selectLeatherColor(this, 'Genuine Caramel/Brown')">
@@ -1254,7 +1269,7 @@
       // Check if we need to add velcro backing (for all patch products with backing option)
       const backingInput = document.getElementById('backing-input');
       const qtyInput = document.getElementById('qty-input');
-      const productHandle = '{{ product.handle }}';
+      const productHandle = {{ pk_handle | json }};
       // Velcro surcharge applies to every product that renders the backing
       // selector - the whole patch template except stickers and DTF transfers.
       const needsVelcroBacking = !productHandle.includes('sticker') &&
@@ -1483,7 +1498,8 @@
     const shopifyVariants = {{ product.variants | json }};
 
     // 2. PRODUCT HANDLE
-    const PRODUCT_HANDLE = '{{ product.handle }}';
+    // The handle this page behaves as (see pk_handle at the top of the markup).
+    const PRODUCT_HANDLE = {{ pk_handle | json }};
 
     // AI backend (Remove Background / Edit with AI)
     const AI_BACKEND_URL = ({{ section.settings.backend_url | json }} || '').replace(/\/+$/, '');

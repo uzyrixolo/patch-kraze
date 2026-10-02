@@ -71,7 +71,8 @@
 {% endschema %}
 
 <style>
-  .pk-faq { position: relative; background: var(--faq-bg, #fff); padding: 3.5rem 0; }
+  /* id="faq" is linked from the footer; the margin keeps the heading clear of the fixed header. */
+  .pk-faq { position: relative; background: var(--faq-bg, #fff); padding: 3.5rem 0; scroll-margin-top: 5.5rem; }
   .pk-faq__inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 3.5rem; align-items: start; }
 
   /* The left column stays in view while a long list of questions scrolls past. */
@@ -149,7 +150,7 @@
 -%}
 
 {%- if faq_count > 0 -%}
-<section class="pk-faq{% if section.settings.text_tone == 'light' %} pk-faq--light{% endif %}" style="--faq-bg: {{ section.settings.background | default: '#ffffff' }};">
+<section class="pk-faq{% if section.settings.text_tone == 'light' %} pk-faq--light{% endif %}" id="faq" style="--faq-bg: {{ section.settings.background | default: '#ffffff' }};">
   {%- render 'pk-section-bg', image: section.settings.bg_image, image_mobile: section.settings.bg_image_mobile, tint: section.settings.bg_tint, tone: section.settings.text_tone -%}
   <div class="pk-faq__inner">
     <div class="pk-faq__intro">

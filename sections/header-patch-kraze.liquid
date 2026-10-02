@@ -97,7 +97,12 @@
      a known engine quirk where sticky elements don't stick to that specific
      scrolling box. Fixed sidesteps it; the script at the bottom reserves the
      equivalent space so page content doesn't slide under the header. */
-  .pk-header { position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 1100; background: #fff; font-family: 'Inter', sans-serif !important; line-height: 1.5; color: #111827; }
+  .pk-header { position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 1100; background: #fff; font-family: 'Inter', sans-serif !important; line-height: 1.5; color: #111827; transition: top 0.25s ease; }
+  /* Scrolling down slides the header out of the way; scrolling back up brings
+     it back (the script toggles the class). It moves with `top`, not a
+     transform: a transform here would re-anchor the slide-in menu and its
+     overlay, which are fixed-position children of the header. */
+  .pk-header--hidden { top: calc(-1 * var(--pk-header-h, 8rem) - 2px); }
   .pk-wrap { max-width: 1440px; margin: 0 auto; padding: 0 1.25rem; }
 
   /* ANNOUNCEMENT / UTILITY STRIP - drops away once the page is scrolled */
@@ -131,8 +136,12 @@
   .pk-header--light .pk-bar .pk-menu__link:focus-visible { outline-color: #fff; }
   .pk-header--light .pk-bar .pk-quote-btn { background: #fff; color: #111827; }
   .pk-header--light .pk-bar .pk-quote-btn:hover { background: #f3f4f6; }
-  .pk-bar__row { position: relative; display: flex; align-items: stretch; gap: 1.5rem; min-height: 4.25rem; }
-  .pk-bar__logo { display: flex; align-items: center; flex-shrink: 0; }
+  /* Three columns with the logo in the middle one. The outer two share the
+     leftover space equally, so the logo sits on the centre line; either grows
+     past its share only if its content needs the room. */
+  .pk-bar__row { position: relative; display: grid; grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr); align-items: stretch; column-gap: 1.5rem; min-height: 4.25rem; }
+  .pk-menu { grid-column: 1; grid-row: 1; }
+  .pk-bar__logo { grid-column: 2; grid-row: 1; justify-self: center; display: flex; align-items: center; flex-shrink: 0; }
   .pk-bar__logo img { height: 2.75rem; width: auto; display: block; object-fit: contain; }
 
   .pk-menu { display: flex; align-items: stretch; gap: 0.15rem; }
@@ -179,7 +188,7 @@
   .pk-panel__aside-btn { align-self: flex-start; margin-top: 0.25rem; display: inline-flex; align-items: center; height: 2.4rem; padding: 0 1rem; border-radius: 0.6rem; font-size: 0.85rem; font-weight: 700; text-decoration: none; }
 
   /* TOOLS: search, account, cart, quote button, menu button */
-  .pk-tools { display: flex; align-items: center; gap: 0.25rem; flex-shrink: 0; margin-left: auto; }
+  .pk-tools { grid-column: 3; grid-row: 1; justify-self: end; display: flex; align-items: center; gap: 0.25rem; flex-shrink: 0; }
   .pk-tool { position: relative; width: 2.5rem; height: 2.5rem; display: inline-flex; align-items: center; justify-content: center; border-radius: 0.6rem; padding: 0; text-decoration: none; }
   /* Icons are the base theme's own files (assets/icon-*.svg). Search, account
      and cart are drawn on a 20-unit grid, menu and close on a 14-unit one, so
@@ -199,18 +208,25 @@
     .pk-strip { font-size: 0.72rem; }
     .pk-strip__row { justify-content: center; text-align: center; min-height: 1.9rem; padding-top: 0.25rem; padding-bottom: 0.25rem; }
     .pk-strip__links { display: none; }
-    .pk-bar__row { min-height: 3.5rem; gap: 0.5rem; }
+    /* Menu button on the left, logo in the middle, search and cart on the
+       right. Two button-wide columns each side keep the logo centred; the
+       tools wrapper steps aside so its buttons can take their own columns. */
+    .pk-bar__row { grid-template-columns: 2.5rem 2.5rem minmax(0, 1fr) 2.5rem 2.5rem; align-items: center; column-gap: 0.15rem; min-height: 3.5rem; }
+    .pk-tools { display: contents; }
+    .pk-bar__logo { grid-column: 3; }
     .pk-bar__logo img { height: 2.25rem; }
     .pk-menu, .pk-tool--account, .pk-bar .pk-quote-btn { display: none; }
-    .pk-tool--menu { display: inline-flex; }
+    .pk-tool--menu { display: inline-flex; grid-column: 1; grid-row: 1; }
+    .pk-tool--search { grid-column: 4; grid-row: 1; }
+    .pk-tool--cart { grid-column: 5; grid-row: 1; }
   }
 
   /* SLIDE-IN MENU (phones and tablets) */
   .pk-overlay { position: fixed; inset: 0; background: rgba(17, 24, 39, 0.5); z-index: 55; display: none; }
   .pk-overlay.open { display: block; }
   .pk-drawer {
-    position: fixed; top: 0; right: 0; height: 100%; width: 88%; max-width: 22rem; background: #fff; z-index: 60;
-    display: flex; flex-direction: column; transform: translateX(100%); visibility: hidden;
+    position: fixed; top: 0; left: 0; height: 100%; width: 88%; max-width: 22rem; background: #fff; z-index: 60;
+    display: flex; flex-direction: column; transform: translateX(-100%); visibility: hidden;
     transition: transform 0.28s ease, visibility 0s linear 0.28s;
   }
   .pk-drawer.open { transform: translateX(0); visibility: visible; transition-delay: 0s; }
@@ -234,7 +250,7 @@
   .pk-drawer__foot-links a { color: #374151; text-decoration: none; font-weight: 600; }
 
   @media (prefers-reduced-motion: reduce) {
-    .pk-panel, .pk-drawer, .pk-menu__link::after, .pk-menu__chev, .pk-drawer__chev { transition: none; }
+    .pk-header, .pk-panel, .pk-drawer, .pk-menu__link::after, .pk-menu__chev, .pk-drawer__chev { transition: none; }
   }
 </style>
 
@@ -390,13 +406,13 @@
       </nav>
 
       <div class="pk-tools">
-        <button type="button" class="pk-tool pk-btn-icon" onclick="document.querySelector('#search-modal dialog')?.showModal()" aria-label="Search">
+        <button type="button" class="pk-tool pk-tool--search pk-btn-icon" onclick="document.querySelector('#search-modal dialog')?.showModal()" aria-label="Search">
           <span class="svg-wrapper" aria-hidden="true">{{- 'icon-search.svg' | inline_asset_content -}}</span>
         </button>
         <a href="{{ routes.account_url }}" class="pk-tool pk-tool--account pk-btn-icon" aria-label="Account">
           <span class="svg-wrapper" aria-hidden="true">{{- 'icon-account.svg' | inline_asset_content -}}</span>
         </a>
-        <button type="button" class="pk-tool pk-btn-icon" onclick="document.querySelector('cart-drawer-component').open()" aria-label="Open cart">
+        <button type="button" class="pk-tool pk-tool--cart pk-btn-icon" onclick="document.querySelector('cart-drawer-component').open()" aria-label="Open cart">
           <cart-icon class="header-actions__cart-icon" data-testid="cart-icon">
             <span class="svg-wrapper" aria-hidden="true">{{- 'icon-cart.svg' | inline_asset_content -}}</span>
             {% render 'cart-bubble', limit: 100, live_region: true %}
@@ -500,6 +516,8 @@
       var condensed = header.classList.contains('pk-header--scrolled');
       if (condensed) header.classList.remove('pk-header--scrolled');
       document.body.style.paddingTop = header.offsetHeight + 'px';
+      // Also how far the header has to move to be fully out of view.
+      header.style.setProperty('--pk-header-h', header.offsetHeight + 'px');
       if (condensed) header.classList.add('pk-header--scrolled');
     }
     syncOffset();
@@ -507,9 +525,32 @@
     window.addEventListener('load', syncOffset);
 
     // Past a small threshold (so a 1px scroll doesn't flicker it) the strip hides.
+    // Further down, scrolling down slides the whole header away and scrolling
+    // back up returns it. It never hides while it is in use: the slide-in menu
+    // or a menu panel open, the pointer over it, or keyboard focus inside it.
     var ticking = false;
+    var lastY = window.scrollY;
+    function headerInUse() {
+      var drawer = document.getElementById('mobile-drawer');
+      return (drawer && drawer.classList.contains('open')) ||
+        !!header.querySelector('[data-pk-menu][data-open]') ||
+        header.matches(':hover') ||
+        !!header.querySelector(':focus-visible');
+    }
     function applyScrollState() {
-      header.classList.toggle('pk-header--scrolled', window.scrollY > 12);
+      var y = window.scrollY;
+      var moved = y - lastY;
+      header.classList.toggle('pk-header--scrolled', y > 12);
+      if (y < 160) {
+        header.classList.remove('pk-header--hidden');
+        lastY = y;
+      } else if (moved > 6) {
+        if (!headerInUse()) header.classList.add('pk-header--hidden');
+        lastY = y;
+      } else if (moved < -6) {
+        header.classList.remove('pk-header--hidden');
+        lastY = y;
+      }
       ticking = false;
     }
     window.addEventListener('scroll', function () {
