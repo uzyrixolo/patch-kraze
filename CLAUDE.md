@@ -589,8 +589,9 @@ videos.
   what this store actually does (the mockup is the optional checkbox on the product page,
   in 24-48 hours; nothing here charges for a proof).
 - **A product can disappear from the storefront** (set to Draft, or hidden by Shopify), and
-  the theme has to cope. A product setting then resolves to blank and `all_products[handle].id`
-  is empty. The header drops a menu group whose products are all gone, heading included, and
+  the theme has to cope. A product setting then resolves to blank. `all_products[handle]`
+  returns an empty object that is still truthy (and so is its `.id`), so test
+  `all_products[handle].handle == handle` instead. The header drops a menu group whose products are all gone, heading included, and
   closes the grid up (`--pk-cols`); the menu snippet uses its typed fallback list only when a
   group has no blocks at all. `type-showcase` leaves out a tab with nothing to show.
   The footer, the AI designer page and the back-to-school cards check availability before

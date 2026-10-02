@@ -113,12 +113,16 @@
         <h3 class="footer-col-title">Our Products</h3>
         <ul class="footer-nav-list">
           <li class="footer-nav-item"><a href="/products/embroidered-patches" class="footer-nav-link">Embroidered Patches</a></li>
-          {%- comment -%} These four are shown only while the product is available. {%- endcomment -%}
-          {%- if all_products['metallic-flex-patches'].id -%}<li class="footer-nav-item"><a href="/products/metallic-flex-patches" class="footer-nav-link">Metallic Flex Patches</a></li>{%- endif -%}
+          {%- comment -%}
+            These four are shown only while the product is available. An unavailable
+            product comes back as an empty object that still counts as true, so the
+            test is whether it has the handle that was asked for.
+          {%- endcomment -%}
+          {%- if all_products['metallic-flex-patches'].handle == 'metallic-flex-patches' -%}<li class="footer-nav-item"><a href="/products/metallic-flex-patches" class="footer-nav-link">Metallic Flex Patches</a></li>{%- endif -%}
           <li class="footer-nav-item"><a href="/products/full-color-printed-patches" class="footer-nav-link">Full Color Printed Patches</a></li>
           <li class="footer-nav-item"><a href="/products/pvc-patches" class="footer-nav-link">PVC Patches</a></li>
-          {%- if all_products['leather-patches'].id -%}<li class="footer-nav-item"><a href="/products/leather-patches" class="footer-nav-link">Genuine Leather Patches</a></li>{%- endif -%}
-          {%- if all_products['faux-leather-patches'].id -%}<li class="footer-nav-item"><a href="/products/faux-leather-patches" class="footer-nav-link">Faux Leather Patches</a></li>{%- endif -%}
+          {%- if all_products['leather-patches'].handle == 'leather-patches' -%}<li class="footer-nav-item"><a href="/products/leather-patches" class="footer-nav-link">Genuine Leather Patches</a></li>{%- endif -%}
+          {%- if all_products['faux-leather-patches'].handle == 'faux-leather-patches' -%}<li class="footer-nav-item"><a href="/products/faux-leather-patches" class="footer-nav-link">Faux Leather Patches</a></li>{%- endif -%}
           <li class="footer-nav-item"><a href="/products/woven-patches" class="footer-nav-link">Woven Patches</a></li>
           <li class="footer-nav-item"><a href="/products/3d-embroidered-patches" class="footer-nav-link">3D Embroidered Patches</a></li>
           <li class="footer-nav-item"><a href="/products/chenille-patches" class="footer-nav-link">Chenille Patches</a></li>
@@ -140,7 +144,7 @@
           <li class="footer-nav-item"><a href="/products/patches-for-hoodies" class="footer-nav-link">Patches for Hoodies</a></li>
           <li class="footer-nav-item"><a href="/products/patches-for-vests" class="footer-nav-link">Patches for Vests</a></li>
           <li class="footer-nav-item"><a href="/products/patches-for-pants" class="footer-nav-link">Patches for Pants</a></li>
-          {%- if all_products['letterman-jacket-patches'].id -%}<li class="footer-nav-item"><a href="/products/letterman-jacket-patches" class="footer-nav-link">Letterman Jacket Patches</a></li>{%- endif -%}
+          {%- if all_products['letterman-jacket-patches'].handle == 'letterman-jacket-patches' -%}<li class="footer-nav-item"><a href="/products/letterman-jacket-patches" class="footer-nav-link">Letterman Jacket Patches</a></li>{%- endif -%}
           <li class="footer-nav-item"><a href="/collections/all" class="footer-nav-link">View All</a></li>
         </ul>
       </div>
