@@ -49,6 +49,10 @@
   .nav-arrow.prev { left: 1rem; }
   .nav-arrow.next { right: 1rem; }
   .nav-arrow.hidden { display: none; }
+  .zoom-icon.hidden { display: none; }
+  /* A product with no photo to show: a quiet panel instead of a blank square. */
+  .pk-gallery-empty { background: #f7f4fc; color: #d8c8f5; }
+  .pk-gallery-empty svg { width: 46%; height: 46%; }
 
   .zoom-icon {
     position: absolute;
@@ -580,9 +584,14 @@
             </div>
             {%- assign pk_slide = pk_slide | plus: 1 -%}
           {% endfor %}
+          {%- if pk_shown_count == 0 -%}
+            <div class="gallery-slide pk-gallery-empty" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><circle cx="38" cy="40" r="22"/><rect x="66" y="20" width="38" height="38" rx="6"/><ellipse cx="42" cy="88" rx="28" ry="17"/><path d="M78 100c-9 0-12-11-4-15-3-10 10-17 16-9 6-8 20-4 17 7 8 3 5 17-4 17z"/></svg>
+            </div>
+          {%- endif -%}
         </div>
         <button class="nav-arrow next{% if pk_shown_count <= 1 %} hidden{% endif %}" id="btnNext"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
-        <button class="zoom-icon" onclick="zoomImage()">
+        <button class="zoom-icon{% if pk_shown_count == 0 %} hidden{% endif %}" onclick="zoomImage()">
           <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="11" cy="11" r="8"/>
             <path d="M21 21l-4.35-4.35"/>
