@@ -1,0 +1,195 @@
+{%- doc -%}
+  Prints a short description of a product and what it is best used for, as
+  "description|||best uses". Either part can be empty; a product this snippet
+  does not recognise prints nothing on either side.
+
+  The text is written here, per kind of product, so every listing has a
+  description in our own words whatever its description field in the admin
+  holds. The description says what the product is; the best uses come from
+  the listing's own name where it names one ("... for hats"), and from the
+  kind of product otherwise.
+
+  A product can carry its own text in two metafields, which win over what is
+  written here: custom.short_description and custom.best_uses (single line
+  text).
+
+  Keep this to what the product is. No claims about quality, speed or price,
+  and nothing lifted from another store.
+
+  @param {product} product - the product to describe
+{%- enddoc -%}
+
+{%- liquid
+  assign pc_handle = product.handle
+  assign pc_type = product.type | downcase
+
+  comment
+    The kind of product. The handle is checked before the product type: a few
+    listings carry a type that does not match what they are.
+  endcomment
+  assign pc_kind = ''
+  if pc_handle contains 'sticker'
+    assign pc_kind = 'stickers'
+  elsif pc_handle == 'dtf-transfers' or pc_type == 'dtf'
+    assign pc_kind = 'dtf'
+  elsif pc_handle contains 'keychain'
+    assign pc_kind = 'keychains'
+  elsif pc_handle contains 'pu-uv'
+    assign pc_kind = 'uv'
+  elsif pc_handle contains 'print-embroidery' or pc_handle contains 'print-stitch'
+    assign pc_kind = 'print-stitch'
+  elsif pc_handle contains 'name-patches'
+    assign pc_kind = 'names'
+  elsif pc_handle contains '3d-embroidered'
+    assign pc_kind = '3d'
+  elsif pc_handle contains 'embroider'
+    assign pc_kind = 'embroidered'
+  elsif pc_handle contains 'chenille' or pc_handle contains 'varsity' or pc_handle contains 'letterman-jacket-patches'
+    assign pc_kind = 'chenille'
+  elsif pc_handle contains 'faux-leather'
+    assign pc_kind = 'faux-leather'
+  elsif pc_handle contains 'leather'
+    assign pc_kind = 'leather'
+  elsif pc_handle contains 'pvc' or pc_handle contains 'rubber'
+    assign pc_kind = 'pvc'
+  elsif pc_handle contains 'printed' or pc_handle contains 'sublimation'
+    assign pc_kind = 'printed'
+  elsif pc_handle contains 'woven'
+    assign pc_kind = 'woven'
+  elsif pc_handle contains 'silicone'
+    assign pc_kind = 'silicone'
+  elsif pc_handle contains 'twill'
+    assign pc_kind = 'twill'
+  elsif pc_handle contains 'flex'
+    assign pc_kind = 'flex'
+  elsif pc_type contains '3d embroider'
+    assign pc_kind = '3d'
+  elsif pc_type contains 'chenille'
+    assign pc_kind = 'chenille'
+  elsif pc_type contains 'faux'
+    assign pc_kind = 'faux-leather'
+  elsif pc_type contains 'leather'
+    assign pc_kind = 'leather'
+  elsif pc_type contains 'pvc'
+    assign pc_kind = 'pvc'
+  elsif pc_type contains 'full color'
+    assign pc_kind = 'printed'
+  elsif pc_type contains 'woven'
+    assign pc_kind = 'woven'
+  elsif pc_type contains 'silicone'
+    assign pc_kind = 'silicone'
+  elsif pc_type contains 'twill'
+    assign pc_kind = 'twill'
+  elsif pc_type contains 'flex'
+    assign pc_kind = 'flex'
+  elsif pc_type contains 'embroider'
+    assign pc_kind = 'embroidered'
+  endif
+
+  assign pc_text = ''
+  assign pc_best = ''
+  case pc_kind
+    when 'embroidered'
+      assign pc_text = 'Your artwork stitched in thread. The classic patch look, with texture you can feel.'
+      assign pc_best = 'Jackets, hats, bags and uniforms'
+    when '3d'
+      assign pc_text = 'Embroidered patches with padded, raised stitching, so letters and shapes stand off the surface.'
+      assign pc_best = 'Caps, bold logos and lettering'
+    when 'print-stitch'
+      assign pc_text = 'A printed patch with embroidery stitched over it. The print carries the color and the stitching adds texture.'
+      assign pc_best = 'Artwork with many colors that still wants a stitched look'
+    when 'names'
+      assign pc_text = 'A name or a short line of text, stitched in thread on a bordered patch.'
+      assign pc_best = 'Work shirts, uniforms and jackets'
+    when 'chenille'
+      assign pc_text = 'Soft, fuzzy patches made from looped yarn, the style used for varsity letters.'
+      assign pc_best = 'Letterman jackets, hoodies and sweatshirts'
+    when 'leather'
+      assign pc_text = 'Patches cut from real leather, with your design engraved or printed on the surface.'
+      assign pc_best = 'Hats, bags, jackets and denim'
+    when 'faux-leather'
+      assign pc_text = 'Patches cut from faux leather, with your design marked on the surface.'
+      assign pc_best = 'Hats, beanies, bags and jackets'
+    when 'pvc'
+      assign pc_text = 'Soft rubber patches molded from your artwork, with raised detail. Flexible and waterproof.'
+      assign pc_best = 'Outdoor gear, bags, hats and tactical gear'
+    when 'keychains'
+      assign pc_text = 'Soft rubber keychains molded from your artwork, with raised detail.'
+      assign pc_best = 'Giveaways, merch tables and team gifts'
+    when 'printed'
+      assign pc_text = 'Your artwork printed in full color on a fabric patch, so photos, gradients and fine detail come through.'
+      assign pc_best = 'Photos, gradients and detailed artwork'
+    when 'uv'
+      assign pc_text = 'Patches printed with UV ink for a raised, dimensional finish.'
+      assign pc_best = 'Logos with fine detail and many colors'
+    when 'woven'
+      assign pc_text = 'Patches woven from fine thread, which keeps small text and thin lines sharp.'
+      assign pc_best = 'Small text, fine detail and clothing labels'
+    when 'silicone'
+      assign pc_text = 'Molded silicone patches with raised, soft-touch detail.'
+      assign pc_best = 'Hats, bags and sportswear'
+    when 'twill'
+      assign pc_text = 'Letters and numbers cut from twill fabric and stitched in layers, the style used on team jerseys.'
+      assign pc_best = 'Jerseys, team jackets and hoodies'
+    when 'flex'
+      assign pc_text = 'Thin, flexible patches with a raised finish, cut to the outline of your design.'
+      assign pc_best = 'Hats, polos and lightweight garments'
+    when 'stickers'
+      assign pc_text = 'Your artwork printed as vinyl stickers and cut to size.'
+      assign pc_best = 'Laptops, water bottles and packaging'
+    when 'dtf'
+      assign pc_text = 'Your artwork printed in full color on transfer film, ready to heat-press onto garments.'
+      assign pc_best = 'T-shirts, hoodies and tote bags'
+  endcase
+
+  comment
+    A listing named for a use says so. The first match wins, so the more
+    specific names come first.
+  endcomment
+  if pc_kind != '' and pc_kind != 'stickers' and pc_kind != 'dtf' and pc_kind != 'keychains'
+    if pc_handle contains 'velcro'
+      assign pc_best = 'Hook-and-loop panels on caps, bags and gear'
+    elsif pc_handle contains 'beanies'
+      assign pc_best = 'Beanies and knit caps'
+    elsif pc_handle contains 'hats' or pc_handle contains 'hat-'
+      assign pc_best = 'Caps, beanies and visors'
+    elsif pc_handle contains 'shirts'
+      assign pc_best = 'Shirts, polos and work shirts'
+    elsif pc_handle contains 'hoodies'
+      assign pc_best = 'Hoodies and sweatshirts'
+    elsif pc_handle contains 'for-jackets' or pc_handle contains 'vests'
+      assign pc_best = 'Jackets, vests and coats'
+    elsif pc_handle contains 'jeans' or pc_handle contains 'pants'
+      assign pc_best = 'Jeans, pants and denim jackets'
+    elsif pc_handle contains 'clothes' or pc_handle contains 'iron-on'
+      assign pc_best = 'Shirts, jackets, jeans and bags'
+    elsif pc_handle contains 'backpack'
+      assign pc_best = 'Backpacks, bags and gear'
+    elsif pc_handle contains 'army' or pc_handle contains 'military' or pc_handle contains 'navy' or pc_handle contains 'tactical' or pc_handle contains 'police' or pc_handle contains 'firefighter' or pc_handle contains 'uniform'
+      assign pc_best = 'Uniforms, duty gear and caps'
+    elsif pc_handle contains 'football' or pc_handle contains 'soccer' or pc_handle contains 'sports'
+      assign pc_best = 'Team jerseys, jackets and bags'
+    elsif pc_handle contains 'motorcycle'
+      assign pc_best = 'Riding vests, jackets and bags'
+    elsif pc_handle contains 'girl-scout'
+      assign pc_best = 'Vests, sashes and bags'
+    elsif pc_handle contains 'morale' or pc_handle contains 'funny'
+      assign pc_best = 'Bags, caps, jackets and hook-and-loop panels'
+    endif
+  elsif pc_handle contains 'truck'
+    assign pc_best = 'Trucks, vans, trailers and toolboxes'
+  endif
+
+  assign pc_own_text = product.metafields.custom.short_description.value
+  if pc_own_text != blank
+    assign pc_text = pc_own_text
+  endif
+  assign pc_own_best = product.metafields.custom.best_uses.value
+  if pc_own_best != blank
+    assign pc_best = pc_own_best
+  endif
+
+  echo pc_text
+  echo '|||'
+  echo pc_best
+-%}

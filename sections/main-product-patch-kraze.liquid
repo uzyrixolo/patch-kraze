@@ -4,7 +4,8 @@
   "class": "section-main-product",
   "settings": [
     { "type": "text", "id": "backend_url", "label": "AI backend URL", "info": "Used for Remove Background and Edit with AI. Leave default unless the quote backend moves.", "default": "https://patch-kraze-quote-production.up.railway.app" },
-    { "type": "checkbox", "id": "show_description", "label": "Show the opening sentence of the product description", "default": false, "info": "Only switch this on once the product descriptions are our own wording." }
+    { "type": "checkbox", "id": "show_intro", "label": "Show a short description and best uses", "default": true, "info": "Written in the theme for each kind of product (snippets/pk-product-copy). A product can carry its own in the custom.short_description and custom.best_uses metafields." },
+    { "type": "checkbox", "id": "show_description", "label": "Show the opening sentence of the product description", "default": false, "info": "The description typed in the admin. Only switch this on once those descriptions are our own wording." }
   ],
   "blocks": [
     {
@@ -100,6 +101,9 @@
   .pk-rating-row:hover .pk-rating-row__count { text-decoration: underline; }
 
   .pk-lede { font-size: 0.95rem; line-height: 1.6; color: #4b5563; margin: 0; }
+  .pk-intro { display: grid; gap: 0.45rem; }
+  .pk-bestfor { margin: 0; font-size: 0.9rem; line-height: 1.5; color: #374151; }
+  .pk-bestfor__label { display: inline-block; margin-right: 0.4rem; padding: 0.1rem 0.5rem; border-radius: 999px; background: #f3e8ff; color: #6b21a8; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; vertical-align: 0.08em; }
 
   /* Live price card */
   .pk-price-card { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 0.9rem; padding: 0.9rem 1.1rem; }
@@ -649,6 +653,26 @@
       -%}
       {%- if section.settings.show_description and pk_lede != blank -%}
         <p class="pk-lede">{{ pk_lede }}{% unless pk_lede_end == '.' or pk_lede_end == '!' or pk_lede_end == '?' %}.{% endunless %}</p>
+      {%- endif -%}
+
+      {%- comment -%} What the product is and what it suits, written per kind of product in snippets/pk-product-copy. {%- endcomment -%}
+      {%- if section.settings.show_intro -%}
+        {%- capture pk_copy -%}{%- render 'pk-product-copy', product: product -%}{%- endcapture -%}
+        {%- liquid
+          assign pk_copy_parts = pk_copy | split: '|||'
+          assign pk_copy_text = pk_copy_parts[0] | strip
+          assign pk_copy_best = pk_copy_parts[1] | strip
+        -%}
+        {%- if pk_copy_text != blank or pk_copy_best != blank -%}
+          <div class="pk-intro">
+            {%- if pk_copy_text != blank -%}
+              <p class="pk-lede">{{ pk_copy_text }}</p>
+            {%- endif -%}
+            {%- if pk_copy_best != blank -%}
+              <p class="pk-bestfor"><span class="pk-bestfor__label">Best for</span> {{ pk_copy_best }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       {%- endif -%}
 
       <div class="pk-price-card">

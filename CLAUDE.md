@@ -475,6 +475,18 @@ Above the steps: title, rating row, the opening sentence of the description, a l
 - Hidden on the product templates, switch back on in the theme editor if wanted: the
   "Complete your order" product row (`product_list_ijbaxp`) and the before/after slider
   (`comparison_slider`).
+- **Under the title: a one-line description and a "Best for" line**, written in
+  `snippets/pk-product-copy.liquid` per kind of product (embroidered, 3D, chenille, leather,
+  PVC, printed, woven, flex, stickers, DTF and so on; the handle is checked before the product
+  type because a few listings carry a type that does not match). A listing named for a use
+  ("... for hats") gets that as its best use. The snippet prints `description|||best uses` and
+  the section splits it. `custom.short_description` and `custom.best_uses` metafields on a
+  product override it. Setting `show_intro`, on by default. It describes what the product is
+  and makes no claims about quality, speed or price. The description typed in the admin is
+  still not printed (`show_description`, off): most of those are one-line stubs.
+- Each order step is a bordered box (`.pk-step`), with the tinted band as its top edge.
+- A product whose images are all held back by `pk-image-ok` shows a plain tinted panel in the
+  gallery (`.pk-gallery-empty`) instead of a blank square.
 - Shopify refuses a section whose schema `name` is longer than 25 characters, the same silent
   failure on push as the 50-character option label. `shopify theme dev` shows it.
 - Verified 2026-10-02 on a development theme: displayed price equals the matched variant's
@@ -631,7 +643,11 @@ videos.
   (which renumbers its slides around the gaps). Anything new that draws product photos should
   ask the same snippet. The check is a safety net, not the fix: the photos still have to come
   off the products in the admin, and until then they remain in the product data the page
-  embeds and in its sharing tags.
+  embeds and in its sharing tags. The base theme's own product cards (collection pages,
+  search) do not use the snippet. Markers added on 2026-10-02 came from comparing the
+  pictures themselves across the whole catalog, not their file names; a marker must match
+  only the files it is meant for (our "...detailImagecollage" photos must stay visible, so
+  the `detailImage` markers end in the file extension).
 - The opening sentence of the product description on the product page is behind the
   `show_description` setting of `main-product-patch-kraze`, off by default.
 - **Gotcha: the base theme styles every `[role="tabpanel"]` on the site.**
