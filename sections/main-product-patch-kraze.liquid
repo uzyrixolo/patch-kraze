@@ -114,9 +114,12 @@
      step is the most visible thing in the order column; the band also does
      the job of the divider line between steps. */
   #product-form-pk { counter-reset: pkstep; }
-  .pk-step { counter-increment: pkstep; margin-top: 2.25rem; }
+  /* Each step is its own box: the tinted band is the top of the box and the
+     step's controls sit inside the border. */
+  .pk-step { counter-increment: pkstep; margin-top: 1.5rem; padding: 0 1.1rem 1.25rem; background: #fff; border: 1px solid #e3d5fb; border-radius: 1rem; }
   .pk-step--first { margin-top: 0.5rem; }
-  .pk-step__head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin-bottom: 1.15rem; padding: 0.7rem 1rem 0.7rem 0.7rem; background: #f3e8ff; border-radius: 0.85rem; }
+  .pk-step > :last-child { margin-bottom: 0; }
+  .pk-step__head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin: 0 -1.1rem 1.15rem; padding: 0.7rem 1rem 0.7rem 0.7rem; background: #f3e8ff; border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0; }
   .pk-step__num { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: #9333ea; color: #fff; font-size: 1.1rem; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 6px 14px -6px rgba(126, 34, 206, 0.75); }
   .pk-step__num::before { content: counter(pkstep); }
   .pk-step__title { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.01em; color: #111827; margin: 0; line-height: 1.2; }
@@ -331,8 +334,8 @@
     .pricing-header, .pricing-row { font-size: 0.8rem; padding: 0.75rem 0.5rem; min-width: unset; }
     .nav-arrow { width: 2.5rem; height: 2.5rem; }
     .pk-upload { min-height: 3.25rem; font-size: 1rem; }
-    .pk-step { margin-top: 2rem; }
-    .pk-step__head { padding: 0.6rem 0.85rem 0.6rem 0.6rem; }
+    .pk-step { margin-top: 1.25rem; padding: 0 0.85rem 1rem; }
+    .pk-step__head { margin: 0 -0.85rem 1rem; padding: 0.6rem 0.85rem 0.6rem 0.6rem; }
     .pk-step__num { width: 2rem; height: 2rem; font-size: 1rem; }
     .pk-step__title { font-size: 1.15rem; }
     /* The size links drop under the title, lined up with it. */
