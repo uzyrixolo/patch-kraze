@@ -94,21 +94,25 @@
     <h2 class="pk-aigen__history-title">Ordering options</h2>
     <p class="pk-aigen__order-note">Download your design, then upload it on any product page — pricing updates live as you customize.</p>
     <div class="pk-aigen__ordergrid">
-      {%- if all_products['embroidered-patches'].handle == 'embroidered-patches' -%}<a class="pk-aigen__ordercard" href="/products/embroidered-patches">Embroidered Patches</a>
-      {%- elsif all_products['custom-embroidered-patches'].handle == 'custom-embroidered-patches' -%}<a class="pk-aigen__ordercard" href="/products/custom-embroidered-patches">Embroidered Patches</a>{%- endif -%}
-      <a class="pk-aigen__ordercard" href="/products/3d-embroidered-patches">3D Embroidered</a>
-      {%- if all_products['full-color-printed-patches'].handle == 'full-color-printed-patches' -%}<a class="pk-aigen__ordercard" href="/products/full-color-printed-patches">Full Color Printed</a>{%- endif -%}
-      <a class="pk-aigen__ordercard" href="/products/pvc-patches">PVC Rubber</a>
-      {%- if all_products['leather-patches'].handle == 'leather-patches' -%}<a class="pk-aigen__ordercard" href="/products/leather-patches">Genuine Leather</a>{%- endif -%}
-      {%- if all_products['faux-leather-patches'].handle == 'faux-leather-patches' -%}<a class="pk-aigen__ordercard" href="/products/faux-leather-patches">Faux Leather</a>{%- endif -%}
-      <a class="pk-aigen__ordercard" href="/products/woven-patches">Woven</a>
-      {%- if all_products['chenille-patches'].handle == 'chenille-patches' -%}<a class="pk-aigen__ordercard" href="/products/chenille-patches">Chenille</a>{%- endif -%}
-      <a class="pk-aigen__ordercard" href="/products/silicone-patches">Silicone</a>
-      <a class="pk-aigen__ordercard" href="/products/full-color-flex-patches">Full Color Flex</a>
-      <a class="pk-aigen__ordercard" href="/products/name-patches">Name Patches</a>
-      <a class="pk-aigen__ordercard" href="/products/dtf-transfers">DTF Transfers</a>
-      <a class="pk-aigen__ordercard" href="/products/tackle-twill-letters">Tackle Twill</a>
-      <a class="pk-aigen__ordercard" href="/products/custom-keychains">PVC Keychains</a>
+      {%- comment -%}
+        "handle|label|1" marks a listing that has a replacement named "custom-"
+        plus its handle (see the footer): the card links to whichever of the
+        two is available and is left out when neither is.
+      {%- endcomment -%}
+      {%- assign aigen_products = 'embroidered-patches|Embroidered Patches|1,3d-embroidered-patches|3D Embroidered|0,full-color-printed-patches|Full Color Printed|1,pvc-patches|PVC Rubber|0,leather-patches|Genuine Leather|1,faux-leather-patches|Faux Leather|1,woven-patches|Woven|0,chenille-patches|Chenille|1,silicone-patches|Silicone|0,full-color-flex-patches|Full Color Flex|0,name-patches|Name Patches|0,dtf-transfers|DTF Transfers|0,tackle-twill-letters|Tackle Twill|0,custom-keychains|PVC Keychains|0' | split: ',' -%}
+      {%- for aigen_entry in aigen_products -%}
+        {%- assign aigen_parts = aigen_entry | split: '|' -%}
+        {%- assign aigen_handle = aigen_parts[0] -%}
+        {%- if aigen_parts[2] == '1' -%}
+          {%- assign aigen_new_handle = 'custom-' | append: aigen_handle -%}
+          {%- if all_products[aigen_new_handle].handle == aigen_new_handle -%}
+            {%- assign aigen_handle = aigen_new_handle -%}
+          {%- elsif all_products[aigen_handle].handle != aigen_handle -%}
+            {%- continue -%}
+          {%- endif -%}
+        {%- endif -%}
+        <a class="pk-aigen__ordercard" href="/products/{{ aigen_handle }}">{{ aigen_parts[1] }}</a>
+      {%- endfor -%}
       <a class="pk-aigen__ordercard" href="/pages/quote">Not sure? Get a Quote</a>
     </div>
   </div>

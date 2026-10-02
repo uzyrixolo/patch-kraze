@@ -691,6 +691,19 @@ credibility -> factory video -> `ordering_process` -> `price_includes` -> FAQ ->
   `custom-` (`custom-stickers`, `custom-keychains`); add a new replacement's handle to it.
 - Shopify refuses to duplicate a product that is under suspension. Replacements were copied
   from other listings on the same price grid (see `backups/products-snapshot-2026-10-02/`).
+- **Six replacement listings exist since 2026-10-02**, each with the same variants, prices and
+  price grid as the listing it replaces (checked cell by cell on the live pages):
+  `custom-embroidered-patches`, `custom-full-color-printed-patches`, `custom-chenille-patches`,
+  `custom-leather-patches`, `custom-faux-leather-patches`, `custom-metallic-flex-patches`. The
+  menu, the home page tabs, cards and price fact, the footer, the AI designer page and the
+  back-to-school page point at them; each picker keeps the old handle as its backup. A price
+  change to one of these patch types now has to be made on the replacement listing (variants
+  and `custom.prices` together, as always).
+- **A save from a theme editor tab that was opened before a push can drop new settings.** On
+  2026-10-02 a save in the editor removed a `backup_handle` this repo had just added to
+  `sections/header-group.json`, because that editor session predated the setting. Reload the
+  theme editor after a push that changes a schema or a JSON template, and re-check the JSON
+  after the next "Update from Shopify" commit.
 - `all_products` only answers for 20 different handles per page. The footer uses up to 8 and
   the back-to-school page about 9 more, so do not add lookups there without counting.
 - **`snippets/pk-image-ok.liquid` decides whether a product image may be shown.** It holds a

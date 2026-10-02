@@ -104,8 +104,8 @@
           "type": "tab",
           "settings": {
             "label": "Embroidered",
-            "product": "embroidered-patches",
-            "backup_handle": "custom-embroidered-patches",
+            "product": "custom-embroidered-patches",
+            "backup_handle": "embroidered-patches",
             "collection": "",
             "more_label": "See sizes and pricing"
           }
@@ -114,7 +114,8 @@
           "type": "tab",
           "settings": {
             "label": "Printed",
-            "product": "full-color-printed-patches",
+            "product": "custom-full-color-printed-patches",
+            "backup_handle": "full-color-printed-patches",
             "collection": "",
             "more_label": "See sizes and pricing"
           }
@@ -141,7 +142,8 @@
           "type": "tab",
           "settings": {
             "label": "Leather",
-            "product": "leather-patches",
+            "product": "custom-leather-patches",
+            "backup_handle": "leather-patches",
             "collection": "",
             "more_label": "See sizes and pricing"
           }
@@ -150,7 +152,8 @@
           "type": "tab",
           "settings": {
             "label": "Chenille",
-            "product": "chenille-patches",
+            "product": "custom-chenille-patches",
+            "backup_handle": "chenille-patches",
             "collection": "",
             "more_label": "See sizes and pricing"
           }
@@ -190,8 +193,8 @@
         "card_1": {
           "type": "product_card",
           "settings": {
-            "product": "embroidered-patches",
-            "backup_handle": "custom-embroidered-patches",
+            "product": "custom-embroidered-patches",
+            "backup_handle": "embroidered-patches",
             "point_1": "Classic stitched-thread texture",
             "point_2": "Merrowed or thin-stitched edge",
             "group": "embroidered",
@@ -201,7 +204,8 @@
         "card_2": {
           "type": "product_card",
           "settings": {
-            "product": "full-color-printed-patches",
+            "product": "custom-full-color-printed-patches",
+            "backup_handle": "full-color-printed-patches",
             "point_1": "Dye-sublimated, any number of colors",
             "point_2": "Handles photos, shading and small text",
             "group": "printed",
@@ -221,7 +225,8 @@
         "card_4": {
           "type": "product_card",
           "settings": {
-            "product": "leather-patches",
+            "product": "custom-leather-patches",
+            "backup_handle": "leather-patches",
             "point_1": "Real leather, laser-engraved",
             "point_2": "A natural match for hats and jackets",
             "group": "leather",
@@ -241,7 +246,8 @@
         "card_6": {
           "type": "product_card",
           "settings": {
-            "product": "faux-leather-patches",
+            "product": "custom-faux-leather-patches",
+            "backup_handle": "faux-leather-patches",
             "point_1": "Leather look, laser-engraved",
             "point_2": "Several colors, safe to machine wash",
             "group": "leather",
@@ -261,7 +267,8 @@
         "card_8": {
           "type": "product_card",
           "settings": {
-            "product": "metallic-flex-patches",
+            "product": "custom-metallic-flex-patches",
+            "backup_handle": "metallic-flex-patches",
             "point_1": "Raised finish with a metal look",
             "point_2": "Cut to your shape with clean edges",
             "group": "printed",
@@ -291,7 +298,8 @@
         "card_11": {
           "type": "product_card",
           "settings": {
-            "product": "chenille-patches",
+            "product": "custom-chenille-patches",
+            "backup_handle": "chenille-patches",
             "point_1": "Soft, fuzzy yarn on a felt base",
             "point_2": "The varsity-letter look for jackets",
             "group": "embroidered",
@@ -671,8 +679,8 @@
           "type": "fact",
           "settings": {
             "value": "",
-            "product": "embroidered-patches",
-            "backup_handle": "custom-embroidered-patches",
+            "product": "custom-embroidered-patches",
+            "backup_handle": "embroidered-patches",
             "label": "lowest price per piece",
             "text": "For embroidered patches at the largest quantity. Every price break is on the product page."
           }

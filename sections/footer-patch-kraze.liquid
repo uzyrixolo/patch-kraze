@@ -113,22 +113,27 @@
         <h3 class="footer-col-title">Our Products</h3>
         <ul class="footer-nav-list">
           {%- comment -%}
-            These seven are shown only while the product is available. An unavailable
-            product comes back as an empty object that still counts as true, so the
-            test is whether it has the handle that was asked for.
+            "handle|label|1" marks a listing that has a replacement named
+            "custom-" plus its handle: the link goes to the replacement while it
+            is available, to the listing itself if only that one is, and is left
+            out when neither is. An unavailable product comes back as an empty
+            object that still counts as true, so the test is whether it has the
+            handle that was asked for.
           {%- endcomment -%}
-          {%- comment -%} Embroidered has a replacement listing that takes over when the first one is gone. {%- endcomment -%}
-          {%- if all_products['embroidered-patches'].handle == 'embroidered-patches' -%}<li class="footer-nav-item"><a href="/products/embroidered-patches" class="footer-nav-link">Embroidered Patches</a></li>
-          {%- elsif all_products['custom-embroidered-patches'].handle == 'custom-embroidered-patches' -%}<li class="footer-nav-item"><a href="/products/custom-embroidered-patches" class="footer-nav-link">Embroidered Patches</a></li>{%- endif -%}
-          {%- if all_products['metallic-flex-patches'].handle == 'metallic-flex-patches' -%}<li class="footer-nav-item"><a href="/products/metallic-flex-patches" class="footer-nav-link">Metallic Flex Patches</a></li>{%- endif -%}
-          {%- if all_products['full-color-printed-patches'].handle == 'full-color-printed-patches' -%}<li class="footer-nav-item"><a href="/products/full-color-printed-patches" class="footer-nav-link">Full Color Printed Patches</a></li>{%- endif -%}
-          <li class="footer-nav-item"><a href="/products/pvc-patches" class="footer-nav-link">PVC Patches</a></li>
-          {%- if all_products['leather-patches'].handle == 'leather-patches' -%}<li class="footer-nav-item"><a href="/products/leather-patches" class="footer-nav-link">Genuine Leather Patches</a></li>{%- endif -%}
-          {%- if all_products['faux-leather-patches'].handle == 'faux-leather-patches' -%}<li class="footer-nav-item"><a href="/products/faux-leather-patches" class="footer-nav-link">Faux Leather Patches</a></li>{%- endif -%}
-          <li class="footer-nav-item"><a href="/products/woven-patches" class="footer-nav-link">Woven Patches</a></li>
-          <li class="footer-nav-item"><a href="/products/3d-embroidered-patches" class="footer-nav-link">3D Embroidered Patches</a></li>
-          {%- if all_products['chenille-patches'].handle == 'chenille-patches' -%}<li class="footer-nav-item"><a href="/products/chenille-patches" class="footer-nav-link">Chenille Patches</a></li>{%- endif -%}
-          <li class="footer-nav-item"><a href="/products/custom-stickers" class="footer-nav-link">Custom Stickers</a></li>
+          {%- assign footer_products = 'embroidered-patches|Embroidered Patches|1,metallic-flex-patches|Metallic Flex Patches|1,full-color-printed-patches|Full Color Printed Patches|1,pvc-patches|PVC Patches|0,leather-patches|Genuine Leather Patches|1,faux-leather-patches|Faux Leather Patches|1,woven-patches|Woven Patches|0,3d-embroidered-patches|3D Embroidered Patches|0,chenille-patches|Chenille Patches|1,custom-stickers|Custom Stickers|0' | split: ',' -%}
+          {%- for footer_entry in footer_products -%}
+            {%- assign footer_parts = footer_entry | split: '|' -%}
+            {%- assign footer_handle = footer_parts[0] -%}
+            {%- if footer_parts[2] == '1' -%}
+              {%- assign footer_new_handle = 'custom-' | append: footer_handle -%}
+              {%- if all_products[footer_new_handle].handle == footer_new_handle -%}
+                {%- assign footer_handle = footer_new_handle -%}
+              {%- elsif all_products[footer_handle].handle != footer_handle -%}
+                {%- continue -%}
+              {%- endif -%}
+            {%- endif -%}
+            <li class="footer-nav-item"><a href="/products/{{ footer_handle }}" class="footer-nav-link">{{ footer_parts[1] }}</a></li>
+          {%- endfor -%}
         </ul>
       </div>
 

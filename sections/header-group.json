@@ -17,7 +17,8 @@
         "menu_embroidered_patches": {
           "type": "menu_product",
           "settings": {
-            "product": "embroidered-patches",
+            "product": "custom-embroidered-patches",
+            "backup_handle": "embroidered-patches",
             "label": "Embroidered",
             "group": "stitched"
           }
@@ -41,7 +42,8 @@
         "menu_chenille_patches": {
           "type": "menu_product",
           "settings": {
-            "product": "chenille-patches",
+            "product": "custom-chenille-patches",
+            "backup_handle": "chenille-patches",
             "label": "Chenille",
             "group": "stitched"
           }
@@ -73,7 +75,8 @@
         "menu_full_color_printed_patches": {
           "type": "menu_product",
           "settings": {
-            "product": "full-color-printed-patches",
+            "product": "custom-full-color-printed-patches",
+            "backup_handle": "full-color-printed-patches",
             "label": "Full color printed",
             "group": "printed"
           }
@@ -153,7 +156,8 @@
         "menu_leather_patches": {
           "type": "menu_product",
           "settings": {
-            "product": "leather-patches",
+            "product": "custom-leather-patches",
+            "backup_handle": "leather-patches",
             "label": "Genuine leather",
             "group": "leather"
           }
@@ -161,7 +165,8 @@
         "menu_faux_leather_patches": {
           "type": "menu_product",
           "settings": {
-            "product": "faux-leather-patches",
+            "product": "custom-faux-leather-patches",
+            "backup_handle": "faux-leather-patches",
             "label": "Faux leather",
             "group": "leather"
           }
