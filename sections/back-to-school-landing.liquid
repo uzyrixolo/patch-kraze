@@ -554,6 +554,8 @@
     <div class="bts-category-grid">
       {%- for block in category_blocks -%}
         {%- assign card_product = all_products[block.settings.product] -%}
+        {%- comment -%} A card that names a product is left out while that product is unavailable. {%- endcomment -%}
+        {%- if block.settings.product != blank and card_product.id == blank -%}{%- continue -%}{%- endif -%}
         {%- assign card_link = block.settings.link | default: card_product.url | default: quote_link -%}
         <a href="{{ card_link }}" class="bts-category-card" {{ block.shopify_attributes }}>
           <div class="bts-category-media">

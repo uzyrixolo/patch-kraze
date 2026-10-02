@@ -91,16 +91,29 @@
   assign skip_list = section.settings.skip_keywords | split: ','
   assign btn_1_link = section.settings.card_btn_1_link | default: '/pages/quote'
   assign btn_2_link = section.settings.card_btn_2_link | default: '#styles'
+
+  comment
+    A tab whose product or collection is no longer available is left out. The
+    first tab that still has something to show starts selected.
+  endcomment
+  assign ts_first_id = ''
+  for block in section.blocks
+    if block.settings.product != blank or block.settings.collection != blank
+      assign ts_first_id = block.id
+      break
+    endif
+  endfor
 -%}
 
-{%- if section.blocks.size > 0 -%}
+{%- if ts_first_id != '' -%}
 <section class="pk-ts">
   <div class="pk-ts__inner">
     <div class="pk-ts__box">
       <div class="pk-ts__main">
         <div class="pk-ts__tabs" role="tablist" aria-label="Patch styles" data-ts-tabs>
           {%- for block in section.blocks -%}
-            <button type="button" class="pk-ts__tab" role="tab" id="ts-tab-{{ block.id }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="ts-panel-{{ block.id }}" data-ts-tab {{ block.shopify_attributes }}>{{ block.settings.label }}</button>
+            {%- if block.settings.product == blank and block.settings.collection == blank -%}{%- continue -%}{%- endif -%}
+            <button type="button" class="pk-ts__tab" role="tab" id="ts-tab-{{ block.id }}" aria-selected="{% if block.id == ts_first_id %}true{% else %}false{% endif %}" aria-controls="ts-panel-{{ block.id }}" data-ts-tab {{ block.shopify_attributes }}>{{ block.settings.label }}</button>
           {%- endfor -%}
         </div>
 
@@ -109,7 +122,8 @@
             assign tab_product = block.settings.product
             assign tab_collection = block.settings.collection
           -%}
-          <div class="pk-ts__panel" role="tabpanel" id="ts-panel-{{ block.id }}" aria-labelledby="ts-tab-{{ block.id }}"{% unless forloop.first %} hidden{% endunless %}>
+          {%- if tab_product == blank and tab_collection == blank -%}{%- continue -%}{%- endif -%}
+          <div class="pk-ts__panel" role="tabpanel" id="ts-panel-{{ block.id }}" aria-labelledby="ts-tab-{{ block.id }}"{% unless block.id == ts_first_id %} hidden{% endunless %}>
             {%- if tab_product != blank -%}
               <div class="pk-ts__row">
                 {%- assign shown = 0 -%}

@@ -588,6 +588,14 @@ videos.
   steps as a numbered list down a line on the right. No pictures. Step text should describe
   what this store actually does (the mockup is the optional checkbox on the product page,
   in 24-48 hours; nothing here charges for a proof).
+- **A product can disappear from the storefront** (set to Draft, or hidden by Shopify), and
+  the theme has to cope. A product setting then resolves to blank and `all_products[handle].id`
+  is empty. The header drops a menu group whose products are all gone, heading included, and
+  closes the grid up (`--pk-cols`); the menu snippet uses its typed fallback list only when a
+  group has no blocks at all. `type-showcase` leaves out a tab with nothing to show.
+  The footer, the AI designer page and the back-to-school cards check availability before
+  linking to the products that have been affected. On `shopify theme dev` a Draft product
+  still resolves, so test this with a handle that does not exist.
 - **`snippets/pk-image-ok.liquid` decides whether a product image may be shown.** It holds a
   short list of file-name markers; an image whose file name contains one is skipped by the
   header menu thumbnails, the homepage cards and photo tabs, and the product page gallery

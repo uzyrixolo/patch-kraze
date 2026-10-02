@@ -161,7 +161,7 @@
     opacity: 0; visibility: hidden; transform: translateY(-4px);
     transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0.15s;
   }
-  .pk-panel--wide { right: 0; display: grid; grid-template-columns: 1.3fr 1fr 1.15fr 0.8fr 1.2fr; gap: 2rem; }
+  .pk-panel--wide { right: 0; display: grid; grid-template-columns: repeat(var(--pk-cols, 4), minmax(0, 1fr)) minmax(0, 1.15fr); gap: 2rem; }
   .pk-panel--list { min-width: 17rem; padding: 0.9rem 1rem; }
   @media (hover: hover) {
     .pk-menu__item:hover > .pk-panel { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
@@ -291,31 +291,66 @@
             Patches
             <span class="pk-menu__chev" aria-hidden="true">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
           </button>
-          <div class="pk-panel pk-panel--wide" id="pk-panel-patches">
-            <div>
-              <p class="pk-panel__head">Embroidered &amp; woven</p>
-              <ul class="pk-panel__links">
-                {%- render 'pk-menu-links', blocks: section.blocks, group: 'stitched', fallback: pk_grp_stitched, variant: 'panel' -%}
-              </ul>
-            </div>
-            <div>
-              <p class="pk-panel__head">Printed &amp; flex</p>
-              <ul class="pk-panel__links">
-                {%- render 'pk-menu-links', blocks: section.blocks, group: 'printed', fallback: pk_grp_printed, variant: 'panel' -%}
-              </ul>
-            </div>
-            <div>
-              <p class="pk-panel__head">PVC, rubber &amp; silicone</p>
-              <ul class="pk-panel__links">
-                {%- render 'pk-menu-links', blocks: section.blocks, group: 'molded', fallback: pk_grp_molded, variant: 'panel' -%}
-              </ul>
-            </div>
-            <div>
-              <p class="pk-panel__head">Leather</p>
-              <ul class="pk-panel__links">
-                {%- render 'pk-menu-links', blocks: section.blocks, group: 'leather', fallback: pk_grp_leather, variant: 'panel' -%}
-              </ul>
-            </div>
+          {%- liquid
+            comment
+              Each group's links are rendered first; a group whose products have all
+              gone is left out, heading and all, and the grid closes up around it.
+            endcomment
+            assign pk_patch_cols = 0
+            capture pk_links_stitched
+              render 'pk-menu-links', blocks: section.blocks, group: 'stitched', fallback: pk_grp_stitched, variant: 'panel'
+            endcapture
+            capture pk_links_printed
+              render 'pk-menu-links', blocks: section.blocks, group: 'printed', fallback: pk_grp_printed, variant: 'panel'
+            endcapture
+            capture pk_links_molded
+              render 'pk-menu-links', blocks: section.blocks, group: 'molded', fallback: pk_grp_molded, variant: 'panel'
+            endcapture
+            capture pk_links_leather
+              render 'pk-menu-links', blocks: section.blocks, group: 'leather', fallback: pk_grp_leather, variant: 'panel'
+            endcapture
+            assign pk_links_stitched = pk_links_stitched | strip
+            assign pk_links_printed = pk_links_printed | strip
+            assign pk_links_molded = pk_links_molded | strip
+            assign pk_links_leather = pk_links_leather | strip
+            if pk_links_stitched != blank
+              assign pk_patch_cols = pk_patch_cols | plus: 1
+            endif
+            if pk_links_printed != blank
+              assign pk_patch_cols = pk_patch_cols | plus: 1
+            endif
+            if pk_links_molded != blank
+              assign pk_patch_cols = pk_patch_cols | plus: 1
+            endif
+            if pk_links_leather != blank
+              assign pk_patch_cols = pk_patch_cols | plus: 1
+            endif
+          -%}
+          <div class="pk-panel pk-panel--wide" id="pk-panel-patches" style="--pk-cols: {{ pk_patch_cols }};">
+            {%- if pk_links_stitched != blank -%}
+              <div>
+                <p class="pk-panel__head">Embroidered &amp; woven</p>
+                <ul class="pk-panel__links">{{ pk_links_stitched }}</ul>
+              </div>
+            {%- endif -%}
+            {%- if pk_links_printed != blank -%}
+              <div>
+                <p class="pk-panel__head">Printed &amp; flex</p>
+                <ul class="pk-panel__links">{{ pk_links_printed }}</ul>
+              </div>
+            {%- endif -%}
+            {%- if pk_links_molded != blank -%}
+              <div>
+                <p class="pk-panel__head">PVC, rubber &amp; silicone</p>
+                <ul class="pk-panel__links">{{ pk_links_molded }}</ul>
+              </div>
+            {%- endif -%}
+            {%- if pk_links_leather != blank -%}
+              <div>
+                <p class="pk-panel__head">Leather</p>
+                <ul class="pk-panel__links">{{ pk_links_leather }}</ul>
+              </div>
+            {%- endif -%}
             <div class="pk-panel__aside">
               <p class="pk-panel__aside-title">Not sure which style suits your design?</p>
               <p class="pk-panel__aside-text">Send us the artwork and we'll point you to the right patch, with a price.</p>
@@ -390,14 +425,30 @@
       <details class="pk-drawer__group" open>
         <summary>Patches <span class="pk-drawer__chev" aria-hidden="true">{{- 'icon-caret.svg' | inline_asset_content -}}</span></summary>
         <div class="pk-drawer__sub">
-          <p class="pk-drawer__label">Embroidered &amp; woven</p>
-          {%- render 'pk-menu-links', blocks: section.blocks, group: 'stitched', fallback: pk_grp_stitched, variant: 'drawer' -%}
-          <p class="pk-drawer__label">Printed &amp; flex</p>
-          {%- render 'pk-menu-links', blocks: section.blocks, group: 'printed', fallback: pk_grp_printed, variant: 'drawer' -%}
-          <p class="pk-drawer__label">PVC, rubber &amp; silicone</p>
-          {%- render 'pk-menu-links', blocks: section.blocks, group: 'molded', fallback: pk_grp_molded, variant: 'drawer' -%}
-          <p class="pk-drawer__label">Leather</p>
-          {%- render 'pk-menu-links', blocks: section.blocks, group: 'leather', fallback: pk_grp_leather, variant: 'drawer' -%}
+          {%- capture pk_drawer_links -%}{%- render 'pk-menu-links', blocks: section.blocks, group: 'stitched', fallback: pk_grp_stitched, variant: 'drawer' -%}{%- endcapture -%}
+          {%- assign pk_drawer_links = pk_drawer_links | strip -%}
+          {%- if pk_drawer_links != blank -%}
+            <p class="pk-drawer__label">Embroidered &amp; woven</p>
+            {{ pk_drawer_links }}
+          {%- endif -%}
+          {%- capture pk_drawer_links -%}{%- render 'pk-menu-links', blocks: section.blocks, group: 'printed', fallback: pk_grp_printed, variant: 'drawer' -%}{%- endcapture -%}
+          {%- assign pk_drawer_links = pk_drawer_links | strip -%}
+          {%- if pk_drawer_links != blank -%}
+            <p class="pk-drawer__label">Printed &amp; flex</p>
+            {{ pk_drawer_links }}
+          {%- endif -%}
+          {%- capture pk_drawer_links -%}{%- render 'pk-menu-links', blocks: section.blocks, group: 'molded', fallback: pk_grp_molded, variant: 'drawer' -%}{%- endcapture -%}
+          {%- assign pk_drawer_links = pk_drawer_links | strip -%}
+          {%- if pk_drawer_links != blank -%}
+            <p class="pk-drawer__label">PVC, rubber &amp; silicone</p>
+            {{ pk_drawer_links }}
+          {%- endif -%}
+          {%- capture pk_drawer_links -%}{%- render 'pk-menu-links', blocks: section.blocks, group: 'leather', fallback: pk_grp_leather, variant: 'drawer' -%}{%- endcapture -%}
+          {%- assign pk_drawer_links = pk_drawer_links | strip -%}
+          {%- if pk_drawer_links != blank -%}
+            <p class="pk-drawer__label">Leather</p>
+            {{ pk_drawer_links }}
+          {%- endif -%}
         </div>
       </details>
       <details class="pk-drawer__group">
