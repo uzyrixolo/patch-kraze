@@ -122,7 +122,9 @@
                       {%- assign skip_image = true -%}
                     {%- endif -%}
                   {%- endfor -%}
-                  {%- if skip_image -%}{%- continue -%}{%- endif -%}
+                  {%- capture image_ok -%}{%- render 'pk-image-ok', src: image.src -%}{%- endcapture -%}
+                  {%- assign image_ok = image_ok | strip -%}
+                  {%- if skip_image or image_ok == blank -%}{%- continue -%}{%- endif -%}
                   {%- assign shown = shown | plus: 1 -%}
                   <a class="pk-ts__tile" href="{{ tab_product.url }}" aria-label="{{ tab_product.title | escape }}, photo {{ shown }}">
                     <img src="{{ image | image_url: width: 360, height: 360, crop: 'center' }}" width="360" height="360" loading="lazy" alt="">

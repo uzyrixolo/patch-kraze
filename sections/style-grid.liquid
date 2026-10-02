@@ -242,7 +242,17 @@
       {%- for block in section.blocks -%}
         {%- assign product = block.settings.product -%}
         {%- if product != blank -%}
-          {%- assign card_image = block.settings.image | default: product.featured_image -%}
+          {%- assign card_image = block.settings.image -%}
+          {%- if card_image == blank -%}
+            {%- for product_image in product.images -%}
+              {%- capture product_image_ok -%}{%- render 'pk-image-ok', src: product_image.src -%}{%- endcapture -%}
+              {%- assign product_image_ok = product_image_ok | strip -%}
+              {%- if product_image_ok != blank -%}
+                {%- assign card_image = product_image -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
           <article class="pk-sg__cell" data-sg-group="{{ block.settings.group }}"{% if block.settings.best_seller %} data-sg-best{% endif %} {{ block.shopify_attributes }}>
             {%- comment -%} The photo repeats the name link, so it is kept out of the tab order. {%- endcomment -%}
             <a class="pk-sg__photo" href="{{ product.url }}" tabindex="-1" aria-hidden="true">

@@ -3,7 +3,8 @@
   "name": "Main Product PK",
   "class": "section-main-product",
   "settings": [
-    { "type": "text", "id": "backend_url", "label": "AI backend URL", "info": "Used for Remove Background and Edit with AI. Leave default unless the quote backend moves.", "default": "https://patch-kraze-quote-production.up.railway.app" }
+    { "type": "text", "id": "backend_url", "label": "AI backend URL", "info": "Used for Remove Background and Edit with AI. Leave default unless the quote backend moves.", "default": "https://patch-kraze-quote-production.up.railway.app" },
+    { "type": "checkbox", "id": "show_description", "label": "Show the opening sentence of the product description", "default": false, "info": "Only switch this on once the product descriptions are our own wording." }
   ],
   "blocks": [
     {
@@ -531,17 +532,39 @@
 <div class="product-page-main">
   <div class="product-container">
 
-    <!-- Gallery -->
+    <!-- Gallery. Media held back by snippets/pk-image-ok is left out, so the
+         slide and thumbnail numbering below counts only what is shown. -->
+    {%- liquid
+      assign pk_shown_ids = ''
+      for media in product.media
+        capture pk_media_ok
+          render 'pk-image-ok', src: media.preview_image.src
+        endcapture
+        assign pk_media_ok = pk_media_ok | strip
+        if pk_media_ok != blank
+          assign pk_shown_ids = pk_shown_ids | append: ',' | append: media.id | append: ','
+        endif
+      endfor
+      assign pk_shown_count = pk_shown_ids | split: ',,' | size
+      if pk_shown_ids == ''
+        assign pk_shown_count = 0
+      endif
+    -%}
     <div class="product-gallery">
       <div class="main-image-wrapper">
-        <button class="nav-arrow prev{% if product.media.size <= 1 %} hidden{% endif %}" id="btnPrev"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg></button>
+        <button class="nav-arrow prev{% if pk_shown_count <= 1 %} hidden{% endif %}" id="btnPrev"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg></button>
         <div class="gallery-scroller" id="galleryScroller">
+          {%- assign pk_slide = 0 -%}
           {% for media in product.media %}
-            <div class="gallery-slide" data-index="{{ forloop.index0 }}" data-media-type="{{ media.media_type }}">
+            {%- assign pk_media_key = ',' | append: media.id | append: ',' -%}
+            {%- unless pk_shown_ids contains pk_media_key -%}{%- continue -%}{%- endunless -%}
+            {%- assign pk_first_slide = false -%}
+            {%- if pk_slide == 0 -%}{%- assign pk_first_slide = true -%}{%- endif -%}
+            <div class="gallery-slide" data-index="{{ pk_slide }}" data-media-type="{{ media.media_type }}">
               {%- case media.media_type -%}
                 {%- when 'video' -%}
                   <video
-                    id="{% if forloop.first %}mainProductImage{% endif %}"
+                    id="{% if pk_first_slide %}mainProductImage{% endif %}"
                     poster="{{ media.preview_image | image_url: width: 1000 }}"
                     controls
                     playsinline
@@ -555,7 +578,7 @@
                 {%- when 'external_video' -%}
                   {% if media.host == 'youtube' %}
                     <iframe
-                      id="{% if forloop.first %}mainProductImage{% endif %}"
+                      id="{% if pk_first_slide %}mainProductImage{% endif %}"
                       src="https://www.youtube.com/embed/{{ media.external_id }}?rel=0&playsinline=1"
                       frameborder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -564,7 +587,7 @@
                     ></iframe>
                   {% else %}
                     <iframe
-                      id="{% if forloop.first %}mainProductImage{% endif %}"
+                      id="{% if pk_first_slide %}mainProductImage{% endif %}"
                       src="https://player.vimeo.com/video/{{ media.external_id }}"
                       frameborder="0"
                       allow="autoplay; fullscreen"
@@ -573,12 +596,13 @@
                     ></iframe>
                   {% endif %}
                 {%- else -%}
-                  <img id="{% if forloop.first %}mainProductImage{% endif %}" src="{{ media | image_url: width: 1000 }}" width="1000" height="1000" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+                  <img id="{% if pk_first_slide %}mainProductImage{% endif %}" src="{{ media | image_url: width: 1000 }}" width="1000" height="1000" loading="{% if pk_first_slide %}eager{% else %}lazy{% endif %}">
               {%- endcase -%}
             </div>
+            {%- assign pk_slide = pk_slide | plus: 1 -%}
           {% endfor %}
         </div>
-        <button class="nav-arrow next{% if product.media.size <= 1 %} hidden{% endif %}" id="btnNext"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        <button class="nav-arrow next{% if pk_shown_count <= 1 %} hidden{% endif %}" id="btnNext"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
         <button class="zoom-icon" onclick="zoomImage()">
           <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="11" cy="11" r="8"/>
@@ -587,10 +611,14 @@
           </svg>
         </button>
       </div>
-      {% if product.media.size > 1 %}
+      {% if pk_shown_count > 1 %}
       <div class="thumbnails-row">
+        {%- assign pk_thumb = 0 -%}
         {% for media in product.media %}
-          <button class="thumbnail-btn {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
+          {%- assign pk_media_key = ',' | append: media.id | append: ',' -%}
+          {%- unless pk_shown_ids contains pk_media_key -%}{%- continue -%}{%- endunless -%}
+          <button class="thumbnail-btn {% if pk_thumb == 0 %}active{% endif %}" data-index="{{ pk_thumb }}">
+          {%- assign pk_thumb = pk_thumb | plus: 1 -%}
             <img src="{{ media.preview_image | image_url: width: 200 }}" width="200" height="200">
             {% if media.media_type == 'video' or media.media_type == 'external_video' %}
               <span class="thumbnail-play-icon">▶</span>
@@ -631,7 +659,7 @@
         assign pk_lede = pk_lede | split: '. ' | first | split: '! ' | first | split: '? ' | first | strip | truncate: 220
         assign pk_lede_end = pk_lede | slice: -1
       -%}
-      {%- if pk_lede != blank -%}
+      {%- if section.settings.show_description and pk_lede != blank -%}
         <p class="pk-lede">{{ pk_lede }}{% unless pk_lede_end == '.' or pk_lede_end == '!' or pk_lede_end == '?' %}.{% endunless %}</p>
       {%- endif -%}
 

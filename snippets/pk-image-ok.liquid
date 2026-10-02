@@ -1,0 +1,23 @@
+{%- doc -%}
+  Prints "1" when an image may be shown on the storefront, and nothing when
+  it may not. Callers capture the output and test it for blank.
+
+  An image is held back when its file name contains one of the markers below.
+  Those files must not appear in menus, cards or product galleries; the
+  proper fix is to remove them from the product in the admin, and this check
+  is the safety net until that is done (and if one is ever added again).
+
+  @param {string} src - the image's src
+{%- enddoc -%}
+
+{%- liquid
+  assign pk_markers = 'NP0,_NP_,NT.Patches,Ninja_,fauxpatchexplainer,Patch_PrintEmb,Kraken' | split: ','
+  assign pk_image_ok = '1'
+  for pk_marker in pk_markers
+    if src contains pk_marker
+      assign pk_image_ok = ''
+      break
+    endif
+  endfor
+  echo pk_image_ok
+-%}

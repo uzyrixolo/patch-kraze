@@ -2,8 +2,8 @@
   Links for one group of the header menu, each with a small thumbnail.
 
   Product links come from the header section's "menu_product" blocks whose
-  group matches; the thumbnail is the product's own featured photo, so it
-  follows the product if its photo changes. When no block matches, the
+  group matches; the thumbnail is the product's first photo that may be shown
+  (see snippets/pk-image-ok), so it follows the product if its photos change. When no block matches, the
   `fallback` list is used instead: "Label|/url" or "Label|/url|file-name"
   entries, the optional third part naming an image in Files.
 
@@ -22,8 +22,17 @@
   {%- assign rendered = rendered | plus: 1 -%}
   {%- if variant == 'panel' -%}<li {{ block.shopify_attributes }}>{%- endif -%}
     <a href="{{ item.url }}">
-      {%- if item.featured_image -%}
-        <img class="pk-thumb" src="{{ item.featured_image | image_url: width: 96, height: 96, crop: 'center' }}" width="48" height="48" alt="" loading="lazy" decoding="async">
+      {%- assign item_thumb = '' -%}
+      {%- for item_image in item.images -%}
+        {%- capture item_image_ok -%}{%- render 'pk-image-ok', src: item_image.src -%}{%- endcapture -%}
+        {%- assign item_image_ok = item_image_ok | strip -%}
+        {%- if item_image_ok != blank -%}
+          {%- assign item_thumb = item_image -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if item_thumb != blank -%}
+        <img class="pk-thumb" src="{{ item_thumb | image_url: width: 96, height: 96, crop: 'center' }}" width="48" height="48" alt="" loading="lazy" decoding="async">
       {%- else -%}
         <span class="pk-thumb" aria-hidden="true"></span>
       {%- endif -%}

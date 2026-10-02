@@ -11,3 +11,6 @@ __pycache__/
 
 # Local agent/dev-server config
 .claude/
+
+# Local working records; never committed
+local-records/

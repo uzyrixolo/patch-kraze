@@ -588,6 +588,15 @@ videos.
   steps as a numbered list down a line on the right. No pictures. Step text should describe
   what this store actually does (the mockup is the optional checkbox on the product page,
   in 24-48 hours; nothing here charges for a proof).
+- **`snippets/pk-image-ok.liquid` decides whether a product image may be shown.** It holds a
+  short list of file-name markers; an image whose file name contains one is skipped by the
+  header menu thumbnails, the homepage cards and photo tabs, and the product page gallery
+  (which renumbers its slides around the gaps). Anything new that draws product photos should
+  ask the same snippet. The check is a safety net, not the fix: the photos still have to come
+  off the products in the admin, and until then they remain in the product data the page
+  embeds and in its sharing tags.
+- The opening sentence of the product description on the product page is behind the
+  `show_description` setting of `main-product-patch-kraze`, off by default.
 - **Gotcha: the base theme styles every `[role="tabpanel"]` on the site.**
   `sections/layered-slideshow.liquid` ships unscoped rules (width 100% under 750px, height,
   z-index). `style-grid` and `type-showcase` each carry a reset for their own panel; any new
