@@ -18,7 +18,6 @@
           "type": "menu_product",
           "settings": {
             "product": "embroidered-patches",
-            "backup_handle": "custom-embroidered-patches",
             "label": "Embroidered",
             "group": "stitched"
           }
@@ -91,7 +90,7 @@
           "type": "menu_product",
           "settings": {
             "product": "gold-flex-patches",
-            "label": "Gold flex",
+            "label": "Shining gold TPU flex",
             "group": "printed"
           }
         },
