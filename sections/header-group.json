@@ -17,7 +17,7 @@
         "menu_embroidered_patches": {
           "type": "menu_product",
           "settings": {
-            "product": "custom-embroidered-patches",
+            "product": "embroidered-patches",
             "backup_handle": "embroidered-patches",
             "label": "Embroidered",
             "group": "stitched"
@@ -27,6 +27,7 @@
           "type": "menu_product",
           "settings": {
             "product": "3d-embroidered-patches",
+            "backup_handle": "",
             "label": "3D embroidered",
             "group": "stitched"
           }
@@ -35,6 +36,7 @@
           "type": "menu_product",
           "settings": {
             "product": "name-patches",
+            "backup_handle": "",
             "label": "Name patches",
             "group": "stitched"
           }
@@ -52,6 +54,7 @@
           "type": "menu_product",
           "settings": {
             "product": "tackle-twill-letters",
+            "backup_handle": "",
             "label": "Tackle twill letters",
             "group": "stitched"
           }
@@ -60,6 +63,7 @@
           "type": "menu_product",
           "settings": {
             "product": "woven-patches",
+            "backup_handle": "",
             "label": "Woven",
             "group": "stitched"
           }
@@ -68,6 +72,7 @@
           "type": "menu_product",
           "settings": {
             "product": "glow-in-the-dark-embroidery-patches",
+            "backup_handle": "",
             "label": "Glow-in-the-dark embroidered",
             "group": "stitched"
           }
@@ -85,6 +90,7 @@
           "type": "menu_product",
           "settings": {
             "product": "full-color-flex-patches",
+            "backup_handle": "",
             "label": "Full color TPU flex patches",
             "group": "printed"
           }
@@ -93,6 +99,7 @@
           "type": "menu_product",
           "settings": {
             "product": "gold-flex-patches",
+            "backup_handle": "",
             "label": "Shiny Gold TPU Flex",
             "group": "printed"
           }
@@ -101,6 +108,7 @@
           "type": "menu_product",
           "settings": {
             "product": "silver-flex-patches",
+            "backup_handle": "",
             "label": "Silver flex",
             "group": "printed"
           }
@@ -109,6 +117,7 @@
           "type": "menu_product",
           "settings": {
             "product": "pu-uv-3d-patches",
+            "backup_handle": "",
             "label": "TPU UV 3D",
             "group": "printed"
           }
@@ -117,6 +126,7 @@
           "type": "menu_product",
           "settings": {
             "product": "pvc-rubber-patches",
+            "backup_handle": "",
             "label": "PVC rubber",
             "group": "molded"
           }
@@ -125,6 +135,7 @@
           "type": "menu_product",
           "settings": {
             "product": "3d-pvc-patches",
+            "backup_handle": "",
             "label": "3D PVC",
             "group": "molded"
           }
@@ -133,6 +144,7 @@
           "type": "menu_product",
           "settings": {
             "product": "glow-in-the-dark-pvc-rubber-patches",
+            "backup_handle": "",
             "label": "Glow-in-the-dark PVC",
             "group": "molded"
           }
@@ -141,6 +153,7 @@
           "type": "menu_product",
           "settings": {
             "product": "silicone-patches",
+            "backup_handle": "",
             "label": "Silicone",
             "group": "molded"
           }
@@ -149,6 +162,7 @@
           "type": "menu_product",
           "settings": {
             "product": "custom-keychains",
+            "backup_handle": "",
             "label": "PVC keychains",
             "group": "molded"
           }
@@ -175,6 +189,7 @@
           "type": "menu_product",
           "settings": {
             "product": "custom-vinyl-stickers",
+            "backup_handle": "",
             "label": "Vinyl stickers",
             "group": "stickers"
           }
@@ -183,6 +198,7 @@
           "type": "menu_product",
           "settings": {
             "product": "holographic-stickers",
+            "backup_handle": "",
             "label": "Holographic stickers",
             "group": "stickers"
           }
@@ -191,6 +207,7 @@
           "type": "menu_product",
           "settings": {
             "product": "uv-transparent-stickers",
+            "backup_handle": "",
             "label": "UV transparent stickers",
             "group": "stickers"
           }
