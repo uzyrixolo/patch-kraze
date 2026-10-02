@@ -1,0 +1,181 @@
+{
+ "read_from": "Shopify Admin API, 2 October 2026, about 20:45 UTC",
+ "note": "Details the storefront copy does not carry. No listing has a custom search-engine title or description. All collections are automatic (by tag, title or price), so a rebuilt listing with the same tags lands in the same collections. Reviews belong to the Judge.me app and stay there.",
+ "products": {
+  "embroidered-patches": {
+   "id": 7820592119892,
+   "status": "ACTIVE",
+   "option_name": "Patch Size x Quantity",
+   "collections": [
+    "standard-patches",
+    "shop-all",
+    "rush-order"
+   ],
+   "reviews": {
+    "rating": 5.0,
+    "count": 2
+   },
+   "sales_channels": [
+    "Online Store",
+    "Point of Sale",
+    "Shop",
+    "TikTok",
+    "Facebook & Instagram",
+    "Google & YouTube",
+    "Microsoft Copilot",
+    "Inbox",
+    "Meta AI and Muse",
+    "Google AI Mode and Gemini"
+   ]
+  },
+  "full-color-printed-patches": {
+   "id": 7820592087124,
+   "status": "ACTIVE",
+   "option_name": "Patch Size x Quantity",
+   "collections": [
+    "standard-patches",
+    "shop-all"
+   ],
+   "reviews": {
+    "rating": 2.0,
+    "count": 1
+   },
+   "sales_channels": [
+    "Online Store",
+    "Point of Sale",
+    "Shop",
+    "TikTok",
+    "Facebook & Instagram",
+    "Google & YouTube",
+    "Microsoft Copilot",
+    "Inbox",
+    "Meta AI and Muse",
+    "Google AI Mode and Gemini"
+   ]
+  },
+  "chenille-patches": {
+   "id": 7820590088276,
+   "status": "ACTIVE",
+   "option_name": "Patch Size x Quantity",
+   "collections": [
+    "standard-patches",
+    "shop-all",
+    "rush-order"
+   ],
+   "reviews": null,
+   "sales_channels": [
+    "Online Store",
+    "Point of Sale",
+    "Shop",
+    "TikTok",
+    "Facebook & Instagram",
+    "Google & YouTube",
+    "Microsoft Copilot",
+    "Inbox",
+    "Meta AI and Muse",
+    "Google AI Mode and Gemini"
+   ]
+  },
+  "leather-patches": {
+   "id": 7820592152660,
+   "status": "ACTIVE",
+   "option_name": "Patch Size x Quantity",
+   "collections": [
+    "leather-patches",
+    "standard-patches",
+    "shop-all",
+    "rush-order"
+   ],
+   "reviews": null,
+   "sales_channels": [
+    "Online Store",
+    "Point of Sale",
+    "Shop",
+    "TikTok",
+    "Facebook & Instagram",
+    "Google & YouTube",
+    "Microsoft Copilot",
+    "Inbox",
+    "Meta AI and Muse",
+    "Google AI Mode and Gemini"
+   ]
+  },
+  "faux-leather-patches": {
+   "id": 7820591661140,
+   "status": "ACTIVE",
+   "option_name": "Patch Size x Quantity",
+   "collections": [
+    "leather-patches",
+    "standard-patches",
+    "shop-all",
+    "rush-order"
+   ],
+   "reviews": null,
+   "sales_channels": [
+    "Online Store",
+    "Point of Sale",
+    "Shop",
+    "TikTok",
+    "Facebook & Instagram",
+    "Google & YouTube",
+    "Microsoft Copilot",
+    "Inbox",
+    "Meta AI and Muse",
+    "Google AI Mode and Gemini"
+   ]
+  },
+  "metallic-flex-patches": {
+   "id": 7820589695060,
+   "status": "ACTIVE",
+   "option_name": "Patch Width (inches)",
+   "collections": [
+    "standard-patches",
+    "shop-all"
+   ],
+   "reviews": null,
+   "sales_channels": [
+    "Online Store",
+    "Point of Sale",
+    "Shop",
+    "TikTok",
+    "Facebook & Instagram",
+    "Google & YouTube",
+    "Microsoft Copilot",
+    "Inbox",
+    "Meta AI and Muse",
+    "Google AI Mode and Gemini"
+   ]
+  }
+ },
+ "replacement_listings": {
+  "embroidered-patches": {
+   "new_handle": "custom-embroidered-patches",
+   "new_id": 10320462610516,
+   "copied_from": "iron-on-patches"
+  },
+  "full-color-printed-patches": {
+   "new_handle": "custom-full-color-printed-patches",
+   "new_id": 10320464740436,
+   "copied_from": "sublimation-patches-for-hats"
+  },
+  "chenille-patches": {
+   "new_handle": "custom-chenille-patches",
+   "new_id": 10320464773204,
+   "copied_from": "chenille-letter-patches"
+  },
+  "leather-patches": {
+   "new_handle": "custom-leather-patches",
+   "new_id": 10320464805972,
+   "copied_from": "leather-patches-for-hats"
+  },
+  "faux-leather-patches": {
+   "new_handle": "custom-faux-leather-patches",
+   "new_id": 10320464871508,
+   "copied_from": "leather-patches-for-hats"
+  },
+  "metallic-flex-patches": {
+   "new_handle": null,
+   "note": "Shopify refuses to duplicate a product under suspension and no other listing has the same variants."
+  }
+ }
+}
