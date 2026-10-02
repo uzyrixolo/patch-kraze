@@ -506,13 +506,19 @@
   comment
     The order button goes to the style grid on the home page unless a link is
     set. A link to a product that is no longer available would be a dead
-    link, so that falls back to the style grid too.
+    link: it goes to that product's replacement listing when there is one
+    (the same handle with "custom-" in front), and to the style grid if not.
   endcomment
   assign order_link = section.settings.order_button_link | default: '/#styles'
   if order_link contains '/products/'
     assign order_handle = order_link | split: '/products/' | last | split: '?' | first | split: '#' | first
     unless all_products[order_handle].handle == order_handle
-      assign order_link = '/#styles'
+      assign order_new_handle = 'custom-' | append: order_handle
+      if all_products[order_new_handle].handle == order_new_handle
+        assign order_link = '/products/' | append: order_new_handle
+      else
+        assign order_link = '/#styles'
+      endif
     endunless
   endif
 -%}
@@ -536,6 +542,10 @@
     </div>
     <div>
       {%- assign hero_product = all_products[section.settings.hero_product] -%}
+      {%- unless hero_product.handle == section.settings.hero_product -%}
+        {%- assign hero_new_handle = 'custom-' | append: section.settings.hero_product -%}
+        {%- assign hero_product = all_products[hero_new_handle] -%}
+      {%- endunless -%}
       {%- if section.settings.hero_image != blank -%}
         <div class="bts-hero-image">
           {{ section.settings.hero_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: section.settings.heading }}
@@ -595,6 +605,10 @@
             assign card_link_handle = card_typed_link | split: '/products/' | last | split: '?' | first | split: '#' | first
             unless all_products[card_link_handle].handle == card_link_handle
               assign card_typed_link = ''
+              assign card_new_handle = 'custom-' | append: card_link_handle
+              if all_products[card_new_handle].handle == card_new_handle
+                assign card_typed_link = '/products/' | append: card_new_handle
+              endif
             endunless
           endif
           assign card_link = card_typed_link | default: card_product.url

@@ -56,6 +56,7 @@
       "settings": [
         { "type": "text", "id": "value", "label": "Figure", "default": "3", "info": "Keep it to a few characters: a number, a size, a price." },
         { "type": "product", "id": "product", "label": "Or show a product's lowest price", "info": "When a product is picked, its lowest per-piece price is shown instead of the figure above and stays up to date by itself." },
+        { "type": "text", "id": "backup_handle", "label": "Backup product handle", "info": "Used when the product above is not available. The last part of the product's address, for example custom-embroidered-patches." },
         { "type": "text", "id": "label", "label": "Label", "default": "ways to attach" },
         { "type": "textarea", "id": "text", "label": "One line of explanation" }
       ]
@@ -186,8 +187,16 @@
           {%- for block in section.blocks -%}
             {%- liquid
               assign fact_value = block.settings.value
-              if block.settings.product != blank
-                assign fact_value = block.settings.product.price_min | money
+              assign fact_product = block.settings.product
+              if fact_product == blank and block.settings.backup_handle != blank
+                assign fact_backup_handle = block.settings.backup_handle | strip
+                assign fact_backup = all_products[fact_backup_handle]
+                if fact_backup.handle == fact_backup_handle
+                  assign fact_product = fact_backup
+                endif
+              endif
+              if fact_product != blank
+                assign fact_value = fact_product.price_min | money
               endif
               comment
                 A fact that shows a product's price has no figure once that

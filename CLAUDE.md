@@ -658,6 +658,19 @@ credibility -> factory video -> `ordering_process` -> `price_includes` -> FAQ ->
   The footer, the AI designer page and the back-to-school cards check availability before
   linking to the products that have been affected. On `shopify theme dev` a Draft product
   still resolves, so test this with a handle that does not exist.
+- **Backup product.** The menu's product blocks, the style-grid cards, the photo tabs and the
+  price fact each take a "Backup product handle" (`backup_handle`, plain text). When the
+  picked product is unavailable and the backup exists, the backup is shown in its place, same
+  label and position; with neither, the entry is dropped as before. It is text, not a second
+  product picker, so it can name a listing that does not exist yet and survives a save in the
+  theme editor. Set for the embroidered entries: `custom-embroidered-patches`.
+- **Replacement listings are named `custom-<old handle>`.** The footer and the AI designer page
+  link embroidered to `custom-embroidered-patches` once `embroidered-patches` is gone, and
+  the back-to-school page tries `custom-<handle>` for any typed product link or hero product
+  that has disappeared. A new listing without a `PRODUCT_CONFIGS` entry uses the embroidered
+  size limits, so a replacement for another patch type also needs its own entry there.
+- `all_products` only answers for 20 different handles per page. The footer uses up to 8 and
+  the back-to-school page about 9 more, so do not add lookups there without counting.
 - **`snippets/pk-image-ok.liquid` decides whether a product image may be shown.** It holds a
   short list of file-name markers; an image whose file name contains one is skipped by the
   header menu thumbnails, the homepage cards and photo tabs, and the product page gallery

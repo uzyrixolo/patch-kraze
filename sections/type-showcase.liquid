@@ -30,6 +30,7 @@
       "settings": [
         { "type": "text", "id": "label", "label": "Tab label", "default": "Embroidered" },
         { "type": "product", "id": "product", "label": "Product (shows its photos)" },
+        { "type": "text", "id": "backup_handle", "label": "Backup product handle", "info": "Used when the product above is not available. The last part of the product's address, for example custom-embroidered-patches." },
         { "type": "collection", "id": "collection", "label": "Collection (shows its products)", "info": "Used only when no product is chosen." },
         { "type": "text", "id": "more_label", "label": "Link under the photos", "default": "See sizes and pricing" }
       ]
@@ -96,11 +97,28 @@
     A tab whose product or collection is no longer available is left out. The
     first tab that still has something to show starts selected.
   endcomment
+  comment
+    A tab's product can name a backup product (by handle) that takes over
+    when the product itself is no longer available. The ids of the tabs that
+    need their backup are collected here, as ",id,".
+  endcomment
   assign ts_first_id = ''
+  assign ts_backup_ids = ''
   for block in section.blocks
-    if block.settings.product != blank or block.settings.collection != blank
-      assign ts_first_id = block.id
-      break
+    assign ts_has_product = false
+    if block.settings.product != blank
+      assign ts_has_product = true
+    elsif block.settings.backup_handle != blank
+      assign ts_backup_handle = block.settings.backup_handle | strip
+      if all_products[ts_backup_handle].handle == ts_backup_handle
+        assign ts_has_product = true
+        assign ts_backup_ids = ts_backup_ids | append: ',' | append: block.id | append: ','
+      endif
+    endif
+    if ts_first_id == ''
+      if ts_has_product or block.settings.collection != blank
+        assign ts_first_id = block.id
+      endif
     endif
   endfor
 -%}
@@ -112,7 +130,10 @@
       <div class="pk-ts__main">
         <div class="pk-ts__tabs" role="tablist" aria-label="Patch styles" data-ts-tabs>
           {%- for block in section.blocks -%}
-            {%- if block.settings.product == blank and block.settings.collection == blank -%}{%- continue -%}{%- endif -%}
+            {%- assign ts_block_key = ',' | append: block.id | append: ',' -%}
+            {%- if block.settings.product == blank and block.settings.collection == blank -%}
+              {%- unless ts_backup_ids contains ts_block_key -%}{%- continue -%}{%- endunless -%}
+            {%- endif -%}
             <button type="button" class="pk-ts__tab" role="tab" id="ts-tab-{{ block.id }}" aria-selected="{% if block.id == ts_first_id %}true{% else %}false{% endif %}" aria-controls="ts-panel-{{ block.id }}" data-ts-tab {{ block.shopify_attributes }}>{{ block.settings.label }}</button>
           {%- endfor -%}
         </div>
@@ -121,6 +142,11 @@
           {%- liquid
             assign tab_product = block.settings.product
             assign tab_collection = block.settings.collection
+            assign ts_block_key = ',' | append: block.id | append: ','
+            if tab_product == blank and ts_backup_ids contains ts_block_key
+              assign ts_backup_handle = block.settings.backup_handle | strip
+              assign tab_product = all_products[ts_backup_handle]
+            endif
           -%}
           {%- if tab_product == blank and tab_collection == blank -%}{%- continue -%}{%- endif -%}
           <div class="pk-ts__panel" role="tabpanel" id="ts-panel-{{ block.id }}" aria-labelledby="ts-tab-{{ block.id }}"{% unless block.id == ts_first_id %} hidden{% endunless %}>

@@ -4,8 +4,10 @@
   Product links come from the header section's "menu_product" blocks whose
   group matches; the thumbnail is the product's first photo that may be shown
   (see snippets/pk-image-ok), so it follows the product if its photos change.
-  A block whose product is no longer available prints nothing, so a group can
-  come back empty; the caller then leaves the group's heading out. Only when
+  A block whose product is no longer available uses its backup product
+  (the "backup_handle" setting) when that one is available, and otherwise
+  prints nothing, so a group can come back empty; the caller then leaves the
+  group's heading out. Only when
   the group has no blocks at all is the `fallback` list used instead:
   "Label|/url" or "Label|/url|file-name" entries, the optional third part
   naming an image in Files.
@@ -23,11 +25,19 @@
     {%- continue -%}
   {%- endif -%}
   {%- assign configured = configured | plus: 1 -%}
-  {%- comment -%} A product that is no longer available resolves to blank: skip it. {%- endcomment -%}
-  {%- if block.settings.product == blank -%}
+  {%- comment -%}
+    A product that is no longer available resolves to blank. Try the backup
+    product; with neither, skip the link.
+  {%- endcomment -%}
+  {%- assign item = block.settings.product -%}
+  {%- if item == blank and block.settings.backup_handle != blank -%}
+    {%- assign item_backup_handle = block.settings.backup_handle | strip -%}
+    {%- assign item_backup = all_products[item_backup_handle] -%}
+    {%- if item_backup.handle == item_backup_handle -%}{%- assign item = item_backup -%}{%- endif -%}
+  {%- endif -%}
+  {%- if item == blank -%}
     {%- continue -%}
   {%- endif -%}
-  {%- assign item = block.settings.product -%}
   {%- assign rendered = rendered | plus: 1 -%}
   {%- if variant == 'panel' -%}<li {{ block.shopify_attributes }}>{%- endif -%}
     <a href="{{ item.url }}">

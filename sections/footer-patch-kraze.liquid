@@ -117,7 +117,9 @@
             product comes back as an empty object that still counts as true, so the
             test is whether it has the handle that was asked for.
           {%- endcomment -%}
-          {%- if all_products['embroidered-patches'].handle == 'embroidered-patches' -%}<li class="footer-nav-item"><a href="/products/embroidered-patches" class="footer-nav-link">Embroidered Patches</a></li>{%- endif -%}
+          {%- comment -%} Embroidered has a replacement listing that takes over when the first one is gone. {%- endcomment -%}
+          {%- if all_products['embroidered-patches'].handle == 'embroidered-patches' -%}<li class="footer-nav-item"><a href="/products/embroidered-patches" class="footer-nav-link">Embroidered Patches</a></li>
+          {%- elsif all_products['custom-embroidered-patches'].handle == 'custom-embroidered-patches' -%}<li class="footer-nav-item"><a href="/products/custom-embroidered-patches" class="footer-nav-link">Embroidered Patches</a></li>{%- endif -%}
           {%- if all_products['metallic-flex-patches'].handle == 'metallic-flex-patches' -%}<li class="footer-nav-item"><a href="/products/metallic-flex-patches" class="footer-nav-link">Metallic Flex Patches</a></li>{%- endif -%}
           {%- if all_products['full-color-printed-patches'].handle == 'full-color-printed-patches' -%}<li class="footer-nav-item"><a href="/products/full-color-printed-patches" class="footer-nav-link">Full Color Printed Patches</a></li>{%- endif -%}
           <li class="footer-nav-item"><a href="/products/pvc-patches" class="footer-nav-link">PVC Patches</a></li>

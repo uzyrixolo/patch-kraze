@@ -18,6 +18,7 @@
           "type": "menu_product",
           "settings": {
             "product": "embroidered-patches",
+            "backup_handle": "custom-embroidered-patches",
             "label": "Embroidered",
             "group": "stitched"
           }

@@ -67,6 +67,7 @@
       "name": "Product Card",
       "settings": [
         { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "backup_handle", "label": "Backup product handle", "info": "Used when the product above is not available. The last part of the product's address, for example custom-embroidered-patches." },
         { "type": "image_picker", "id": "image", "label": "Image override (optional)" },
         { "type": "text", "id": "point_1", "label": "Point 1", "info": "A short fact about this style, about 35 characters. Leave empty to hide." },
         { "type": "text", "id": "point_2", "label": "Point 2" },
@@ -179,7 +180,15 @@
   assign pvc_count = 0
   assign leather_count = 0
   for block in section.blocks
-    if block.settings.product != blank
+    assign sg_product = block.settings.product
+    if sg_product == blank and block.settings.backup_handle != blank
+      assign sg_backup_handle = block.settings.backup_handle | strip
+      assign sg_backup = all_products[sg_backup_handle]
+      if sg_backup.handle == sg_backup_handle
+        assign sg_product = sg_backup
+      endif
+    endif
+    if sg_product != blank
       assign total_count = total_count | plus: 1
       if block.settings.best_seller
         assign best_count = best_count | plus: 1
@@ -240,7 +249,13 @@
 
     <div class="pk-sg__grid" id="sg-grid-{{ section.id }}"{% if section.settings.show_tabs %} role="tabpanel"{% endif %}>
       {%- for block in section.blocks -%}
+        {%- comment -%} The card's product, or its backup product when that one is no longer available. {%- endcomment -%}
         {%- assign product = block.settings.product -%}
+        {%- if product == blank and block.settings.backup_handle != blank -%}
+          {%- assign sg_backup_handle = block.settings.backup_handle | strip -%}
+          {%- assign sg_backup = all_products[sg_backup_handle] -%}
+          {%- if sg_backup.handle == sg_backup_handle -%}{%- assign product = sg_backup -%}{%- endif -%}
+        {%- endif -%}
         {%- if product != blank -%}
           {%- assign card_image = block.settings.image -%}
           {%- if card_image == blank -%}

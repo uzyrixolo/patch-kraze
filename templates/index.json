@@ -105,6 +105,7 @@
           "settings": {
             "label": "Embroidered",
             "product": "embroidered-patches",
+            "backup_handle": "custom-embroidered-patches",
             "collection": "",
             "more_label": "See sizes and pricing"
           }
@@ -190,6 +191,7 @@
           "type": "product_card",
           "settings": {
             "product": "embroidered-patches",
+            "backup_handle": "custom-embroidered-patches",
             "point_1": "Classic stitched-thread texture",
             "point_2": "Merrowed or thin-stitched edge",
             "group": "embroidered",
@@ -670,6 +672,7 @@
           "settings": {
             "value": "",
             "product": "embroidered-patches",
+            "backup_handle": "custom-embroidered-patches",
             "label": "lowest price per piece",
             "text": "For embroidered patches at the largest quantity. Every price break is on the product page."
           }
