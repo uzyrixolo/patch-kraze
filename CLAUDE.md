@@ -547,8 +547,8 @@ cart, quote button). On phones the menu collapses into a drawer that slides in f
 ## Homepage sections (October 2026)
 
 Order in `templates/index.json`: `home_hero` -> `type_showcase` -> `style_grid` ->
-credibility -> factory video -> `ordering_process` -> why-buy -> FAQ -> `blog_highlights` ->
-videos.
+credibility -> factory video -> `ordering_process` -> `price_includes` -> FAQ ->
+`blog_highlights` -> videos.
 
 - **`sections/home-hero.liquid`** - light panel: eyebrow, heading, three points, two buttons,
   one photo on the right, and a row of "assurance" blocks underneath.
@@ -616,9 +616,9 @@ videos.
     checkbox, and three shipping options, Express (7-8 days), Economy (11-12 days) and
     Standard (13-15 days, free over $100). Re-check `/cart/shipping_rates.json` before
     editing delivery wording.
-  - Unresolved, the owner's call: the site gives three different production times ("rush
-    from 5 business days" in the hero and strip, "10-12 business days" in the What You Get
-    section, and the checkout's day ranges above). The FAQ only quotes checkout.
+  - Unresolved, the owner's call: the site gives two different production times ("rush from
+    5 business days" in the hero and strip, and the checkout's day ranges above). The FAQ
+    only quotes checkout.
 - **`sections/blog-highlights.liquid`** - latest posts from one blog as cards (picture cropped
   to one shape, date, title, a few lines, read link; the whole card is the link), with a
   link to the blog. It replaced the base theme's `featured-blog-posts` on the homepage, whose
@@ -629,6 +629,22 @@ videos.
   (renders nothing without an image; its CSS is in the snippet's `{% stylesheet %}`); the
   section must be `position: relative` with its content at `z-index: 1`. Use the same
   snippet when another section needs a background image.
+- **`sections/price-includes-patch-kraze.liquid`** ("Price Includes" in the editor) - what
+  the per-piece price covers and what is added on top: a heading and two cards, "Included"
+  and "Costs extra", each a list of block lines (a few words, an optional note or price, and
+  which list). It replaced the old six-point "why buy" grid, which is gone. Every line states
+  a price or a term, so it must match the order form's Finishing step and
+  `/cart/shipping_rates.json` on the day it is written. Checked 2026-10-02 with a California
+  address: over $100, Standard (13-15 days) is free, Economy (11-12 days) $6.90, Express (7-8
+  days) $45; under $100 there is no free option.
+- The video row's heading is "Our Patches On Video". It makes no claim about customer numbers.
+- **An alternate template is public at `?view=<suffix>`.** `templates/index.context.json` was
+  an old copy of the home page and kept serving the old sections, old headline included, at
+  `/?view=context` long after `index.json` had been rebuilt. It and the `hero-banner` section
+  it alone used are deleted. Before leaving an old template in the theme, open its `?view=`
+  address. Old sections that are only switched off in `index.json` (`shop-all-patches`,
+  `shop-popular-products`, `cta-patch-kraze`, `video-section-patch-kraze`) do not render, but
+  they are one click from coming back.
 - **`sections/ordering-process-patch-kraze.liquid`** - heading and two links on the left, the
   steps as a numbered list down a line on the right. No pictures. Step text should describe
   what this store actually does (the mockup is the optional checkbox on the product page,

@@ -755,8 +755,93 @@
         "link_url": ""
       }
     },
-    "why_buy": {
-      "type": "why-buy-patch-kraze",
+    "price_includes": {
+      "type": "price-includes-patch-kraze",
+      "blocks": {
+        "setup": {
+          "type": "item",
+          "settings": {
+            "text": "Artwork setup",
+            "note": "No setup fee",
+            "kind": "included"
+          }
+        },
+        "mockup": {
+          "type": "item",
+          "settings": {
+            "text": "A digital mockup when you ask for one",
+            "note": "24–48 hours",
+            "kind": "included"
+          }
+        },
+        "shape": {
+          "type": "item",
+          "settings": {
+            "text": "Any cut shape",
+            "note": "Circle, square, rectangle, oval or cut to your design",
+            "kind": "included"
+          }
+        },
+        "colors": {
+          "type": "item",
+          "settings": {
+            "text": "Background and border in any color",
+            "note": "Name it, or give a hex code or Pantone number",
+            "kind": "included"
+          }
+        },
+        "backing": {
+          "type": "item",
+          "settings": {
+            "text": "Iron-on or adhesive backing",
+            "note": "Chosen on the order form",
+            "kind": "included"
+          }
+        },
+        "shipping": {
+          "type": "item",
+          "settings": {
+            "text": "Standard shipping on orders over $100",
+            "note": "13–15 days",
+            "kind": "included"
+          }
+        },
+        "velcro": {
+          "type": "item",
+          "settings": {
+            "text": "Velcro backing",
+            "note": "+$0.25 per piece",
+            "kind": "extra"
+          }
+        },
+        "ship_small": {
+          "type": "item",
+          "settings": {
+            "text": "Shipping on orders under $100",
+            "note": "Priced at checkout",
+            "kind": "extra"
+          }
+        },
+        "ship_fast": {
+          "type": "item",
+          "settings": {
+            "text": "Faster shipping",
+            "note": "Economy or Express, priced at checkout",
+            "kind": "extra"
+          }
+        }
+      },
+      "block_order": [
+        "setup",
+        "mockup",
+        "shape",
+        "colors",
+        "backing",
+        "shipping",
+        "velcro",
+        "ship_small",
+        "ship_fast"
+      ],
       "settings": {}
     },
     "faq": {
@@ -936,8 +1021,8 @@
       ],
       "name": "Video Carousel PK",
       "settings": {
-        "heading_prefix": "Trusted By",
-        "heading_highlight": "Thousands of People",
+        "heading_prefix": "Our Patches",
+        "heading_highlight": "On Video",
         "highlight_color": "#eb1d25",
         "background_color": "#ffffff",
         "visible_videos_desktop": 4,
@@ -979,7 +1064,7 @@
     "factory_visit_video",
     "cta",
     "ordering_process",
-    "why_buy",
+    "price_includes",
     "faq",
     "blog_highlights",
     "video_carousel_patch_kraze_HQHGpj",
