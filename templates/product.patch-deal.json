@@ -25,12 +25,9 @@
         "charge_velcro": false
       }
     },
-    "product_details": {
-      "type": "product-details-accordion",
-      "settings": {}
-    },
     "comparison_slider": {
       "type": "comparison-slider",
+      "disabled": true,
       "settings": {
         "heading": "You Upload Your Design, We Turn it into an Embroidered Patch",
         "before_image": "shopify://shop_images/monkey-before.jpg",
@@ -110,7 +107,6 @@
   },
   "order": [
     "main",
-    "product_details",
     "comparison_slider",
     "product_faq"
   ]

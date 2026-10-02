@@ -57,11 +57,7 @@
         "padding_top": 36,
         "padding_bottom": 12
       }
-    },
-    "product_details": {
-      "type": "product-details-accordion",
-      "settings": {}
     }
   },
-  "order": ["main", "product_details"]
+  "order": ["main"]
 }

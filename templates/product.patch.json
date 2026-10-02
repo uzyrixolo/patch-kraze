@@ -188,6 +188,7 @@
           ]
         }
       },
+      "disabled": true,
       "name": "t:names.products_carousel",
       "settings": {
         "collection": "caps",
@@ -223,11 +224,81 @@
       "settings": {}
     },
     "product_details": {
-      "type": "product-details-accordion",
+      "type": "product-specs-patch-kraze",
+      "blocks": {
+        "size": {
+          "type": "size",
+          "settings": {}
+        },
+        "shape": {
+          "type": "spec",
+          "settings": {
+            "label": "Cut shape",
+            "value": "Cut to your design",
+            "text": "Or pick a circle, square, rectangle or oval.",
+            "patch_only": true
+          }
+        },
+        "colors": {
+          "type": "spec",
+          "settings": {
+            "label": "Colors",
+            "value": "Any color",
+            "text": "Name the background and border color, or give a hex code or Pantone number.",
+            "patch_only": true
+          }
+        },
+        "backing": {
+          "type": "spec",
+          "settings": {
+            "label": "Backing",
+            "value": "3 choices",
+            "text": "Iron-on, Velcro (+$0.25 per piece) or peel-off adhesive.",
+            "patch_only": true
+          }
+        },
+        "artwork": {
+          "type": "spec",
+          "settings": {
+            "label": "Artwork",
+            "value": "Image or PDF",
+            "text": "Upload it on the order form and add a note if anything needs explaining.",
+            "patch_only": false
+          }
+        },
+        "mockup": {
+          "type": "spec",
+          "settings": {
+            "label": "Mockup",
+            "value": "24–48 hours",
+            "text": "Tick the mockup box to approve a free digital mockup before production.",
+            "patch_only": false
+          }
+        },
+        "levels": {
+          "type": "levels",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "size",
+        "shape",
+        "colors",
+        "backing",
+        "artwork",
+        "mockup",
+        "levels",
+        "price"
+      ],
       "settings": {}
     },
     "comparison_slider": {
       "type": "comparison-slider",
+      "disabled": true,
       "settings": {
         "heading": "You Upload Your Design, We Turn it into an Embroidered Patch",
         "before_image": "shopify://shop_images/monkey-before.jpg",

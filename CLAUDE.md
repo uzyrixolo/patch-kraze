@@ -457,6 +457,34 @@ Above the steps: title, rating row, the opening sentence of the description, a l
 - Known and untouched: after add-to-cart, re-rendering the cart drawer logs
   `MissingRefError ... cart-quantity-selector-component` in the console (the drawer section
   HTML is swapped in with `innerHTML`). The item is added and the drawer opens.
+- **Gallery and order form are equal columns** from 1024px up (`.product-container`,
+  `minmax(0, 1fr)` twice). Everything in the order form has to fit a half-width column.
+- **Cut shape is a row of outline buttons** (`.pk-shape`, inline SVG outlines drawn for this
+  theme, `aria-pressed`), not photo cards. `selectShape(el, value)` still writes
+  `#shape-input`; the values are unchanged (`Circle`, `Square`, `Rectangle`, `Oval`,
+  `Custom`). The buttons wrap and the last row stretches.
+- **Under the order form: `sections/product-specs-patch-kraze.liquid`** ("Specs" in the
+  editor, template key `product_details` in `templates/product.patch.json`). A heading and up
+  to eight small cards: label, value, one line. "Spec" cards are typed; "Size range", "Price
+  levels" and "Lowest price" read the product (first and last size and the number of quantity
+  levels in `custom.prices`, and `price_min`), so they cannot drift from the order form. A
+  card with nothing to show is left out and the row closes up; `[product]` and "patch products
+  only" work as in the FAQ. Typed cards must match what the form offers. It replaced the old
+  `product-details-accordion` section, which is gone from every template. The deal template
+  has no such block (the deal page lists what is included itself).
+- Hidden on the product templates, switch back on in the theme editor if wanted: the
+  "Complete your order" product row (`product_list_ijbaxp`) and the before/after slider
+  (`comparison_slider`).
+- Shopify refuses a section whose schema `name` is longer than 25 characters, the same silent
+  failure on push as the 50-character option label. `shopify theme dev` shows it.
+- Verified 2026-10-02 on a development theme: displayed price equals the matched variant's
+  price in 44 size and quantity combinations across embroidered, printed, PVC, leather,
+  tackle twill, sticker and DTF products.
+- **Known, not changed: DTF shows one price and charges another for sizes between its
+  brackets.** The displayed price takes the next bracket up, the variant lookup takes the
+  nearest bracket (`DTF_BRACKETS.reduce(...)`), so 6 x 3 in (18 sq in) shows the 25 sq in price
+  and adds the 16 sq in variant, which is cheaper. Square sizes on a bracket match. Which rule
+  is intended is the owner's call.
 
 ## Header (October 2026)
 

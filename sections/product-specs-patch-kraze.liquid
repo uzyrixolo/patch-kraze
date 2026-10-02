@@ -1,0 +1,258 @@
+{% comment %}
+  A short spec sheet under the order form on the patch product pages: a
+  heading and a set of small cards, each a label, a value and one line.
+
+  Cards are blocks. A "Spec" card is typed. The other three read the product,
+  so they cannot drift from what the order form charges:
+    - "Size range" takes the smallest and largest size in the product's price
+      grid (the custom.prices metafield). Patch products only.
+    - "Price levels" counts the quantity levels in the same grid.
+    - "Lowest price" is the product's lowest variant price.
+  A card with nothing to show is left out, and the row closes up around it.
+
+  [product] in the heading, the text under it or a card becomes the product's
+  name, and a card marked "patch products only" is skipped for stickers and
+  DTF transfers, the same as in the FAQ section.
+
+  What is typed here should describe what the order form offers today (the
+  cut shapes, the backing choices and their price, the mockup checkbox).
+  Check it against the form before changing it, and keep it in our own words.
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Specs (Patch Kraze)",
+  "class": "section-product-specs",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small label above the heading", "default": "Specs", "info": "Leave empty to hide." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "[product] at a Glance", "info": "[product] is replaced with the product's name." },
+    { "type": "textarea", "id": "intro", "label": "Text under the heading", "default": "Everything here is set on the order form above." },
+    {
+      "type": "select", "id": "mobile_layout", "label": "Layout on phones", "default": "swipe",
+      "options": [
+        { "value": "swipe", "label": "Swiped row" },
+        { "value": "grid", "label": "Two per row" }
+      ]
+    },
+    { "type": "color_background", "id": "background", "label": "Background (color or gradient)", "default": "#f7f4fc" }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Spec",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Backing" },
+        { "type": "text", "id": "value", "label": "Value", "default": "3 choices" },
+        { "type": "textarea", "id": "text", "label": "One line of text", "default": "Iron-on, Velcro (+$0.25 per piece) or peel-off adhesive." },
+        { "type": "checkbox", "id": "patch_only", "label": "Patch products only", "default": false, "info": "Leave this card out for stickers and DTF transfers." }
+      ]
+    },
+    {
+      "type": "size",
+      "name": "Size range",
+      "limit": 1,
+      "settings": [
+        { "type": "paragraph", "content": "Shows the smallest and largest size in this product's price grid. Left out for stickers, DTF transfers and products without a grid." },
+        { "type": "text", "id": "label", "label": "Label", "default": "Sizes" },
+        { "type": "textarea", "id": "text", "label": "One line of text", "default": "Set the width and height on the order form. Pricing goes by the average of the two." }
+      ]
+    },
+    {
+      "type": "levels",
+      "name": "Price levels",
+      "limit": 1,
+      "settings": [
+        { "type": "paragraph", "content": "Counts the quantity levels in this product's price grid. Left out for products without a grid." },
+        { "type": "text", "id": "label", "label": "Label", "default": "Quantity" },
+        { "type": "textarea", "id": "text", "label": "One line of text", "default": "Size and quantity set the price per piece. Every level is in the table above." }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Lowest price",
+      "limit": 1,
+      "settings": [
+        { "type": "paragraph", "content": "Shows this product's lowest price per piece, read live from the product." },
+        { "type": "text", "id": "label", "label": "Label", "default": "Price" },
+        { "type": "text", "id": "prefix", "label": "Text before the price", "default": "From" },
+        { "type": "text", "id": "suffix", "label": "Text after the price", "default": "each" },
+        { "type": "textarea", "id": "text", "label": "One line of text", "default": "The lowest price per piece on this product. Yours is at the top of the page." }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Specs (Patch Kraze)",
+      "blocks": [
+        { "type": "size" },
+        { "type": "spec", "settings": { "label": "Cut shape", "value": "Cut to your design", "text": "Or pick a circle, square, rectangle or oval.", "patch_only": true } },
+        { "type": "spec", "settings": { "label": "Colors", "value": "Any color", "text": "Name the background and border color, or give a hex code or Pantone number.", "patch_only": true } },
+        { "type": "spec", "settings": { "label": "Backing", "value": "3 choices", "text": "Iron-on, Velcro (+$0.25 per piece) or peel-off adhesive.", "patch_only": true } },
+        { "type": "spec", "settings": { "label": "Artwork", "value": "Image or PDF", "text": "Upload it on the order form and add a note if anything needs explaining.", "patch_only": false } },
+        { "type": "spec", "settings": { "label": "Mockup", "value": "24–48 hours", "text": "Tick the mockup box to approve a free digital mockup before production.", "patch_only": false } },
+        { "type": "levels" },
+        { "type": "price" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .pk-sp { background: var(--sp-bg, #f7f4fc); padding: 3.5rem 0; }
+  .pk-sp__inner { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+  .pk-sp__head { margin-bottom: 1.6rem; }
+  .pk-sp__eyebrow { margin: 0 0 0.5rem; font-size: var(--pk-fs-label); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pk-text-brand); }
+  .pk-sp__heading { margin: 0; font-size: var(--pk-fs-heading); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; color: var(--pk-text-primary); }
+  .pk-sp__intro { margin: 0.6rem 0 0; font-size: var(--pk-fs-body); line-height: 1.55; color: var(--pk-text-secondary); }
+
+  /* Cards wrap, and whatever lands on the last row stretches to fill it, so a
+     product that shows fewer cards never leaves an empty slot. */
+  .pk-sp__cards { display: flex; flex-wrap: wrap; gap: 1rem; margin: 0; padding: 0; }
+  .pk-sp__card {
+    flex: 1 1 calc((100% - (var(--sp-per-row, 4) - 1) * 1rem) / var(--sp-per-row, 4));
+    min-width: 0; margin: 0; padding: 1.15rem 1.2rem 1.25rem;
+    background: #fff; border: 1px solid #e5e7eb; border-radius: var(--pk-radius-md);
+  }
+  .pk-sp__label { margin: 0 0 0.45rem; font-size: var(--pk-fs-tiny); font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--pk-text-brand); }
+  .pk-sp__value { margin: 0 0 0.4rem; font-size: 1.2rem; font-weight: 800; line-height: 1.25; color: var(--pk-text-primary); }
+  .pk-sp__text { margin: 0; font-size: var(--pk-fs-label); line-height: 1.5; color: var(--pk-text-secondary); }
+
+  @media (max-width: 989px) {
+    .pk-sp__card { flex-basis: calc((100% - 1rem) / 2); }
+  }
+  @media (max-width: 749px) {
+    .pk-sp { padding: 2.5rem 0; }
+    .pk-sp__inner { padding: 0 1rem; }
+    .pk-sp__heading { font-size: var(--pk-fs-heading-sm); }
+    .pk-sp__cards { gap: 0.75rem; }
+    .pk-sp__card { flex-basis: calc((100% - 0.75rem) / 2); padding: 1rem 1rem 1.1rem; }
+    .pk-sp__value { font-size: 1.05rem; }
+
+    /* Swiped row: one card and the edge of the next, snapping as it scrolls. */
+    .pk-sp--swipe .pk-sp__cards {
+      flex-wrap: nowrap; overflow-x: auto; margin: 0 -1rem; padding: 0 1rem 0.5rem;
+      scroll-snap-type: x mandatory; scroll-padding: 0 1rem; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .pk-sp--swipe .pk-sp__cards::-webkit-scrollbar { display: none; }
+    .pk-sp--swipe .pk-sp__card { flex: 0 0 72%; scroll-snap-align: start; }
+  }
+</style>
+
+{%- liquid
+  assign sp_product = product.title | default: 'Custom patches'
+  assign sp_is_patch = true
+  if product
+    if product.handle == 'dtf-transfers' or product.handle contains 'sticker'
+      assign sp_is_patch = false
+    endif
+  endif
+
+  comment
+    The price grid: sizes are plain numbers, quantity levels are objects. A
+    sticker product's grid has neither and so shows neither card.
+  endcomment
+  assign sp_grid = product.metafields.custom.prices.value
+  assign sp_size_min = nil
+  assign sp_size_max = nil
+  assign sp_levels = 0
+  if sp_grid
+    for sp_size in sp_grid.sizeBrackets
+      if sp_size_min == nil or sp_size < sp_size_min
+        assign sp_size_min = sp_size
+      endif
+      if sp_size_max == nil or sp_size > sp_size_max
+        assign sp_size_max = sp_size
+      endif
+    endfor
+    assign sp_levels = sp_grid.quantityTiers.size | default: 0
+  endif
+  if sp_size_min != nil
+    assign sp_whole = sp_size_min | floor
+    if sp_whole == sp_size_min
+      assign sp_size_min = sp_whole
+    endif
+    assign sp_whole = sp_size_max | floor
+    if sp_whole == sp_size_max
+      assign sp_size_max = sp_whole
+    endif
+  endif
+-%}
+
+{%- capture sp_cards -%}
+  {%- assign sp_count = 0 -%}
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign sp_value = ''
+      case block.type
+        when 'spec'
+          unless block.settings.patch_only and sp_is_patch == false
+            assign sp_value = block.settings.value | replace: '[product]', sp_product
+          endunless
+        when 'size'
+          if sp_is_patch and sp_size_min != nil and sp_size_min != sp_size_max
+            assign sp_value = sp_size_min | append: ' to ' | append: sp_size_max | append: ' inches'
+          endif
+        when 'levels'
+          if sp_levels > 1
+            assign sp_value = sp_levels | append: ' price levels'
+          endif
+        when 'price'
+          if product and product.price_min > 0
+            assign sp_money = product.price_min | money
+            assign sp_value = block.settings.prefix | append: ' ' | append: sp_money | append: ' ' | append: block.settings.suffix | strip
+          endif
+      endcase
+      if sp_value == blank
+        continue
+      endif
+      assign sp_count = sp_count | plus: 1
+    -%}
+    <div class="pk-sp__card" {{ block.shopify_attributes }}>
+      {%- if block.settings.label != blank -%}
+        <dt class="pk-sp__label">{{ block.settings.label | replace: '[product]', sp_product }}</dt>
+      {%- endif -%}
+      <dd class="pk-sp__value">{{ sp_value }}</dd>
+      {%- if block.settings.text != blank -%}
+        <dd class="pk-sp__text">{{ block.settings.text | replace: '[product]', sp_product }}</dd>
+      {%- endif -%}
+    </div>
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- liquid
+  comment
+    Up to four cards share one row. Five or six sit three to a row, seven or
+    eight sit four to a row.
+  endcomment
+  assign sp_per_row = 4
+  if sp_count < 4
+    assign sp_per_row = sp_count
+  elsif sp_count == 5 or sp_count == 6
+    assign sp_per_row = 3
+  endif
+-%}
+
+{%- if sp_count > 0 -%}
+<section class="pk-sp pk-sp--{{ section.settings.mobile_layout }}" style="--sp-bg: {{ section.settings.background | default: '#f7f4fc' }}; --sp-per-row: {{ sp_per_row }};">
+  <div class="pk-sp__inner">
+    {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
+      <div class="pk-sp__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="pk-sp__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="pk-sp__heading">{{ section.settings.heading | replace: '[product]', sp_product }}</h2>
+        {%- endif -%}
+        {%- if section.settings.intro != blank -%}
+          <p class="pk-sp__intro">{{ section.settings.intro | replace: '[product]', sp_product }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    <dl class="pk-sp__cards">
+      {{ sp_cards }}
+    </dl>
+  </div>
+</section>
+{%- endif -%}
