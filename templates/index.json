@@ -193,10 +193,21 @@
     "style_grid": {
       "type": "style-grid",
       "blocks": {
+        "product_card_Nhh4qG": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "backup_handle": "",
+            "point_1": "",
+            "point_2": "",
+            "group": "",
+            "best_seller": false
+          }
+        },
         "card_1": {
           "type": "product_card",
           "settings": {
-            "product": "embroidered-patches",
+            "product": "custom-embroidered-patches",
             "backup_handle": "embroidered-patches",
             "point_1": "Classic stitched-thread texture",
             "point_2": "Merrowed or thin-stitched edge",
@@ -382,6 +393,7 @@
         }
       },
       "block_order": [
+        "product_card_Nhh4qG",
         "card_1",
         "card_5",
         "card_11",
