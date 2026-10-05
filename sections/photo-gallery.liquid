@@ -1,0 +1,316 @@
+{% schema %}
+{
+  "name": "Photo Gallery",
+  "class": "section-pk-photo-gallery",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Real orders" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Patches We've Made" },
+    { "type": "text", "id": "intro", "label": "Intro line", "default": "Tap any photo to see it up close and swipe through the rest." },
+    { "type": "range", "id": "strip_count", "label": "Photos shown on the page", "min": 3, "max": 8, "step": 1, "default": 4, "info": "The first photo of each block is shown on the page, up to this many. Every photo opens in the full-screen viewer." },
+    { "type": "text", "id": "all_label", "label": "\"See all\" button label", "default": "See all photos" },
+    { "type": "header", "content": "Viewer buttons" },
+    { "type": "text", "id": "details_label", "label": "Product button label", "default": "See this patch type", "info": "Goes to the product the photo belongs to. Hidden when a photo has no product." },
+    { "type": "text", "id": "cta_label", "label": "Quote button label", "default": "Start a quote" },
+    { "type": "url", "id": "cta_link", "label": "Quote button link", "info": "Defaults to /pages/quote" },
+    { "type": "header", "content": "Photo source" },
+    { "type": "text", "id": "skip_keywords", "label": "Skip product photos whose file name contains", "default": "detailImage,Gemini_Generated,ChatGPT,_info", "info": "Comma-separated. Keeps charts and infographics out of the gallery." },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#ffffff" }
+  ],
+  "blocks": [
+    {
+      "type": "product_photos",
+      "name": "Photos from a product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "range", "id": "max", "label": "Maximum photos", "min": 1, "max": 12, "step": 1, "default": 4 },
+        { "type": "text", "id": "caption", "label": "Caption (optional)", "info": "Shown under every photo from this product." }
+      ]
+    },
+    {
+      "type": "photo",
+      "name": "Single photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "caption", "label": "Caption" },
+        { "type": "product", "id": "product", "label": "Product (for the product button)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Photo Gallery" }]
+}
+{% endschema %}
+
+{%- comment -%}
+  A row of photos of real patches. Clicking one opens a full-screen viewer
+  (<dialog>) with the photo in the middle, its neighbours angled at the sides,
+  arrows, swipe, keyboard arrows, a thumbnail strip, the photo's title and
+  caption, and two buttons (the photo's product, and the quote form).
+  The viewer is built by script from the JSON below; without script the row
+  tiles are plain links to each photo's product.
+{%- endcomment -%}
+
+{%- liquid
+  assign skip_list = section.settings.skip_keywords | split: ','
+  assign cta_link = section.settings.cta_link | default: '/pages/quote'
+  assign total = 0
+  assign pg_tiles = ''
+  assign shown_tiles = 0
+-%}
+
+  {%- capture pg_json -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'product_photos' -%}
+        {%- assign p = block.settings.product -%}
+        {%- if p == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign taken = 0 -%}
+        {%- for image in p.images -%}
+          {%- if taken >= block.settings.max -%}{%- break -%}{%- endif -%}
+          {%- assign skip_image = false -%}
+          {%- for keyword in skip_list -%}
+            {%- assign keyword_clean = keyword | strip -%}
+            {%- if keyword_clean != blank and image.src contains keyword_clean -%}{%- assign skip_image = true -%}{%- endif -%}
+          {%- endfor -%}
+          {%- capture image_ok -%}{%- render 'pk-image-ok', src: image.src -%}{%- endcapture -%}
+          {%- assign image_ok = image_ok | strip -%}
+          {%- if skip_image or image_ok == blank -%}{%- continue -%}{%- endif -%}
+          {%- assign taken = taken | plus: 1 -%}
+          {%- if total > 0 %},{% endif -%}
+          {"full":{{ image | image_url: width: 1400 | json }},"thumb":{{ image | image_url: width: 160, height: 160, crop: 'center' | json }},"title":{{ p.title | json }},"caption":{{ block.settings.caption | json }},"url":{{ p.url | json }}}
+          {%- if taken == 1 and shown_tiles < section.settings.strip_count -%}
+            {%- assign shown_tiles = shown_tiles | plus: 1 -%}
+            {%- capture one_tile -%}<li class="pk-pg__item"><a class="pk-pg__tile" href="{{ p.url }}" data-pg-open="{{ total }}" aria-label="View photos: {{ p.title | escape }}"><img src="{{ image | image_url: width: 480, height: 480, crop: 'center' }}" width="480" height="480" loading="lazy" alt="{{ p.title | escape }}"></a></li>{%- endcapture -%}
+            {%- assign pg_tiles = pg_tiles | append: one_tile -%}
+          {%- endif -%}
+          {%- assign total = total | plus: 1 -%}
+        {%- endfor -%}
+      {%- elsif block.settings.image != blank -%}
+        {%- assign img = block.settings.image -%}
+        {%- assign p = block.settings.product -%}
+        {%- assign t = block.settings.title | default: p.title | default: '' -%}
+        {%- if total > 0 %},{% endif -%}
+        {"full":{{ img | image_url: width: 1400 | json }},"thumb":{{ img | image_url: width: 160, height: 160, crop: 'center' | json }},"title":{{ t | json }},"caption":{{ block.settings.caption | json }},"url":{% if p != blank %}{{ p.url | json }}{% else %}null{% endif %}}
+        {%- if shown_tiles < section.settings.strip_count -%}
+          {%- assign shown_tiles = shown_tiles | plus: 1 -%}
+          {%- capture one_tile -%}<li class="pk-pg__item"><a class="pk-pg__tile" href="{% if p != blank %}{{ p.url }}{% else %}{{ img | image_url: width: 1400 }}{% endif %}" data-pg-open="{{ total }}" aria-label="View photo: {{ t | default: 'Patch photo' | escape }}"><img src="{{ img | image_url: width: 480, height: 480, crop: 'center' }}" width="480" height="480" loading="lazy" alt="{{ img.alt | default: t | escape }}"></a></li>{%- endcapture -%}
+          {%- assign pg_tiles = pg_tiles | append: one_tile -%}
+        {%- endif -%}
+        {%- assign total = total | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+<style>
+  #pk-pg-{{ section.id }} { background: {{ section.settings.bg }}; padding: 3.5rem 0; }
+  .pk-pg__inner { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .pk-pg__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .pk-pg__eyebrow { display: block; font-size: var(--pk-fs-label); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pk-text-brand); margin-bottom: 0.35rem; }
+  .pk-pg__heading { font-size: var(--pk-fs-heading); font-weight: 800; color: var(--pk-text-primary); margin: 0; line-height: 1.15; }
+  .pk-pg__intro { font-size: var(--pk-fs-body); color: var(--pk-text-secondary); margin: 0.4rem 0 0; }
+  .pk-pg__all { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.2rem; border-radius: var(--pk-radius-pill); font-size: var(--pk-fs-label); font-weight: 700; cursor: pointer; border: 1px solid var(--pk-text-primary); background: transparent; color: var(--pk-text-primary); transition: background-color var(--pk-btn-transition), color var(--pk-btn-transition); }
+  .pk-pg__all:hover { background: var(--pk-text-primary); color: var(--pk-text-inverse); }
+  .pk-pg__row { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--pg-cols, 4), minmax(0, 1fr)); gap: 1rem; }
+  .pk-pg__tile { position: relative; display: block; border-radius: var(--pk-radius-md); overflow: hidden; background: #f3f4f6; aspect-ratio: 1; }
+  .pk-pg__tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
+  .pk-pg__tile::after { content: ""; position: absolute; inset: 0; background: rgba(17, 24, 39, 0); transition: background-color 0.2s; }
+  .pk-pg__tile:hover img { transform: scale(1.05); }
+  .pk-pg__tile:hover::after { background: rgba(17, 24, 39, 0.12); }
+  .pk-pg__tile:focus-visible { outline: 3px solid var(--pk-btn-primary-bg); outline-offset: 3px; }
+  @media (max-width: 749px) {
+    #pk-pg-{{ section.id }} { padding: 2.5rem 0; }
+    .pk-pg__row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -1.5rem; padding: 0 1.5rem; }
+    .pk-pg__row::-webkit-scrollbar { display: none; }
+    .pk-pg__item { flex: 0 0 44%; scroll-snap-align: start; }
+  }
+
+  /* ---- Viewer ---- */
+  .pk-pg__dlg { border: 0; padding: 0; margin: auto; width: min(1100px, 100vw - 2rem); max-width: none; max-height: calc(100dvh - 2rem); border-radius: var(--pk-radius-lg); background: #0b0b12; color: var(--pk-text-inverse); overflow: hidden; }
+  .pk-pg__dlg::backdrop { background: rgba(5, 5, 10, 0.75); }
+  .pk-pg__dlg[open] { display: flex; flex-direction: column; height: min(calc(100dvh - 2rem), 860px); }
+  .pk-pg__bar { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.1rem 0; font-size: var(--pk-fs-label); color: var(--pk-text-inverse-muted); }
+  .pk-pg__x { width: 2.5rem; height: 2.5rem; border: 0; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; font-size: 1.4rem; line-height: 1; cursor: pointer; }
+  .pk-pg__x:hover { background: rgba(255,255,255,0.2); }
+  .pk-pg__stage { position: relative; flex: 1 1 auto; min-height: 9rem; perspective: 1400px; touch-action: pan-y; user-select: none; }
+  .pk-pg__slide { position: absolute; top: 50%; left: 50%; height: 92%; width: auto; max-width: 56%; aspect-ratio: 1; margin: 0; transform: translate(-50%, -50%) scale(0.6); opacity: 0; pointer-events: none; border-radius: var(--pk-radius-md); overflow: hidden; background: #1f2030; transition: transform 0.45s cubic-bezier(.2,.7,.2,1), opacity 0.45s; }
+  .pk-pg__slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pk-pg__slide.is-active { transform: translate(-50%, -50%); opacity: 1; z-index: 3; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .pk-pg__slide.is-prev { transform: translate(-128%, -50%) rotateY(32deg) scale(0.78); opacity: 0.55; z-index: 2; pointer-events: auto; cursor: pointer; }
+  .pk-pg__slide.is-next { transform: translate(28%, -50%) rotateY(-32deg) scale(0.78); opacity: 0.55; z-index: 2; pointer-events: auto; cursor: pointer; }
+  .pk-pg__arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 3rem; height: 3rem; border-radius: 50%; border: 0; background: rgba(255,255,255,0.92); color: var(--pk-text-primary); cursor: pointer; display: grid; place-items: center; box-shadow: 0 4px 14px rgba(0,0,0,0.35); }
+  .pk-pg__arrow:hover { background: #fff; }
+  .pk-pg__arrow--prev { left: 1rem; }
+  .pk-pg__arrow--next { right: 1rem; }
+  .pk-pg__arrow:focus-visible, .pk-pg__x:focus-visible, .pk-pg__thumb:focus-visible { outline: 3px solid var(--pk-text-brand-inverse); outline-offset: 2px; }
+  .pk-pg__info { text-align: center; padding: 1rem 1.25rem 0.25rem; }
+  .pk-pg__title { font-size: var(--pk-fs-subheading); font-weight: 700; margin: 0; }
+  .pk-pg__caption { font-size: var(--pk-fs-label); color: var(--pk-text-inverse-secondary); margin: 0.3rem 0 0; min-height: 1.2em; }
+  .pk-pg__btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin: 0.9rem 0 0; }
+  .pk-pg__btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.7rem 1.3rem; border-radius: var(--pk-radius-sm); font-size: var(--pk-fs-label); font-weight: 700; text-decoration: none; transition: background-color var(--pk-btn-transition); }
+  .pk-pg__btn--ghost { border: 1px solid rgba(255,255,255,0.55); color: #fff; }
+  .pk-pg__btn--ghost:hover { background: rgba(255,255,255,0.12); }
+  .pk-pg__btn--main { background: var(--pk-btn-primary-bg); color: var(--pk-btn-primary-fg); }
+  .pk-pg__btn--main:hover { background: var(--pk-btn-primary-bg-hover); }
+  .pk-pg__thumbs { flex: 0 0 auto; display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.9rem 1.1rem 1rem; scrollbar-width: none; justify-content: safe center; }
+  .pk-pg__thumbs::-webkit-scrollbar { display: none; }
+  .pk-pg__info, .pk-pg__bar { flex: 0 0 auto; }
+  .pk-pg__thumb { flex: 0 0 auto; width: 4rem; height: 4rem; padding: 0; border: 2px solid transparent; border-radius: var(--pk-radius-sm); overflow: hidden; background: #1f2030; cursor: pointer; opacity: 0.6; transition: opacity 0.2s, border-color 0.2s; }
+  .pk-pg__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pk-pg__thumb[aria-current="true"] { border-color: var(--pk-text-brand-inverse); opacity: 1; }
+  .pk-pg__thumb:hover { opacity: 1; }
+  @media (max-width: 749px) {
+    .pk-pg__dlg { width: 100vw; max-height: 100dvh; border-radius: 0; }
+    .pk-pg__dlg[open] { height: 100dvh; }
+    
+    .pk-pg__slide { height: auto; width: 78%; max-width: 78%; max-height: 92%; }
+    .pk-pg__slide.is-prev { transform: translate(-112%, -50%) rotateY(30deg) scale(0.7); opacity: 0.4; }
+    .pk-pg__slide.is-next { transform: translate(12%, -50%) rotateY(-30deg) scale(0.7); opacity: 0.4; }
+    .pk-pg__arrow { width: 2.5rem; height: 2.5rem; }
+    .pk-pg__arrow--prev { left: 0.4rem; }
+    .pk-pg__arrow--next { right: 0.4rem; }
+    .pk-pg__thumb { width: 3.25rem; height: 3.25rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pk-pg__slide, .pk-pg__tile img { transition: none; }
+  }
+</style>
+
+{%- if total > 0 -%}
+<section id="pk-pg-{{ section.id }}" class="pk-pg" style="--pg-cols: {{ shown_tiles }};" aria-labelledby="pk-pg-h-{{ section.id }}">
+  <div class="pk-pg__inner">
+    <div class="pk-pg__head">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<span class="pk-pg__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="pk-pg__heading" id="pk-pg-h-{{ section.id }}">{{ section.settings.heading }}</h2>
+        {%- if section.settings.intro != blank -%}<p class="pk-pg__intro">{{ section.settings.intro }}</p>{%- endif -%}
+      </div>
+      {%- if section.settings.all_label != blank and total > shown_tiles -%}
+        <button type="button" class="pk-pg__all" data-pg-open="0" hidden>{{ section.settings.all_label }} ({{ total }}) <span aria-hidden="true">&rarr;</span></button>
+      {%- endif -%}
+    </div>
+    <ul class="pk-pg__row">{{ pg_tiles }}</ul>
+  </div>
+
+  <dialog class="pk-pg__dlg" aria-label="{{ section.settings.heading | escape }}">
+    <div class="pk-pg__bar">
+      <span class="pk-pg__count" aria-live="polite"></span>
+      <button type="button" class="pk-pg__x" data-pg-close aria-label="Close">&times;</button>
+    </div>
+    <div class="pk-pg__stage">
+      <button type="button" class="pk-pg__arrow pk-pg__arrow--prev" data-pg-step="-1" aria-label="Previous photo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button type="button" class="pk-pg__arrow pk-pg__arrow--next" data-pg-step="1" aria-label="Next photo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+    <div class="pk-pg__info">
+      <p class="pk-pg__title"></p>
+      <p class="pk-pg__caption"></p>
+      <div class="pk-pg__btns">
+        {%- if section.settings.details_label != blank -%}<a class="pk-pg__btn pk-pg__btn--ghost" data-pg-details href="#">{{ section.settings.details_label }}</a>{%- endif -%}
+        {%- if section.settings.cta_label != blank -%}<a class="pk-pg__btn pk-pg__btn--main" href="{{ cta_link }}">{{ section.settings.cta_label }}</a>{%- endif -%}
+      </div>
+    </div>
+    <div class="pk-pg__thumbs" role="group" aria-label="All photos"></div>
+  </dialog>
+  <script type="application/json" data-pg-data>[{{ pg_json }}]</script>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('pk-pg-{{ section.id }}');
+    if (!root || root.dataset.pgReady) return;
+    root.dataset.pgReady = '1';
+    var data;
+    try { data = JSON.parse(root.querySelector('[data-pg-data]').textContent); } catch (e) { return; }
+    var dlg = root.querySelector('.pk-pg__dlg');
+    if (!data.length || !dlg || typeof dlg.showModal !== 'function') return;
+
+    var stage = dlg.querySelector('.pk-pg__stage');
+    var thumbs = dlg.querySelector('.pk-pg__thumbs');
+    var title = dlg.querySelector('.pk-pg__title');
+    var caption = dlg.querySelector('.pk-pg__caption');
+    var count = dlg.querySelector('.pk-pg__count');
+    var details = dlg.querySelector('[data-pg-details]');
+    var slides = [], thumbBtns = [], current = 0, n = data.length;
+
+    data.forEach(function (d, i) {
+      var fig = document.createElement('figure');
+      fig.className = 'pk-pg__slide';
+      var img = document.createElement('img');
+      img.alt = d.title || '';
+      img.dataset.src = d.full;
+      fig.appendChild(img);
+      fig.addEventListener('click', function () { if (i !== current) show(i); });
+      stage.appendChild(fig);
+      slides.push(fig);
+
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pk-pg__thumb';
+      b.setAttribute('aria-label', 'Photo ' + (i + 1) + (d.title ? ': ' + d.title : ''));
+      var t = document.createElement('img');
+      t.src = d.thumb; t.alt = ''; t.loading = 'lazy';
+      b.appendChild(t);
+      b.addEventListener('click', function () { show(i); });
+      thumbs.appendChild(b);
+      thumbBtns.push(b);
+    });
+
+    function load(i) {
+      var img = slides[(i + n) % n].querySelector('img');
+      if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
+    }
+
+    function show(i) {
+      current = (i + n) % n;
+      slides.forEach(function (s, k) {
+        s.classList.toggle('is-active', k === current);
+        s.classList.toggle('is-prev', n > 2 && k === (current - 1 + n) % n);
+        s.classList.toggle('is-next', n > 1 && k === (current + 1) % n);
+      });
+      load(current); load(current + 1); load(current - 1);
+      var d = data[current];
+      title.textContent = d.title || '';
+      caption.textContent = d.caption || '';
+      count.textContent = (current + 1) + ' / ' + n;
+      if (details) {
+        details.hidden = !d.url;
+        if (d.url) details.href = d.url;
+      }
+      thumbBtns.forEach(function (b, k) { b.setAttribute('aria-current', k === current ? 'true' : 'false'); });
+      var tb = thumbBtns[current];
+      thumbs.scrollTo({ left: tb.offsetLeft - thumbs.clientWidth / 2 + tb.clientWidth / 2, behavior: 'smooth' });
+    }
+
+    function open(i) {
+      dlg.showModal();
+      show(i);
+      document.documentElement.style.overflow = 'hidden';
+    }
+    dlg.addEventListener('close', function () { document.documentElement.style.overflow = ''; });
+
+    root.querySelectorAll('[data-pg-open]').forEach(function (el) {
+      el.hidden = false;
+      el.addEventListener('click', function (e) { e.preventDefault(); open(+el.dataset.pgOpen); });
+    });
+    dlg.querySelector('[data-pg-close]').addEventListener('click', function () { dlg.close(); });
+    dlg.querySelectorAll('[data-pg-step]').forEach(function (b) {
+      b.addEventListener('click', function () { show(current + (+b.dataset.pgStep)); });
+    });
+    // Click on the dimmed area outside the panel closes the viewer.
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { show(current + 1); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { show(current - 1); e.preventDefault(); }
+    });
+
+    // Swipe (touch or mouse drag) on the photo area.
+    var startX = null, startY = 0;
+    stage.addEventListener('pointerdown', function (e) { startX = e.clientX; startY = e.clientY; });
+    stage.addEventListener('pointerup', function (e) {
+      if (startX === null) return;
+      var dx = e.clientX - startX, dy = e.clientY - startY;
+      startX = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
+    });
+    stage.addEventListener('pointercancel', function () { startX = null; });
+  })();
+</script>
+{%- endif -%}
