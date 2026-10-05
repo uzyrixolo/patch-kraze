@@ -125,7 +125,7 @@
         "menu_pvc_rubber_patches": {
           "type": "menu_product",
           "settings": {
-            "product": "pvc-rubber-patches",
+            "product": "pvc-patches",
             "backup_handle": "",
             "label": "PVC rubber",
             "group": "molded"
