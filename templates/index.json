@@ -104,7 +104,7 @@
           "type": "tab",
           "settings": {
             "label": "Embroidered",
-            "product": "embroidered-patches",
+            "product": "custom-embroidered-patches",
             "backup_handle": "embroidered-patches",
             "collection": "",
             "more_label": "See sizes and pricing"
