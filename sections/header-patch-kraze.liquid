@@ -80,12 +80,12 @@
   assign pk_announcement_mobile = section.settings.announcement_mobile | default: section.settings.announcement
   assign pk_logo = 'https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patch_Kraze_Logo_horizontal_low_9ea09d1a-6c9e-4f1b-8b6a-58cbadcfdf50.png?v=1787003036'
 
-  assign pk_grp_stitched = 'Embroidered|/products/embroidered-patches,3D embroidered|/products/3d-embroidered-patches,Name patches|/products/name-patches,Chenille|/products/chenille-patches,Tackle twill letters|/products/tackle-twill-letters,Woven|/products/woven-patches,Glow-in-the-dark embroidered|/products/glow-in-the-dark-embroidery-patches' | split: ','
-  assign pk_grp_printed = 'Full color printed|/products/full-color-printed-patches,Full color flex|/products/full-color-flex-patches,Gold flex|/products/gold-flex-patches,Silver flex|/products/silver-flex-patches,TPU UV 3D|/products/pu-uv-3d-patches' | split: ','
-  assign pk_grp_molded = 'PVC rubber|/products/pvc-rubber-patches,3D PVC|/products/3d-pvc-patches,Glow-in-the-dark PVC|/products/glow-in-the-dark-pvc-rubber-patches,Silicone|/products/silicone-patches,PVC keychains|/products/custom-keychains' | split: ','
-  assign pk_grp_leather = 'Genuine leather|/products/leather-patches,Faux leather|/products/faux-leather-patches' | split: ','
-  assign pk_grp_stickers = 'Vinyl stickers|/products/custom-vinyl-stickers,Holographic stickers|/products/holographic-stickers,UV transparent stickers|/products/uv-transparent-stickers' | split: ','
-  assign pk_grp_services = 'Direct embroidery|/pages/direct-embroidery|services_4.webp,Screen printing|/pages/screen-printing|services_5.webp,Heat press service|/pages/heat-press-service|services_1.webp,Tees with DTF prints|/pages/tees-with-dtf-prints|services_2.webp' | split: ','
+  assign pk_grp_stitched = 'Embroidered|/products/embroidered-patches,3D Embroidered|/products/3d-embroidered-patches,Name Patches|/products/name-patches,Chenille|/products/chenille-patches,Tackle Twill Letters|/products/tackle-twill-letters,Woven|/products/woven-patches,Glow-in-the-Dark Embroidered|/products/glow-in-the-dark-embroidery-patches' | split: ','
+  assign pk_grp_printed = 'Full Color Printed|/products/full-color-printed-patches,Full Color Flex|/products/full-color-flex-patches,Gold Flex|/products/gold-flex-patches,Silver Flex|/products/silver-flex-patches,TPU UV 3D|/products/pu-uv-3d-patches' | split: ','
+  assign pk_grp_molded = 'PVC Rubber|/products/pvc-rubber-patches,3D PVC|/products/3d-pvc-patches,Glow-in-the-Dark PVC|/products/glow-in-the-dark-pvc-rubber-patches,Silicone|/products/silicone-patches,PVC Keychains|/products/custom-keychains' | split: ','
+  assign pk_grp_leather = 'Genuine Leather|/products/leather-patches,Faux Leather|/products/faux-leather-patches' | split: ','
+  assign pk_grp_stickers = 'Vinyl Stickers|/products/custom-vinyl-stickers,Holographic Stickers|/products/holographic-stickers,UV Transparent Stickers|/products/uv-transparent-stickers' | split: ','
+  assign pk_grp_services = 'Direct Embroidery|/pages/direct-embroidery|services_4.webp,Screen Printing|/pages/screen-printing|services_5.webp,Heat Press Service|/pages/heat-press-service|services_1.webp,Tees with DTF Prints|/pages/tees-with-dtf-prints|services_2.webp' | split: ','
 -%}
 
 <style>
@@ -285,8 +285,8 @@
       <p class="pk-strip__msg pk-strip__msg--desktop">{{ section.settings.announcement }}</p>
       <p class="pk-strip__msg pk-strip__msg--mobile">{{ pk_announcement_mobile }}</p>
       <div class="pk-strip__links">
-        <a href="{{ pk_url_readymade }}">Ready-made patches</a>
-        <a href="{{ pk_url_blanks }}">Blank hats</a>
+        <a href="{{ pk_url_readymade }}">Ready-Made Patches</a>
+        <a href="{{ pk_url_blanks }}">Blank Hats</a>
         <a href="tel:+1{{ pk_tel }}" class="pk-strip__phone" aria-label="Call Patch Kraze at {{ pk_phone }}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           {{ section.settings.contact_label }} <strong>{{ pk_phone }}</strong>
@@ -346,19 +346,19 @@
           <div class="pk-panel pk-panel--wide" id="pk-panel-patches" style="--pk-cols: {{ pk_patch_cols }};">
             {%- if pk_links_stitched != blank -%}
               <div>
-                <p class="pk-panel__head">Embroidered &amp; woven</p>
+                <p class="pk-panel__head">Embroidered &amp; Woven</p>
                 <ul class="pk-panel__links">{{ pk_links_stitched }}</ul>
               </div>
             {%- endif -%}
             {%- if pk_links_printed != blank -%}
               <div>
-                <p class="pk-panel__head">Printed &amp; flex</p>
+                <p class="pk-panel__head">Printed &amp; Flex</p>
                 <ul class="pk-panel__links">{{ pk_links_printed }}</ul>
               </div>
             {%- endif -%}
             {%- if pk_links_molded != blank -%}
               <div>
-                <p class="pk-panel__head">PVC, rubber &amp; silicone</p>
+                <p class="pk-panel__head">PVC, Rubber &amp; Silicone</p>
                 <ul class="pk-panel__links">{{ pk_links_molded }}</ul>
               </div>
             {%- endif -%}
@@ -371,7 +371,7 @@
             <div class="pk-panel__aside">
               <p class="pk-panel__aside-title">Not sure which style suits your design?</p>
               <p class="pk-panel__aside-text">Send us the artwork and we'll point you to the right patch, with a price.</p>
-              <a class="pk-panel__aside-btn pk-btn-primary" href="{{ pk_url_quote }}">Get a free quote</a>
+              <a class="pk-panel__aside-btn pk-btn-primary" href="{{ pk_url_quote }}">Get a Free Quote</a>
             </div>
           </div>
         </div>
@@ -389,7 +389,7 @@
         </div>
 
         <div class="pk-menu__item">
-          <a class="pk-menu__link" href="/products/dtf-transfers">DTF transfers</a>
+          <a class="pk-menu__link" href="/products/dtf-transfers">DTF Transfers</a>
         </div>
 
         <div class="pk-menu__item pk-menu__item--compact" data-pk-menu>
@@ -418,7 +418,7 @@
             {% render 'cart-bubble', limit: 100, live_region: true %}
           </cart-icon>
         </button>
-        <a class="pk-quote-btn pk-btn-dark" href="{{ pk_url_quote }}">Get a quote</a>
+        <a class="pk-quote-btn pk-btn-dark" href="{{ pk_url_quote }}">Get a Quote</a>
         <button type="button" class="pk-tool pk-tool--menu pk-btn-icon" onclick="toggleMobileMenu(true)" aria-label="Open menu" aria-controls="mobile-drawer">
           <span class="svg-wrapper" aria-hidden="true">{{- 'icon-menu.svg' | inline_asset_content -}}</span>
         </button>
@@ -445,19 +445,19 @@
           {%- capture pk_drawer_links -%}{%- render 'pk-menu-links', blocks: section.blocks, group: 'stitched', fallback: pk_grp_stitched, variant: 'drawer' -%}{%- endcapture -%}
           {%- assign pk_drawer_links = pk_drawer_links | strip -%}
           {%- if pk_drawer_links != blank -%}
-            <p class="pk-drawer__label">Embroidered &amp; woven</p>
+            <p class="pk-drawer__label">Embroidered &amp; Woven</p>
             {{ pk_drawer_links }}
           {%- endif -%}
           {%- capture pk_drawer_links -%}{%- render 'pk-menu-links', blocks: section.blocks, group: 'printed', fallback: pk_grp_printed, variant: 'drawer' -%}{%- endcapture -%}
           {%- assign pk_drawer_links = pk_drawer_links | strip -%}
           {%- if pk_drawer_links != blank -%}
-            <p class="pk-drawer__label">Printed &amp; flex</p>
+            <p class="pk-drawer__label">Printed &amp; Flex</p>
             {{ pk_drawer_links }}
           {%- endif -%}
           {%- capture pk_drawer_links -%}{%- render 'pk-menu-links', blocks: section.blocks, group: 'molded', fallback: pk_grp_molded, variant: 'drawer' -%}{%- endcapture -%}
           {%- assign pk_drawer_links = pk_drawer_links | strip -%}
           {%- if pk_drawer_links != blank -%}
-            <p class="pk-drawer__label">PVC, rubber &amp; silicone</p>
+            <p class="pk-drawer__label">PVC, Rubber &amp; Silicone</p>
             {{ pk_drawer_links }}
           {%- endif -%}
           {%- capture pk_drawer_links -%}{%- render 'pk-menu-links', blocks: section.blocks, group: 'leather', fallback: pk_grp_leather, variant: 'drawer' -%}{%- endcapture -%}
@@ -474,18 +474,18 @@
           {%- render 'pk-menu-links', blocks: section.blocks, group: 'stickers', fallback: pk_grp_stickers, variant: 'drawer' -%}
         </div>
       </details>
-      <a class="pk-drawer__link" href="/products/dtf-transfers">DTF transfers</a>
+      <a class="pk-drawer__link" href="/products/dtf-transfers">DTF Transfers</a>
       <details class="pk-drawer__group">
         <summary>Services <span class="pk-drawer__chev" aria-hidden="true">{{- 'icon-caret.svg' | inline_asset_content -}}</span></summary>
         <div class="pk-drawer__sub">
           {%- render 'pk-menu-links', blocks: section.blocks, group: 'services', fallback: pk_grp_services, variant: 'drawer' -%}
         </div>
       </details>
-      <a class="pk-drawer__link" href="{{ pk_url_readymade }}">Ready-made patches</a>
-      <a class="pk-drawer__link" href="{{ pk_url_blanks }}">Blank hats</a>
+      <a class="pk-drawer__link" href="{{ pk_url_readymade }}">Ready-Made Patches</a>
+      <a class="pk-drawer__link" href="{{ pk_url_blanks }}">Blank Hats</a>
     </div>
     <div class="pk-drawer__foot">
-      <a class="pk-quote-btn pk-btn-dark" href="{{ pk_url_quote }}">Get a quote</a>
+      <a class="pk-quote-btn pk-btn-dark" href="{{ pk_url_quote }}">Get a Quote</a>
       <div class="pk-drawer__foot-links">
         <a href="tel:+1{{ pk_tel }}">Call {{ pk_phone }}</a>
         <a href="{{ routes.account_url }}">Account</a>

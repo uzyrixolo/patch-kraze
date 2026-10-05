@@ -28,7 +28,7 @@
           "settings": {
             "product": "3d-embroidered-patches",
             "backup_handle": "",
-            "label": "3D embroidered",
+            "label": "3D Embroidered",
             "group": "stitched"
           }
         },
@@ -37,7 +37,7 @@
           "settings": {
             "product": "name-patches",
             "backup_handle": "",
-            "label": "Name patches",
+            "label": "Name Patches",
             "group": "stitched"
           }
         },
@@ -55,7 +55,7 @@
           "settings": {
             "product": "tackle-twill-letters",
             "backup_handle": "",
-            "label": "Tackle twill letters",
+            "label": "Tackle Twill Letters",
             "group": "stitched"
           }
         },
@@ -73,7 +73,7 @@
           "settings": {
             "product": "glow-in-the-dark-embroidery-patches",
             "backup_handle": "",
-            "label": "Glow-in-the-dark embroidered",
+            "label": "Glow-in-the-Dark Embroidered",
             "group": "stitched"
           }
         },
@@ -82,7 +82,7 @@
           "settings": {
             "product": "custom-full-color-printed-patches",
             "backup_handle": "full-color-printed-patches",
-            "label": "Full color printed",
+            "label": "Full Color Printed",
             "group": "printed"
           }
         },
@@ -91,7 +91,7 @@
           "settings": {
             "product": "full-color-flex-patches",
             "backup_handle": "",
-            "label": "Full color TPU flex patches",
+            "label": "Full Color TPU Flex Patches",
             "group": "printed"
           }
         },
@@ -109,7 +109,7 @@
           "settings": {
             "product": "silver-flex-patches",
             "backup_handle": "",
-            "label": "Silver flex",
+            "label": "Silver Flex",
             "group": "printed"
           }
         },
@@ -145,7 +145,7 @@
           "settings": {
             "product": "glow-in-the-dark-pvc-rubber-patches",
             "backup_handle": "",
-            "label": "Glow-in-the-dark PVC",
+            "label": "Glow-in-the-Dark PVC",
             "group": "molded"
           }
         },
@@ -163,7 +163,7 @@
           "settings": {
             "product": "custom-keychains",
             "backup_handle": "",
-            "label": "PVC keychains",
+            "label": "PVC Keychains",
             "group": "molded"
           }
         },
@@ -172,7 +172,7 @@
           "settings": {
             "product": "custom-leather-patches",
             "backup_handle": "leather-patches",
-            "label": "Genuine leather",
+            "label": "Genuine Leather",
             "group": "leather"
           }
         },
@@ -181,7 +181,7 @@
           "settings": {
             "product": "custom-faux-leather-patches",
             "backup_handle": "faux-leather-patches",
-            "label": "Faux leather",
+            "label": "Faux Leather",
             "group": "leather"
           }
         },
@@ -190,7 +190,7 @@
           "settings": {
             "product": "custom-vinyl-stickers",
             "backup_handle": "",
-            "label": "Vinyl stickers",
+            "label": "Vinyl Stickers",
             "group": "stickers"
           }
         },
@@ -199,7 +199,7 @@
           "settings": {
             "product": "holographic-stickers",
             "backup_handle": "",
-            "label": "Holographic stickers",
+            "label": "Holographic Stickers",
             "group": "stickers"
           }
         },
@@ -208,7 +208,7 @@
           "settings": {
             "product": "uv-transparent-stickers",
             "backup_handle": "",
-            "label": "UV transparent stickers",
+            "label": "UV Transparent Stickers",
             "group": "stickers"
           }
         }
