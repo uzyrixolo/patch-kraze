@@ -1100,79 +1100,6 @@
         "overlay_opacity": 60,
         "corner_radius": 16
       }
-    },
-    "photo_gallery": {
-      "type": "photo-gallery",
-      "blocks": {
-        "pg_1": {
-          "type": "product_photos",
-          "settings": {
-            "product": "custom-embroidered-patches",
-            "max": 4,
-            "caption": ""
-          }
-        },
-        "pg_2": {
-          "type": "product_photos",
-          "settings": {
-            "product": "custom-chenille-patches",
-            "max": 4,
-            "caption": ""
-          }
-        },
-        "pg_3": {
-          "type": "product_photos",
-          "settings": {
-            "product": "custom-full-color-printed-patches",
-            "max": 4,
-            "caption": ""
-          }
-        },
-        "pg_4": {
-          "type": "product_photos",
-          "settings": {
-            "product": "custom-leather-patches",
-            "max": 4,
-            "caption": ""
-          }
-        },
-        "pg_5": {
-          "type": "product_photos",
-          "settings": {
-            "product": "pvc-rubber-patches",
-            "max": 4,
-            "caption": ""
-          }
-        },
-        "pg_6": {
-          "type": "product_photos",
-          "settings": {
-            "product": "3d-embroidered-patches",
-            "max": 4,
-            "caption": ""
-          }
-        }
-      },
-      "block_order": [
-        "pg_1",
-        "pg_2",
-        "pg_3",
-        "pg_4",
-        "pg_5",
-        "pg_6"
-      ],
-      "settings": {
-        "eyebrow": "Real orders",
-        "heading": "Patches We've Made",
-        "intro": "Tap any photo to see it up close and swipe through the rest.",
-        "strip_count": 4,
-        "all_label": "See all photos",
-        "details_label": "See this patch type",
-        "cta_label": "Start a quote",
-        "cta_link": "",
-        "skip_keywords": "detailImage,Gemini_Generated,ChatGPT,_info",
-        "bg": "#ffffff"
-      }
     }
   },
   "order": [
@@ -1180,7 +1107,6 @@
     "home_hero",
     "type_showcase",
     "style_grid",
-    "photo_gallery",
     "shop_all_patches",
     "shop_popular_products",
     "credibility",
