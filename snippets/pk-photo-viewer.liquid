@@ -1,0 +1,232 @@
+{%- doc -%}
+  The full-screen photo viewer shared by every section that opens one (the
+  Photo Gallery section, the "Explore Gallery" button on Style Grid cards).
+  Prints nothing; its CSS and script are bundled by Shopify. Render it once in
+  any section that uses it so the dependency is visible there.
+
+  How to open it: give any element `data-pk-gallery="<id>"`, where <id> is a
+  `<script type="application/json">` holding a list of photos:
+    [{"full": url, "thumb": url, "title": text, "caption": text, "url": product url or null}, ...]
+  Optional on the trigger: `data-pk-gallery-start="<n>"` (photo to open on).
+  Optional on the JSON element:
+    data-pv-title          the viewer's accessible name
+    data-pv-product-label  label of the button to the photo's product (hidden when a photo has no url)
+    data-pv-cta-label      label of the second button
+    data-pv-cta-href       its link (default /pages/quote)
+    data-pv-main           "product" or "cta": which of the two is the filled button (default "cta")
+
+  A trigger that carries the `hidden` attribute is shown once the script runs,
+  so a button that only works with the viewer never shows without it. Links
+  (such as photo tiles) should keep a real href for when script is off.
+{%- enddoc -%}
+
+{% stylesheet %}
+  /* The page behind stays put while the viewer is open. Done in CSS rather
+     than on the dialog's close event, so it can never be left locked. */
+  html:has(dialog.pk-pv[open]) { overflow: hidden; }
+  .pk-pv { border: 0; padding: 0; margin: auto; width: min(1100px, 100vw - 2rem); max-width: none; max-height: calc(100dvh - 2rem); border-radius: var(--pk-radius-lg); background: #0b0b12; color: var(--pk-text-inverse); overflow: hidden; }
+  .pk-pv::backdrop { background: rgba(5, 5, 10, 0.75); }
+  .pk-pv[open] { display: flex; flex-direction: column; height: min(calc(100dvh - 2rem), 860px); }
+  .pk-pv__bar { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.1rem 0; font-size: var(--pk-fs-label); color: var(--pk-text-inverse-muted); }
+  .pk-pv__x { width: 2.5rem; height: 2.5rem; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.1); color: #fff; font-size: 1.4rem; line-height: 1; cursor: pointer; }
+  .pk-pv__x:hover { background: rgba(255, 255, 255, 0.2); }
+  .pk-pv__stage { position: relative; flex: 1 1 auto; min-height: 9rem; perspective: 1400px; touch-action: pan-y; user-select: none; }
+  .pk-pv__slide { position: absolute; top: 50%; left: 50%; height: 92%; width: auto; max-width: 56%; aspect-ratio: 1; margin: 0; transform: translate(-50%, -50%) scale(0.6); opacity: 0; pointer-events: none; border-radius: var(--pk-radius-md); overflow: hidden; background: #1f2030; transition: transform 0.45s cubic-bezier(.2, .7, .2, 1), opacity 0.45s; }
+  .pk-pv__slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pk-pv__slide.is-active { transform: translate(-50%, -50%); opacity: 1; z-index: 3; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
+  .pk-pv__slide.is-prev { transform: translate(-128%, -50%) rotateY(32deg) scale(0.78); opacity: 0.55; z-index: 2; pointer-events: auto; cursor: pointer; }
+  .pk-pv__slide.is-next { transform: translate(28%, -50%) rotateY(-32deg) scale(0.78); opacity: 0.55; z-index: 2; pointer-events: auto; cursor: pointer; }
+  .pk-pv__arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 3rem; height: 3rem; border-radius: 50%; border: 0; background: rgba(255, 255, 255, 0.92); color: var(--pk-text-primary); cursor: pointer; display: grid; place-items: center; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35); }
+  .pk-pv__arrow:hover { background: #fff; }
+  .pk-pv__arrow[hidden] { display: none; }
+  .pk-pv__arrow--prev { left: 1rem; }
+  .pk-pv__arrow--next { right: 1rem; }
+  .pk-pv__arrow:focus-visible, .pk-pv__x:focus-visible, .pk-pv__thumb:focus-visible, .pk-pv__btn:focus-visible { outline: 3px solid var(--pk-text-brand-inverse); outline-offset: 2px; }
+  .pk-pv__info { flex: 0 0 auto; text-align: center; padding: 1rem 1.25rem 0.25rem; }
+  .pk-pv__title { font-size: var(--pk-fs-subheading); font-weight: 700; margin: 0; }
+  .pk-pv__caption { font-size: var(--pk-fs-label); color: var(--pk-text-inverse-secondary); margin: 0.3rem 0 0; min-height: 1.2em; }
+  .pk-pv__btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin: 0.9rem 0 0; }
+  .pk-pv__btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.7rem 1.3rem; border-radius: var(--pk-radius-sm); font-size: var(--pk-fs-label); font-weight: 700; text-decoration: none; transition: background-color var(--pk-btn-transition); }
+  .pk-pv__btn[hidden] { display: none; }
+  .pk-pv__btn--ghost { border: 1px solid rgba(255, 255, 255, 0.55); color: #fff; }
+  .pk-pv__btn--ghost:hover { background: rgba(255, 255, 255, 0.12); }
+  .pk-pv__btn--main { background: var(--pk-btn-primary-bg); color: var(--pk-btn-primary-fg); }
+  .pk-pv__btn--main:hover { background: var(--pk-btn-primary-bg-hover); }
+  .pk-pv__thumbs { flex: 0 0 auto; display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.9rem 1.1rem 1rem; scrollbar-width: none; justify-content: safe center; }
+  .pk-pv__thumbs::-webkit-scrollbar { display: none; }
+  .pk-pv__thumb { flex: 0 0 auto; width: 4rem; height: 4rem; padding: 0; border: 2px solid transparent; border-radius: var(--pk-radius-sm); overflow: hidden; background: #1f2030; cursor: pointer; opacity: 0.6; transition: opacity 0.2s, border-color 0.2s; }
+  .pk-pv__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pk-pv__thumb[aria-current="true"] { border-color: var(--pk-text-brand-inverse); opacity: 1; }
+  .pk-pv__thumb:hover { opacity: 1; }
+  @media (max-width: 749px) {
+    .pk-pv { width: 100vw; max-height: 100dvh; border-radius: 0; }
+    .pk-pv[open] { height: 100dvh; }
+    .pk-pv__slide { height: auto; width: 78%; max-width: 78%; max-height: 92%; }
+    .pk-pv__slide.is-prev { transform: translate(-112%, -50%) rotateY(30deg) scale(0.7); opacity: 0.4; }
+    .pk-pv__slide.is-next { transform: translate(12%, -50%) rotateY(-30deg) scale(0.7); opacity: 0.4; }
+    .pk-pv__arrow { width: 2.5rem; height: 2.5rem; }
+    .pk-pv__arrow--prev { left: 0.4rem; }
+    .pk-pv__arrow--next { right: 0.4rem; }
+    .pk-pv__thumb { width: 3.25rem; height: 3.25rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pk-pv__slide { transition: none; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (function () {
+    if (window.pkPhotoViewer) return;
+    var supported = typeof HTMLDialogElement === 'function' && typeof HTMLDialogElement.prototype.showModal === 'function';
+
+    var dlg, stage, thumbs, titleEl, captionEl, countEl, productBtn, ctaBtn, arrows;
+    var data = [], slides = [], thumbBtns = [], current = 0, n = 0;
+    var arrowSvg = function (points) {
+      return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="' + points + '"/></svg>';
+    };
+
+    // The viewer is built once, on first use, and appended to <body> so no
+    // section's layout or stacking can clip it.
+    function build() {
+      dlg = document.createElement('dialog');
+      dlg.className = 'pk-pv';
+      dlg.innerHTML =
+        '<div class="pk-pv__bar"><span class="pk-pv__count" aria-live="polite"></span>' +
+        '<button type="button" class="pk-pv__x" aria-label="Close">&times;</button></div>' +
+        '<div class="pk-pv__stage">' +
+        '<button type="button" class="pk-pv__arrow pk-pv__arrow--prev" data-step="-1" aria-label="Previous photo">' + arrowSvg('15 18 9 12 15 6') + '</button>' +
+        '<button type="button" class="pk-pv__arrow pk-pv__arrow--next" data-step="1" aria-label="Next photo">' + arrowSvg('9 18 15 12 9 6') + '</button>' +
+        '</div>' +
+        '<div class="pk-pv__info"><p class="pk-pv__title"></p><p class="pk-pv__caption"></p>' +
+        '<div class="pk-pv__btns"><a class="pk-pv__btn" data-product href="#"></a><a class="pk-pv__btn" data-cta href="#"></a></div></div>' +
+        '<div class="pk-pv__thumbs" role="group" aria-label="All photos"></div>';
+      document.body.appendChild(dlg);
+
+      stage = dlg.querySelector('.pk-pv__stage');
+      thumbs = dlg.querySelector('.pk-pv__thumbs');
+      titleEl = dlg.querySelector('.pk-pv__title');
+      captionEl = dlg.querySelector('.pk-pv__caption');
+      countEl = dlg.querySelector('.pk-pv__count');
+      productBtn = dlg.querySelector('[data-product]');
+      ctaBtn = dlg.querySelector('[data-cta]');
+      arrows = dlg.querySelectorAll('[data-step]');
+
+      dlg.querySelector('.pk-pv__x').addEventListener('click', function () { dlg.close(); });
+      arrows.forEach(function (b) {
+        b.addEventListener('click', function () { show(current + (+b.dataset.step)); });
+      });
+      // A click on the dimmed area outside the panel closes the viewer.
+      dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+      dlg.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') { show(current + 1); e.preventDefault(); }
+        if (e.key === 'ArrowLeft') { show(current - 1); e.preventDefault(); }
+      });
+
+      // Swipe (touch or mouse drag) on the photo area.
+      var startX = null, startY = 0;
+      stage.addEventListener('pointerdown', function (e) { startX = e.clientX; startY = e.clientY; });
+      stage.addEventListener('pointerup', function (e) {
+        if (startX === null) return;
+        var dx = e.clientX - startX, dy = e.clientY - startY;
+        startX = null;
+        if (n > 1 && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
+      });
+      stage.addEventListener('pointercancel', function () { startX = null; });
+    }
+
+    function load(i) {
+      var img = slides[(i + n) % n].querySelector('img');
+      if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
+    }
+
+    function show(i) {
+      current = (i + n) % n;
+      slides.forEach(function (s, k) {
+        s.classList.toggle('is-active', k === current);
+        s.classList.toggle('is-prev', n > 2 && k === (current - 1 + n) % n);
+        s.classList.toggle('is-next', n > 1 && k === (current + 1) % n);
+      });
+      load(current); load(current + 1); load(current - 1);
+      var d = data[current];
+      titleEl.textContent = d.title || '';
+      captionEl.textContent = d.caption || '';
+      countEl.textContent = (current + 1) + ' / ' + n;
+      productBtn.hidden = !d.url || !productBtn.textContent;
+      if (d.url) productBtn.href = d.url;
+      thumbBtns.forEach(function (b, k) { b.setAttribute('aria-current', k === current ? 'true' : 'false'); });
+      var tb = thumbBtns[current];
+      thumbs.scrollTo({ left: tb.offsetLeft - thumbs.clientWidth / 2 + tb.clientWidth / 2, behavior: 'smooth' });
+    }
+
+    function open(items, start, opts) {
+      if (!dlg) build();
+      opts = opts || {};
+      data = items; n = items.length; slides = []; thumbBtns = [];
+      stage.querySelectorAll('.pk-pv__slide').forEach(function (s) { s.remove(); });
+      thumbs.textContent = '';
+
+      items.forEach(function (d, i) {
+        var fig = document.createElement('figure');
+        fig.className = 'pk-pv__slide';
+        var img = document.createElement('img');
+        img.alt = d.title || '';
+        img.dataset.src = d.full;
+        fig.appendChild(img);
+        fig.addEventListener('click', function () { if (i !== current) show(i); });
+        stage.appendChild(fig);
+        slides.push(fig);
+
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'pk-pv__thumb';
+        b.setAttribute('aria-label', 'Photo ' + (i + 1) + (d.title ? ': ' + d.title : ''));
+        var t = document.createElement('img');
+        t.src = d.thumb; t.alt = ''; t.loading = 'lazy';
+        b.appendChild(t);
+        b.addEventListener('click', function () { show(i); });
+        thumbs.appendChild(b);
+        thumbBtns.push(b);
+      });
+      arrows.forEach(function (a) { a.hidden = n < 2; });
+      thumbs.hidden = n < 2;
+
+      var productMain = opts.pvMain === 'product';
+      productBtn.textContent = opts.pvProductLabel || '';
+      productBtn.className = 'pk-pv__btn ' + (productMain ? 'pk-pv__btn--main' : 'pk-pv__btn--ghost');
+      ctaBtn.textContent = opts.pvCtaLabel || '';
+      ctaBtn.href = opts.pvCtaHref || '/pages/quote';
+      ctaBtn.className = 'pk-pv__btn ' + (productMain ? 'pk-pv__btn--ghost' : 'pk-pv__btn--main');
+      ctaBtn.hidden = !ctaBtn.textContent;
+      // The filled button comes first.
+      if (productMain) productBtn.parentNode.insertBefore(productBtn, ctaBtn);
+      else ctaBtn.parentNode.insertBefore(ctaBtn, productBtn);
+      dlg.setAttribute('aria-label', opts.pvTitle || 'Photos');
+
+      dlg.showModal();
+      show(start || 0);
+    }
+
+    if (!supported) return;
+    window.pkPhotoViewer = { open: open };
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest && e.target.closest('[data-pk-gallery]');
+      if (!trigger) return;
+      var source = document.getElementById(trigger.dataset.pkGallery);
+      if (!source) return;
+      var items;
+      try { items = JSON.parse(source.textContent); } catch (err) { return; }
+      if (!items || !items.length) return;
+      e.preventDefault();
+      open(items, +trigger.dataset.pkGalleryStart || 0, source.dataset);
+    });
+
+    function reveal() {
+      document.querySelectorAll('[data-pk-gallery][hidden]').forEach(function (el) { el.hidden = false; });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', reveal);
+    else reveal();
+    // Theme editor: a re-rendered section brings its triggers back hidden.
+    document.addEventListener('shopify:section:load', reveal);
+  })();
+{% endjavascript %}

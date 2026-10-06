@@ -13,6 +13,12 @@
   card is always in the HTML - without JS they all simply show - and the first
   tab lists the full set, so no product is ever unreachable.
 
+  "Explore Gallery" ("Photo gallery" settings): a button on each card's photo
+  opens the shared full-screen viewer (snippets/pk-photo-viewer.liquid) with
+  that product's own photos, the same ones the product page shows, minus the
+  file names in the skip list and anything pk-image-ok holds back. It is only
+  shown for a product with at least two such photos.
+
   Phones: "Layout on phones" picks between one row that is swiped sideways and
   a two-per-row grid.
 
@@ -56,6 +62,10 @@
     { "type": "text", "id": "btn_label", "label": "Button label", "default": "Start Your Order", "info": "Goes to the product page. Leave empty to hide." },
     { "type": "text", "id": "link_label", "label": "Text link label", "default": "Get a quote", "info": "Leave empty to hide." },
     { "type": "url", "id": "link_url", "label": "Text link", "info": "Defaults to /pages/quote." },
+    { "type": "header", "content": "Photo gallery" },
+    { "type": "text", "id": "gallery_label", "label": "Gallery button label", "default": "Explore Gallery", "info": "Sits on each card's photo and opens that product's photos full screen. Leave empty to hide." },
+    { "type": "range", "id": "gallery_max", "label": "Most photos per product", "min": 2, "max": 20, "step": 1, "default": 12 },
+    { "type": "text", "id": "gallery_skip", "label": "Skip product photos whose file name contains", "default": "detailImage,Gemini_Generated,ChatGPT,_info", "info": "Comma-separated. Keeps charts and infographics out of the gallery." },
     { "type": "header", "content": "Filter tabs" },
     { "type": "checkbox", "id": "show_tabs", "label": "Show filter tabs", "info": "Filters cards by each card's Group / Most popular setting. The label and subtext above are replaced by the tab row.", "default": false },
     { "type": "text", "id": "best_tab_label", "label": "Top-picks tab label", "default": "Top Picks" },
@@ -125,9 +135,16 @@
   .pk-sg__cell { display: flex; flex-direction: column; min-width: 0; padding: 0.4rem; background: #fff; border: 1px solid #e5e7eb; border-radius: var(--pk-radius-lg); transition: border-color 0.15s ease, box-shadow 0.15s ease; }
   .pk-sg__cell[hidden] { display: none; }
   .pk-sg__cell:hover { border-color: #d8b4fe; box-shadow: 0 18px 32px -24px rgba(88, 28, 135, 0.5); }
+  .pk-sg__media { position: relative; }
   .pk-sg__photo { display: block; aspect-ratio: 1 / 1; border-radius: calc(var(--pk-radius-lg) - 0.35rem); overflow: hidden; background: #f3f4f6; }
   .pk-sg__photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
   .pk-sg__cell:hover .pk-sg__photo img { transform: scale(1.04); }
+  .pk-sg__gallery { position: absolute; left: 0.6rem; bottom: 0.6rem; z-index: 1; display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2.25rem; padding: 0 0.85rem; border: 0; border-radius: var(--pk-radius-pill); background: rgba(255, 255, 255, 0.94); color: var(--pk-text-primary); font: inherit; font-size: var(--pk-fs-label); font-weight: 700; white-space: nowrap; cursor: pointer; box-shadow: 0 4px 14px rgba(17, 24, 39, 0.18); transition: background-color var(--pk-btn-transition), color var(--pk-btn-transition); }
+  .pk-sg__gallery[hidden] { display: none; }
+  .pk-sg__gallery:hover { background: var(--pk-btn-dark-bg); color: var(--pk-btn-dark-fg); }
+  .pk-sg__gallery:focus-visible { outline: 2px solid var(--pk-btn-primary-bg); outline-offset: 2px; }
+  .pk-sg__gallery svg { flex: 0 0 auto; }
+  .pk-sg__gallery-count { font-weight: 500; opacity: 0.7; }
   .pk-sg__body { display: flex; flex-direction: column; flex: 1; padding: 0.85rem 0.6rem 0.6rem; }
   .pk-sg__name { margin: 0; font-size: var(--pk-fs-body); font-weight: 700; line-height: 1.3; }
   .pk-sg__name a { color: var(--pk-text-primary); text-decoration: none; }
@@ -165,6 +182,8 @@
     .pk-sg--grid .pk-sg__body { padding: 0.7rem 0.35rem 0.4rem; }
     .pk-sg--grid .pk-sg__name { font-size: var(--pk-fs-label); }
     .pk-sg--grid .pk-sg__from, .pk-sg--grid .pk-sg__points { font-size: var(--pk-fs-tiny); }
+    .pk-sg--grid .pk-sg__gallery { left: 0.4rem; bottom: 0.4rem; min-height: 2rem; padding: 0 0.6rem; font-size: var(--pk-fs-tiny); }
+    .pk-sg--grid .pk-sg__gallery svg { display: none; }
     .pk-sg--grid .pk-sg__actions { flex-direction: column; align-items: stretch; text-align: center; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -207,7 +226,10 @@
   endfor
 
   assign quote_link = section.settings.link_url | default: '/pages/quote'
+  assign gallery_skip_list = section.settings.gallery_skip | split: ','
 -%}
+
+{%- render 'pk-photo-viewer' -%}
 
 <section class="pk-sg pk-sg--{{ section.settings.mobile_layout | default: 'swipe' }}{% if section.settings.text_tone == 'light' %} pk-sg--light{% endif %}" id="styles" style="--sg-desktop-cols: {{ section.settings.columns | default: 4 }}; --sg-bg: {{ section.settings.background | default: '#f7f4fc' }};">
   {%- render 'pk-section-bg', image: section.settings.bg_image, image_mobile: section.settings.bg_image_mobile, tint: section.settings.bg_tint, tone: section.settings.text_tone -%}
@@ -268,13 +290,44 @@
               {%- endif -%}
             {%- endfor -%}
           {%- endif -%}
+          {%- comment -%} The product's photos for the "Explore Gallery" viewer, as JSON. {%- endcomment -%}
+          {%- assign gallery_count = 0 -%}
+          {%- capture gallery_json -%}
+            {%- if section.settings.gallery_label != blank -%}
+              {%- for product_image in product.images -%}
+                {%- if gallery_count >= section.settings.gallery_max -%}{%- break -%}{%- endif -%}
+                {%- assign skip_image = false -%}
+                {%- for keyword in gallery_skip_list -%}
+                  {%- assign keyword_clean = keyword | strip -%}
+                  {%- if keyword_clean != blank and product_image.src contains keyword_clean -%}{%- assign skip_image = true -%}{%- endif -%}
+                {%- endfor -%}
+                {%- if skip_image -%}{%- continue -%}{%- endif -%}
+                {%- capture product_image_ok -%}{%- render 'pk-image-ok', src: product_image.src -%}{%- endcapture -%}
+                {%- assign product_image_ok = product_image_ok | strip -%}
+                {%- if product_image_ok == blank -%}{%- continue -%}{%- endif -%}
+                {%- if gallery_count > 0 %},{% endif -%}
+                {"full":{{ product_image | image_url: width: 1400 | json }},"thumb":{{ product_image | image_url: width: 160, height: 160, crop: 'center' | json }},"title":{{ product.title | json }},"caption":"","url":{{ product.url | json }}}
+                {%- assign gallery_count = gallery_count | plus: 1 -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endcapture -%}
           <article class="pk-sg__cell" data-sg-group="{{ block.settings.group }}"{% if block.settings.best_seller %} data-sg-best{% endif %} {{ block.shopify_attributes }}>
-            {%- comment -%} The photo repeats the name link, so it is kept out of the tab order. {%- endcomment -%}
-            <a class="pk-sg__photo" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
-              {%- if card_image -%}
-                <img src="{{ card_image | image_url: width: 600, height: 600, crop: 'center' }}" width="600" height="600" loading="lazy" alt="">
+            <div class="pk-sg__media">
+              {%- comment -%} The photo repeats the name link, so it is kept out of the tab order. {%- endcomment -%}
+              <a class="pk-sg__photo" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+                {%- if card_image -%}
+                  <img src="{{ card_image | image_url: width: 600, height: 600, crop: 'center' }}" width="600" height="600" loading="lazy" alt="">
+                {%- endif -%}
+              </a>
+              {%- if gallery_count > 1 -%}
+                {%- comment -%} Hidden until the viewer's script runs, since it does nothing without it. {%- endcomment -%}
+                <button type="button" class="pk-sg__gallery" data-pk-gallery="sg-pics-{{ section.id }}-{{ block.id }}" aria-label="{{ section.settings.gallery_label | escape }}: {{ product.title | escape }}, {{ gallery_count }} photos" hidden>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  {{ section.settings.gallery_label }} <span class="pk-sg__gallery-count" aria-hidden="true">{{ gallery_count }}</span>
+                </button>
+                <script type="application/json" id="sg-pics-{{ section.id }}-{{ block.id }}" data-pv-title="{{ product.title | escape }}" data-pv-product-label="{{ section.settings.btn_label | default: 'View this product' | escape }}" data-pv-cta-label="{{ section.settings.link_label | escape }}" data-pv-cta-href="{{ quote_link }}" data-pv-main="product">[{{ gallery_json }}]</script>
               {%- endif -%}
-            </a>
+            </div>
             <div class="pk-sg__body">
               <h3 class="pk-sg__name"><a href="{{ product.url }}">{{ product.title }}</a></h3>
               <p class="pk-sg__from">{{ section.settings.price_prefix }} <strong>{{ product.price_min | money }}</strong> {{ section.settings.price_suffix }}</p>
