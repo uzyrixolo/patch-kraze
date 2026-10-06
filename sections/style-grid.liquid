@@ -139,12 +139,13 @@
   .pk-sg__photo { display: block; aspect-ratio: 1 / 1; border-radius: calc(var(--pk-radius-lg) - 0.35rem); overflow: hidden; background: #f3f4f6; }
   .pk-sg__photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
   .pk-sg__cell:hover .pk-sg__photo img { transform: scale(1.04); }
-  .pk-sg__gallery { position: absolute; left: 0.6rem; bottom: 0.6rem; z-index: 1; display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2.25rem; padding: 0 0.85rem; border: 0; border-radius: var(--pk-radius-pill); background: rgba(255, 255, 255, 0.94); color: var(--pk-text-primary); font: inherit; font-size: var(--pk-fs-label); font-weight: 700; white-space: nowrap; cursor: pointer; box-shadow: 0 4px 14px rgba(17, 24, 39, 0.18); transition: background-color var(--pk-btn-transition), color var(--pk-btn-transition); }
+  /* Same look as the card's "Start Your Order" button: color and hover come
+     from .pk-btn-primary, size and shape match .pk-sg__btn. */
+  .pk-sg__gallery { position: absolute; left: 0.6rem; bottom: 0.6rem; z-index: 1; display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2.5rem; padding: 0 1.15rem; border: 0; border-radius: var(--pk-radius-sm); font: inherit; font-size: var(--pk-fs-label); font-weight: 700; white-space: nowrap; cursor: pointer; box-shadow: 0 4px 14px rgba(17, 24, 39, 0.25); }
   .pk-sg__gallery[hidden] { display: none; }
-  .pk-sg__gallery:hover { background: var(--pk-btn-dark-bg); color: var(--pk-btn-dark-fg); }
   .pk-sg__gallery:focus-visible { outline: 2px solid var(--pk-btn-primary-bg); outline-offset: 2px; }
   .pk-sg__gallery svg { flex: 0 0 auto; }
-  .pk-sg__gallery-count { font-weight: 500; opacity: 0.7; }
+  .pk-sg__gallery-count { font-weight: 500; opacity: 0.75; }
   .pk-sg__body { display: flex; flex-direction: column; flex: 1; padding: 0.85rem 0.6rem 0.6rem; }
   .pk-sg__name { margin: 0; font-size: var(--pk-fs-body); font-weight: 700; line-height: 1.3; }
   .pk-sg__name a { color: var(--pk-text-primary); text-decoration: none; }
@@ -321,7 +322,7 @@
               </a>
               {%- if gallery_count > 1 -%}
                 {%- comment -%} Hidden until the viewer's script runs, since it does nothing without it. {%- endcomment -%}
-                <button type="button" class="pk-sg__gallery" data-pk-gallery="sg-pics-{{ section.id }}-{{ block.id }}" aria-label="{{ section.settings.gallery_label | escape }}: {{ product.title | escape }}, {{ gallery_count }} photos" hidden>
+                <button type="button" class="pk-sg__gallery pk-btn-primary" data-pk-gallery="sg-pics-{{ section.id }}-{{ block.id }}" aria-label="{{ section.settings.gallery_label | escape }}: {{ product.title | escape }}, {{ gallery_count }} photos" hidden>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                   {{ section.settings.gallery_label }} <span class="pk-sg__gallery-count" aria-hidden="true">{{ gallery_count }}</span>
                 </button>
