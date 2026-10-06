@@ -44,6 +44,7 @@
   .gallery-scroller::-webkit-scrollbar { display: none; }
   .gallery-slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; scroll-snap-stop: always; display: flex; align-items: center; justify-content: center; }
   .gallery-slide img { width: 100%; height: 100%; object-fit: contain; padding: 0rem; }
+  .gallery-slide.pk-zoomable { cursor: zoom-in; }
 
   .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 3rem; height: 3rem; background-color: white; border: 1px solid #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: all 0.2s; }
   .nav-arrow:hover { background-color: #f9fafb; scale: 1.05; }
@@ -552,17 +553,37 @@
         assign pk_shown_count = 0
       endif
     -%}
+    {%- comment -%}
+      The shown photos (not videos) for the full-screen viewer
+      (snippets/pk-photo-viewer.liquid). A click on a photo slide, or the zoom
+      button, opens it on that photo.
+    {%- endcomment -%}
+    {%- assign pk_photo_count = 0 -%}
+    {%- capture pk_photos_json -%}
+      {%- for media in product.media -%}
+        {%- assign pk_media_key = ',' | append: media.id | append: ',' -%}
+        {%- unless pk_shown_ids contains pk_media_key -%}{%- continue -%}{%- endunless -%}
+        {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}{%- continue -%}{%- endif -%}
+        {%- if pk_photo_count > 0 %},{% endif -%}
+        {"full":{{ media.preview_image | image_url: width: 1600 | json }},"thumb":{{ media.preview_image | image_url: width: 160, height: 160, crop: 'center' | json }},"title":{{ product.title | json }},"caption":"","url":null}
+        {%- assign pk_photo_count = pk_photo_count | plus: 1 -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- render 'pk-photo-viewer' -%}
     <div class="product-gallery">
       <div class="main-image-wrapper">
         <button class="nav-arrow prev{% if pk_shown_count <= 1 %} hidden{% endif %}" id="btnPrev"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg></button>
         <div class="gallery-scroller" id="galleryScroller">
           {%- assign pk_slide = 0 -%}
+          {%- assign pk_photo = 0 -%}
           {% for media in product.media %}
             {%- assign pk_media_key = ',' | append: media.id | append: ',' -%}
             {%- unless pk_shown_ids contains pk_media_key -%}{%- continue -%}{%- endunless -%}
             {%- assign pk_first_slide = false -%}
             {%- if pk_slide == 0 -%}{%- assign pk_first_slide = true -%}{%- endif -%}
-            <div class="gallery-slide" data-index="{{ pk_slide }}" data-media-type="{{ media.media_type }}">
+            {%- assign pk_is_photo = true -%}
+            {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}{%- assign pk_is_photo = false -%}{%- endif -%}
+            <div class="gallery-slide{% if pk_is_photo %} pk-zoomable{% endif %}" data-index="{{ pk_slide }}" data-media-type="{{ media.media_type }}"{% if pk_is_photo %} data-pk-gallery="pk-pdp-photos-{{ section.id }}" data-pk-gallery-start="{{ pk_photo }}"{% endif %}>
               {%- case media.media_type -%}
                 {%- when 'video' -%}
                   <video
@@ -602,6 +623,7 @@
               {%- endcase -%}
             </div>
             {%- assign pk_slide = pk_slide | plus: 1 -%}
+            {%- if pk_is_photo -%}{%- assign pk_photo = pk_photo | plus: 1 -%}{%- endif -%}
           {% endfor %}
           {%- if pk_shown_count == 0 -%}
             <div class="gallery-slide pk-gallery-empty" aria-hidden="true">
@@ -634,6 +656,9 @@
         {% endfor %}
       </div>
       {% endif %}
+      {%- if pk_photo_count > 0 -%}
+        <script type="application/json" id="pk-pdp-photos-{{ section.id }}" data-pv-title="{{ product.title | escape }} photos" data-pv-fit="contain">[{{ pk_photos_json }}]</script>
+      {%- endif -%}
     </div>
 
     <!-- Info -->
@@ -1424,6 +1449,13 @@
 
     // Don't zoom video/iframe slides
     if (activeSlide && (activeSlide.dataset.mediaType === 'video' || activeSlide.dataset.mediaType === 'external_video')) {
+      return;
+    }
+
+    // Open the full-screen photo viewer on this photo (snippets/pk-photo-viewer.liquid).
+    // The overlay below is only the fallback for browsers it does not run in.
+    if (window.pkPhotoViewer && activeSlide && activeSlide.dataset.pkGallery) {
+      activeSlide.click();
       return;
     }
 
