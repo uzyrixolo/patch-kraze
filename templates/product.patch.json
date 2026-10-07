@@ -466,6 +466,132 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "patch_compare": {
+      "type": "patch-compare-pk",
+      "blocks": {
+        "cmp_1": {
+          "type": "patch_type",
+          "settings": {
+            "product": "custom-embroidered-patches",
+            "backup_handle": "embroidered-patches",
+            "label": "Embroidered",
+            "photo": 5,
+            "point_1": "Classic stitched-thread texture",
+            "point_2": "Merrowed or thin-stitched edge"
+          }
+        },
+        "cmp_2": {
+          "type": "patch_type",
+          "settings": {
+            "product": "3d-embroidered-patches",
+            "backup_handle": "",
+            "label": "3D Embroidered",
+            "photo": 1,
+            "point_1": "Padded stitching with real height",
+            "point_2": "Makes letters and logos stand out"
+          }
+        },
+        "cmp_3": {
+          "type": "patch_type",
+          "settings": {
+            "product": "custom-chenille-patches",
+            "backup_handle": "chenille-patches",
+            "label": "Chenille",
+            "photo": 2,
+            "point_1": "Soft, fuzzy yarn on a felt base",
+            "point_2": "The varsity-letter look for jackets"
+          }
+        },
+        "cmp_4": {
+          "type": "patch_type",
+          "settings": {
+            "product": "woven-patches",
+            "backup_handle": "",
+            "label": "Woven",
+            "photo": 6,
+            "point_1": "Tightly woven, smooth to the touch",
+            "point_2": "Keeps small lettering crisp"
+          }
+        },
+        "cmp_5": {
+          "type": "patch_type",
+          "settings": {
+            "product": "custom-full-color-printed-patches",
+            "backup_handle": "full-color-printed-patches",
+            "label": "Full Color Printed",
+            "photo": 3,
+            "point_1": "Dye-sublimated, any number of colors",
+            "point_2": "Handles photos, shading and small text"
+          }
+        },
+        "cmp_6": {
+          "type": "patch_type",
+          "settings": {
+            "product": "custom-metallic-flex-patches",
+            "backup_handle": "metallic-flex-patches",
+            "label": "Metallic Flex",
+            "photo": 1,
+            "point_1": "Raised finish with a metal look",
+            "point_2": "Cut to your shape with clean edges"
+          }
+        },
+        "cmp_7": {
+          "type": "patch_type",
+          "settings": {
+            "product": "pvc-patches",
+            "backup_handle": "",
+            "label": "PVC",
+            "photo": 4,
+            "point_1": "Flexible molded PVC with raised detail",
+            "point_2": "Waterproof, made for gear and bags"
+          }
+        },
+        "cmp_8": {
+          "type": "patch_type",
+          "settings": {
+            "product": "silicone-patches",
+            "backup_handle": "",
+            "label": "Silicone",
+            "photo": 6,
+            "point_1": "Raised 3D silicone detail",
+            "point_2": "A clean, modern finish on apparel"
+          }
+        },
+        "cmp_9": {
+          "type": "patch_type",
+          "settings": {
+            "product": "custom-leather-patches",
+            "backup_handle": "leather-patches",
+            "label": "Leather",
+            "photo": 6,
+            "point_1": "Real leather, laser-engraved",
+            "point_2": "A natural match for hats and jackets"
+          }
+        }
+      },
+      "block_order": [
+        "cmp_1",
+        "cmp_2",
+        "cmp_3",
+        "cmp_4",
+        "cmp_5",
+        "cmp_6",
+        "cmp_7",
+        "cmp_8",
+        "cmp_9"
+      ],
+      "settings": {
+        "eyebrow": "Side by side",
+        "heading": "Compare patch types",
+        "intro": "Pick any two styles and drag the line across the picture to see how they differ.",
+        "background": "#ffffff",
+        "price_prefix": "From",
+        "price_suffix": "each in bulk",
+        "link_label": "See this patch type",
+        "current_label": "You're viewing this",
+        "patch_only": true
+      }
     }
   },
   "order": [
@@ -474,6 +600,7 @@
     "recommended_hats",
     "patch_examples",
     "product_details",
+    "patch_compare",
     "comparison_slider",
     "product_faq",
     "17873477237276b08f",

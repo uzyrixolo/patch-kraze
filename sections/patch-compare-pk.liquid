@@ -1,0 +1,312 @@
+{% schema %}
+{
+  "name": "Compare Patch Types",
+  "class": "section-pk-compare",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Side by side" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Compare patch types" },
+    { "type": "text", "id": "intro", "label": "Intro line", "default": "Pick any two styles and drag the line across the picture to see how they differ." },
+    { "type": "color_background", "id": "background", "label": "Background (color or gradient)", "default": "#ffffff" },
+    { "type": "header", "content": "Cards" },
+    { "type": "text", "id": "price_prefix", "label": "Text before the price", "default": "From" },
+    { "type": "text", "id": "price_suffix", "label": "Text after the price", "default": "each in bulk" },
+    { "type": "text", "id": "link_label", "label": "Product link label", "default": "See this patch type" },
+    { "type": "text", "id": "current_label", "label": "Tag on the product being viewed", "default": "You're viewing this" },
+    { "type": "checkbox", "id": "patch_only", "label": "Patch products only", "default": true, "info": "Leave the section out on sticker and DTF transfer pages." }
+  ],
+  "blocks": [
+    {
+      "type": "patch_type",
+      "name": "Patch type",
+      "limit": 12,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "backup_handle", "label": "Backup product handle", "info": "Used when the product above is not available, for example custom-embroidered-patches." },
+        { "type": "text", "id": "label", "label": "Short name", "info": "Shown in the picker and on the picture, for example Embroidered. Defaults to the product title." },
+        { "type": "range", "id": "photo", "label": "Which product photo to use", "min": 1, "max": 10, "step": 1, "default": 1, "info": "Counts the product's photos in order, skipping any the store hides. Pick a clear photo of a patch, not a chart." },
+        { "type": "image_picker", "id": "image", "label": "Photo override (optional)", "info": "Used instead of the product photo above." },
+        { "type": "text", "id": "point_1", "label": "Point 1", "info": "A short fact about this style." },
+        { "type": "text", "id": "point_2", "label": "Point 2" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Compare Patch Types" }]
+}
+{% endschema %}
+
+{%- comment -%}
+  Two patch styles side by side. Two pickers choose the styles; the picture
+  shows one photo of each, split by a line the shopper drags (a range input
+  laid over the picture, so it also works from the keyboard). Under the
+  picture, a card for each style: its lowest price read live from the
+  product, two typed points, and a link to it.
+
+  On a product page the style being viewed starts on the left. Every style's
+  data is in the JSON below and the script fills the picture, pickers and
+  cards from it.
+{%- endcomment -%}
+
+{%- liquid
+  assign cmp_show = true
+  if section.settings.patch_only and product
+    if product.handle == 'dtf-transfers' or product.handle contains 'sticker'
+      assign cmp_show = false
+    endif
+  endif
+
+  assign cmp_count = 0
+  assign cmp_left = -1
+-%}
+
+{%- capture cmp_json -%}
+  {%- for block in section.blocks -%}
+    {%- assign p = block.settings.product -%}
+    {%- if p == blank and block.settings.backup_handle != blank -%}
+      {%- assign cmp_backup_handle = block.settings.backup_handle | strip -%}
+      {%- assign cmp_backup = all_products[cmp_backup_handle] -%}
+      {%- if cmp_backup.handle == cmp_backup_handle -%}{%- assign p = cmp_backup -%}{%- endif -%}
+    {%- endif -%}
+    {%- if p == blank -%}{%- continue -%}{%- endif -%}
+
+    {%- comment -%} The photo: the override, or the Nth product photo the store allows. {%- endcomment -%}
+    {%- assign cmp_img = block.settings.image -%}
+    {%- if cmp_img == blank -%}
+      {%- assign cmp_seen = 0 -%}
+      {%- assign cmp_first = blank -%}
+      {%- for img in p.images -%}
+        {%- capture cmp_ok -%}{%- render 'pk-image-ok', src: img.src -%}{%- endcapture -%}
+        {%- assign cmp_ok = cmp_ok | strip -%}
+        {%- if cmp_ok == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign cmp_seen = cmp_seen | plus: 1 -%}
+        {%- if cmp_first == blank -%}{%- assign cmp_first = img -%}{%- endif -%}
+        {%- if cmp_seen == block.settings.photo -%}{%- assign cmp_img = img -%}{%- break -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if cmp_img == blank -%}{%- assign cmp_img = cmp_first -%}{%- endif -%}
+    {%- endif -%}
+    {%- if cmp_img == blank -%}{%- continue -%}{%- endif -%}
+
+    {%- assign cmp_label = block.settings.label | default: p.title -%}
+    {%- assign cmp_current = false -%}
+    {%- if product and product.id == p.id -%}{%- assign cmp_current = true -%}{%- endif -%}
+    {%- if product and block.settings.backup_handle != blank and product.handle == block.settings.backup_handle -%}{%- assign cmp_current = true -%}{%- endif -%}
+    {%- if cmp_current and cmp_left == -1 -%}{%- assign cmp_left = cmp_count -%}{%- endif -%}
+
+    {%- if cmp_count > 0 %},{% endif -%}
+    {"label":{{ cmp_label | json }},"img":{{ cmp_img | image_url: width: 1200 | json }},"price":{{ p.price_min | money | json }},"url":{{ p.url | json }},"current":{{ cmp_current }},"points":[{%- if block.settings.point_1 != blank -%}{{ block.settings.point_1 | json }}{%- endif -%}{%- if block.settings.point_1 != blank and block.settings.point_2 != blank -%},{%- endif -%}{%- if block.settings.point_2 != blank -%}{{ block.settings.point_2 | json }}{%- endif -%}]}
+    {%- assign cmp_count = cmp_count | plus: 1 -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- liquid
+  if cmp_left == -1
+    assign cmp_left = 0
+  endif
+  if cmp_left == 0
+    assign cmp_right = 1
+  else
+    assign cmp_right = 0
+  endif
+-%}
+
+{%- if cmp_show and cmp_count > 1 -%}
+<style>
+  #pk-cmp-{{ section.id }} { background: {{ section.settings.background | default: '#ffffff' }}; }
+  .pk-cmp { padding: 3.5rem 0; }
+  .pk-cmp__inner { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+  .pk-cmp__head { margin-bottom: 1.4rem; }
+  .pk-cmp__eyebrow { margin: 0 0 0.5rem; font-size: var(--pk-fs-label); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pk-text-brand); }
+  .pk-cmp__heading { margin: 0; font-size: var(--pk-fs-heading); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; color: var(--pk-text-primary); }
+  .pk-cmp__intro { margin: 0.6rem 0 0; font-size: var(--pk-fs-body); line-height: 1.55; color: var(--pk-text-secondary); }
+
+  /* Picture on the left, the pickers and the two cards on the right. On
+     narrower screens: pickers, then the picture, then the cards. */
+  .pk-cmp__body { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-rows: auto 1fr; grid-template-areas: "stage pick" "stage cards"; column-gap: 2rem; align-items: start; }
+  .pk-cmp__stage { grid-area: stage; }
+  .pk-cmp__pick { grid-area: pick; }
+  .pk-cmp__cards { grid-area: cards; }
+
+  .pk-cmp__stage { position: relative; aspect-ratio: 1 / 1; max-height: 34rem; width: 100%; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: var(--pk-radius-lg); overflow: hidden; background: #fff; user-select: none; --pos: 50%; }
+  .pk-cmp__layer { position: absolute; inset: 0; margin: 0; display: flex; align-items: center; justify-content: center; background: #fff; }
+  .pk-cmp__layer img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  /* The right-hand style shows only to the right of the line. */
+  .pk-cmp__layer--b { clip-path: inset(0 0 0 var(--pos)); }
+  .pk-cmp__tag { position: absolute; top: 0.85rem; z-index: 2; max-width: 45%; padding: 0.35rem 0.75rem; border-radius: var(--pk-radius-pill); font-size: var(--pk-fs-label); font-weight: 700; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none; }
+  .pk-cmp__tag--a { left: 0.85rem; background: var(--pk-btn-dark-bg); color: var(--pk-btn-dark-fg); }
+  .pk-cmp__tag--b { right: 0.85rem; background: var(--pk-btn-primary-bg); color: var(--pk-btn-primary-fg); }
+  .pk-cmp__line { position: absolute; top: 0; bottom: 0; left: var(--pos); z-index: 2; width: 3px; margin-left: -1.5px; background: #fff; box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.18); pointer-events: none; }
+  .pk-cmp__knob { position: absolute; top: 50%; left: 50%; width: 2.75rem; height: 2.75rem; transform: translate(-50%, -50%); border-radius: 50%; background: var(--pk-btn-primary-bg); color: var(--pk-btn-primary-fg); display: grid; place-items: center; box-shadow: 0 4px 14px rgba(17, 24, 39, 0.3); }
+  /* The range input covers the whole picture, invisible: drag anywhere, or
+     use the arrow keys once it has focus. */
+  .pk-cmp__range { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none; touch-action: pan-y; }
+  .pk-cmp__stage:has(.pk-cmp__range:focus-visible) .pk-cmp__knob { outline: 3px solid var(--pk-text-primary); outline-offset: 3px; }
+
+  .pk-cmp__pick { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: 0.6rem; margin-bottom: 1.1rem; }
+  .pk-cmp__field { display: grid; gap: 0.35rem; min-width: 0; }
+  .pk-cmp__field-label { font-size: var(--pk-fs-tiny); font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--pk-text-muted); }
+  .pk-cmp__select { width: 100%; min-width: 0; height: 2.75rem; padding: 0 2.2rem 0 0.9rem; border: 1px solid #d1d5db; border-radius: var(--pk-radius-sm); background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23111827' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 0.85rem center; font: inherit; font-size: var(--pk-fs-body); font-weight: 600; color: var(--pk-text-primary); cursor: pointer; -webkit-appearance: none; appearance: none; }
+  .pk-cmp__select:hover { border-color: var(--pk-text-primary); }
+  .pk-cmp__select:focus-visible { outline: 2px solid var(--pk-btn-primary-bg); outline-offset: 2px; }
+  .pk-cmp__field--a .pk-cmp__select { border-left: 4px solid var(--pk-btn-dark-bg); }
+  .pk-cmp__field--b .pk-cmp__select { border-left: 4px solid var(--pk-btn-primary-bg); }
+  .pk-cmp__vs { padding-bottom: 0.75rem; font-size: var(--pk-fs-label); font-weight: 700; color: var(--pk-text-muted); }
+
+  .pk-cmp__cards { display: grid; gap: 1rem; }
+  .pk-cmp__card { padding: 1.1rem 1.2rem 1.2rem; background: #fff; border: 1px solid #e5e7eb; border-radius: var(--pk-radius-md); }
+  .pk-cmp__card--a { border-top: 4px solid var(--pk-btn-dark-bg); }
+  .pk-cmp__card--b { border-top: 4px solid var(--pk-btn-primary-bg); }
+  .pk-cmp__card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem 1rem; flex-wrap: wrap; }
+  .pk-cmp__name { margin: 0; font-size: var(--pk-fs-subheading); font-weight: 800; line-height: 1.25; color: var(--pk-text-primary); }
+  .pk-cmp__price { margin: 0; font-size: var(--pk-fs-label); color: var(--pk-text-muted); }
+  .pk-cmp__price strong { font-weight: 700; color: var(--pk-text-brand); }
+  .pk-cmp__points { list-style: none; margin: 0.65rem 0 0; padding: 0; display: grid; gap: 0.25rem; font-size: var(--pk-fs-label); line-height: 1.45; color: var(--pk-text-secondary); }
+  .pk-cmp__points:empty { display: none; }
+  .pk-cmp__points li { position: relative; padding-left: 0.85rem; }
+  .pk-cmp__points li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 0.3rem; height: 0.3rem; border-radius: 50%; background: #c084fc; }
+  .pk-cmp__foot { margin-top: 0.85rem; }
+  .pk-cmp__link { font-size: var(--pk-fs-label); font-weight: 700; color: var(--pk-text-link); text-decoration: none; }
+  .pk-cmp__link:hover { color: var(--pk-text-link-hover); text-decoration: underline; text-underline-offset: 3px; }
+  .pk-cmp__link[hidden], .pk-cmp__here[hidden] { display: none; }
+  .pk-cmp__here { display: inline-block; padding: 0.25rem 0.6rem; border-radius: var(--pk-radius-pill); background: #f3e8ff; color: #6b21a8; font-size: var(--pk-fs-tiny); font-weight: 700; }
+
+  @media (max-width: 989px) {
+    .pk-cmp__body { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "pick" "stage" "cards"; }
+    .pk-cmp__stage { max-width: 36rem; max-height: none; margin-bottom: 1.25rem; }
+    .pk-cmp__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 749px) {
+    .pk-cmp { padding: 2.5rem 0; }
+    .pk-cmp__inner { padding: 0 1rem; }
+    .pk-cmp__heading { font-size: var(--pk-fs-heading-sm); }
+    .pk-cmp__select { padding-left: 0.7rem; font-size: var(--pk-fs-label); }
+    .pk-cmp__cards { gap: 0.75rem; }
+    .pk-cmp__card { padding: 0.9rem 0.9rem 1rem; }
+    .pk-cmp__name { font-size: var(--pk-fs-body); }
+    .pk-cmp__tag { top: 0.6rem; font-size: var(--pk-fs-tiny); }
+    .pk-cmp__tag--a { left: 0.6rem; }
+    .pk-cmp__tag--b { right: 0.6rem; }
+    .pk-cmp__knob { width: 2.4rem; height: 2.4rem; }
+  }
+</style>
+
+{%- assign cmp_items = cmp_json | prepend: '[' | append: ']' -%}
+<section id="pk-cmp-{{ section.id }}" class="pk-cmp" aria-labelledby="pk-cmp-h-{{ section.id }}" data-left="{{ cmp_left }}" data-right="{{ cmp_right }}">
+  <div class="pk-cmp__inner">
+    <div class="pk-cmp__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="pk-cmp__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="pk-cmp__heading" id="pk-cmp-h-{{ section.id }}">{{ section.settings.heading }}</h2>
+      {%- if section.settings.intro != blank -%}<p class="pk-cmp__intro">{{ section.settings.intro }}</p>{%- endif -%}
+    </div>
+
+    <div class="pk-cmp__body">
+      <div class="pk-cmp__stage">
+        <figure class="pk-cmp__layer pk-cmp__layer--a"><img data-cmp-img="a" alt="" width="1200" height="1200" loading="lazy"></figure>
+        <figure class="pk-cmp__layer pk-cmp__layer--b"><img data-cmp-img="b" alt="" width="1200" height="1200" loading="lazy"></figure>
+        <span class="pk-cmp__tag pk-cmp__tag--a" data-cmp-tag="a"></span>
+        <span class="pk-cmp__tag pk-cmp__tag--b" data-cmp-tag="b"></span>
+        <span class="pk-cmp__line" aria-hidden="true">
+          <span class="pk-cmp__knob"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 3 12 9 18"/><polyline points="15 6 21 12 15 18"/></svg></span>
+        </span>
+        <input class="pk-cmp__range" type="range" min="0" max="100" step="1" value="50" aria-label="Move the dividing line between the two patch types">
+      </div>
+
+      <div class="pk-cmp__pick">
+        <label class="pk-cmp__field pk-cmp__field--a">
+          <span class="pk-cmp__field-label">Left</span>
+          <select class="pk-cmp__select" data-cmp-select="a"></select>
+        </label>
+        <span class="pk-cmp__vs" aria-hidden="true">vs</span>
+        <label class="pk-cmp__field pk-cmp__field--b">
+          <span class="pk-cmp__field-label">Right</span>
+          <select class="pk-cmp__select" data-cmp-select="b"></select>
+        </label>
+      </div>
+
+      <div class="pk-cmp__cards">
+        {%- for side in (1..2) -%}
+          {%- if side == 1 -%}{%- assign s = 'a' -%}{%- else -%}{%- assign s = 'b' -%}{%- endif -%}
+          <article class="pk-cmp__card pk-cmp__card--{{ s }}" aria-live="polite">
+            <div class="pk-cmp__card-top">
+              <h3 class="pk-cmp__name" data-cmp-name="{{ s }}"></h3>
+              {%- if section.settings.price_prefix != blank or section.settings.price_suffix != blank -%}
+                <p class="pk-cmp__price">{{ section.settings.price_prefix }} <strong data-cmp-price="{{ s }}"></strong> {{ section.settings.price_suffix }}</p>
+              {%- else -%}
+                <p class="pk-cmp__price"><strong data-cmp-price="{{ s }}"></strong></p>
+              {%- endif -%}
+            </div>
+            <ul class="pk-cmp__points" data-cmp-points="{{ s }}"></ul>
+            <div class="pk-cmp__foot">
+              <a class="pk-cmp__link" data-cmp-link="{{ s }}" href="#">{{ section.settings.link_label }} &rarr;</a>
+              <span class="pk-cmp__here" data-cmp-here="{{ s }}" hidden>{{ section.settings.current_label }}</span>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+  <script type="application/json" data-cmp-data>{{ cmp_items }}</script>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('pk-cmp-{{ section.id }}');
+    if (!root || root.dataset.cmpReady) return;
+    root.dataset.cmpReady = '1';
+    var items;
+    try { items = JSON.parse(root.querySelector('[data-cmp-data]').textContent); } catch (e) { return; }
+    if (!items || items.length < 2) return;
+
+    var stage = root.querySelector('.pk-cmp__stage');
+    var range = root.querySelector('.pk-cmp__range');
+    var pick = { a: +root.dataset.left || 0, b: +root.dataset.right || 0 };
+    if (pick.a === pick.b) pick.b = pick.a === 0 ? 1 : 0;
+    var q = function (sel) { return root.querySelector(sel); };
+
+    ['a', 'b'].forEach(function (s) {
+      var select = q('[data-cmp-select="' + s + '"]');
+      items.forEach(function (it, i) {
+        var o = document.createElement('option');
+        o.value = i;
+        o.textContent = it.label;
+        select.appendChild(o);
+      });
+      select.addEventListener('change', function () {
+        var other = s === 'a' ? 'b' : 'a';
+        var next = +select.value;
+        // The same style on both sides would compare nothing: swap them.
+        if (next === pick[other]) { pick[other] = pick[s]; }
+        pick[s] = next;
+        render();
+      });
+    });
+
+    function fill(s) {
+      var it = items[pick[s]];
+      var img = q('[data-cmp-img="' + s + '"]');
+      if (img.getAttribute('src') !== it.img) img.src = it.img;
+      img.alt = it.label + ' patch';
+      q('[data-cmp-tag="' + s + '"]').textContent = it.label;
+      q('[data-cmp-select="' + s + '"]').value = pick[s];
+      q('[data-cmp-name="' + s + '"]').textContent = it.label;
+      q('[data-cmp-price="' + s + '"]').textContent = it.price;
+      var ul = q('[data-cmp-points="' + s + '"]');
+      ul.textContent = '';
+      (it.points || []).forEach(function (t) {
+        var li = document.createElement('li');
+        li.textContent = t;
+        ul.appendChild(li);
+      });
+      var link = q('[data-cmp-link="' + s + '"]');
+      link.href = it.url;
+      link.hidden = !!it.current;
+      q('[data-cmp-here="' + s + '"]').hidden = !it.current;
+    }
+
+    function render() { fill('a'); fill('b'); }
+
+    function setPos(v) { stage.style.setProperty('--pos', v + '%'); }
+    range.addEventListener('input', function () { setPos(range.value); });
+    setPos(range.value);
+    render();
+  })();
+</script>
+{%- endif -%}
