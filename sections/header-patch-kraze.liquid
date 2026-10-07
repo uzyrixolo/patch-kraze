@@ -139,10 +139,10 @@
   /* Three columns with the logo in the middle one. The outer two share the
      leftover space equally, so the logo sits on the centre line; either grows
      past its share only if its content needs the room. */
-  .pk-bar__row { position: relative; display: grid; grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr); align-items: stretch; column-gap: 1.5rem; min-height: 4.25rem; }
+  .pk-bar__row { position: relative; display: grid; grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr); align-items: stretch; column-gap: 1.5rem; min-height: 4.75rem; }
   .pk-menu { grid-column: 1; grid-row: 1; }
   .pk-bar__logo { grid-column: 2; grid-row: 1; justify-self: center; display: flex; align-items: center; flex-shrink: 0; }
-  .pk-bar__logo img { height: 2.75rem; width: auto; display: block; object-fit: contain; }
+  .pk-bar__logo img { height: 3.5rem; width: auto; display: block; object-fit: contain; }
 
   .pk-menu { display: flex; align-items: stretch; gap: 0.15rem; }
   .pk-menu__item { display: flex; align-items: stretch; }
@@ -211,10 +211,10 @@
     /* Menu button on the left, logo in the middle, search and cart on the
        right. Two button-wide columns each side keep the logo centred; the
        tools wrapper steps aside so its buttons can take their own columns. */
-    .pk-bar__row { grid-template-columns: 2.5rem 2.5rem minmax(0, 1fr) 2.5rem 2.5rem; align-items: center; column-gap: 0.15rem; min-height: 3.5rem; }
+    .pk-bar__row { grid-template-columns: 2.5rem 2.5rem minmax(0, 1fr) 2.5rem 2.5rem; align-items: center; column-gap: 0.15rem; min-height: 4rem; }
     .pk-tools { display: contents; }
     .pk-bar__logo { grid-column: 3; }
-    .pk-bar__logo img { height: 2.25rem; }
+    .pk-bar__logo img { height: 3rem; }
     .pk-menu, .pk-tool--account, .pk-bar .pk-quote-btn { display: none; }
     .pk-tool--menu { display: inline-flex; grid-column: 1; grid-row: 1; }
     .pk-tool--search { grid-column: 4; grid-row: 1; }
