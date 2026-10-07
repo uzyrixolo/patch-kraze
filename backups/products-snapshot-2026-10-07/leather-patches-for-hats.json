@@ -1,0 +1,1186 @@
+{
+ "saved_at_utc": "2026-10-07T10:59:54Z",
+ "source": "Shopify Admin API bulk export",
+ "product": {
+  "id": "gid://shopify/Product/7820591202388",
+  "handle": "leather-patches-for-hats",
+  "title": "Custom Leather Patches For Hats",
+  "status": "DRAFT",
+  "templateSuffix": "patch",
+  "productType": "leather",
+  "vendor": "Patch Kraze",
+  "tags": [
+   "Genuine Leather Patches",
+   "patches",
+   "rush",
+   "SEO Patches"
+  ],
+  "descriptionHtml": "<p>Custom leather patches for hats.</p>",
+  "createdAt": "2025-11-03T16:01:49Z",
+  "updatedAt": "2026-10-07T09:30:57Z",
+  "publishedAt": null,
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "options": [
+   {
+    "name": "Patch Size x Quantity",
+    "position": 1,
+    "values": [
+     "1.5 inch - 25-49",
+     "1.5 inch - 50-99",
+     "1.5 inch - 100-199",
+     "1.5 inch - 200-499",
+     "1.5 inch - 500-999",
+     "1.5 inch - 1000+",
+     "2.0 inch - 25-49",
+     "2.0 inch - 50-99",
+     "2.0 inch - 100-199",
+     "2.0 inch - 200-499",
+     "2.0 inch - 500-999",
+     "2.0 inch - 1000+",
+     "2.5 inch - 25-49",
+     "2.5 inch - 50-99",
+     "2.5 inch - 100-199",
+     "2.5 inch - 200-499",
+     "2.5 inch - 500-999",
+     "2.5 inch - 1000+",
+     "3.0 inch - 25-49",
+     "3.0 inch - 50-99",
+     "3.0 inch - 100-199",
+     "3.0 inch - 200-499",
+     "3.0 inch - 500-999",
+     "3.0 inch - 1000+",
+     "3.5 inch - 25-49",
+     "3.5 inch - 50-99",
+     "3.5 inch - 100-199",
+     "3.5 inch - 200-499",
+     "3.5 inch - 500-999",
+     "3.5 inch - 1000+",
+     "4.0 inch - 25-49",
+     "4.0 inch - 50-99",
+     "4.0 inch - 100-199",
+     "4.0 inch - 200-499",
+     "4.0 inch - 500-999",
+     "4.0 inch - 1000+",
+     "4.5 inch - 25-49",
+     "4.5 inch - 50-99",
+     "4.5 inch - 100-199",
+     "4.5 inch - 200-499",
+     "4.5 inch - 500-999",
+     "4.5 inch - 1000+",
+     "6.0 inch - 25-49",
+     "6.0 inch - 50-99",
+     "6.0 inch - 100-199",
+     "6.0 inch - 200-499",
+     "6.0 inch - 500-999",
+     "6.0 inch - 1000+"
+    ]
+   }
+  ],
+  "prices": {
+   "value": "{\"sizeBrackets\":[1.5,2.0,2.5,3.0,3.5,4.0,4.5,6.0],\"quantityTiers\":[{\"min\":25,\"max\":49,\"prices\":[4.0,4.2,4.6,4.8,5.0,5.2,5.4,5.6]},{\"min\":50,\"max\":99,\"prices\":[3.5,3.7,4.0,4.2,4.5,4.0,4.5,4.7]},{\"min\":100,\"max\":199,\"prices\":[1.9,2.0,2.1,2.3,2.4,2.6,2.8,3.0]},{\"min\":200,\"max\":499,\"prices\":[1.5,1.6,1.8,1.95,2.1,2.2,2.3,2.5]},{\"min\":500,\"max\":999,\"prices\":[1.2,1.25,1.3,1.5,1.6,1.8,2.0,2.2]},{\"min\":1000,\"max\":999999,\"prices\":[0.8,0.85,0.9,1.0,1.1,1.02,1.3,1.5]}]}",
+   "type": "json",
+   "value_parsed": {
+    "sizeBrackets": [
+     1.5,
+     2.0,
+     2.5,
+     3.0,
+     3.5,
+     4.0,
+     4.5,
+     6.0
+    ],
+    "quantityTiers": [
+     {
+      "min": 25,
+      "max": 49,
+      "prices": [
+       4.0,
+       4.2,
+       4.6,
+       4.8,
+       5.0,
+       5.2,
+       5.4,
+       5.6
+      ]
+     },
+     {
+      "min": 50,
+      "max": 99,
+      "prices": [
+       3.5,
+       3.7,
+       4.0,
+       4.2,
+       4.5,
+       4.0,
+       4.5,
+       4.7
+      ]
+     },
+     {
+      "min": 100,
+      "max": 199,
+      "prices": [
+       1.9,
+       2.0,
+       2.1,
+       2.3,
+       2.4,
+       2.6,
+       2.8,
+       3.0
+      ]
+     },
+     {
+      "min": 200,
+      "max": 499,
+      "prices": [
+       1.5,
+       1.6,
+       1.8,
+       1.95,
+       2.1,
+       2.2,
+       2.3,
+       2.5
+      ]
+     },
+     {
+      "min": 500,
+      "max": 999,
+      "prices": [
+       1.2,
+       1.25,
+       1.3,
+       1.5,
+       1.6,
+       1.8,
+       2.0,
+       2.2
+      ]
+     },
+     {
+      "min": 1000,
+      "max": 999999,
+      "prices": [
+       0.8,
+       0.85,
+       0.9,
+       1.0,
+       1.1,
+       1.02,
+       1.3,
+       1.5
+      ]
+     }
+    ]
+   }
+  },
+  "variants": [
+   {
+    "id": "gid://shopify/ProductVariant/43500166053972",
+    "title": "1.5 inch - 25-49",
+    "sku": "LTH-HAT-15-25-49",
+    "price": "4.00",
+    "compareAtPrice": null,
+    "position": 1,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166086740",
+    "title": "1.5 inch - 50-99",
+    "sku": "LTH-HAT-15-50-99",
+    "price": "3.50",
+    "compareAtPrice": null,
+    "position": 2,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166119508",
+    "title": "1.5 inch - 100-199",
+    "sku": "LTH-HAT-15-100-199",
+    "price": "1.90",
+    "compareAtPrice": null,
+    "position": 3,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166152276",
+    "title": "1.5 inch - 200-499",
+    "sku": "LTH-HAT-15-200-499",
+    "price": "1.50",
+    "compareAtPrice": null,
+    "position": 4,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166185044",
+    "title": "1.5 inch - 500-999",
+    "sku": "LTH-HAT-15-500-999",
+    "price": "1.20",
+    "compareAtPrice": null,
+    "position": 5,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166217812",
+    "title": "1.5 inch - 1000+",
+    "sku": "LTH-HAT-15-1000plus",
+    "price": "0.80",
+    "compareAtPrice": null,
+    "position": 6,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166250580",
+    "title": "2.0 inch - 25-49",
+    "sku": "LTH-HAT-20-25-49",
+    "price": "4.20",
+    "compareAtPrice": null,
+    "position": 7,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166283348",
+    "title": "2.0 inch - 50-99",
+    "sku": "LTH-HAT-20-50-99",
+    "price": "3.70",
+    "compareAtPrice": null,
+    "position": 8,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166316116",
+    "title": "2.0 inch - 100-199",
+    "sku": "LTH-HAT-20-100-199",
+    "price": "2.00",
+    "compareAtPrice": null,
+    "position": 9,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166348884",
+    "title": "2.0 inch - 200-499",
+    "sku": "LTH-HAT-20-200-499",
+    "price": "1.60",
+    "compareAtPrice": null,
+    "position": 10,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166381652",
+    "title": "2.0 inch - 500-999",
+    "sku": "LTH-HAT-20-500-999",
+    "price": "1.25",
+    "compareAtPrice": null,
+    "position": 11,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166414420",
+    "title": "2.0 inch - 1000+",
+    "sku": "LTH-HAT-20-1000plus",
+    "price": "0.85",
+    "compareAtPrice": null,
+    "position": 12,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166447188",
+    "title": "2.5 inch - 25-49",
+    "sku": "LTH-HAT-25-25-49",
+    "price": "4.60",
+    "compareAtPrice": null,
+    "position": 13,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166479956",
+    "title": "2.5 inch - 50-99",
+    "sku": "LTH-HAT-25-50-99",
+    "price": "4.00",
+    "compareAtPrice": null,
+    "position": 14,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166512724",
+    "title": "2.5 inch - 100-199",
+    "sku": "LTH-HAT-25-100-199",
+    "price": "2.10",
+    "compareAtPrice": null,
+    "position": 15,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166545492",
+    "title": "2.5 inch - 200-499",
+    "sku": "LTH-HAT-25-200-499",
+    "price": "1.80",
+    "compareAtPrice": null,
+    "position": 16,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166578260",
+    "title": "2.5 inch - 500-999",
+    "sku": "LTH-HAT-25-500-999",
+    "price": "1.30",
+    "compareAtPrice": null,
+    "position": 17,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166611028",
+    "title": "2.5 inch - 1000+",
+    "sku": "LTH-HAT-25-1000plus",
+    "price": "0.90",
+    "compareAtPrice": null,
+    "position": 18,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166643796",
+    "title": "3.0 inch - 25-49",
+    "sku": "LTH-HAT-30-25-49",
+    "price": "4.80",
+    "compareAtPrice": null,
+    "position": 19,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166676564",
+    "title": "3.0 inch - 50-99",
+    "sku": "LTH-HAT-30-50-99",
+    "price": "4.20",
+    "compareAtPrice": null,
+    "position": 20,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166709332",
+    "title": "3.0 inch - 100-199",
+    "sku": "LTH-HAT-30-100-199",
+    "price": "2.30",
+    "compareAtPrice": null,
+    "position": 21,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166742100",
+    "title": "3.0 inch - 200-499",
+    "sku": "LTH-HAT-30-200-499",
+    "price": "1.95",
+    "compareAtPrice": null,
+    "position": 22,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166774868",
+    "title": "3.0 inch - 500-999",
+    "sku": "LTH-HAT-30-500-999",
+    "price": "1.50",
+    "compareAtPrice": null,
+    "position": 23,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166807636",
+    "title": "3.0 inch - 1000+",
+    "sku": "LTH-HAT-30-1000plus",
+    "price": "1.00",
+    "compareAtPrice": null,
+    "position": 24,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166840404",
+    "title": "3.5 inch - 25-49",
+    "sku": "LTH-HAT-35-25-49",
+    "price": "5.00",
+    "compareAtPrice": null,
+    "position": 25,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166873172",
+    "title": "3.5 inch - 50-99",
+    "sku": "LTH-HAT-35-50-99",
+    "price": "4.50",
+    "compareAtPrice": null,
+    "position": 26,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166905940",
+    "title": "3.5 inch - 100-199",
+    "sku": "LTH-HAT-35-100-199",
+    "price": "2.40",
+    "compareAtPrice": null,
+    "position": 27,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166938708",
+    "title": "3.5 inch - 200-499",
+    "sku": "LTH-HAT-35-200-499",
+    "price": "2.10",
+    "compareAtPrice": null,
+    "position": 28,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500166971476",
+    "title": "3.5 inch - 500-999",
+    "sku": "LTH-HAT-35-500-999",
+    "price": "1.60",
+    "compareAtPrice": null,
+    "position": 29,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167004244",
+    "title": "3.5 inch - 1000+",
+    "sku": "LTH-HAT-35-1000plus",
+    "price": "1.10",
+    "compareAtPrice": null,
+    "position": 30,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167037012",
+    "title": "4.0 inch - 25-49",
+    "sku": "LTH-HAT-40-25-49",
+    "price": "5.20",
+    "compareAtPrice": null,
+    "position": 31,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167069780",
+    "title": "4.0 inch - 50-99",
+    "sku": "LTH-HAT-40-50-99",
+    "price": "4.00",
+    "compareAtPrice": null,
+    "position": 32,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167102548",
+    "title": "4.0 inch - 100-199",
+    "sku": "LTH-HAT-40-100-199",
+    "price": "2.60",
+    "compareAtPrice": null,
+    "position": 33,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167135316",
+    "title": "4.0 inch - 200-499",
+    "sku": "LTH-HAT-40-200-499",
+    "price": "2.20",
+    "compareAtPrice": null,
+    "position": 34,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167168084",
+    "title": "4.0 inch - 500-999",
+    "sku": "LTH-HAT-40-500-999",
+    "price": "1.80",
+    "compareAtPrice": null,
+    "position": 35,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167200852",
+    "title": "4.0 inch - 1000+",
+    "sku": "LTH-HAT-40-1000plus",
+    "price": "1.02",
+    "compareAtPrice": null,
+    "position": 36,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167233620",
+    "title": "4.5 inch - 25-49",
+    "sku": "LTH-HAT-45-25-49",
+    "price": "5.40",
+    "compareAtPrice": null,
+    "position": 37,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167266388",
+    "title": "4.5 inch - 50-99",
+    "sku": "LTH-HAT-45-50-99",
+    "price": "4.50",
+    "compareAtPrice": null,
+    "position": 38,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167299156",
+    "title": "4.5 inch - 100-199",
+    "sku": "LTH-HAT-45-100-199",
+    "price": "2.80",
+    "compareAtPrice": null,
+    "position": 39,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167331924",
+    "title": "4.5 inch - 200-499",
+    "sku": "LTH-HAT-45-200-499",
+    "price": "2.30",
+    "compareAtPrice": null,
+    "position": 40,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167364692",
+    "title": "4.5 inch - 500-999",
+    "sku": "LTH-HAT-45-500-999",
+    "price": "2.00",
+    "compareAtPrice": null,
+    "position": 41,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167397460",
+    "title": "4.5 inch - 1000+",
+    "sku": "LTH-HAT-45-1000plus",
+    "price": "1.30",
+    "compareAtPrice": null,
+    "position": 42,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167430228",
+    "title": "6.0 inch - 25-49",
+    "sku": "LTH-HAT-60-25-49",
+    "price": "5.60",
+    "compareAtPrice": null,
+    "position": 43,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167462996",
+    "title": "6.0 inch - 50-99",
+    "sku": "LTH-HAT-60-50-99",
+    "price": "4.70",
+    "compareAtPrice": null,
+    "position": 44,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167495764",
+    "title": "6.0 inch - 100-199",
+    "sku": "LTH-HAT-60-100-199",
+    "price": "3.00",
+    "compareAtPrice": null,
+    "position": 45,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167528532",
+    "title": "6.0 inch - 200-499",
+    "sku": "LTH-HAT-60-200-499",
+    "price": "2.50",
+    "compareAtPrice": null,
+    "position": 46,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167561300",
+    "title": "6.0 inch - 500-999",
+    "sku": "LTH-HAT-60-500-999",
+    "price": "2.20",
+    "compareAtPrice": null,
+    "position": 47,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43500167594068",
+    "title": "6.0 inch - 1000+",
+    "sku": "LTH-HAT-60-1000plus",
+    "price": "1.50",
+    "compareAtPrice": null,
+    "position": 48,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591202388"
+   }
+  ],
+  "media": [
+   {
+    "id": "gid://shopify/MediaImage/28555415486548",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/hatleather.webp?v=1762185711",
+     "width": 840,
+     "height": 840
+    },
+    "__parentId": "gid://shopify/Product/7820591202388"
+   }
+  ],
+  "collections": [
+   {
+    "id": "gid://shopify/Collection/294172360788",
+    "handle": "leather-patches",
+    "title": "Leather Patches",
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/Collection/294172655700",
+    "handle": "hats",
+    "title": "Hats",
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/Collection/295371866196",
+    "handle": "shop-all",
+    "title": "Shop All",
+    "__parentId": "gid://shopify/Product/7820591202388"
+   },
+   {
+    "id": "gid://shopify/Collection/295657046100",
+    "handle": "rush-order",
+    "title": "Rush Order",
+    "__parentId": "gid://shopify/Product/7820591202388"
+   }
+  ]
+ }
+}

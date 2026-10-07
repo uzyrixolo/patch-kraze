@@ -1,0 +1,1636 @@
+{
+ "saved_at_utc": "2026-10-07T10:59:54Z",
+ "source": "Shopify Admin API bulk export",
+ "product": {
+  "id": "gid://shopify/Product/7820589989972",
+  "handle": "chenille-letter-patches",
+  "title": "Chenille Letter Patches",
+  "status": "DRAFT",
+  "templateSuffix": "patch",
+  "productType": "chenille",
+  "vendor": "Patch Kraze",
+  "tags": [
+   "Chenille Patches",
+   "patches",
+   "Popular"
+  ],
+  "descriptionHtml": "<p>Custom chenille patches.</p>",
+  "createdAt": "2025-11-03T16:01:14Z",
+  "updatedAt": "2026-10-07T09:30:35Z",
+  "publishedAt": null,
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "options": [
+   {
+    "name": "Patch Size x Quantity",
+    "position": 1,
+    "values": [
+     "4.0 inch - 25-49",
+     "4.0 inch - 50-99",
+     "4.0 inch - 100-199",
+     "4.0 inch - 200-499",
+     "4.0 inch - 500-999",
+     "4.0 inch - 1000+",
+     "5.0 inch - 25-49",
+     "5.0 inch - 50-99",
+     "5.0 inch - 100-199",
+     "5.0 inch - 200-499",
+     "5.0 inch - 500-999",
+     "5.0 inch - 1000+",
+     "6.0 inch - 25-49",
+     "6.0 inch - 50-99",
+     "6.0 inch - 100-199",
+     "6.0 inch - 200-499",
+     "6.0 inch - 500-999",
+     "6.0 inch - 1000+",
+     "7.0 inch - 25-49",
+     "7.0 inch - 50-99",
+     "7.0 inch - 100-199",
+     "7.0 inch - 200-499",
+     "7.0 inch - 500-999",
+     "7.0 inch - 1000+",
+     "8.0 inch - 25-49",
+     "8.0 inch - 50-99",
+     "8.0 inch - 100-199",
+     "8.0 inch - 200-499",
+     "8.0 inch - 500-999",
+     "8.0 inch - 1000+",
+     "9.0 inch - 25-49",
+     "9.0 inch - 50-99",
+     "9.0 inch - 100-199",
+     "9.0 inch - 200-499",
+     "9.0 inch - 500-999",
+     "9.0 inch - 1000+",
+     "10.0 inch - 25-49",
+     "10.0 inch - 50-99",
+     "10.0 inch - 100-199",
+     "10.0 inch - 200-499",
+     "10.0 inch - 500-999",
+     "10.0 inch - 1000+",
+     "11.0 inch - 25-49",
+     "11.0 inch - 50-99",
+     "11.0 inch - 100-199",
+     "11.0 inch - 200-499",
+     "11.0 inch - 500-999",
+     "11.0 inch - 1000+",
+     "13.0 inch - 25-49",
+     "13.0 inch - 50-99",
+     "13.0 inch - 100-199",
+     "13.0 inch - 200-499",
+     "13.0 inch - 500-999",
+     "13.0 inch - 1000+",
+     "4.0 inch - 10-24",
+     "5.0 inch - 10-24",
+     "6.0 inch - 10-24",
+     "7.0 inch - 10-24",
+     "8.0 inch - 10-24",
+     "9.0 inch - 10-24",
+     "10.0 inch - 10-24",
+     "11.0 inch - 10-24",
+     "13.0 inch - 10-24"
+    ]
+   }
+  ],
+  "prices": {
+   "value": "{\"sizeBrackets\":[4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,13.0],\"quantityTiers\":[{\"min\":10,\"max\":24,\"prices\":[6.99,7.52,8.89,9.53,10.03,10.54,11.53,12.23,14.03]},{\"min\":25,\"max\":49,\"prices\":[4.42,6.38,7.52,8.08,8.5,8.93,9.78,10.37,11.9]},{\"min\":50,\"max\":99,\"prices\":[3.74,4.42,5.02,5.78,6.38,7.23,7.65,8.29,9.35]},{\"min\":100,\"max\":199,\"prices\":[3.19,4.04,4.42,5.1,5.53,6.38,6.8,7.14,7.91]},{\"min\":200,\"max\":499,\"prices\":[2.13,3.32,3.83,4.17,4.51,5.27,5.53,5.91,6.8]},{\"min\":500,\"max\":999,\"prices\":[1.7,2.13,2.72,2.98,3.32,3.57,3.83,4.42,5.27]},{\"min\":1000,\"max\":999999,\"prices\":[1.49,1.87,2.47,2.72,2.98,3.32,3.49,3.91,4.42]}]}",
+   "type": "json",
+   "value_parsed": {
+    "sizeBrackets": [
+     4.0,
+     5.0,
+     6.0,
+     7.0,
+     8.0,
+     9.0,
+     10.0,
+     11.0,
+     13.0
+    ],
+    "quantityTiers": [
+     {
+      "min": 10,
+      "max": 24,
+      "prices": [
+       6.99,
+       7.52,
+       8.89,
+       9.53,
+       10.03,
+       10.54,
+       11.53,
+       12.23,
+       14.03
+      ]
+     },
+     {
+      "min": 25,
+      "max": 49,
+      "prices": [
+       4.42,
+       6.38,
+       7.52,
+       8.08,
+       8.5,
+       8.93,
+       9.78,
+       10.37,
+       11.9
+      ]
+     },
+     {
+      "min": 50,
+      "max": 99,
+      "prices": [
+       3.74,
+       4.42,
+       5.02,
+       5.78,
+       6.38,
+       7.23,
+       7.65,
+       8.29,
+       9.35
+      ]
+     },
+     {
+      "min": 100,
+      "max": 199,
+      "prices": [
+       3.19,
+       4.04,
+       4.42,
+       5.1,
+       5.53,
+       6.38,
+       6.8,
+       7.14,
+       7.91
+      ]
+     },
+     {
+      "min": 200,
+      "max": 499,
+      "prices": [
+       2.13,
+       3.32,
+       3.83,
+       4.17,
+       4.51,
+       5.27,
+       5.53,
+       5.91,
+       6.8
+      ]
+     },
+     {
+      "min": 500,
+      "max": 999,
+      "prices": [
+       1.7,
+       2.13,
+       2.72,
+       2.98,
+       3.32,
+       3.57,
+       3.83,
+       4.42,
+       5.27
+      ]
+     },
+     {
+      "min": 1000,
+      "max": 999999,
+      "prices": [
+       1.49,
+       1.87,
+       2.47,
+       2.72,
+       2.98,
+       3.32,
+       3.49,
+       3.91,
+       4.42
+      ]
+     }
+    ]
+   }
+  },
+  "variants": [
+   {
+    "id": "gid://shopify/ProductVariant/43493272256596",
+    "title": "4.0 inch - 25-49",
+    "sku": "chenille-letter-patches-40-25-49",
+    "price": "4.42",
+    "compareAtPrice": null,
+    "position": 1,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272289364",
+    "title": "4.0 inch - 50-99",
+    "sku": "chenille-letter-patches-40-50-99",
+    "price": "3.74",
+    "compareAtPrice": null,
+    "position": 2,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272322132",
+    "title": "4.0 inch - 100-199",
+    "sku": "chenille-letter-patches-40-100-199",
+    "price": "3.19",
+    "compareAtPrice": null,
+    "position": 3,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272354900",
+    "title": "4.0 inch - 200-499",
+    "sku": "chenille-letter-patches-40-200-499",
+    "price": "2.13",
+    "compareAtPrice": null,
+    "position": 4,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272387668",
+    "title": "4.0 inch - 500-999",
+    "sku": "chenille-letter-patches-40-500-999",
+    "price": "1.70",
+    "compareAtPrice": null,
+    "position": 5,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272420436",
+    "title": "4.0 inch - 1000+",
+    "sku": "chenille-letter-patches-40-1000plus",
+    "price": "1.49",
+    "compareAtPrice": null,
+    "position": 6,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272453204",
+    "title": "5.0 inch - 25-49",
+    "sku": "chenille-letter-patches-50-25-49",
+    "price": "6.38",
+    "compareAtPrice": null,
+    "position": 7,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272485972",
+    "title": "5.0 inch - 50-99",
+    "sku": "chenille-letter-patches-50-50-99",
+    "price": "4.42",
+    "compareAtPrice": null,
+    "position": 8,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272518740",
+    "title": "5.0 inch - 100-199",
+    "sku": "chenille-letter-patches-50-100-199",
+    "price": "4.04",
+    "compareAtPrice": null,
+    "position": 9,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272551508",
+    "title": "5.0 inch - 200-499",
+    "sku": "chenille-letter-patches-50-200-499",
+    "price": "3.32",
+    "compareAtPrice": null,
+    "position": 10,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272584276",
+    "title": "5.0 inch - 500-999",
+    "sku": "chenille-letter-patches-50-500-999",
+    "price": "2.13",
+    "compareAtPrice": null,
+    "position": 11,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272617044",
+    "title": "5.0 inch - 1000+",
+    "sku": "chenille-letter-patches-50-1000plus",
+    "price": "1.87",
+    "compareAtPrice": null,
+    "position": 12,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272649812",
+    "title": "6.0 inch - 25-49",
+    "sku": "chenille-letter-patches-60-25-49",
+    "price": "7.52",
+    "compareAtPrice": null,
+    "position": 13,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272682580",
+    "title": "6.0 inch - 50-99",
+    "sku": "chenille-letter-patches-60-50-99",
+    "price": "5.02",
+    "compareAtPrice": null,
+    "position": 14,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272715348",
+    "title": "6.0 inch - 100-199",
+    "sku": "chenille-letter-patches-60-100-199",
+    "price": "4.42",
+    "compareAtPrice": null,
+    "position": 15,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272748116",
+    "title": "6.0 inch - 200-499",
+    "sku": "chenille-letter-patches-60-200-499",
+    "price": "3.83",
+    "compareAtPrice": null,
+    "position": 16,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272780884",
+    "title": "6.0 inch - 500-999",
+    "sku": "chenille-letter-patches-60-500-999",
+    "price": "2.72",
+    "compareAtPrice": null,
+    "position": 17,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272813652",
+    "title": "6.0 inch - 1000+",
+    "sku": "chenille-letter-patches-60-1000plus",
+    "price": "2.47",
+    "compareAtPrice": null,
+    "position": 18,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272846420",
+    "title": "7.0 inch - 25-49",
+    "sku": "chenille-letter-patches-70-25-49",
+    "price": "8.08",
+    "compareAtPrice": null,
+    "position": 19,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272879188",
+    "title": "7.0 inch - 50-99",
+    "sku": "chenille-letter-patches-70-50-99",
+    "price": "5.78",
+    "compareAtPrice": null,
+    "position": 20,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272911956",
+    "title": "7.0 inch - 100-199",
+    "sku": "chenille-letter-patches-70-100-199",
+    "price": "5.10",
+    "compareAtPrice": null,
+    "position": 21,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272944724",
+    "title": "7.0 inch - 200-499",
+    "sku": "chenille-letter-patches-70-200-499",
+    "price": "4.17",
+    "compareAtPrice": null,
+    "position": 22,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493272977492",
+    "title": "7.0 inch - 500-999",
+    "sku": "chenille-letter-patches-70-500-999",
+    "price": "2.98",
+    "compareAtPrice": null,
+    "position": 23,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273010260",
+    "title": "7.0 inch - 1000+",
+    "sku": "chenille-letter-patches-70-1000plus",
+    "price": "2.72",
+    "compareAtPrice": null,
+    "position": 24,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273043028",
+    "title": "8.0 inch - 25-49",
+    "sku": "chenille-letter-patches-80-25-49",
+    "price": "8.50",
+    "compareAtPrice": null,
+    "position": 25,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273075796",
+    "title": "8.0 inch - 50-99",
+    "sku": "chenille-letter-patches-80-50-99",
+    "price": "6.38",
+    "compareAtPrice": null,
+    "position": 26,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273108564",
+    "title": "8.0 inch - 100-199",
+    "sku": "chenille-letter-patches-80-100-199",
+    "price": "5.53",
+    "compareAtPrice": null,
+    "position": 27,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273141332",
+    "title": "8.0 inch - 200-499",
+    "sku": "chenille-letter-patches-80-200-499",
+    "price": "4.51",
+    "compareAtPrice": null,
+    "position": 28,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273174100",
+    "title": "8.0 inch - 500-999",
+    "sku": "chenille-letter-patches-80-500-999",
+    "price": "3.32",
+    "compareAtPrice": null,
+    "position": 29,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273206868",
+    "title": "8.0 inch - 1000+",
+    "sku": "chenille-letter-patches-80-1000plus",
+    "price": "2.98",
+    "compareAtPrice": null,
+    "position": 30,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273239636",
+    "title": "9.0 inch - 25-49",
+    "sku": "chenille-letter-patches-90-25-49",
+    "price": "8.93",
+    "compareAtPrice": null,
+    "position": 31,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273272404",
+    "title": "9.0 inch - 50-99",
+    "sku": "chenille-letter-patches-90-50-99",
+    "price": "7.23",
+    "compareAtPrice": null,
+    "position": 32,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273305172",
+    "title": "9.0 inch - 100-199",
+    "sku": "chenille-letter-patches-90-100-199",
+    "price": "6.38",
+    "compareAtPrice": null,
+    "position": 33,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273337940",
+    "title": "9.0 inch - 200-499",
+    "sku": "chenille-letter-patches-90-200-499",
+    "price": "5.27",
+    "compareAtPrice": null,
+    "position": 34,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273370708",
+    "title": "9.0 inch - 500-999",
+    "sku": "chenille-letter-patches-90-500-999",
+    "price": "3.57",
+    "compareAtPrice": null,
+    "position": 35,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273403476",
+    "title": "9.0 inch - 1000+",
+    "sku": "chenille-letter-patches-90-1000plus",
+    "price": "3.32",
+    "compareAtPrice": null,
+    "position": 36,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273436244",
+    "title": "10.0 inch - 25-49",
+    "sku": "chenille-letter-patches-100-25-49",
+    "price": "9.78",
+    "compareAtPrice": null,
+    "position": 37,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273469012",
+    "title": "10.0 inch - 50-99",
+    "sku": "chenille-letter-patches-100-50-99",
+    "price": "7.65",
+    "compareAtPrice": null,
+    "position": 38,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273501780",
+    "title": "10.0 inch - 100-199",
+    "sku": "chenille-letter-patches-100-100-199",
+    "price": "6.80",
+    "compareAtPrice": null,
+    "position": 39,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273534548",
+    "title": "10.0 inch - 200-499",
+    "sku": "chenille-letter-patches-100-200-499",
+    "price": "5.53",
+    "compareAtPrice": null,
+    "position": 40,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273567316",
+    "title": "10.0 inch - 500-999",
+    "sku": "chenille-letter-patches-100-500-999",
+    "price": "3.83",
+    "compareAtPrice": null,
+    "position": 41,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273600084",
+    "title": "10.0 inch - 1000+",
+    "sku": "chenille-letter-patches-100-1000plus",
+    "price": "3.49",
+    "compareAtPrice": null,
+    "position": 42,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273632852",
+    "title": "11.0 inch - 25-49",
+    "sku": "chenille-letter-patches-110-25-49",
+    "price": "10.37",
+    "compareAtPrice": null,
+    "position": 43,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273665620",
+    "title": "11.0 inch - 50-99",
+    "sku": "chenille-letter-patches-110-50-99",
+    "price": "8.29",
+    "compareAtPrice": null,
+    "position": 44,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273698388",
+    "title": "11.0 inch - 100-199",
+    "sku": "chenille-letter-patches-110-100-199",
+    "price": "7.14",
+    "compareAtPrice": null,
+    "position": 45,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273731156",
+    "title": "11.0 inch - 200-499",
+    "sku": "chenille-letter-patches-110-200-499",
+    "price": "5.91",
+    "compareAtPrice": null,
+    "position": 46,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273763924",
+    "title": "11.0 inch - 500-999",
+    "sku": "chenille-letter-patches-110-500-999",
+    "price": "4.42",
+    "compareAtPrice": null,
+    "position": 47,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273796692",
+    "title": "11.0 inch - 1000+",
+    "sku": "chenille-letter-patches-110-1000plus",
+    "price": "3.91",
+    "compareAtPrice": null,
+    "position": 48,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273829460",
+    "title": "13.0 inch - 25-49",
+    "sku": "chenille-letter-patches-130-25-49",
+    "price": "11.90",
+    "compareAtPrice": null,
+    "position": 49,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273862228",
+    "title": "13.0 inch - 50-99",
+    "sku": "chenille-letter-patches-130-50-99",
+    "price": "9.35",
+    "compareAtPrice": null,
+    "position": 50,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273894996",
+    "title": "13.0 inch - 100-199",
+    "sku": "chenille-letter-patches-130-100-199",
+    "price": "7.91",
+    "compareAtPrice": null,
+    "position": 51,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273927764",
+    "title": "13.0 inch - 200-499",
+    "sku": "chenille-letter-patches-130-200-499",
+    "price": "6.80",
+    "compareAtPrice": null,
+    "position": 52,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273960532",
+    "title": "13.0 inch - 500-999",
+    "sku": "chenille-letter-patches-130-500-999",
+    "price": "5.27",
+    "compareAtPrice": null,
+    "position": 53,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43493273993300",
+    "title": "13.0 inch - 1000+",
+    "sku": "chenille-letter-patches-130-1000plus",
+    "price": "4.42",
+    "compareAtPrice": null,
+    "position": 54,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47487771705428",
+    "title": "4.0 inch - 10-24",
+    "sku": null,
+    "price": "6.99",
+    "compareAtPrice": null,
+    "position": 55,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 10-24"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47487771738196",
+    "title": "5.0 inch - 10-24",
+    "sku": null,
+    "price": "7.52",
+    "compareAtPrice": null,
+    "position": 56,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 10-24"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47487771770964",
+    "title": "6.0 inch - 10-24",
+    "sku": null,
+    "price": "8.89",
+    "compareAtPrice": null,
+    "position": 57,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 10-24"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47487771803732",
+    "title": "7.0 inch - 10-24",
+    "sku": null,
+    "price": "9.53",
+    "compareAtPrice": null,
+    "position": 58,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 10-24"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47487771836500",
+    "title": "8.0 inch - 10-24",
+    "sku": null,
+    "price": "10.03",
+    "compareAtPrice": null,
+    "position": 59,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 10-24"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47487771869268",
+    "title": "9.0 inch - 10-24",
+    "sku": null,
+    "price": "10.54",
+    "compareAtPrice": null,
+    "position": 60,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 10-24"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47487771902036",
+    "title": "10.0 inch - 10-24",
+    "sku": null,
+    "price": "11.53",
+    "compareAtPrice": null,
+    "position": 61,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 10-24"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47487771934804",
+    "title": "11.0 inch - 10-24",
+    "sku": null,
+    "price": "12.23",
+    "compareAtPrice": null,
+    "position": 62,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 10-24"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47487771967572",
+    "title": "13.0 inch - 10-24",
+    "sku": null,
+    "price": "14.03",
+    "compareAtPrice": null,
+    "position": 63,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 10-24"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589989972"
+   }
+  ],
+  "media": [
+   {
+    "id": "gid://shopify/MediaImage/30804951236692",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/chenille_patches_main_1774615926546.jpg?v=1774624923",
+     "width": 640,
+     "height": 640
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/MediaImage/30793222520916",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/chenille_letter_patches_main_1774596645231.jpg?v=1774624923",
+     "width": 640,
+     "height": 640
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/MediaImage/30793223045204",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/chenille_letter_patches_info_1774596660368.jpg?v=1774624923",
+     "width": 640,
+     "height": 640
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29885449699412",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_otcauvotcauvotca.png?v=1774624923",
+     "width": 1408,
+     "height": 768
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29886821990484",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_gvnf25gvnf25gvnf.png?v=1774624923",
+     "width": 1408,
+     "height": 768
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29885257023572",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_m8vifom8vifom8vi.png?v=1774624923",
+     "width": 1408,
+     "height": 768
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29885339730004",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_kxg3czkxg3czkxg3.png?v=1774624923",
+     "width": 1408,
+     "height": 768
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29885289824340",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_2kseog2kseog2kse.png?v=1774624923",
+     "width": 1408,
+     "height": 768
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29885129654356",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_40xsih40xsih40xs.png?v=1774624923",
+     "width": 1408,
+     "height": 768
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29885143253076",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_s30ui1s30ui1s30u.png?v=1774624923",
+     "width": 1408,
+     "height": 768
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29885221371988",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_3zu77c3zu77c3zu7.png?v=1774624923",
+     "width": 1408,
+     "height": 768
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29885166551124",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Gemini_Generated_Image_rc09acrc09acrc09.png?v=1774624923",
+     "width": 1408,
+     "height": 768
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   },
+   {
+    "id": "gid://shopify/MediaImage/28555412897876",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Chenille_1_No_BG_558b131c-534b-4888-bb4d-b62d27aa68c2.png?v=1774624923",
+     "width": 1500,
+     "height": 1500
+    },
+    "__parentId": "gid://shopify/Product/7820589989972"
+   }
+  ],
+  "collections": [
+   {
+    "id": "gid://shopify/Collection/295371866196",
+    "handle": "shop-all",
+    "title": "Shop All",
+    "__parentId": "gid://shopify/Product/7820589989972"
+   }
+  ]
+ }
+}

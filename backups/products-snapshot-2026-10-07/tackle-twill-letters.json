@@ -1,0 +1,2414 @@
+{
+ "saved_at_utc": "2026-10-07T10:59:54Z",
+ "source": "Shopify Admin API bulk export",
+ "product": {
+  "id": "gid://shopify/Product/7820586909780",
+  "handle": "tackle-twill-letters",
+  "title": "Custom Tackle Twill Letters",
+  "status": "DRAFT",
+  "templateSuffix": "patch",
+  "productType": "Tackle Twill",
+  "vendor": "Patch Kraze",
+  "tags": [
+   "patches",
+   "Popular",
+   "Standard Patches",
+   "Tackle Twill"
+  ],
+  "descriptionHtml": "<p>Tackle Twill emblems are the perfect solution for your company, school or group name. They have multiple layers of fabric with elaborate stitching utilizing fabrics stitched together to deliver a three-dimensional effect. These emblems are completely customizable, affordable and eye-catching! They are ideal for letterman jackets and backpacks, and can be customized with a variety of layered textures.</p>",
+  "createdAt": "2025-11-03T15:59:44Z",
+  "updatedAt": "2026-10-07T09:30:33Z",
+  "publishedAt": null,
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "options": [
+   {
+    "name": "Patch Size x Quantity",
+    "position": 1,
+    "values": [
+     "1.0 inch - 25-49",
+     "1.0 inch - 50-99",
+     "1.0 inch - 100-199",
+     "1.0 inch - 200-499",
+     "1.0 inch - 500-999",
+     "1.0 inch - 1000+",
+     "1.5 inch - 25-49",
+     "1.5 inch - 50-99",
+     "1.5 inch - 100-199",
+     "1.5 inch - 200-499",
+     "1.5 inch - 500-999",
+     "1.5 inch - 1000+",
+     "2.0 inch - 25-49",
+     "2.0 inch - 50-99",
+     "2.0 inch - 100-199",
+     "2.0 inch - 200-499",
+     "2.0 inch - 500-999",
+     "2.0 inch - 1000+",
+     "2.5 inch - 25-49",
+     "2.5 inch - 50-99",
+     "2.5 inch - 100-199",
+     "2.5 inch - 200-499",
+     "2.5 inch - 500-999",
+     "2.5 inch - 1000+",
+     "3.0 inch - 25-49",
+     "3.0 inch - 50-99",
+     "3.0 inch - 100-199",
+     "3.0 inch - 200-499",
+     "3.0 inch - 500-999",
+     "3.0 inch - 1000+",
+     "3.5 inch - 25-49",
+     "3.5 inch - 50-99",
+     "3.5 inch - 100-199",
+     "3.5 inch - 200-499",
+     "3.5 inch - 500-999",
+     "3.5 inch - 1000+",
+     "4.0 inch - 25-49",
+     "4.0 inch - 50-99",
+     "4.0 inch - 100-199",
+     "4.0 inch - 200-499",
+     "4.0 inch - 500-999",
+     "4.0 inch - 1000+",
+     "4.5 inch - 25-49",
+     "4.5 inch - 50-99",
+     "4.5 inch - 100-199",
+     "4.5 inch - 200-499",
+     "4.5 inch - 500-999",
+     "4.5 inch - 1000+",
+     "5.0 inch - 25-49",
+     "5.0 inch - 50-99",
+     "5.0 inch - 100-199",
+     "5.0 inch - 200-499",
+     "5.0 inch - 500-999",
+     "5.0 inch - 1000+",
+     "6.0 inch - 25-49",
+     "6.0 inch - 50-99",
+     "6.0 inch - 100-199",
+     "6.0 inch - 200-499",
+     "6.0 inch - 500-999",
+     "6.0 inch - 1000+",
+     "7.0 inch - 25-49",
+     "7.0 inch - 50-99",
+     "7.0 inch - 100-199",
+     "7.0 inch - 200-499",
+     "7.0 inch - 500-999",
+     "7.0 inch - 1000+",
+     "8.0 inch - 25-49",
+     "8.0 inch - 50-99",
+     "8.0 inch - 100-199",
+     "8.0 inch - 200-499",
+     "8.0 inch - 500-999",
+     "8.0 inch - 1000+",
+     "9.0 inch - 25-49",
+     "9.0 inch - 50-99",
+     "9.0 inch - 100-199",
+     "9.0 inch - 200-499",
+     "9.0 inch - 500-999",
+     "9.0 inch - 1000+",
+     "10.0 inch - 25-49",
+     "10.0 inch - 50-99",
+     "10.0 inch - 100-199",
+     "10.0 inch - 200-499",
+     "10.0 inch - 500-999",
+     "10.0 inch - 1000+",
+     "11.0 inch - 25-49",
+     "11.0 inch - 50-99",
+     "11.0 inch - 100-199",
+     "11.0 inch - 200-499",
+     "11.0 inch - 500-999",
+     "11.0 inch - 1000+",
+     "12.0 inch - 25-49",
+     "12.0 inch - 50-99",
+     "12.0 inch - 100-199",
+     "12.0 inch - 200-499",
+     "12.0 inch - 500-999",
+     "12.0 inch - 1000+"
+    ]
+   }
+  ],
+  "prices": {
+   "value": "{\"sizeBrackets\":[1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0],\"quantityTiers\":[{\"min\":25,\"max\":49,\"prices\":[3.0,3.0,3.0,3.0,3.04,3.53,4.06,4.55,5.07,6.08,7.08,8.09,9.1,10.11,11.14,12.15]},{\"min\":50,\"max\":99,\"prices\":[1.5,1.5,1.76,2.21,2.63,3.08,3.52,3.95,4.4,5.28,6.17,7.04,7.91,8.8,9.68,10.57]},{\"min\":100,\"max\":199,\"prices\":[0.75,0.98,1.3,1.64,1.96,2.29,2.6,2.93,3.25,3.91,4.57,5.21,5.85,6.52,7.16,7.81]},{\"min\":200,\"max\":499,\"prices\":[0.47,0.69,0.88,1.16,1.37,1.6,1.84,2.07,2.29,2.76,3.2,3.67,4.11,4.58,5.03,5.5]},{\"min\":500,\"max\":999,\"prices\":[0.34,0.51,0.66,0.84,1.0,1.16,1.34,1.5,1.67,2.02,2.34,2.67,3.02,3.35,3.68,4.01]},{\"min\":1000,\"max\":999999,\"prices\":[0.31,0.46,0.61,0.75,0.9,1.03,1.21,1.37,1.49,1.8,2.09,2.41,2.7,2.99,3.29,3.59]}]}",
+   "type": "json",
+   "value_parsed": {
+    "sizeBrackets": [
+     1.0,
+     1.5,
+     2.0,
+     2.5,
+     3.0,
+     3.5,
+     4.0,
+     4.5,
+     5.0,
+     6.0,
+     7.0,
+     8.0,
+     9.0,
+     10.0,
+     11.0,
+     12.0
+    ],
+    "quantityTiers": [
+     {
+      "min": 25,
+      "max": 49,
+      "prices": [
+       3.0,
+       3.0,
+       3.0,
+       3.0,
+       3.04,
+       3.53,
+       4.06,
+       4.55,
+       5.07,
+       6.08,
+       7.08,
+       8.09,
+       9.1,
+       10.11,
+       11.14,
+       12.15
+      ]
+     },
+     {
+      "min": 50,
+      "max": 99,
+      "prices": [
+       1.5,
+       1.5,
+       1.76,
+       2.21,
+       2.63,
+       3.08,
+       3.52,
+       3.95,
+       4.4,
+       5.28,
+       6.17,
+       7.04,
+       7.91,
+       8.8,
+       9.68,
+       10.57
+      ]
+     },
+     {
+      "min": 100,
+      "max": 199,
+      "prices": [
+       0.75,
+       0.98,
+       1.3,
+       1.64,
+       1.96,
+       2.29,
+       2.6,
+       2.93,
+       3.25,
+       3.91,
+       4.57,
+       5.21,
+       5.85,
+       6.52,
+       7.16,
+       7.81
+      ]
+     },
+     {
+      "min": 200,
+      "max": 499,
+      "prices": [
+       0.47,
+       0.69,
+       0.88,
+       1.16,
+       1.37,
+       1.6,
+       1.84,
+       2.07,
+       2.29,
+       2.76,
+       3.2,
+       3.67,
+       4.11,
+       4.58,
+       5.03,
+       5.5
+      ]
+     },
+     {
+      "min": 500,
+      "max": 999,
+      "prices": [
+       0.34,
+       0.51,
+       0.66,
+       0.84,
+       1.0,
+       1.16,
+       1.34,
+       1.5,
+       1.67,
+       2.02,
+       2.34,
+       2.67,
+       3.02,
+       3.35,
+       3.68,
+       4.01
+      ]
+     },
+     {
+      "min": 1000,
+      "max": 999999,
+      "prices": [
+       0.31,
+       0.46,
+       0.61,
+       0.75,
+       0.9,
+       1.03,
+       1.21,
+       1.37,
+       1.49,
+       1.8,
+       2.09,
+       2.41,
+       2.7,
+       2.99,
+       3.29,
+       3.59
+      ]
+     }
+    ]
+   }
+  },
+  "variants": [
+   {
+    "id": "gid://shopify/ProductVariant/43379068567636",
+    "title": "1.0 inch - 25-49",
+    "sku": "TWILL-1.0-2549",
+    "price": "3.00",
+    "compareAtPrice": null,
+    "position": 1,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068600404",
+    "title": "1.0 inch - 50-99",
+    "sku": "TWILL-1.0-5099",
+    "price": "1.50",
+    "compareAtPrice": null,
+    "position": 2,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068633172",
+    "title": "1.0 inch - 100-199",
+    "sku": "TWILL-1.0-100199",
+    "price": "0.75",
+    "compareAtPrice": null,
+    "position": 3,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068665940",
+    "title": "1.0 inch - 200-499",
+    "sku": "TWILL-1.0-200499",
+    "price": "0.47",
+    "compareAtPrice": null,
+    "position": 4,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068698708",
+    "title": "1.0 inch - 500-999",
+    "sku": "TWILL-1.0-500999",
+    "price": "0.34",
+    "compareAtPrice": null,
+    "position": 5,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068731476",
+    "title": "1.0 inch - 1000+",
+    "sku": "TWILL-1.0-1000",
+    "price": "0.31",
+    "compareAtPrice": null,
+    "position": 6,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068764244",
+    "title": "1.5 inch - 25-49",
+    "sku": "TWILL-1.5-2549",
+    "price": "3.00",
+    "compareAtPrice": null,
+    "position": 7,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068797012",
+    "title": "1.5 inch - 50-99",
+    "sku": "TWILL-1.5-5099",
+    "price": "1.50",
+    "compareAtPrice": null,
+    "position": 8,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068829780",
+    "title": "1.5 inch - 100-199",
+    "sku": "TWILL-1.5-100199",
+    "price": "0.98",
+    "compareAtPrice": null,
+    "position": 9,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068862548",
+    "title": "1.5 inch - 200-499",
+    "sku": "TWILL-1.5-200499",
+    "price": "0.69",
+    "compareAtPrice": null,
+    "position": 10,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068895316",
+    "title": "1.5 inch - 500-999",
+    "sku": "TWILL-1.5-500999",
+    "price": "0.51",
+    "compareAtPrice": null,
+    "position": 11,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068928084",
+    "title": "1.5 inch - 1000+",
+    "sku": "TWILL-1.5-1000",
+    "price": "0.46",
+    "compareAtPrice": null,
+    "position": 12,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068960852",
+    "title": "2.0 inch - 25-49",
+    "sku": "TWILL-2.0-2549",
+    "price": "3.00",
+    "compareAtPrice": null,
+    "position": 13,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379068993620",
+    "title": "2.0 inch - 50-99",
+    "sku": "TWILL-2.0-5099",
+    "price": "1.76",
+    "compareAtPrice": null,
+    "position": 14,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069026388",
+    "title": "2.0 inch - 100-199",
+    "sku": "TWILL-2.0-100199",
+    "price": "1.30",
+    "compareAtPrice": null,
+    "position": 15,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069059156",
+    "title": "2.0 inch - 200-499",
+    "sku": "TWILL-2.0-200499",
+    "price": "0.88",
+    "compareAtPrice": null,
+    "position": 16,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069091924",
+    "title": "2.0 inch - 500-999",
+    "sku": "TWILL-2.0-500999",
+    "price": "0.66",
+    "compareAtPrice": null,
+    "position": 17,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069124692",
+    "title": "2.0 inch - 1000+",
+    "sku": "TWILL-2.0-1000",
+    "price": "0.61",
+    "compareAtPrice": null,
+    "position": 18,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069157460",
+    "title": "2.5 inch - 25-49",
+    "sku": "TWILL-2.5-2549",
+    "price": "3.00",
+    "compareAtPrice": null,
+    "position": 19,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069190228",
+    "title": "2.5 inch - 50-99",
+    "sku": "TWILL-2.5-5099",
+    "price": "2.21",
+    "compareAtPrice": null,
+    "position": 20,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069222996",
+    "title": "2.5 inch - 100-199",
+    "sku": "TWILL-2.5-100199",
+    "price": "1.64",
+    "compareAtPrice": null,
+    "position": 21,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069255764",
+    "title": "2.5 inch - 200-499",
+    "sku": "TWILL-2.5-200499",
+    "price": "1.16",
+    "compareAtPrice": null,
+    "position": 22,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069288532",
+    "title": "2.5 inch - 500-999",
+    "sku": "TWILL-2.5-500999",
+    "price": "0.84",
+    "compareAtPrice": null,
+    "position": 23,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069321300",
+    "title": "2.5 inch - 1000+",
+    "sku": "TWILL-2.5-1000",
+    "price": "0.75",
+    "compareAtPrice": null,
+    "position": 24,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069354068",
+    "title": "3.0 inch - 25-49",
+    "sku": "TWILL-3.0-2549",
+    "price": "3.04",
+    "compareAtPrice": null,
+    "position": 25,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069386836",
+    "title": "3.0 inch - 50-99",
+    "sku": "TWILL-3.0-5099",
+    "price": "2.63",
+    "compareAtPrice": null,
+    "position": 26,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069419604",
+    "title": "3.0 inch - 100-199",
+    "sku": "TWILL-3.0-100199",
+    "price": "1.96",
+    "compareAtPrice": null,
+    "position": 27,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069452372",
+    "title": "3.0 inch - 200-499",
+    "sku": "TWILL-3.0-200499",
+    "price": "1.37",
+    "compareAtPrice": null,
+    "position": 28,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069485140",
+    "title": "3.0 inch - 500-999",
+    "sku": "TWILL-3.0-500999",
+    "price": "1.00",
+    "compareAtPrice": null,
+    "position": 29,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069517908",
+    "title": "3.0 inch - 1000+",
+    "sku": "TWILL-3.0-1000",
+    "price": "0.90",
+    "compareAtPrice": null,
+    "position": 30,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069550676",
+    "title": "3.5 inch - 25-49",
+    "sku": "TWILL-3.5-2549",
+    "price": "3.53",
+    "compareAtPrice": null,
+    "position": 31,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069583444",
+    "title": "3.5 inch - 50-99",
+    "sku": "TWILL-3.5-5099",
+    "price": "3.08",
+    "compareAtPrice": null,
+    "position": 32,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069616212",
+    "title": "3.5 inch - 100-199",
+    "sku": "TWILL-3.5-100199",
+    "price": "2.29",
+    "compareAtPrice": null,
+    "position": 33,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069648980",
+    "title": "3.5 inch - 200-499",
+    "sku": "TWILL-3.5-200499",
+    "price": "1.60",
+    "compareAtPrice": null,
+    "position": 34,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069681748",
+    "title": "3.5 inch - 500-999",
+    "sku": "TWILL-3.5-500999",
+    "price": "1.16",
+    "compareAtPrice": null,
+    "position": 35,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069714516",
+    "title": "3.5 inch - 1000+",
+    "sku": "TWILL-3.5-1000",
+    "price": "1.03",
+    "compareAtPrice": null,
+    "position": 36,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069747284",
+    "title": "4.0 inch - 25-49",
+    "sku": "TWILL-4.0-2549",
+    "price": "4.06",
+    "compareAtPrice": null,
+    "position": 37,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069780052",
+    "title": "4.0 inch - 50-99",
+    "sku": "TWILL-4.0-5099",
+    "price": "3.52",
+    "compareAtPrice": null,
+    "position": 38,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069812820",
+    "title": "4.0 inch - 100-199",
+    "sku": "TWILL-4.0-100199",
+    "price": "2.60",
+    "compareAtPrice": null,
+    "position": 39,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069845588",
+    "title": "4.0 inch - 200-499",
+    "sku": "TWILL-4.0-200499",
+    "price": "1.84",
+    "compareAtPrice": null,
+    "position": 40,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069878356",
+    "title": "4.0 inch - 500-999",
+    "sku": "TWILL-4.0-500999",
+    "price": "1.34",
+    "compareAtPrice": null,
+    "position": 41,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069911124",
+    "title": "4.0 inch - 1000+",
+    "sku": "TWILL-4.0-1000",
+    "price": "1.21",
+    "compareAtPrice": null,
+    "position": 42,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069943892",
+    "title": "4.5 inch - 25-49",
+    "sku": "TWILL-4.5-2549",
+    "price": "4.55",
+    "compareAtPrice": null,
+    "position": 43,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379069976660",
+    "title": "4.5 inch - 50-99",
+    "sku": "TWILL-4.5-5099",
+    "price": "3.95",
+    "compareAtPrice": null,
+    "position": 44,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070009428",
+    "title": "4.5 inch - 100-199",
+    "sku": "TWILL-4.5-100199",
+    "price": "2.93",
+    "compareAtPrice": null,
+    "position": 45,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070042196",
+    "title": "4.5 inch - 200-499",
+    "sku": "TWILL-4.5-200499",
+    "price": "2.07",
+    "compareAtPrice": null,
+    "position": 46,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070074964",
+    "title": "4.5 inch - 500-999",
+    "sku": "TWILL-4.5-500999",
+    "price": "1.50",
+    "compareAtPrice": null,
+    "position": 47,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070107732",
+    "title": "4.5 inch - 1000+",
+    "sku": "TWILL-4.5-1000",
+    "price": "1.37",
+    "compareAtPrice": null,
+    "position": 48,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070140500",
+    "title": "5.0 inch - 25-49",
+    "sku": "TWILL-5.0-2549",
+    "price": "5.07",
+    "compareAtPrice": null,
+    "position": 49,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070173268",
+    "title": "5.0 inch - 50-99",
+    "sku": "TWILL-5.0-5099",
+    "price": "4.40",
+    "compareAtPrice": null,
+    "position": 50,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070206036",
+    "title": "5.0 inch - 100-199",
+    "sku": "TWILL-5.0-100199",
+    "price": "3.25",
+    "compareAtPrice": null,
+    "position": 51,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070238804",
+    "title": "5.0 inch - 200-499",
+    "sku": "TWILL-5.0-200499",
+    "price": "2.29",
+    "compareAtPrice": null,
+    "position": 52,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070271572",
+    "title": "5.0 inch - 500-999",
+    "sku": "TWILL-5.0-500999",
+    "price": "1.67",
+    "compareAtPrice": null,
+    "position": 53,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070304340",
+    "title": "5.0 inch - 1000+",
+    "sku": "TWILL-5.0-1000",
+    "price": "1.49",
+    "compareAtPrice": null,
+    "position": 54,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070337108",
+    "title": "6.0 inch - 25-49",
+    "sku": "TWILL-6.0-2549",
+    "price": "6.08",
+    "compareAtPrice": null,
+    "position": 55,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070369876",
+    "title": "6.0 inch - 50-99",
+    "sku": "TWILL-6.0-5099",
+    "price": "5.28",
+    "compareAtPrice": null,
+    "position": 56,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070402644",
+    "title": "6.0 inch - 100-199",
+    "sku": "TWILL-6.0-100199",
+    "price": "3.91",
+    "compareAtPrice": null,
+    "position": 57,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070435412",
+    "title": "6.0 inch - 200-499",
+    "sku": "TWILL-6.0-200499",
+    "price": "2.76",
+    "compareAtPrice": null,
+    "position": 58,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070468180",
+    "title": "6.0 inch - 500-999",
+    "sku": "TWILL-6.0-500999",
+    "price": "2.02",
+    "compareAtPrice": null,
+    "position": 59,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070500948",
+    "title": "6.0 inch - 1000+",
+    "sku": "TWILL-6.0-1000",
+    "price": "1.80",
+    "compareAtPrice": null,
+    "position": 60,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070533716",
+    "title": "7.0 inch - 25-49",
+    "sku": "TWILL-7.0-2549",
+    "price": "7.08",
+    "compareAtPrice": null,
+    "position": 61,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070566484",
+    "title": "7.0 inch - 50-99",
+    "sku": "TWILL-7.0-5099",
+    "price": "6.17",
+    "compareAtPrice": null,
+    "position": 62,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070599252",
+    "title": "7.0 inch - 100-199",
+    "sku": "TWILL-7.0-100199",
+    "price": "4.57",
+    "compareAtPrice": null,
+    "position": 63,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070632020",
+    "title": "7.0 inch - 200-499",
+    "sku": "TWILL-7.0-200499",
+    "price": "3.20",
+    "compareAtPrice": null,
+    "position": 64,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070664788",
+    "title": "7.0 inch - 500-999",
+    "sku": "TWILL-7.0-500999",
+    "price": "2.34",
+    "compareAtPrice": null,
+    "position": 65,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070697556",
+    "title": "7.0 inch - 1000+",
+    "sku": "TWILL-7.0-1000",
+    "price": "2.09",
+    "compareAtPrice": null,
+    "position": 66,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070730324",
+    "title": "8.0 inch - 25-49",
+    "sku": "TWILL-8.0-2549",
+    "price": "8.09",
+    "compareAtPrice": null,
+    "position": 67,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070763092",
+    "title": "8.0 inch - 50-99",
+    "sku": "TWILL-8.0-5099",
+    "price": "7.04",
+    "compareAtPrice": null,
+    "position": 68,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070795860",
+    "title": "8.0 inch - 100-199",
+    "sku": "TWILL-8.0-100199",
+    "price": "5.21",
+    "compareAtPrice": null,
+    "position": 69,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070828628",
+    "title": "8.0 inch - 200-499",
+    "sku": "TWILL-8.0-200499",
+    "price": "3.67",
+    "compareAtPrice": null,
+    "position": 70,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070861396",
+    "title": "8.0 inch - 500-999",
+    "sku": "TWILL-8.0-500999",
+    "price": "2.67",
+    "compareAtPrice": null,
+    "position": 71,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070894164",
+    "title": "8.0 inch - 1000+",
+    "sku": "TWILL-8.0-1000",
+    "price": "2.41",
+    "compareAtPrice": null,
+    "position": 72,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070926932",
+    "title": "9.0 inch - 25-49",
+    "sku": "TWILL-9.0-2549",
+    "price": "9.10",
+    "compareAtPrice": null,
+    "position": 73,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070959700",
+    "title": "9.0 inch - 50-99",
+    "sku": "TWILL-9.0-5099",
+    "price": "7.91",
+    "compareAtPrice": null,
+    "position": 74,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379070992468",
+    "title": "9.0 inch - 100-199",
+    "sku": "TWILL-9.0-100199",
+    "price": "5.85",
+    "compareAtPrice": null,
+    "position": 75,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071025236",
+    "title": "9.0 inch - 200-499",
+    "sku": "TWILL-9.0-200499",
+    "price": "4.11",
+    "compareAtPrice": null,
+    "position": 76,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071058004",
+    "title": "9.0 inch - 500-999",
+    "sku": "TWILL-9.0-500999",
+    "price": "3.02",
+    "compareAtPrice": null,
+    "position": 77,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071090772",
+    "title": "9.0 inch - 1000+",
+    "sku": "TWILL-9.0-1000",
+    "price": "2.70",
+    "compareAtPrice": null,
+    "position": 78,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071123540",
+    "title": "10.0 inch - 25-49",
+    "sku": "TWILL-10.0-2549",
+    "price": "10.11",
+    "compareAtPrice": null,
+    "position": 79,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071156308",
+    "title": "10.0 inch - 50-99",
+    "sku": "TWILL-10.0-5099",
+    "price": "8.80",
+    "compareAtPrice": null,
+    "position": 80,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071189076",
+    "title": "10.0 inch - 100-199",
+    "sku": "TWILL-10.0-100199",
+    "price": "6.52",
+    "compareAtPrice": null,
+    "position": 81,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071221844",
+    "title": "10.0 inch - 200-499",
+    "sku": "TWILL-10.0-200499",
+    "price": "4.58",
+    "compareAtPrice": null,
+    "position": 82,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071254612",
+    "title": "10.0 inch - 500-999",
+    "sku": "TWILL-10.0-500999",
+    "price": "3.35",
+    "compareAtPrice": null,
+    "position": 83,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071287380",
+    "title": "10.0 inch - 1000+",
+    "sku": "TWILL-10.0-1000",
+    "price": "2.99",
+    "compareAtPrice": null,
+    "position": 84,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071320148",
+    "title": "11.0 inch - 25-49",
+    "sku": "TWILL-11.0-2549",
+    "price": "11.14",
+    "compareAtPrice": null,
+    "position": 85,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071352916",
+    "title": "11.0 inch - 50-99",
+    "sku": "TWILL-11.0-5099",
+    "price": "9.68",
+    "compareAtPrice": null,
+    "position": 86,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071385684",
+    "title": "11.0 inch - 100-199",
+    "sku": "TWILL-11.0-100199",
+    "price": "7.16",
+    "compareAtPrice": null,
+    "position": 87,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071418452",
+    "title": "11.0 inch - 200-499",
+    "sku": "TWILL-11.0-200499",
+    "price": "5.03",
+    "compareAtPrice": null,
+    "position": 88,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071451220",
+    "title": "11.0 inch - 500-999",
+    "sku": "TWILL-11.0-500999",
+    "price": "3.68",
+    "compareAtPrice": null,
+    "position": 89,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071483988",
+    "title": "11.0 inch - 1000+",
+    "sku": "TWILL-11.0-1000",
+    "price": "3.29",
+    "compareAtPrice": null,
+    "position": 90,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071516756",
+    "title": "12.0 inch - 25-49",
+    "sku": "TWILL-12.0-2549",
+    "price": "12.15",
+    "compareAtPrice": null,
+    "position": 91,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071549524",
+    "title": "12.0 inch - 50-99",
+    "sku": "TWILL-12.0-5099",
+    "price": "10.57",
+    "compareAtPrice": null,
+    "position": 92,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071582292",
+    "title": "12.0 inch - 100-199",
+    "sku": "TWILL-12.0-100199",
+    "price": "7.81",
+    "compareAtPrice": null,
+    "position": 93,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071615060",
+    "title": "12.0 inch - 200-499",
+    "sku": "TWILL-12.0-200499",
+    "price": "5.50",
+    "compareAtPrice": null,
+    "position": 94,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071647828",
+    "title": "12.0 inch - 500-999",
+    "sku": "TWILL-12.0-500999",
+    "price": "4.01",
+    "compareAtPrice": null,
+    "position": 95,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43379071680596",
+    "title": "12.0 inch - 1000+",
+    "sku": "TWILL-12.0-1000",
+    "price": "3.59",
+    "compareAtPrice": null,
+    "position": 96,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820586909780"
+   }
+  ],
+  "media": [
+   {
+    "id": "gid://shopify/MediaImage/33017893290068",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/a7011c50-9f38-4f3e-acb4-1863f2bf1e12.png?v=1791244770",
+     "width": 1254,
+     "height": 1254
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/33017897058388",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Arizona_Varsity_Applique_Sweatshirt_Showcase.png?v=1791244953",
+     "width": 1312,
+     "height": 1199
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/33017889161300",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/WhatsApp_Image_2026-09-29_at_10.18.21_AM.jpg?v=1791244496",
+     "width": 1600,
+     "height": 721
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29613542735956",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Custom-Tackle-Twill_8.jpg?v=1774624330",
+     "width": 1033,
+     "height": 1020
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/33017889128532",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/WhatsApp_Image_2026-09-29_at_10.18.21_AM_1.jpg?v=1791244497",
+     "width": 1600,
+     "height": 721
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/33004933316692",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/WhatsApp_Image_2026-10-03_at_1.56.07_AM.jpg?v=1790974596",
+     "width": 1600,
+     "height": 1600
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/33004935381076",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/WhatsApp_Image_2026-10-03_at_1.56.35_AM.jpg?v=1790974628",
+     "width": 1600,
+     "height": 1600
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/33017889226836",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/WhatsApp_Image_2026-09-29_at_10.18.21_AM_2.jpg?v=1791244496",
+     "width": 1600,
+     "height": 721
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/33017889194068",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/WhatsApp_Image_2026-09-29_at_10.18.21_AM_3.jpg?v=1791244496",
+     "width": 1600,
+     "height": 721
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29613542604884",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Custom-Tackle-Twill_4.jpg?v=1774624330",
+     "width": 970,
+     "height": 992
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29613542572116",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Custom-Tackle-Twill_3.jpg?v=1774624330",
+     "width": 772,
+     "height": 981
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29613542637652",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Custom-Tackle-Twill_5.jpg?v=1774624330",
+     "width": 1050,
+     "height": 1029
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29613542670420",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Custom-Tackle-Twill_6.jpg?v=1774624330",
+     "width": 991,
+     "height": 924
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29613542703188",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Custom-Tackle-Twill_7.jpg?v=1774624330",
+     "width": 1010,
+     "height": 917
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29613542506580",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Custom-Tackle-Twill_1.jpg?v=1774624330",
+     "width": 1117,
+     "height": 836
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/29613542539348",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Custom-Tackle-Twill_2.jpg?v=1774624330",
+     "width": 1102,
+     "height": 1061
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/MediaImage/31855218065492",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/ChatGPTImageApr22_2026_11_51_12AM_23fb3e59-b285-4eb1-a655-f06ad0ee3271.png?v=1776896468",
+     "width": 1254,
+     "height": 1254
+    },
+    "__parentId": "gid://shopify/Product/7820586909780"
+   }
+  ],
+  "collections": [
+   {
+    "id": "gid://shopify/Collection/294172852308",
+    "handle": "standard-patches",
+    "title": "Standard Patches",
+    "__parentId": "gid://shopify/Product/7820586909780"
+   },
+   {
+    "id": "gid://shopify/Collection/295371866196",
+    "handle": "shop-all",
+    "title": "Shop All",
+    "__parentId": "gid://shopify/Product/7820586909780"
+   }
+  ]
+ }
+}

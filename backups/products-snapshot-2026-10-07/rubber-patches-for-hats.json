@@ -1,0 +1,907 @@
+{
+ "saved_at_utc": "2026-10-07T10:59:54Z",
+ "source": "Shopify Admin API bulk export",
+ "product": {
+  "id": "gid://shopify/Product/7820591169620",
+  "handle": "rubber-patches-for-hats",
+  "title": "Custom Rubber Patches For Hats",
+  "status": "DRAFT",
+  "templateSuffix": null,
+  "productType": "rubber pvc",
+  "vendor": "Patch Kraze",
+  "tags": [
+   "patches",
+   "Rubber Patches",
+   "SEO Patches"
+  ],
+  "descriptionHtml": "<p>Custom PVC rubber patches.</p>",
+  "createdAt": "2025-11-03T16:01:48Z",
+  "updatedAt": "2026-10-07T09:30:52Z",
+  "publishedAt": null,
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "options": [
+   {
+    "name": "Patch Size x Quantity",
+    "position": 1,
+    "values": [
+     "1.5 inch - 25-49",
+     "1.5 inch - 50-99",
+     "1.5 inch - 100-199",
+     "1.5 inch - 200-499",
+     "1.5 inch - 500-999",
+     "1.5 inch - 1000+",
+     "2.0 inch - 25-49",
+     "2.0 inch - 50-99",
+     "2.0 inch - 100-199",
+     "2.0 inch - 200-499",
+     "2.0 inch - 500-999",
+     "2.0 inch - 1000+",
+     "2.5 inch - 25-49",
+     "2.5 inch - 50-99",
+     "2.5 inch - 100-199",
+     "2.5 inch - 200-499",
+     "2.5 inch - 500-999",
+     "2.5 inch - 1000+",
+     "3.0 inch - 25-49",
+     "3.0 inch - 50-99",
+     "3.0 inch - 100-199",
+     "3.0 inch - 200-499",
+     "3.0 inch - 500-999",
+     "3.0 inch - 1000+",
+     "3.5 inch - 25-49",
+     "3.5 inch - 50-99",
+     "3.5 inch - 100-199",
+     "3.5 inch - 200-499",
+     "3.5 inch - 500-999",
+     "3.5 inch - 1000+",
+     "4.0 inch - 25-49",
+     "4.0 inch - 50-99",
+     "4.0 inch - 100-199",
+     "4.0 inch - 200-499",
+     "4.0 inch - 500-999",
+     "4.0 inch - 1000+"
+    ]
+   }
+  ],
+  "prices": {
+   "value": "{\"sizeBrackets\":[1.5,2.0,2.5,3.0,3.5,4.0],\"quantityTiers\":[{\"min\":25,\"max\":49,\"prices\":[4.5,4.55,5.55,5.57,6.51,7.49]},{\"min\":50,\"max\":99,\"prices\":[3.47,3.5,4.26,4.28,5.01,5.78]},{\"min\":100,\"max\":199,\"prices\":[2.39,2.4,2.85,2.85,3.27,3.77]},{\"min\":200,\"max\":499,\"prices\":[1.67,1.67,1.89,1.92,2.16,2.49]},{\"min\":500,\"max\":999,\"prices\":[1.35,1.38,1.64,1.65,1.83,2.09]},{\"min\":1000,\"max\":999999,\"prices\":[1.23,1.25,1.49,1.49,1.65,1.91]}]}",
+   "type": "json",
+   "value_parsed": {
+    "sizeBrackets": [
+     1.5,
+     2.0,
+     2.5,
+     3.0,
+     3.5,
+     4.0
+    ],
+    "quantityTiers": [
+     {
+      "min": 25,
+      "max": 49,
+      "prices": [
+       4.5,
+       4.55,
+       5.55,
+       5.57,
+       6.51,
+       7.49
+      ]
+     },
+     {
+      "min": 50,
+      "max": 99,
+      "prices": [
+       3.47,
+       3.5,
+       4.26,
+       4.28,
+       5.01,
+       5.78
+      ]
+     },
+     {
+      "min": 100,
+      "max": 199,
+      "prices": [
+       2.39,
+       2.4,
+       2.85,
+       2.85,
+       3.27,
+       3.77
+      ]
+     },
+     {
+      "min": 200,
+      "max": 499,
+      "prices": [
+       1.67,
+       1.67,
+       1.89,
+       1.92,
+       2.16,
+       2.49
+      ]
+     },
+     {
+      "min": 500,
+      "max": 999,
+      "prices": [
+       1.35,
+       1.38,
+       1.64,
+       1.65,
+       1.83,
+       2.09
+      ]
+     },
+     {
+      "min": 1000,
+      "max": 999999,
+      "prices": [
+       1.23,
+       1.25,
+       1.49,
+       1.49,
+       1.65,
+       1.91
+      ]
+     }
+    ]
+   }
+  },
+  "variants": [
+   {
+    "id": "gid://shopify/ProductVariant/43492980129876",
+    "title": "1.5 inch - 25-49",
+    "sku": "rubber-patches-for-hats-15-25-49",
+    "price": "4.50",
+    "compareAtPrice": null,
+    "position": 1,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980162644",
+    "title": "1.5 inch - 50-99",
+    "sku": "rubber-patches-for-hats-15-50-99",
+    "price": "3.47",
+    "compareAtPrice": null,
+    "position": 2,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980195412",
+    "title": "1.5 inch - 100-199",
+    "sku": "rubber-patches-for-hats-15-100-199",
+    "price": "2.39",
+    "compareAtPrice": null,
+    "position": 3,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980228180",
+    "title": "1.5 inch - 200-499",
+    "sku": "rubber-patches-for-hats-15-200-499",
+    "price": "1.67",
+    "compareAtPrice": null,
+    "position": 4,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980260948",
+    "title": "1.5 inch - 500-999",
+    "sku": "rubber-patches-for-hats-15-500-999",
+    "price": "1.35",
+    "compareAtPrice": null,
+    "position": 5,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980293716",
+    "title": "1.5 inch - 1000+",
+    "sku": "rubber-patches-for-hats-15-1000plus",
+    "price": "1.23",
+    "compareAtPrice": null,
+    "position": 6,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980326484",
+    "title": "2.0 inch - 25-49",
+    "sku": "rubber-patches-for-hats-20-25-49",
+    "price": "4.55",
+    "compareAtPrice": null,
+    "position": 7,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980359252",
+    "title": "2.0 inch - 50-99",
+    "sku": "rubber-patches-for-hats-20-50-99",
+    "price": "3.50",
+    "compareAtPrice": null,
+    "position": 8,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980392020",
+    "title": "2.0 inch - 100-199",
+    "sku": "rubber-patches-for-hats-20-100-199",
+    "price": "2.40",
+    "compareAtPrice": null,
+    "position": 9,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980424788",
+    "title": "2.0 inch - 200-499",
+    "sku": "rubber-patches-for-hats-20-200-499",
+    "price": "1.67",
+    "compareAtPrice": null,
+    "position": 10,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980457556",
+    "title": "2.0 inch - 500-999",
+    "sku": "rubber-patches-for-hats-20-500-999",
+    "price": "1.38",
+    "compareAtPrice": null,
+    "position": 11,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980490324",
+    "title": "2.0 inch - 1000+",
+    "sku": "rubber-patches-for-hats-20-1000plus",
+    "price": "1.25",
+    "compareAtPrice": null,
+    "position": 12,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980523092",
+    "title": "2.5 inch - 25-49",
+    "sku": "rubber-patches-for-hats-25-25-49",
+    "price": "5.55",
+    "compareAtPrice": null,
+    "position": 13,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980555860",
+    "title": "2.5 inch - 50-99",
+    "sku": "rubber-patches-for-hats-25-50-99",
+    "price": "4.26",
+    "compareAtPrice": null,
+    "position": 14,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980588628",
+    "title": "2.5 inch - 100-199",
+    "sku": "rubber-patches-for-hats-25-100-199",
+    "price": "2.85",
+    "compareAtPrice": null,
+    "position": 15,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980621396",
+    "title": "2.5 inch - 200-499",
+    "sku": "rubber-patches-for-hats-25-200-499",
+    "price": "1.89",
+    "compareAtPrice": null,
+    "position": 16,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980654164",
+    "title": "2.5 inch - 500-999",
+    "sku": "rubber-patches-for-hats-25-500-999",
+    "price": "1.64",
+    "compareAtPrice": null,
+    "position": 17,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980686932",
+    "title": "2.5 inch - 1000+",
+    "sku": "rubber-patches-for-hats-25-1000plus",
+    "price": "1.49",
+    "compareAtPrice": null,
+    "position": 18,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980719700",
+    "title": "3.0 inch - 25-49",
+    "sku": "rubber-patches-for-hats-30-25-49",
+    "price": "5.57",
+    "compareAtPrice": null,
+    "position": 19,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980752468",
+    "title": "3.0 inch - 50-99",
+    "sku": "rubber-patches-for-hats-30-50-99",
+    "price": "4.28",
+    "compareAtPrice": null,
+    "position": 20,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980785236",
+    "title": "3.0 inch - 100-199",
+    "sku": "rubber-patches-for-hats-30-100-199",
+    "price": "2.85",
+    "compareAtPrice": null,
+    "position": 21,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980818004",
+    "title": "3.0 inch - 200-499",
+    "sku": "rubber-patches-for-hats-30-200-499",
+    "price": "1.92",
+    "compareAtPrice": null,
+    "position": 22,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980850772",
+    "title": "3.0 inch - 500-999",
+    "sku": "rubber-patches-for-hats-30-500-999",
+    "price": "1.65",
+    "compareAtPrice": null,
+    "position": 23,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980883540",
+    "title": "3.0 inch - 1000+",
+    "sku": "rubber-patches-for-hats-30-1000plus",
+    "price": "1.49",
+    "compareAtPrice": null,
+    "position": 24,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980916308",
+    "title": "3.5 inch - 25-49",
+    "sku": "rubber-patches-for-hats-35-25-49",
+    "price": "6.51",
+    "compareAtPrice": null,
+    "position": 25,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980949076",
+    "title": "3.5 inch - 50-99",
+    "sku": "rubber-patches-for-hats-35-50-99",
+    "price": "5.01",
+    "compareAtPrice": null,
+    "position": 26,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492980981844",
+    "title": "3.5 inch - 100-199",
+    "sku": "rubber-patches-for-hats-35-100-199",
+    "price": "3.27",
+    "compareAtPrice": null,
+    "position": 27,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492981014612",
+    "title": "3.5 inch - 200-499",
+    "sku": "rubber-patches-for-hats-35-200-499",
+    "price": "2.16",
+    "compareAtPrice": null,
+    "position": 28,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492981047380",
+    "title": "3.5 inch - 500-999",
+    "sku": "rubber-patches-for-hats-35-500-999",
+    "price": "1.83",
+    "compareAtPrice": null,
+    "position": 29,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492981080148",
+    "title": "3.5 inch - 1000+",
+    "sku": "rubber-patches-for-hats-35-1000plus",
+    "price": "1.65",
+    "compareAtPrice": null,
+    "position": 30,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492981112916",
+    "title": "4.0 inch - 25-49",
+    "sku": "rubber-patches-for-hats-40-25-49",
+    "price": "7.49",
+    "compareAtPrice": null,
+    "position": 31,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492981145684",
+    "title": "4.0 inch - 50-99",
+    "sku": "rubber-patches-for-hats-40-50-99",
+    "price": "5.78",
+    "compareAtPrice": null,
+    "position": 32,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492981178452",
+    "title": "4.0 inch - 100-199",
+    "sku": "rubber-patches-for-hats-40-100-199",
+    "price": "3.77",
+    "compareAtPrice": null,
+    "position": 33,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492981211220",
+    "title": "4.0 inch - 200-499",
+    "sku": "rubber-patches-for-hats-40-200-499",
+    "price": "2.49",
+    "compareAtPrice": null,
+    "position": 34,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492981243988",
+    "title": "4.0 inch - 500-999",
+    "sku": "rubber-patches-for-hats-40-500-999",
+    "price": "2.09",
+    "compareAtPrice": null,
+    "position": 35,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492981276756",
+    "title": "4.0 inch - 1000+",
+    "sku": "rubber-patches-for-hats-40-1000plus",
+    "price": "1.91",
+    "compareAtPrice": null,
+    "position": 36,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591169620"
+   }
+  ],
+  "media": [
+   {
+    "id": "gid://shopify/MediaImage/28555415388244",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/rubberhat.webp?v=1762185710",
+     "width": 840,
+     "height": 840
+    },
+    "__parentId": "gid://shopify/Product/7820591169620"
+   }
+  ],
+  "collections": [
+   {
+    "id": "gid://shopify/Collection/294172655700",
+    "handle": "hats",
+    "title": "Hats",
+    "__parentId": "gid://shopify/Product/7820591169620"
+   },
+   {
+    "id": "gid://shopify/Collection/295371866196",
+    "handle": "shop-all",
+    "title": "Shop All",
+    "__parentId": "gid://shopify/Product/7820591169620"
+   }
+  ]
+ }
+}

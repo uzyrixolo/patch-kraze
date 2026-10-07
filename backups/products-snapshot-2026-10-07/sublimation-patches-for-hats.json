@@ -1,0 +1,3661 @@
+{
+ "saved_at_utc": "2026-10-07T10:59:54Z",
+ "source": "Shopify Admin API bulk export",
+ "product": {
+  "id": "gid://shopify/Product/7820591136852",
+  "handle": "sublimation-patches-for-hats",
+  "title": "Sublimation Patches",
+  "status": "DRAFT",
+  "templateSuffix": "patch",
+  "productType": "full color",
+  "vendor": "Patch Kraze",
+  "tags": [
+   "patches",
+   "rush",
+   "SEO Patches"
+  ],
+  "descriptionHtml": "<p>Custom sublimation hat patches allow for vibrant full-color printing with your unique text and designs. Similar to our embroidered badges, these sublimated patches are finished with a merrow border in a thread color of your choosing. Each patch order includes a Free roll of Thermal Tape.</p>",
+  "createdAt": "2025-11-03T16:01:47Z",
+  "updatedAt": "2026-10-07T09:30:50Z",
+  "publishedAt": null,
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "options": [
+   {
+    "name": "Patch Size x Quantity",
+    "position": 1,
+    "values": [
+     "1.0 inch - 10",
+     "1.0 inch - 11-25",
+     "1.0 inch - 26-50",
+     "1.0 inch - 51-100",
+     "1.0 inch - 101-199",
+     "1.0 inch - 200-499",
+     "1.0 inch - 500-999",
+     "1.0 inch - 1000+",
+     "1.5 inch - 10",
+     "1.5 inch - 11-25",
+     "1.5 inch - 26-50",
+     "1.5 inch - 51-100",
+     "1.5 inch - 101-199",
+     "1.5 inch - 200-499",
+     "1.5 inch - 500-999",
+     "1.5 inch - 1000+",
+     "2.0 inch - 10",
+     "2.0 inch - 11-25",
+     "2.0 inch - 26-50",
+     "2.0 inch - 51-100",
+     "2.0 inch - 101-199",
+     "2.0 inch - 200-499",
+     "2.0 inch - 500-999",
+     "2.0 inch - 1000+",
+     "2.5 inch - 10",
+     "2.5 inch - 11-25",
+     "2.5 inch - 26-50",
+     "2.5 inch - 51-100",
+     "2.5 inch - 101-199",
+     "2.5 inch - 200-499",
+     "2.5 inch - 500-999",
+     "2.5 inch - 1000+",
+     "3.0 inch - 10",
+     "3.0 inch - 11-25",
+     "3.0 inch - 26-50",
+     "3.0 inch - 51-100",
+     "3.0 inch - 101-199",
+     "3.0 inch - 200-499",
+     "3.0 inch - 500-999",
+     "3.0 inch - 1000+",
+     "3.5 inch - 10",
+     "3.5 inch - 11-25",
+     "3.5 inch - 26-50",
+     "3.5 inch - 51-100",
+     "3.5 inch - 101-199",
+     "3.5 inch - 200-499",
+     "3.5 inch - 500-999",
+     "3.5 inch - 1000+",
+     "4.0 inch - 10",
+     "4.0 inch - 11-25",
+     "4.0 inch - 26-50",
+     "4.0 inch - 51-100",
+     "4.0 inch - 101-199",
+     "4.0 inch - 200-499",
+     "4.0 inch - 500-999",
+     "4.0 inch - 1000+",
+     "4.5 inch - 10",
+     "4.5 inch - 11-25",
+     "4.5 inch - 26-50",
+     "4.5 inch - 51-100",
+     "4.5 inch - 101-199",
+     "4.5 inch - 200-499",
+     "4.5 inch - 500-999",
+     "4.5 inch - 1000+",
+     "5.0 inch - 10",
+     "5.0 inch - 11-25",
+     "5.0 inch - 26-50",
+     "5.0 inch - 51-100",
+     "5.0 inch - 101-199",
+     "5.0 inch - 200-499",
+     "5.0 inch - 500-999",
+     "5.0 inch - 1000+",
+     "6.0 inch - 10",
+     "6.0 inch - 11-25",
+     "6.0 inch - 26-50",
+     "6.0 inch - 51-100",
+     "6.0 inch - 101-199",
+     "6.0 inch - 200-499",
+     "6.0 inch - 500-999",
+     "6.0 inch - 1000+",
+     "7.0 inch - 10",
+     "7.0 inch - 11-25",
+     "7.0 inch - 26-50",
+     "7.0 inch - 51-100",
+     "7.0 inch - 101-199",
+     "7.0 inch - 200-499",
+     "7.0 inch - 500-999",
+     "7.0 inch - 1000+",
+     "8.0 inch - 10",
+     "8.0 inch - 11-25",
+     "8.0 inch - 26-50",
+     "8.0 inch - 51-100",
+     "8.0 inch - 101-199",
+     "8.0 inch - 200-499",
+     "8.0 inch - 500-999",
+     "8.0 inch - 1000+",
+     "9.0 inch - 10",
+     "9.0 inch - 11-25",
+     "9.0 inch - 26-50",
+     "9.0 inch - 51-100",
+     "9.0 inch - 101-199",
+     "9.0 inch - 200-499",
+     "9.0 inch - 500-999",
+     "9.0 inch - 1000+",
+     "10.0 inch - 10",
+     "10.0 inch - 11-25",
+     "10.0 inch - 26-50",
+     "10.0 inch - 51-100",
+     "10.0 inch - 101-199",
+     "10.0 inch - 200-499",
+     "10.0 inch - 500-999",
+     "10.0 inch - 1000+",
+     "11.0 inch - 10",
+     "11.0 inch - 11-25",
+     "11.0 inch - 26-50",
+     "11.0 inch - 51-100",
+     "11.0 inch - 101-199",
+     "11.0 inch - 200-499",
+     "11.0 inch - 500-999",
+     "11.0 inch - 1000+",
+     "12.0 inch - 10",
+     "12.0 inch - 11-25",
+     "12.0 inch - 26-50",
+     "12.0 inch - 51-100",
+     "12.0 inch - 101-199",
+     "12.0 inch - 200-499",
+     "12.0 inch - 500-999",
+     "12.0 inch - 1000+",
+     "13.0 inch - 10",
+     "13.0 inch - 11-25",
+     "13.0 inch - 26-50",
+     "13.0 inch - 51-100",
+     "13.0 inch - 101-199",
+     "13.0 inch - 200-499",
+     "13.0 inch - 500-999",
+     "13.0 inch - 1000+",
+     "14.0 inch - 10",
+     "14.0 inch - 11-25",
+     "14.0 inch - 26-50",
+     "14.0 inch - 51-100",
+     "14.0 inch - 101-199",
+     "14.0 inch - 200-499",
+     "14.0 inch - 500-999",
+     "14.0 inch - 1000+",
+     "15.0 inch - 10",
+     "15.0 inch - 11-25",
+     "15.0 inch - 26-50",
+     "15.0 inch - 51-100",
+     "15.0 inch - 101-199",
+     "15.0 inch - 200-499",
+     "15.0 inch - 500-999",
+     "15.0 inch - 1000+",
+     "16.0 inch - 10",
+     "16.0 inch - 11-25",
+     "16.0 inch - 26-50",
+     "16.0 inch - 51-100",
+     "16.0 inch - 101-199",
+     "16.0 inch - 200-499",
+     "16.0 inch - 500-999",
+     "16.0 inch - 1000+"
+    ]
+   }
+  ],
+  "prices": {
+   "value": "{\"sizeBrackets\":[1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0],\"quantityTiers\":[{\"min\":10,\"max\":10,\"prices\":[6.99,6.99,6.99,6.99,6.99,6.99,6.99,6.99,6.99,6.99,7.2,8.4,9.6,10.8,12.0,13.2,13.8,14.52,15.24,15.96]},{\"min\":11,\"max\":25,\"prices\":[6.36,6.36,6.36,6.36,6.36,6.36,6.36,6.36,6.36,6.36,6.36,6.6,7.8,9.6,10.8,12.0,12.6,13.5,14.22,14.88]},{\"min\":26,\"max\":50,\"prices\":[2.69,2.69,2.69,2.69,2.69,2.69,2.69,2.69,2.7,3.6,4.8,6.0,7.2,9.0,9.6,10.8,11.4,12.12,12.84,13.62]},{\"min\":51,\"max\":100,\"prices\":[1.38,1.38,1.38,1.38,1.4,1.5,1.72,1.93,2.15,2.57,3.01,3.43,3.86,4.29,4.72,5.15,6.12,6.84,7.68,8.34]},{\"min\":101,\"max\":199,\"prices\":[0.9,0.9,0.9,1.0,1.1,1.12,1.27,1.43,1.58,1.91,2.23,2.54,2.86,3.18,3.49,3.81,4.5,5.28,5.97,6.57]},{\"min\":200,\"max\":499,\"prices\":[0.8,0.8,0.8,0.85,0.9,0.95,0.98,1.01,1.12,1.34,1.56,1.79,2.0,2.23,2.45,2.68,3.36,4.05,4.68,5.31]},{\"min\":500,\"max\":999,\"prices\":[0.7,0.7,0.7,0.75,0.8,0.85,0.88,0.85,0.9,0.98,1.14,1.3,1.47,1.63,1.79,1.96,2.58,3.27,4.08,4.77]},{\"min\":1000,\"max\":999999,\"prices\":[0.75,0.75,0.75,0.7,0.72,0.75,0.78,0.8,0.85,0.88,1.02,1.18,1.31,1.46,1.6,1.75,2.39,3.06,3.84,4.56]}]}",
+   "type": "json",
+   "value_parsed": {
+    "sizeBrackets": [
+     1.0,
+     1.5,
+     2.0,
+     2.5,
+     3.0,
+     3.5,
+     4.0,
+     4.5,
+     5.0,
+     6.0,
+     7.0,
+     8.0,
+     9.0,
+     10.0,
+     11.0,
+     12.0,
+     13.0,
+     14.0,
+     15.0,
+     16.0
+    ],
+    "quantityTiers": [
+     {
+      "min": 10,
+      "max": 10,
+      "prices": [
+       6.99,
+       6.99,
+       6.99,
+       6.99,
+       6.99,
+       6.99,
+       6.99,
+       6.99,
+       6.99,
+       6.99,
+       7.2,
+       8.4,
+       9.6,
+       10.8,
+       12.0,
+       13.2,
+       13.8,
+       14.52,
+       15.24,
+       15.96
+      ]
+     },
+     {
+      "min": 11,
+      "max": 25,
+      "prices": [
+       6.36,
+       6.36,
+       6.36,
+       6.36,
+       6.36,
+       6.36,
+       6.36,
+       6.36,
+       6.36,
+       6.36,
+       6.36,
+       6.6,
+       7.8,
+       9.6,
+       10.8,
+       12.0,
+       12.6,
+       13.5,
+       14.22,
+       14.88
+      ]
+     },
+     {
+      "min": 26,
+      "max": 50,
+      "prices": [
+       2.69,
+       2.69,
+       2.69,
+       2.69,
+       2.69,
+       2.69,
+       2.69,
+       2.69,
+       2.7,
+       3.6,
+       4.8,
+       6.0,
+       7.2,
+       9.0,
+       9.6,
+       10.8,
+       11.4,
+       12.12,
+       12.84,
+       13.62
+      ]
+     },
+     {
+      "min": 51,
+      "max": 100,
+      "prices": [
+       1.38,
+       1.38,
+       1.38,
+       1.38,
+       1.4,
+       1.5,
+       1.72,
+       1.93,
+       2.15,
+       2.57,
+       3.01,
+       3.43,
+       3.86,
+       4.29,
+       4.72,
+       5.15,
+       6.12,
+       6.84,
+       7.68,
+       8.34
+      ]
+     },
+     {
+      "min": 101,
+      "max": 199,
+      "prices": [
+       0.9,
+       0.9,
+       0.9,
+       1.0,
+       1.1,
+       1.12,
+       1.27,
+       1.43,
+       1.58,
+       1.91,
+       2.23,
+       2.54,
+       2.86,
+       3.18,
+       3.49,
+       3.81,
+       4.5,
+       5.28,
+       5.97,
+       6.57
+      ]
+     },
+     {
+      "min": 200,
+      "max": 499,
+      "prices": [
+       0.8,
+       0.8,
+       0.8,
+       0.85,
+       0.9,
+       0.95,
+       0.98,
+       1.01,
+       1.12,
+       1.34,
+       1.56,
+       1.79,
+       2.0,
+       2.23,
+       2.45,
+       2.68,
+       3.36,
+       4.05,
+       4.68,
+       5.31
+      ]
+     },
+     {
+      "min": 500,
+      "max": 999,
+      "prices": [
+       0.7,
+       0.7,
+       0.7,
+       0.75,
+       0.8,
+       0.85,
+       0.88,
+       0.85,
+       0.9,
+       0.98,
+       1.14,
+       1.3,
+       1.47,
+       1.63,
+       1.79,
+       1.96,
+       2.58,
+       3.27,
+       4.08,
+       4.77
+      ]
+     },
+     {
+      "min": 1000,
+      "max": 999999,
+      "prices": [
+       0.75,
+       0.75,
+       0.75,
+       0.7,
+       0.72,
+       0.75,
+       0.78,
+       0.8,
+       0.85,
+       0.88,
+       1.02,
+       1.18,
+       1.31,
+       1.46,
+       1.6,
+       1.75,
+       2.39,
+       3.06,
+       3.84,
+       4.56
+      ]
+     }
+    ]
+   }
+  },
+  "variants": [
+   {
+    "id": "gid://shopify/ProductVariant/47493728403540",
+    "title": "1.0 inch - 10",
+    "sku": null,
+    "price": "6.99",
+    "compareAtPrice": null,
+    "position": 1,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740134484",
+    "title": "1.0 inch - 11-25",
+    "sku": null,
+    "price": "6.36",
+    "compareAtPrice": null,
+    "position": 2,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740167252",
+    "title": "1.0 inch - 26-50",
+    "sku": null,
+    "price": "2.69",
+    "compareAtPrice": null,
+    "position": 3,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740200020",
+    "title": "1.0 inch - 51-100",
+    "sku": null,
+    "price": "1.38",
+    "compareAtPrice": null,
+    "position": 4,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740232788",
+    "title": "1.0 inch - 101-199",
+    "sku": null,
+    "price": "0.90",
+    "compareAtPrice": null,
+    "position": 5,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943804473428",
+    "title": "1.0 inch - 200-499",
+    "sku": "SUB-1.0-200499",
+    "price": "0.80",
+    "compareAtPrice": null,
+    "position": 6,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943804506196",
+    "title": "1.0 inch - 500-999",
+    "sku": "SUB-1.0-500999",
+    "price": "0.70",
+    "compareAtPrice": null,
+    "position": 7,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943804538964",
+    "title": "1.0 inch - 1000+",
+    "sku": "SUB-1.0-1000",
+    "price": "0.75",
+    "compareAtPrice": null,
+    "position": 8,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728436308",
+    "title": "1.5 inch - 10",
+    "sku": null,
+    "price": "6.99",
+    "compareAtPrice": null,
+    "position": 9,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740265556",
+    "title": "1.5 inch - 11-25",
+    "sku": null,
+    "price": "6.36",
+    "compareAtPrice": null,
+    "position": 10,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740298324",
+    "title": "1.5 inch - 26-50",
+    "sku": null,
+    "price": "2.69",
+    "compareAtPrice": null,
+    "position": 11,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740331092",
+    "title": "1.5 inch - 51-100",
+    "sku": null,
+    "price": "1.38",
+    "compareAtPrice": null,
+    "position": 12,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740363860",
+    "title": "1.5 inch - 101-199",
+    "sku": null,
+    "price": "0.90",
+    "compareAtPrice": null,
+    "position": 13,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943804670036",
+    "title": "1.5 inch - 200-499",
+    "sku": "SUB-1.5-200499",
+    "price": "0.80",
+    "compareAtPrice": null,
+    "position": 14,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943804702804",
+    "title": "1.5 inch - 500-999",
+    "sku": "SUB-1.5-500999",
+    "price": "0.70",
+    "compareAtPrice": null,
+    "position": 15,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943804735572",
+    "title": "1.5 inch - 1000+",
+    "sku": "SUB-1.5-1000",
+    "price": "0.75",
+    "compareAtPrice": null,
+    "position": 16,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728469076",
+    "title": "2.0 inch - 10",
+    "sku": null,
+    "price": "6.99",
+    "compareAtPrice": null,
+    "position": 17,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740396628",
+    "title": "2.0 inch - 11-25",
+    "sku": null,
+    "price": "6.36",
+    "compareAtPrice": null,
+    "position": 18,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740429396",
+    "title": "2.0 inch - 26-50",
+    "sku": null,
+    "price": "2.69",
+    "compareAtPrice": null,
+    "position": 19,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740462164",
+    "title": "2.0 inch - 51-100",
+    "sku": null,
+    "price": "1.38",
+    "compareAtPrice": null,
+    "position": 20,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740494932",
+    "title": "2.0 inch - 101-199",
+    "sku": null,
+    "price": "0.90",
+    "compareAtPrice": null,
+    "position": 21,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943804866644",
+    "title": "2.0 inch - 200-499",
+    "sku": "SUB-2.0-200499",
+    "price": "0.80",
+    "compareAtPrice": null,
+    "position": 22,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943804899412",
+    "title": "2.0 inch - 500-999",
+    "sku": "SUB-2.0-500999",
+    "price": "0.70",
+    "compareAtPrice": null,
+    "position": 23,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943804932180",
+    "title": "2.0 inch - 1000+",
+    "sku": "SUB-2.0-1000",
+    "price": "0.75",
+    "compareAtPrice": null,
+    "position": 24,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728501844",
+    "title": "2.5 inch - 10",
+    "sku": null,
+    "price": "6.99",
+    "compareAtPrice": null,
+    "position": 25,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740527700",
+    "title": "2.5 inch - 11-25",
+    "sku": null,
+    "price": "6.36",
+    "compareAtPrice": null,
+    "position": 26,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740560468",
+    "title": "2.5 inch - 26-50",
+    "sku": null,
+    "price": "2.69",
+    "compareAtPrice": null,
+    "position": 27,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740593236",
+    "title": "2.5 inch - 51-100",
+    "sku": null,
+    "price": "1.38",
+    "compareAtPrice": null,
+    "position": 28,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740626004",
+    "title": "2.5 inch - 101-199",
+    "sku": null,
+    "price": "1.00",
+    "compareAtPrice": null,
+    "position": 29,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805063252",
+    "title": "2.5 inch - 200-499",
+    "sku": "SUB-2.5-200499",
+    "price": "0.85",
+    "compareAtPrice": null,
+    "position": 30,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805096020",
+    "title": "2.5 inch - 500-999",
+    "sku": "SUB-2.5-500999",
+    "price": "0.75",
+    "compareAtPrice": null,
+    "position": 31,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805128788",
+    "title": "2.5 inch - 1000+",
+    "sku": "SUB-2.5-1000",
+    "price": "0.70",
+    "compareAtPrice": null,
+    "position": 32,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728534612",
+    "title": "3.0 inch - 10",
+    "sku": null,
+    "price": "6.99",
+    "compareAtPrice": null,
+    "position": 33,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740658772",
+    "title": "3.0 inch - 11-25",
+    "sku": null,
+    "price": "6.36",
+    "compareAtPrice": null,
+    "position": 34,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740691540",
+    "title": "3.0 inch - 26-50",
+    "sku": null,
+    "price": "2.69",
+    "compareAtPrice": null,
+    "position": 35,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740724308",
+    "title": "3.0 inch - 51-100",
+    "sku": null,
+    "price": "1.40",
+    "compareAtPrice": null,
+    "position": 36,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740757076",
+    "title": "3.0 inch - 101-199",
+    "sku": null,
+    "price": "1.10",
+    "compareAtPrice": null,
+    "position": 37,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805259860",
+    "title": "3.0 inch - 200-499",
+    "sku": "SUB-3.0-200499",
+    "price": "0.90",
+    "compareAtPrice": null,
+    "position": 38,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805292628",
+    "title": "3.0 inch - 500-999",
+    "sku": "SUB-3.0-500999",
+    "price": "0.80",
+    "compareAtPrice": null,
+    "position": 39,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805325396",
+    "title": "3.0 inch - 1000+",
+    "sku": "SUB-3.0-1000",
+    "price": "0.72",
+    "compareAtPrice": null,
+    "position": 40,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728567380",
+    "title": "3.5 inch - 10",
+    "sku": null,
+    "price": "6.99",
+    "compareAtPrice": null,
+    "position": 41,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740789844",
+    "title": "3.5 inch - 11-25",
+    "sku": null,
+    "price": "6.36",
+    "compareAtPrice": null,
+    "position": 42,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740822612",
+    "title": "3.5 inch - 26-50",
+    "sku": null,
+    "price": "2.69",
+    "compareAtPrice": null,
+    "position": 43,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740855380",
+    "title": "3.5 inch - 51-100",
+    "sku": null,
+    "price": "1.50",
+    "compareAtPrice": null,
+    "position": 44,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740888148",
+    "title": "3.5 inch - 101-199",
+    "sku": null,
+    "price": "1.12",
+    "compareAtPrice": null,
+    "position": 45,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805456468",
+    "title": "3.5 inch - 200-499",
+    "sku": "SUB-3.5-200499",
+    "price": "0.95",
+    "compareAtPrice": null,
+    "position": 46,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805489236",
+    "title": "3.5 inch - 500-999",
+    "sku": "SUB-3.5-500999",
+    "price": "0.85",
+    "compareAtPrice": null,
+    "position": 47,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805522004",
+    "title": "3.5 inch - 1000+",
+    "sku": "SUB-3.5-1000",
+    "price": "0.75",
+    "compareAtPrice": null,
+    "position": 48,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728600148",
+    "title": "4.0 inch - 10",
+    "sku": null,
+    "price": "6.99",
+    "compareAtPrice": null,
+    "position": 49,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740920916",
+    "title": "4.0 inch - 11-25",
+    "sku": null,
+    "price": "6.36",
+    "compareAtPrice": null,
+    "position": 50,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740953684",
+    "title": "4.0 inch - 26-50",
+    "sku": null,
+    "price": "2.69",
+    "compareAtPrice": null,
+    "position": 51,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493740986452",
+    "title": "4.0 inch - 51-100",
+    "sku": null,
+    "price": "1.72",
+    "compareAtPrice": null,
+    "position": 52,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741019220",
+    "title": "4.0 inch - 101-199",
+    "sku": null,
+    "price": "1.27",
+    "compareAtPrice": null,
+    "position": 53,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805653076",
+    "title": "4.0 inch - 200-499",
+    "sku": "SUB-4.0-200499",
+    "price": "0.98",
+    "compareAtPrice": null,
+    "position": 54,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805685844",
+    "title": "4.0 inch - 500-999",
+    "sku": "SUB-4.0-500999",
+    "price": "0.88",
+    "compareAtPrice": null,
+    "position": 55,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805718612",
+    "title": "4.0 inch - 1000+",
+    "sku": "SUB-4.0-1000",
+    "price": "0.78",
+    "compareAtPrice": null,
+    "position": 56,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728632916",
+    "title": "4.5 inch - 10",
+    "sku": null,
+    "price": "6.99",
+    "compareAtPrice": null,
+    "position": 57,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741051988",
+    "title": "4.5 inch - 11-25",
+    "sku": null,
+    "price": "6.36",
+    "compareAtPrice": null,
+    "position": 58,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741084756",
+    "title": "4.5 inch - 26-50",
+    "sku": null,
+    "price": "2.69",
+    "compareAtPrice": null,
+    "position": 59,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741117524",
+    "title": "4.5 inch - 51-100",
+    "sku": null,
+    "price": "1.93",
+    "compareAtPrice": null,
+    "position": 60,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741150292",
+    "title": "4.5 inch - 101-199",
+    "sku": null,
+    "price": "1.43",
+    "compareAtPrice": null,
+    "position": 61,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805849684",
+    "title": "4.5 inch - 200-499",
+    "sku": "SUB-4.5-200499",
+    "price": "1.01",
+    "compareAtPrice": null,
+    "position": 62,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805882452",
+    "title": "4.5 inch - 500-999",
+    "sku": "SUB-4.5-500999",
+    "price": "0.85",
+    "compareAtPrice": null,
+    "position": 63,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943805915220",
+    "title": "4.5 inch - 1000+",
+    "sku": "SUB-4.5-1000",
+    "price": "0.80",
+    "compareAtPrice": null,
+    "position": 64,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728665684",
+    "title": "5.0 inch - 10",
+    "sku": null,
+    "price": "6.99",
+    "compareAtPrice": null,
+    "position": 65,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741183060",
+    "title": "5.0 inch - 11-25",
+    "sku": null,
+    "price": "6.36",
+    "compareAtPrice": null,
+    "position": 66,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741215828",
+    "title": "5.0 inch - 26-50",
+    "sku": null,
+    "price": "2.70",
+    "compareAtPrice": null,
+    "position": 67,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741248596",
+    "title": "5.0 inch - 51-100",
+    "sku": null,
+    "price": "2.15",
+    "compareAtPrice": null,
+    "position": 68,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741281364",
+    "title": "5.0 inch - 101-199",
+    "sku": null,
+    "price": "1.58",
+    "compareAtPrice": null,
+    "position": 69,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806046292",
+    "title": "5.0 inch - 200-499",
+    "sku": "SUB-5.0-200499",
+    "price": "1.12",
+    "compareAtPrice": null,
+    "position": 70,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806079060",
+    "title": "5.0 inch - 500-999",
+    "sku": "SUB-5.0-500999",
+    "price": "0.90",
+    "compareAtPrice": null,
+    "position": 71,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806111828",
+    "title": "5.0 inch - 1000+",
+    "sku": "SUB-5.0-1000",
+    "price": "0.85",
+    "compareAtPrice": null,
+    "position": 72,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "5.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728698452",
+    "title": "6.0 inch - 10",
+    "sku": null,
+    "price": "6.99",
+    "compareAtPrice": null,
+    "position": 73,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741314132",
+    "title": "6.0 inch - 11-25",
+    "sku": null,
+    "price": "6.36",
+    "compareAtPrice": null,
+    "position": 74,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741346900",
+    "title": "6.0 inch - 26-50",
+    "sku": null,
+    "price": "3.60",
+    "compareAtPrice": null,
+    "position": 75,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741379668",
+    "title": "6.0 inch - 51-100",
+    "sku": null,
+    "price": "2.57",
+    "compareAtPrice": null,
+    "position": 76,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741412436",
+    "title": "6.0 inch - 101-199",
+    "sku": null,
+    "price": "1.91",
+    "compareAtPrice": null,
+    "position": 77,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806242900",
+    "title": "6.0 inch - 200-499",
+    "sku": "SUB-6.0-200499",
+    "price": "1.34",
+    "compareAtPrice": null,
+    "position": 78,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806275668",
+    "title": "6.0 inch - 500-999",
+    "sku": "SUB-6.0-500999",
+    "price": "0.98",
+    "compareAtPrice": null,
+    "position": 79,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806308436",
+    "title": "6.0 inch - 1000+",
+    "sku": "SUB-6.0-1000",
+    "price": "0.88",
+    "compareAtPrice": null,
+    "position": 80,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "6.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728731220",
+    "title": "7.0 inch - 10",
+    "sku": null,
+    "price": "7.20",
+    "compareAtPrice": null,
+    "position": 81,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741445204",
+    "title": "7.0 inch - 11-25",
+    "sku": null,
+    "price": "6.36",
+    "compareAtPrice": null,
+    "position": 82,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741477972",
+    "title": "7.0 inch - 26-50",
+    "sku": null,
+    "price": "4.80",
+    "compareAtPrice": null,
+    "position": 83,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741510740",
+    "title": "7.0 inch - 51-100",
+    "sku": null,
+    "price": "3.01",
+    "compareAtPrice": null,
+    "position": 84,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741543508",
+    "title": "7.0 inch - 101-199",
+    "sku": null,
+    "price": "2.23",
+    "compareAtPrice": null,
+    "position": 85,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806439508",
+    "title": "7.0 inch - 200-499",
+    "sku": "SUB-7.0-200499",
+    "price": "1.56",
+    "compareAtPrice": null,
+    "position": 86,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806472276",
+    "title": "7.0 inch - 500-999",
+    "sku": "SUB-7.0-500999",
+    "price": "1.14",
+    "compareAtPrice": null,
+    "position": 87,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806505044",
+    "title": "7.0 inch - 1000+",
+    "sku": "SUB-7.0-1000",
+    "price": "1.02",
+    "compareAtPrice": null,
+    "position": 88,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "7.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728763988",
+    "title": "8.0 inch - 10",
+    "sku": null,
+    "price": "8.40",
+    "compareAtPrice": null,
+    "position": 89,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741576276",
+    "title": "8.0 inch - 11-25",
+    "sku": null,
+    "price": "6.60",
+    "compareAtPrice": null,
+    "position": 90,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741609044",
+    "title": "8.0 inch - 26-50",
+    "sku": null,
+    "price": "6.00",
+    "compareAtPrice": null,
+    "position": 91,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741641812",
+    "title": "8.0 inch - 51-100",
+    "sku": null,
+    "price": "3.43",
+    "compareAtPrice": null,
+    "position": 92,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741674580",
+    "title": "8.0 inch - 101-199",
+    "sku": null,
+    "price": "2.54",
+    "compareAtPrice": null,
+    "position": 93,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806636116",
+    "title": "8.0 inch - 200-499",
+    "sku": "SUB-8.0-200499",
+    "price": "1.79",
+    "compareAtPrice": null,
+    "position": 94,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806668884",
+    "title": "8.0 inch - 500-999",
+    "sku": "SUB-8.0-500999",
+    "price": "1.30",
+    "compareAtPrice": null,
+    "position": 95,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806701652",
+    "title": "8.0 inch - 1000+",
+    "sku": "SUB-8.0-1000",
+    "price": "1.18",
+    "compareAtPrice": null,
+    "position": 96,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "8.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728796756",
+    "title": "9.0 inch - 10",
+    "sku": null,
+    "price": "9.60",
+    "compareAtPrice": null,
+    "position": 97,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741707348",
+    "title": "9.0 inch - 11-25",
+    "sku": null,
+    "price": "7.80",
+    "compareAtPrice": null,
+    "position": 98,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741740116",
+    "title": "9.0 inch - 26-50",
+    "sku": null,
+    "price": "7.20",
+    "compareAtPrice": null,
+    "position": 99,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741772884",
+    "title": "9.0 inch - 51-100",
+    "sku": null,
+    "price": "3.86",
+    "compareAtPrice": null,
+    "position": 100,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741805652",
+    "title": "9.0 inch - 101-199",
+    "sku": null,
+    "price": "2.86",
+    "compareAtPrice": null,
+    "position": 101,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806832724",
+    "title": "9.0 inch - 200-499",
+    "sku": "SUB-9.0-200499",
+    "price": "2.00",
+    "compareAtPrice": null,
+    "position": 102,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806865492",
+    "title": "9.0 inch - 500-999",
+    "sku": "SUB-9.0-500999",
+    "price": "1.47",
+    "compareAtPrice": null,
+    "position": 103,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943806898260",
+    "title": "9.0 inch - 1000+",
+    "sku": "SUB-9.0-1000",
+    "price": "1.31",
+    "compareAtPrice": null,
+    "position": 104,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "9.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493728829524",
+    "title": "10.0 inch - 10",
+    "sku": null,
+    "price": "10.80",
+    "compareAtPrice": null,
+    "position": 105,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741838420",
+    "title": "10.0 inch - 11-25",
+    "sku": null,
+    "price": "9.60",
+    "compareAtPrice": null,
+    "position": 106,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741871188",
+    "title": "10.0 inch - 26-50",
+    "sku": null,
+    "price": "9.00",
+    "compareAtPrice": null,
+    "position": 107,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741903956",
+    "title": "10.0 inch - 51-100",
+    "sku": null,
+    "price": "4.29",
+    "compareAtPrice": null,
+    "position": 108,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741936724",
+    "title": "10.0 inch - 101-199",
+    "sku": null,
+    "price": "3.18",
+    "compareAtPrice": null,
+    "position": 109,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943807029332",
+    "title": "10.0 inch - 200-499",
+    "sku": "SUB-10.0-200499",
+    "price": "2.23",
+    "compareAtPrice": null,
+    "position": 110,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943807062100",
+    "title": "10.0 inch - 500-999",
+    "sku": "SUB-10.0-500999",
+    "price": "1.63",
+    "compareAtPrice": null,
+    "position": 111,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42943807094868",
+    "title": "10.0 inch - 1000+",
+    "sku": "SUB-10.0-1000",
+    "price": "1.46",
+    "compareAtPrice": null,
+    "position": 112,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "10.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493741969492",
+    "title": "11.0 inch - 10",
+    "sku": null,
+    "price": "12.00",
+    "compareAtPrice": null,
+    "position": 113,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742002260",
+    "title": "11.0 inch - 11-25",
+    "sku": null,
+    "price": "10.80",
+    "compareAtPrice": null,
+    "position": 114,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742035028",
+    "title": "11.0 inch - 26-50",
+    "sku": null,
+    "price": "9.60",
+    "compareAtPrice": null,
+    "position": 115,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742067796",
+    "title": "11.0 inch - 51-100",
+    "sku": null,
+    "price": "4.72",
+    "compareAtPrice": null,
+    "position": 116,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742100564",
+    "title": "11.0 inch - 101-199",
+    "sku": null,
+    "price": "3.49",
+    "compareAtPrice": null,
+    "position": 117,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742133332",
+    "title": "11.0 inch - 200-499",
+    "sku": null,
+    "price": "2.45",
+    "compareAtPrice": null,
+    "position": 118,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742166100",
+    "title": "11.0 inch - 500-999",
+    "sku": null,
+    "price": "1.79",
+    "compareAtPrice": null,
+    "position": 119,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742198868",
+    "title": "11.0 inch - 1000+",
+    "sku": null,
+    "price": "1.60",
+    "compareAtPrice": null,
+    "position": 120,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "11.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742231636",
+    "title": "12.0 inch - 10",
+    "sku": null,
+    "price": "13.20",
+    "compareAtPrice": null,
+    "position": 121,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742264404",
+    "title": "12.0 inch - 11-25",
+    "sku": null,
+    "price": "12.00",
+    "compareAtPrice": null,
+    "position": 122,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742297172",
+    "title": "12.0 inch - 26-50",
+    "sku": null,
+    "price": "10.80",
+    "compareAtPrice": null,
+    "position": 123,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742329940",
+    "title": "12.0 inch - 51-100",
+    "sku": null,
+    "price": "5.15",
+    "compareAtPrice": null,
+    "position": 124,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742362708",
+    "title": "12.0 inch - 101-199",
+    "sku": null,
+    "price": "3.81",
+    "compareAtPrice": null,
+    "position": 125,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742395476",
+    "title": "12.0 inch - 200-499",
+    "sku": null,
+    "price": "2.68",
+    "compareAtPrice": null,
+    "position": 126,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742428244",
+    "title": "12.0 inch - 500-999",
+    "sku": null,
+    "price": "1.96",
+    "compareAtPrice": null,
+    "position": 127,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742461012",
+    "title": "12.0 inch - 1000+",
+    "sku": null,
+    "price": "1.75",
+    "compareAtPrice": null,
+    "position": 128,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "12.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742493780",
+    "title": "13.0 inch - 10",
+    "sku": null,
+    "price": "13.80",
+    "compareAtPrice": null,
+    "position": 129,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742526548",
+    "title": "13.0 inch - 11-25",
+    "sku": null,
+    "price": "12.60",
+    "compareAtPrice": null,
+    "position": 130,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742559316",
+    "title": "13.0 inch - 26-50",
+    "sku": null,
+    "price": "11.40",
+    "compareAtPrice": null,
+    "position": 131,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742592084",
+    "title": "13.0 inch - 51-100",
+    "sku": null,
+    "price": "6.12",
+    "compareAtPrice": null,
+    "position": 132,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742624852",
+    "title": "13.0 inch - 101-199",
+    "sku": null,
+    "price": "4.50",
+    "compareAtPrice": null,
+    "position": 133,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742657620",
+    "title": "13.0 inch - 200-499",
+    "sku": null,
+    "price": "3.36",
+    "compareAtPrice": null,
+    "position": 134,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742690388",
+    "title": "13.0 inch - 500-999",
+    "sku": null,
+    "price": "2.58",
+    "compareAtPrice": null,
+    "position": 135,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742723156",
+    "title": "13.0 inch - 1000+",
+    "sku": null,
+    "price": "2.39",
+    "compareAtPrice": null,
+    "position": 136,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "13.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742755924",
+    "title": "14.0 inch - 10",
+    "sku": null,
+    "price": "14.52",
+    "compareAtPrice": null,
+    "position": 137,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "14.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742788692",
+    "title": "14.0 inch - 11-25",
+    "sku": null,
+    "price": "13.50",
+    "compareAtPrice": null,
+    "position": 138,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "14.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742821460",
+    "title": "14.0 inch - 26-50",
+    "sku": null,
+    "price": "12.12",
+    "compareAtPrice": null,
+    "position": 139,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "14.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742854228",
+    "title": "14.0 inch - 51-100",
+    "sku": null,
+    "price": "6.84",
+    "compareAtPrice": null,
+    "position": 140,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "14.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742886996",
+    "title": "14.0 inch - 101-199",
+    "sku": null,
+    "price": "5.28",
+    "compareAtPrice": null,
+    "position": 141,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "14.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742919764",
+    "title": "14.0 inch - 200-499",
+    "sku": null,
+    "price": "4.05",
+    "compareAtPrice": null,
+    "position": 142,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "14.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742952532",
+    "title": "14.0 inch - 500-999",
+    "sku": null,
+    "price": "3.27",
+    "compareAtPrice": null,
+    "position": 143,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "14.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493742985300",
+    "title": "14.0 inch - 1000+",
+    "sku": null,
+    "price": "3.06",
+    "compareAtPrice": null,
+    "position": 144,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "14.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743018068",
+    "title": "15.0 inch - 10",
+    "sku": null,
+    "price": "15.24",
+    "compareAtPrice": null,
+    "position": 145,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "15.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743050836",
+    "title": "15.0 inch - 11-25",
+    "sku": null,
+    "price": "14.22",
+    "compareAtPrice": null,
+    "position": 146,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "15.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743083604",
+    "title": "15.0 inch - 26-50",
+    "sku": null,
+    "price": "12.84",
+    "compareAtPrice": null,
+    "position": 147,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "15.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743116372",
+    "title": "15.0 inch - 51-100",
+    "sku": null,
+    "price": "7.68",
+    "compareAtPrice": null,
+    "position": 148,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "15.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743149140",
+    "title": "15.0 inch - 101-199",
+    "sku": null,
+    "price": "5.97",
+    "compareAtPrice": null,
+    "position": 149,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "15.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743181908",
+    "title": "15.0 inch - 200-499",
+    "sku": null,
+    "price": "4.68",
+    "compareAtPrice": null,
+    "position": 150,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "15.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743214676",
+    "title": "15.0 inch - 500-999",
+    "sku": null,
+    "price": "4.08",
+    "compareAtPrice": null,
+    "position": 151,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "15.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743247444",
+    "title": "15.0 inch - 1000+",
+    "sku": null,
+    "price": "3.84",
+    "compareAtPrice": null,
+    "position": 152,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "15.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743280212",
+    "title": "16.0 inch - 10",
+    "sku": null,
+    "price": "15.96",
+    "compareAtPrice": null,
+    "position": 153,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "16.0 inch - 10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743312980",
+    "title": "16.0 inch - 11-25",
+    "sku": null,
+    "price": "14.88",
+    "compareAtPrice": null,
+    "position": 154,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "16.0 inch - 11-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743345748",
+    "title": "16.0 inch - 26-50",
+    "sku": null,
+    "price": "13.62",
+    "compareAtPrice": null,
+    "position": 155,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "16.0 inch - 26-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743378516",
+    "title": "16.0 inch - 51-100",
+    "sku": null,
+    "price": "8.34",
+    "compareAtPrice": null,
+    "position": 156,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "16.0 inch - 51-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743411284",
+    "title": "16.0 inch - 101-199",
+    "sku": null,
+    "price": "6.57",
+    "compareAtPrice": null,
+    "position": 157,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "16.0 inch - 101-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743444052",
+    "title": "16.0 inch - 200-499",
+    "sku": null,
+    "price": "5.31",
+    "compareAtPrice": null,
+    "position": 158,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "16.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743476820",
+    "title": "16.0 inch - 500-999",
+    "sku": null,
+    "price": "4.77",
+    "compareAtPrice": null,
+    "position": 159,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "16.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/47493743509588",
+    "title": "16.0 inch - 1000+",
+    "sku": null,
+    "price": "4.56",
+    "compareAtPrice": null,
+    "position": 160,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "16.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820591136852"
+   }
+  ],
+  "media": [
+   {
+    "id": "gid://shopify/MediaImage/28555415322708",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/subhat.webp?v=1762185709",
+     "width": 840,
+     "height": 840
+    },
+    "__parentId": "gid://shopify/Product/7820591136852"
+   }
+  ],
+  "collections": [
+   {
+    "id": "gid://shopify/Collection/295371866196",
+    "handle": "shop-all",
+    "title": "Shop All",
+    "__parentId": "gid://shopify/Product/7820591136852"
+   },
+   {
+    "id": "gid://shopify/Collection/295657046100",
+    "handle": "rush-order",
+    "title": "Rush Order",
+    "__parentId": "gid://shopify/Product/7820591136852"
+   }
+  ]
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "saved_at_utc": "2026-10-07T10:59:54Z",
+ "source": "Shopify Admin API bulk export",
+ "product": {
+  "id": "gid://shopify/Product/7820590284884",
+  "handle": "military-velcro-patches",
+  "title": "Custom Military Velcro Patches",
+  "status": "DRAFT",
+  "templateSuffix": null,
+  "productType": "embroidered",
+  "vendor": "Patch Kraze",
+  "tags": [
+   "Embroidered Patches",
+   "Patch Styles",
+   "patches",
+   "rush"
+  ],
+  "descriptionHtml": "<meta charset=\"utf-8\"> <div class=\"jss96\" data-mce-fragment=\"1\"> <div class=\"MuiContainer-root MuiContainer-maxWidthXl\" data-mce-fragment=\"1\"> <div class=\"MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4\" data-mce-fragment=\"1\"> <div class=\"MuiGrid-root jss102 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-lg-6\" data-mce-fragment=\"1\"> <div class=\"jss105\" data-mce-fragment=\"1\"> <p class=\"MuiTypography-root jss108 MuiTypography-body1\" data-mce-fragment=\"1\"><meta charset=\"utf-8\"><span data-mce-fragment=\"1\">Military Velcro Patches are crafted to deliver the distinguished appearance and feel of direct embroidery while providing the adaptability of interchangeable positioning. These patches merge the precision of exquisite embroidery with the practicality of Velcro backing, facilitating effortless application and detachment from uniforms or gear. Opt for a refined thin-stitched edge for a smooth integration or select a robust Merrow border for enhanced durability.</span><br></p> <p class=\"MuiTypography-root jss108 MuiTypography-body1\" style=\"font-size: 10pt; font-weight: 600;\" data-mce-fragment=\"1\"><span data-mce-fragment=\"1\">Each patch order includes a Free roll of Thermal Tape.</span></p> <p class=\"MuiTypography-root jss108 MuiTypography-body1 __prematched-text\" data-mce-fragment=\"1\"><span>Add a Premade Patch Sample to <meta charset=\"utf-8\">Cart - $0.01 - <a title=\"Add to Cart\" href=\"https://Patch%20Krazepatches.com/cart/add?id=46978094727487&amp;quantity=1\"><strong>Add to Cart</strong></a></span></p> <p class=\"MuiTypography-root jss108 MuiTypography-body1 __prematched-text\" data-mce-fragment=\"1\"><br></p> </div> </div> </div> </div> </div>",
+  "createdAt": "2025-11-03T16:01:22Z",
+  "updatedAt": "2026-10-07T09:30:38Z",
+  "publishedAt": null,
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "options": [
+   {
+    "name": "Patch Width (inches)",
+    "position": 1,
+    "values": [
+     "2\"",
+     "2.5\"",
+     "3\"",
+     "3.5\"",
+     "4\""
+    ]
+   }
+  ],
+  "prices": null,
+  "variants": [
+   {
+    "id": "gid://shopify/ProductVariant/42635838357588",
+    "title": "2\"",
+    "sku": "00840400570150",
+    "price": "3.79",
+    "compareAtPrice": null,
+    "position": 1,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Width (inches)",
+      "value": "2\""
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/NavyPatch3.png?v=1762185685"
+    },
+    "__parentId": "gid://shopify/Product/7820590284884"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635838390356",
+    "title": "2.5\"",
+    "sku": "00840400570167",
+    "price": "4.09",
+    "compareAtPrice": null,
+    "position": 2,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Width (inches)",
+      "value": "2.5\""
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820590284884"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635838423124",
+    "title": "3\"",
+    "sku": "00840400570815",
+    "price": "4.38",
+    "compareAtPrice": null,
+    "position": 3,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Width (inches)",
+      "value": "3\""
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820590284884"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635838455892",
+    "title": "3.5\"",
+    "sku": "00840400570648",
+    "price": "5.26",
+    "compareAtPrice": null,
+    "position": 4,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Width (inches)",
+      "value": "3.5\""
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820590284884"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635838488660",
+    "title": "4\"",
+    "sku": "00840400569895",
+    "price": "5.86",
+    "compareAtPrice": null,
+    "position": 5,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Patch Width (inches)",
+      "value": "4\""
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820590284884"
+   }
+  ],
+  "media": [
+   {
+    "id": "gid://shopify/MediaImage/28555413454932",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/NavyPatch3.png?v=1762185685",
+     "width": 1500,
+     "height": 1500
+    },
+    "__parentId": "gid://shopify/Product/7820590284884"
+   }
+  ],
+  "collections": [
+   {
+    "id": "gid://shopify/Collection/295371866196",
+    "handle": "shop-all",
+    "title": "Shop All",
+    "__parentId": "gid://shopify/Product/7820590284884"
+   },
+   {
+    "id": "gid://shopify/Collection/295657046100",
+    "handle": "rush-order",
+    "title": "Rush Order",
+    "__parentId": "gid://shopify/Product/7820590284884"
+   }
+  ]
+ }
+}

@@ -1,0 +1,168 @@
+{
+ "saved_at_utc": "2026-10-07T10:59:54Z",
+ "source": "Shopify Admin API bulk export",
+ "product": {
+  "id": "gid://shopify/Product/7820587499604",
+  "handle": "truck-stickers",
+  "title": "Custom Truck Stickers",
+  "status": "DRAFT",
+  "templateSuffix": "patch",
+  "productType": "stickers",
+  "vendor": "Patch Kraze",
+  "tags": [
+   "novariantn",
+   "stickers"
+  ],
+  "descriptionHtml": "<p data-end=\"500\" data-start=\"44\">Make a bold statement on the road with our vibrant, high-resolution full-color vinyl truck stickers. Designed for maximum visibility and built tough, these stickers feature a convenient face peel tab for effortless application. With an impressive 2+ year outdoor durability, they're made to withstand harsh weather conditions and remain vibrant mile after mile.</p> <p data-end=\"500\" data-start=\"44\"><meta charset=\"utf-8\">Our proprietary EasyPeel tab allows a fast safe peel every time, protecting your sticker from being bent or damaged while peeling your sticker.</p> <p data-is-only-node=\"\" data-is-last-node=\"\" data-end=\"763\" data-start=\"502\"><meta charset=\"utf-8\"><strong>All Sticker Orders Ship FREE</strong></p>",
+  "createdAt": "2025-11-03T16:00:01Z",
+  "updatedAt": "2026-10-07T09:30:33Z",
+  "publishedAt": null,
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "options": [
+   {
+    "name": "Truck Sticker Size (w x h)",
+    "position": 1,
+    "values": [
+     "18 in x 12 in Rectangle",
+     "24 in x 16 in Rectangle",
+     "24 in x 18 in Rectangle"
+    ]
+   }
+  ],
+  "prices": null,
+  "variants": [
+   {
+    "id": "gid://shopify/ProductVariant/42635820662868",
+    "title": "18 in x 12 in Rectangle",
+    "sku": "00840400587820",
+    "price": "36.00",
+    "compareAtPrice": null,
+    "position": 1,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Truck Sticker Size (w x h)",
+      "value": "18 in x 12 in Rectangle"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/TruckStickerFeatureImage_6e04a370-a3a3-4a59-80b1-45ffdeb165c8.png?v=1762185604"
+    },
+    "__parentId": "gid://shopify/Product/7820587499604"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635820695636",
+    "title": "24 in x 16 in Rectangle",
+    "sku": "00840400587837",
+    "price": "40.00",
+    "compareAtPrice": null,
+    "position": 2,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Truck Sticker Size (w x h)",
+      "value": "24 in x 16 in Rectangle"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587499604"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635820728404",
+    "title": "24 in x 18 in Rectangle",
+    "sku": "00840400587813",
+    "price": "44.00",
+    "compareAtPrice": null,
+    "position": 3,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Truck Sticker Size (w x h)",
+      "value": "24 in x 18 in Rectangle"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/TwoTruckStickers_e8c68d9d-1957-4624-b817-c4295f578e9b.png?v=1762185605"
+    },
+    "__parentId": "gid://shopify/Product/7820587499604"
+   }
+  ],
+  "media": [
+   {
+    "id": "gid://shopify/MediaImage/28555393695828",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/TruckStickerFeatureImage_6e04a370-a3a3-4a59-80b1-45ffdeb165c8.png?v=1762185604",
+     "width": 1500,
+     "height": 1500
+    },
+    "__parentId": "gid://shopify/Product/7820587499604"
+   },
+   {
+    "id": "gid://shopify/MediaImage/28555393761364",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/TwoTruckStickers_e8c68d9d-1957-4624-b817-c4295f578e9b.png?v=1762185605",
+     "width": 1500,
+     "height": 1500
+    },
+    "__parentId": "gid://shopify/Product/7820587499604"
+   },
+   {
+    "id": "gid://shopify/MediaImage/28555393794132",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Truck-Sticker-Mock-v3.png?v=1762185604",
+     "width": 1500,
+     "height": 1500
+    },
+    "__parentId": "gid://shopify/Product/7820587499604"
+   },
+   {
+    "id": "gid://shopify/MediaImage/28555393826900",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/TruckStickerSingle1.png?v=1762185605",
+     "width": 1500,
+     "height": 1500
+    },
+    "__parentId": "gid://shopify/Product/7820587499604"
+   },
+   {
+    "id": "gid://shopify/MediaImage/28555393859668",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/TruckStickerSingle2.png?v=1762185605",
+     "width": 1500,
+     "height": 1500
+    },
+    "__parentId": "gid://shopify/Product/7820587499604"
+   }
+  ],
+  "collections": [
+   {
+    "id": "gid://shopify/Collection/295371866196",
+    "handle": "shop-all",
+    "title": "Shop All",
+    "__parentId": "gid://shopify/Product/7820587499604"
+   }
+  ]
+ }
+}

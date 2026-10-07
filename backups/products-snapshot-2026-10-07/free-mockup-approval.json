@@ -1,0 +1,74 @@
+{
+ "saved_at_utc": "2026-10-07T10:59:54Z",
+ "source": "Shopify Admin API bulk export",
+ "product": {
+  "id": "gid://shopify/Product/7820587270228",
+  "handle": "free-mockup-approval",
+  "title": "Free Proof Approval Before Production",
+  "status": "DRAFT",
+  "templateSuffix": null,
+  "productType": "proof fee",
+  "vendor": "Patch Kraze",
+  "tags": [
+   "fee",
+   "proof",
+   "YBlocklist"
+  ],
+  "descriptionHtml": "<p></p>",
+  "createdAt": "2025-11-03T15:59:55Z",
+  "updatedAt": "2026-10-07T09:30:34Z",
+  "publishedAt": null,
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "options": [
+   {
+    "name": "Title",
+    "position": 1,
+    "values": [
+     "Default Title"
+    ]
+   }
+  ],
+  "prices": null,
+  "variants": [
+   {
+    "id": "gid://shopify/ProductVariant/42635819778132",
+    "title": "Default Title",
+    "sku": "proof-fee",
+    "price": "0.00",
+    "compareAtPrice": null,
+    "position": 1,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Title",
+      "value": "Default Title"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patches_Proof.png?v=1762185597"
+    },
+    "__parentId": "gid://shopify/Product/7820587270228"
+   }
+  ],
+  "media": [
+   {
+    "id": "gid://shopify/MediaImage/28555392516180",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Patches_Proof.png?v=1762185597",
+     "width": 1400,
+     "height": 1400
+    },
+    "__parentId": "gid://shopify/Product/7820587270228"
+   }
+  ],
+  "collections": []
+ }
+}

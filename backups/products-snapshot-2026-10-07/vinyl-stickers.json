@@ -1,0 +1,544 @@
+{
+ "saved_at_utc": "2026-10-07T10:59:54Z",
+ "source": "Shopify Admin API bulk export",
+ "product": {
+  "id": "gid://shopify/Product/7820589629524",
+  "handle": "vinyl-stickers",
+  "title": "Custom Vinyl Stickers",
+  "status": "DRAFT",
+  "templateSuffix": null,
+  "productType": "stickers",
+  "vendor": "Patch Kraze",
+  "tags": [
+   "novariantn",
+   "stickers"
+  ],
+  "descriptionHtml": "<p class=\"__prematched-text-block\">Premade Custom Stickers Sample $0.01 - <a data-vrntid=\"50397083402559\" title=\"Add to Cart\" class=\"lnkcolor\"><strong>Add to Cart</strong></a></p> <p>Create vibrant, high-resolution full-color vinyl stickers designed to make a lasting impression. <meta charset=\"utf-8\">Featuring a convenient face peel tab, these stickers are user-friendly, dishwasher safe, and built to withstand the elements with an impressive 2+ year outdoor durability.</p> <p><meta charset=\"utf-8\">Our proprietary EasyPeel tab allows a fast safe peel every time, protecting your sticker from being bent or damaged while peeling your sticker.</p> <p><meta charset=\"utf-8\"><strong>All Sticker Orders Ship FREE</strong></p>",
+  "createdAt": "2025-11-03T16:01:02Z",
+  "updatedAt": "2026-10-07T09:30:35Z",
+  "publishedAt": null,
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "options": [
+   {
+    "name": "Design Size (square inches)",
+    "position": 1,
+    "values": [
+     "Style #1-5",
+     "Style #6-10",
+     "Style #11-15",
+     "Style #16-20",
+     "Style #21-25",
+     "Style #26-30",
+     "Style #31-35",
+     "Style #36-40",
+     "Style #41-45",
+     "Style #46-50",
+     "Style #51-55",
+     "Style #56-60",
+     "Style #61-65",
+     "Style #66-70",
+     "Style #71-75",
+     "Style #76-80",
+     "Style #81-85",
+     "Style #86-90",
+     "Style #91-95",
+     "Style #96-100"
+    ]
+   }
+  ],
+  "prices": null,
+  "variants": [
+   {
+    "id": "gid://shopify/ProductVariant/42635833737300",
+    "title": "Style #1-5",
+    "sku": "00840400587479",
+    "price": "0.63",
+    "compareAtPrice": null,
+    "position": 1,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #1-5"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Sticker-Main.png?v=1762185665"
+    },
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635833770068",
+    "title": "Style #6-10",
+    "sku": "00840400587486",
+    "price": "0.81",
+    "compareAtPrice": null,
+    "position": 2,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #6-10"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635833802836",
+    "title": "Style #11-15",
+    "sku": "00840400587493",
+    "price": "0.99",
+    "compareAtPrice": null,
+    "position": 3,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #11-15"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/ChatGPT_Image_Oct_7_2025_03_38_24_PM.png?v=1762185665"
+    },
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635833835604",
+    "title": "Style #16-20",
+    "sku": "00840400587509",
+    "price": "1.19",
+    "compareAtPrice": null,
+    "position": 4,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #16-20"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/STICKER_2.png?v=1762185665"
+    },
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635833868372",
+    "title": "Style #21-25",
+    "sku": "00840400587516",
+    "price": "1.36",
+    "compareAtPrice": null,
+    "position": 5,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #21-25"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/SINGLE.png?v=1762185665"
+    },
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635833901140",
+    "title": "Style #26-30",
+    "sku": "00840400587523",
+    "price": "1.51",
+    "compareAtPrice": null,
+    "position": 6,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #26-30"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/BOOK.png?v=1762185665"
+    },
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635833933908",
+    "title": "Style #31-35",
+    "sku": "00840400587530",
+    "price": "1.68",
+    "compareAtPrice": null,
+    "position": 7,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #31-35"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/LAPTOP.png?v=1762185665"
+    },
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635833966676",
+    "title": "Style #36-40",
+    "sku": "00840400587547",
+    "price": "1.79",
+    "compareAtPrice": null,
+    "position": 8,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #36-40"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635833999444",
+    "title": "Style #41-45",
+    "sku": "00840400587554",
+    "price": "1.93",
+    "compareAtPrice": null,
+    "position": 9,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #41-45"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635834032212",
+    "title": "Style #46-50",
+    "sku": "00840400587561",
+    "price": "2.06",
+    "compareAtPrice": null,
+    "position": 10,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #46-50"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635834064980",
+    "title": "Style #51-55",
+    "sku": "00840400587578",
+    "price": "2.21",
+    "compareAtPrice": null,
+    "position": 11,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #51-55"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635834097748",
+    "title": "Style #56-60",
+    "sku": "00840400587585",
+    "price": "2.32",
+    "compareAtPrice": null,
+    "position": 12,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #56-60"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635834130516",
+    "title": "Style #61-65",
+    "sku": "00840400587592",
+    "price": "2.47",
+    "compareAtPrice": null,
+    "position": 13,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #61-65"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635834163284",
+    "title": "Style #66-70",
+    "sku": "00840400587608",
+    "price": "2.56",
+    "compareAtPrice": null,
+    "position": 14,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #66-70"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635834196052",
+    "title": "Style #71-75",
+    "sku": "00840400587615",
+    "price": "2.72",
+    "compareAtPrice": null,
+    "position": 15,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #71-75"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635834228820",
+    "title": "Style #76-80",
+    "sku": "00840400587622",
+    "price": "2.81",
+    "compareAtPrice": null,
+    "position": 16,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #76-80"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635834261588",
+    "title": "Style #81-85",
+    "sku": "00840400587639",
+    "price": "3.01",
+    "compareAtPrice": null,
+    "position": 17,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #81-85"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635834294356",
+    "title": "Style #86-90",
+    "sku": "00840400587646",
+    "price": "3.11",
+    "compareAtPrice": null,
+    "position": 18,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #86-90"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635834327124",
+    "title": "Style #91-95",
+    "sku": "00840400587653",
+    "price": "3.20",
+    "compareAtPrice": null,
+    "position": 19,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #91-95"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/42635834359892",
+    "title": "Style #96-100",
+    "sku": "00840400587660",
+    "price": "3.29",
+    "compareAtPrice": null,
+    "position": 20,
+    "inventoryPolicy": "DENY",
+    "selectedOptions": [
+     {
+      "name": "Design Size (square inches)",
+      "value": "Style #96-100"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820589629524"
+   }
+  ],
+  "media": [
+   {
+    "id": "gid://shopify/MediaImage/28555411128404",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Sticker-Main.png?v=1762185665",
+     "width": 2000,
+     "height": 2000
+    },
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/MediaImage/28555411193940",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/ChatGPT_Image_Oct_7_2025_03_38_24_PM.png?v=1762185665",
+     "width": 1024,
+     "height": 1024
+    },
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/MediaImage/28555411226708",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/STICKER_2.png?v=1762185665",
+     "width": 2000,
+     "height": 2000
+    },
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/MediaImage/28555411259476",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/SINGLE.png?v=1762185665",
+     "width": 2000,
+     "height": 2000
+    },
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/MediaImage/28555411292244",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/BOOK.png?v=1762185665",
+     "width": 2000,
+     "height": 2000
+    },
+    "__parentId": "gid://shopify/Product/7820589629524"
+   },
+   {
+    "id": "gid://shopify/MediaImage/28555411325012",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/LAPTOP.png?v=1762185665",
+     "width": 2000,
+     "height": 2000
+    },
+    "__parentId": "gid://shopify/Product/7820589629524"
+   }
+  ],
+  "collections": [
+   {
+    "id": "gid://shopify/Collection/295371866196",
+    "handle": "shop-all",
+    "title": "Shop All",
+    "__parentId": "gid://shopify/Product/7820589629524"
+   }
+  ]
+ }
+}

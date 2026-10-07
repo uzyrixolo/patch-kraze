@@ -1,0 +1,956 @@
+{
+ "saved_at_utc": "2026-10-07T10:59:54Z",
+ "source": "Shopify Admin API bulk export",
+ "product": {
+  "id": "gid://shopify/Product/7820587040852",
+  "handle": "glow-in-the-dark-pvc-rubber-patches",
+  "title": "Glow in The Dark PVC Rubber Patches",
+  "status": "DRAFT",
+  "templateSuffix": "patch",
+  "productType": "rubber pvc",
+  "vendor": "Patch Kraze",
+  "tags": [
+   "patches",
+   "Popular",
+   "Rubber Patches"
+  ],
+  "descriptionHtml": "<p>Glow in the dark PVC rubber patches.</p>",
+  "createdAt": "2025-11-03T15:59:48Z",
+  "updatedAt": "2026-10-07T09:30:33Z",
+  "publishedAt": null,
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "options": [
+   {
+    "name": "Patch Size x Quantity",
+    "position": 1,
+    "values": [
+     "1.5 inch - 25-49",
+     "1.5 inch - 50-99",
+     "1.5 inch - 100-199",
+     "1.5 inch - 200-499",
+     "1.5 inch - 500-999",
+     "1.5 inch - 1000+",
+     "2.0 inch - 25-49",
+     "2.0 inch - 50-99",
+     "2.0 inch - 100-199",
+     "2.0 inch - 200-499",
+     "2.0 inch - 500-999",
+     "2.0 inch - 1000+",
+     "2.5 inch - 25-49",
+     "2.5 inch - 50-99",
+     "2.5 inch - 100-199",
+     "2.5 inch - 200-499",
+     "2.5 inch - 500-999",
+     "2.5 inch - 1000+",
+     "3.0 inch - 25-49",
+     "3.0 inch - 50-99",
+     "3.0 inch - 100-199",
+     "3.0 inch - 200-499",
+     "3.0 inch - 500-999",
+     "3.0 inch - 1000+",
+     "3.5 inch - 25-49",
+     "3.5 inch - 50-99",
+     "3.5 inch - 100-199",
+     "3.5 inch - 200-499",
+     "3.5 inch - 500-999",
+     "3.5 inch - 1000+",
+     "4.0 inch - 25-49",
+     "4.0 inch - 50-99",
+     "4.0 inch - 100-199",
+     "4.0 inch - 200-499",
+     "4.0 inch - 500-999",
+     "4.0 inch - 1000+"
+    ]
+   }
+  ],
+  "prices": {
+   "value": "{\"sizeBrackets\":[1.5,2.0,2.5,3.0,3.5,4.0],\"quantityTiers\":[{\"min\":25,\"max\":49,\"prices\":[4.65,4.7,5.7,5.72,6.66,7.64]},{\"min\":50,\"max\":99,\"prices\":[3.62,3.65,4.41,4.43,5.16,5.93]},{\"min\":100,\"max\":199,\"prices\":[2.54,2.55,3.0,3.0,3.42,3.92]},{\"min\":200,\"max\":499,\"prices\":[1.82,1.82,2.04,2.07,2.31,2.64]},{\"min\":500,\"max\":999,\"prices\":[1.5,1.53,1.79,1.8,1.98,2.24]},{\"min\":1000,\"max\":999999,\"prices\":[1.38,1.4,1.64,1.64,1.8,2.06]}]}",
+   "type": "json",
+   "value_parsed": {
+    "sizeBrackets": [
+     1.5,
+     2.0,
+     2.5,
+     3.0,
+     3.5,
+     4.0
+    ],
+    "quantityTiers": [
+     {
+      "min": 25,
+      "max": 49,
+      "prices": [
+       4.65,
+       4.7,
+       5.7,
+       5.72,
+       6.66,
+       7.64
+      ]
+     },
+     {
+      "min": 50,
+      "max": 99,
+      "prices": [
+       3.62,
+       3.65,
+       4.41,
+       4.43,
+       5.16,
+       5.93
+      ]
+     },
+     {
+      "min": 100,
+      "max": 199,
+      "prices": [
+       2.54,
+       2.55,
+       3.0,
+       3.0,
+       3.42,
+       3.92
+      ]
+     },
+     {
+      "min": 200,
+      "max": 499,
+      "prices": [
+       1.82,
+       1.82,
+       2.04,
+       2.07,
+       2.31,
+       2.64
+      ]
+     },
+     {
+      "min": 500,
+      "max": 999,
+      "prices": [
+       1.5,
+       1.53,
+       1.79,
+       1.8,
+       1.98,
+       2.24
+      ]
+     },
+     {
+      "min": 1000,
+      "max": 999999,
+      "prices": [
+       1.38,
+       1.4,
+       1.64,
+       1.64,
+       1.8,
+       2.06
+      ]
+     }
+    ]
+   }
+  },
+  "variants": [
+   {
+    "id": "gid://shopify/ProductVariant/43492994875476",
+    "title": "1.5 inch - 25-49",
+    "sku": "GLOW-PVC-15-25-49",
+    "price": "4.65",
+    "compareAtPrice": null,
+    "position": 1,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492994908244",
+    "title": "1.5 inch - 50-99",
+    "sku": "GLOW-PVC-15-50-99",
+    "price": "3.62",
+    "compareAtPrice": null,
+    "position": 2,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492994941012",
+    "title": "1.5 inch - 100-199",
+    "sku": "GLOW-PVC-15-100-199",
+    "price": "2.54",
+    "compareAtPrice": null,
+    "position": 3,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492994973780",
+    "title": "1.5 inch - 200-499",
+    "sku": "GLOW-PVC-15-200-499",
+    "price": "1.82",
+    "compareAtPrice": null,
+    "position": 4,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995006548",
+    "title": "1.5 inch - 500-999",
+    "sku": "GLOW-PVC-15-500-999",
+    "price": "1.50",
+    "compareAtPrice": null,
+    "position": 5,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995039316",
+    "title": "1.5 inch - 1000+",
+    "sku": "GLOW-PVC-15-1000plus",
+    "price": "1.38",
+    "compareAtPrice": null,
+    "position": 6,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "1.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995072084",
+    "title": "2.0 inch - 25-49",
+    "sku": "GLOW-PVC-20-25-49",
+    "price": "4.70",
+    "compareAtPrice": null,
+    "position": 7,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995104852",
+    "title": "2.0 inch - 50-99",
+    "sku": "GLOW-PVC-20-50-99",
+    "price": "3.65",
+    "compareAtPrice": null,
+    "position": 8,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995137620",
+    "title": "2.0 inch - 100-199",
+    "sku": "GLOW-PVC-20-100-199",
+    "price": "2.55",
+    "compareAtPrice": null,
+    "position": 9,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995170388",
+    "title": "2.0 inch - 200-499",
+    "sku": "GLOW-PVC-20-200-499",
+    "price": "1.82",
+    "compareAtPrice": null,
+    "position": 10,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995203156",
+    "title": "2.0 inch - 500-999",
+    "sku": "GLOW-PVC-20-500-999",
+    "price": "1.53",
+    "compareAtPrice": null,
+    "position": 11,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995235924",
+    "title": "2.0 inch - 1000+",
+    "sku": "GLOW-PVC-20-1000plus",
+    "price": "1.40",
+    "compareAtPrice": null,
+    "position": 12,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995268692",
+    "title": "2.5 inch - 25-49",
+    "sku": "GLOW-PVC-25-25-49",
+    "price": "5.70",
+    "compareAtPrice": null,
+    "position": 13,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995301460",
+    "title": "2.5 inch - 50-99",
+    "sku": "GLOW-PVC-25-50-99",
+    "price": "4.41",
+    "compareAtPrice": null,
+    "position": 14,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995334228",
+    "title": "2.5 inch - 100-199",
+    "sku": "GLOW-PVC-25-100-199",
+    "price": "3.00",
+    "compareAtPrice": null,
+    "position": 15,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995366996",
+    "title": "2.5 inch - 200-499",
+    "sku": "GLOW-PVC-25-200-499",
+    "price": "2.04",
+    "compareAtPrice": null,
+    "position": 16,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995399764",
+    "title": "2.5 inch - 500-999",
+    "sku": "GLOW-PVC-25-500-999",
+    "price": "1.79",
+    "compareAtPrice": null,
+    "position": 17,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995432532",
+    "title": "2.5 inch - 1000+",
+    "sku": "GLOW-PVC-25-1000plus",
+    "price": "1.64",
+    "compareAtPrice": null,
+    "position": 18,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "2.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995465300",
+    "title": "3.0 inch - 25-49",
+    "sku": "GLOW-PVC-30-25-49",
+    "price": "5.72",
+    "compareAtPrice": null,
+    "position": 19,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995498068",
+    "title": "3.0 inch - 50-99",
+    "sku": "GLOW-PVC-30-50-99",
+    "price": "4.43",
+    "compareAtPrice": null,
+    "position": 20,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995530836",
+    "title": "3.0 inch - 100-199",
+    "sku": "GLOW-PVC-30-100-199",
+    "price": "3.00",
+    "compareAtPrice": null,
+    "position": 21,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995563604",
+    "title": "3.0 inch - 200-499",
+    "sku": "GLOW-PVC-30-200-499",
+    "price": "2.07",
+    "compareAtPrice": null,
+    "position": 22,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995596372",
+    "title": "3.0 inch - 500-999",
+    "sku": "GLOW-PVC-30-500-999",
+    "price": "1.80",
+    "compareAtPrice": null,
+    "position": 23,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995629140",
+    "title": "3.0 inch - 1000+",
+    "sku": "GLOW-PVC-30-1000plus",
+    "price": "1.64",
+    "compareAtPrice": null,
+    "position": 24,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995661908",
+    "title": "3.5 inch - 25-49",
+    "sku": "GLOW-PVC-35-25-49",
+    "price": "6.66",
+    "compareAtPrice": null,
+    "position": 25,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995694676",
+    "title": "3.5 inch - 50-99",
+    "sku": "GLOW-PVC-35-50-99",
+    "price": "5.16",
+    "compareAtPrice": null,
+    "position": 26,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995727444",
+    "title": "3.5 inch - 100-199",
+    "sku": "GLOW-PVC-35-100-199",
+    "price": "3.42",
+    "compareAtPrice": null,
+    "position": 27,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995760212",
+    "title": "3.5 inch - 200-499",
+    "sku": "GLOW-PVC-35-200-499",
+    "price": "2.31",
+    "compareAtPrice": null,
+    "position": 28,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995792980",
+    "title": "3.5 inch - 500-999",
+    "sku": "GLOW-PVC-35-500-999",
+    "price": "1.98",
+    "compareAtPrice": null,
+    "position": 29,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995825748",
+    "title": "3.5 inch - 1000+",
+    "sku": "GLOW-PVC-35-1000plus",
+    "price": "1.80",
+    "compareAtPrice": null,
+    "position": 30,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "3.5 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995858516",
+    "title": "4.0 inch - 25-49",
+    "sku": "GLOW-PVC-40-25-49",
+    "price": "7.64",
+    "compareAtPrice": null,
+    "position": 31,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 25-49"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995891284",
+    "title": "4.0 inch - 50-99",
+    "sku": "GLOW-PVC-40-50-99",
+    "price": "5.93",
+    "compareAtPrice": null,
+    "position": 32,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 50-99"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995924052",
+    "title": "4.0 inch - 100-199",
+    "sku": "GLOW-PVC-40-100-199",
+    "price": "3.92",
+    "compareAtPrice": null,
+    "position": 33,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 100-199"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995956820",
+    "title": "4.0 inch - 200-499",
+    "sku": "GLOW-PVC-40-200-499",
+    "price": "2.64",
+    "compareAtPrice": null,
+    "position": 34,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 200-499"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492995989588",
+    "title": "4.0 inch - 500-999",
+    "sku": "GLOW-PVC-40-500-999",
+    "price": "2.24",
+    "compareAtPrice": null,
+    "position": 35,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 500-999"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/ProductVariant/43492996022356",
+    "title": "4.0 inch - 1000+",
+    "sku": "GLOW-PVC-40-1000plus",
+    "price": "2.06",
+    "compareAtPrice": null,
+    "position": 36,
+    "inventoryPolicy": "CONTINUE",
+    "selectedOptions": [
+     {
+      "name": "Patch Size x Quantity",
+      "value": "4.0 inch - 1000+"
+     }
+    ],
+    "inventoryItem": {
+     "tracked": false
+    },
+    "image": null,
+    "__parentId": "gid://shopify/Product/7820587040852"
+   }
+  ],
+  "media": [
+   {
+    "id": "gid://shopify/MediaImage/33017617776724",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/WhatsApp_Image_2026-10-06_at_3.16.03_AM.jpg?v=1791238714",
+     "width": 1254,
+     "height": 1254
+    },
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/MediaImage/33017622003796",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/WhatsApp_Image_2026-10-06_at_3.19.46_AM.jpg?v=1791238916",
+     "width": 1254,
+     "height": 1254
+    },
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/MediaImage/33017857441876",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/download_9.png?v=1791243048",
+     "width": 2000,
+     "height": 2000
+    },
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/MediaImage/33017857343572",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Day-to-Dark_Glow_Flag_Patches.png?v=1791243046",
+     "width": 1254,
+     "height": 1254
+    },
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/MediaImage/33017857376340",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Day_and_Dark_Glow_Emblem_Comparison.png?v=1791243047",
+     "width": 1254,
+     "height": 1254
+    },
+    "__parentId": "gid://shopify/Product/7820587040852"
+   },
+   {
+    "id": "gid://shopify/MediaImage/33017857409108",
+    "mediaContentType": "IMAGE",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0661/2965/7940/files/Day_and_Dark_Glow_Wolf_Patch.png?v=1791243046",
+     "width": 1254,
+     "height": 1254
+    },
+    "__parentId": "gid://shopify/Product/7820587040852"
+   }
+  ],
+  "collections": [
+   {
+    "id": "gid://shopify/Collection/295371866196",
+    "handle": "shop-all",
+    "title": "Shop All",
+    "__parentId": "gid://shopify/Product/7820587040852"
+   }
+  ]
+ }
+}
