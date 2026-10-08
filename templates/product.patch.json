@@ -476,7 +476,7 @@
             "product": "custom-embroidered-patches",
             "backup_handle": "embroidered-patches",
             "label": "Embroidered",
-            "photo": 5,
+            "photo": 2,
             "point_1": "Classic stitched-thread texture",
             "point_2": "Merrowed or thin-stitched edge"
           }
@@ -509,7 +509,7 @@
             "product": "woven-patches",
             "backup_handle": "",
             "label": "Woven",
-            "photo": 6,
+            "photo": 8,
             "point_1": "Tightly woven, smooth to the touch",
             "point_2": "Keeps small lettering crisp"
           }
