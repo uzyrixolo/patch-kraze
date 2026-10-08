@@ -17,9 +17,9 @@
           "settings": {
             "title": "School Uniform Patches",
             "subtitle": "Custom embroidered patches for any school uniform",
-            "product": "custom-uniform-patches",
+            "product": "embroidered-uniform-patches",
             "emoji": "🎽",
-            "link": "/products/custom-uniform-patches"
+            "link": "/products/embroidered-uniform-patches"
           }
         },
         "cat_letterman": {
@@ -27,9 +27,9 @@
           "settings": {
             "title": "Letterman Jacket Patches",
             "subtitle": "Classic varsity letters and chenille patches",
-            "product": "letterman-jacket-patches",
+            "product": "varsity-jacket-chenille-patches",
             "emoji": "🧥",
-            "link": "/products/letterman-jacket-patches"
+            "link": "/products/varsity-jacket-chenille-patches"
           }
         },
         "cat_sports": {
@@ -37,9 +37,9 @@
           "settings": {
             "title": "Sports Team Patches",
             "subtitle": "Team logos, mascots and player numbers",
-            "product": "sports-patches",
+            "product": "embroidered-sports-patches",
             "emoji": "🏈",
-            "link": "/products/sports-patches"
+            "link": "/products/embroidered-sports-patches"
           }
         },
         "cat_club": {
@@ -47,9 +47,9 @@
           "settings": {
             "title": "Club Patches",
             "subtitle": "Debate, robotics, scouts, band and more",
-            "product": "girl-scout-patches",
+            "product": "embroidered-scout-patches",
             "emoji": "🎗️",
-            "link": "/products/custom-embroidered-patches"
+            "link": "/products/embroidered-scout-patches"
           }
         },
         "cat_achievement": {
@@ -67,9 +67,9 @@
           "settings": {
             "title": "Graduation Patches",
             "subtitle": "Class of '26 chenille letters and keepsakes",
-            "product": "chenille-letter-patches",
+            "product": "chenille-varsity-letters",
             "emoji": "🎓",
-            "link": "/products/chenille-letter-patches"
+            "link": "/products/chenille-varsity-letters"
           }
         },
         "cat_jackets": {

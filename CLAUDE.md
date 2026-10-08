@@ -684,11 +684,11 @@ credibility -> factory video -> `ordering_process` -> `price_includes` -> FAQ ->
   the back-to-school page tries `custom-<handle>` for any typed product link or hero product
   that has disappeared.
 - **`pk_handle` is the handle a product page behaves as.** `main-product-patch-kraze` sets it
-  at the top of its markup: the listing's own handle, or, for the replacement listings named
-  in `pk_replacements`, that handle without `custom-`. `PRODUCT_HANDLE` in the script and the
-  leather color pickers use it, so a replacement gets the same size limits and options as the
-  listing it replaces. The list is explicit because ordinary listings also start with
-  `custom-` (`custom-stickers`, `custom-keychains`); add a new replacement's handle to it.
+  at the top of its markup from `pk_alias_map`, a list of `new-handle:old-handle` pairs: a
+  listing in the map behaves as the old handle (size limits in `PRODUCT_CONFIGS`, minimum
+  quantity, the leather color pickers, the sticker and flex branches), any other listing
+  behaves as itself. Add a pair when a listing is rebuilt under a new address. The map holds
+  the six `custom-*` listings from 2026-10-02 and the 40 from 2026-10-07 (see below).
 - Shopify refuses to duplicate a product that is under suspension. Replacements were copied
   from other listings on the same price grid (see `backups/products-snapshot-2026-10-02/`).
 - **Six replacement listings exist since 2026-10-02**, each with the same variants, prices and
@@ -699,13 +699,42 @@ credibility -> factory video -> `ordering_process` -> `price_includes` -> FAQ ->
   back-to-school page point at them; each picker keeps the old handle as its backup. A price
   change to one of these patch types now has to be made on the replacement listing (variants
   and `custom.prices` together, as always).
+- **Second wave of replacements, 2026-10-07.** A second takedown notice hid 41 more listings
+  (the ones that carried the other company's pictures). 40 replacements were created, named a
+  little differently: the embroidered use-case pages as `embroidered-<use>-patches`
+  ("Embroidered Hat Patches", "Embroidered Scout Patches" instead of "Girl Scout"...), plus
+  `chenille-varsity-letters`, `varsity-jacket-chenille-patches`, `leather-hat-patches`,
+  `leather-jacket-patches`, `printed-hat-patches`, `molded-pvc-rubber-patches`,
+  `glow-in-the-dark-pvc-patches`, `pvc-hat-patches`, `3d-puff-embroidered-patches`,
+  `tackle-twill-letters-numbers`, `die-cut-vinyl-stickers`, `truck-trailer-stickers`,
+  `velcro-military-patches`, `velcro-backpack-patches`, `funny-hook-loop-patches`,
+  `sample-patches`. The proof add-on was not replaced. 31 are copies of clean live listings on
+  the same price grid (prices identical, checked from the export); 9 were rebuilt from the
+  export with the same variants and grids. Every pair is in `pk_alias_map`; the footer, menu,
+  home page, AI designer page and back-to-school page point at the new handles with the old
+  as backup. Data of the hidden 41 is in `backups/products-snapshot-2026-10-07/`.
+- **Shopify throttles this machine after heavy traffic.** On 2026-10-07, after ~1,300 photo
+  downloads and the audits, every request to patchkraze.com and myshopify.com answered 429 or
+  timed out for over 20 minutes, which also kills `shopify theme dev` (ETIMEDOUT). Pace bulk
+  downloads, and when probing, send one request a minute.
 - **A save from a theme editor tab that was opened before a push can drop new settings.** On
   2026-10-02 a save in the editor removed a `backup_handle` this repo had just added to
   `sections/header-group.json`, because that editor session predated the setting. Reload the
   theme editor after a push that changes a schema or a JSON template, and re-check the JSON
   after the next "Update from Shopify" commit.
-- `all_products` only answers for 20 different handles per page. The footer uses up to 8 and
-  the back-to-school page about 9 more, so do not add lookups there without counting.
+- **`all_products` only answers for 20 different handles per page, counting every section on
+  that page (header, footer, the template's sections).** Past the 20th distinct handle the
+  lookup silently returns an empty object, so a guarded link vanishes for no visible reason.
+  That is why the footer's product columns are product-picker blocks (zero lookups) and why
+  the header, home page cards and tabs use pickers with a text backup: a picker costs nothing,
+  the backup lookup runs only while the picked product is unavailable. Budget today: the
+  back-to-school page spends about 9 of its own, the AI designer page up to 16. Count before
+  adding any `all_products[...]`.
+- **Footer product columns are `product_link` blocks** (picker, optional label, column 1-3) in
+  `sections/footer-group.json`, 31 links as of 2026-10-07. A link is printed only while the
+  product is available; a column with no links left is dropped. Column titles are section
+  settings. The Customer Care and Store Info columns still check `pages[handle]` and
+  `shop.shipping_policy` before printing a link.
 - **`snippets/pk-image-ok.liquid` decides whether a product image may be shown.** It holds a
   short list of file-name markers; an image whose file name contains one is skipped by the
   header menu thumbnails, the homepage cards and photo tabs, and the product page gallery

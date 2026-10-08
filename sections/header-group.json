@@ -26,8 +26,8 @@
         "menu_3d_embroidered_patches": {
           "type": "menu_product",
           "settings": {
-            "product": "3d-embroidered-patches",
-            "backup_handle": "",
+            "product": "3d-puff-embroidered-patches",
+            "backup_handle": "3d-embroidered-patches",
             "label": "3D Embroidered",
             "group": "stitched"
           }
@@ -53,8 +53,8 @@
         "menu_tackle_twill_letters": {
           "type": "menu_product",
           "settings": {
-            "product": "tackle-twill-letters",
-            "backup_handle": "",
+            "product": "tackle-twill-letters-numbers",
+            "backup_handle": "tackle-twill-letters",
             "label": "Tackle Twill Letters",
             "group": "stitched"
           }
@@ -143,8 +143,8 @@
         "menu_glow_in_the_dark_pvc_rubber_patches": {
           "type": "menu_product",
           "settings": {
-            "product": "glow-in-the-dark-pvc-rubber-patches",
-            "backup_handle": "",
+            "product": "glow-in-the-dark-pvc-patches",
+            "backup_handle": "glow-in-the-dark-pvc-rubber-patches",
             "label": "Glow-in-the-Dark PVC",
             "group": "molded"
           }

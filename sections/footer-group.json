@@ -4,7 +4,294 @@
   "sections": {
     "footer": {
       "type": "footer-patch-kraze",
-      "settings": {}
+      "blocks": {
+        "link_custom_embroidered_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "custom-embroidered-patches",
+            "label": "Embroidered Patches",
+            "column": "1"
+          }
+        },
+        "link_custom_metallic_flex_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "custom-metallic-flex-patches",
+            "label": "Metallic Flex Patches",
+            "column": "1"
+          }
+        },
+        "link_custom_full_color_printed_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "custom-full-color-printed-patches",
+            "label": "Full Color Printed Patches",
+            "column": "1"
+          }
+        },
+        "link_pvc_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "pvc-patches",
+            "label": "PVC Patches",
+            "column": "1"
+          }
+        },
+        "link_custom_leather_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "custom-leather-patches",
+            "label": "Genuine Leather Patches",
+            "column": "1"
+          }
+        },
+        "link_custom_faux_leather_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "custom-faux-leather-patches",
+            "label": "Faux Leather Patches",
+            "column": "1"
+          }
+        },
+        "link_woven_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "woven-patches",
+            "label": "Woven Patches",
+            "column": "1"
+          }
+        },
+        "link_3d_puff_embroidered_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "3d-puff-embroidered-patches",
+            "label": "3D Embroidered Patches",
+            "column": "1"
+          }
+        },
+        "link_custom_chenille_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "custom-chenille-patches",
+            "label": "Chenille Patches",
+            "column": "1"
+          }
+        },
+        "link_custom_stickers": {
+          "type": "product_link",
+          "settings": {
+            "product": "custom-stickers",
+            "label": "Custom Stickers",
+            "column": "1"
+          }
+        },
+        "link_backpack_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "backpack-patches",
+            "label": "Backpack Patches",
+            "column": "2"
+          }
+        },
+        "link_patches_for_beanies": {
+          "type": "product_link",
+          "settings": {
+            "product": "patches-for-beanies",
+            "label": "Patches for Beanies",
+            "column": "2"
+          }
+        },
+        "link_embroidered_jacket_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-jacket-patches",
+            "label": "Patches for Jackets",
+            "column": "2"
+          }
+        },
+        "link_embroidered_denim_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-denim-patches",
+            "label": "Patches for Jeans",
+            "column": "2"
+          }
+        },
+        "link_embroidered_hat_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-hat-patches",
+            "label": "Patches for Hats",
+            "column": "2"
+          }
+        },
+        "link_patches_for_clothes": {
+          "type": "product_link",
+          "settings": {
+            "product": "patches-for-clothes",
+            "label": "Patches for Clothes",
+            "column": "2"
+          }
+        },
+        "link_embroidered_shirt_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-shirt-patches",
+            "label": "Patches for Shirts",
+            "column": "2"
+          }
+        },
+        "link_embroidered_hoodie_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-hoodie-patches",
+            "label": "Patches for Hoodies",
+            "column": "2"
+          }
+        },
+        "link_patches_for_vests": {
+          "type": "product_link",
+          "settings": {
+            "product": "patches-for-vests",
+            "label": "Patches for Vests",
+            "column": "2"
+          }
+        },
+        "link_embroidered_patches_for_pants": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-patches-for-pants",
+            "label": "Patches for Pants",
+            "column": "2"
+          }
+        },
+        "link_iron_on_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "iron-on-patches",
+            "label": "Iron On Patches",
+            "column": "3"
+          }
+        },
+        "link_embroidered_morale_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-morale-patches",
+            "label": "Morale Patches",
+            "column": "3"
+          }
+        },
+        "link_army_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "army-patches",
+            "label": "Army Patches",
+            "column": "3"
+          }
+        },
+        "link_embroidered_motorcycle_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-motorcycle-patches",
+            "label": "Motorcycle Patches",
+            "column": "3"
+          }
+        },
+        "link_embroidered_military_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-military-patches",
+            "label": "Military Patches",
+            "column": "3"
+          }
+        },
+        "link_embroidered_tactical_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-tactical-patches",
+            "label": "Tactical Patches",
+            "column": "3"
+          }
+        },
+        "link_embroidered_police_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-police-patches",
+            "label": "Police Patches",
+            "column": "3"
+          }
+        },
+        "link_embroidered_scout_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-scout-patches",
+            "label": "Scout Patches",
+            "column": "3"
+          }
+        },
+        "link_embroidered_funny_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "embroidered-funny-patches",
+            "label": "Funny Patches",
+            "column": "3"
+          }
+        },
+        "link_name_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "name-patches",
+            "label": "Name Patches",
+            "column": "3"
+          }
+        },
+        "link_custom_velcro_patches": {
+          "type": "product_link",
+          "settings": {
+            "product": "custom-velcro-patches",
+            "label": "Custom Velcro Patches",
+            "column": "3"
+          }
+        }
+      },
+      "block_order": [
+        "link_custom_embroidered_patches",
+        "link_custom_metallic_flex_patches",
+        "link_custom_full_color_printed_patches",
+        "link_pvc_patches",
+        "link_custom_leather_patches",
+        "link_custom_faux_leather_patches",
+        "link_woven_patches",
+        "link_3d_puff_embroidered_patches",
+        "link_custom_chenille_patches",
+        "link_custom_stickers",
+        "link_backpack_patches",
+        "link_patches_for_beanies",
+        "link_embroidered_jacket_patches",
+        "link_embroidered_denim_patches",
+        "link_embroidered_hat_patches",
+        "link_patches_for_clothes",
+        "link_embroidered_shirt_patches",
+        "link_embroidered_hoodie_patches",
+        "link_patches_for_vests",
+        "link_embroidered_patches_for_pants",
+        "link_iron_on_patches",
+        "link_embroidered_morale_patches",
+        "link_army_patches",
+        "link_embroidered_motorcycle_patches",
+        "link_embroidered_military_patches",
+        "link_embroidered_tactical_patches",
+        "link_embroidered_police_patches",
+        "link_embroidered_scout_patches",
+        "link_embroidered_funny_patches",
+        "link_name_patches",
+        "link_custom_velcro_patches"
+      ],
+      "settings": {
+        "col1_title": "Our Products",
+        "col2_title": "Custom Patches",
+        "col3_title": "Custom Patch Styles"
+      }
     }
   },
   "order": [

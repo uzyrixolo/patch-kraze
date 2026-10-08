@@ -95,21 +95,22 @@
     <p class="pk-aigen__order-note">Download your design, then upload it on any product page — pricing updates live as you customize.</p>
     <div class="pk-aigen__ordergrid">
       {%- comment -%}
-        "handle|label|1" marks a listing that has a replacement named "custom-"
-        plus its handle (see the footer): the card links to whichever of the
-        two is available and is left out when neither is.
+        Entries are "handle|label|fallback". A card links to the handle while
+        that listing is available, to the fallback (the listing it replaced)
+        if only that one is, and is left out when neither is.
       {%- endcomment -%}
-      {%- assign aigen_products = 'embroidered-patches|Embroidered Patches|1,3d-embroidered-patches|3D Embroidered|0,full-color-printed-patches|Full Color Printed|1,pvc-patches|PVC Rubber|0,leather-patches|Genuine Leather|1,faux-leather-patches|Faux Leather|1,woven-patches|Woven|0,chenille-patches|Chenille|1,silicone-patches|Silicone|0,full-color-flex-patches|Full Color Flex|0,name-patches|Name Patches|0,dtf-transfers|DTF Transfers|0,tackle-twill-letters|Tackle Twill|0,custom-keychains|PVC Keychains|0' | split: ',' -%}
+      {%- assign aigen_products = 'custom-embroidered-patches|Embroidered Patches|embroidered-patches,3d-puff-embroidered-patches|3D Embroidered|3d-embroidered-patches,custom-full-color-printed-patches|Full Color Printed|full-color-printed-patches,pvc-patches|PVC Rubber|,custom-leather-patches|Genuine Leather|leather-patches,custom-faux-leather-patches|Faux Leather|faux-leather-patches,woven-patches|Woven|,custom-chenille-patches|Chenille|chenille-patches,silicone-patches|Silicone|,full-color-flex-patches|Full Color Flex|,name-patches|Name Patches|,dtf-transfers|DTF Transfers|,tackle-twill-letters-numbers|Tackle Twill|tackle-twill-letters,custom-keychains|PVC Keychains|' | split: ',' -%}
       {%- for aigen_entry in aigen_products -%}
         {%- assign aigen_parts = aigen_entry | split: '|' -%}
         {%- assign aigen_handle = aigen_parts[0] -%}
-        {%- if aigen_parts[2] == '1' -%}
-          {%- assign aigen_new_handle = 'custom-' | append: aigen_handle -%}
-          {%- if all_products[aigen_new_handle].handle == aigen_new_handle -%}
-            {%- assign aigen_handle = aigen_new_handle -%}
-          {%- elsif all_products[aigen_handle].handle != aigen_handle -%}
-            {%- continue -%}
-          {%- endif -%}
+        {%- if aigen_parts[2] != blank -%}
+          {%- unless all_products[aigen_handle].handle == aigen_handle -%}
+            {%- if all_products[aigen_parts[2]].handle == aigen_parts[2] -%}
+              {%- assign aigen_handle = aigen_parts[2] -%}
+            {%- else -%}
+              {%- continue -%}
+            {%- endif -%}
+          {%- endunless -%}
         {%- endif -%}
         <a class="pk-aigen__ordercard" href="/products/{{ aigen_handle }}">{{ aigen_parts[1] }}</a>
       {%- endfor -%}

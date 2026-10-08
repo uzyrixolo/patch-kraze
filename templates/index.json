@@ -124,8 +124,8 @@
           "type": "tab",
           "settings": {
             "label": "PVC",
-            "product": "pvc-rubber-patches",
-            "backup_handle": "",
+            "product": "molded-pvc-rubber-patches",
+            "backup_handle": "pvc-rubber-patches",
             "collection": "",
             "more_label": "See sizes and pricing"
           }
@@ -218,8 +218,8 @@
         "card_5": {
           "type": "product_card",
           "settings": {
-            "product": "3d-embroidered-patches",
-            "backup_handle": "",
+            "product": "3d-puff-embroidered-patches",
+            "backup_handle": "3d-embroidered-patches",
             "point_1": "Padded stitching with real height",
             "point_2": "Makes letters and logos stand out",
             "group": "embroidered",
@@ -262,8 +262,8 @@
         "card_16": {
           "type": "product_card",
           "settings": {
-            "product": "tackle-twill-letters",
-            "backup_handle": "",
+            "product": "tackle-twill-letters-numbers",
+            "backup_handle": "tackle-twill-letters",
             "point_1": "Layered twill with stitched edges",
             "point_2": "Letters and numbers for jackets",
             "group": "embroidered",
