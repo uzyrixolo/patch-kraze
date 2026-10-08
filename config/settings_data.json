@@ -53,11 +53,6 @@
           "widget_type": "review-widget"
         }
       },
-      "6610233760104865948": {
-        "type": "shopify://apps/brevo-pushowl/blocks/pushowl-app-embed-3d2ff2b5/fa20c3ba-38bf-43e0-ba5c-431f6ae07d95",
-        "disabled": false,
-        "settings": {}
-      },
       "6399541321894134091": {
         "type": "shopify://apps/mergn/blocks/index/52d5f725-db4d-4931-bef3-895243f3807b",
         "disabled": false,
@@ -98,6 +93,11 @@
           "db_button_radius": 6,
           "db_use_stub": false
         }
+      },
+      "6610233760104865948": {
+        "type": "shopify://apps/brevo-pushowl/blocks/pushowl-app-embed-3d2ff2b5/fa20c3ba-38bf-43e0-ba5c-431f6ae07d95",
+        "disabled": true,
+        "settings": {}
       }
     }
   }
