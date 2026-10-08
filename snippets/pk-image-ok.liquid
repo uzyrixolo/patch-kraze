@@ -19,7 +19,7 @@
     only those files, never a photo of our own (the "...detailImagecollage"
     photos are ours, so the three detailImage markers end in the extension).
   endcomment
-  assign pk_markers_more = 'detailImage.jpg,detailImage_1.jpg,detailImages.jpg,PatchMOCK,PatchForJacketMOCK,VelcroBackpackMock,JacketVelcroMock,VelcroHatMock,FunnyVelcro2,EMBhat_,EMBbeanie_,hatleather,rubberhat,subhat,ArmyPatch_1,MilitaryPatch,FunnyPatch_1,moralepatch,PolicePatch_2,FootballPatch,GirlScoutPatch,NavyPatch3,FlagPatch2,SportsPatch_1,Chenille_1_No_BG,STICKER_2,Patches_Proof,DALL_E2023,1d5c9780-1876,glow.gif' | split: ','
+  assign pk_markers_more = 'detailImage.jpg,detailImage_1.jpg,detailImages.jpg,PatchMOCK,PatchForJacketMOCK,VelcroBackpackMock,JacketVelcroMock,VelcroHatMock,FunnyVelcro2,EMBhat_,EMBbeanie_,hatleather,rubberhat,subhat,ArmyPatch_1,MilitaryPatch,FunnyPatch_1,moralepatch,PolicePatch_2,FootballPatch,GirlScoutPatch,NavyPatch3,FlagPatch2,SportsPatch_1,Chenille_1_No_BG,STICKER_2,Patches_Proof,DALL_E2023,1d5c9780-1876,glow.gif,LettermanJacketMock' | split: ','
   assign pk_markers = pk_markers | concat: pk_markers_more
   assign pk_image_ok = '1'
   for pk_marker in pk_markers

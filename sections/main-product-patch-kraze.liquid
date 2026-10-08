@@ -519,18 +519,21 @@
 
 {%- liquid
   comment
-    A replacement listing is named "custom-" plus the handle of the listing it
-    replaces, and behaves exactly like it: same size limits, same options on
-    the order form. pk_handle is the handle the page behaves as; the listing's
-    own handle is still product.handle. Only the listings named here are
-    treated this way, because plenty of ordinary listings also start with
-    "custom-" (custom-stickers, custom-keychains and so on).
+    A replacement listing behaves exactly like the listing it replaced: same
+    size limits, same options on the order form. pk_handle is the handle the
+    page behaves as; the listing's own handle is still product.handle. The
+    map below is "new-handle:old-handle" pairs; a listing not in it behaves
+    as itself. Add a pair here when a listing is rebuilt under a new address.
   endcomment
   assign pk_handle = product.handle
-  assign pk_replacements = 'custom-embroidered-patches,custom-full-color-printed-patches,custom-chenille-patches,custom-leather-patches,custom-faux-leather-patches,custom-metallic-flex-patches' | split: ','
-  if pk_replacements contains product.handle
-    assign pk_handle = product.handle | remove_first: 'custom-'
-  endif
+  assign pk_alias_map = 'custom-embroidered-patches:embroidered-patches,custom-full-color-printed-patches:full-color-printed-patches,custom-chenille-patches:chenille-patches,custom-leather-patches:leather-patches,custom-faux-leather-patches:faux-leather-patches,custom-metallic-flex-patches:metallic-flex-patches,embroidered-army-patches:custom-army-patches,embroidered-motorcycle-patches:motorcycle-patches,embroidered-designer-patches:designer-patches,embroidered-american-flag-patches:american-flag-patches,embroidered-football-patches:football-patches,embroidered-scout-patches:girl-scout-patches,embroidered-military-patches:military-patches,embroidered-tactical-patches:tactical-patches,embroidered-firefighter-patches:firefighter-patches,embroidered-clothing-patches:embroidered-patches-for-clothes,embroidered-hat-patches:patches-for-hats,embroidered-sports-patches:sports-patches,embroidered-funny-patches:funny-patches,embroidered-hoodie-patches:patches-for-hoodies,embroidered-jacket-patches:patches-for-jackets,embroidered-denim-patches:patches-for-jeans,embroidered-navy-patches:navy-patches,embroidered-morale-patches:morale-patches,embroidered-patches-for-pants:patches-for-pants,embroidered-police-patches:police-patches,embroidered-shirt-patches:patches-for-shirts,embroidered-soccer-patches:custom-soccer-patches,embroidered-uniform-patches:custom-uniform-patches,embroidered-velcro-hat-patches:velcro-hat-patches,chenille-varsity-letters:chenille-letter-patches,varsity-jacket-chenille-patches:varsity-jacket-patches,leather-hat-patches:leather-patches-for-hats,leather-jacket-patches:leather-patches-for-jackets,printed-hat-patches:sublimation-patches-for-hats,molded-pvc-rubber-patches:pvc-rubber-patches,glow-in-the-dark-pvc-patches:glow-in-the-dark-pvc-rubber-patches,pvc-hat-patches:rubber-patches-for-hats,3d-puff-embroidered-patches:3d-embroidered-patches,tackle-twill-letters-numbers:tackle-twill-letters,die-cut-vinyl-stickers:vinyl-stickers,truck-trailer-stickers:truck-stickers,velcro-military-patches:military-velcro-patches,velcro-backpack-patches:velcro-patches-backpacks,funny-hook-loop-patches:funny-velcro-patches,sample-patches:custom-patch-samples' | split: ','
+  for pk_pair in pk_alias_map
+    assign pk_pair_parts = pk_pair | split: ':'
+    if pk_pair_parts[0] == product.handle
+      assign pk_handle = pk_pair_parts[1]
+      break
+    endif
+  endfor
 -%}
 <div class="product-page-main">
   <div class="product-container">
