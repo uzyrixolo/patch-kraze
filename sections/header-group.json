@@ -14,15 +14,6 @@
     "header": {
       "type": "header-patch-kraze",
       "blocks": {
-        "menu_product_mWwLNW": {
-          "type": "menu_product",
-          "settings": {
-            "product": "custom-embroidered-transfer",
-            "backup_handle": "embroidered-transfer",
-            "label": "Embroidered Transfer",
-            "group": "stitched"
-          }
-        },
         "menu_embroidered_patches": {
           "type": "menu_product",
           "settings": {
@@ -47,6 +38,15 @@
             "product": "name-patches",
             "backup_handle": "",
             "label": "Name Patches",
+            "group": "stitched"
+          }
+        },
+        "menu_product_mWwLNW": {
+          "type": "menu_product",
+          "settings": {
+            "product": "custom-embroidered-transfer",
+            "backup_handle": "embroidered-transfer",
+            "label": "Embroidered Transfer",
             "group": "stitched"
           }
         },
@@ -223,10 +223,10 @@
         }
       },
       "block_order": [
-        "menu_product_mWwLNW",
         "menu_embroidered_patches",
         "menu_3d_embroidered_patches",
         "menu_name_patches",
+        "menu_product_mWwLNW",
         "menu_chenille_patches",
         "menu_tackle_twill_letters",
         "menu_woven_patches",

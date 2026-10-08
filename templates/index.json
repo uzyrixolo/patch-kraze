@@ -193,17 +193,6 @@
     "style_grid": {
       "type": "style-grid",
       "blocks": {
-        "product_card_Nhh4qG": {
-          "type": "product_card",
-          "settings": {
-            "product": "",
-            "backup_handle": "",
-            "point_1": "",
-            "point_2": "",
-            "group": "",
-            "best_seller": false
-          }
-        },
         "card_1": {
           "type": "product_card",
           "settings": {
@@ -223,6 +212,17 @@
             "point_1": "Padded stitching with real height",
             "point_2": "Makes letters and logos stand out",
             "group": "embroidered",
+            "best_seller": false
+          }
+        },
+        "product_card_Nhh4qG": {
+          "type": "product_card",
+          "settings": {
+            "product": "custom-embroidered-transfer",
+            "backup_handle": "embroidered-transfer",
+            "point_1": "",
+            "point_2": "",
+            "group": "",
             "best_seller": false
           }
         },
@@ -393,9 +393,9 @@
         }
       },
       "block_order": [
-        "product_card_Nhh4qG",
         "card_1",
         "card_5",
+        "product_card_Nhh4qG",
         "card_11",
         "card_7",
         "card_13",
@@ -429,6 +429,9 @@
         "btn_label": "Start Your Order",
         "link_label": "Get a quote",
         "link_url": "",
+        "gallery_label": "Explore Gallery",
+        "gallery_max": 12,
+        "gallery_skip": "detailImage,Gemini_Generated,ChatGPT,_info",
         "show_tabs": true,
         "best_tab_label": "Top Picks",
         "all_tab_label": "Everything"
