@@ -14,6 +14,15 @@
     "header": {
       "type": "header-patch-kraze",
       "blocks": {
+        "menu_product_mWwLNW": {
+          "type": "menu_product",
+          "settings": {
+            "product": "custom-embroidered-transfer",
+            "backup_handle": "embroidered-transfer",
+            "label": "Embroidered Transfer",
+            "group": "stitched"
+          }
+        },
         "menu_embroidered_patches": {
           "type": "menu_product",
           "settings": {
@@ -214,6 +223,7 @@
         }
       },
       "block_order": [
+        "menu_product_mWwLNW",
         "menu_embroidered_patches",
         "menu_3d_embroidered_patches",
         "menu_name_patches",
