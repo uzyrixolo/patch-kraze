@@ -57,6 +57,47 @@
         "type": "shopify://apps/brevo-pushowl/blocks/pushowl-app-embed-3d2ff2b5/fa20c3ba-38bf-43e0-ba5c-431f6ae07d95",
         "disabled": false,
         "settings": {}
+      },
+      "6399541321894134091": {
+        "type": "shopify://apps/mergn/blocks/index/52d5f725-db4d-4931-bef3-895243f3807b",
+        "disabled": false,
+        "settings": {
+          "enable_notify_in_stock": false,
+          "nis_button_radius": 4,
+          "nis_button_margin_top": 5,
+          "nis_button_full_width": false,
+          "nis_button_width": 0,
+          "nis_button_height": 0,
+          "nis_button_padding_y": 12,
+          "nis_button_padding_x": 20,
+          "nis_button_text": "Notify when Available",
+          "nis_button_text_size": 16,
+          "nis_button_text_color": "#ffffff",
+          "nis_button_bg_color": "#2aa758",
+          "nis_button_hover_bg_color": "#249a4e",
+          "nis_modal_radius": 16,
+          "nis_modal_bg_color": "#ffffff",
+          "nis_emoji_text": "🤩",
+          "nis_emoji_size": 96,
+          "nis_emoji_color": "#000000",
+          "nis_description_text": "Notify me when this product is back in Stock!",
+          "nis_description_text_size": 16,
+          "nis_description_text_color": "#000000",
+          "nis_label_color": "#2aa758",
+          "enable_discount_banner": false,
+          "db_position": "top",
+          "db_auto_dismiss_seconds": 8,
+          "db_bg_color": "#0F172A",
+          "db_text_color": "#ffffff",
+          "db_accent_color_1": "#5FBFA9",
+          "db_title_text_size": 15,
+          "db_body_text_size": 14,
+          "db_button_text": "Got it",
+          "db_button_text_color": "#ffffff",
+          "db_button_bg_color": "#E8794A",
+          "db_button_radius": 6,
+          "db_use_stub": false
+        }
       }
     }
   }
