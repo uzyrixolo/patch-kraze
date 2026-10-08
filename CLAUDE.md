@@ -713,10 +713,24 @@ credibility -> factory video -> `ordering_process` -> `price_includes` -> FAQ ->
   export with the same variants and grids. Every pair is in `pk_alias_map`; the footer, menu,
   home page, AI designer page and back-to-school page point at the new handles with the old
   as backup. Data of the hidden 41 is in `backups/products-snapshot-2026-10-07/`.
-- **Shopify throttles this machine after heavy traffic.** On 2026-10-07, after ~1,300 photo
-  downloads and the audits, every request to patchkraze.com and myshopify.com answered 429 or
-  timed out for over 20 minutes, which also kills `shopify theme dev` (ETIMEDOUT). Pace bulk
-  downloads, and when probing, send one request a minute.
+- **Shopify's storefront edge can refuse this machine for a long time after heavy traffic.** On
+  2026-10-07, after ~1,300 photo downloads and the audits, patchkraze.com and *.myshopify.com
+  answered 429, then timed out, then refused connections (ECONNREFUSED on 23.227.38.x) for more
+  than sixteen hours. That kills `shopify theme dev` (ETIMEDOUT on the admin host), curl, WebFetch
+  and the in-app browser alike, while cdn.shopify.com, GitHub and the Admin API through the
+  connector keep working. Pace bulk downloads, probe at most once a minute, and when it happens:
+  confirm a push through the Admin API (`theme(id: "gid://shopify/OnlineStoreTheme/140182224980")
+  { files(filenames: [...]) { nodes { updatedAt checksumMd5 } } }` equals `md5 -q` of the local
+  file), and check live pages from another machine (a throwaway cloud sandbox works), about 2.5 s
+  between requests - 60 quick requests got an HTML rate-limit page in place of
+  `/products/<handle>.js`. A browserless price check is enough: read `METAFIELD_MATRIX` out of the
+  page HTML and compare every cell with the variant in `/products/<handle>.js` by the theme's
+  title rule.
+- **Aliased Admin API write batches can execute partially.** On 2026-10-08 a 40-alias
+  `productUpdate` document and a 40-alias `publishablePublish` document each stopped after alias
+  32 with an upstream error or timeout, and the first 32 had taken effect. After any error on a
+  write batch, re-read the state before resending and resend only what is missing; keep write
+  documents to about 16 aliases. (A single `productVariantsBulkCreate` of 160 variants was fine.)
 - **A save from a theme editor tab that was opened before a push can drop new settings.** On
   2026-10-02 a save in the editor removed a `backup_handle` this repo had just added to
   `sections/header-group.json`, because that editor session predated the setting. Reload the
