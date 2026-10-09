@@ -485,10 +485,11 @@
         "cmp_2": {
           "type": "patch_type",
           "settings": {
-            "product": "3d-embroidered-patches",
+            "product": "3d-puff-embroidered-patches",
             "backup_handle": "",
-            "label": "3D Embroidered",
-            "photo": 1,
+            "label": "3D Puff Embroidered",
+            "photo_name": "WhatsApp_Image_2026-10-03_at_3.01.15_AM",
+            "photo": 2,
             "point_1": "Padded stitching with real height",
             "point_2": "Makes letters and logos stand out"
           }
