@@ -492,10 +492,27 @@ Above the steps: title, rating row, the opening sentence of the description, a l
   HTML is swapped in with `innerHTML`). The item is added and the drawer opens.
 - **Gallery and order form are equal columns** from 1024px up (`.product-container`,
   `minmax(0, 1fr)` twice). Everything in the order form has to fit a half-width column.
-- **Cut shape is a row of outline buttons** (`.pk-shape`, inline SVG outlines drawn for this
-  theme, `aria-pressed`), not photo cards. `selectShape(el, value)` still writes
-  `#shape-input`; the values are unchanged (`Circle`, `Square`, `Rectangle`, `Oval`,
-  `Custom`). The buttons wrap and the last row stretches.
+- **Cut shape is a grid of 30 outline buttons** (`.pk-shape`, inline SVG outlines drawn for
+  this theme, `aria-pressed`), three to a row, since 2026-10-10. Six always show (Circle,
+  Square, Rectangle, Oval, Shield, "Follow my design" = value `Custom`); the other 24 carry
+  `.pk-shape--more` and open with `#pk-shapes-toggle` ("Show 24 more shapes", adds `.is-open`
+  to `#pk-shapes`). A chosen shape from that list stays visible when it is closed, and the
+  label shows the choice (`#pk-shape-current`). `selectShape(el, value)` writes
+  `#shape-input`; the old values are unchanged, new ones are Title Case ("Rounded Rectangle",
+  "6-Point Star", "Maltese Cross"...). The shape is not priced; it only reaches the `Shape`
+  line property and the quote/mockup info. The `window.selectShape = function...` assignment
+  must end in `;` - without it the script that follows is parsed as a call to it. The specs
+  card, the home page "Price Includes" line and the FAQ say "29 set shapes" plus "follow my
+  design"; keep them in step if the list changes.
+- **A click on a gallery photo opens the full-screen photo viewer**
+  (`snippets/pk-photo-viewer.liquid`, shared with the home page cards), on that photo, with
+  every photo the gallery shows (videos left out); the zoom button does the same. Photos are
+  shown whole (`data-pv-fit="contain"`) because some are charts. The old single-photo zoom
+  overlay is only the fallback where `<dialog>` is missing. Any element with
+  `data-pk-gallery="<id of a JSON script>"` opens the viewer; the snippet's doc block lists the
+  JSON shape and options. The page scroll lock is the CSS rule
+  `html:has(dialog.pk-pv[open])`, not a `close` handler (the close event did not fire in the
+  preview browser, which left the page locked).
 - **Under the order form: `sections/product-specs-patch-kraze.liquid`** ("Specs" in the
   editor, template key `product_details` in `templates/product.patch.json`). A heading and up
   to eight small cards: label, value, one line. "Spec" cards are typed; "Size range", "Price
@@ -505,9 +522,24 @@ Above the steps: title, rating row, the opening sentence of the description, a l
   only" work as in the FAQ. Typed cards must match what the form offers. It replaced the old
   `product-details-accordion` section, which is gone from every template. The deal template
   has no such block (the deal page lists what is included itself).
+- **Under the specs: `sections/patch-compare-pk.liquid`** ("Compare Patch Types", template
+  key `patch_compare`, between `product_details` and the FAQ; since 2026-10-09). Two selects
+  pick any two patch styles; the picture shows a photo of each split by a line the shopper
+  drags (an invisible range input over the picture, so arrow keys work too); a card per style
+  shows its live `price_min`, two typed points and a link. The style being viewed starts on
+  the left, tagged "You're viewing this"; picking the same style on both sides swaps them.
+  Left out on sticker and DTF pages. Layout and copy are our own (the request referenced
+  another site; nothing was taken from it). Nine styles, one block each.
+  - **Each photo is picked by file name** (`photo_name`, matched with `contains`), with the
+    photo number (`photo`, the Nth photo `pk-image-ok` allows) only as the fallback. Numbers
+    alone broke on 2026-10-10: new product photos shifted five styles to the wrong picture.
+  - Faux Leather is left out (its only photo that can be shown is a how-to chart). 3D points
+    at `3d-puff-embroidered-patches` ("3D Puff Embroidered"), since `3d-embroidered-patches`
+    is gone.
 - Hidden on the product templates, switch back on in the theme editor if wanted: the
-  "Complete your order" product row (`product_list_ijbaxp`) and the before/after slider
-  (`comparison_slider`).
+  "Complete your order" product row (`product_list_ijbaxp`) and the old before/after slider
+  (`comparison_slider`). Leave the latter off: its heading is one of the lines named in the
+  2026-09-30 legal notice.
 - **Under the title: a one-line description and a "Best for" line**, written in
   `snippets/pk-product-copy.liquid` per kind of product (embroidered, 3D, chenille, leather,
   PVC, printed, woven, flex, stickers, DTF and so on; the handle is checked before the product
@@ -542,6 +574,9 @@ slides in from the left.
 - The bar is a three-column grid (`.pk-bar__row`); the two outer columns share the leftover
   space, which is what centres the logo. On phones the tools wrapper is `display: contents`
   so its buttons can sit in their own columns either side of the logo.
+- Logo height (2026-10-08): 3.5rem on desktop in a 4.75rem bar, 3rem under 1024px in a 4rem
+  bar. The logo file is about 4.4:1, so on a 375px phone the middle column (about 177px)
+  caps it at about 40px tall. Checked at 1024px: the menu and the logo do not touch.
 - Scrolling down slides the whole header out of view and scrolling back up returns it
   (`pk-header--hidden`, toggled by the scroll handler; it stays put while a menu panel or the
   drawer is open, under the pointer, or holding keyboard focus). It moves with `top`, not a
@@ -619,6 +654,15 @@ credibility -> factory video -> `ordering_process` -> `price_includes` -> FAQ ->
   swiped row or a two-per-row grid.
   - The price is `product.price_min`, read live - it is not typed anywhere in the section.
     The two points are typed per card: plain facts about the style, in our own words.
+  - **"Explore Gallery" button on each card's photo** (2026-10-07; same look as "Start Your
+    Order", `pk-btn-primary`). It opens the shared photo viewer
+    (`snippets/pk-photo-viewer.liquid`) with that product's own photos, minus the "Photo
+    gallery" skip keywords and anything `pk-image-ok` holds back. Shown only for a product
+    with at least two such photos. Settings: label (empty hides it), most photos per product,
+    skip keywords. The button stays on the photo on purpose: beside "Start Your Order" it
+    does not fit a card (about 344px needed, about 231px available).
+  - The standalone "Photo Gallery" section (`sections/photo-gallery.liquid`) was taken off the
+    home page on 2026-10-07 but kept in the theme; it uses the same viewer.
 - **`sections/credibility-patch-kraze.liquid`** ("Key Facts" in the editor) - one colored
   panel (purple, near-black or light) with a heading and up to four fact blocks: a large
   figure, a label and one line. A fact with a product picked shows that product's
@@ -801,6 +845,20 @@ credibility -> factory video -> `ordering_process` -> `price_includes` -> FAQ ->
   `sections/layered-slideshow.liquid` ships unscoped rules (width 100% under 750px, height,
   z-index). `style-grid` and `type-showcase` each carry a reset for their own panel; any new
   tabbed section needs the same.
+
+## Web push (Mergn app, October 2026)
+
+- The **Mergn** Shopify app (installed by the owner on 2026-10-09) shows the "Stay updated"
+  opt-in banner and sends web push. No theme code: it is an app embed, switched on in the
+  theme editor, which shows in this repo only as its block in `config/settings_data.json`
+  (`shopify://apps/mergn/blocks/index/...`; keep it when editing that file). Its service
+  worker is served by the app proxy at `/apps/mergn/mergn-sw.js`. Banner design and
+  timing are set in the Mergn dashboard (delay 20 s, so it does not land on top of the
+  `promo_popup` deal, which opens at 5 s).
+- A push subscriber is an anonymous browser; the page passes the logged-in customer to
+  Mergn (`mergn.recordAttribute`), which is how a subscriber gets a name or email.
+- The banner never shows in a browser where notifications are blocked (the Claude preview
+  browser is one), so check it in a normal Chrome window, in incognito.
 
 ## Conventions
 
