@@ -347,6 +347,28 @@ theme compute new tier labels that have no matching variants, and the fallback a
 ## Quote form + backend
 
 - `sections/quote-form.liquid` — used on `/pages/quote`, service pages, back-to-school. Uses native `{% form 'contact' %}` (a previous hand-rolled version silently discarded every submission — do not regress this).
+  - **Shopify injects a bot-check script into every contact form** (storefront-forms hCaptcha).
+    On submit it sends the form itself, or runs hCaptcha and then sends it, whatever our
+    `preventDefault()` says. Until 2026-10-09 that raced the backend request: the page left
+    after ~1.5 s, the backend logged `499` (client closed), and the visitor landed on
+    Shopify's "not a robot" page (`/challenge?form_type=contact...`; nothing sent unless they
+    ticked it) or on `?contact_posted=true` (email only, no file, no Quote Request). The form
+    now carries the script's own opt-out, `data-nocaptcha="true"`, whenever `backend_url` is
+    set. **A URL ending `?contact_posted=true` means the native fallback ran**, not the backend.
+  - Required fields show the `.form-error` message under them (`.form-group.error`, set from
+    the `invalid` event) and the page scrolls to the first one. Before that only the browser's
+    bubble showed, and the patch-type radios are 0x0, so a missing patch type looked like a
+    dead button.
+  - Shopify's server still challenges a native `/contact` post without a captcha token, so the
+    `sendBeacon('/contact')` "backup email" never arrives; the backend's Resend email to
+    orders@patchkraze.com is the notification.
+  - Diagnose with `railway logs --service patch-kraze-quote --http --lines 100 --json` (from
+    `quote-backend/`, after `railway link --project patch-kraze-quote --service
+    patch-kraze-quote --environment production`): every `POST /quote` with its status. The app
+    log only prints failures (file upload, customer, metaobject, email), never successes.
+  - Verified 2026-10-09 with a real submission (name "TEST Quote Check (Claude)", email
+    orders+quotetest@patchkraze.com, a small PNG): success panel in place, `POST /quote` 200,
+    no step failed.
 - Section setting **`backend_url`**: when set (in theme editor or template JSON), submissions POST to `{backend_url}/quote` (multipart, includes real file upload) with the native contact email fired via sendBeacon as backup; when empty, email-only flow + best-effort customer creation via `form_type=customer` beacon.
 - **`quote-backend/`** — Node/Express service (deploy target: Railway, root directory `quote-backend`). Per quote: uploads design file to Shopify Files (staged upload), upserts customer tagged `quote-request`, creates a `quote_request` **metaobject** (definition auto-created on boot; view in admin under Content → Metaobjects).
 - **Auth (Shopify 2026 model):** no static `shpat_` tokens. Backend exchanges `SHOPIFY_CLIENT_ID` + `SHOPIFY_CLIENT_SECRET` for short-lived Admin tokens via client-credentials grant (`POST /admin/oauth/access_token`), auto-refreshing. Requires the app installed on the store with scopes: `read/write_files, read/write_customers, read/write_metaobjects`.
@@ -368,6 +390,12 @@ theme compute new tier labels that have no matching variants, and the fallback a
 - Create the 4 service pages in admin (assign templates page.service-*).
 
 ### AI image tools (August 2026)
+
+**As of 2026-10-09 every OpenAI call fails with `insufficient_quota` /
+`credit_balance_exhausted`** (seen in the backend log from at least 2026-10-04): the AI
+designer page and the product page's "Erase the background" / "Describe a change" do nothing
+useful until credit is added to the OpenAI account. The backend also rejects uploads over
+20 MB (`MulterError: File too large`, shared `upload` limit for `/quote` and `/edit-image`).
 
 `quote-backend/server.js` calls OpenAI's `gpt-image-1` for two things, both gated on
 `OPENAI_API_KEY`. Was unset as of 2026-08-28 (nothing worked live); **confirmed set and working
@@ -762,6 +790,13 @@ credibility -> factory video -> `ordering_process` -> `price_includes` -> FAQ ->
   the `detailImage` markers end in the file extension).
 - The opening sentence of the product description on the product page is behind the
   `show_description` setting of `main-product-patch-kraze`, off by default.
+- **Quick add on product cards (collection pages, search).** The base theme's "Choose" pop-up
+  loads the product page and takes its `[data-product-grid-content]` block, which only the
+  `product-information` section renders. Listings on `product.patch`, `product.patch-deal` and
+  `product.coming-soon` have no such block, so the pop-up opened empty (and, being modal, left
+  the page unclickable until Esc). Since 2026-10-09 `snippets/quick-add.liquid` renders their
+  Choose button as a plain link to the product page; the list of template suffixes is in the
+  snippet. Add a suffix there when another template without that block is created.
 - **Gotcha: the base theme styles every `[role="tabpanel"]` on the site.**
   `sections/layered-slideshow.liquid` ships unscoped rules (width 100% under 750px, height,
   z-index). `style-grid` and `type-showcase` each carry a reset for their own panel; any new
