@@ -23,7 +23,8 @@
         { "type": "product", "id": "product", "label": "Product" },
         { "type": "text", "id": "backup_handle", "label": "Backup product handle", "info": "Used when the product above is not available, for example custom-embroidered-patches." },
         { "type": "text", "id": "label", "label": "Short name", "info": "Shown in the picker and on the picture, for example Embroidered. Defaults to the product title." },
-        { "type": "range", "id": "photo", "label": "Which product photo to use", "min": 1, "max": 10, "step": 1, "default": 1, "info": "Counts the product's photos in order, skipping any the store hides. Pick a clear photo of a patch, not a chart." },
+        { "type": "text", "id": "photo_name", "label": "Photo file name", "info": "Part of the file name of the product photo to use, for example leather-engraving. Keeps the same photo when photos are added or reordered. Leave empty to use the number below." },
+        { "type": "range", "id": "photo", "label": "Which product photo to use (if no file name)", "min": 1, "max": 20, "step": 1, "default": 1, "info": "Counts the product's photos in order, skipping any the store hides. Pick a clear photo of a patch, not a chart." },
         { "type": "image_picker", "id": "image", "label": "Photo override (optional)", "info": "Used instead of the product photo above." },
         { "type": "text", "id": "point_1", "label": "Point 1", "info": "A short fact about this style." },
         { "type": "text", "id": "point_2", "label": "Point 2" }
@@ -68,19 +69,30 @@
     {%- endif -%}
     {%- if p == blank -%}{%- continue -%}{%- endif -%}
 
-    {%- comment -%} The photo: the override, or the Nth product photo the store allows. {%- endcomment -%}
+    {%- comment -%}
+      The photo: the override; else the product photo whose file name contains
+      "Photo file name" (stays put when photos are added or reordered); else
+      the Nth photo the store allows; else the first one.
+    {%- endcomment -%}
     {%- assign cmp_img = block.settings.image -%}
     {%- if cmp_img == blank -%}
+      {%- assign cmp_name = block.settings.photo_name | strip -%}
       {%- assign cmp_seen = 0 -%}
       {%- assign cmp_first = blank -%}
+      {%- assign cmp_nth = blank -%}
       {%- for img in p.images -%}
         {%- capture cmp_ok -%}{%- render 'pk-image-ok', src: img.src -%}{%- endcapture -%}
         {%- assign cmp_ok = cmp_ok | strip -%}
         {%- if cmp_ok == blank -%}{%- continue -%}{%- endif -%}
         {%- assign cmp_seen = cmp_seen | plus: 1 -%}
         {%- if cmp_first == blank -%}{%- assign cmp_first = img -%}{%- endif -%}
-        {%- if cmp_seen == block.settings.photo -%}{%- assign cmp_img = img -%}{%- break -%}{%- endif -%}
+        {%- if cmp_name != blank and img.src contains cmp_name -%}{%- assign cmp_img = img -%}{%- break -%}{%- endif -%}
+        {%- if cmp_seen == block.settings.photo -%}
+          {%- assign cmp_nth = img -%}
+          {%- if cmp_name == blank -%}{%- break -%}{%- endif -%}
+        {%- endif -%}
       {%- endfor -%}
+      {%- if cmp_img == blank -%}{%- assign cmp_img = cmp_nth -%}{%- endif -%}
       {%- if cmp_img == blank -%}{%- assign cmp_img = cmp_first -%}{%- endif -%}
     {%- endif -%}
     {%- if cmp_img == blank -%}{%- continue -%}{%- endif -%}

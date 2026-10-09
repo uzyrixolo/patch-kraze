@@ -476,7 +476,8 @@
             "product": "custom-embroidered-patches",
             "backup_handle": "embroidered-patches",
             "label": "Embroidered",
-            "photo": 2,
+            "photo_name": "WhatsApp_Image_2026-10-03_at_2.10.22_AM",
+            "photo": 5,
             "point_1": "Classic stitched-thread texture",
             "point_2": "Merrowed or thin-stitched edge"
           }
@@ -498,6 +499,7 @@
             "product": "custom-chenille-patches",
             "backup_handle": "chenille-patches",
             "label": "Chenille",
+            "photo_name": "WhatsApp_Image_2026-10-06_at_2.54.22_AM",
             "photo": 2,
             "point_1": "Soft, fuzzy yarn on a felt base",
             "point_2": "The varsity-letter look for jackets"
@@ -509,7 +511,8 @@
             "product": "woven-patches",
             "backup_handle": "",
             "label": "Woven",
-            "photo": 8,
+            "photo_name": "WhatsApp_Image_2026-10-03_at_3.29.46_AM",
+            "photo": 10,
             "point_1": "Tightly woven, smooth to the touch",
             "point_2": "Keeps small lettering crisp"
           }
@@ -520,6 +523,7 @@
             "product": "custom-full-color-printed-patches",
             "backup_handle": "full-color-printed-patches",
             "label": "Full Color Printed",
+            "photo_name": "WhatsApp_Image_2026-10-03_at_12.44.38_AM",
             "photo": 3,
             "point_1": "Dye-sublimated, any number of colors",
             "point_2": "Handles photos, shading and small text"
@@ -531,6 +535,7 @@
             "product": "custom-metallic-flex-patches",
             "backup_handle": "metallic-flex-patches",
             "label": "Metallic Flex",
+            "photo_name": "Furia",
             "photo": 1,
             "point_1": "Raised finish with a metal look",
             "point_2": "Cut to your shape with clean edges"
@@ -542,7 +547,8 @@
             "product": "pvc-patches",
             "backup_handle": "",
             "label": "PVC",
-            "photo": 4,
+            "photo_name": "WhatsApp_Image_2026-10-06_at_12.07.43_AM",
+            "photo": 5,
             "point_1": "Flexible molded PVC with raised detail",
             "point_2": "Waterproof, made for gear and bags"
           }
@@ -553,7 +559,8 @@
             "product": "silicone-patches",
             "backup_handle": "",
             "label": "Silicone",
-            "photo": 6,
+            "photo_name": "WhatsAppImage2026-03-26at22.22.27",
+            "photo": 7,
             "point_1": "Raised 3D silicone detail",
             "point_2": "A clean, modern finish on apparel"
           }
@@ -564,7 +571,8 @@
             "product": "custom-leather-patches",
             "backup_handle": "leather-patches",
             "label": "Leather",
-            "photo": 6,
+            "photo_name": "leather-engraving",
+            "photo": 9,
             "point_1": "Real leather, laser-engraved",
             "point_2": "A natural match for hats and jackets"
           }
