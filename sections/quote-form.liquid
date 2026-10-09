@@ -355,6 +355,9 @@
   .form-group.error .form-error {
     display: block;
   }
+  .form-group.error .patch-type-label {
+    border-color: #ef4444;
+  }
   
   .form-success {
     display: none;
@@ -385,7 +388,21 @@
     <h2 class="quote-form-heading">{{ section.settings.heading }}</h2>
     <div class="quote-form-description">{{ section.settings.description }}</div>
     
-    {% form 'contact', id: 'quoteForm', class: 'quote-form' %}
+    {%- comment -%}
+      Shopify adds a bot-check script to every contact form. On submit it sends
+      the form itself (or runs hCaptcha and then sends it), whatever our script
+      does, so with a backend the page left mid-request: the backend call was
+      cut off and the visitor landed on Shopify's "not a robot" page or on
+      ?contact_posted=true with no file. data-nocaptcha="true" is that script's
+      own opt-out; it is set only when the backend takes the submission.
+    {%- endcomment -%}
+    {%- liquid
+      assign quote_nocaptcha = 'false'
+      if section.settings.backend_url != blank
+        assign quote_nocaptcha = 'true'
+      endif
+    -%}
+    {% form 'contact', id: 'quoteForm', class: 'quote-form', data-nocaptcha: quote_nocaptcha %}
       <input type="hidden" name="contact[Request Type]" value="Quote Request">
 
       {% if form.posted_successfully? %}
@@ -653,6 +670,38 @@
     const formSuccess = document.getElementById('formSuccess');
     
     if (!form) return;
+
+    // A required field that is empty or wrong shows the message written under
+    // it and gets a red outline, and the page scrolls to the first one. The
+    // browser's own bubble is not enough: the patch type choices are hidden
+    // radio buttons, so a missing patch type made the button look dead.
+    let firstInvalid = null;
+    form.addEventListener('invalid', function(e) {
+      e.preventDefault();
+      const field = e.target;
+      field.setAttribute('aria-invalid', 'true');
+      const group = field.closest('.form-group');
+      if (group) group.classList.add('error');
+      if (!firstInvalid) {
+        firstInvalid = field;
+        setTimeout(function() {
+          (firstInvalid.closest('.form-group') || firstInvalid).scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstInvalid.focus({ preventScroll: true });
+          firstInvalid = null;
+        }, 0);
+      }
+    }, true);
+
+    function clearFieldError(e) {
+      const group = e.target.closest && e.target.closest('.form-group');
+      if (!group || !group.classList.contains('error')) return;
+      const fields = group.querySelectorAll('input, select, textarea');
+      if ([].some.call(fields, function(el) { return el.willValidate && !el.validity.valid; })) return;
+      group.classList.remove('error');
+      fields.forEach(function(el) { el.removeAttribute('aria-invalid'); });
+    }
+    form.addEventListener('input', clearFieldError);
+    form.addEventListener('change', clearFieldError);
 
     // Backend endpoint (Railway). When set, submissions go there first:
     // real file upload -> Shopify Files, customer creation, quote metaobject.
