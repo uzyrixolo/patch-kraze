@@ -823,7 +823,7 @@
           "type": "item",
           "settings": {
             "text": "Any cut shape",
-            "note": "Circle, square, rectangle, oval or cut to your design",
+            "note": "29 set shapes, from circle to shield, star and heart, or cut to your design",
             "kind": "included"
           }
         },
@@ -951,7 +951,7 @@
           "type": "question",
           "settings": {
             "question": "What shapes and sizes can you make?",
-            "answer": "<p>Circle, square, rectangle, oval, or an outline that follows your design. Size limits depend on the style and are shown on each product page; embroidered patches go from 1 to 16 inches.</p>",
+            "answer": "<p>Any of 29 set shapes (circle, oval, square, shield, hexagon, star, heart, banner and more), or an outline that follows your design. Size limits depend on the style and are shown on each product page; embroidered patches go from 1 to 16 inches.</p>",
             "patch_only": false
           }
         },
