@@ -110,10 +110,16 @@
   .pk-strip__row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2.25rem; }
   .pk-strip__msg { margin: 0; font-weight: 500; }
   .pk-strip__msg--mobile { display: none; }
-  .pk-strip__links { display: flex; align-items: center; gap: 1.25rem; white-space: nowrap; }
+  .pk-strip__links { display: flex; align-items: center; gap: 0.6rem 1.25rem; white-space: nowrap; }
   .pk-strip__links a { color: inherit; text-decoration: none; font-weight: 600; }
   .pk-strip__links a:hover { text-decoration: underline; }
-  .pk-strip__phone { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 500 !important; }
+  /* Ready-made and blank hats are shop links, so they read as buttons rather
+     than as more strip text: white pills in the strip's own text color. */
+  .pk-strip__links .pk-strip__chip { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.22rem 0.75rem; border: 1px solid color-mix(in srgb, currentColor 35%, transparent); border-radius: 999px; background: #fff; font-weight: 700; box-shadow: 0 1px 2px rgba(17, 24, 39, 0.06); transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease; }
+  .pk-strip__links .pk-strip__chip:hover { text-decoration: none; background: var(--pk-strip-fg, #4c1d95); border-color: var(--pk-strip-fg, #4c1d95); color: var(--pk-strip-bg, #f5f3ff); }
+  .pk-strip__links .pk-strip__chip:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+  .pk-strip__chip svg { width: 0.85rem; height: 0.85rem; flex: 0 0 auto; }
+  .pk-strip__phone { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 500 !important; padding-left: 1.25rem; border-left: 1px solid color-mix(in srgb, currentColor 25%, transparent); }
   .pk-strip__phone strong { font-weight: 700; }
   .pk-strip__phone svg { width: 0.85rem; height: 0.85rem; }
   .pk-header--scrolled .pk-strip { display: none; }
@@ -233,6 +239,11 @@
   .pk-drawer__head { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0.75rem 0.75rem 1.1rem; border-bottom: 1px solid #e5e7eb; }
   .pk-drawer__title { font-size: 1rem; font-weight: 700; }
   .pk-drawer__body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  /* Ready-made and blank hats sit first in the drawer as two tiles. */
+  .pk-drawer__quick { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; padding: 0.9rem 1.1rem; border-bottom: 1px solid #f3f4f6; }
+  .pk-drawer__tile { display: flex; flex-direction: column; align-items: flex-start; gap: 0.45rem; padding: 0.8rem 0.85rem; border: 1px solid #e9d5ff; border-radius: 0.75rem; background: #faf5ff; color: #6b21a8; font-size: 0.9rem; font-weight: 700; line-height: 1.25; text-decoration: none; }
+  .pk-drawer__tile:hover, .pk-drawer__tile:focus-visible { background: #f3e8ff; border-color: #c084fc; }
+  .pk-drawer__tile svg { width: 1.25rem; height: 1.25rem; }
   .pk-drawer__group > summary,
   .pk-drawer__link { display: flex; align-items: center; justify-content: space-between; padding: 0.95rem 1.1rem; border-bottom: 1px solid #f3f4f6; font-size: 1rem; font-weight: 700; color: #111827; text-decoration: none; cursor: pointer; }
   .pk-drawer__group > summary { list-style: none; }
@@ -285,8 +296,8 @@
       <p class="pk-strip__msg pk-strip__msg--desktop">{{ section.settings.announcement }}</p>
       <p class="pk-strip__msg pk-strip__msg--mobile">{{ pk_announcement_mobile }}</p>
       <div class="pk-strip__links">
-        <a href="{{ pk_url_readymade }}">Ready-Made Patches</a>
-        <a href="{{ pk_url_blanks }}">Blank Hats</a>
+        <a class="pk-strip__chip" href="{{ pk_url_readymade }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>Ready-Made Patches</a>
+        <a class="pk-strip__chip" href="{{ pk_url_blanks }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M4 15h11c3 0 6 .8 6 2.2V18H4z"/><path d="M12 7V5"/></svg>Blank Hats</a>
         <a href="tel:+1{{ pk_tel }}" class="pk-strip__phone" aria-label="Call Patch Kraze at {{ pk_phone }}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           {{ section.settings.contact_label }} <strong>{{ pk_phone }}</strong>
@@ -439,6 +450,10 @@
       </button>
     </div>
     <div class="pk-drawer__body">
+      <div class="pk-drawer__quick">
+        <a class="pk-drawer__tile" href="{{ pk_url_readymade }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>Ready-Made Patches</a>
+        <a class="pk-drawer__tile" href="{{ pk_url_blanks }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M4 15h11c3 0 6 .8 6 2.2V18H4z"/><path d="M12 7V5"/></svg>Blank Hats</a>
+      </div>
       <details class="pk-drawer__group" open>
         <summary>Patches <span class="pk-drawer__chev" aria-hidden="true">{{- 'icon-caret.svg' | inline_asset_content -}}</span></summary>
         <div class="pk-drawer__sub">
@@ -481,8 +496,6 @@
           {%- render 'pk-menu-links', blocks: section.blocks, group: 'services', fallback: pk_grp_services, variant: 'drawer' -%}
         </div>
       </details>
-      <a class="pk-drawer__link" href="{{ pk_url_readymade }}">Ready-Made Patches</a>
-      <a class="pk-drawer__link" href="{{ pk_url_blanks }}">Blank Hats</a>
     </div>
     <div class="pk-drawer__foot">
       <a class="pk-quote-btn pk-btn-dark" href="{{ pk_url_quote }}">Get a Quote</a>
