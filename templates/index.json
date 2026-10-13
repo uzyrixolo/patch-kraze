@@ -9,6 +9,36 @@
  */
 {
   "sections": {
+    "quick_shop": {
+      "type": "quick-shop-pk",
+      "blocks": {
+        "qs_readymade": {
+          "type": "card",
+          "settings": {
+            "collection": "ready-made-patches",
+            "title": "Ready-Made Patches",
+            "text": "Finished designs you can order as they are. No artwork needed.",
+            "button": "Shop ready-made"
+          }
+        },
+        "qs_hats": {
+          "type": "card",
+          "settings": {
+            "collection": "caps",
+            "title": "Blank Hats",
+            "text": "Plain caps, ready for your own patches.",
+            "button": "Shop hats"
+          }
+        }
+      },
+      "block_order": [
+        "qs_readymade",
+        "qs_hats"
+      ],
+      "settings": {
+        "background": "#ffffff"
+      }
+    },
     "video_section_patch_kraze_DwW7mE": {
       "type": "video-section-patch-kraze",
       "disabled": true,
@@ -1108,6 +1138,7 @@
   "order": [
     "video_section_patch_kraze_DwW7mE",
     "home_hero",
+    "quick_shop",
     "type_showcase",
     "style_grid",
     "shop_all_patches",
