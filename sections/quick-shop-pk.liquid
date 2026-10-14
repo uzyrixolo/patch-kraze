@@ -15,7 +15,8 @@
         { "type": "text", "id": "title", "label": "Title", "info": "Defaults to the collection's title." },
         { "type": "text", "id": "text", "label": "One line under the title" },
         { "type": "text", "id": "button", "label": "Button label", "default": "Shop now" },
-        { "type": "product", "id": "photo_product", "label": "Product for the picture (optional)", "info": "Uses this product's photo. Without it: the collection's first product with a photo, else the collection's own image." },
+        { "type": "product_list", "id": "photo_products", "label": "Photos to rotate (optional)", "limit": 4, "info": "Up to 4 products; their photos fade from one to the next. Without them: the collection's first 4 products with a photo." },
+        { "type": "product", "id": "photo_product", "label": "Single product for the picture (optional)", "info": "Used only when no photos to rotate are picked: shows just this product's photo." },
         { "type": "image_picker", "id": "image", "label": "Picture override (optional)" }
       ]
     }
@@ -30,6 +31,11 @@
   collection, and a button. The whole card is the link. A card whose
   collection is missing or empty is left out, and the row closes up.
   Pictures pass through pk-image-ok like every other product photo.
+
+  Up to four pictures fade from one to the next (every 2.6s, and at once on
+  hover). The title types itself out once, the first time the card scrolls
+  into view; the full title stays in the HTML, so it reads without script,
+  under reduced motion and to screen readers, and the card does not shift.
 {%- endcomment -%}
 
 <style>
@@ -39,8 +45,17 @@
   .pk-qs__card { display: flex; align-items: center; gap: 1.1rem; min-width: 0; padding: 0.85rem 1.1rem 0.85rem 0.85rem; border: 1px solid #e9d5ff; border-radius: var(--pk-radius-lg); background: #faf5ff; color: var(--pk-text-primary); text-decoration: none; transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease; }
   .pk-qs__card:hover { border-color: #c084fc; box-shadow: 0 16px 30px -22px rgba(88, 28, 135, 0.55); transform: translateY(-1px); }
   .pk-qs__card:focus-visible { outline: 3px solid var(--pk-btn-primary-bg); outline-offset: 3px; }
-  .pk-qs__pic { flex: 0 0 auto; width: 6.5rem; height: 6.5rem; border-radius: var(--pk-radius-md); overflow: hidden; background: #fff; }
-  .pk-qs__pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pk-qs__pic { position: relative; flex: 0 0 auto; width: 6.5rem; height: 6.5rem; border-radius: var(--pk-radius-md); overflow: hidden; background: #fff; }
+  .pk-qs__pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transform: scale(1.04); transition: opacity 0.6s ease, transform 2.6s ease; }
+  .pk-qs__pic img.is-on { opacity: 1; transform: scale(1); }
+  /* Typewriter: the real title keeps its space and is what screen readers
+     read; the typed copy sits on top of it. Without script nothing changes. */
+  .pk-qs__title { position: relative; }
+  .pk-qs__title.is-typing .pk-qs__ghost { color: transparent; }
+  .pk-qs__typed { position: absolute; inset: 0; }
+  .pk-qs__typed:empty { display: none; }
+  .pk-qs__title.is-typing .pk-qs__typed::after { content: ""; display: inline-block; width: 2px; height: 1em; margin-left: 2px; vertical-align: -0.12em; background: #7e22ce; animation: pk-qs-caret 0.8s steps(1) infinite; }
+  @keyframes pk-qs-caret { 50% { opacity: 0; } }
   .pk-qs__body { flex: 1 1 auto; min-width: 0; }
   .pk-qs__title { display: block; margin: 0; font-size: var(--pk-fs-subheading); font-weight: 800; line-height: 1.2; }
   .pk-qs__text { display: block; margin: 0.3rem 0 0; font-size: var(--pk-fs-label); line-height: 1.45; color: var(--pk-text-secondary); }
@@ -58,8 +73,9 @@
     .pk-qs__card::after { content: "\2192"; margin-left: auto; padding-left: 0.5rem; font-weight: 700; color: #7e22ce; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .pk-qs__card { transition: none; }
+    .pk-qs__card, .pk-qs__pic img { transition: none; }
     .pk-qs__card:hover { transform: none; }
+    .pk-qs__pic img { transform: none; }
   }
 </style>
 
@@ -69,30 +85,48 @@
     {%- if c == blank or c.products_count == 0 -%}{%- continue -%}{%- endif -%}
 
     {%- comment -%}
-      The picture: override, picked product, else the first product photo
-      pk-image-ok allows. The collection's own image comes last: those are
-      often banners or generated art, not a photo of the product.
+      The pictures, as <img> tags: the override; else the picked products to
+      rotate; else the single picked product; else the collection's first 4
+      products whose photo pk-image-ok allows. The collection's own image
+      comes last: those are often banners or generated art.
     {%- endcomment -%}
-    {%- assign qs_img = block.settings.image -%}
-    {%- if qs_img == blank and block.settings.photo_product != blank -%}
-      {%- assign qs_img = block.settings.photo_product.featured_image -%}
-    {%- endif -%}
-    {%- if qs_img == blank -%}
-      {%- for p in c.products limit: 8 -%}
-        {%- if p.featured_image == blank -%}{%- continue -%}{%- endif -%}
-        {%- capture qs_ok -%}{%- render 'pk-image-ok', src: p.featured_image.src -%}{%- endcapture -%}
-        {%- assign qs_ok = qs_ok | strip -%}
-        {%- if qs_ok != blank -%}{%- assign qs_img = p.featured_image -%}{%- break -%}{%- endif -%}
-      {%- endfor -%}
-    {%- endif -%}
-    {%- if qs_img == blank and c.image -%}{%- assign qs_img = c.image -%}{%- endif -%}
+    {%- assign qs_n = 0 -%}
+    {%- capture qs_pics -%}
+      {%- if block.settings.image != blank -%}
+        <img class="is-on" src="{{ block.settings.image | image_url: width: 240, height: 240, crop: 'center' }}" width="240" height="240" loading="lazy" alt="">
+        {%- assign qs_n = 1 -%}
+      {%- elsif block.settings.photo_products == blank and block.settings.photo_product != blank and block.settings.photo_product.featured_image -%}
+        <img class="is-on" src="{{ block.settings.photo_product.featured_image | image_url: width: 240, height: 240, crop: 'center' }}" width="240" height="240" loading="lazy" alt="">
+        {%- assign qs_n = 1 -%}
+      {%- else -%}
+        {%- if block.settings.photo_products != blank -%}
+          {%- assign qs_source = block.settings.photo_products -%}
+        {%- else -%}
+          {%- assign qs_source = c.products -%}
+        {%- endif -%}
+        {%- for p in qs_source limit: 12 -%}
+          {%- if qs_n >= 4 -%}{%- break -%}{%- endif -%}
+          {%- if p.featured_image == blank -%}{%- continue -%}{%- endif -%}
+          {%- capture qs_ok -%}{%- render 'pk-image-ok', src: p.featured_image.src -%}{%- endcapture -%}
+          {%- assign qs_ok = qs_ok | strip -%}
+          {%- if qs_ok == blank -%}{%- continue -%}{%- endif -%}
+          <img{% if qs_n == 0 %} class="is-on"{% endif %} src="{{ p.featured_image | image_url: width: 240, height: 240, crop: 'center' }}" width="240" height="240" loading="lazy" alt="">
+          {%- assign qs_n = qs_n | plus: 1 -%}
+        {%- endfor -%}
+        {%- if qs_n == 0 and c.image -%}
+          <img class="is-on" src="{{ c.image | image_url: width: 240, height: 240, crop: 'center' }}" width="240" height="240" loading="lazy" alt="">
+          {%- assign qs_n = 1 -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- assign qs_title = block.settings.title | default: c.title -%}
 
     <a class="pk-qs__card" href="{{ c.url }}" {{ block.shopify_attributes }}>
-      {%- if qs_img != blank -%}
-        <span class="pk-qs__pic"><img src="{{ qs_img | image_url: width: 240, height: 240, crop: 'center' }}" width="240" height="240" loading="lazy" alt=""></span>
+      {%- if qs_n > 0 -%}
+        <span class="pk-qs__pic"{% if qs_n > 1 %} data-qs-cycle{% endif %}>{{ qs_pics }}</span>
       {%- endif -%}
       <span class="pk-qs__body">
-        <span class="pk-qs__title">{{ block.settings.title | default: c.title }}</span>
+        <span class="pk-qs__title" data-qs-type><span class="pk-qs__ghost">{{ qs_title }}</span><span class="pk-qs__typed" aria-hidden="true"></span></span>
         {%- if block.settings.text != blank -%}<span class="pk-qs__text">{{ block.settings.text }}</span>{%- endif -%}
         <span class="pk-qs__count">{{ c.products_count }} {% if c.products_count == 1 %}product{% else %}products{% endif %}</span>
       </span>
@@ -108,4 +142,50 @@
 <section id="pk-qs-{{ section.id }}" class="pk-qs" aria-label="Shop by collection">
   <div class="pk-qs__inner" style="--qs-cols: {{ qs_count }};">{{ qs_cards }}</div>
 </section>
+
+<script>
+  (function () {
+    var root = document.getElementById('pk-qs-{{ section.id }}');
+    if (!root || root.dataset.qsReady) return;
+    root.dataset.qsReady = '1';
+    var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Pictures: fade to the next one every 2.6s while the tab is visible, and
+    // straight away when the pointer comes onto the card.
+    root.querySelectorAll('[data-qs-cycle]').forEach(function (pic) {
+      var imgs = pic.querySelectorAll('img');
+      var i = 0;
+      function next() {
+        imgs[i].classList.remove('is-on');
+        i = (i + 1) % imgs.length;
+        imgs[i].classList.add('is-on');
+      }
+      if (!still) setInterval(function () { if (!document.hidden) next(); }, 2600);
+      var card = pic.closest('.pk-qs__card');
+      if (card) card.addEventListener('mouseenter', next);
+    });
+
+    // Titles: type out once, when the card first comes into view.
+    if (still || !('IntersectionObserver' in window)) return;
+    function type(title) {
+      var text = title.querySelector('.pk-qs__ghost').textContent;
+      var out = title.querySelector('.pk-qs__typed');
+      var k = 0;
+      title.classList.add('is-typing');
+      (function step() {
+        out.textContent = text.slice(0, ++k);
+        if (k < text.length) setTimeout(step, 55);
+        else setTimeout(function () { title.classList.remove('is-typing'); out.textContent = ''; }, 900);
+      })();
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        type(e.target);
+      });
+    }, { threshold: 0.6 });
+    root.querySelectorAll('[data-qs-type]').forEach(function (t) { io.observe(t); });
+  })();
+</script>
 {%- endif -%}

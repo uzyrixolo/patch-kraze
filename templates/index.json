@@ -16,6 +16,12 @@
           "type": "card",
           "settings": {
             "collection": "ready-made-patches",
+            "photo_products": [
+              "colorful-headphones-embroidered-patch",
+              "butterfly-embroidered-patch",
+              "three-eyed-fish-chenille-patch",
+              "sunflower-embroidered-patch"
+            ],
             "title": "Ready-Made Patches",
             "text": "Finished designs you can order as they are. No artwork needed.",
             "button": "Shop ready-made"
