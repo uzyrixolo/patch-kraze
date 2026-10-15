@@ -60,7 +60,9 @@
   .pk-qs__title { display: block; margin: 0; font-size: var(--pk-fs-subheading); font-weight: 800; line-height: 1.2; }
   .pk-qs__text { display: block; margin: 0.3rem 0 0; font-size: var(--pk-fs-label); line-height: 1.45; color: var(--pk-text-secondary); }
   .pk-qs__count { display: inline-block; margin-top: 0.45rem; font-size: var(--pk-fs-tiny); font-weight: 700; color: #7e22ce; }
-  .pk-qs__btn { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.5rem; padding: 0 1.1rem; border-radius: var(--pk-radius-sm); font-size: var(--pk-fs-label); font-weight: 700; white-space: nowrap; }
+  /* Orange, like the shop pills in the header strip; darker while the card is hovered. */
+  .pk-qs__btn { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.5rem; padding: 0 1.1rem; border-radius: var(--pk-radius-sm); background: #ea580c; color: #fff; font-size: var(--pk-fs-label); font-weight: 700; white-space: nowrap; transition: background-color 0.15s ease; }
+  .pk-qs__card:hover .pk-qs__btn { background: #c2410c; }
   @media (max-width: 989px) {
     .pk-qs__btn { display: none; }
   }
@@ -131,7 +133,7 @@
         <span class="pk-qs__count">{{ c.products_count }} {% if c.products_count == 1 %}product{% else %}products{% endif %}</span>
       </span>
       {%- if block.settings.button != blank -%}
-        <span class="pk-qs__btn pk-btn-primary">{{ block.settings.button }} <span aria-hidden="true">&rarr;</span></span>
+        <span class="pk-qs__btn">{{ block.settings.button }} <span aria-hidden="true">&rarr;</span></span>
       {%- endif -%}
     </a>
   {%- endfor -%}

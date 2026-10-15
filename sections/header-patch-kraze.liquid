@@ -114,10 +114,12 @@
   .pk-strip__links a { color: inherit; text-decoration: none; font-weight: 600; }
   .pk-strip__links a:hover { text-decoration: underline; }
   /* Ready-made and blank hats are shop links, so they read as buttons rather
-     than as more strip text: white pills in the strip's own text color. */
-  .pk-strip__links .pk-strip__chip { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.22rem 0.75rem; border: 1px solid color-mix(in srgb, currentColor 35%, transparent); border-radius: 999px; background: #fff; font-weight: 700; box-shadow: 0 1px 2px rgba(17, 24, 39, 0.06); transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease; }
-  .pk-strip__links .pk-strip__chip:hover { text-decoration: none; background: #f97316; border-color: #f97316; color: #fff; }
-  .pk-strip__links .pk-strip__chip:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+     than as more strip text: orange pills with white text, a shade darker on
+     hover (#ea580c rather than the lighter #f97316, so the small white text
+     stays readable). */
+  .pk-strip__links .pk-strip__chip { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.22rem 0.75rem; border: 1px solid #ea580c; border-radius: 999px; background: #ea580c; color: #fff; font-weight: 700; box-shadow: 0 1px 2px rgba(17, 24, 39, 0.08); transition: background-color 0.15s ease, border-color 0.15s ease; }
+  .pk-strip__links .pk-strip__chip:hover { text-decoration: none; background: #c2410c; border-color: #c2410c; color: #fff; }
+  .pk-strip__links .pk-strip__chip:focus-visible { outline: 2px solid #c2410c; outline-offset: 2px; }
   .pk-strip__chip svg { width: 0.85rem; height: 0.85rem; flex: 0 0 auto; }
   .pk-strip__phone { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 500 !important; padding-left: 1.25rem; border-left: 1px solid color-mix(in srgb, currentColor 25%, transparent); }
   .pk-strip__phone strong { font-weight: 700; }
