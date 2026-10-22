@@ -6,6 +6,12 @@
   shows one assurance at a time: it moves on by itself, and can be swiped or
   stepped through with the dots underneath.
 
+  Video: a picked video (or an .mp4 link) replaces the photo on the right with
+  an upright card in a brand-purple frame, also over a background image. It
+  plays without sound and loops only while on screen, loads nothing before
+  that, and has pause and sound buttons; "Sound on" restarts it from the top.
+  Reduced motion: it waits for the play button.
+
   Heading: the first line types itself out and cycles through the phrases in
   "Rotating first line"; the second line stays put. The first phrase is in the
   HTML, so the heading reads correctly with scripts off or reduced motion on.
@@ -45,6 +51,11 @@
     { "type": "url", "id": "extra_link", "label": "Extra link", "info": "Defaults to /pages/ai-image-generator. Clear the label to hide the link." },
     { "type": "header", "content": "Photo" },
     { "type": "image_picker", "id": "image", "label": "Photo (right side)", "info": "Used when no background image is set. Leave empty to use the Full Color Printed Patches product photo." },
+    { "type": "header", "content": "Video" },
+    { "type": "video", "id": "video", "label": "Video (right side)", "info": "Upload in Content > Files. Upright (9:16) phone video works best. Shown on the right in place of the photo, over the background image if one is set. Plays without sound until the visitor turns sound on." },
+    { "type": "text", "id": "video_url", "label": "Video link (.mp4)", "info": "Used only when no video is picked above." },
+    { "type": "image_picker", "id": "video_poster", "label": "Video cover image", "info": "Shown before the video loads. Defaults to the video's own preview image." },
+    { "type": "text", "id": "video_label", "label": "Video description", "default": "Ryan from Patch Kraze shows patches made in our shop", "info": "Read out by screen readers." },
     { "type": "header", "content": "Background" },
     { "type": "color_background", "id": "panel_bg", "label": "Background color or gradient", "default": "linear-gradient(180deg, #f1e8ff 0%, #faf5ff 58%, #ffffff 100%)", "info": "The panel behind the text. Hidden by a background image when one is set below." },
     { "type": "image_picker", "id": "bg_image", "label": "Background image, desktop", "info": "Full-width banner, about 2400 x 900 px. Keep the subject on the right: the text sits on the left. Replaces the photo on the right." },
@@ -129,6 +140,24 @@
 
   .pk-hh__photo { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--pk-radius-lg); box-shadow: 0 28px 50px -24px rgba(88, 28, 135, 0.4); background: #ede9fe; }
 
+  /* Video: an upright card on the right in a brand-purple gradient frame (the
+     frame is the padding showing the gradient behind the video). Height sets
+     the size so a tall phone video does not stretch the hero. */
+  .pk-hh__media--video { display: flex; justify-content: center; }
+  .pk-hh__vid { position: relative; height: min(30rem, 72vh); aspect-ratio: 9 / 16; max-width: 100%; padding: 4px; border-radius: 1.4rem; background: linear-gradient(150deg, #c084fc 0%, #a855f7 40%, #7e22ce 100%); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25), 0 28px 50px -18px rgba(88, 28, 135, 0.7); }
+  .pk-hh__vid video { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: calc(1.4rem - 4px); background: #1f1235; }
+  .pk-hh__vid-btns { position: absolute; right: 0.85rem; bottom: 0.85rem; display: flex; gap: 0.45rem; }
+  .pk-hh__vid-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; height: 2.5rem; min-width: 2.5rem; padding: 0 0.7rem; border: none; border-radius: 999px; background: rgba(17, 24, 39, 0.72); color: #fff; font: inherit; font-size: var(--pk-fs-label); font-weight: 700; cursor: pointer; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  .pk-hh__vid-btn:hover { background: var(--pk-btn-primary-bg-hover, #9333ea); }
+  .pk-hh__vid-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .pk-hh__vid-btn svg { width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
+  .pk-hh__vid-btn [data-on],
+  .pk-hh__vid-btn[aria-pressed="true"] [data-off],
+  .pk-hh__vid-btn[data-paused="true"] [data-off] { display: none; }
+  .pk-hh__vid-btn[aria-pressed="true"] [data-on],
+  .pk-hh__vid-btn[data-paused="true"] [data-on] { display: inline; }
+  .pk-hh__vid-btn[aria-pressed="true"] .pk-hh__vid-hint { display: none; }
+
   /* Background-image mode: the image fills the stage, a wash on the text side
      keeps the copy readable, and the copy takes a single column. */
   .pk-hh__bg { position: absolute; inset: 0; display: block; overflow: hidden; }
@@ -136,6 +165,8 @@
   .pk-hh__tint { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(var(--hh-tint-rgb), var(--hh-tint)) 0%, rgba(var(--hh-tint-rgb), var(--hh-tint)) 42%, rgba(var(--hh-tint-rgb), 0) 76%); }
   .pk-hh--bg { --hh-tint-rgb: 250, 245, 255; }
   .pk-hh--bg .pk-hh__main { grid-template-columns: minmax(0, 36rem); min-height: 22rem; padding-bottom: 2.75rem; }
+  .pk-hh--bg.pk-hh--video .pk-hh__main { grid-template-columns: minmax(0, 36rem) minmax(0, 1fr); }
+  .pk-hh--bg .pk-hh__media--video { justify-content: flex-end; }
   .pk-hh--bg.pk-hh--light { --hh-tint-rgb: 17, 24, 39; }
   .pk-hh--light .pk-hh__title, .pk-hh--light .pk-hh__points li { color: #fff; }
   .pk-hh--light .pk-hh__type, .pk-hh--light .pk-hh__eyebrow, .pk-hh--light .pk-hh__note a { color: #d8b4fe; }
@@ -152,6 +183,9 @@
 
   @media (max-width: 899px) {
     .pk-hh__main { grid-template-columns: 1fr; gap: 1.75rem; padding: 1.75rem 0; }
+    .pk-hh--bg.pk-hh--video .pk-hh__main { grid-template-columns: 1fr; }
+    .pk-hh--bg .pk-hh__media--video { justify-content: center; }
+    .pk-hh__vid { height: min(28rem, 70vh); }
   }
   @media (max-width: 749px) {
     /* Phones: the copy sits at the top over an even wash, and a strip is left
@@ -161,6 +195,8 @@
     .pk-hh__bg img { object-position: center bottom; }
     .pk-hh__tint { background: linear-gradient(180deg, rgba(var(--hh-tint-rgb), var(--hh-tint)) 0, rgba(var(--hh-tint-rgb), var(--hh-tint)) calc(100% - var(--hh-clear)), rgba(var(--hh-tint-rgb), 0) calc(100% - var(--hh-clear) * 0.45)); }
     .pk-hh--bg .pk-hh__main { min-height: 0; padding-bottom: var(--hh-clear); }
+    /* The video is the picture on phones: no clear strip under it. */
+    .pk-hh--bg.pk-hh--video .pk-hh__main { padding-bottom: 1.75rem; }
 
     /* Assurances: one per view in a sideways scroller, so swiping works
        natively; the script only adds the auto-advance and the dots. */
@@ -210,6 +246,29 @@
     endunless
   endunless
 
+  # A picked video wins over the typed link; an mp4 source is used because every
+  # browser plays it. The video takes the photo's place on the right.
+  assign video_src = blank
+  assign video_poster = section.settings.video_poster
+  if section.settings.video != blank
+    for source in section.settings.video.sources
+      if source.mime_type == 'video/mp4'
+        assign video_src = source.url
+        break
+      endif
+    endfor
+    if video_poster == blank
+      assign video_poster = section.settings.video.preview_image
+    endif
+  endif
+  if video_src == blank and section.settings.video_url != blank
+    assign video_src = section.settings.video_url
+  endif
+  assign has_video = false
+  if video_src != blank
+    assign has_video = true
+  endif
+
   assign primary_link = section.settings.btn_primary_link | default: '#styles'
   assign secondary_link = section.settings.btn_secondary_link | default: '/pages/quote'
   assign extra_link = section.settings.extra_link | default: '/pages/ai-image-generator'
@@ -219,7 +278,7 @@
   assign tint = section.settings.bg_tint | divided_by: 100.0
 -%}
 
-<section class="pk-hh{% if has_bg %} pk-hh--bg{% endif %}{% if section.settings.bg_text == 'light' %} pk-hh--light{% endif %}" style="{% if section.settings.panel_bg != blank %}--hh-panel: {{ section.settings.panel_bg }};{% endif %}{% if has_bg %} --hh-tint: {{ tint }};{% endif %}">
+<section class="pk-hh{% if has_bg %} pk-hh--bg{% endif %}{% if has_video %} pk-hh--video{% endif %}{% if section.settings.bg_text == 'light' %} pk-hh--light{% endif %}" style="{% if section.settings.panel_bg != blank %}--hh-panel: {{ section.settings.panel_bg }};{% endif %}{% if has_bg %} --hh-tint: {{ tint }};{% endif %}">
   <div class="pk-hh__stage">
     {%- if has_bg -%}
       <picture class="pk-hh__bg">
@@ -290,7 +349,32 @@
           {%- endif -%}
         </div>
 
-        {%- if has_bg == false and hero_photo -%}
+        {%- if has_video -%}
+          <div class="pk-hh__media pk-hh__media--video">
+            <div class="pk-hh__vid" data-hh-video>
+              <video
+                src="{{ video_src }}"
+                {% if video_poster != blank %}poster="{{ video_poster | image_url: width: 600 }}"{% endif %}
+                muted
+                loop
+                playsinline
+                preload="none"
+                aria-label="{{ section.settings.video_label | escape }}"
+              ></video>
+              <div class="pk-hh__vid-btns">
+                <button type="button" class="pk-hh__vid-btn" data-hh-play data-paused="false" aria-label="Pause video">
+                  <svg data-off viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                  <svg data-on viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.2-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+                </button>
+                <button type="button" class="pk-hh__vid-btn" data-hh-sound aria-pressed="false" aria-label="Turn sound on">
+                  <svg data-off viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4z" fill="currentColor"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+                  <svg data-on viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+                  <span class="pk-hh__vid-hint" aria-hidden="true">Sound on</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        {%- elsif has_bg == false and hero_photo -%}
           <div class="pk-hh__media">
             <img
               class="pk-hh__photo"
@@ -440,6 +524,76 @@
 
     mark();
     start();
+  })();
+</script>
+{%- endif -%}
+
+{%- if has_video -%}
+<script>
+  (function () {
+    var root = document.getElementById('shopify-section-{{ section.id }}');
+    var box = root ? root.querySelector('[data-hh-video]') : null;
+    if (!box) return;
+    var video = box.querySelector('video');
+    var playBtn = box.querySelector('[data-hh-play]');
+    var soundBtn = box.querySelector('[data-hh-sound]');
+    // Paused by the visitor (or by reduced motion): scrolling never restarts it.
+    var held = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var seen = false;
+    var inView = false;
+
+    function mark() {
+      var paused = video.paused;
+      playBtn.setAttribute('data-paused', paused ? 'true' : 'false');
+      playBtn.setAttribute('aria-label', paused ? 'Play video' : 'Pause video');
+      soundBtn.setAttribute('aria-pressed', video.muted ? 'false' : 'true');
+      soundBtn.setAttribute('aria-label', video.muted ? 'Turn sound on' : 'Turn sound off');
+    }
+    function play() {
+      var p = video.play();
+      if (p && p.catch) p.catch(mark);
+    }
+
+    video.addEventListener('play', mark);
+    video.addEventListener('pause', mark);
+    video.addEventListener('volumechange', mark);
+
+    playBtn.addEventListener('click', function () {
+      if (video.paused) { held = false; play(); } else { held = true; video.pause(); }
+    });
+    // Sound on starts the clip from the top, so the visitor hears it from the first word.
+    soundBtn.addEventListener('click', function () {
+      if (video.muted) {
+        video.muted = false;
+        video.currentTime = 0;
+        held = false;
+        play();
+      } else {
+        video.muted = true;
+      }
+    });
+
+    // Load and play only while the card is on screen; nothing is fetched before that.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          inView = entry.isIntersecting;
+          if (inView) {
+            if (!seen) { seen = true; video.preload = 'auto'; }
+            if (!held) play();
+          } else if (!video.paused) {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.35 }).observe(box);
+    } else if (!held) {
+      play();
+    }
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { if (!video.paused) video.pause(); }
+      else if (inView && !held) play();
+    });
+    mark();
   })();
 </script>
 {%- endif -%}

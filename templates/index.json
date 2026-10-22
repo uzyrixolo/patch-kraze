@@ -130,7 +130,8 @@
         "bg_image": "shopify://shop_images/WhatsApp_Image_2026-10-01_at_10.31.22_AM.jpg",
         "bg_image_mobile": "shopify://shop_images/WhatsApp_Image_2026-10-01_at_10.33.45_AM.jpg",
         "bg_tint": 80,
-        "bg_text": "light"
+        "bg_text": "light",
+        "video_url": "https://cdn.shopify.com/videos/c/o/v/bb4ad803d6854bfa87bde77380e0314b.mp4"
       }
     },
     "type_showcase": {
