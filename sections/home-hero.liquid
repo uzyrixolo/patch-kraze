@@ -165,8 +165,15 @@
   .pk-hh__tint { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(var(--hh-tint-rgb), var(--hh-tint)) 0%, rgba(var(--hh-tint-rgb), var(--hh-tint)) 42%, rgba(var(--hh-tint-rgb), 0) 76%); }
   .pk-hh--bg { --hh-tint-rgb: 250, 245, 255; }
   .pk-hh--bg .pk-hh__main { grid-template-columns: minmax(0, 36rem); min-height: 22rem; padding-bottom: 2.75rem; }
-  .pk-hh--bg.pk-hh--video .pk-hh__main { grid-template-columns: minmax(0, 36rem) minmax(0, 1fr); }
-  .pk-hh--bg .pk-hh__media--video { justify-content: center; }
+  /* With a background image the video sits first, on the far left, and the
+     copy beside it, level with the heading. */
+  .pk-hh--bg.pk-hh--video .pk-hh__main { grid-template-columns: max-content minmax(0, 36rem); justify-content: start; }
+  /* The copy now reaches further right, so the wash behind it does too. */
+  .pk-hh--bg.pk-hh--video .pk-hh__tint { background: linear-gradient(90deg, rgba(var(--hh-tint-rgb), var(--hh-tint)) 0%, rgba(var(--hh-tint-rgb), var(--hh-tint)) 62%, rgba(var(--hh-tint-rgb), 0) 88%); }
+  .pk-hh--bg .pk-hh__media--video { order: -1; justify-content: flex-start; }
+  /* Same width and side padding as the header bar (.pk-bar__row), so on wide
+     screens the video lines up under the menu instead of floating centre. */
+  .pk-hh--bg.pk-hh--video .pk-hh__stage .pk-hh__inner { max-width: 1440px; padding: 0 20px; }
   .pk-hh--bg.pk-hh--light { --hh-tint-rgb: 17, 24, 39; }
   .pk-hh--light .pk-hh__title, .pk-hh--light .pk-hh__points li { color: #fff; }
   .pk-hh--light .pk-hh__type, .pk-hh--light .pk-hh__eyebrow, .pk-hh--light .pk-hh__note a { color: #d8b4fe; }
@@ -184,7 +191,7 @@
   @media (max-width: 899px) {
     .pk-hh__main { grid-template-columns: 1fr; gap: 1.75rem; padding: 1.75rem 0; }
     .pk-hh--bg.pk-hh--video .pk-hh__main { grid-template-columns: 1fr; }
-    .pk-hh--bg .pk-hh__media--video { justify-content: center; }
+    .pk-hh--bg .pk-hh__media--video { order: 0; justify-content: center; }
     .pk-hh__vid { height: min(28rem, 70vh); }
   }
   @media (max-width: 749px) {
@@ -197,6 +204,7 @@
     .pk-hh--bg .pk-hh__main { min-height: 0; padding-bottom: var(--hh-clear); }
     /* The video is the picture on phones: no clear strip under it. */
     .pk-hh--bg.pk-hh--video .pk-hh__main { padding-bottom: 1.75rem; }
+    .pk-hh--bg.pk-hh--video .pk-hh__tint { background: rgba(var(--hh-tint-rgb), var(--hh-tint)); }
 
     /* Assurances: one per view in a sideways scroller, so swiping works
        natively; the script only adds the auto-advance and the dots. */
